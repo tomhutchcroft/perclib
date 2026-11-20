@@ -62,12 +62,12 @@ theorem setOf_localConn_comm {W : Type*} (D : Set W) (a b : W) :
   ext ω
   exact ⟨fun ⟨ha, hb, r⟩ => ⟨hb, ha, r.symm⟩, fun ⟨hb, ha, r⟩ => ⟨ha, hb, r.symm⟩⟩
 
-variable (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0) (f : ℕ → ℝ≥0)
-  (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ))
+variable (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0)
+  (hshift : ∀ (g : ℕ →₀ (Fin d → ZMod L)) e, J (Sym2.map (Equiv.addRight g) e) = J e)
 
-include hJ in
+include hshift in
 /-- **Translation.** For `x ∈ B_n`, `∑' y, τ_n(x,y) = μ_n`. -/
-theorem tsum_localConn_ball_eq (β : ℝ≥0) {n : ℕ} {x : ℕ →₀ (Fin d → ZMod L)}
+theorem tsum_localConn_ball_eq_of_translation (β : ℝ≥0) {n : ℕ} {x : ℕ →₀ (Fin d → ZMod L)}
     (hx : x.support.sup Nat.succ ≤ n) :
     ∑' y, law (intensityProfile J β)
         {ω | ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
@@ -83,7 +83,7 @@ theorem tsum_localConn_ball_eq (β : ℝ≥0) {n : ℕ} {x : ℕ →₀ (Fin d �
   rw [← (Equiv.addRight x).tsum_eq]
   refine tsum_congr fun z => ?_
   have h := law_localConn_eq_of_image J (Equiv.addRight x)
-    (radial_map_eq_of_levelIsometry J f hJ _ (level_addRight x)) β
+    (hshift x) β
     (S := {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n})
     (T := {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n})
     (fun v => by
@@ -92,10 +92,10 @@ theorem tsum_localConn_ball_eq (β : ℝ≥0) {n : ℕ} {x : ℕ →₀ (Fin d �
   rw [show (Equiv.addRight x) 0 = x from zero_add x] at h
   exact h
 
-include hJ in
-/-- **R11, first exit between consecutive balls.** If `f j ≤ K j` with `K` antitone, then for
+include hshift in
+/-- **R11, first exit between consecutive balls.** If the kernel has a radial majorant `K` with `K` antitone, then for
 `x ∈ B_m`, `τ_{m+1}(0,x) ≤ τ_m(0,x) + β K(m+1) μ_m μ_{m+1}`. -/
-theorem law_localConn_ball_succ_le (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : ℝ≥0∞) ≤ K j)
+theorem law_localConn_ball_succ_le_of_translation (K : ℕ → ℝ≥0∞) (hK : ∀ a y, a ≠ y → (J s(a,y) : ℝ≥0∞) ≤ K ((y-a).support.sup Nat.succ))
     (hKa : Antitone K) (β : ℝ≥0) (m : ℕ) {x : ℕ →₀ (Fin d → ZMod L)}
     (hx : x.support.sup Nat.succ ≤ m) :
     law (intensityProfile J β)
@@ -164,12 +164,12 @@ theorem law_localConn_ball_succ_le (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : 
       exact hy ((hmemS y).2 ((level_le_iff_level_sub_le ((hmemS a).1 ha)).2 hlt))
     calc (unitInterval.toNNReal (q s(a, y)) : ℝ≥0∞) ≤ ((β * J s(a, y) : ℝ≥0) : ℝ≥0∞) :=
           ENNReal.coe_le_coe.2 (intensityProfile_toNNReal_le J β _)
-      _ = β * f ((y - a).support.sup Nat.succ) := by rw [hJ, ENNReal.coe_mul]
-      _ ≤ β * K (m + 1) := mul_le_mul' le_rfl ((hK _).trans (hKa hlev))
+      _ = β * (J s(a,y) : ℝ≥0∞) := ENNReal.coe_mul _ _
+      _ ≤ β * K (m + 1) := mul_le_mul' le_rfl ((hK a y (fun e => hy (e ▸ ha))).trans (hKa hlev))
   -- The sum of the returns is `μ_{m+1}`.
   have hPsum : ∑' y, P y = ∑' z, law q {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈ A,
       ∃ hz : z ∈ A, ((openGraph ω).induce A).Reachable ⟨0, h0⟩ ⟨z, hz⟩} := by
-    rw [← tsum_localConn_ball_eq J f hJ β (hx.trans (Nat.le_succ m))]
+    rw [← tsum_localConn_ball_eq_of_translation J hshift β (hx.trans (Nat.le_succ m))]
     refine tsum_congr fun y => ?_
     simp only [hP, mem_singleton_iff, exists_eq_left]
     rw [setOf_localConn_comm]
@@ -197,10 +197,10 @@ theorem law_localConn_ball_succ_le (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : 
           _ = β * K (m + 1) * (∑' a, τ a) * ∑' y, P y := by ring
     _ = _ := by rw [hPsum]
 
-include hJ in
-/-- **R12, general form.** If `f j ≤ K j` with `K` antitone and `μ_m ≤ g m` for every `m`, then
+include hshift in
+/-- **R12, general form.** If the kernel has a radial majorant `K` with `K` antitone and `μ_m ≤ g m` for every `m`, then
 for `x ∈ B_n`, `τ(0,x) ≤ τ_n(0,x) + β ∑'_k K(n+k+1) g(n+k) g(n+k+1)`. -/
-theorem tau_le_localConn_ball_add (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : ℝ≥0∞) ≤ K j)
+theorem tau_le_localConn_ball_add_of_translation (K : ℕ → ℝ≥0∞) (hK : ∀ a y, a ≠ y → (J s(a,y) : ℝ≥0∞) ≤ K ((y-a).support.sup Nat.succ))
     (hKa : Antitone K) (β : ℝ≥0) (g : ℕ → ℝ≥0∞)
     (hg : ∀ m, ∑' z, law (intensityProfile J β)
       {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
@@ -232,7 +232,7 @@ theorem tau_le_localConn_ball_add (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : �
     induction M with
     | zero => simp
     | succ M ih =>
-      have h := law_localConn_ball_succ_le J f hJ K hK hKa β (n + M)
+      have h := law_localConn_ball_succ_le_of_translation J hshift K hK hKa β (n + M)
         (hx.trans (Nat.le_add_right n M))
       calc P (n + (M + 1)) ≤ P (n + M) + β * K (n + M + 1) * g (n + M) * g (n + M + 1) :=
             h.trans (add_le_add le_rfl (mul_le_mul' (mul_le_mul' le_rfl (hg _)) (hg _)))
@@ -269,6 +269,212 @@ theorem rpow_powerLaw_mul_eq (hL : 1 ≤ L) (α : ℝ) (n k : ℕ) :
   congr 1
   push_cast
   ring
+
+include hshift in
+/-- **R11, power-law form.** Under a radial power-law majorant then for `x ∈ B_m`,
+`τ_{m+1}(0,x) ≤ τ_m(0,x) + β C₀ L^{-(d+α)(m+1)} μ_m μ_{m+1}`. -/
+theorem law_localConn_ball_succ_le_powerLaw_of_translation (hL : 1 ≤ L) {α : ℝ} (hα : 0 < α) (C₀ : ℝ≥0∞)
+    (hf : ∀ a y, a ≠ y → (J s(a,y) : ℝ≥0∞) ≤ C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((y-a).support.sup Nat.succ : ℕ))) (β : ℝ≥0) (m : ℕ)
+    {x : ℕ →₀ (Fin d → ZMod L)} (hx : x.support.sup Nat.succ ≤ m) :
+    law (intensityProfile J β)
+        {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+            {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+          ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+          ((openGraph ω).induce
+            {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1}).Reachable
+            ⟨0, h0⟩ ⟨x, hx'⟩} ≤
+      law (intensityProfile J β)
+          {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+            ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+            ((openGraph ω).induce
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+              ⟨0, h0⟩ ⟨x, hx'⟩} +
+        β * (C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((m + 1 : ℕ) : ℝ))) *
+          (∑' z, law (intensityProfile J β)
+            {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+              ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+              ((openGraph ω).induce
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+                ⟨0, h0⟩ ⟨z, hz⟩}) *
+          (∑' z, law (intensityProfile J β)
+            {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+              ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+              ((openGraph ω).induce
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1}).Reachable
+                ⟨0, h0⟩ ⟨z, hz⟩}) :=
+  law_localConn_ball_succ_le_of_translation J hshift _ hf (antitone_powerLaw_level hL (by positivity) C₀) β m hx
+
+include hshift in
+/-- **R12.** Under a radial power-law majorant and `μ_m ≤ A L^{αm}` for every `m`, then for `x ∈ B_n`
+(in particular `h x = n`), `τ(0,x) ≤ τ_n(0,x) + D L^{-(d-α) n}` with
+`D = β C₀ A² L^{-d} (1 - L^{-(d-α)})⁻¹`. -/
+theorem tau_le_localConn_ball_add_powerLaw_of_translation (hL : 1 ≤ L) {α : ℝ} (hα : 0 < α) (C₀ : ℝ≥0∞)
+    (hf : ∀ a y, a ≠ y → (J s(a,y) : ℝ≥0∞) ≤ C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((y-a).support.sup Nat.succ : ℕ))) (β : ℝ≥0)
+    (A : ℝ≥0∞)
+    (hμ : ∀ m : ℕ, ∑' z, law (intensityProfile J β)
+      {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+          {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ((openGraph ω).induce {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+          ⟨0, h0⟩ ⟨z, hz⟩} ≤ A * (L : ℝ≥0∞) ^ (α * m))
+    {n : ℕ} {x : ℕ →₀ (Fin d → ZMod L)} (hx : x.support.sup Nat.succ ≤ n) :
+    tau (intensityProfile J β) 0 x ≤
+      law (intensityProfile J β)
+          {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+            ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+            ((openGraph ω).induce
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n}).Reachable
+              ⟨0, h0⟩ ⟨x, hx'⟩} +
+        β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹ *
+          (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * n) := by
+  refine (tau_le_localConn_ball_add_of_translation J hshift _ hf (antitone_powerLaw_level hL (by positivity) C₀)
+    β (fun m => A * (L : ℝ≥0∞) ^ (α * m)) hμ hx).trans (add_le_add le_rfl (le_of_eq ?_))
+  have hterm : ∀ k : ℕ, C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
+      (A * (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ))) *
+      (A * (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ))) =
+      (C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * n)) *
+        ((L : ℝ≥0∞) ^ (-((d : ℝ) - α))) ^ k := by
+    intro k
+    calc C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
+          (A * (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ))) *
+          (A * (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ)))
+        = C₀ * A ^ 2 * ((L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
+          (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ)) *
+          (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ))) := by ring
+      _ = _ := by rw [rpow_powerLaw_mul_eq hL α n k]; ring
+  simp_rw [hterm]
+  rw [ENNReal.tsum_mul_left, ENNReal.tsum_geometric]
+  ring
+
+include hshift in
+/-- **Summed form.** Under the hypotheses of R12,
+`∑_{x ∈ B_N} τ(0,x) ≤ ∑_{x ∈ B_N} τ_N(0,x) + D L^{αN}`, with the same `D`. -/
+theorem tsum_tau_ball_le_powerLaw_of_translation (hL : 1 ≤ L) {α : ℝ} (hα : 0 < α) (C₀ : ℝ≥0∞)
+    (hf : ∀ a y, a ≠ y → (J s(a,y) : ℝ≥0∞) ≤ C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((y-a).support.sup Nat.succ : ℕ))) (β : ℝ≥0)
+    (A : ℝ≥0∞)
+    (hμ : ∀ m : ℕ, ∑' z, law (intensityProfile J β)
+      {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+          {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ((openGraph ω).induce {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+          ⟨0, h0⟩ ⟨z, hz⟩} ≤ A * (L : ℝ≥0∞) ^ (α * m)) (N : ℕ) :
+    ∑' x : {x : ℕ →₀ (Fin d → ZMod L) // x.support.sup Nat.succ ≤ N},
+        tau (intensityProfile J β) 0 x ≤
+      ∑' x : {x : ℕ →₀ (Fin d → ZMod L) // x.support.sup Nat.succ ≤ N},
+          law (intensityProfile J β)
+            {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ N},
+              ∃ hx' : (x : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ N},
+              ((openGraph ω).induce
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ N}).Reachable
+                ⟨0, h0⟩ ⟨x, hx'⟩} +
+        β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹ *
+          (L : ℝ≥0∞) ^ (α * N) := by
+  set D := β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹
+  have hfin : Finite {x : ℕ →₀ (Fin d → ZMod L) // x.support.sup Nat.succ ≤ N} :=
+    (finite_level_ball N).to_subtype
+  refine (ENNReal.tsum_le_tsum fun x =>
+    tau_le_localConn_ball_add_powerLaw_of_translation J hshift hL hα C₀ hf β A hμ x.2).trans ?_
+  rw [ENNReal.tsum_add, ENNReal.tsum_const, ENat.card_eq_coe_natCard, ENat.toENNReal_coe,
+    card_ball]
+  refine add_le_add le_rfl (le_of_eq ?_)
+  have h0 : (L : ℝ≥0∞) ≠ 0 := by exact_mod_cast (show L ≠ 0 by omega)
+  have ht : (L : ℝ≥0∞) ≠ ⊤ := ENNReal.natCast_ne_top L
+  have e : (((L ^ d) ^ N : ℕ) : ℝ≥0∞) * (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * N) =
+      (L : ℝ≥0∞) ^ (α * N) := by
+    rw [← pow_mul, Nat.cast_pow, ← ENNReal.rpow_natCast, ← ENNReal.rpow_add _ _ h0 ht]
+    congr 1
+    push_cast
+    ring
+  rw [mul_comm, mul_assoc, mul_comm _ (((L ^ d) ^ N : ℕ) : ℝ≥0∞), e]
+
+variable (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0) (f : ℕ → ℝ≥0)
+  (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ))
+
+include hJ in
+/-- **Translation.** For `x ∈ B_n`, `∑' y, τ_n(x,y) = μ_n`. -/
+theorem tsum_localConn_ball_eq (β : ℝ≥0) {n : ℕ} {x : ℕ →₀ (Fin d → ZMod L)}
+    (hx : x.support.sup Nat.succ ≤ n) :
+    ∑' y, law (intensityProfile J β)
+        {ω | ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+          ∃ hy : y ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+          ((openGraph ω).induce {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n}).Reachable
+            ⟨x, hx'⟩ ⟨y, hy⟩} =
+      ∑' z, law (intensityProfile J β)
+        {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+            {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+          ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+          ((openGraph ω).induce {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n}).Reachable
+            ⟨0, h0⟩ ⟨z, hz⟩} :=
+  tsum_localConn_ball_eq_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) β hx
+
+include hJ in
+/-- **R11, first exit between consecutive balls.** If `f j ≤ K j` with `K` antitone, then for
+`x ∈ B_m`, `τ_{m+1}(0,x) ≤ τ_m(0,x) + β K(m+1) μ_m μ_{m+1}`. -/
+theorem law_localConn_ball_succ_le (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : ℝ≥0∞) ≤ K j)
+    (hKa : Antitone K) (β : ℝ≥0) (m : ℕ) {x : ℕ →₀ (Fin d → ZMod L)}
+    (hx : x.support.sup Nat.succ ≤ m) :
+    law (intensityProfile J β)
+        {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+            {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+          ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+          ((openGraph ω).induce
+            {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1}).Reachable
+            ⟨0, h0⟩ ⟨x, hx'⟩} ≤
+      law (intensityProfile J β)
+          {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+            ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+            ((openGraph ω).induce
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+              ⟨0, h0⟩ ⟨x, hx'⟩} +
+        β * K (m + 1) *
+          (∑' z, law (intensityProfile J β)
+            {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+              ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+              ((openGraph ω).induce
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+                ⟨0, h0⟩ ⟨z, hz⟩}) *
+          (∑' z, law (intensityProfile J β)
+            {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+              ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1},
+              ((openGraph ω).induce
+                {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1}).Reachable
+                ⟨0, h0⟩ ⟨z, hz⟩}) :=
+  law_localConn_ball_succ_le_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) K (fun a y _ => by rw [hJ]; exact hK _) hKa β m hx
+
+include hJ in
+/-- **R12, general form.** If `f j ≤ K j` with `K` antitone and `μ_m ≤ g m` for every `m`, then
+for `x ∈ B_n`, `τ(0,x) ≤ τ_n(0,x) + β ∑'_k K(n+k+1) g(n+k) g(n+k+1)`. -/
+theorem tau_le_localConn_ball_add (K : ℕ → ℝ≥0∞) (hK : ∀ j, (f j : ℝ≥0∞) ≤ K j)
+    (hKa : Antitone K) (β : ℝ≥0) (g : ℕ → ℝ≥0∞)
+    (hg : ∀ m, ∑' z, law (intensityProfile J β)
+      {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+          {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ∃ hz : z ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m},
+        ((openGraph ω).induce {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m}).Reachable
+          ⟨0, h0⟩ ⟨z, hz⟩} ≤ g m)
+    {n : ℕ} {x : ℕ →₀ (Fin d → ZMod L)} (hx : x.support.sup Nat.succ ≤ n) :
+    tau (intensityProfile J β) 0 x ≤
+      law (intensityProfile J β)
+          {ω | ∃ h0 : (0 : ℕ →₀ (Fin d → ZMod L)) ∈
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+            ∃ hx' : x ∈ {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n},
+            ((openGraph ω).induce
+              {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n}).Reachable
+              ⟨0, h0⟩ ⟨x, hx'⟩} +
+        β * ∑' k, K (n + k + 1) * g (n + k) * g (n + k + 1) :=
+  tau_le_localConn_ball_add_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) K (fun a y _ => by rw [hJ]; exact hK _) hKa β g hg hx
 
 include hJ in
 /-- **R11, power-law form.** If `f j ≤ C₀ L^{-(d+α) j}` then for `x ∈ B_m`,
@@ -307,6 +513,10 @@ theorem law_localConn_ball_succ_le_powerLaw (hL : 1 ≤ L) {α : ℝ} (hα : 0 <
                 ⟨0, h0⟩ ⟨z, hz⟩}) :=
   law_localConn_ball_succ_le J f hJ _ hf (antitone_powerLaw_level hL (by positivity) C₀) β m hx
 
+ :=
+  law_localConn_ball_succ_le_powerLaw_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) hL hα C₀ (fun a y _ => by rw [hJ]; exact hf _) β m hx
+
 include hJ in
 /-- **R12.** If `f j ≤ C₀ L^{-(d+α) j}` and `μ_m ≤ A L^{αm}` for every `m`, then for `x ∈ B_n`
 (in particular `h x = n`), `τ(0,x) ≤ τ_n(0,x) + D L^{-(d-α) n}` with
@@ -330,25 +540,9 @@ theorem tau_le_localConn_ball_add_powerLaw (hL : 1 ≤ L) {α : ℝ} (hα : 0 < 
               {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ n}).Reachable
               ⟨0, h0⟩ ⟨x, hx'⟩} +
         β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹ *
-          (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * n) := by
-  refine (tau_le_localConn_ball_add J f hJ _ hf (antitone_powerLaw_level hL (by positivity) C₀)
-    β (fun m => A * (L : ℝ≥0∞) ^ (α * m)) hμ hx).trans (add_le_add le_rfl (le_of_eq ?_))
-  have hterm : ∀ k : ℕ, C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
-      (A * (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ))) *
-      (A * (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ))) =
-      (C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * n)) *
-        ((L : ℝ≥0∞) ^ (-((d : ℝ) - α))) ^ k := by
-    intro k
-    calc C₀ * (L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
-          (A * (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ))) *
-          (A * (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ)))
-        = C₀ * A ^ 2 * ((L : ℝ≥0∞) ^ (-((d : ℝ) + α) * ((n + k + 1 : ℕ) : ℝ)) *
-          (L : ℝ≥0∞) ^ (α * ((n + k : ℕ) : ℝ)) *
-          (L : ℝ≥0∞) ^ (α * ((n + k + 1 : ℕ) : ℝ))) := by ring
-      _ = _ := by rw [rpow_powerLaw_mul_eq hL α n k]; ring
-  simp_rw [hterm]
-  rw [ENNReal.tsum_mul_left, ENNReal.tsum_geometric]
-  ring
+          (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * n) :=
+  tau_le_localConn_ball_add_powerLaw_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) hL hα C₀ (fun a y _ => by rw [hJ]; exact hf _) β A hμ hx
 
 include hJ in
 /-- **Summed form.** Under the hypotheses of R12,
@@ -374,24 +568,9 @@ theorem tsum_tau_ball_le_powerLaw (hL : 1 ≤ L) {α : ℝ} (hα : 0 < α) (C₀
                 {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ N}).Reachable
                 ⟨0, h0⟩ ⟨x, hx'⟩} +
         β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹ *
-          (L : ℝ≥0∞) ^ (α * N) := by
-  set D := β * C₀ * A ^ 2 * (L : ℝ≥0∞) ^ (-(d : ℝ)) * (1 - (L : ℝ≥0∞) ^ (-((d : ℝ) - α)))⁻¹
-  have hfin : Finite {x : ℕ →₀ (Fin d → ZMod L) // x.support.sup Nat.succ ≤ N} :=
-    (finite_level_ball N).to_subtype
-  refine (ENNReal.tsum_le_tsum fun x =>
-    tau_le_localConn_ball_add_powerLaw J f hJ hL hα C₀ hf β A hμ x.2).trans ?_
-  rw [ENNReal.tsum_add, ENNReal.tsum_const, ENat.card_eq_coe_natCard, ENat.toENNReal_coe,
-    card_ball]
-  refine add_le_add le_rfl (le_of_eq ?_)
-  have h0 : (L : ℝ≥0∞) ≠ 0 := by exact_mod_cast (show L ≠ 0 by omega)
-  have ht : (L : ℝ≥0∞) ≠ ⊤ := ENNReal.natCast_ne_top L
-  have e : (((L ^ d) ^ N : ℕ) : ℝ≥0∞) * (L : ℝ≥0∞) ^ (-((d : ℝ) - α) * N) =
-      (L : ℝ≥0∞) ^ (α * N) := by
-    rw [← pow_mul, Nat.cast_pow, ← ENNReal.rpow_natCast, ← ENNReal.rpow_add _ _ h0 ht]
-    congr 1
-    push_cast
-    ring
-  rw [mul_comm, mul_assoc, mul_comm _ (((L ^ d) ^ N : ℕ) : ℝ≥0∞), e]
+          (L : ℝ≥0∞) ^ (α * N) :=
+  tsum_tau_ball_le_powerLaw_of_translation J
+    (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) hL hα C₀ (fun a y _ => by rw [hJ]; exact hf _) β A hμ N
 
 /-! ### Non-vacuity (D-5): `d = 1`, `L = 2`, `f j = 4^(-j)`, `α = 1`, `β = 1/8` -/
 
