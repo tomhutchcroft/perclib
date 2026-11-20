@@ -48,6 +48,7 @@ public import PercLib.Models.HierarchicalBallSums
 public import PercLib.Models.HierarchicalCutoff
 public import PercLib.Models.HierarchicalGeometry
 public import PercLib.Models.HierarchicalSymmetry
+public import PercLib.Models.HierarchicalTriangle
 public import PercLib.Models.HierarchicalTwoPoint
 public import PercLib.Models.HierarchicalTwoPointUpper
 public import PercLib.Models.Lattice

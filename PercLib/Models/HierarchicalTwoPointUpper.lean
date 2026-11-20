@@ -511,9 +511,6 @@ theorem law_localConn_ball_succ_le_powerLaw (hL : 1 ≤ L) {α : ℝ} (hα : 0 <
               ((openGraph ω).induce
                 {z : ℕ →₀ (Fin d → ZMod L) | z.support.sup Nat.succ ≤ m + 1}).Reachable
                 ⟨0, h0⟩ ⟨z, hz⟩}) :=
-  law_localConn_ball_succ_le J f hJ _ hf (antitone_powerLaw_level hL (by positivity) C₀) β m hx
-
- :=
   law_localConn_ball_succ_le_powerLaw_of_translation J
     (fun g => radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) hL hα C₀ (fun a y _ => by rw [hJ]; exact hf _) β m hx
 
