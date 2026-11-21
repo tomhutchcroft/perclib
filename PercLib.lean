@@ -107,11 +107,13 @@ public import PercLib.Models.Lattice
 public import PercLib.Models.Line
 public import PercLib.Models.LongRange.Convolution
 public import PercLib.Models.LongRange.CutPoints
+public import PercLib.Models.LongRange.CutoffCorner
 public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.Defs
 public import PercLib.Models.LongRange.FiniteSusceptibility
 public import PercLib.Models.LongRange.FourierSymbol
 public import PercLib.Models.LongRange.InfiniteVolumeRusso
+public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.OmittedLayer
 public import PercLib.Models.LongRange.OneDimensional
 public import PercLib.Models.LongRange.PowerLaw
