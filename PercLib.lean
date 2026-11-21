@@ -125,6 +125,11 @@ public import PercLib.Percolation.Bond.IntensityScaling
 public import PercLib.Percolation.Bond.IntrinsicBalls
 public import PercLib.Percolation.Bond.IntrinsicGrowth
 public import PercLib.Percolation.Bond.IntrinsicRenewal
+public import PercLib.Percolation.Bond.Lace.Basic
+public import PercLib.Percolation.Bond.Lace.DiagramBounds
+public import PercLib.Percolation.Bond.Lace.DistinctTriangle
+public import PercLib.Percolation.Bond.Lace.DoubleConnection
+public import PercLib.Percolation.Bond.Lace.Sharpness
 public import PercLib.Percolation.Bond.LocalConnectivity
 public import PercLib.Percolation.Bond.LocalConvergence
 public import PercLib.Percolation.Bond.LocalFiniteness
