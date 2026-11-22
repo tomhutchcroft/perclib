@@ -38,7 +38,7 @@ open scoped ENNReal BigOperators
 
 namespace PercLib.Percolation.Bond.Exploration.BFS
 
-variable {V : Type*}
+variable {V : Type*} [Countable V]
 
 /-- At a reachable finite state, `E(A k, U k)` is disjoint from `R k`. -/
 theorem disjoint_queried_revealFin_of_some {ω : Config V} {o : V} {k : ℕ} {Q T : Finset V}
@@ -54,8 +54,6 @@ theorem disjoint_queried_revealFin_of_some {ω : Config V} {o : V} {k : ℕ} {Q 
     · rintro ⟨v, hv, hve⟩
       exact ⟨v, hQ ▸ hv, hve⟩]
   exact (disjoint_revealed_queried ω o k).symm
-
-variable [Countable V]
 
 /-- **Direction 1's factorization at the BFS countable state.**  This is
 `PercLib.Probability.AdaptedReveal.lintegral_adapted_prod` applied to
