@@ -224,6 +224,7 @@ public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.De
 public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Induction
 public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Natural
 public import PercLib.Percolation.Bond.Exploration.BFS.History
+public import PercLib.Percolation.Bond.Exploration.BFS.IntensityMoments
 public import PercLib.Percolation.Bond.Exploration.BFS.Limit
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
 public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Assemble
@@ -243,6 +244,7 @@ public import PercLib.Percolation.Bond.FourthMoment
 public import PercLib.Percolation.Bond.GlobalConnectivity
 public import PercLib.Percolation.Bond.HarrisDecreasing
 public import PercLib.Percolation.Bond.HarrisLocal
+public import PercLib.Percolation.Bond.HighTemperatureTail
 public import PercLib.Percolation.Bond.Host
 public import PercLib.Percolation.Bond.IndependentLayer
 public import PercLib.Percolation.Bond.IndependentLayer.AddedVolume

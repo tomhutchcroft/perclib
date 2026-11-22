@@ -111,6 +111,18 @@ interface, no code copied.
 
 All perclib paths in this section are relative to `PercLib/`.
 
+### Bounded high-temperature migration supplement — 22 November 2026
+
+These two files come from the later local source branch
+`work/yujinhkim-critical-lrp-orchestration`. Their headers give the complete revision and
+Apache-2.0 credit. This supplement records the new tail/intensity landing; it does not re-audit
+or renumber the 21 November tables above.
+
+| perclib file | Source path (repository root) | Source revision | Taken | Header credit |
+|---|---|---|---|---|
+| `Percolation/Bond/HighTemperatureTail.lean` | `PercLib/CriticalLRP/HighTemperatureTail.lean` | `7802b33d22f7516ab155005e8526d0b4264ad855` | code | complete |
+| `Percolation/Bond/Exploration/BFS/IntensityMoments.lean` | `PercLib/CriticalLRP/IntensityMoments.lean` | `95248147f2fcfeb9c2666c706089d86ee17887a6` | code | complete |
+
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 
 Revision `c820fea91a7482c1755de0ec94ecb9f59ccfcacc`. Reused with Tom Hutchcroft's
