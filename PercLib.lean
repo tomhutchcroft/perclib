@@ -211,10 +211,15 @@ public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.Cluster
 public import PercLib.Percolation.Bond.Exploration.BFS.Counting
 public import PercLib.Percolation.Bond.Exploration.BFS.Defs
+public import PercLib.Percolation.Bond.Exploration.BFS.Generation.Fresh.Defs
+public import PercLib.Percolation.Bond.Exploration.BFS.Generation.History.Defs
+public import PercLib.Percolation.Bond.Exploration.BFS.Generation.Step.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.History
 public import PercLib.Percolation.Bond.Exploration.BFS.Limit
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
 public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Budget
+public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Fresh.Defs
+public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Rows.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.RevealData.Defs
 public import PercLib.Percolation.Bond.FiniteSetCriterion
 public import PercLib.Percolation.Bond.FiniteTriangle
