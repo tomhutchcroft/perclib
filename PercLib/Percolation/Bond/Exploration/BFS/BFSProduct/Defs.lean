@@ -10,6 +10,7 @@ Adapted from repository `yujinhkim/lrp`, file
 supplied under its Apache-2.0 header. Canonical definitions and their stated API are moved into
 this interface module; declarations are unchanged except for the coordinated namespace prefix.
 The forbidden `set_option autoImplicit false` was removed, since the build enforces it.
+The countability premise carried by source theorem statements is bound explicitly.
 -/
 module
 
@@ -49,7 +50,7 @@ noncomputable def finState (ω : Config V) (o : V) (k : ℕ) : FinState V := by
   else none
 
 /-- Characterization of the finite states. -/
-theorem finState_eq_some_iff {ω : Config V} {o : V} {k : ℕ} {Q T : Finset V} :
+theorem finState_eq_some_iff [Countable V] {ω : Config V} {o : V} {k : ℕ} {Q T : Finset V} :
     finState ω o k = some (Q, T) ↔
       (Q : Set V) = P ω o k ∧ (T : Set V) = A ω o k := by
   classical
