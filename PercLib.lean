@@ -206,11 +206,13 @@ public import PercLib.Percolation.Bond.DisjointUnion
 public import PercLib.Percolation.Bond.DomainIndependence
 public import PercLib.Percolation.Bond.Embedding
 public import PercLib.Percolation.Bond.Ergodic
+public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct
 public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.Cluster
 public import PercLib.Percolation.Bond.Exploration.BFS.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.History
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
+public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Budget
 public import PercLib.Percolation.Bond.Exploration.BFS.RevealData.Defs
 public import PercLib.Percolation.Bond.FiniteSetCriterion
 public import PercLib.Percolation.Bond.FiniteTriangle
@@ -362,6 +364,7 @@ public import PercLib.Probability.Exploration.MomentBound
 public import PercLib.Probability.Exploration.MomentTransfer
 public import PercLib.Probability.Exploration.PGF
 public import PercLib.Probability.Exploration.Poisson.Defs
+public import PercLib.Probability.Exploration.Poisson.Scalar
 public import PercLib.Probability.Exploration.Transcript
 public import PercLib.Probability.ExponentialMoments
 public import PercLib.Probability.FKG
