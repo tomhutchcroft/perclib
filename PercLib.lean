@@ -206,7 +206,7 @@ public import PercLib.Percolation.Bond.DisjointUnion
 public import PercLib.Percolation.Bond.DomainIndependence
 public import PercLib.Percolation.Bond.Embedding
 public import PercLib.Percolation.Bond.Ergodic
-public import PercLib.Percolation.Bond.Exploration.BFS.Basic
+public import PercLib.Percolation.Bond.Exploration.BFS.Cluster
 public import PercLib.Percolation.Bond.Exploration.BFS.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.History
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable

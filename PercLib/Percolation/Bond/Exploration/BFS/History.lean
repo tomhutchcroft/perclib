@@ -13,7 +13,7 @@ unchanged. The forbidden
 -/
 module
 
-public import PercLib.Percolation.Bond.Exploration.BFS.Basic
+public import PercLib.Percolation.Bond.Exploration.BFS.Cluster
 
 /-!
 # Dependency of BFS states on their revealed history
