@@ -94,7 +94,7 @@ UniformRowBound p m)
     rw [mul_comm C ((k.factorial : ℝ) / (Real.log lam) ^ k)]
     exact (ENNReal.ofReal_mul hc0).symm)
 
-/-- **The natural cluster moments, `0 < m ≤ 1`, sharp constant.** -/
+/-- **The natural cluster moments with the explicit envelope constant `1 / m`.** -/
 theorem lintegral_pow_encard_cluster_le_inv_mul {p : Sym2 V → unitInterval} {m : ℝ}
     (hrow : UniformRowBound p m) (o : V) {lam : ℝ} (hlam : 1 < lam) (hm : 0 < m) (hm1 : m ≤ 1)
     (hcond : m * lam ≤ Real.exp (m - 1)) (k : ℕ) :
@@ -125,7 +125,7 @@ theorem lintegral_pow_encard_cluster_le_zero {p : Sym2 V → unitInterval} {m : 
 
 /-! ### An admissible parameter exists -/
 
-/-- **Theorem 2 of `PROOF.md`, exponential form.**  For `0 < m < 1` there is `λ > 1` with a
+/-- **Theorem 1 of `PROOF.md`, exponential form.**  For `0 < m < 1` there is `λ > 1` with a
 uniform exponential cluster moment bound. -/
 theorem exists_lam_lintegral_epow_encard_cluster_le {p : Sym2 V → unitInterval} {m : ℝ}
     (hrow : UniformRowBound p m) (hm : 0 < m) (hm1 : m < 1) (o : V) :
@@ -151,6 +151,70 @@ theorem exists_lam_lintegral_pow_encard_cluster_le {p : Sym2 V → unitInterval}
       = (k.factorial : ℝ) / (m * (Real.log lam) ^ k) := by
     field_simp
   exact hmeq.le
+
+/-! ### Root-uniform consequences, with one admissible `λ` shared by every root -/
+
+/-- There is one admissible `λ > 1` that bounds the exponential moment of the true cluster
+at every root. This is the uniform form of the exponential-moment theorem, rather than
+choosing a possibly different `λ` separately for each root. -/
+theorem exists_lam_forall_lintegral_epow_encard_cluster_le {V : Type*} [Countable V]
+    {p : Sym2 V → unitInterval} {m : ℝ} (hrow : UniformRowBound p m) (hm : 0 < m) (hm1 : m < 1) :
+    ∃ lam : ℝ, 1 < lam ∧ ∀ o : V,
+      ∫⁻ ω, epow (ENNReal.ofReal lam) ((cluster ω o).encard) ∂(prodBernoulli p)
+        ≤ ENNReal.ofReal (1 / m) := by
+  obtain ⟨lam, hlam, hcond⟩ :=
+    PercLib.Probability.ExplorationEnvelope.exists_admissible_lambda hm hm1
+  exact ⟨lam, hlam, fun o =>
+    lintegral_epow_encard_cluster_le_inv_mul hrow o hlam.le hm hm1.le hcond⟩
+
+/-- One admissible `λ > 1` gives the factorial-logarithm bound at every root and every order.
+The finite-cardinality hypothesis is proved almost surely, not silently assumed for `toNat`. -/
+theorem exists_lam_forall_lintegral_pow_encard_cluster_le {V : Type*} [Countable V]
+    {p : Sym2 V → unitInterval} {m : ℝ} (hrow : UniformRowBound p m) (hm : 0 < m) (hm1 : m < 1) :
+    ∃ lam : ℝ, 1 < lam ∧ ∀ (o : V) (k : ℕ),
+      ∫⁻ ω, ENNReal.ofReal (((cluster ω o).encard.toNat : ℝ) ^ k) ∂(prodBernoulli p)
+        ≤ ENNReal.ofReal ((k.factorial : ℝ) / (m * (Real.log lam) ^ k)) := by
+  obtain ⟨lam, hlam, hcond⟩ :=
+    PercLib.Probability.ExplorationEnvelope.exists_admissible_lambda hm hm1
+  refine ⟨lam, hlam, fun o k => ?_⟩
+  refine (lintegral_pow_encard_cluster_le_inv_mul hrow o hlam hm hm1.le hcond k).trans ?_
+  refine ENNReal.ofReal_le_ofReal ?_
+  have hlogk : Real.log lam ≠ 0 := ne_of_gt (Real.log_pos hlam)
+  have hmeq : (1 / m) * ((k.factorial : ℝ) / (Real.log lam) ^ k)
+      = (k.factorial : ℝ) / (m * (Real.log lam) ^ k) := by
+    field_simp
+  exact hmeq.le
+
+/-- For `0 < m < 1`, the true cluster is almost surely finite at every root. -/
+theorem ae_encard_cluster_ne_top {V : Type*} [Countable V]
+    {p : Sym2 V → unitInterval} {m : ℝ} (hrow : UniformRowBound p m) (hm : 0 < m) (hm1 : m < 1) :
+    ∀ o : V, ∀ᵐ ω ∂(prodBernoulli p), (cluster ω o).encard ≠ ⊤ := by
+  obtain ⟨lam, hlam, hforall⟩ :=
+    exists_lam_forall_lintegral_epow_encard_cluster_le hrow hm hm1
+  intro o
+  exact ae_encard_cluster_ne_top_of_epow_le hlam (hforall o)
+
+/-- The exponential moment of the actual finite cluster cardinality is bounded by `1/m`
+for a single admissible `λ > 1` shared by every root. -/
+theorem lintegral_rpow_encard_cluster_le {V : Type*} [Countable V]
+    {p : Sym2 V → unitInterval} {m : ℝ} (hrow : UniformRowBound p m) (hm : 0 < m) (hm1 : m < 1) :
+    ∃ lam : ℝ, 1 < lam ∧ ∀ o : V,
+      ∫⁻ ω, ENNReal.ofReal (lam ^ ((cluster ω o).encard.toNat : ℝ)) ∂(prodBernoulli p)
+        ≤ ENNReal.ofReal (1 / m) := by
+  obtain ⟨lam, hlam, hforall⟩ :=
+    exists_lam_forall_lintegral_epow_encard_cluster_le hrow hm hm1
+  refine ⟨lam, hlam, fun o => ?_⟩
+  have hcongr : ∫⁻ ω, ENNReal.ofReal (lam ^ ((cluster ω o).encard.toNat : ℝ)) ∂(prodBernoulli p)
+      = ∫⁻ ω, (ENNReal.ofReal lam) ^ (((cluster ω o).encard.toNat : ℕ) : ℝ)
+          ∂(prodBernoulli p) := by
+    refine lintegral_congr (fun ω => ?_)
+    refine (ENNReal.ofReal_rpow_of_nonneg (le_of_lt (by linarith : (0 : ℝ) < lam))
+      (by positivity)).symm
+  rw [hcongr, ← lintegral_epow_eq_of_ae_finite (prodBernoulli p) o (ENNReal.ofReal lam)
+    (by rw [← ENNReal.ofReal_one]; exact ENNReal.ofReal_le_ofReal hlam.le)
+    (ae_encard_cluster_ne_top hrow hm hm1 o)]
+  exact hforall o
+
 
 /-! ### Interoperability with the diagonal-inclusive `RowSum` -/
 

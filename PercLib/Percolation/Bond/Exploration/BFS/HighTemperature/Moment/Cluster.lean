@@ -107,7 +107,7 @@ theorem lintegral_epow_cluster_le_of_envelope_bound {p : Sym2 V → unitInterval
     (fun n => ?_)
   exact (lintegral_epow_horizon_le hrow o hlam n).trans (ENNReal.ofReal_le_ofReal (hC n))
 
-/-- **The high-temperature exponential moment, `0 < m`, sharp constant `1/m`.**
+/-- **The high-temperature exponential moment with explicit envelope constant `1 / m`.**
 
 For independent bond percolation on a countable vertex set with every finite partial row
 sum at most `m ∈ (0,1]` and `m λ ≤ e^{m-1}`, the extended exponential moment of the actual
