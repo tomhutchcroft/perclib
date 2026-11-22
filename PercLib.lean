@@ -219,7 +219,10 @@ public import PercLib.Percolation.Bond.Exploration.BFS.Generation.RowCharge
 public import PercLib.Percolation.Bond.Exploration.BFS.Generation.Step
 public import PercLib.Percolation.Bond.Exploration.BFS.Generation.Step.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.FiniteHorizon
+public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Cluster
 public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Defs
+public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Induction
+public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Natural
 public import PercLib.Percolation.Bond.Exploration.BFS.History
 public import PercLib.Percolation.Bond.Exploration.BFS.Limit
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
