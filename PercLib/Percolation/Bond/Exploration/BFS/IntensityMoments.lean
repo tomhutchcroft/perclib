@@ -6,8 +6,10 @@ Authors: PercLib contributors
 /-
 Proofs adapted from repository `yujinhkim/lrp`, file `PercLib/CriticalLRP/IntensityMoments.lean`;
 added at source revision `95248147f2fcfeb9c2666c706089d86ee17887a6`, unchanged at branch head
-`1a4906a25965de1bf9440b0af188deb0420c03a6` (blob `de8a9ffc08db60a45674356694d069cb507c3e71`),
-supplied under its Apache-2.0 header. Canonical namespace prefix:
+`1a4906a25965de1bf9440b0af188deb0420c03a6` (blob `de8a9ffc08db60a45674356694d069cb507c3e71`);
+the underlying full-row power-law bound is adapted from `PercLib/CriticalLRP/PowerLawHighTemp.lean`
+at source revision `6953cfc748205d5589dd0ed17f79afff0d44b2d7`. Both source files carry the
+Apache-2.0 licence. Canonical namespace prefix:
 `PercLib.Percolation.Bond.Exploration.BFS`. This is a proof-only module: it introduces no
 definition and no alternative configuration model.
 

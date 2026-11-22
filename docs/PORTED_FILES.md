@@ -122,6 +122,7 @@ or renumber the 21 November tables above.
 |---|---|---|---|---|
 | `Percolation/Bond/HighTemperatureTail.lean` | `PercLib/CriticalLRP/HighTemperatureTail.lean` | `7802b33d22f7516ab155005e8526d0b4264ad855` | code | complete |
 | `Percolation/Bond/Exploration/BFS/IntensityMoments.lean` | `PercLib/CriticalLRP/IntensityMoments.lean` | `95248147f2fcfeb9c2666c706089d86ee17887a6` | code | complete |
+| `Percolation/Bond/PowerLawHighTemp/Tail.lean` | `PercLib/CriticalLRP/PowerLawHighTemp/Tail.lean` (`4a8819bfb7779ac3ff9bf079a8f8edc0a6b19536`), `PercLib/CriticalLRP/PowerLawHighTemp/Moments.lean` (`7802b33d22f7516ab155005e8526d0b4264ad855`), and the row-sum section of `PercLib/CriticalLRP/PowerLawHighTemp.lean` (`6953cfc748205d5589dd0ed17f79afff0d44b2d7`) | See the three file-specific revisions in the preceding column | code | complete |
 
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 

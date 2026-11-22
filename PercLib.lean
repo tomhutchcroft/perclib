@@ -275,6 +275,7 @@ public import PercLib.Percolation.Bond.Multipoint.Tags.SmallSets
 public import PercLib.Percolation.Bond.Multipoint.Ultrametric
 public import PercLib.Percolation.Bond.PathComparison
 public import PercLib.Percolation.Bond.PathLowerBounds
+public import PercLib.Percolation.Bond.PowerLawHighTemp.Tail
 public import PercLib.Percolation.Bond.Pivotal
 public import PercLib.Percolation.Bond.ProfileRegularity
 public import PercLib.Percolation.Bond.RootGlobalPercolation
