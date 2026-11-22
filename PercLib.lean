@@ -206,6 +206,7 @@ public import PercLib.Percolation.Bond.DisjointUnion
 public import PercLib.Percolation.Bond.DomainIndependence
 public import PercLib.Percolation.Bond.Embedding
 public import PercLib.Percolation.Bond.Ergodic
+public import PercLib.Percolation.Bond.Exploration.BFS.Defs
 public import PercLib.Percolation.Bond.FiniteSetCriterion
 public import PercLib.Percolation.Bond.FiniteTriangle
 public import PercLib.Percolation.Bond.FiniteVolume
