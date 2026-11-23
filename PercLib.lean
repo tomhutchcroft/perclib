@@ -23,6 +23,7 @@ public import PercLib.Analysis.LogarithmicCorrections
 public import PercLib.Analysis.MesoscopicNegligibility
 public import PercLib.Analysis.ModelNorm.Defs
 public import PercLib.Analysis.MomentHierarchy
+public import PercLib.Analysis.MonotoneDerivLimit
 public import PercLib.Analysis.MultiplicativeDecrement
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.QuadraticRecursion
@@ -146,6 +147,7 @@ public import PercLib.Models.LongRange.OmittedLayer
 public import PercLib.Models.LongRange.OneDimensional
 public import PercLib.Models.LongRange.PowerLaw
 public import PercLib.Models.LongRange.PowerLawCapMoment
+public import PercLib.Models.LongRange.PowerLawCappedFluxInterface
 public import PercLib.Models.LongRange.PowerLawBinomialDerivative
 public import PercLib.Models.LongRange.PowerLawFluxAssembly
 public import PercLib.Models.LongRange.PowerLawFluxSummability
@@ -155,6 +157,7 @@ public import PercLib.Models.LongRange.RootIndependence
 public import PercLib.Models.LongRange.SoftCutoff
 public import PercLib.Models.LongRange.TruncatedMoments
 public import PercLib.Models.LongRange.TwoPointCutoffConvergence
+public import PercLib.Models.LongRange.UncappedMomentContinuity
 public import PercLib.Models.LongRange.I41BinomialRestIndex
 public import PercLib.Models.LongRange.Tags.BranchingRandomWalk
 public import PercLib.Models.LongRange.Tags.CutsAndRows
@@ -306,6 +309,7 @@ public import PercLib.Percolation.Bond.Pivotal
 public import PercLib.Percolation.Bond.ProfileRegularity
 public import PercLib.Percolation.Bond.RootGlobalPercolation
 public import PercLib.Percolation.Bond.RootIndependence
+public import PercLib.Percolation.Bond.RestorationFibreMajorant
 public import PercLib.Percolation.Bond.RowSum
 public import PercLib.Percolation.Bond.RowSumDecay
 public import PercLib.Percolation.Bond.SelfAvoiding
