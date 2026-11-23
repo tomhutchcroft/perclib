@@ -134,6 +134,18 @@ stated revision scopes. They carry complete source and Apache-2.0 credit in thei
 | `Percolation/Bond/MomentTransport.lean` | `PercLib/CriticalLRP/MomentMonotonicity/MomentTransfer.lean` | `be191774d09f8bcded687f6950b5ab667972eb3d` | code | complete |
 | `Percolation/Bond/PowerLawHighTemp/Threshold.lean` | `PercLib/CriticalLRP/PowerLawHighTemp.lean` (susceptibility and critical-intensity sections) | `6953cfc748205d5589dd0ed17f79afff0d44b2d7` | code | complete |
 | `Models/LongRange/CutoffDominatedHighTemp.lean` | `PercLib/CriticalLRP/CutoffDominated.lean` (same-parameter cutoff-domination consequences) | `58b6fe64fc3994d6bf3f9c2b6f673e99d093f44f` | code | complete |
+### Cutoff derivative and mass-transport integration — 23 November 2026
+
+These modules come from the verified `work/yujin-cutoff-moment-prereqs` branch at `80ee07ad`.
+`CutoffCorner.lean` additionally adapts the older `critical-lrp-1` sources recorded in its header.
+`MassTransportI41.lean` and `TruncatedMoments.lean` are newly written canonical proofs, not copies
+of the `CriticalLRP` source tree. They are listed here so this parallel-source provenance is explicit.
+
+| perclib file | Provenance in the current integration | Header credit |
+|---|---|---|
+| `Models/LongRange/CutoffCorner.lean` | `80ee07ad`'s adaptation of `critical-lrp-1` at `d382e4c`; source files are named and licensed in the header | complete |
+| `Models/LongRange/MassTransportI41.lean` | new canonical proofs from `80ee07ad`, over the previously integrated cutoff interfaces | complete |
+| `Models/LongRange/TruncatedMoments.lean` | new canonical truncation, derivative and limit proofs from `80ee07ad` | complete |
 
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 
