@@ -159,6 +159,7 @@ public import PercLib.Models.LongRange.RootIndependence
 public import PercLib.Models.LongRange.SoftCutoff
 public import PercLib.Models.LongRange.TruncatedMoments
 public import PercLib.Models.LongRange.RestorationDerivative
+public import PercLib.Models.LongRange.RestorationDerivativeGeneral
 public import PercLib.Models.LongRange.TwoPointCutoffConvergence
 public import PercLib.Models.LongRange.UncappedMomentContinuity
 public import PercLib.Models.LongRange.I41BinomialRestIndex

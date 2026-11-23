@@ -582,7 +582,9 @@ Every input of production's continuity interface
 `continuousOn_flux_cutoff_of_root_succ_moment_of_small_tail` is constructed here: the higher root
 moment `M` at the top scale, the corner-free window, the derivative rate and the local small-tail
 estimate `exists_nhds_htail_powerLaw_of_restoration`.  This is the `hflux_cont` hypothesis of
-`hasDerivAt_uncappedMoment_powerLaw_of_flux`, at `r₀ = 5/2`. -/
+`hasDerivAt_uncappedMoment_powerLaw_of_flux` at any interior scale, in particular `r₀ = 3/2`.
+The window does not contain `5/2`; the generalization to arbitrary valid corner-free intervals is
+in `Models/LongRange/RestorationDerivativeGeneral`. -/
 theorem continuousOn_flux_powerLaw_of_restoration {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
     (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
