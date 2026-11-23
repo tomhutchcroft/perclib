@@ -133,6 +133,7 @@ stated revision scopes. They carry complete source and Apache-2.0 credit in thei
 |---|---|---|---|---|
 | `Percolation/Bond/MomentTransport.lean` | `PercLib/CriticalLRP/MomentMonotonicity/MomentTransfer.lean` | `be191774d09f8bcded687f6950b5ab667972eb3d` | code | complete |
 | `Percolation/Bond/PowerLawHighTemp/Threshold.lean` | `PercLib/CriticalLRP/PowerLawHighTemp.lean` (susceptibility and critical-intensity sections) | `6953cfc748205d5589dd0ed17f79afff0d44b2d7` | code | complete |
+| `Models/LongRange/CutoffDominatedHighTemp.lean` | `PercLib/CriticalLRP/CutoffDominated.lean` (same-parameter cutoff-domination consequences) | `58b6fe64fc3994d6bf3f9c2b6f673e99d093f44f` | code | complete |
 
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 

@@ -126,6 +126,9 @@ public import PercLib.Models.Lattice
 public import PercLib.Models.Line
 public import PercLib.Models.LongRange.Convolution
 public import PercLib.Models.LongRange.CutPoints
+public import PercLib.Models.LongRange.CutoffDominatedHighTemp
+public import PercLib.Models.LongRange.CutoffMoments
+public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.Defs
 public import PercLib.Models.LongRange.FiniteSusceptibility
@@ -225,6 +228,7 @@ public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.In
 public import PercLib.Percolation.Bond.Exploration.BFS.HighTemperature.Moment.Natural
 public import PercLib.Percolation.Bond.Exploration.BFS.History
 public import PercLib.Percolation.Bond.Exploration.BFS.IntensityMoments
+public import PercLib.Percolation.Bond.Exploration.BFS.IntensityRpowMoments
 public import PercLib.Percolation.Bond.Exploration.BFS.Limit
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
 public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Assemble
@@ -276,7 +280,9 @@ public import PercLib.Percolation.Bond.Multipoint.Tags.SmallSets
 public import PercLib.Percolation.Bond.Multipoint.Ultrametric
 public import PercLib.Percolation.Bond.PathComparison
 public import PercLib.Percolation.Bond.PathLowerBounds
+public import PercLib.Percolation.Bond.PowerLawHighTemp.MassBudget
 public import PercLib.Percolation.Bond.PowerLawHighTemp.Tail
+public import PercLib.Percolation.Bond.PowerLawHighTemp.TailSums
 public import PercLib.Percolation.Bond.PowerLawHighTemp.Threshold
 public import PercLib.Percolation.Bond.Pivotal
 public import PercLib.Percolation.Bond.ProfileRegularity
