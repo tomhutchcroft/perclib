@@ -124,6 +124,16 @@ or renumber the 21 November tables above.
 | `Percolation/Bond/Exploration/BFS/IntensityMoments.lean` | `PercLib/CriticalLRP/IntensityMoments.lean` | `95248147f2fcfeb9c2666c706089d86ee17887a6` | code | complete |
 | `Percolation/Bond/PowerLawHighTemp/Tail.lean` | `PercLib/CriticalLRP/PowerLawHighTemp/Tail.lean` (`4a8819bfb7779ac3ff9bf079a8f8edc0a6b19536`), `PercLib/CriticalLRP/PowerLawHighTemp/Moments.lean` (`7802b33d22f7516ab155005e8526d0b4264ad855`), and the row-sum section of `PercLib/CriticalLRP/PowerLawHighTemp.lean` (`6953cfc748205d5589dd0ed17f79afff0d44b2d7`) | See the three file-specific revisions in the preceding column | code | complete |
 
+### High-temperature transport supplement — 23 November 2026
+
+These new files continue the bounded high-temperature migration; the earlier tables retain their
+stated revision scopes. They carry complete source and Apache-2.0 credit in their own headers.
+
+| perclib file | Source path (repository root) | Source revision | Taken | Header credit |
+|---|---|---|---|---|
+| `Percolation/Bond/MomentTransport.lean` | `PercLib/CriticalLRP/MomentMonotonicity/MomentTransfer.lean` | `be191774d09f8bcded687f6950b5ab667972eb3d` | code | complete |
+| `Percolation/Bond/PowerLawHighTemp/Threshold.lean` | `PercLib/CriticalLRP/PowerLawHighTemp.lean` (susceptibility and critical-intensity sections) | `6953cfc748205d5589dd0ed17f79afff0d44b2d7` | code | complete |
+
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 
 Revision `c820fea91a7482c1755de0ec94ecb9f59ccfcacc`. Reused with Tom Hutchcroft's

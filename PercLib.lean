@@ -267,6 +267,7 @@ public import PercLib.Percolation.Bond.LocalFiniteness
 public import PercLib.Percolation.Bond.MomentDerivativeBound
 public import PercLib.Percolation.Bond.MomentDerivativeTruncated
 public import PercLib.Percolation.Bond.MomentDerivatives
+public import PercLib.Percolation.Bond.MomentTransport
 public import PercLib.Percolation.Bond.Multipoint.Defs
 public import PercLib.Percolation.Bond.Multipoint.Geometry
 public import PercLib.Percolation.Bond.Multipoint.ShapeCount
@@ -276,6 +277,7 @@ public import PercLib.Percolation.Bond.Multipoint.Ultrametric
 public import PercLib.Percolation.Bond.PathComparison
 public import PercLib.Percolation.Bond.PathLowerBounds
 public import PercLib.Percolation.Bond.PowerLawHighTemp.Tail
+public import PercLib.Percolation.Bond.PowerLawHighTemp.Threshold
 public import PercLib.Percolation.Bond.Pivotal
 public import PercLib.Percolation.Bond.ProfileRegularity
 public import PercLib.Percolation.Bond.RootGlobalPercolation
