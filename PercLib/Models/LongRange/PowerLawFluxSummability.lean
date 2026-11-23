@@ -11,14 +11,17 @@ for the cut-off derivative consumer. No old proof text is migrated here.
 module
 
 public import PercLib.Models.LongRange.HighTemperatureDerivative
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 public import PercLib.Models.LongRange.PowerLawPivotalContinuity
 public import PercLib.Models.LongRange.TruncatedMoments
 
 /-!
 # Summability of the power-law weighted pivotal flux
 
-At `K s = s ^ (-(d + α))` in the sup norm and in the explicit high-temperature region `β M < 1`,
-the weighted inserted-pivotal series of the uncapped cut-off derivative is absolutely summable
+At `K s = s ^ (-(d + α))` in the sup norm and strictly below the uncut global critical intensity.
+The moment majorant comes from `CutoffExhaustion.Moments`; older high-temperature inputs can be
+converted by `lt_globalCriticalIntensity_of_BFS`.
+The weighted inserted-pivotal series of the uncapped cut-off derivative is absolutely summable
 on every corner-free positive-radius window. A uniform bound on its total mass is also proved.
 
 These are pointwise-in-radius summability and total-mass results. They do not establish
@@ -49,8 +52,9 @@ The weight is the derivative of the cut-off edge probability at the power-law de
 evaluated as `(d + α) r ^ (-(d + α) - 1)`. -/
 theorem summable_norm_cutoffKernel_powerLaw_flux_of_high_temp {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Summable fun e : Sym2 (Fin d → ℤ) =>
@@ -62,7 +66,8 @@ theorem summable_norm_cutoffKernel_powerLaw_flux_of_high_temp {d : ℕ} (hd : 1 
           ((cluster (ω \ {e}) 0).encard : ℝ≥0∞) ^ p).toReal ∂
           (law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
             (powerLawProfile 1 ((d : ℝ) + α)) r) β))‖ := by
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound
+  obtain ⟨M, hM, hroot⟩ :=
+  CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
     (d := d) hd hα (β := β) hβ (0 : Fin d → ℤ) p (u := u) (v := v) (R := 1)
     hu zero_lt_one
   refine summable_norm_cutoff_flux_of_root_succ_moment
@@ -84,8 +89,9 @@ theorem summable_norm_cutoffKernel_powerLaw_flux_of_high_temp {d : ℕ} (hd : 1 
 window: the pointwise summability a derivative consumer needs. -/
 theorem summable_cutoffKernel_powerLaw_flux_of_high_temp {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v r : ℝ} (hu : 0 < u)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) (hr : r ∈ Ioo u v) :
     Summable fun e : Sym2 (Fin d → ℤ) =>
@@ -113,8 +119,9 @@ Nothing uniform in a *tolerance* is claimed, and no tail over the complement of 
 bounded: the constant dominates the sum over all edges, so it gives no small-tail input. -/
 theorem exists_uniform_norm_tsum_cutoffKernel_powerLaw_flux_le_of_high_temp {d : ℕ} (hd : 1 ≤ d)
     {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∃ C : ℝ, 0 ≤ C ∧ ∀ r ∈ Ioo u v,
@@ -139,7 +146,8 @@ theorem exists_uniform_norm_tsum_cutoffKernel_powerLaw_flux_le_of_high_temp {d :
             (law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
               (powerLawProfile 1 ((d : ℝ) + α)) r) β))‖) ≤
         (β : ℝ) * (((d : ℝ) + α) * u ^ (-((d : ℝ) + α) - 1)) * C := by
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound
+  obtain ⟨M, hM, hroot⟩ :=
+  CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
     (d := d) hd hα (β := β) hβ (0 : Fin d → ℤ) p (u := u) (v := v) (R := 1)
     hu zero_lt_one
   obtain ⟨C, hC0, hC⟩ := exists_uniform_tsum_norm_cutoff_flux_le_of_root_succ_moment

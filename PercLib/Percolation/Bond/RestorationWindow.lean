@@ -15,6 +15,7 @@ module
 public import PercLib.Percolation.Bond.RestorationWindow.Defs
 public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.PowerLawFluxAssembly
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # One finite window for the whole restoration family on a scale interval
@@ -490,8 +491,9 @@ finite pair set is arbitrarily small on a neighbourhood of `r₀`.  Compared wit
 are gone; the finite window comes from `exists_window_uniform_hwin`. -/
 theorem exists_nhds_htail_powerLaw_of_restoration {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) (r₀ : ℝ)
     (hr₀ : r₀ ∈ Ioo (5 / 4 : ℝ) (8 / 5)) (ε : ℝ) (hε : 0 < ε) :
     ∃ U ∈ 𝓝 r₀, ∃ F : Finset (Sym2 (Fin d → ℤ)),
@@ -512,7 +514,9 @@ theorem exists_nhds_htail_powerLaw_of_restoration {d : ℕ} (hd : 1 ≤ d) {α :
   let N : ModelNorm (Fin d → ℝ) := ModelNorm.ofNorm (Fin d → ℝ)
   have hK : AntitoneOn K (Ioi 0) :=
     antitoneOn_powerLawProfile_add (c := 1) (α := α) zero_le_one (by positivity)
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ o p
+  obtain ⟨M, hM, hroot⟩ :=
+    CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ o p
     (u := 5 / 4) (v := 8 / 5) (R := 8 / 5) (by norm_num) (by norm_num)
   have hmomv : rootMoment (law (intensityProfile (cutoffKernel (d := d) N K (8 / 5)) β)) o p
       ≠ ⊤ := by
@@ -587,8 +591,9 @@ The window does not contain `5/2`; the generalization to arbitrary valid corner-
 in `Models/LongRange/RestorationDerivativeGeneral`. -/
 theorem continuousOn_flux_powerLaw_of_restoration {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) :
     ContinuousOn (fun r : ℝ => ∑' e : Sym2 (Fin d → ℤ),
       ((radialKernel (normSeminorm ℝ (Fin d → ℝ))
@@ -605,7 +610,9 @@ theorem continuousOn_flux_powerLaw_of_restoration {d : ℕ} (hd : 1 ≤ d) {α :
   let K : ℝ → ℝ := powerLawProfile 1 ((d : ℝ) + α)
   let K' : ℝ → ℝ := fun t => (1 : ℝ) * (-((d : ℝ) + α) * t ^ (-((d : ℝ) + α) - 1))
   let N : ModelNorm (Fin d → ℝ) := ModelNorm.ofNorm (Fin d → ℝ)
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
+  obtain ⟨M, hM, hroot⟩ :=
+    CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ
     (0 : Fin d → ℤ) p (u := 5 / 4) (v := 8 / 5) (R := 8 / 5) (by norm_num) (by norm_num)
   have hK : AntitoneOn K (Ioi 0) :=
     antitoneOn_powerLawProfile_add (c := 1) (α := α) zero_le_one (by positivity)

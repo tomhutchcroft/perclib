@@ -13,13 +13,14 @@ module
 
 public import PercLib.Analysis.UniformTail
 public import PercLib.Models.LongRange.RestorationDerivativeGeneral
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # The right limit of the uncapped pivotal flux at an integer scale
 
-Uniform small tails replace a uniform summable edge dominator. At every positive integer radius in
-the explicit high-temperature regime, restoration supplies the local tail and the uncapped flux
-sums have absolute summability at the same radius. Their right limit carries the closed-ball
+Uniform small tails replace a uniform summable edge dominator. At every positive integer radius
+strictly below the uncut global critical intensity, restoration supplies the local tail and the
+uncapped flux sums have absolute summability there. Their right limit carries the closed-ball
 radial weight. Moment continuity is a separate input and is not assumed here.
 -/
 
@@ -72,11 +73,10 @@ theorem tendsto_tsum_cutoff_pivotal_flux_nhdsGT_of_uniform_tail {d : ℕ}
 
 /-- **The right limit of the actual uncapped power-law pivotal flux at a positive integer scale.**
 
-At every positive integer scale `n`, in the explicit high-temperature regime `β M < 1` of
-`exists_powerLaw_root_succ_moment_bound`, the whole weighted pivotal flux series of the uncapped
-`p`-th cut-off moment has a right limit at `n`, and that limit is the same series evaluated at `n`
-with the **closed-ball** radial weight `1 (‖z‖ ≤ n)`.  So the entire length class sitting at the
-corner carries its full derivative weight in the right limit.
+At every positive integer scale `n`, strictly below the uncut global critical intensity, the whole
+weighted pivotal flux series of the uncapped `p`-th root moment has a right limit at `n`.
+That limit uses the **closed-ball** radial weight `1 (‖z‖ ≤ n)`, so the entire cutoff support
+carries its full derivative weight in the right limit.
 
 Every hypothesis of `tendsto_tsum_cutoff_pivotal_flux_nhdsGT_of_root_succ_moment` is discharged:
 the uniform one-sided dominator `hbd` — which does not exist on the infinite lattice — is replaced
@@ -87,8 +87,9 @@ by `summable_norm_cutoffKernel_powerLaw_flux_of_high_temp` on the corner-free wi
 `(n, n+1)`. -/
 theorem tendsto_tsum_cutoffKernel_powerLaw_pivotal_flux_nhdsGT_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     Tendsto (fun r : ℝ => ∑' e : Sym2 (Fin d → ℤ),
         (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (fun s => if s < r then 1 else 0) e : ℝ) *
@@ -131,7 +132,9 @@ theorem tendsto_tsum_cutoffKernel_powerLaw_pivotal_flux_nhdsGT_nat {d : ℕ} (hd
     exact hasDerivAt_powerLawProfile_add 1 α ht
   have hK'cont : ContinuousOn K' (Ioi 0) := by
     rw [hK']; exact continuousOn_powerLawProfile_deriv_add (d := d) 1 α
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
+  obtain ⟨M, hM, hroot⟩ :=
+    CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ
     (0 : Fin d → ℤ) p (u := u) (v := R) (R := R) hu hR
   have hroot' : ∀ r ∈ (Ioo u R ∪ {R} : Set ℝ),
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ (p + 1)

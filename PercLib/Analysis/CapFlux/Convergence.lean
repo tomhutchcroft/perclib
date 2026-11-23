@@ -16,6 +16,7 @@ public import PercLib.Models.LongRange.PowerLawFluxSummability
 public import PercLib.Analysis.MonotoneDerivLimit
 public import PercLib.Percolation.Bond.RestorationFibreMajorant
 public import PercLib.Models.LongRange.PowerLawCappedFluxInterface
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # Monotone convergence of capped pivotal fluxes
@@ -374,8 +375,9 @@ variable {d : ℕ}
 
 /-- **`hflux_mono` from uncapped summability** (general root). -/
 theorem hflux_mono_powerLaw_of_summable (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p)
     (o : Fin d → ℤ) {u v : ℝ} (hu : 0 < u) (_huv : u < v)
     (hsum : ∀ r ∈ Ioo u v, Summable fun e => plWeight (d := d) α β r e *
@@ -393,12 +395,14 @@ theorem hflux_mono_powerLaw_of_summable (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     (K := powerLawProfile 1 ((d : ℝ) + α)) β p r o (fun y => by
       rw [lintegral_encard_pow_cutoffKernel_eq (normSeminorm ℝ (Fin d → ℝ))
         (powerLawProfile 1 ((d : ℝ) + α)) r β p y 0]
-      exact lintegral_cutoffKernel_powerLaw_pow_ne_top hd hα hβ hrpos 0 p) e
+      exact CutoffExhaustion.lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical
+        hd hα hβ hrpos 0 p) e
 
 /-- **`hflux_lim` from uncapped summability** (general root). -/
 theorem hflux_lim_powerLaw_of_summable (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p)
     (o : Fin d → ℤ) {u v : ℝ} (hu : 0 < u) (_huv : u < v)
     (hsum : ∀ r ∈ Ioo u v, Summable fun e => plWeight (d := d) α β r e *
@@ -419,13 +423,15 @@ theorem hflux_lim_powerLaw_of_summable (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) 
     (K := powerLawProfile 1 ((d : ℝ) + α)) β p r o (fun y => by
       rw [lintegral_encard_pow_cutoffKernel_eq (normSeminorm ℝ (Fin d → ℝ))
         (powerLawProfile 1 ((d : ℝ) + α)) r β p y 0]
-      exact lintegral_cutoffKernel_powerLaw_pow_ne_top hd hα hβ hrpos 0 p) e
+      exact CutoffExhaustion.lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical
+        hd hα hβ hrpos 0 p) e
 
 /-- **The uncapped weighted pivotal series is summable at the root.** This is production's
 `summable_norm_cutoffKernel_powerLaw_flux_of_high_temp`, rewritten in the shapes of this file. -/
 theorem summable_capIncLim_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Summable fun e => plWeight (d := d) α β r e *
@@ -440,8 +446,9 @@ theorem summable_capIncLim_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α
 
 /-- **`hflux_mono` at the root, unconditionally in the high-temperature region.** -/
 theorem hflux_mono_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Monotone fun B : ℕ => ∑' e : Sym2 (Fin d → ℤ),
@@ -453,8 +460,9 @@ theorem hflux_mono_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : 
 
 /-- **`hflux_lim` at the root, unconditionally in the high-temperature region.** -/
 theorem hflux_lim_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Tendsto (fun B : ℕ => ∑' e : Sym2 (Fin d → ℤ),
@@ -473,8 +481,9 @@ theorem hflux_lim_powerLaw_zero (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : �
 interface's own integrand shape.**  Both are proved; the only hypothesis is `1 ≤ p` (the case
 `p = 0` is trivial and is `hflux_mono_zero_p_zero`/`hflux_lim_zero_p_zero` below). -/
 theorem hflux_mono_powerLaw_zero_toNat (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Monotone fun B : ℕ => ∑' e : Sym2 (Fin d → ℤ),
@@ -494,8 +503,9 @@ theorem hflux_mono_powerLaw_zero_toNat (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) 
 
 /-- `hflux_lim` of the interface at the root, in the interface's own integrand shape. -/
 theorem hflux_lim_powerLaw_zero_toNat (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hcorner : ∀ n : ℕ, (n : ℝ) ∉ Ioo u v) :
     ∀ r ∈ Ioo u v, Tendsto (fun B : ℕ => ∑' e : Sym2 (Fin d → ℤ),
@@ -531,8 +541,9 @@ remaining hypothesis is the continuity of the uncapped weighted pivotal flux on 
 is the small-tail input of the programme (not claimed here). -/
 theorem hasDerivAt_uncappedMoment_powerLaw_zero_of_flux_cont (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {u v R r₀ : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v)
     (hflux_cont : ContinuousOn (fun r =>

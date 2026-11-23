@@ -14,6 +14,7 @@ public import PercLib.Models.LongRange.PowerLawCapMoment
 public import PercLib.Models.LongRange.PowerLawPivotalContinuity
 public import PercLib.Analysis.MonotoneDerivLimit
 public import PercLib.Models.LongRange.InfiniteVolumeRusso
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # The capped-flux interface at the power law
@@ -58,6 +59,7 @@ noncomputable section
 
 open Filter MeasureTheory Set
 open PercLib.Percolation.Bond
+open PercLib.Models.LongRange.CutoffExhaustion
 open PercLib.Analysis
 open scoped ENNReal NNReal Topology
 
@@ -75,8 +77,9 @@ envelope `F k = ((k ⊓ B).toNat : ℝ) ^ p` and `m = B ^ p`; the dominator is
 `2 * B ^ p * ((β * L) * radialKernel_v e * P_v e)`, summable in `e`. -/
 theorem continuousOn_cappedFlux_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (o : Fin d → ℤ) {u v R : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (B : ℕ) :
     ContinuousOn (fun r => ∑' e : Sym2 (Fin d → ℤ),
@@ -111,7 +114,9 @@ theorem continuousOn_cappedFlux_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (h�
     (fun t ht => hasDerivAt_powerLawProfile_add 1 α ht)
     (continuousOn_powerLawProfile_deriv_add (d := d) 1 α)
     β hFm hF o
-    (chi_cutoffKernel_powerLaw_ne_top hd hα hβ hR o) hu hvR
+    (by simpa only [chi, pow_one, ModelNorm.toSeminorm_ofNorm] using
+      (lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical hd hα hβ hR o 1))
+    hu hvR
     (corner_free_of_forall_nat_notMem (d := d) hI)
   refine h.congr ?_
   intro r _
@@ -126,8 +131,9 @@ constant envelope `F k = ((k ⊓ B).toNat : ℝ) ^ p` over the sup-norm power la
 corner-free window of positive radii inside `(0, R)` with finite susceptibility at `R`. -/
 theorem hasDerivAt_cappedMoment_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (o : Fin d → ℤ) {u v R r₀ : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v) (B : ℕ) :
     HasDerivAt (fun r => ∫ ω,
@@ -166,7 +172,9 @@ theorem hasDerivAt_cappedMoment_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (h�
     (fun t ht => hasDerivAt_powerLawProfile_add 1 α ht)
     (continuousOn_powerLawProfile_deriv_add (d := d) 1 α)
     β hFm hF o
-    (chi_cutoffKernel_powerLaw_ne_top hd hα hβ hR o) (lt_trans hu hr₀.1) (hr₀.2.trans_le hvR)
+    (by simpa only [chi, pow_one, ModelNorm.toSeminorm_ofNorm] using
+      (lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical hd hα hβ hR o 1))
+    (lt_trans hu hr₀.1) (hr₀.2.trans_le hvR)
     (fun z hz => by
       obtain ⟨n, hn⟩ := exists_nat_eq_norm z
       rw [ModelNorm.coe_ofNorm, norm_intCast_comp, hn] at hz
@@ -179,11 +187,12 @@ theorem hasDerivAt_cappedMoment_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (h�
 cut-off scale in the high-temperature region `β M < 1`, the real capped `p`-th moments converge as
 the cap grows to the honest real moment `(∫⁻ |K_o| ^ p).toReal`. This is
 `PercLib.Probability.tendsto_integral_capToNat_pow` with the finite `p`-th moment supplied by
-`lintegral_cutoffKernel_powerLaw_pow_ne_top`. -/
+`lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical`. -/
 theorem tendsto_cappedMoment_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (o : Fin d → ℤ) {r : ℝ} (hr : 0 < r) :
     Tendsto (fun B : ℕ => ∫ ω,
         (((cluster ω o).encard ⊓ (B : ℕ∞) : ℕ∞).toNat : ℝ) ^ p
@@ -194,7 +203,8 @@ theorem tendsto_cappedMoment_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα :
           (powerLawProfile 1 ((d : ℝ) + α)) r) β))).toReal)) :=
   PercLib.Probability.tendsto_integral_capToNat_pow _
     (measurable_encard_cluster o) p
-    (lintegral_cutoffKernel_powerLaw_pow_ne_top hd hα hβ hr o p)
+    (lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical
+      hd hα hβ hr o p)
 
 /-! ### The derivative-level cap reduction -/
 
@@ -214,8 +224,9 @@ Dini's theorem plus `hasDerivAt_of_tendstoLocallyUniformlyOn`, so *no uniform-in
 of the fluxes is used*. -/
 theorem hasDerivAt_uncappedMoment_powerLaw_of_flux {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (o : Fin d → ℤ) {u v R r₀ : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v)
     (hflux_mono : ∀ r ∈ Ioo u v, Monotone fun B : ℕ =>
@@ -280,8 +291,9 @@ corner-free window `(2, 3)`, on which production has finite susceptibility. The 
 same three flux inputs, now on `(2, 3)`. -/
 theorem hasDerivAt_uncappedMoment_powerLaw_five_halves_of_flux {d : ℕ} (hd : 1 ≤ d)
     {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (o : Fin d → ℤ)
     (hflux_mono : ∀ r ∈ Ioo (2 : ℝ) 3, Monotone fun B : ℕ =>
       ∑' e : Sym2 (Fin d → ℤ),

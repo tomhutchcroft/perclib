@@ -13,6 +13,7 @@ public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
 public import PercLib.Models.LongRange.InfiniteVolumeRusso
 public import PercLib.Models.LongRange.TruncatedMoments
 public import PercLib.Models.LongRange.HighTemperatureDerivative
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # Power-law continuity of one inserted pivotal moment
@@ -24,8 +25,9 @@ those abstract inputs at the concrete profile `powerLawProfile 1 (d + α)`:
 
 * the profile is antitone on `(0, ∞)`;
 * its derivative `t ↦ 1 * (-(d + α) * t ^ (-(d + α) - 1))` exists and is continuous on `(0, ∞)`;
-* the uniform `(p + 1)`-st root moment bound is `exists_powerLaw_root_succ_moment_bound`, valid at
-  every positive scale of the window and at the outer scale `R`, at high temperature `β M < 1`.
+* the uniform `(p + 1)`-st root moment bound is
+  `exists_uniform_root_succ_moment_bound_of_lt_globalCritical`, valid at every positive scale in
+  the window and at the outer scale `R`, strictly below uncut global criticality.
 
 What is *not* proved here: absolute summability of the pair series over `e`, the small-tail
 estimate, and the derivative formula of the cutoff moment itself. Those remain inputs of
@@ -39,19 +41,21 @@ noncomputable section
 
 open Filter MeasureTheory Set
 open PercLib.Percolation.Bond
+open PercLib.Models.LongRange.CutoffExhaustion
 open PercLib.Analysis
 open scoped ENNReal NNReal Topology
 
 namespace PercLib.Models.LongRange
 
 /-- **Single-pair uncapped pivotal continuity at the concrete power law.** With `1 ≤ d`, `0 < α`
-and the high-temperature hypothesis `β M < 1` of the summability region, the inserted pivotal
+and strict subcriticality of the raw full-lattice power-law law, the inserted pivotal
 moment of one pair is continuous in the cutoff radius on every window `(u, R)` of positive radii.
 No norm-corner hypothesis is needed for this unweighted statement. -/
 theorem continuousOn_pivotal_cutoff_uncapped_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {u R : ℝ} (hu : 0 < u) (huR : u < R)
     (e : Sym2 (Fin d → ℤ)) :
     ContinuousOn (fun r => ∫ ω, (((cluster (insert e ω) o).encard : ℝ≥0∞) ^ p -
@@ -59,7 +63,7 @@ theorem continuousOn_pivotal_cutoff_uncapped_powerLaw {d : ℕ} (hd : 1 ≤ d) {
         ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
           (powerLawProfile 1 ((d : ℝ) + α)) r) β))) (Ioo u R) := by
   obtain ⟨M, hM, hroot⟩ :=
-    exists_powerLaw_root_succ_moment_bound hd hα hβ 0 p hu (lt_trans hu huR)
+    exists_uniform_root_succ_moment_bound_of_lt_globalCritical hd hα hβ 0 p hu (lt_trans hu huR)
   exact continuousOn_pivotal_cutoff_uncapped_of_root_succ_moment
     (N := ModelNorm.ofNorm (Fin d → ℝ))
     (K := powerLawProfile 1 ((d : ℝ) + α))
@@ -77,8 +81,9 @@ single summand of the flux in `hasDerivAt_integral_cutoff_pow_binomial`; the der
 written out as `(d + α) r ^ (-(d + α) - 1)`, which is `-K'(r)`. -/
 theorem continuousOn_cutoff_weight_mul_pivotal_uncapped_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {u v R : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ z : Fin d → ℤ,
       (normSeminorm ℝ (Fin d → ℝ)) (Int.cast ∘ z) ∉ Ioo u v)
@@ -95,7 +100,8 @@ theorem continuousOn_cutoff_weight_mul_pivotal_uncapped_powerLaw {d : ℕ} (hd :
   have hcoef : ∀ r : ℝ, -(1 * (-((d : ℝ) + α) * r ^ (-((d : ℝ) + α) - 1))) =
       ((d : ℝ) + α) * r ^ (-((d : ℝ) + α) - 1) := fun r => by ring
   obtain ⟨M, hM, hroot⟩ :=
-    exists_powerLaw_root_succ_moment_bound hd hα hβ 0 p hu (lt_of_lt_of_le (lt_trans hu huv) hvR)
+    exists_uniform_root_succ_moment_bound_of_lt_globalCritical hd hα hβ 0 p hu
+      (lt_of_lt_of_le (lt_trans hu huv) hvR)
   refine (continuousOn_cutoff_weight_mul_pivotal_uncapped_of_root_succ_moment
     (N := ModelNorm.ofNorm (Fin d → ℝ))
     (K := powerLawProfile 1 ((d : ℝ) + α))
@@ -116,8 +122,9 @@ convergence input `hPiv` of
 `tendsto_tsum_cutoff_pivotal_flux_nhdsGT_of_root_succ_moment`, discharged at the power law. -/
 theorem tendsto_pivotal_cutoff_uncapped_powerLaw_nhdsGT {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {u R n : ℝ} (hu : 0 < u) (hun : u < n) (hnR : n < R)
     (e : Sym2 (Fin d → ℤ)) :
     Tendsto (fun r => ∫ ω, (((cluster (insert e ω) o).encard : ℝ≥0∞) ^ p -
@@ -129,7 +136,8 @@ theorem tendsto_pivotal_cutoff_uncapped_powerLaw_nhdsGT {d : ℕ} (hd : 1 ≤ d)
         ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
           (powerLawProfile 1 ((d : ℝ) + α)) n) β)))) := by
   obtain ⟨M, hM, hroot⟩ :=
-    exists_powerLaw_root_succ_moment_bound hd hα hβ 0 p hu (lt_trans (lt_trans hu hun) hnR)
+    exists_uniform_root_succ_moment_bound_of_lt_globalCritical hd hα hβ 0 p hu
+      (lt_trans (lt_trans hu hun) hnR)
   exact continuousAt_pivotal_cutoff_uncapped_of_root_succ_moment
     (N := ModelNorm.ofNorm (Fin d → ℝ))
     (K := powerLawProfile 1 ((d : ℝ) + α))
@@ -157,8 +165,9 @@ window**, the usable form of `continuousOn_cutoff_weight_mul_pivotal_uncapped_po
 corner-freeness hypothesis is discharged by excluding natural numbers from `(u, v)`. -/
 theorem continuousOn_cutoff_weight_mul_pivotal_uncapped_powerLaw_of_nat {d : ℕ} (hd : 1 ≤ d)
     {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {u v R : ℝ} (hu : 0 < u) (huv : u < v) (hvR : v ≤ R)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (e : Sym2 (Fin d → ℤ)) :
     ContinuousOn (fun r =>
@@ -181,8 +190,9 @@ ordinary two-sided topology. This is the one-scale regularity the pair series is
 does not assert that the series over `e` is summable or continuous. -/
 theorem continuousAt_cutoff_weight_mul_pivotal_uncapped_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {r₀ R : ℝ} (hr₀ : 0 < r₀) (hr₀R : r₀ < R)
     (hcorner : ∀ z : Fin d → ℤ, (normSeminorm ℝ (Fin d → ℝ)) (Int.cast ∘ z) ≠ r₀)
     (e : Sym2 (Fin d → ℤ)) :
@@ -209,8 +219,9 @@ The corner-free hypothesis in `continuousAt_cutoff_weight_mul_pivotal_uncapped_p
 only for the radial indicator weight `1{s < r}`. -/
 theorem continuousAt_pivotal_cutoff_uncapped_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α))) : ℝ≥0) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {r₀ R : ℝ} (hr₀ : 0 < r₀) (hr₀R : r₀ < R)
     (e : Sym2 (Fin d → ℤ)) :
     ContinuousAt (fun r => ∫ ω, (((cluster (insert e ω) o).encard : ℝ≥0∞) ^ p -

@@ -6,12 +6,13 @@ Authors: PercLib contributors
 /-
 New derived proof-only result; no old-source code is copied.
 Mathematical reference: T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1,
-Lemma I.4.1. The statement below is restricted to the explicit high-temperature regime and to
-corner-free scales; these restrictions are not present in the source lemma.
+Lemma I.4.1. The cutoff moment derivative is proved below at strictly subcritical parameters
+and corner-free scales. These restrictions are not asserted for the source lemma.
 -/
 module
 
 public import PercLib.Models.LongRange.RestorationDerivative
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 public import PercLib.Percolation.Bond.ZeroIntensityGap
 public import PercLib.Models.LongRange.PowerLawCappedFluxInterface
 public import PercLib.Analysis.CapFlux.Convergence
@@ -21,8 +22,8 @@ public import PercLib.Analysis.CapFlux.Convergence
 
 The published base proves the uncapped binomial derivative of the sup-norm power-law cut-off
 moment at `r₀ = 3/2` only, because the restoration-majorant window is stated on `(5/4, 8/5)`.
-This file lifts the high-temperature restoration/flux argument to an arbitrary positive,
-corner-free scale.
+This file extends the restoration/flux argument to an arbitrary positive, corner-free scale,
+and its power-law applications now use strict subcriticality of the uncut law.
 
 Main results:
 
@@ -53,14 +54,16 @@ Main results:
 
 ## What this file does not claim
 
-Only the high-temperature row-sum condition `β M < 1` is used; nothing is asserted about a
-critical `β_c`, about all natural scales (a natural `r₀` is a sup-norm corner and remains
+The power-law results assume strict subcriticality of the uncut law. Nothing is asserted at
+criticality, about all natural scales (a natural `r₀` is a sup-norm corner and remains
 excluded), about uniform-in-`r` sharpness, or about the paper's Lemma I.4.1 in full.
 -/
 
 @[expose] public section
 
 noncomputable section
+
+open PercLib.Models.LongRange.CutoffExhaustion
 
 open Filter Set MeasureTheory
 open PercLib.Percolation.Bond
@@ -112,7 +115,7 @@ theorem exists_powerLaw_rate_bound_of_pos {α : ℝ} (hα : 0 < α) (β : ℝ≥
 open Classical in
 /-- **The local small-tail estimate at the sup-norm power law on an arbitrary bounded interval.**
 
-For `1 ≤ d`, `α > 0`, the high-temperature row-sum condition `β M < 1`, every order `p ≥ 1`,
+For `1 ≤ d`, `α > 0`, strict subcriticality of the uncut law, every order `p ≥ 1`,
 every root `o` and every `r₀` in a positive interval `(u, v)`, the real-norm tail of the cut-off
 pivotal series outside one finite pair set is arbitrarily small on a neighbourhood of `r₀` inside
 `(u, v)`.  This is the published `exists_nhds_htail_powerLaw_of_restoration` with `(5/4, 8/5)`
@@ -121,8 +124,9 @@ from `exists_window_uniform_hwin`, and the rate is bounded by its value at the l
 No corner hypothesis is needed for the tail alone. -/
 theorem exists_nhds_htail_powerLaw_of_restoration_general {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) (o : Fin d → ℤ) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (r₀ : ℝ) (hr₀ : r₀ ∈ Ioo u v) (ε : ℝ) (hε : 0 < ε) :
     ∃ U ∈ 𝓝 r₀, ∃ F : Finset (Sym2 (Fin d → ℤ)),
@@ -144,7 +148,8 @@ theorem exists_nhds_htail_powerLaw_of_restoration_general {d : ℕ} (hd : 1 ≤ 
   have hK : AntitoneOn K (Ioi 0) :=
     antitoneOn_powerLawProfile_add (c := 1) (α := α) zero_le_one (by positivity)
   have hvpos : (0 : ℝ) < v := lt_trans hu huv
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ o p
+  obtain ⟨M, hM, hroot⟩ := exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ o p
     (u := u) (v := v) (R := v) hu hvpos
   have hmomv : rootMoment (law (intensityProfile (cutoffKernel (d := d) N K v) β)) o p
       ≠ ⊤ := by
@@ -219,13 +224,14 @@ open Classical in
 /-- **The uncapped binomial derivative of the power-law cut-off moment at an arbitrary positive
 corner-free scale.**
 
-For `1 ≤ d`, `α > 0`, the high-temperature row-sum condition `β M < 1`, every order `p ≥ 1` and
+For `1 ≤ d`, `α > 0`, strict subcriticality of the uncut law, every order `p ≥ 1` and
 every `r₀ > 0` that is *not* a value of the sup norm on `ℤ^d`, the `p`-th cut-off root moment is
 differentiable at `r₀`, with the full binomial derivative.  Every hypothesis of
 `hasDerivAt_integral_cutoff_pow_binomial_of_root_succ_moment_of_local_tail` is discharged here:
 
 * the corner-free interval comes from `exists_corner_free_interval` (shrunk to keep `u > 0`);
-* the uniform root `(p+1)`-st moment bound comes from `exists_powerLaw_root_succ_moment_bound`;
+* the uniform root `(p+1)`-st moment bound comes from
+  `exists_uniform_root_succ_moment_bound_of_lt_globalCritical`;
 * pointwise absolute summability of the weighted pivotal flux comes from
   `summable_norm_cutoff_flux_of_root_succ_moment`;
 * the local small-tail estimate comes from
@@ -235,8 +241,9 @@ No `hfac`, `hwin`, or `hflux_cont` and no corner-free-interval hypothesis is lef
 the single-scale corner-freeness hypothesis `hfree` remains explicit. -/
 theorem hasDerivAt_powerLaw_of_corner_free {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {r₀ : ℝ} (hr₀ : 0 < r₀)
     (hfree : ∀ z : Fin d → ℤ, normSeminorm ℝ (Fin d → ℝ) (Int.cast ∘ z) ≠ r₀) :
     HasDerivAt (fun r : ℝ => ∫ ω,
@@ -268,7 +275,8 @@ theorem hasDerivAt_powerLaw_of_corner_free {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (
     exact hfree z
   obtain ⟨u, v, hu, hur, hrv, hcorner⟩ :=
     exists_pos_corner_free_interval N hr₀ hfreeN
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
+  obtain ⟨M, hM, hroot⟩ := exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ
     (0 : Fin d → ℤ) p (u := u) (v := v) (R := v) hu (lt_trans hu (lt_trans hur hrv))
   have hroot' : ∀ r ∈ (Ioo u v ∪ {v} : Set ℝ),
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ (p + 1)
@@ -307,8 +315,9 @@ The corner hypothesis is discharged arithmetically: sup-norm values on `ℤ^d` a
 numbers. -/
 theorem hasDerivAt_powerLaw_of_nat_ne {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {r₀ : ℝ} (hr₀ : 0 < r₀)
     (hne : ∀ n : ℕ, (n : ℝ) ≠ r₀) :
     HasDerivAt (fun r : ℝ => ∫ ω,
@@ -335,8 +344,9 @@ estimate only on `(5/4, 8/5)`, so this scale is not covered there; it is an inst
 `hasDerivAt_powerLaw_of_corner_free`.  `5/2` is not a sup-norm value on `ℤ^d`. -/
 theorem hasDerivAt_powerLaw_five_halves {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) :
     HasDerivAt (fun r : ℝ => ∫ ω,
         (((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p).toReal
@@ -371,8 +381,9 @@ constructed from the restoration bounds, with the local small tail taken from
 `hasDerivAt_uncappedMoment_powerLaw_of_flux` on that interval. -/
 theorem continuousOn_flux_powerLaw_of_restoration_general {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hcorner : ∀ z : Fin d → ℤ, normSeminorm ℝ (Fin d → ℝ) (Int.cast ∘ z) ∉ Ioo u v) :
     ContinuousOn (fun r : ℝ => ∑' e : Sym2 (Fin d → ℤ),
@@ -395,7 +406,8 @@ theorem continuousOn_flux_powerLaw_of_restoration_general {d : ℕ} (hd : 1 ≤ 
   have hK' : ∀ t, 0 < t → HasDerivAt K (K' t) t :=
     fun t ht => hasDerivAt_powerLawProfile_add 1 α ht
   have hK'c : ContinuousOn K' (Ioi 0) := continuousOn_powerLawProfile_deriv_add (d := d) 1 α
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
+  obtain ⟨M, hM, hroot⟩ := exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ
     (0 : Fin d → ℤ) p (u := u) (v := v) (R := v) hu (lt_trans hu huv)
   have hroot' : ∀ r ∈ (Ioo u v ∪ {v} : Set ℝ),
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ (p + 1)
@@ -413,8 +425,9 @@ continuous there.  Matches the `hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v` shape o
 `hasDerivAt_uncappedMoment_powerLaw_of_flux`. -/
 theorem continuousOn_flux_powerLaw_of_restoration_general_of_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {u v : ℝ} (hu : 0 < u) (huv : u < v)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) :
     ContinuousOn (fun r : ℝ => ∑' e : Sym2 (Fin d → ℤ),
@@ -442,8 +455,9 @@ a corner-free scale, so `hasDerivAt_powerLaw_of_corner_free` applies.  This is t
 the generalisation, matching the phrase "arbitrary valid corner-free power-law scale interval". -/
 theorem hasDerivAt_powerLaw_of_corner_free_interval {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {u v r₀ : ℝ} (hu : 0 < u)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v) :
     HasDerivAt (fun r : ℝ => ∫ ω,
@@ -475,12 +489,13 @@ here: monotonicity in the cap and the cap limit at the root are
 `hflux_mono_powerLaw_zero_toNat` and `hflux_lim_powerLaw_zero_toNat`, and continuity of the whole
 flux series is `continuousOn_flux_powerLaw_of_restoration_general_of_nat`.  The result is the
 paper's value-level derivative `ψ'(r₀) = ∑_e c_{r₀}(e) PI_e(r₀)` at every interior point of a valid
-corner-free interval. The high-temperature, dimensional and geometric inputs remain explicit; no
-additional analytic hypothesis is needed. -/
+corner-free interval. Strict subcriticality and the dimensional and geometric inputs remain
+explicit; no additional analytic hypothesis is needed. -/
 theorem hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval {d : ℕ} (hd : 1 ≤ d)
     {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {u v r₀ : ℝ} (hu : 0 < u) (huv : u < v)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v) :
     HasDerivAt (fun r => (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p
@@ -536,8 +551,9 @@ the ordinary integral and `lintegral`-`toReal` expressions agree locally, so uni
 derivative identifies their values. -/
 theorem binomial_eq_flux_powerLaw_of_corner_free_interval {d : ℕ} (hd : 1 ≤ d)
     {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
     (p : ℕ) (hp : 1 ≤ p) {u v r₀ : ℝ} (hu : 0 < u) (huv : u < v)
     (hI : ∀ k : ℕ, (k : ℝ) ∉ Ioo u v) (hr₀ : r₀ ∈ Ioo u v) :
     (β : ℝ) * -((fun t : ℝ => (1 : ℝ) *
@@ -561,7 +577,8 @@ theorem binomial_eq_flux_powerLaw_of_corner_free_interval {d : ℕ} (hd : 1 ≤ 
             ((cluster (ω \ {e}) (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p).toReal
             ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
               (powerLawProfile 1 ((d : ℝ) + α)) r₀) β)) := by
-  obtain ⟨M, hM, hroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
+  obtain ⟨M, hM, hroot⟩ := exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ
     (0 : Fin d → ℤ) p (u := u) (v := v) (R := v) hu (lt_trans hu huv)
   have hfin : ∀ r ∈ Ioo u v,
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p

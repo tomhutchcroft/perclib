@@ -183,6 +183,23 @@ theorem cutoff_pow_le_raw (β : ℝ≥0) (o : Fin d → ℤ) (k : ℕ) {ρ : ℝ
     (N := ModelNorm.ofNorm (Fin d → ℝ))
     (hK := fun _ ht => (powerLawProfile_pos (c := 1) one_pos ht).le) hρ β o k
 
+/-- Every natural cutoff moment is finite at every positive scale, for the raw power-law model
+strictly below its global critical intensity. This is the needed strengthening of cutoff
+monotonicity; the uncut moment is finite by `lintegral_encard_pow_raw_ne_top`. -/
+theorem lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical {d : ℕ} (hd : 1 ≤ d)
+    {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α))))
+    {ρ : ℝ} (hρ : 0 < ρ) (o : Fin d → ℤ) (p : ℕ) :
+    (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ p ∂law (intensityProfile
+      (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α)) ρ) β)) ≠ ⊤ := by
+  exact PercLib.Models.LongRange.lintegral_cutoffKernel_encard_cluster_pow_ne_top_of_le
+    (N := ModelNorm.ofNorm (Fin d → ℝ))
+    (hK := fun _ hρ' => (powerLawProfile_pos (c := 1) one_pos hρ').le)
+    hρ β o p (lintegral_encard_pow_raw_ne_top hd hα hβ o p)
+
 /-- **A single finite constant bounds every cut-off moment at strict subcriticality.** -/
 theorem exists_uniform_cutoff_pow_bound_raw (hd : 1 ≤ d) (hα : 0 < α) {β : ℝ≥0}
     (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
@@ -241,15 +258,12 @@ theorem exists_uniform_root_succ_moment_bound_of_lt_globalCritical {d : ℕ} (hd
     (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
       (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     (o : Fin d → ℤ) (p : ℕ) {u v R : ℝ} (hu : 0 < u) (hR : 0 < R) :
-    ∃ M : ℝ≥0∞, M ≠ ⊤ ∧
+    ∃ M : ℝ≥0∞, M ≠ ⊤ ∧ ∀ r ∈ (Ioo u v ∪ {R} : Set ℝ),
       (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ (p + 1) ∂law (intensityProfile
-        (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))) β)) ≤ M ∧
-      ∀ r ∈ (Ioo u v ∪ {R} : Set ℝ),
-        (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ (p + 1) ∂law (intensityProfile
-          (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
-            (powerLawProfile 1 ((d : ℝ) + α)) r) β)) ≤ M := by
-  obtain ⟨M, hM, hraw, hbound⟩ := exists_uniform_cutoff_pow_bound_raw hd hα hβ o p
-  refine ⟨M, hM, hraw, fun r hr => hbound r ?_⟩
+        (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+          (powerLawProfile 1 ((d : ℝ) + α)) r) β)) ≤ M := by
+  obtain ⟨M, hM, -, hbound⟩ := exists_uniform_cutoff_pow_bound_raw hd hα hβ o p
+  refine ⟨M, hM, fun r hr => hbound r ?_⟩
   rcases hr with hr | rfl
   · linarith [hu, hr.1, hr.2]
   · exact hR

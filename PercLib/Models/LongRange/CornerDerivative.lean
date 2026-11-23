@@ -92,7 +92,8 @@ theorem deriv_momToReal_eventuallyEq_fluxOpen {d : ℕ} (hd : 1 ≤ d) {α : ℝ
       nhdsWithin_le_nhds (Iio_mem_nhds (show (n : ℝ) < (n : ℝ) + 1 by linarith))
     exact inter_mem h1 h2
   filter_upwards [hwin] with r hr
-  have h := hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα hβ p hp
+  have h := hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα
+    (CutoffExhaustion.lt_globalCriticalIntensity_of_BFS hd hα hβ) p hp
     (u := (n : ℝ)) (v := (n : ℝ) + 1) (r₀ := r) hnn (by linarith) hcorner hr
   refine (h.deriv).trans ?_
   simp only [fluxOpen_eq_raw]
@@ -112,7 +113,8 @@ theorem tendsto_deriv_momToReal_nhdsGT_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     Tendsto (deriv (momToReal d α β p)) (𝓝[>] (n : ℝ))
       (𝓝 (fluxClosedAt d α β p (n : ℝ))) := by
-  have hflux := tendsto_tsum_cutoffKernel_powerLaw_pivotal_flux_nhdsGT_nat (d := d) hd hα hβ hp hn
+  have hflux := tendsto_tsum_cutoffKernel_powerLaw_pivotal_flux_nhdsGT_nat (d := d) hd hα
+    (CutoffExhaustion.lt_globalCriticalIntensity_of_BFS hd hα hβ) hp hn
   have hmain : Tendsto (fun r => fluxOpen d α β p r) (𝓝[>] (n : ℝ))
       (𝓝 (fluxClosedAt d α β p (n : ℝ))) := by
     rw [fluxClosedAt_eq_raw]
@@ -157,7 +159,8 @@ theorem hasDerivWithinAt_momToReal_of_continuousWithinAt {d : ℕ} (hd : 1 ≤ d
   refine hasDerivWithinAt_Ici_of_tendsto_deriv (s := Ioo (n : ℝ) ((n : ℝ) + 1)) ?_ ?_ hwin
     (tendsto_deriv_momToReal_nhdsGT_nat hd hα hβ hp hn)
   · intro r hr
-    exact (hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα hβ p hp
+    exact (hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα
+      (CutoffExhaustion.lt_globalCriticalIntensity_of_BFS hd hα hβ) p hp
       (u := (n : ℝ)) (v := (n : ℝ) + 1) (r₀ := r) hnn (by linarith) hcorner hr)
       |>.differentiableAt.differentiableWithinAt
   · exact hcont.mono (fun y hy => le_of_lt hy.1)
@@ -369,7 +372,8 @@ theorem hasDerivWithinAt_update_momToReal {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (h
     exact hev_of_ne y hy
   have hg_has : ∀ r ∈ Ioo (n : ℝ) ((n : ℝ) + 1), HasDerivAt g (fluxOpen d α β p r) r := by
     intro r hr
-    exact (hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα hβ p hp
+    exact (hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα
+      (CutoffExhaustion.lt_globalCriticalIntensity_of_BFS hd hα hβ) p hp
       (u := (n : ℝ)) (v := (n : ℝ) + 1) (r₀ := r) hnn (by linarith) hcorner hr)
       |>.congr_of_eventuallyEq (by rw [hg, hψ]; exact hnear r (ne_of_gt hr.1))
   have hg_diff : DifferentiableOn ℝ g (Ioo (n : ℝ) ((n : ℝ) + 1)) :=

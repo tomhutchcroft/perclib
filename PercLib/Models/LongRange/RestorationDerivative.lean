@@ -12,6 +12,7 @@ module
 
 public import PercLib.Models.LongRange.PowerLawBinomialDerivative
 public import PercLib.Percolation.Bond.RestorationWindow
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # A high-temperature instance of the cut-off binomial derivative
@@ -54,6 +55,7 @@ theorem hasDerivAt_powerLaw_three_halves_of_restoration {d : ℕ} (hd : 1 ≤ d)
       (3 / 2) := by
   refine hasDerivAt_powerLaw_three_halves_of_small_tail (d := d) hd hα hβ p hp ?_
   intro r₀ hr₀ ε hε
-  exact exists_nhds_htail_powerLaw_of_restoration hd hα hβ p hp 0 r₀ hr₀ ε hε
+  exact exists_nhds_htail_powerLaw_of_restoration hd hα
+    (CutoffExhaustion.lt_globalCriticalIntensity_of_BFS hd hα hβ) p hp 0 r₀ hr₀ ε hε
 
 end PercLib.Models.LongRange
