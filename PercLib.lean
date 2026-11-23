@@ -135,6 +135,7 @@ public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
 public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.Defs
+public import PercLib.Models.LongRange.ExplicitHighTemperature
 public import PercLib.Models.LongRange.FiniteSusceptibility
 public import PercLib.Models.LongRange.FourierSymbol
 public import PercLib.Models.LongRange.HighTemperatureDerivative
@@ -298,6 +299,7 @@ public import PercLib.Percolation.Bond.PowerLawHighTemp.MassBudget
 public import PercLib.Percolation.Bond.PowerLawHighTemp.Tail
 public import PercLib.Percolation.Bond.PowerLawHighTemp.TailSums
 public import PercLib.Percolation.Bond.PowerLawHighTemp.Threshold
+public import PercLib.Percolation.Bond.SmallTailMass
 public import PercLib.Percolation.Bond.Pivotal
 public import PercLib.Percolation.Bond.ProfileRegularity
 public import PercLib.Percolation.Bond.RootGlobalPercolation
