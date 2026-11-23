@@ -144,6 +144,8 @@ public import PercLib.Models.LongRange.CutPoints
 public import PercLib.Models.LongRange.CappedDerivative
 public import PercLib.Models.LongRange.CutoffCorner
 public import PercLib.Models.LongRange.CutoffDominatedHighTemp
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
+public import PercLib.Models.LongRange.CutoffExhaustion
 public import PercLib.Models.LongRange.CutoffMoments
 public import PercLib.Models.LongRange.CutoffMomentConvergence
 public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
@@ -160,6 +162,7 @@ public import PercLib.Models.LongRange.InfiniteVolumeRusso
 public import PercLib.Models.LongRange.LatticeConvolution
 public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.MomentCorner
+public import PercLib.Models.LongRange.MomentThreshold
 public import PercLib.Models.LongRange.CriticalFirstMomentCorner
 public import PercLib.Models.LongRange.DegreeCorner
 public import PercLib.Models.LongRange.OmittedLayer
