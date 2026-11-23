@@ -126,6 +126,7 @@ public import PercLib.Models.Lattice
 public import PercLib.Models.Line
 public import PercLib.Models.LongRange.Convolution
 public import PercLib.Models.LongRange.CutPoints
+public import PercLib.Models.LongRange.CappedDerivative
 public import PercLib.Models.LongRange.CutoffCorner
 public import PercLib.Models.LongRange.CutoffDominatedHighTemp
 public import PercLib.Models.LongRange.CutoffMoments
@@ -145,6 +146,8 @@ public import PercLib.Models.LongRange.QuantileMoments
 public import PercLib.Models.LongRange.RootIndependence
 public import PercLib.Models.LongRange.SoftCutoff
 public import PercLib.Models.LongRange.TruncatedMoments
+public import PercLib.Models.LongRange.TwoPointCutoffConvergence
+public import PercLib.Models.LongRange.I41BinomialRestIndex
 public import PercLib.Models.LongRange.Tags.BranchingRandomWalk
 public import PercLib.Models.LongRange.Tags.CutsAndRows
 public import PercLib.Models.LongRange.Tags.DisplacementKernels
@@ -212,6 +215,7 @@ public import PercLib.Percolation.Bond.Diagonal.Probability
 public import PercLib.Percolation.Bond.DisjointUnion
 public import PercLib.Percolation.Bond.DomainIndependence
 public import PercLib.Percolation.Bond.Embedding
+public import PercLib.Percolation.Bond.EdgeWindowMoments
 public import PercLib.Percolation.Bond.Ergodic
 public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct
 public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct.Defs

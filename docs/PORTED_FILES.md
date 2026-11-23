@@ -146,6 +146,7 @@ of the `CriticalLRP` source tree. They are listed here so this parallel-source p
 | `Models/LongRange/CutoffCorner.lean` | `80ee07ad`'s adaptation of `critical-lrp-1` at `d382e4c`; source files are named and licensed in the header | complete |
 | `Models/LongRange/MassTransportI41.lean` | new canonical proofs from `80ee07ad`, over the previously integrated cutoff interfaces | complete |
 | `Models/LongRange/TruncatedMoments.lean` | new canonical truncation, derivative and limit proofs from `80ee07ad` | complete |
+| `Percolation/Bond/EdgeWindowMoments.lean` | `PercLib/CriticalLRP/MomentMonotonicity/CutoffMomentAudit.lean` | `be191774d09f8bcded687f6950b5ab667972eb3d` | code | complete |
 
 ## 2. `github.com/tomhutchcroft/near-critical-diffusivity`
 
