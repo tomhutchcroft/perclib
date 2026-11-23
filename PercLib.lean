@@ -64,6 +64,7 @@ public import PercLib.Analysis.Tauberian.Complete
 public import PercLib.Analysis.Tauberian.Converse
 public import PercLib.Analysis.Tauberian.Endpoints
 public import PercLib.Analysis.Tauberian.Laplace
+public import PercLib.Analysis.UniformTail
 public import PercLib.Analysis.VolumeTail.A3Limit
 public import PercLib.Analysis.VolumeTail.ChiSquareConstants
 public import PercLib.Analysis.VolumeTail.Endpoint
@@ -142,6 +143,7 @@ public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.CutoffSubcritical
 public import PercLib.Models.LongRange.Defs
 public import PercLib.Models.LongRange.ExplicitHighTemperature
+public import PercLib.Models.LongRange.FluxRightLimit
 public import PercLib.Models.LongRange.FiniteSusceptibility
 public import PercLib.Models.LongRange.FourierSymbol
 public import PercLib.Models.LongRange.HighTemperatureDerivative
