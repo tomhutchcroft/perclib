@@ -133,6 +133,8 @@ public import PercLib.Models.LongRange.CornerCoupling
 public import PercLib.Models.LongRange.CornerCoupling.Defs
 public import PercLib.Models.LongRange.CornerChangeMeasurable
 public import PercLib.Models.LongRange.CornerContinuity
+public import PercLib.Models.LongRange.CornerDerivative.Defs
+public import PercLib.Models.LongRange.CornerDerivative
 public import PercLib.Models.LongRange.Corner.Defs
 public import PercLib.Models.LongRange.DegreeCorner.Defs
 public import PercLib.Models.LongRange.CutPoints
