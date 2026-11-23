@@ -9,8 +9,8 @@ Adapted from the uncommitted, project-generated candidates `I41AtCorner.lean` an
 journal. Its source digest is retained in the verification log and the integration commit message.
 The final assembly with the already landed right derivative is new in this module.
 Mathematical reference: T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1,
-Lemma I.4.1. The corner statement is the one-sided version in the explicit high-temperature
-regime, not ordinary two-sided differentiation there or the full range of intensities.
+Lemma I.4.1. The corner statement is one-sided at strict subcriticality of the uncut law,
+not ordinary two-sided differentiation or a statement at all intensities.
 -/
 module
 
@@ -19,17 +19,22 @@ public import PercLib.Models.LongRange.CornerDerivative
 public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.TruncatedMoments
 public import PercLib.Models.LongRange.HighTemperatureDerivative
+public import PercLib.Models.LongRange.CutoffExhaustion.Moments
 
 /-!
 # Lemma I.4.1 at the integer corner `n`: the pivot-flux value *is* the binomial value
+
+The seven main results use strict subcriticality of the uncut law. Their six
+right-continuity inputs are restated with that hypothesis in the section below; the older
+row-sum versions remain available in `CornerMoment` and `CornerDerivative`.
 
 The landed right derivative `hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_powerLaw_nat`
 identifies the right derivative of the cutoff root moment at a positive integer radius `n` with
 the closed-ball pivotal flux `fluxClosedAt d α β p (n : ℝ)`.  This file identifies that same
 number with the paper's binomial right-hand side of Lemma I.4.1, under nothing but `d ≥ 1`,
-`α > 0`, the explicit high-temperature condition `β M < 1`, `p ≥ 1` and `n ≥ 1`.  No derivative is
-taken here and no two-sided claim is made: this is an identity of two values at the same scale and
-the same law.
+`α > 0`, strict subcriticality `β < globalCriticalIntensity …`, `p ≥ 1` and `n ≥ 1`.  No
+derivative is taken here and no two-sided claim is made: this is an identity of two values at the
+same scale and the same law.
 
 The chain is:
 
@@ -40,7 +45,7 @@ The chain is:
 * `i41_binomial_at_nat` (migrated below from the validated candidate `I41AtCorner.lean`), the
   `ℝ≥0∞` closed-ball identity at the corner itself;
 * `i41_real_flux_closed_at_nat`, the `toReal` passage, in which a.e. finiteness of the ball
-  clusters comes from the high-temperature root `(p+1)`-moment bound and the finiteness of every
+  clusters comes from the strict-subcritical root `(p+1)`-moment bound and the finiteness of every
   diagram term comes from the same bound.  Without it `ENNReal.toReal` would silently replace an
   infinite cluster by `0`.
 
@@ -136,19 +141,19 @@ end PercLib.Models.LongRange
 namespace PercLib.Models.LongRange
 
 open Classical in
-/-- **Lemma I.4.1 at the integer corner.**  At the corner radius `n ∈ ℕ`, `n ≥ 1`, in the
-high-temperature regime `β M < 1`, the pivotal sum with the **closed-ball** selector — the
-right-continuous reading of the rate weight, carrying the whole sphere `‖e‖ = n` — equals the
-paper's binomial right-hand side (I.4.1) with the closed ball `B_n` and with the *same* law
+/-- **Lemma I.4.1 at the integer corner.**  At the corner radius `n ∈ ℕ`, `n ≥ 1`, strictly
+below the uncut global critical intensity, the pivotal sum with the **closed-ball** selector —
+the right-continuous reading of the rate weight, carrying the whole sphere `‖e‖ = n` — equals
+the paper's binomial right-hand side (I.4.1) with the closed ball `B_n` and with the *same* law
 `μ_n`, i.e. with no differentiability in `r` anywhere.
 
-Only the root `p`-th moment enters the binomial step, and it is discharged from the landed
-uniform `(p+1)`-st root moment bound of `exists_powerLaw_root_succ_moment_bound`, not assumed.
-The identity is in `ℝ≥0∞`: no summability and no finiteness of the far clusters is needed, and
-the truncated subtraction agrees with the honest real difference on finite clusters. -/
+Only the root `p`-th moment enters the binomial step, and its finiteness is discharged from the
+strict-subcritical cutoff moment bounds, not assumed.  The identity is in `ℝ≥0∞`: no summability
+and no finiteness of the far clusters is needed, and the truncated subtraction agrees with the
+honest real difference on finite clusters. -/
 theorem i41_binomial_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     ∫⁻ ω, (∑' e : Sym2 (Fin d → ℤ),
         ((radialKernel (normSeminorm ℝ (Fin d → ℝ))
@@ -171,9 +176,8 @@ theorem i41_binomial_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {
   have hnn : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn
   have hmom : ∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p
       ∂(law (intensityProfile (cutoffKernel (d := d) N K (n : ℝ)) β)) ≠ ⊤ :=
-    lintegral_moment_ne_top (d := d) hd hα hβ (p := p)
-      (u := (n : ℝ) / 2) (R := 2 * (n : ℝ) + 1) (by linarith) (by linarith)
-      ⟨by linarith, by linarith⟩
+    CutoffExhaustion.lintegral_cutoffKernel_powerLaw_pow_ne_top_of_lt_globalCritical
+      (d := d) hd hα hβ (ρ := (n : ℝ)) hnn (0 : Fin d → ℤ) p
   have hstep : ∀ ω : Config (Fin d → ℤ),
       (∑' e : Sym2 (Fin d → ℤ),
           ((radialKernel (N : Seminorm ℝ (Fin d → ℝ))
@@ -363,17 +367,18 @@ theorem tsum_cutoff_pivotal_eq_closed_pow_closedSel {d : ℕ} {N : Seminorm ℝ 
   calc ∑' e, cw e * Piv e = ∑' e, ((β : ℝ) * -K' t) * (rk e * Clo e) := tsum_congr hstep
     _ = ((β : ℝ) * -K' t) * ∑' e, rk e * Clo e := tsum_mul_left
 
-/-! ### The binomial diagram is finite at the corner, from the high-temperature moments -/
+/-! ### The binomial diagram is finite at the corner, from strict subcriticality -/
 
 open Classical in
 /-- **The diagram bound at the corner radius.**  The uniform `(p+1)`-st root moment bound of
-`exists_powerLaw_root_succ_moment_bound` bounds every `ℓ`-th diagram term of Lemma I.4.1 at the
+`CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical` bounds every
+`ℓ`-th diagram term of Lemma I.4.1 at the
 radius `n` itself by a finite constant, uniformly in `ℓ < p`.  This is the only finiteness input
 needed for the `ℝ≥0∞` pivotal flux at the corner. -/
 theorem exists_binomial_diagram_bound_closed_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} {n : ℕ} (hn : 1 ≤ n) :
     ∃ D : ℕ → ℝ≥0∞, (∑ ℓ ∈ Finset.range p, D ℓ) ≠ ⊤ ∧
       ∀ ℓ ∈ Finset.range p, (p.choose ℓ : ℝ≥0∞) *
@@ -389,9 +394,10 @@ theorem exists_binomial_diagram_bound_closed_at_nat {d : ℕ} (hd : 1 ≤ d) {α
   have hn1 : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
   have hu : (0 : ℝ) < (n : ℝ) - 1 / 2 := by linarith
   have hR : (0 : ℝ) < 2 * (n : ℝ) + 1 := by linarith
-  obtain ⟨M, hM, hMroot⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
-    (0 : Fin d → ℤ) p (u := (n : ℝ) - 1 / 2) (v := (n : ℝ) + 1 / 2) (R := 2 * (n : ℝ) + 1)
-    hu hR
+  obtain ⟨M, hM, hMroot⟩ :=
+    CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+    (d := d) hd hα (β := β) hβ (0 : Fin d → ℤ) p
+    (u := (n : ℝ) - 1 / 2) (v := (n : ℝ) + 1 / 2) (R := 2 * (n : ℝ) + 1) hu hR
   have hroot : ∀ r ∈ Ioo ((n : ℝ) - 1 / 2) ((n : ℝ) + 1 / 2),
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ (p + 1)
         ∂(law (intensityProfile (cutoffKernel (d := d) N K r) β))) ≤ M := by
@@ -411,8 +417,8 @@ open Classical in
 closed-ball identity `i41_binomial_at_nat` with the finite diagram bound. -/
 theorem lintegral_closed_pivotal_ne_top_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
     {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     (∫⁻ ω, (∑' e : Sym2 (Fin d → ℤ),
         ((radialKernel (normSeminorm ℝ (Fin d → ℝ))
@@ -428,14 +434,14 @@ theorem lintegral_closed_pivotal_ne_top_at_nat {d : ℕ} (hd : 1 ≤ d) {α : �
   exact Finset.sum_le_sum hD
 
 open Classical in
-/-- **Per-vertex moment data at the corner radius, from high temperature.**  Every vertex has the
-same cutoff `p`-th moment (`lintegral_pow_encard_cluster_eq_root`), and the uniform `(p+1)`-st
-root moment bound of `exists_powerLaw_root_succ_moment_bound` bounds it.  This supplies the
-per-pair a.e. finiteness, the per-pair integrability and the a.e. finiteness of the ball clusters
-used below, with no extra hypothesis. -/
+/-- **Per-vertex moment data at the corner radius, from strict subcriticality.**  Every vertex
+has the same cutoff `p`-th moment (`lintegral_pow_encard_cluster_eq_root`), and the uniform
+`(p+1)`-st strict-subcritical root moment bound controls it.  This supplies the per-pair a.e.
+finiteness, the per-pair integrability and the a.e. finiteness of the ball clusters used below,
+with no extra hypothesis. -/
 theorem vertex_moments_closed_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     (∀ y : Fin d → ℤ, (∫⁻ ω, ((cluster ω y).encard : ℝ≥0∞) ^ p
         ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
@@ -457,8 +463,10 @@ theorem vertex_moments_closed_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 
         ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
           (powerLawProfile 1 ((d : ℝ) + α)) (n : ℝ)) β))) ≠ ⊤ := by
     intro y
-    obtain ⟨M, hM, hMr⟩ := exists_powerLaw_root_succ_moment_bound (d := d) hd hα (β := β) hβ
-      y p (u := (n : ℝ) - 1 / 2) (v := (n : ℝ) + 1 / 2) (R := 2 * (n : ℝ) + 1) hu hR
+    obtain ⟨M, hM, hMr⟩ :=
+      CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+      (d := d) hd hα (β := β) hβ y p
+      (u := (n : ℝ) - 1 / 2) (v := (n : ℝ) + 1 / 2) (R := 2 * (n : ℝ) + 1) hu hR
     exact ne_top_of_le_ne_top hM (hMr (n : ℝ) (Or.inl hnmem))
   have hstep : ∀ y : Fin d → ℤ,
       (∫⁻ ω, ((cluster ω y).encard : ℝ≥0∞) ^ p
@@ -480,14 +488,14 @@ passage of Lemma I.4.1 at the integer radius `n` itself: the real integral of th
 nonnegative pivotal series with the closed-ball selector is the paper's real binomial sum, with
 the closed ball `B_n` and the *same* law.  The a.e. finiteness of the ball clusters, which
 `ENNReal.toReal` silently discards otherwise, is the input `hvert`; here it is discharged from the
-high-temperature root moment.
+strict-subcritical root moment.
 
 The proof transplants the real-binomial passage of `i41_real_of_root_finite` to the corner: the
 only extra inputs are the `ℝ≥0∞` identity `i41_binomial_at_nat` (which needs no corner-free
 hypothesis) and the per-vertex a.e. finiteness. -/
 theorem i41_real_flux_closed_at_nat {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n)
     (hflux : (∫⁻ ω, (∑' e : Sym2 (Fin d → ℤ),
         ((radialKernel (normSeminorm ℝ (Fin d → ℝ))
@@ -633,7 +641,7 @@ open Classical in
 
 This is `fluxClosedAt_eq_raw` followed by the production transfer
 `tsum_pivotal_eq_rate_mul_toReal_lintegral`, which replaces the real series of per-pair pivotal
-expectations by the `toReal` of the extended-nonnegative flux using only `lintregral_tsum` at
+expectations by the `toReal` of the extended-nonnegative flux using only `lintegral_tsum` at
 `ℝ≥0∞` level (no summability of any real series is assumed, so the `tsum = 0` junk value of a
 non-summable family never enters).  The per-pair inputs `hfin`, `hint` and `hflux` are discharged
 from per-vertex moments at the actual law. -/
@@ -702,13 +710,156 @@ theorem fluxClosedAt_eq_rate_mul_lintegral_closed {d : ℕ} {α : ℝ} {β : ℝ
   rw [fluxClosedAt_eq_raw]
   simpa only [hK, hK', hwdef, hrkdef, hcwdef, powerLawRate, neg_neg] using hmain
 
+/-! ### Strict-subcritical right-continuity inputs
+
+The right-continuity input of the corner chain was stated with the explicit row-sum condition
+`β · ∑'_z ‖z‖^{-(d+α)} < 1`.  The declarations below restate that input, unchanged in conclusion,
+at strict subcriticality `β < globalCriticalIntensity …`, which is strictly weaker: the row-sum
+condition only *implies* strict subcriticality (`lt_globalCriticalIntensity_of_BFS`).  The uniform
+`(p+1)`-st bound is `exists_uniform_root_succ_moment_bound_of_lt_globalCritical`; the abstract
+right-continuity `continuousWithinAt_rootMomentReal` and the mean-value assembly are free of any
+condition on `β`, so only the moment bound has to be re-sourced. -/
+
+/-- The published uniform `(p+1)`-st root-moment bound at strict subcriticality, with the canonical
+bond root moment and the cutoff law. -/
+theorem exists_uniform_rootMoment_bound_of_lt_globalCritical {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
+    (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    (o : Fin d → ℤ) (p : ℕ) {u v R : ℝ} (hu : 0 < u) (hR : 0 < R) :
+    ∃ M : ℝ≥0∞, M ≠ ⊤ ∧ ∀ r, r ∈ (Ioo u v ∪ {R} : Set ℝ) →
+      PercLib.Percolation.Bond.rootMoment
+        (law (intensityProfile (cutoffKernel (supModelNorm d).toSeminorm
+          (powerLawProfile 1 ((d : ℝ) + α)) r) β)) o (p + 1) ≤ M := by
+  obtain ⟨M, hM, hb⟩ :=
+    CutoffExhaustion.exists_uniform_root_succ_moment_bound_of_lt_globalCritical
+      (d := d) hd hα (β := β) hβ o p hu hR
+  refine ⟨M, hM, fun r hr => ?_⟩
+  simpa only [PercLib.Percolation.Bond.rootMoment, ModelNorm.toSeminorm_ofNorm] using hb r hr
+
+/-- Right-continuity of the real power-law cutoff root moment at every positive integer radius, at
+strict subcriticality. -/
+theorem continuousWithinAt_rootMomentReal_powerLaw_nat_of_lt_globalCritical {d : ℕ} {α : ℝ}
+    (hd : 1 ≤ d) (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    (o : Fin d → ℤ) (p : ℕ) {n : ℕ} (hn : 1 ≤ n) :
+    ContinuousWithinAt (fun r : ℝ => (PercLib.Percolation.Bond.rootMoment
+      (law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+        (powerLawProfile 1 ((d : ℝ) + α)) r) β)) o p).toReal)
+      (Ici (n : ℝ)) (n : ℝ) := by
+  have hK : AntitoneOn (powerLawProfile 1 ((d : ℝ) + α)) (Ioi 0) :=
+    antitoneOn_powerLawProfile zero_le_one (by positivity)
+  have hKc : ContinuousAt (powerLawProfile 1 ((d : ℝ) + α)) (n : ℝ) := by
+    have hn0 : (n : ℝ) ≠ 0 := by positivity
+    change ContinuousAt (fun s : ℝ => (1 : ℝ) * s ^ (-((d : ℝ) + α))) (n : ℝ)
+    simpa using (Real.continuousAt_rpow_const (n : ℝ) (-((d : ℝ) + α)) (Or.inl hn0)).const_mul
+      (1 : ℝ)
+  have hn1 : (1 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
+  obtain ⟨M, hMtop, hM⟩ := exists_uniform_rootMoment_bound_of_lt_globalCritical
+    (d := d) hd hα hβ o p
+    (u := (n : ℝ) - 1 / 2) (v := (n : ℝ) + 1) (R := (n : ℝ)) (by linarith) (by linarith)
+  exact CornerMoment.continuousWithinAt_rootMomentReal (d := d) hK hn hKc.continuousWithinAt o p
+    hMtop hM
+
+/-- The corner-free derivative on `(n, n+1)` at strict subcriticality. -/
+theorem deriv_momToReal_eventuallyEq_fluxOpen_of_lt_globalCritical {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
+    (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
+    deriv (momToReal d α β p) =ᶠ[𝓝[>] (n : ℝ)] (fun r => fluxOpen d α β p r) := by
+  have hnn : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn
+  have hcorner : ∀ k : ℕ, (k : ℝ) ∉ Ioo (n : ℝ) ((n : ℝ) + 1) := by
+    intro k hk
+    have h1 : (n : ℝ) < (k : ℝ) := hk.1
+    have h2 : (k : ℝ) < (n : ℝ) + 1 := hk.2
+    have hk1 : n < k := by exact_mod_cast h1
+    have hk2 : k < n + 1 := by exact_mod_cast h2
+    omega
+  have hwin : Ioo (n : ℝ) ((n : ℝ) + 1) ∈ 𝓝[>] (n : ℝ) := by
+    have h1 : Ioi (n : ℝ) ∈ 𝓝[>] (n : ℝ) := self_mem_nhdsWithin
+    have h2 : Iio ((n : ℝ) + 1) ∈ 𝓝[>] (n : ℝ) :=
+      nhdsWithin_le_nhds (Iio_mem_nhds (show (n : ℝ) < (n : ℝ) + 1 by linarith))
+    exact inter_mem h1 h2
+  filter_upwards [hwin] with r hr
+  have h := hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα hβ p hp
+    (u := (n : ℝ)) (v := (n : ℝ) + 1) (r₀ := r) hnn (by linarith) hcorner hr
+  refine (h.deriv).trans ?_
+  simp only [fluxOpen_eq_raw]
+
+/-- The right limit of the derivative of the real moment at a positive integer radius is the
+closed-ball pivotal flux, at strict subcriticality. -/
+theorem tendsto_deriv_momToReal_nhdsGT_nat_of_lt_globalCritical {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
+    (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
+    Tendsto (deriv (momToReal d α β p)) (𝓝[>] (n : ℝ))
+      (𝓝 (fluxClosedAt d α β p (n : ℝ))) := by
+  have hflux := tendsto_tsum_cutoffKernel_powerLaw_pivotal_flux_nhdsGT_nat (d := d) hd hα hβ hp hn
+  have hmain : Tendsto (fun r => fluxOpen d α β p r) (𝓝[>] (n : ℝ))
+      (𝓝 (fluxClosedAt d α β p (n : ℝ))) := by
+    rw [fluxClosedAt_eq_raw]
+    simpa only [fluxOpen_eq_raw] using hflux
+  exact hmain.congr'
+    (deriv_momToReal_eventuallyEq_fluxOpen_of_lt_globalCritical hd hα hβ hp hn).symm
+
+/-- Right derivative of the real uncapped moment at a positive integer scale from right
+continuity, at strict subcriticality. -/
+theorem hasDerivWithinAt_momToReal_of_continuousWithinAt_of_lt_globalCritical {d : ℕ}
+    (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n)
+    (hcont : ContinuousWithinAt (momToReal d α β p) (Ici (n : ℝ)) (n : ℝ)) :
+    HasDerivWithinAt (momToReal d α β p) (fluxClosedAt d α β p (n : ℝ))
+      (Ici (n : ℝ)) (n : ℝ) := by
+  have hnn : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn
+  have hcorner : ∀ k : ℕ, (k : ℝ) ∉ Ioo (n : ℝ) ((n : ℝ) + 1) := by
+    intro k hk
+    have h1 : (n : ℝ) < (k : ℝ) := hk.1
+    have h2 : (k : ℝ) < (n : ℝ) + 1 := hk.2
+    have hk1 : n < k := by exact_mod_cast h1
+    have hk2 : k < n + 1 := by exact_mod_cast h2
+    omega
+  have hwin : Ioo (n : ℝ) ((n : ℝ) + 1) ∈ 𝓝[>] (n : ℝ) := by
+    have h1 : Ioi (n : ℝ) ∈ 𝓝[>] (n : ℝ) := self_mem_nhdsWithin
+    have h2 : Iio ((n : ℝ) + 1) ∈ 𝓝[>] (n : ℝ) :=
+      nhdsWithin_le_nhds (Iio_mem_nhds (show (n : ℝ) < (n : ℝ) + 1 by linarith))
+    exact inter_mem h1 h2
+  refine hasDerivWithinAt_Ici_of_tendsto_deriv (s := Ioo (n : ℝ) ((n : ℝ) + 1)) ?_ ?_ hwin
+    (tendsto_deriv_momToReal_nhdsGT_nat_of_lt_globalCritical hd hα hβ hp hn)
+  · intro r hr
+    exact (hasDerivAt_uncappedMoment_powerLaw_of_corner_free_interval (d := d) hd hα hβ p hp
+      (u := (n : ℝ)) (v := (n : ℝ) + 1) (r₀ := r) hnn (by linarith) hcorner hr)
+      |>.differentiableAt.differentiableWithinAt
+  · exact hcont.mono (fun y hy => le_of_lt hy.1)
+
+/-- The uncorrected right derivative at a positive integer radius, with the moment written as the
+raw cutoff integral on the full lattice, at strict subcriticality.  The value is the closed-ball
+pivotal flux `fluxClosedAt`; this is the value that `fluxClosedAt_eq_paper_binomial` rewrites. -/
+theorem hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_powerLaw_nat_of_lt_globalCritical
+    {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
+    HasDerivWithinAt (fun r : ℝ =>
+      (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p ∂
+        law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+          (powerLawProfile 1 ((d : ℝ) + α)) r) β)).toReal)
+      (fluxClosedAt d α β p (n : ℝ)) (Ici (n : ℝ)) (n : ℝ) :=
+  hasDerivWithinAt_momToReal_of_continuousWithinAt_of_lt_globalCritical hd hα hβ hp hn
+    (continuousWithinAt_rootMomentReal_powerLaw_nat_of_lt_globalCritical (d := d) hd hα hβ
+      (0 : Fin d → ℤ) p hn)
+
 /-! ### Lemma I.4.1 at the corner: the exact equality of the two values -/
 
 open Classical in
 /-- **Lemma I.4.1 at a positive integer radius: `fluxClosedAt` is the paper's binomial flux.**
 
-Under `d ≥ 1`, `α > 0`, the explicit high temperature condition
-`β · ∑'_z ‖z‖^{-(d+α)} < 1`, `p ≥ 1` and `n ≥ 1`, the closed-ball pivotal flux at the corner
+Under `d ≥ 1`, `α > 0`, strict subcriticality `β < globalCriticalIntensity …`,
+`p ≥ 1` and `n ≥ 1`, the closed-ball pivotal flux at the corner
 `n` — the right limit of the derivative of the cutoff root moment, i.e. the value produced by
 `hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_powerLaw_nat` — equals the prefactor
 `powerLawRate d α β n` times the paper's binomial expression of Lemma I.4.1 with the closed ball
@@ -716,11 +867,11 @@ Under `d ≥ 1`, `α > 0`, the explicit high temperature condition
 
 `∑_{ℓ<p} C(p,ℓ) ∫ |K_0|^{ℓ+1} ∑_{y: ‖y‖≤n} 1(y ∉ K_0) |K_y|^{p−ℓ} ∂μ_n`,
 
-where `|K|` is the `ncard` of the cluster.  No derivative is taken and no two-sided claim is
-made; this is an identity of values at the same scale and law. -/
+where `|K|` is extended cardinality (`Set.encard`).  No derivative is taken and no two-sided
+claim is made; this is an identity of values at the same scale and law. -/
 theorem fluxClosedAt_eq_paper_binomial {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     fluxClosedAt d α β p (n : ℝ) = powerLawRate d α β (n : ℝ) *
       ∑ ℓ ∈ Finset.range p, (p.choose ℓ : ℝ) * ∫ ω, (((cluster ω (
@@ -769,13 +920,14 @@ theorem fluxClosedAt_eq_paper_binomial {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα 
       (powerLawProfile 1 ((d : ℝ) + α)) (n : ℝ)) β)) (0 : Fin d → ℤ) p _ hfluxP
 
 open Classical in
-/-- **The one-sided form of Lemma I.4.1 at a positive integer radius.** In the explicit
-high-temperature regime, the uncorrected, uncapped cutoff root moment has the paper's binomial
-expression as its right derivative at `n` within `Ici n`. No two-sided derivative is claimed. -/
+/-- **The one-sided form of Lemma I.4.1 at a positive integer radius, raw integral form.**
+Strictly below the uncut global critical intensity, the uncorrected, uncapped cutoff root moment
+has the paper's binomial expression as its right derivative at `n` within `Ici n`.  No two-sided
+derivative is claimed. -/
 theorem hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_paper_binomial_at_nat {d : ℕ}
     (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
-    (hβ : (β : ℝ≥0∞) * ((Real.toNNReal
-      (∑' z : Fin d → ℤ, (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) : ℝ≥0∞) < 1)
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
     {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
     HasDerivWithinAt (fun r : ℝ =>
       (∫⁻ ω, ((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞) ^ p ∂
@@ -792,9 +944,31 @@ theorem hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_paper_binomial_at_n
             (powerLawProfile 1 ((d : ℝ) + α)) (n : ℝ)) β)))
       (Ici (n : ℝ)) (n : ℝ) := by
   have h :=
-    CornerMoment.hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_powerLaw_nat
+    hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_powerLaw_nat_of_lt_globalCritical
     (d := d) hd hα hβ hp hn
   rw [fluxClosedAt_eq_paper_binomial hd hα hβ hp hn] at h
   exact h
+
+/-- **The one-sided corner derivative of the named real moment is the paper's binomial value.**
+`momToReal` is the moment that the corner right-derivative chain differentiates; this states the
+value identified by Lemma I.4.1 directly for it, at strict subcriticality.  One-sided in `Ici n`;
+no two-sided claim is made. -/
+theorem hasDerivWithinAt_momToReal_paper_binomial_at_nat {d : ℕ}
+    (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    {p : ℕ} (hp : 1 ≤ p) {n : ℕ} (hn : 1 ≤ n) :
+    HasDerivWithinAt (momToReal d α β p)
+      (powerLawRate d α β (n : ℝ) *
+        ∑ ℓ ∈ Finset.range p, (p.choose ℓ : ℝ) * ∫ ω,
+          (((cluster ω (0 : Fin d → ℤ)).encard : ℝ≥0∞).toReal) ^ (ℓ + 1) *
+            (∑' y : Fin d → ℤ,
+              (if normSeminorm ℝ (Fin d → ℝ) (Int.cast ∘ y) ≤ (n : ℝ) then (1 : ℝ) else 0) *
+                (conn (0 : Fin d → ℤ) y)ᶜ.indicator (fun _ => (1 : ℝ)) ω *
+                (((cluster ω y).encard : ℝ≥0∞).toReal) ^ (p - ℓ))
+          ∂(law (intensityProfile (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+            (powerLawProfile 1 ((d : ℝ) + α)) (n : ℝ)) β)))
+      (Ici (n : ℝ)) (n : ℝ) :=
+  hasDerivWithinAt_lintegral_encard_cluster_pow_toReal_paper_binomial_at_nat hd hα hβ hp hn
 
 end PercLib.Models.LongRange
