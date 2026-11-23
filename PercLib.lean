@@ -129,6 +129,7 @@ public import PercLib.Models.HierarchicalVolumeExponent
 public import PercLib.Models.Lattice
 public import PercLib.Models.Line
 public import PercLib.Models.LongRange.Convolution
+public import PercLib.Models.LongRange.CornerBinomial
 public import PercLib.Models.LongRange.CornerCoupling
 public import PercLib.Models.LongRange.CornerCoupling.Defs
 public import PercLib.Models.LongRange.CornerChangeMeasurable
