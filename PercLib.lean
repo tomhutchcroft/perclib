@@ -145,7 +145,9 @@ public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.OmittedLayer
 public import PercLib.Models.LongRange.OneDimensional
 public import PercLib.Models.LongRange.PowerLaw
+public import PercLib.Models.LongRange.PowerLawCapMoment
 public import PercLib.Models.LongRange.PowerLawBinomialDerivative
+public import PercLib.Models.LongRange.PowerLawFluxAssembly
 public import PercLib.Models.LongRange.PowerLawFluxSummability
 public import PercLib.Models.LongRange.PowerLawPivotalContinuity
 public import PercLib.Models.LongRange.QuantileMoments
@@ -372,6 +374,8 @@ public import PercLib.Percolation.Bond.UniformVolumeTail
 public import PercLib.Percolation.Bond.VolumeTails
 public import PercLib.Percolation.Bond.WalkSum
 public import PercLib.Percolation.Bond.WindowPartition
+public import PercLib.Percolation.Bond.WindowFibreMajorant
+public import PercLib.Percolation.Bond.ZeroIntensityGap
 public import PercLib.Percolation.Bond.WiredDerivative
 public import PercLib.Percolation.Bond.WiredDerivativeFormula
 public import PercLib.Percolation.Bond.Wiring.BoundaryLaw
@@ -388,6 +392,7 @@ public import PercLib.Probability.ChiSquareMoments
 public import PercLib.Probability.ClosedProduct
 public import PercLib.Probability.Concentration
 public import PercLib.Probability.Coordinate
+public import PercLib.Probability.CapMoment
 public import PercLib.Probability.CountableBK
 public import PercLib.Probability.Coupling.Monotone
 public import PercLib.Probability.CouplingRatio
