@@ -148,6 +148,7 @@ public import PercLib.Models.LongRange.InfiniteVolumeRusso
 public import PercLib.Models.LongRange.LatticeConvolution
 public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.MomentCorner
+public import PercLib.Models.LongRange.CriticalFirstMomentCorner
 public import PercLib.Models.LongRange.OmittedLayer
 public import PercLib.Models.LongRange.OneDimensional
 public import PercLib.Models.LongRange.PowerLaw
