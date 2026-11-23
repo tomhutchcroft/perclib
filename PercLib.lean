@@ -136,6 +136,7 @@ public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.Defs
 public import PercLib.Models.LongRange.FiniteSusceptibility
 public import PercLib.Models.LongRange.FourierSymbol
+public import PercLib.Models.LongRange.HighTemperatureDerivative
 public import PercLib.Models.LongRange.InfiniteVolumeRusso
 public import PercLib.Models.LongRange.LatticeConvolution
 public import PercLib.Models.LongRange.MassTransportI41
