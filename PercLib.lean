@@ -130,6 +130,7 @@ public import PercLib.Models.LongRange.CappedDerivative
 public import PercLib.Models.LongRange.CutoffCorner
 public import PercLib.Models.LongRange.CutoffDominatedHighTemp
 public import PercLib.Models.LongRange.CutoffMoments
+public import PercLib.Models.LongRange.CutoffMomentConvergence
 public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
 public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.CutoffPowerLaw
@@ -143,6 +144,9 @@ public import PercLib.Models.LongRange.MassTransportI41
 public import PercLib.Models.LongRange.OmittedLayer
 public import PercLib.Models.LongRange.OneDimensional
 public import PercLib.Models.LongRange.PowerLaw
+public import PercLib.Models.LongRange.PowerLawBinomialDerivative
+public import PercLib.Models.LongRange.PowerLawFluxSummability
+public import PercLib.Models.LongRange.PowerLawPivotalContinuity
 public import PercLib.Models.LongRange.QuantileMoments
 public import PercLib.Models.LongRange.RootIndependence
 public import PercLib.Models.LongRange.SoftCutoff
@@ -278,6 +282,7 @@ public import PercLib.Percolation.Bond.LocalConnectivity
 public import PercLib.Percolation.Bond.LocalConvergence
 public import PercLib.Percolation.Bond.LocalFiniteness
 public import PercLib.Percolation.Bond.MomentDerivativeBound
+public import PercLib.Percolation.Bond.MomentConvergence
 public import PercLib.Percolation.Bond.MomentDerivativeTruncated
 public import PercLib.Percolation.Bond.MomentDerivatives
 public import PercLib.Percolation.Bond.MomentTransport
