@@ -13,6 +13,7 @@ strictly below the uncut global critical intensity; no endpoint result is claime
 module
 
 public import PercLib.Models.LongRange.FiniteSusceptibility
+public import PercLib.Models.LongRange.MomentThreshold
 public import PercLib.Percolation.Bond.UniformVolumeTail
 public import PercLib.Models.LongRange.CutoffMoments
 public import PercLib.Models.LongRange.CutoffMomentConvergence
@@ -51,6 +52,7 @@ noncomputable section
 open MeasureTheory Set
 open PercLib.Analysis
 open PercLib.Percolation.Bond
+open PercLib.Percolation.Bond.Exploration
 open PercLib.Models.LongRange
 open scoped ENNReal NNReal
 
@@ -211,5 +213,45 @@ theorem iSup_cutoff_pow_eq_raw (hα : 0 < α) (β : ℝ≥0) (o : Fin d → ℤ)
       (by positivity))
     (PercLib.Models.LongRange.tendsto_powerLawProfile_atTop (by positivity)) β o p
 
+
+/-- The high-temperature hypothesis is strictly below the uncut global critical intensity.
+The point is not a power-of-mean argument: high temperature gives a finite first moment, while
+`MomentThreshold` proves that the first moment would be infinite at or above global criticality. -/
+theorem lt_globalCriticalIntensity_of_BFS {d : ℕ} (hd : 1 ≤ d) {α : ℝ} (hα : 0 < α)
+    {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) *
+      ↑(Real.toNNReal (∑' (z : Fin d → ℤ), (‖z‖ : ℝ) ^ (-((d : ℝ) + α)))) < 1) :
+    (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))) := by
+  classical
+  have hfin : chi (intensityProfile
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))) β) 0 ≠ ⊤ := by
+    simpa only [chi, pow_one] using
+      BFS.power_lintegral_encard_cluster_pow_ne_top hd hα hβ (0 : Fin d → ℤ) 1
+  by_contra hnot
+  have hge := le_of_not_gt hnot
+  exact hfin (powerLaw_chi_eq_top_of_globalCriticalIntensity_le hd hα _
+    (fun x y => PercLib.Percolation.Bond.Exploration.BFS.radialKernel_powerLaw_mk hα x y) 0 hge)
+
+/-- The uniform `(p+1)`-st moment bound in the exact window form used by the restoration and
+Russo derivative interfaces, but with strict subcriticality in place of the narrower
+high-temperature hypothesis. -/
+theorem exists_uniform_root_succ_moment_bound_of_lt_globalCritical {d : ℕ} (hd : 1 ≤ d)
+    {α : ℝ} (hα : 0 < α) {β : ℝ≥0}
+    (hβ : (β : ℝ≥0∞) < globalCriticalIntensity
+      (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))))
+    (o : Fin d → ℤ) (p : ℕ) {u v R : ℝ} (hu : 0 < u) (hR : 0 < R) :
+    ∃ M : ℝ≥0∞, M ≠ ⊤ ∧
+      (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ (p + 1) ∂law (intensityProfile
+        (radialKernel (normSeminorm ℝ (Fin d → ℝ)) (powerLawProfile 1 ((d : ℝ) + α))) β)) ≤ M ∧
+      ∀ r ∈ (Ioo u v ∪ {R} : Set ℝ),
+        (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ (p + 1) ∂law (intensityProfile
+          (cutoffKernel (normSeminorm ℝ (Fin d → ℝ))
+            (powerLawProfile 1 ((d : ℝ) + α)) r) β)) ≤ M := by
+  obtain ⟨M, hM, hraw, hbound⟩ := exists_uniform_cutoff_pow_bound_raw hd hα hβ o p
+  refine ⟨M, hM, hraw, fun r hr => hbound r ?_⟩
+  rcases hr with hr | rfl
+  · linarith [hu, hr.1, hr.2]
+  · exact hR
 
 end PercLib.Models.LongRange.CutoffExhaustion
