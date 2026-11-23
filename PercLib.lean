@@ -128,6 +128,7 @@ public import PercLib.Models.LongRange.Convolution
 public import PercLib.Models.LongRange.CutPoints
 public import PercLib.Models.LongRange.CutoffDominatedHighTemp
 public import PercLib.Models.LongRange.CutoffMoments
+public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
 public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.CutoffPowerLaw
 public import PercLib.Models.LongRange.Defs
