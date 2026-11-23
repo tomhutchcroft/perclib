@@ -131,6 +131,7 @@ public import PercLib.Models.Line
 public import PercLib.Models.LongRange.Convolution
 public import PercLib.Models.LongRange.CornerCoupling
 public import PercLib.Models.LongRange.CornerCoupling.Defs
+public import PercLib.Models.LongRange.CornerChangeMeasurable
 public import PercLib.Models.LongRange.Corner.Defs
 public import PercLib.Models.LongRange.DegreeCorner.Defs
 public import PercLib.Models.LongRange.CutPoints
@@ -288,6 +289,9 @@ public import PercLib.Percolation.Bond.IndependentLayer.AddedVolume
 public import PercLib.Percolation.Bond.IndependentLayer.Conditional
 public import PercLib.Percolation.Bond.IndependentLayer.Exploration
 public import PercLib.Percolation.Bond.IndependentLayer.Ghost
+public import PercLib.Percolation.Bond.IndependentLayer.UnionChange.Defs
+public import PercLib.Percolation.Bond.IndependentLayer.UnionChange
+public import PercLib.Percolation.Bond.IndependentLayer.UnionChangeIntegral
 public import PercLib.Percolation.Bond.IndependentLayer.IntensityForm
 public import PercLib.Percolation.Bond.IndependentLayer.LayerVolume
 public import PercLib.Percolation.Bond.InfiniteDegree
