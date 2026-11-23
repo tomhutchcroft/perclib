@@ -2,6 +2,8 @@ module
 
 public import PercLib.Analysis.AbelianSums
 public import PercLib.Analysis.CriticalDrivenODE
+public import PercLib.Analysis.CapFlux.Defs
+public import PercLib.Analysis.CapFlux.Convergence
 public import PercLib.Analysis.CriticalLogODE
 public import PercLib.Analysis.DiscreteConvolution
 public import PercLib.Analysis.DominatedDerivative
@@ -156,6 +158,7 @@ public import PercLib.Models.LongRange.QuantileMoments
 public import PercLib.Models.LongRange.RootIndependence
 public import PercLib.Models.LongRange.SoftCutoff
 public import PercLib.Models.LongRange.TruncatedMoments
+public import PercLib.Models.LongRange.RestorationDerivative
 public import PercLib.Models.LongRange.TwoPointCutoffConvergence
 public import PercLib.Models.LongRange.UncappedMomentContinuity
 public import PercLib.Models.LongRange.I41BinomialRestIndex
@@ -310,6 +313,8 @@ public import PercLib.Percolation.Bond.ProfileRegularity
 public import PercLib.Percolation.Bond.RootGlobalPercolation
 public import PercLib.Percolation.Bond.RootIndependence
 public import PercLib.Percolation.Bond.RestorationFibreMajorant
+public import PercLib.Percolation.Bond.RestorationWindow.Defs
+public import PercLib.Percolation.Bond.RestorationWindow
 public import PercLib.Percolation.Bond.RowSum
 public import PercLib.Percolation.Bond.RowSumDecay
 public import PercLib.Percolation.Bond.SelfAvoiding
