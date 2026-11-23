@@ -137,6 +137,7 @@ public import PercLib.Models.LongRange.CutoffMomentConvergence
 public import PercLib.Models.LongRange.CutoffPowerLawAnalytic
 public import PercLib.Models.LongRange.CutoffMonotone
 public import PercLib.Models.LongRange.CutoffPowerLaw
+public import PercLib.Models.LongRange.CutoffSubcritical
 public import PercLib.Models.LongRange.Defs
 public import PercLib.Models.LongRange.ExplicitHighTemperature
 public import PercLib.Models.LongRange.FiniteSusceptibility
