@@ -66,6 +66,7 @@ def orientedPivotal (x y u v : V) : Set (Config V) :=
 /-- The event `E'(x,y;A)` in the lace expansion: connection through `A` with
 no directed pivotal pair whose initial endpoint is already connected to `x`
 through `A`. The orientation is tested with that pair deleted. -/
+@[tag "FWTN"]
 def laceEPrime (A : Set V) (x y : V) : Set (Config V) :=
   throughSet A x y \ ⋃ u, ⋃ v, orientedPivotal x y u v ∩ throughSet A x u
 

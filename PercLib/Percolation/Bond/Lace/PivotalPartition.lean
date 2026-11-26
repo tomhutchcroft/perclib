@@ -117,6 +117,7 @@ theorem exists_cuttingEvent_of_not_laceEPrime {A : Set V} {ω : Config V} {x y :
   exact (not_lt_of_ge hmin) (hdist ▸ hsmall)
 
 /-- The first-pivotal decomposition of a connection through a set. -/
+@[tag "VXRP"]
 theorem throughSet_eq_laceEPrime_union_cuttingEvent (A : Set V) (x y : V) :
     throughSet A x y = laceEPrime A x y ∪ ⋃ u, ⋃ v, cuttingEvent A x y u v := by
   ext ω
@@ -214,6 +215,7 @@ theorem pairwiseDisjoint_cuttingEvent (A : Set V) (x y : V) :
 
 /-- The first-pivotal decomposition is an exact probability identity. The
 summation runs over directed pairs, with coefficient one and no overcounting. -/
+@[tag "HU0W"]
 theorem law_throughSet_eq_add_tsum_cuttingEvent [Countable V]
     (q : Sym2 V → unitInterval) (A : Set V) (x y : V) :
     law q (throughSet A x y) = law q (laceEPrime A x y) +
