@@ -40,9 +40,12 @@ namespace PercLib.Percolation.Bond.Exploration.BFS
 
 variable {V : Type*}
 
+/-- Compressed BFS state: `some (processed set, frontier)` when both are finite, `none` as the
+fallback. It is countable when `V` is. -/
 abbrev FinState (V : Type*) := Option (Finset V × Finset V)
 
-/-- The BFS state compressed to the countable type `FinState`. -/
+/-- The BFS state compressed to the countable type `FinState`: `some (P k, A k)` (as finsets)
+when the processed set and the frontier are both finite, and `none` otherwise. -/
 noncomputable def finState (ω : Config V) (o : V) (k : ℕ) : FinState V := by
   classical
   exact if h : (P ω o k).Finite ∧ (A ω o k).Finite then

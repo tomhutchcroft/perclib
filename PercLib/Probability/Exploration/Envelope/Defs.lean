@@ -28,7 +28,6 @@ sums, and finite Bernoulli configuration weights.
 ## Main definitions
 
 * `PercLib.Probability.ExplorationEnvelope.envelope`
-* `PercLib.Probability.ExplorationEnvelope.UniformRowSum`
 * `PercLib.Probability.ExplorationEnvelope.configWeight`
 * `PercLib.Probability.ExplorationEnvelope.tiltedWeight`
 -/
@@ -40,7 +39,7 @@ namespace PercLib.Probability.ExplorationEnvelope
 /-- One step of the envelope recursion: `u ↦ exp (m * (λ * u - 1))`. -/
 noncomputable def envelopeStep (m lam u : ℝ) : ℝ := Real.exp (m * (lam * u - 1))
 
-/-- The envelope sequence `u_0 = 1`, `u_{n+1} = exp (m * (λ * u_n - 1))` of `PROOF.md` (5.1).
+/-- The envelope sequence `u_0 = 1`, `u_{n+1} = exp (m * (λ * u_n - 1))` of the exploration outline (5.1).
 It is the number of "units of λ-weight" carried by one vertex of the frontier after `n`
 generations of the exploration. -/
 noncomputable def envelope (m lam : ℝ) : ℕ → ℝ
@@ -53,12 +52,6 @@ theorem envelope_zero (m lam : ℝ) : envelope m lam 0 = 1 := rfl
 theorem envelope_succ (m lam : ℝ) (n : ℕ) :
     envelope m lam (n + 1) = envelopeStep m lam (envelope m lam n) := rfl
 
-/-- **Uniform real row-sum hypothesis** (R_m) of `PROOF.md` §1, stated as "every finite partial row
-sum is at most `m`". For a nonnegative kernel this is the same as `∑_y p x y ≤ m` and it avoids the
-junk value of `sSup` for an unbounded row. -/
-def UniformRowSum {V : Type*} (p : V → V → ℝ) (m : ℝ) : Prop :=
-  ∀ x : V, ∀ s : Finset V, ∑ y ∈ s, p x y ≤ m
-
 /-- Weight of a finite open-edge configuration under independent Bernoulli edge probabilities. -/
 noncomputable def configWeight {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ι → ℝ) (s : Finset ι) : ℝ :=
@@ -66,7 +59,7 @@ noncomputable def configWeight {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- Exact probability of the configuration `s ⊆ ι` times `t^{#(open edges of s inside S)}`:
 the `S`-tilted configuration weight, used for the per-vertex Poisson domination
-(`PROOF.md` Lemma 4.4 with the edge set `S` and `t ≥ 1`). -/
+(the exploration outline, Lemma 4.4, with the edge set `S` and `t ≥ 1`). -/
 noncomputable def tiltedWeight {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ι → ℝ) (t : ℝ) (S s : Finset ι) : ℝ :=
   (∏ e ∈ s, p e * (if e ∈ S then t else 1)) * ∏ e ∈ sᶜ, (1 - p e)
