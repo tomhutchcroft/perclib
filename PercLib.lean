@@ -134,12 +134,14 @@ public import PercLib.Percolation.Bond.Lace.Coefficients.Recursion
 public import PercLib.Percolation.Bond.Lace.CuttingFactorization
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
+public import PercLib.Percolation.Bond.Lace.Diagrams.Bounds
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.Convolution
 public import PercLib.Percolation.Bond.Lace.Expansion.Defs
 public import PercLib.Percolation.Bond.Lace.Expansion.Finite
+public import PercLib.Percolation.Bond.Lace.Expansion.Fourier
 public import PercLib.Percolation.Bond.Lace.Expansion.Infinite
 public import PercLib.Percolation.Bond.Lace.FiniteClusters
 public import PercLib.Percolation.Bond.Lace.FirstDiagram
