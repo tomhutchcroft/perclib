@@ -138,6 +138,7 @@ public import PercLib.Percolation.Bond.Lace.FirstDiagram
 public import PercLib.Percolation.Bond.Lace.FirstPivotal
 public import PercLib.Percolation.Bond.Lace.InitialExpansion
 public import PercLib.Percolation.Bond.Lace.JointMeasurability
+public import PercLib.Percolation.Bond.Lace.LayerIntegration
 public import PercLib.Percolation.Bond.Lace.PivotalPartition
 public import PercLib.Percolation.Bond.Lace.Remainder.Basic
 public import PercLib.Percolation.Bond.Lace.Remainder.Bounds
