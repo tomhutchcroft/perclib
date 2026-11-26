@@ -181,6 +181,7 @@ public import PercLib.Models.NormalizedSmallIntensityLine
 public import PercLib.Models.NormalizedSmallIntensityLineSymmetry
 public import PercLib.Models.PathCount
 public import PercLib.Models.Planar.Arms.Defs
+public import PercLib.Models.Planar.Arms.Separation.Defs
 public import PercLib.Models.Planar.Defs
 public import PercLib.Models.Site.Basic
 public import PercLib.Models.Site.Harris
