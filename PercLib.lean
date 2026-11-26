@@ -441,7 +441,12 @@ public import PercLib.Probability.DisjointOccurrence
 public import PercLib.Probability.DisjointOccurrenceAlgebra
 public import PercLib.Probability.Dispersion.Defs
 public import PercLib.Probability.Exploration.AdaptedReveal.Defs
+public import PercLib.Probability.Exploration.AdaptedReveal.PGF
+public import PercLib.Probability.Exploration.Envelope
 public import PercLib.Probability.Exploration.Envelope.Defs
+public import PercLib.Probability.Exploration.MomentBound
+public import PercLib.Probability.Exploration.MomentTransfer
+public import PercLib.Probability.Exploration.PGF
 public import PercLib.Probability.Exploration.PriorityStopped
 public import PercLib.Probability.Exploration.PriorityStopped.Defs
 public import PercLib.Probability.Exploration.Tags.PriorityStopped
