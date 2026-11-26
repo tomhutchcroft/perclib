@@ -129,6 +129,7 @@ public import PercLib.Percolation.Bond.Lace.Basic
 public import PercLib.Percolation.Bond.Lace.ClusterLocalization
 public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
 public import PercLib.Percolation.Bond.Lace.Coefficients.Coefficients
+public import PercLib.Percolation.Bond.Lace.Coefficients.MassBounds
 public import PercLib.Percolation.Bond.Lace.Coefficients.Recursion
 public import PercLib.Percolation.Bond.Lace.CuttingFactorization
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
