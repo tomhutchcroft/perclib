@@ -126,9 +126,12 @@ public import PercLib.Percolation.Bond.IntrinsicBalls
 public import PercLib.Percolation.Bond.IntrinsicGrowth
 public import PercLib.Percolation.Bond.IntrinsicRenewal
 public import PercLib.Percolation.Bond.Lace.Basic
+public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
+public import PercLib.Percolation.Bond.Lace.Coefficients.Coefficients
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
+public import PercLib.Percolation.Bond.Lace.JointMeasurability
 public import PercLib.Percolation.Bond.Lace.PivotalPartition
 public import PercLib.Percolation.Bond.Lace.Sharpness
 public import PercLib.Percolation.Bond.Lace.ThroughSet
