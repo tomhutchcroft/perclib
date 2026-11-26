@@ -135,6 +135,7 @@ public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.FirstPivotal
+public import PercLib.Percolation.Bond.Lace.InitialExpansion
 public import PercLib.Percolation.Bond.Lace.JointMeasurability
 public import PercLib.Percolation.Bond.Lace.PivotalPartition
 public import PercLib.Percolation.Bond.Lace.Remainder.Basic
