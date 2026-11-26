@@ -2,6 +2,9 @@ module
 
 public import PercLib.Analysis.AbelianSums
 public import PercLib.Analysis.BlockPositivity
+public import PercLib.Analysis.ContinuousBootstrap
+public import PercLib.Analysis.CosineDifference
+public import PercLib.Analysis.CosineReciprocal
 public import PercLib.Analysis.CriticalDrivenODE
 public import PercLib.Analysis.CriticalLogODE
 public import PercLib.Analysis.DiscreteConvolution
@@ -19,6 +22,7 @@ public import PercLib.Analysis.HardyMajorant
 public import PercLib.Analysis.HomogeneousBallIntegrals
 public import PercLib.Analysis.InverseSquareBlock
 public import PercLib.Analysis.LaplaceUniqueness
+public import PercLib.Analysis.LazyWalkComparison
 public import PercLib.Analysis.LazyWalkThresholds
 public import PercLib.Analysis.LinearODEAsymptotics
 public import PercLib.Analysis.LogExponent
@@ -30,6 +34,7 @@ public import PercLib.Analysis.MultiplicativeDecrement
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.QuadraticRecursion
 public import PercLib.Analysis.ReciprocalCutoff
+public import PercLib.Analysis.ReciprocalDifference
 public import PercLib.Analysis.ReciprocalODE
 public import PercLib.Analysis.RegularVariation.Algebra
 public import PercLib.Analysis.RegularVariation.Composition
@@ -76,6 +81,7 @@ public import PercLib.Analysis.VolumeTail.MGFAssembly
 public import PercLib.Analysis.VolumeTail.Normalizer
 public import PercLib.Analysis.VolumeTail.SizeBiasMGF
 public import PercLib.Analysis.VolumeTail.UpToConstants
+public import PercLib.Analysis.WalkReciprocal
 public import PercLib.Basic
 public import PercLib.Combinatorics.BooleanCoefficients
 public import PercLib.Combinatorics.BooleanCoefficients.Defs
@@ -298,11 +304,14 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Examples
 public import PercLib.Percolation.Bond.Lace.Diagrams.Finiteness
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
+public import PercLib.Percolation.Bond.Lace.Diagrams.TotalMass
 public import PercLib.Percolation.Bond.Lace.Diagrams.TransferBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.Weighted
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
+public import PercLib.Percolation.Bond.Lace.Expansion.BootstrapAlgebra
 public import PercLib.Percolation.Bond.Lace.Expansion.Convolution
 public import PercLib.Percolation.Bond.Lace.Expansion.Defs
 public import PercLib.Percolation.Bond.Lace.Expansion.Finite
