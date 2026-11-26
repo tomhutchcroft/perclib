@@ -11,6 +11,8 @@ public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 /-!
 # Vanishing of the canonical remainders
 
+## Main results
+
 Summability of the positive coefficient masses and a uniform bound on `Jτ`
 imply uniform vanishing of the actual nonnegative lace remainders. The bound
 retains any available constant for `Jτ`, rather than replacing it by the larger

@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.Lace.LayerIntegration
 /-!
 # The nonnegative lace recurrence
 
+## Main results
+
 The fixed-set through-connection expansion is integrated over all earlier
 independent configurations. All identities are in the extended nonnegative
 reals, so no summability of the coefficients is assumed.
@@ -20,7 +22,7 @@ reals, so no summability of the coefficients is assumed.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,6 +33,7 @@ private theorem measurePreserving_snoc_layers (q : Sym2 V → unitInterval) (n :
       (fun p : (Fin n → Config V) × Config V => (Fin.snoc p.1 p.2 : Fin (n + 1) → Config V))
       ((Measure.pi (fun _ : Fin n => law q)).prod (law q))
       (Measure.pi (fun _ : Fin (n + 1) => law q)) := by
+  classical
   have h := ((measurePreserving_piFinSuccAbove
     (fun _ : Fin (n + 1) => law q) (Fin.last n)).symm).comp
       Measure.measurePreserving_swap
@@ -52,13 +55,13 @@ theorem measure_layers_eq_prod_snoc_snoc (q : Sym2 V → unitInterval) {n : ℕ}
     (Measure.pi (fun _ : Fin (n + 2) => law q)) S =
       ((Measure.pi (fun _ : Fin n => law q)).prod ((law q).prod (law q)))
         {p | Fin.snoc (Fin.snoc p.1 p.2.1) p.2.2 ∈ S} := by
+  classical
   have h := (measurePreserving_snoc_layers q (n + 1)).comp
     (((measurePreserving_snoc_layers q n).prod (MeasurePreserving.id (law q))).comp
       ((measurePreserving_prodAssoc (Measure.pi (fun _ : Fin n => law q))
         (law q) (law q)).symm))
   exact (h.measure_preimage hS.nullMeasurableSet).symm
 
-set_option maxHeartbeats 800000 in
 /-- The last sections of the coefficient and remainder share the same
 measurable event on the earlier layers. This includes order zero, where that
 event is the full double-connection event. -/
@@ -76,6 +79,7 @@ theorem coefficient_remainder_last_sections [Countable V] {n : ℕ}
             (cluster (ω (Fin.last n) \ {s((b (Fin.last n)).1, (b (Fin.last n)).2)})
               (Fin.cases x (fun j => (b j).2) (Fin.last n).castSucc))
             (b (Fin.last n)).2 y) := by
+  classical
   let E : Set (Fin (n + 1) → Config V) := {ω |
     ω 0 ∈ doubleConn x (b 0).1 ∧ ∀ i : Fin n,
       ω i.succ ∈ laceEPrime
@@ -147,6 +151,7 @@ theorem remainderEvent_add_tsum_snoc_eq_coefficientEvent_add_step [Countable V]
           (Measure.pi (fun _ : Fin (n + 2) => law q)) (coefficientEvent x u b) *
             offDiagonal (fun c d : V => (unitInterval.toNNReal (q s(c, d)) : ℝ≥0∞)) u v *
               tau q v y := by
+  classical
   obtain ⟨E, hE, hsections⟩ := coefficient_remainder_last_sections x b
   let μ := Measure.pi (fun _ : Fin (n + 1) => law q)
   let a := (b (Fin.last n)).2
@@ -201,6 +206,7 @@ theorem laceRemainder_add_succ_eq_laceCoefficient_add_step [Countable V]
         laceCoefficient q (n + 1) x u *
           offDiagonal (fun c d : V => (unitInterval.toNNReal (q s(c, d)) : ℝ≥0∞)) u v *
             tau q v y := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun c d : V => (unitInterval.toNNReal (q s(c, d)) : ℝ≥0∞))
   let W : (Fin (n + 1) → V × V) → ℝ≥0∞ := fun b => ∏ i, J (b i).1 (b i).2

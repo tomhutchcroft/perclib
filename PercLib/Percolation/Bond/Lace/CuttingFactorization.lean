@@ -18,6 +18,8 @@ public import PercLib.Probability.Coordinate
 /-!
 # The cutting-bond factorization
 
+## Main results
+
 Connections within one component of the deleted graph cannot use the separating
 edge on a simple path. This remains true after further edges are removed and
 when the path is restricted to avoid a vertex set.
@@ -27,7 +29,7 @@ when the path is restricted to avoid a vertex set.
 noncomputable section
 
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -35,6 +37,7 @@ variable {V : Type*}
 
 theorem openGraph_sdiff_eq_deleteEdges (ω : Config V) (E : Set (Sym2 V)) :
     openGraph (ω \ E) = (openGraph ω).deleteEdges E := by
+  classical
   ext a b
   simp only [openGraph_adj_iff, SimpleGraph.deleteEdges_adj, mem_sdiff]
   tauto
@@ -45,6 +48,7 @@ theorem not_mem_edges_of_same_deleted_cluster {ω η : Config V} {o a b u v : V}
     (hη : η ⊆ ω) (ha : ω \ {s(u, v)} ∈ conn o a)
     (hb : ω \ {s(u, v)} ∈ conn o b) (hv : ω \ {s(u, v)} ∉ conn o v)
     {p : (openGraph η).Walk a b} (hp : p.IsTrail) : s(u, v) ∉ p.edges := by
+  classical
   apply hp.notMem_edges_of_not_reachable
   · rw [← openGraph_sdiff_eq_deleteEdges]
     intro h
@@ -59,6 +63,7 @@ theorem conn_sdiff_iff_of_same_deleted_cluster {ω η : Config V} {o a b u v : V
     (hη : η ⊆ ω) (ha : ω \ {s(u, v)} ∈ conn o a)
     (hb : ω \ {s(u, v)} ∈ conn o b) (hv : ω \ {s(u, v)} ∉ conn o v) :
     η ∈ conn a b ↔ η \ {s(u, v)} ∈ conn a b := by
+  classical
   constructor
   · intro h
     obtain ⟨p, hp, -⟩ := h.exists_path_of_dist
@@ -76,6 +81,7 @@ theorem localConn_sdiff_iff_of_same_deleted_cluster (S : Set V)
     (hb : ω \ {s(u, v)} ∈ conn o b) (hv : ω \ {s(u, v)} ∉ conn o v) :
     ((openGraph η).induce S).Reachable a b ↔
       ((openGraph (η \ {s(u, v)})).induce S).Reachable a b := by
+  classical
   constructor
   · intro h
     obtain ⟨p, hp, -⟩ := h.exists_path_of_dist
@@ -102,6 +108,7 @@ theorem throughSet_sdiff_iff_of_same_deleted_cluster (A : Set V)
     (hη : η ⊆ ω) (ha : ω \ {s(u, v)} ∈ conn o a)
     (hb : ω \ {s(u, v)} ∈ conn o b) (hv : ω \ {s(u, v)} ∉ conn o v) :
     η ∈ throughSet A a b ↔ η \ {s(u, v)} ∈ throughSet A a b := by
+  classical
   rw [mem_throughSet_iff, mem_throughSet_iff]
   apply and_congr (conn_sdiff_iff_of_same_deleted_cluster hη ha hb hv)
   apply not_congr
@@ -114,6 +121,7 @@ theorem orientedPivotal_sdiff_iff_of_same_deleted_cluster
     {ω : Config V} {x z u v a b : V}
     (hz : ω \ {s(u, v)} ∈ conn x z) (hv : ω \ {s(u, v)} ∉ conn x v) :
     ω ∈ orientedPivotal x z a b ↔ ω \ {s(u, v)} ∈ orientedPivotal x z a b := by
+  classical
   have hcomm : (ω \ {s(a, b)}) \ {s(u, v)} =
       (ω \ {s(u, v)}) \ {s(a, b)} := by ext e; simp only [mem_sdiff]; tauto
   constructor
@@ -145,6 +153,7 @@ theorem laceEPrime_sdiff_iff_of_same_deleted_cluster (A : Set V)
     {ω : Config V} {x z u v : V}
     (hz : ω \ {s(u, v)} ∈ conn x z) (hv : ω \ {s(u, v)} ∉ conn x v) :
     ω ∈ laceEPrime A x z ↔ ω \ {s(u, v)} ∈ laceEPrime A x z := by
+  classical
   have ht := throughSet_sdiff_iff_of_same_deleted_cluster A (η := ω) Subset.rfl
     (SimpleGraph.Reachable.refl x) hz hv
   have he : (ω ∈ ⋃ a, ⋃ b, orientedPivotal x z a b ∩ throughSet A x a) ↔
@@ -177,6 +186,7 @@ theorem mem_cuttingEvent_iff_deleted_cluster (A : Set V) (ω : Config V)
         ∃ hy : y ∈ (cluster (ω \ {s(u, v)}) x)ᶜ,
           ((openGraph ω).induce (cluster (ω \ {s(u, v)}) x)ᶜ).Reachable
             ⟨v, hv⟩ ⟨y, hy⟩ := by
+  classical
   constructor
   · intro h
     have hp := h.1.2
@@ -220,6 +230,7 @@ theorem cuttingEvent_inter_deleted_cluster_eq (A C : Set V) (x y u v : V) :
           cluster (ω \ {s(u, v)}) x = C} ∩
           {ω | ∃ hv : v ∈ Cᶜ, ∃ hy : y ∈ Cᶜ,
             ((openGraph ω).induce Cᶜ).Reachable ⟨v, hv⟩ ⟨y, hy⟩}) := by
+  classical
   ext ω
   constructor
   · rintro ⟨h, hC⟩
@@ -237,6 +248,7 @@ theorem law_cuttingEvent_eq_tsum_deleted_cluster [Countable V]
     law q (cuttingEvent A x y u v) =
       ∑' C : Finset V, law q (cuttingEvent A x y u v ∩
         {ω | cluster (ω \ {s(u, v)}) x = (C : Set V)}) := by
+  classical
   have hm (C : Finset V) : MeasurableSet (cuttingEvent A x y u v ∩
       {ω | cluster (ω \ {s(u, v)}) x = (C : Set V)}) :=
     (measurableSet_cuttingEvent A x y u v).inter
@@ -270,6 +282,7 @@ theorem law_cuttingEvent_inter_deleted_cluster [Countable V]
           cluster (ω \ {s(u, v)}) x = C} *
         law q {ω | ∃ hv : v ∈ Cᶜ, ∃ hy : y ∈ Cᶜ,
           ((openGraph ω).induce Cᶜ).Reachable ⟨v, hv⟩ ⟨y, hy⟩} := by
+  classical
   by_cases hu : u ∈ C
   · let R : Set (Config V) := {ω | ω \ {s(u, v)} ∈ laceEPrime A x u ∧
         cluster (ω \ {s(u, v)}) x = C}
@@ -357,6 +370,7 @@ theorem law_cuttingEvent_eq_tsum_factorization [Countable V]
             cluster (ω \ {s(u, v)}) x = (C : Set V)} *
           law q {ω | ∃ hv : v ∈ (C : Set V)ᶜ, ∃ hy : y ∈ (C : Set V)ᶜ,
             ((openGraph ω).induce (C : Set V)ᶜ).Reachable ⟨v, hv⟩ ⟨y, hy⟩} := by
+  classical
   rw [law_cuttingEvent_eq_tsum_deleted_cluster q A x y u v hfin]
   simp_rw [law_cuttingEvent_inter_deleted_cluster, mul_assoc]
   exact ENNReal.tsum_mul_left
@@ -375,6 +389,7 @@ theorem law_cuttingEvent_eq_prod [Countable V]
             ∃ hy : y ∈ (cluster (p.1 \ {s(u, v)}) x)ᶜ,
               ((openGraph p.2).induce (cluster (p.1 \ {s(u, v)}) x)ᶜ).Reachable
                 ⟨v, hv⟩ ⟨y, hy⟩} := by
+  classical
   rw [law_cuttingEvent_eq_tsum_factorization q A x y u v hfin]
   congr 1
   let R : Finset V → Set (Config V) := fun C =>
@@ -420,6 +435,7 @@ the near endpoint is independent of the state of the separating pair. -/
 theorem laceEPrime_sdiff_iff_of_not_conn (A : Set V) {ω : Config V} {x u v : V}
     (hv : ω \ {s(u, v)} ∉ conn x v) :
     ω ∈ laceEPrime A x u ↔ ω \ {s(u, v)} ∈ laceEPrime A x u := by
+  classical
   constructor
   · intro hE
     have hxu : ω \ {s(u, v)} ∈ conn x u := by
@@ -446,6 +462,7 @@ theorem law_cuttingEvent_eq_prod_laceEPrime [Countable V]
             ∃ hy : y ∈ (cluster (p.1 \ {s(u, v)}) x)ᶜ,
               ((openGraph p.2).induce (cluster (p.1 \ {s(u, v)}) x)ᶜ).Reachable
                 ⟨v, hv⟩ ⟨y, hy⟩} := by
+  classical
   rw [law_cuttingEvent_eq_prod q A x y u v hfin]
   congr 2
   ext p

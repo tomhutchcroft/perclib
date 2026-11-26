@@ -7,7 +7,10 @@ module
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.CorrelationLength
 
-/-! # Sharpness on the complete three-vertex graph
+/-!
+# Sharpness on the complete three-vertex graph
+
+## Main results
 
 The all-open triangle has zeroth-coefficient mass two and triangle diagram nine.
 It is an equality case for the universal coefficient four.

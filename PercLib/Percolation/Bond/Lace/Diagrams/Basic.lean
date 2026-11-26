@@ -11,15 +11,25 @@ module
 public import PercLib.Percolation.Bond.Lace.Basic
 public import PercLib.Percolation.Bond.WalkSum
 
+/-!
+# Deleted-bond pair-state diagrams
+
+## Main results
+
+The initial, connector, interior, transfer and terminal diagrams retain deletion and
+the exact initial diagonal. Their iterates define the all-order coefficient bounds.
+-/
+
 @[expose] public section
 noncomputable section
 
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
 variable {V : Type*}
 
+open scoped Classical in
 /-- Initial pair-state mass with the certain diagonal double connection
 handled exactly. A state consists of the branch root and outgoing bond tail. -/
 def diagramInitial (q : Sym2 V → unitInterval) (x : V) (p : V × V) : ℝ≥0∞ :=
@@ -32,6 +42,7 @@ def diagramConnector (q : Sym2 V → unitInterval) (p r : V × V) : ℝ≥0∞ :
   ∑' v, offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) p.2 v *
     law q {ω : Config V | ω \ {s(p.2, v)} ∈ conn p.1 r.1} * tau q v r.2
 
+open scoped Classical in
 /-- Interior four-arm factor after extracting the incoming and outgoing
 connections. The second geometry excludes the overlap already counted by the
 first geometry. -/

@@ -7,6 +7,14 @@ module
 
 public import PercLib.Percolation.Bond.Lace.CuttingFactorization
 
+/-!
+# Deleted-cluster finiteness
+
+## Main results
+
+Derives almost-sure finite deleted clusters from zero percolation probability.
+-/
+
 @[expose] public section
 noncomputable section
 

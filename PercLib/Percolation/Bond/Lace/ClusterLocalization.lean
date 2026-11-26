@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.ClusterCorrelation.Restoration
 /-!
 # Localization of lace events to the explored cluster
 
+## Main results
+
 The slice consisting of `E'(x,y;A)` and a specified root cluster `C` is
 determined by the pairs touching `C`. The domain `C` need not be finite.
 The proof transports deleted-edge and restricted-domain connections using
@@ -21,7 +23,6 @@ the existing cluster-agreement theorem.
 noncomputable section
 
 open Set
-open scoped Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -33,6 +34,7 @@ theorem cluster_sdiff_eq_of_eqOn_touch {ω η : Config V} {C : Set V} {x : V}
     (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) (F : Set (Sym2 V)) :
     cluster (η \ F) x = cluster (ω \ F) x := by
+  classical
   apply cluster_eq_of_eqOn_touch
   intro e he
   obtain ⟨z, hze, hz⟩ := he
@@ -43,6 +45,7 @@ theorem conn_sdiff_iff_of_eqOn_touch {ω η : Config V} {C : Set V} {x : V}
     (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η))
     (F : Set (Sym2 V)) (y : V) : ω \ F ∈ conn x y ↔ η \ F ∈ conn x y := by
+  classical
   change y ∈ cluster (ω \ F) x ↔ y ∈ cluster (η \ F) x
   rw [cluster_sdiff_eq_of_eqOn_touch hC hag]
 
@@ -50,6 +53,7 @@ theorem conn_iff_of_eqOn_touch {ω η : Config V} {C : Set V} {x : V}
     (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) (y : V) :
     ω ∈ conn x y ↔ η ∈ conn x y := by
+  classical
   simpa using conn_sdiff_iff_of_eqOn_touch hC hag ∅ y
 
 /-- Restricted connections from the root use only pairs touching its original cluster. -/
@@ -57,6 +61,7 @@ theorem localConn_iff_of_eqOn_touch {ω η : Config V} {C D : Set V} (x y : D)
     (hC : cluster ω (x : V) ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) :
     ((openGraph ω).induce D).Reachable x y ↔ ((openGraph η).induce D).Reachable x y := by
+  classical
   have hcl : cluster (Sym2.map (Subtype.val : D → V) ⁻¹' η) x =
       cluster (Sym2.map (Subtype.val : D → V) ⁻¹' ω) x := by
     apply cluster_eq_of_eqOn_touch
@@ -77,6 +82,7 @@ theorem throughSet_iff_of_eqOn_touch {ω η : Config V} {A C : Set V} {x y : V}
     (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) :
     ω ∈ throughSet A x y ↔ η ∈ throughSet A x y := by
+  classical
   rw [mem_throughSet_iff, mem_throughSet_iff]
   refine and_congr (conn_iff_of_eqOn_touch hC hag y) (not_congr ?_)
   constructor <;> rintro ⟨hx, hy, hp⟩
@@ -89,6 +95,7 @@ theorem orientedPivotal_iff_of_eqOn_touch {ω η : Config V} {C : Set V} {x y u 
     (hxy : ω ∈ conn x y) (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) :
     ω ∈ orientedPivotal x y u v ↔ η ∈ orientedPivotal x y u v := by
+  classical
   have hyC : cluster ω y ⊆ C := fun z hz => hC (conn_trans hxy hz)
   have hη : η ∈ conn x y := (conn_iff_of_eqOn_touch hC hag y).mp hxy
   have hp : insert s(u, v) ω ∈ conn x y := conn_mono (subset_insert _ _) hxy
@@ -109,6 +116,7 @@ theorem laceEPrime_iff_of_eqOn_touch {ω η : Config V} {A C : Set V} {x y : V}
     (hC : cluster ω x ⊆ C)
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) :
     ω ∈ laceEPrime A x y ↔ η ∈ laceEPrime A x y := by
+  classical
   by_cases hxy : ω ∈ conn x y
   · have hex : (∃ u v, ω ∈ orientedPivotal x y u v ∧ ω ∈ throughSet A x u) ↔
         ∃ u v, η ∈ orientedPivotal x y u v ∧ η ∈ throughSet A x u := by
@@ -128,6 +136,7 @@ theorem laceEPrime_cluster_iff_of_eqOn_touch {ω η : Config V} {A C : Set V} {x
     (hag : ∀ e, (∃ z ∈ e, z ∈ C) → (e ∈ ω ↔ e ∈ η)) :
     (ω ∈ laceEPrime A x y ∧ cluster ω x = C) ↔
       (η ∈ laceEPrime A x y ∧ cluster η x = C) := by
+  classical
   constructor
   · rintro ⟨hE, hC⟩
     have hsub : cluster ω x ⊆ C := hC.subset

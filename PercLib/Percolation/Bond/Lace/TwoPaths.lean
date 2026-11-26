@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.BoundarySusceptibility
 /-!
 # Two disjoint connections and absence of pivotal pairs
 
+## Main results
+
 Double connection is transitive. To join two pairs of disjoint paths, stop the
 second pair at its first contacts with the first pair and route to those contacts
 along opposite sides. This uncrossing argument also proves the order-two
@@ -20,7 +22,6 @@ countability assumptions on the ambient vertex type.
 @[expose] public section
 noncomputable section
 open Set
-open scoped Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -32,6 +33,7 @@ private theorem exists_first_contact {z y : V} (r : G.Walk z y)
     (S : Set V) (hy : y ∈ S) :
     ∃ a ∈ S, ∃ t : G.Walk z a,
       t.edges ⊆ r.edges ∧ ∀ e ∈ t.edges, ∃ v ∈ e, v ∉ S := by
+  classical
   induction r with
   | nil => exact ⟨_, hy, .nil, by simp, by simp⟩
   | @cons z w y hzw r ih =>
@@ -57,6 +59,7 @@ private theorem route_two_on_same {x y a b : V} (p q : G.Walk x y)
       f.edges.Disjoint g.edges ∧
       (∀ e ∈ f.edges, e ∈ p.edges ∨ e ∈ q.edges) ∧
       (∀ e ∈ g.edges, e ∈ p.edges ∨ e ∈ q.edges) := by
+  classical
   let l := p.takeUntil a ha
   let r := p.dropUntil a ha
   have hl : l.edges ⊆ p.edges := p.edges_takeUntil_subset_edges ha
@@ -100,6 +103,7 @@ private theorem route_two_contacts {x y a b : V} (p q : G.Walk x y)
       f.edges.Disjoint g.edges ∧
       (∀ e ∈ f.edges, e ∈ p.edges ∨ e ∈ q.edges) ∧
       (∀ e ∈ g.edges, e ∈ p.edges ∨ e ∈ q.edges) := by
+  classical
   rcases ha with ha | ha <;> rcases hb with hb | hb
   · exact route_two_on_same p q hp hd ha hb
   · refine ⟨p.takeUntil a ha, q.takeUntil b hb, ?_, ?_, ?_⟩
@@ -120,6 +124,7 @@ theorem exists_disjoint_paths_of_mem_doubleConn {ω : Config V} {x y : V}
     (h : ω ∈ doubleConn x y) :
     ∃ p q : (openGraph ω).Walk x y,
       p.IsPath ∧ q.IsPath ∧ p.edges.Disjoint q.edges := by
+  classical
   obtain ⟨F, H, _, _, hd, hFω, hHω, hF, hH⟩ := (mem_doubleConn_iff ω x y).mp h
   obtain ⟨p, hp⟩ := (show (openGraph F).Reachable x y from hF).exists_isPath
   obtain ⟨q, hq⟩ := (show (openGraph H).Reachable x y from hH).exists_isPath
@@ -137,6 +142,7 @@ theorem exists_disjoint_paths_of_mem_doubleConn {ω : Config V} {x y : V}
 theorem mem_doubleConn_of_disjoint_walks {ω : Config V} {x y : V}
     (p q : (openGraph ω).Walk x y) (hd : p.edges.Disjoint q.edges) :
     ω ∈ doubleConn x y := by
+  classical
   apply (mem_doubleConn_iff ω x y).mpr
   refine ⟨{e | e ∈ p.edges}, {e | e ∈ q.edges}, List.finite_toSet _,
     List.finite_toSet _, ?_, fun _ he => mem_of_mem_edges_openGraph p he,
@@ -147,6 +153,7 @@ theorem mem_doubleConn_of_disjoint_walks {ω : Config V} {x y : V}
 theorem doubleConn_trans {ω : Config V} {x y z : V}
     (hxy : ω ∈ doubleConn x y) (hyz : ω ∈ doubleConn y z) :
     ω ∈ doubleConn x z := by
+  classical
   obtain ⟨p, q, hp, hq, hpq⟩ := exists_disjoint_paths_of_mem_doubleConn hxy
   have hzy : ω ∈ doubleConn z y := by rwa [doubleConn_comm]
   obtain ⟨r, s, _, _, hrs⟩ := exists_disjoint_paths_of_mem_doubleConn hzy
@@ -179,6 +186,7 @@ private theorem mem_doubleConn_of_walk_steps {ω : Config V} {x y : V}
     (p : (openGraph ω).Walk x y)
     (h : ∀ u v, s(u, v) ∈ p.edges → ω ∈ doubleConn u v) :
     ω ∈ doubleConn x y := by
+  classical
   induction p with
   | nil => simp
   | @cons x u y hxu p ih =>
@@ -190,6 +198,7 @@ private theorem mem_doubleConn_of_walk_steps {ω : Config V} {x y : V}
 every single pair preserves connection exactly when two disjoint paths exist. -/
 theorem mem_doubleConn_iff_isEdgeReachable_two {ω : Config V} {x y : V} :
     ω ∈ doubleConn x y ↔ (openGraph ω).IsEdgeReachable 2 x y := by
+  classical
   refine ⟨isEdgeReachable_two_of_mem_doubleConn, fun h => ?_⟩
   obtain ⟨p, hp⟩ := (h.reachable (by simp)).exists_isPath
   apply mem_doubleConn_of_walk_steps p
@@ -209,6 +218,7 @@ theorem mem_doubleConn_iff_isEdgeReachable_two {ω : Config V} {x y : V} :
 theorem mem_doubleConn_iff_conn_and_no_pivotal {ω : Config V} {x y : V} :
     ω ∈ doubleConn x y ↔ ω ∈ conn x y ∧
       ∀ e : Sym2 V, ¬ (insert e ω ∈ conn x y ∧ ω \ {e} ∉ conn x y) := by
+  classical
   refine ⟨fun h => ⟨doubleConn_subset_conn x y h,
     not_pivotal_of_mem_doubleConn h⟩, fun ⟨hc, hn⟩ => ?_⟩
   rw [mem_doubleConn_iff_isEdgeReachable_two, SimpleGraph.isEdgeReachable_two]

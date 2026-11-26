@@ -13,6 +13,8 @@ public import PercLib.Probability.DisjointOccurrenceAlgebra
 /-!
 # The terminal four-arm lace diagram
 
+## Main results
+
 The last doubly connected block of an `E'` connection must meet the required
 vertex set. Splitting one of its two paths at such a vertex gives two arms to
 the terminal endpoint, as well as a disjoint connection from the source.
@@ -22,7 +24,7 @@ The geometric inclusion does not require a countable or finite vertex set.
 @[expose] public section
 noncomputable section
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,6 +33,7 @@ variable {V : Type*}
 private theorem path_meets_of_throughSet {A : Set V} {ω : Config V} {x y : V}
     (p : (openGraph ω).Walk x y) (h : ω ∈ throughSet A x y) :
     ∃ z ∈ p.support, z ∈ A := by
+  classical
   by_contra hn
   push Not at hn
   exact h.2 ⟨hn x p.start_mem_support, hn y p.end_mem_support,
@@ -39,6 +42,7 @@ private theorem path_meets_of_throughSet {A : Set V} {ω : Config V} {x y : V}
 private theorem disjoint_edges_of_not_conn {ω : Config V} {a b c d : V}
     (p : (openGraph ω).Walk a b) (r : (openGraph ω).Walk c d)
     (h : ω ∉ conn a c) : p.edges.Disjoint r.edges := by
+  classical
   intro e he hf
   induction e using Sym2.ind with
   | _ s t =>
@@ -51,6 +55,7 @@ private theorem throughSet_tail_of_adj {A : Set V} {ω : Config V} {v y t s : V}
     (h : ω ∈ throughSet A v y) (hnt : ω ∉ throughSet A v t)
     (hvt : ω ∈ conn v t) (hts : (openGraph ω).Adj t s) (hsy : ω ∈ conn s y) :
     ω ∈ throughSet A s y := by
+  classical
   have hav : ∃ hv : v ∈ Aᶜ, ∃ ht : t ∈ Aᶜ,
       ((openGraph ω).induce Aᶜ).Reachable ⟨v, hv⟩ ⟨t, ht⟩ := by
     by_contra hn
@@ -69,6 +74,7 @@ private theorem four_arms_of_prefix_paths {ω η : Config V} (hηω : η ⊆ ω)
     ω ∈ disjointOccurrence
       (disjointOccurrence (disjointOccurrence (conn t z) (conn z y)) (conn t y))
       (conn v t) := by
+  classical
   apply (mem_disjointOccurrence_three_iff
     (isUpperSet_disjointOccurrence (isUpperSet_conn t z) (isUpperSet_conn z y))
     (isUpperSet_conn t y) (isUpperSet_conn v t) ω).mpr
@@ -95,6 +101,7 @@ theorem laceEPrime_subset_iUnion_terminal (A : Set V) (v y : V) :
       disjointOccurrence
         (disjointOccurrence (disjointOccurrence (conn t (z : V)) (conn (z : V) y))
           (conn t y)) (conn v t) := by
+  classical
   intro ω h
   have hrev : ω ∈ conn y v := h.1.1.symm
   rw [conn_eq_doubleConn_union_firstPivotal y v] at hrev
@@ -161,6 +168,7 @@ theorem law_laceEPrime_le_terminal [Countable V]
     (q : Sym2 V → unitInterval) (A : Set V) (v y : V) :
     law q (laceEPrime A v y) ≤ ∑' z : A, ∑' t : V,
       tau q v t * tau q t (z : V) * tau q t y * tau q (z : V) y := by
+  classical
   refine (measure_mono (laceEPrime_subset_iUnion_terminal A v y)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun z =>
       (measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun t => ?_)))
@@ -176,6 +184,8 @@ theorem law_laceEPrime_le_terminal [Countable V]
   change ((tau q t (z : V) * tau q (z : V) y) * tau q t y) * tau q v t = _
   ac_rfl
 
-example (x : V) : (∅ : Config V) ∈ laceEPrime {x} x x := by simp
+example (x : V) : (∅ : Config V) ∈ laceEPrime {x} x x := by
+  classical
+  simp
 
 end PercLib.Percolation.Bond.Lace

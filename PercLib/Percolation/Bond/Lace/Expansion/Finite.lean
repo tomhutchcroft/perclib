@@ -14,6 +14,8 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Telescoping
 /-!
 # Finite signed expansion of the canonical coefficients
 
+## Main results
+
 The finite identity follows from the proved nonnegative remainder recurrence.
 Finiteness is explicit before converting to real numbers; no subtraction of
 infinite extended-real quantities is used.
@@ -23,12 +25,13 @@ infinite extended-real quantities is used.
 noncomputable section
 
 open MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
 variable {V : Type*} [Countable V]
 
+open scoped Classical in
 /-- The canonical signed finite expansion, with each continuation term kept
 as the real value of its nonnegative sum. Analytic linearity can subsequently
 combine the finite coefficient sum with the continuation kernel. -/
@@ -89,7 +92,16 @@ theorem finite_lace_expansion_expanded (q : Sym2 V → unitInterval)
     (fun n => (laceRemainder q n x y).toReal) (tau q x y).toReal
     ((if x = y then 1 else 0) + J.toReal) hzero N hnext
 
-set_option maxHeartbeats 800000 in
+private theorem finite_expansion_rearrange (N : ℕ) (f g : ℕ → ℝ)
+    (a b B S r t : ℝ) (hb : b = B)
+    (hS : (∑ n ∈ Finset.range (N + 1), (-1 : ℝ) ^ n * g n) = S)
+    (h : t = a + b +
+      (∑ n ∈ Finset.range (N + 1), (-1 : ℝ) ^ n * (f n + g n)) + r) :
+    t = a + (∑ n ∈ Finset.range (N + 1), (-1 : ℝ) ^ n * f n) + B + S + r := by
+  simp only [mul_add, Finset.sum_add_distrib, hb, hS] at h
+  simpa only [add_assoc, add_left_comm, add_comm] using h
+
+open scoped Classical in
 /-- The finite signed lace expansion with the actual alternating coefficient
 kernel and convolution. Finite coefficient row masses and a finite continuation
 bound justify every conversion and interchange in the identity. -/
@@ -114,10 +126,19 @@ theorem finite_lace_expansion (q : Sym2 V → unitInterval)
     (fun n hn => laceRemainder_ne_top_of_mass_ne_top q n x y C hCfinite hC (hmass n hn))
     (fun n hn => laceCoefficient_ne_top_of_mass_ne_top q n x y (hmass n hn))
     (fun n hn => laceCoefficient_step_ne_top q n x y C hCfinite hC (hmass n hn)) hJ
-  simp_rw [mul_add, Finset.sum_add_distrib] at h
-  rw [partialLaceSum_step_eq_tsum q N x y C hCfinite hC hmass] at h
-  rw [ENNReal.tsum_toReal_eq (ENNReal.ne_top_of_tsum_ne_top hJ)] at h
-  simp only [ENNReal.toReal_mul] at h
-  simpa only [partialLaceSum, add_assoc, add_left_comm, add_comm] using h
+  have hJreal :
+      (∑' v, offDiagonal (fun a b : V =>
+        (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) x v * tau q v y).toReal =
+      ∑' v, (offDiagonal (fun a b : V =>
+        (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) x v).toReal * (tau q v y).toReal := by
+    rw [ENNReal.tsum_toReal_eq (ENNReal.ne_top_of_tsum_ne_top hJ)]
+    simp only [ENNReal.toReal_mul]
+  exact finite_expansion_rearrange N
+    (fun n => (laceCoefficient q n x y).toReal)
+    (fun n => (∑' u, ∑' v, laceCoefficient q n x u *
+      offDiagonal (fun a b : V =>
+        (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v * tau q v y).toReal)
+    _ _ _ _ _ _ hJreal
+    (partialLaceSum_step_eq_tsum q N x y C hCfinite hC hmass) h
 
 end PercLib.Percolation.Bond.Lace

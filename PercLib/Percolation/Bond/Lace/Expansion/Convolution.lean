@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Convergence
 /-!
 # Finiteness and convolution for the finite signed expansion
 
+## Main results
+
 Finite coefficient row masses and a finite continuation bound justify taking
 real values and interchanging the finite alternating sum with the convolution.
 The order-zero remainder retains the diagonal double-connection contribution.
@@ -21,7 +23,7 @@ The order-zero remainder retains the diagonal double-connection contribution.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -43,6 +45,7 @@ theorem laceCoefficient_step_le_mass_mul (q : Sym2 V → unitInterval)
     (∑' u, ∑' v, laceCoefficient q n x u *
       offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
         tau q v y) ≤ (∑' u, laceCoefficient q n x u) * C := by
+  classical
   calc
     _ = ∑' u, laceCoefficient q n x u * (∑' v,
         offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
@@ -74,6 +77,7 @@ theorem laceRemainder_zero_le_one_add_mass_mul [Countable V]
       offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
         tau q v y) ≤ C) :
     laceRemainder q 0 x y ≤ (1 + ∑' u, laceCoefficient q 0 x u) * C := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞))
   have hprob (u v : V) :
@@ -117,6 +121,7 @@ theorem laceRemainder_ne_top_of_mass_ne_top [Countable V]
         tau q v y) ≤ C)
     (hmass : (∑' u, laceCoefficient q n x u) ≠ ⊤) :
     laceRemainder q n x y ≠ ⊤ := by
+  classical
   cases n with
   | zero =>
       exact ne_top_of_le_ne_top
@@ -141,6 +146,7 @@ theorem partialLaceSum_step_eq_tsum (q : Sym2 V → unitInterval)
       ∑' u, ∑' v, partialLaceSum q N x u *
         (offDiagonal (fun a b : V =>
           (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v).toReal * (tau q v y).toReal := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞))
   let F : ℕ → V × V → ℝ≥0∞ := fun n p =>

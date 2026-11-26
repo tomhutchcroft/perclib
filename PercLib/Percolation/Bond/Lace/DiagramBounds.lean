@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Original proofs on the D-2 bond interface. The three diagonal contributions are
+Original proofs on the bond configuration interface. The three diagonal contributions are
 retained exactly; no estimate from the literature is assumed.
 -/
 module
@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.ConnectionKernel
 
 /-!
 # Zeroth lace coefficient: diagram bounds with the diagonal retained
+
+## Main results
 
 The triangle has three copies of the off-diagonal bubble, not just one.
 The remaining contribution is the sum over three distinct vertices. Consequently
@@ -24,17 +26,19 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
 variable {V : Type*}
 
+open scoped Classical in
 /-- Removing the root term from the bubble loses exactly one. -/
 theorem tsum_tau_sq_eq_one_add_offDiagonal (q : Sym2 V → unitInterval) (x : V) :
     ∑' y, tau q x y ^ 2 = 1 + ∑' y, if y = x then 0 else tau q x y ^ 2 := by
+  classical
   rw [ENNReal.tsum_eq_add_tsum_ite x, tau_self, one_pow]
 
+open scoped Classical in
 /-- Exact decomposition into the root, three off-diagonal bubbles, and triangles
 whose vertices are all distinct. No finiteness assumption or subtraction is used. -/
 theorem triangle_eq_one_add_three_mul_offDiagonal_add
@@ -43,6 +47,7 @@ theorem triangle_eq_one_add_three_mul_offDiagonal_add
       1 + 3 * (∑' y, if y = x then 0 else tau q x y ^ 2) +
         ∑' u, ∑' v, if u = x ∨ v = x ∨ u = v then 0
           else tau q x u * tau q u v * tau q v x := by
+  classical
   have hrow (u : V) (hu : u ≠ x) :
       ∑' v, tau q x u * tau q u v * tau q v x =
         2 * tau q x u ^ 2 + ∑' v, if v = x ∨ u = v then 0
@@ -82,18 +87,22 @@ theorem triangle_eq_one_add_three_mul_offDiagonal_add
   rw [hrest]
   ring
 
+open scoped Classical in
 /-- The triangle controls three copies of the off-diagonal bubble. -/
 theorem one_add_three_mul_offDiagonal_le_triangle
     (q : Sym2 V → unitInterval) (x : V) :
     1 + 3 * (∑' y, if y = x then 0 else tau q x y ^ 2) ≤
       ∑' u, ∑' v, tau q x u * tau q u v * tau q v x := by
+  classical
   rw [triangle_eq_one_add_three_mul_offDiagonal_add]
   exact le_self_add
 
+open scoped Classical in
 /-- The zeroth coefficient has no diagonal contribution to its bubble bound. -/
 theorem tsum_piZero_le_offDiagonal [Countable V]
     (q : Sym2 V → unitInterval) (x : V) :
     ∑' y, piZero q x y ≤ ∑' y, if y = x then 0 else tau q x y ^ 2 := by
+  classical
   apply ENNReal.tsum_le_tsum
   intro y
   by_cases hy : y = x
@@ -104,6 +113,7 @@ theorem tsum_piZero_le_offDiagonal [Countable V]
 theorem one_add_tsum_piZero_le_bubble [Countable V]
     (q : Sym2 V → unitInterval) (x : V) :
     1 + ∑' y, piZero q x y ≤ ∑' y, tau q x y ^ 2 := by
+  classical
   rw [tsum_tau_sq_eq_one_add_offDiagonal]
   exact add_le_add le_rfl (tsum_piZero_le_offDiagonal q x)
 
@@ -113,6 +123,7 @@ theorem one_add_three_mul_tsum_piZero_le_triangle [Countable V]
     (q : Sym2 V → unitInterval) (x : V) :
     1 + 3 * (∑' y, piZero q x y) ≤
       ∑' u, ∑' v, tau q x u * tau q u v * tau q v x := by
+  classical
   exact (add_le_add le_rfl
     (mul_le_mul' le_rfl (tsum_piZero_le_offDiagonal q x))).trans
       (one_add_three_mul_offDiagonal_le_triangle q x)
@@ -125,6 +136,7 @@ theorem one_add_four_mul_tsum_piZero_le_triangle [Countable V]
     (q : Sym2 V → unitInterval) (x : V) :
     1 + 4 * (∑' y, piZero q x y) ≤
       ∑' u, ∑' v, tau q x u * tau q u v * tau q v x := by
+  classical
   rw [triangle_eq_one_add_three_mul_offDiagonal_add]
   calc
     1 + 4 * (∑' y, piZero q x y) =
@@ -141,8 +153,9 @@ theorem tsum_piZero_lt_top_of_triangle_lt_top [Countable V]
     (q : Sym2 V → unitInterval) (x : V)
     (h : ∑' u, ∑' v, tau q x u * tau q u v * tau q v x < ⊤) :
     ∑' y, piZero q x y < ⊤ := by
+  classical
   have hb := (one_add_tsum_piZero_le_bubble q x).trans
-    (tsum_tau_sq_le_triangle q x)
+    (by simpa only [connProb_law] using tsum_connProb_sq_le_triangle (law q) x)
   exact (le_add_self.trans hb).trans_lt h
 
 /-- The real zeroth coefficient is absolutely summable under a finite triangle. -/

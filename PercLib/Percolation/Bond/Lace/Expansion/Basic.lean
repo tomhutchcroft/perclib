@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Basic
 /-!
 # Finite signed lace quantities
 
+## Main results
+
 The real-valued finite expansion uses these quantities only after establishing
 finiteness of the corresponding nonnegative coefficients and remainder. The
 definitions themselves do not assert finiteness or an expansion identity.

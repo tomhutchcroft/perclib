@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.Susceptibility
 /-!
 # Through-set and cutting events with a measurable random vertex set
 
+## Main results
+
 An avoiding connection is a countable union of events witnessed in fixed finite
 vertex domains. This gives measurability when both the configuration and the
 vertex set vary, including the deleted clusters supplied by earlier independent
@@ -21,7 +23,6 @@ layers in the lace expansion.
 noncomputable section
 
 open Set MeasureTheory
-open scoped Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -33,6 +34,7 @@ theorem conn_avoiding_iff_exists_finset (A : Set V) (ω : Config V) (x y : V) :
       ((openGraph ω).induce Aᶜ).Reachable ⟨x, hx⟩ ⟨y, hy⟩) ↔
       ∃ F : Finset V, (F : Set V) ⊆ Aᶜ ∧ ∃ hx : x ∈ F, ∃ hy : y ∈ F,
         ((openGraph ω).induce (F : Set V)).Reachable ⟨x, hx⟩ ⟨y, hy⟩ := by
+  classical
   constructor
   · rintro ⟨hx, hy, ⟨p⟩⟩
     let w := p.map (SimpleGraph.Embedding.induce Aᶜ).toHom
@@ -55,6 +57,7 @@ theorem measurableSet_conn_avoiding_of_measurable
     (x y : V) :
     MeasurableSet {s : Ω | ∃ hx : x ∈ (A s)ᶜ, ∃ hy : y ∈ (A s)ᶜ,
       ((openGraph (ω s)).induce (A s)ᶜ).Reachable ⟨x, hx⟩ ⟨y, hy⟩} := by
+  classical
   simp only [conn_avoiding_iff_exists_finset, ofPred_exists]
   refine MeasurableSet.iUnion fun F => ?_
   have hF : MeasurableSet {s : Ω | (F : Set V) ⊆ (A s)ᶜ} := by
@@ -64,7 +67,7 @@ theorem measurableSet_conn_avoiding_of_measurable
       ((measurable_set_mem z).comp hA).setOf.compl
   refine hF.inter ?_
   exact (Measurable.exists fun hx : x ∈ F => Measurable.exists fun hy : y ∈ F =>
-    ((measurableSet_localConn (F : Set V) ⟨x, hx⟩ ⟨y, hy⟩).preimage hω).mem).setOf
+    ((measurableSet_setOf_reachable_induce (F : Set V) ⟨x, hx⟩ ⟨y, hy⟩).preimage hω).mem).setOf
 
 /-- The through-set event is measurable in both inputs. -/
 theorem measurableSet_throughSet_of_measurable
@@ -77,6 +80,7 @@ theorem measurableSet_throughSet_of_measurable
 theorem measurableSet_laceEPrime_of_measurable
     {A : Ω → Set V} {ω : Ω → Config V} (hA : Measurable A) (hω : Measurable ω)
     (x y : V) : MeasurableSet {s : Ω | ω s ∈ laceEPrime (A s) x y} := by
+  classical
   have heq : {s : Ω | ω s ∈ laceEPrime (A s) x y} =
       {s | ω s ∈ throughSet (A s) x y} \
         ⋃ u, ⋃ v, {s | ω s ∈ orientedPivotal x y u v} ∩

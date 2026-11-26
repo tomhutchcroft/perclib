@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.FirstPivotal
 /-!
 # Additional deletion in the first lace diagram
 
+## Main results
+
 When the deleted bond meets the doubly connected endpoint, both the arm from
 the root to the branch vertex and the outgoing branch arm can avoid it.
 The endpoint case is handled by choosing the other disjoint path if needed.
@@ -18,7 +20,7 @@ The endpoint case is handled by choosing the other disjoint path if needed.
 @[expose] public section
 noncomputable section
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -28,6 +30,7 @@ private theorem first_contact {G : SimpleGraph V} {a x : V} (r : G.Walk a x)
     (S : Set V) (hx : x ∈ S) :
     ∃ b ∈ S, ∃ t : G.Walk a b,
       ∀ f ∈ t.edges, ∃ v ∈ f, v ∉ S := by
+  classical
   induction r with
   | nil => exact ⟨_, hx, .nil, by simp⟩
   | @cons a c x hac r ih =>
@@ -41,6 +44,7 @@ private theorem first_contact {G : SimpleGraph V} {a x : V} (r : G.Walk a x)
     · exact ⟨a, by simp, ha⟩
     · exact ht f hf
 
+open scoped Classical in
 private theorem four_arms_of_paths_deleted_prefix {ω : Config V} {x u a b : V}
     (e : Sym2 V) (p q : (openGraph ω).Walk x u)
     (t : (openGraph (ω \ {e})).Walk a b)
@@ -52,6 +56,7 @@ private theorem four_arms_of_paths_deleted_prefix {ω : Config V} {x u a b : V}
         (disjointOccurrence {η : Config V | η \ {e} ∈ conn x b} (conn b u))
         (conn x u))
       {η : Config V | η \ {e} ∈ conn b a} := by
+  classical
   have hdel (r s : V) : IsUpperSet {η : Config V | η \ {e} ∈ conn r s} :=
     fun _ _ h hη => conn_mono (sdiff_subset_sdiff_left h) hη
   apply (mem_disjointOccurrence_three_iff
@@ -91,6 +96,7 @@ theorem doubleConn_inter_deleted_subset_four_arms_endpoint (x u v a : V) :
           (disjointOccurrence {ω : Config V | ω \ {s(u, v)} ∈ conn x b} (conn b u))
           (conn x u))
         {ω : Config V | ω \ {s(u, v)} ∈ conn b a} := by
+  classical
   intro ω h
   obtain ⟨p, q, hp, hq, hpq⟩ := exists_disjoint_paths_of_mem_doubleConn h.1
   obtain ⟨r⟩ := (show (openGraph (ω \ {s(u, v)})).Reachable x a from h.2).symm
@@ -131,6 +137,7 @@ theorem law_doubleConn_inter_deleted_le_endpoint [Countable V]
     law q (doubleConn x u ∩ {ω : Config V | ω \ {s(u, v)} ∈ conn x a}) ≤
       ∑' b, tau q x u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn x b} *
         tau q b u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn b a} := by
+  classical
   refine (measure_mono (doubleConn_inter_deleted_subset_four_arms_endpoint x u v a)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun b => ?_))
   have hdel (r s : V) : IsUpperSet {ω : Config V | ω \ {s(u, v)} ∈ conn r s} :=
@@ -154,6 +161,7 @@ theorem law_doubleConn_inter_deleted_le_min [Countable V]
       min (tau q x u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn x u})
         (∑' b, tau q x u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn x b} *
           tau q b u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn b a}) := by
+  classical
   exact le_min ((measure_mono inter_subset_left).trans
     (law_doubleConn_le_tau_mul_deleted q x u s(u, v)))
     (law_doubleConn_inter_deleted_le_endpoint q x u v a)
@@ -162,6 +170,7 @@ theorem law_doubleConn_inter_deleted_le_min [Countable V]
 an earlier cutting pair. Thus the surviving event is exactly double connection. -/
 theorem laceEPrime_eq_doubleConn_of_left_mem {A : Set V} {x : V} (hx : x ∈ A) (y : V) :
     laceEPrime A x y = doubleConn x y := by
+  classical
   rw [← laceEPrime_univ]
   simp only [laceEPrime, throughSet_eq_conn_of_left_mem hx, throughSet_univ]
 
@@ -169,6 +178,7 @@ private theorem measure_pi_two_rect (q : Sym2 V → unitInterval)
     (A B : Set (Config V)) :
     (Measure.pi (fun _ : Fin 2 => law q)) {ω | ω 0 ∈ A ∧ ω 1 ∈ B} =
       law q A * law q B := by
+  classical
   have hs : {ω : Fin 2 → Config V | ω 0 ∈ A ∧ ω 1 ∈ B} =
       Set.pi univ ![A, B] := by
     ext ω
@@ -176,6 +186,7 @@ private theorem measure_pi_two_rect (q : Sym2 V → unitInterval)
   rw [hs, Measure.pi_pi, Fin.prod_univ_two]
   rfl
 
+open scoped Classical in
 /-- Contact at the starting point of the next layer supplies a full double
 connection. If that point is outside the deleted cluster, the contact differs
 from it. This retains the no-earlier-pivotal condition in the first diagram. -/
@@ -186,6 +197,7 @@ theorem coefficientEvent_one_subset_iUnion_refined (x y : V) (b : Fin 1 → V ×
           {η : Config V | η \ {s((b 0).1, (b 0).2)} ∈ conn x a} ∧
         ω 1 ∈ if a = (b 0).2 then doubleConn (b 0).2 y
           else disjointOccurrence (conn (b 0).2 a) (conn a y)} := by
+  classical
   intro ω h
   obtain ⟨h0, h1⟩ := (mem_coefficientEvent_one_iff x y b ω).mp h
   by_cases hv : (b 0).2 ∈ cluster (ω 0 \ {s((b 0).1, (b 0).2)}) x
@@ -202,6 +214,7 @@ theorem coefficientEvent_one_subset_iUnion_refined (x y : V) (b : Fin 1 → V ×
         z ∈ cluster (ω 0 \ {s((b 0).1, (b 0).2)}) x) h).mp a.property)
     exact mem_iUnion.mpr ⟨a, ⟨h0, a.property⟩, by simpa only [ite_eq_right hne] using ha⟩
 
+open scoped Classical in
 /-- A sharper first-event diagram combines three gains: the exact initial
 diagonal, two deleted branch arms with an independent double-connection cap,
 and a deleted double-connection bound when contact is at the next root. -/
@@ -220,6 +233,7 @@ theorem coefficientEvent_one_probability_le_refined_diagram [Countable V]
         (if a = (b 0).2 then tau q (b 0).2 y *
           law q {ω : Config V | ω \ {s((b 0).1, (b 0).2)} ∈ conn (b 0).2 y}
         else tau q (b 0).2 a * tau q a y) := by
+  classical
   refine (measure_mono (coefficientEvent_one_subset_iUnion_refined x y b)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun a => ?_))
   rw [measure_pi_two_rect]
@@ -236,6 +250,7 @@ theorem coefficientEvent_one_probability_le_refined_diagram [Countable V]
     · simp only [ite_eq_right h]
       exact countable_profile_bk q (isUpperSet_conn (b 0).2 a) (isUpperSet_conn a y)
 
+open scoped Classical in
 /-- The first positive lace coefficient with the retained endpoint and deleted
 bond gains. All terms are explicit two-point probabilities and their one-bond
 deletions; loop weights vanish by the canonical off-diagonal kernel. -/
@@ -251,6 +266,7 @@ theorem laceCoefficient_one_le_refined_diagram [Countable V]
               tau q z u * law q {ω : Config V | ω \ {s(u, v)} ∈ conn z a})) *
           (if a = v then tau q v y * law q {ω : Config V | ω \ {s(u, v)} ∈ conn v y}
           else tau q v a * tau q a y) := by
+  classical
   let F : V × V → ℝ≥0∞ := fun uv =>
     offDiagonal (fun r t : V => (unitInterval.toNNReal (q s(r, t)) : ℝ≥0∞)) uv.1 uv.2 *
       ∑' a,
@@ -277,20 +293,24 @@ theorem laceCoefficient_one_le_refined_diagram [Countable V]
 /-- Deleting the sole off-diagonal pair leaves only reflexive connections. -/
 theorem bool_deleted_conn (ω : Config Bool) (x y : Bool) :
     ω \ {s(false, true)} ∈ conn x y ↔ x = y := by
+  classical
   have hG : openGraph (ω \ {s(false, true)}) = ⊥ := by
     ext a b
     cases a <;> cases b <;> simp [openGraph_adj_iff, Sym2.eq_swap]
   rw [mem_conn_iff, hG, SimpleGraph.reachable_bot]
 
+open scoped Classical in
 /-- The deleted two-point function on two vertices is the diagonal indicator. -/
 theorem law_bool_deleted (q : Sym2 Bool → unitInterval) (x y : Bool) :
     law q {ω : Config Bool | ω \ {s(false, true)} ∈ conn x y} =
       if x = y then 1 else 0 := by
+  classical
   simp_rw [bool_deleted_conn]
   by_cases h : x = y <;> simp [h]
 
 private theorem bool_conn_cross_eq_mem :
     (conn false true : Set (Config Bool)) = {ω | s(false, true) ∈ ω} := by
+  classical
   ext ω
   constructor
   · rintro ⟨r⟩
@@ -304,12 +324,14 @@ private theorem bool_conn_cross_eq_mem :
 /-- The off-diagonal two-point function on two vertices is the bond probability. -/
 theorem tau_bool_cross (q : Sym2 Bool → unitInterval) :
     tau q false true = (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) := by
+  classical
   rw [tau, bool_conn_cross_eq_mem]
   exact prodBernoulli_setOf_mem q _
 
 /-- The first deleted cluster on two vertices is the singleton root. -/
 theorem bool_deleted_cluster (ω : Config Bool) :
     cluster (ω \ {s(false, true)}) false = {false} := by
+  classical
   ext a
   rw [mem_cluster_iff, bool_deleted_conn]
   simp only [mem_singleton_iff, eq_comm]
@@ -317,6 +339,7 @@ theorem bool_deleted_cluster (ω : Config Bool) :
 /-- On two vertices, reaching the other singleton admits no earlier cut. -/
 theorem laceEPrime_singleton_bool :
     laceEPrime {false} true false = conn true false := by
+  classical
   ext ω
   constructor
   · intro h
@@ -330,6 +353,7 @@ theorem laceEPrime_singleton_bool :
       · exact hp.2.1 hp.2.2.1
       · simp at ht
 
+open scoped Classical in
 /-- On two vertices the refined diagram equals the square of the sole bond
 probability. Diagonal profile values are arbitrary. -/
 theorem first_refined_diagram_bool (q : Sym2 Bool → unitInterval) :
@@ -343,6 +367,7 @@ theorem first_refined_diagram_bool (q : Sym2 Bool → unitInterval) :
           (if a = v then tau q v false * law q {ω : Config Bool | ω \ {s(u, v)} ∈ conn v false}
           else tau q v a * tau q a false)) =
       (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞)^2 := by
+  classical
   have ht : tau q true false = (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) := by
     rw [tau_comm]
     exact tau_bool_cross q
@@ -355,6 +380,7 @@ optimal, without an asymptotic or a restriction on diagonal profile values. -/
 theorem laceCoefficient_one_bool (q : Sym2 Bool → unitInterval) :
     laceCoefficient q 1 false false =
       (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞)^2 := by
+  classical
   apply le_antisymm
   · have ht : tau q true false = (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) := by
       rw [tau_comm]
@@ -391,6 +417,7 @@ theorem laceCoefficient_one_bool (q : Sym2 Bool → unitInterval) :
     simpa only [laceCoefficient, pow_two] using hle
 
 example : laceCoefficient (fun _ : Sym2 Bool => 1) 1 false false = 1 := by
+  classical
   simp [laceCoefficient_one_bool]
 
 end PercLib.Percolation.Bond.Lace

@@ -11,6 +11,8 @@ public import PercLib.Probability.DisjointOccurrenceAlgebra
 /-!
 # A deleted-bond diagram for the first positive lace coefficient
 
+## Main results
+
 A connection to a doubly connected pair first meets two disjoint paths at a
 branch vertex. Splitting the path it meets gives four disjoint open arms,
 without an extra factor for the choice of path. The branch arm retains the
@@ -21,7 +23,7 @@ double connection is retained exactly.
 @[expose] public section
 noncomputable section
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,6 +33,7 @@ private theorem first_contact {G : SimpleGraph V} {a x : V} (r : G.Walk a x)
     (S : Set V) (hx : x ∈ S) :
     ∃ b ∈ S, ∃ t : G.Walk a b,
       ∀ f ∈ t.edges, ∃ v ∈ f, v ∉ S := by
+  classical
   induction r with
   | nil => exact ⟨_, hx, .nil, by simp⟩
   | @cons a c x hac r ih =>
@@ -52,6 +55,7 @@ private theorem four_arms_of_paths {ω : Config V} {x u a b : V} (e : Sym2 V)
     ω ∈ disjointOccurrence
       (disjointOccurrence (disjointOccurrence (conn x b) (conn b u)) (conn x u))
       {η : Config V | η \ {e} ∈ conn b a} := by
+  classical
   have hdel : IsUpperSet {η : Config V | η \ {e} ∈ conn b a} :=
     fun _ _ h hη => conn_mono (sdiff_subset_sdiff_left h) hη
   apply (mem_disjointOccurrence_three_iff
@@ -87,6 +91,7 @@ theorem doubleConn_inter_deleted_subset_four_arms (x u a : V) (e : Sym2 V) :
       ⋃ b, disjointOccurrence
         (disjointOccurrence (disjointOccurrence (conn x b) (conn b u)) (conn x u))
         {ω : Config V | ω \ {e} ∈ conn b a} := by
+  classical
   intro ω h
   obtain ⟨p, q, hp, hq, hpq⟩ := exists_disjoint_paths_of_mem_doubleConn h.1
   obtain ⟨r⟩ := (show (openGraph (ω \ {e})).Reachable x a from h.2).symm
@@ -113,6 +118,7 @@ theorem law_doubleConn_inter_deleted_le [Countable V]
     law q (doubleConn x u ∩ {ω : Config V | ω \ {e} ∈ conn x a}) ≤
       ∑' b, tau q x u * tau q x b * tau q b u *
         law q {ω : Config V | ω \ {e} ∈ conn b a} := by
+  classical
   refine (measure_mono (doubleConn_inter_deleted_subset_four_arms x u a e)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun b => ?_))
   have hdel : IsUpperSet {ω : Config V | ω \ {e} ∈ conn b a} :=
@@ -135,12 +141,14 @@ theorem law_doubleConn_inter_deleted_self (q : Sym2 V → unitInterval)
     (x a : V) (e : Sym2 V) :
     law q (doubleConn x x ∩ {ω : Config V | ω \ {e} ∈ conn x a}) =
       law q {ω : Config V | ω \ {e} ∈ conn x a} := by
+  classical
   rw [doubleConn_self, univ_inter]
 
 private theorem measure_pi_two_rect (q : Sym2 V → unitInterval)
     (A B : Set (Config V)) :
     (Measure.pi (fun _ : Fin 2 => law q)) {ω | ω 0 ∈ A ∧ ω 1 ∈ B} =
       law q A * law q B := by
+  classical
   have hs : {ω : Fin 2 → Config V | ω 0 ∈ A ∧ ω 1 ∈ B} =
       Set.pi univ ![A, B] := by
     ext ω
@@ -156,6 +164,7 @@ theorem coefficientEvent_one_subset_iUnion (x y : V) (b : Fin 1 → V × V) :
         ω 0 ∈ doubleConn x (b 0).1 ∩
           {η : Config V | η \ {s((b 0).1, (b 0).2)} ∈ conn x a} ∧
         ω 1 ∈ disjointOccurrence (conn (b 0).2 a) (conn a y)} := by
+  classical
   intro ω h
   obtain ⟨h0, h1⟩ := (mem_coefficientEvent_one_iff x y b ω).mp h
   have ht := throughSet_subset_iUnion_disjointOccurrence
@@ -172,12 +181,14 @@ theorem coefficientEvent_one_probability_le [Countable V]
       ∑' a, law q (doubleConn x (b 0).1 ∩
         {ω : Config V | ω \ {s((b 0).1, (b 0).2)} ∈ conn x a}) *
         (tau q (b 0).2 a * tau q a y) := by
+  classical
   refine (measure_mono (coefficientEvent_one_subset_iUnion x y b)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun a => ?_))
   rw [measure_pi_two_rect]
   exact mul_le_mul' le_rfl
     (countable_profile_bk q (isUpperSet_conn (b 0).2 a) (isUpperSet_conn a y))
 
+open scoped Classical in
 /-- A constant-one explicit first-coefficient diagram. The `x=u` contribution
 is exact in the first layer; elsewhere the branch arm retains bond deletion. -/
 theorem coefficientEvent_one_probability_le_diagram [Countable V]
@@ -189,6 +200,7 @@ theorem coefficientEvent_one_probability_le_diagram [Countable V]
         else ∑' z, tau q x (b 0).1 * tau q x z * tau q z (b 0).1 *
           law q {ω : Config V | ω \ {s((b 0).1, (b 0).2)} ∈ conn z a}) *
         (tau q (b 0).2 a * tau q a y) := by
+  classical
   refine (coefficientEvent_one_probability_le q x y b).trans
     (ENNReal.tsum_le_tsum fun a => mul_le_mul' ?_ le_rfl)
   by_cases h : x = (b 0).1
@@ -198,6 +210,7 @@ theorem coefficientEvent_one_probability_le_diagram [Countable V]
   · simpa [h] using
       law_doubleConn_inter_deleted_le q x (b 0).1 a s((b 0).1, (b 0).2)
 
+open scoped Classical in
 /-- The actual first lace coefficient is bounded by the deleted-bond diagram,
 with no assumed diagram input or finiteness hypothesis. The existing
 off-diagonal kernel removes loop weights exactly. -/
@@ -210,6 +223,7 @@ theorem laceCoefficient_one_le_diagram [Countable V]
           else ∑' z, tau q x u * tau q x z * tau q z u *
             law q {ω : Config V | ω \ {s(u, v)} ∈ conn z a}) *
           (tau q v a * tau q a y) := by
+  classical
   let F : V × V → ℝ≥0∞ := fun uv =>
     offDiagonal (fun r t : V => (unitInterval.toNNReal (q s(r, t)) : ℝ≥0∞)) uv.1 uv.2 *
       ∑' a,

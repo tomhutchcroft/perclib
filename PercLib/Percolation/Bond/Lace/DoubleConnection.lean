@@ -17,6 +17,8 @@ public import Mathlib.Combinatorics.SimpleGraph.Connectivity.EdgeConnectivity
 /-!
 # Double connections: certificates, deletion, and the zeroth coefficient
 
+## Main results
+
 Double connection survives the deletion of any single pair and hence has no
 pivotal pair. BK bounds its probability by the square of the two-point function.
 All probability statements allow inhomogeneous profiles and endpoint values
@@ -28,7 +30,7 @@ bounds that use BK or monotone coupling.
 noncomputable section
 
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -46,9 +48,11 @@ theorem doubleConn_subset_conn (x y : V) : doubleConn x y ⊆ conn x y :=
   fun _ h => (disjointOccurrence_subset_inter _ _ h).1
 
 @[simp] theorem doubleConn_self (x : V) : doubleConn x x = univ := by
+  classical
   simp only [doubleConn, conn_self, disjointOccurrence_univ]
 
 theorem doubleConn_comm (x y : V) : doubleConn x y = doubleConn y x := by
+  classical
   simp only [doubleConn, conn_symm x y]
 
 theorem isUpperSet_doubleConn (x y : V) : IsUpperSet (doubleConn x y) :=
@@ -65,6 +69,7 @@ theorem measurableSet_doubleConn [Countable V] (x y : V) :
 /-- At least one of the two disjoint certificates avoids any specified pair. -/
 theorem conn_sdiff_singleton_of_mem_doubleConn {ω : Config V} {x y : V}
     (h : ω ∈ doubleConn x y) (e : Sym2 V) : ω \ {e} ∈ conn x y := by
+  classical
   obtain ⟨F, H, _, _, hd, hFω, hHω, hF, hH⟩ := (mem_doubleConn_iff ω x y).mp h
   by_cases he : e ∈ F
   · apply conn_mono (ω := H) _ hH
@@ -83,6 +88,7 @@ other certificate gives a disjoint occurrence with the deleted-pair connection. 
 theorem doubleConn_subset_disjointOccurrence_deleted (x y : V) (e : Sym2 V) :
     doubleConn x y ⊆ disjointOccurrence (conn x y)
       {ω : Config V | ω \ {e} ∈ conn x y} := by
+  classical
   have hup : IsUpperSet {ω : Config V | ω \ {e} ∈ conn x y} :=
     fun _ _ h hω => conn_mono (sdiff_subset_sdiff_left h) hω
   intro ω h
@@ -101,6 +107,7 @@ theorem doubleConn_subset_disjointOccurrence_deleted (x y : V) (e : Sym2 V) :
 theorem mem_doubleConn_of_direct_of_deleted {ω : Config V} {x y : V}
     (hxy : x ≠ y) (he : s(x, y) ∈ ω) (h : ω \ {s(x, y)} ∈ conn x y) :
     ω ∈ doubleConn x y := by
+  classical
   obtain ⟨F, hFsub, hF⟩ := exists_finset_of_mem_conn h
   rw [mem_doubleConn_iff]
   refine ⟨{s(x, y)}, F, finite_singleton _, F.finite_toSet, ?_,
@@ -112,6 +119,7 @@ theorem mem_doubleConn_of_direct_of_deleted {ω : Config V} {x y : V}
 after deleting that edge. -/
 theorem insert_mem_doubleConn_iff {ω : Config V} {x y : V} (hxy : x ≠ y) :
     insert s(x, y) ω ∈ doubleConn x y ↔ ω \ {s(x, y)} ∈ conn x y := by
+  classical
   constructor
   · intro h
     simpa only [insert_sdiff_of_mem, mem_singleton] using
@@ -124,6 +132,7 @@ theorem insert_mem_doubleConn_iff {ω : Config V} {x y : V} (hxy : x ≠ y) :
 reachability notion; no new graph connectivity notion is introduced. -/
 theorem isEdgeReachable_two_of_mem_doubleConn {ω : Config V} {x y : V}
     (h : ω ∈ doubleConn x y) : (openGraph ω).IsEdgeReachable 2 x y := by
+  classical
   rw [SimpleGraph.isEdgeReachable_two]
   intro e
   change ((SimpleGraph.fromEdgeSet ω).deleteEdges {e}).Reachable x y
@@ -139,6 +148,7 @@ theorem not_pivotal_of_mem_doubleConn {ω : Config V} {x y : V}
 
 @[simp] theorem empty_mem_doubleConn_iff (x y : V) :
     (∅ : Config V) ∈ doubleConn x y ↔ x = y := by
+  classical
   constructor
   · intro h
     exact (empty_mem_conn_iff x y).mp (doubleConn_subset_conn x y h)
@@ -148,6 +158,7 @@ theorem not_pivotal_of_mem_doubleConn {ω : Config V} {x y : V}
 /-- A single open pair cannot give a double connection between distinct vertices. -/
 @[simp] theorem singleton_mem_doubleConn_iff (e : Sym2 V) (x y : V) :
     ({e} : Config V) ∈ doubleConn x y ↔ x = y := by
+  classical
   constructor
   · intro h
     have hc := conn_sdiff_singleton_of_mem_doubleConn h e
@@ -160,6 +171,7 @@ theorem mem_doubleConn_of_triangle {ω : Config V} {x y z : V}
     (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z)
     (hxyω : s(x, y) ∈ ω) (hxzω : s(x, z) ∈ ω) (hzyω : s(z, y) ∈ ω) :
     ω ∈ doubleConn x y := by
+  classical
   rw [mem_doubleConn_iff]
   refine ⟨{s(x, y)}, {s(x, z), s(z, y)}, finite_singleton _,
     (finite_singleton _).insert _, ?_, singleton_subset_iff.mpr hxyω,
@@ -171,6 +183,7 @@ theorem mem_doubleConn_of_triangle {ω : Config V} {x y z : V}
 
 @[simp] theorem law_doubleConn_self (q : Sym2 V → unitInterval) (x : V) :
     law q (doubleConn x x) = 1 := by
+  classical
   rw [doubleConn_self, measure_univ]
 
 theorem law_doubleConn_le_tau (q : Sym2 V → unitInterval) (x y : V) :
@@ -183,6 +196,7 @@ pair is deleted. Its constant is one, and it improves the square bound. -/
 theorem law_doubleConn_le_tau_mul_deleted [Countable V]
     (q : Sym2 V → unitInterval) (x y : V) (e : Sym2 V) :
     law q (doubleConn x y) ≤ tau q x y * law q {ω : Config V | ω \ {e} ∈ conn x y} := by
+  classical
   refine (measure_mono (doubleConn_subset_disjointOccurrence_deleted x y e)).trans ?_
   exact countable_profile_bk q (isUpperSet_conn x y)
     (fun _ _ h hω => conn_mono (sdiff_subset_sdiff_left h) hω)
@@ -190,22 +204,27 @@ theorem law_doubleConn_le_tau_mul_deleted [Countable V]
 /-- BK square bound for double connections, including the diagonal. -/
 theorem law_doubleConn_le_tau_sq [Countable V] (q : Sym2 V → unitInterval) (x y : V) :
     law q (doubleConn x y) ≤ tau q x y ^ 2 := by
+  classical
   simpa only [law, doubleConn, tau, pow_two] using
     countable_profile_bk q (isUpperSet_conn x y) (isUpperSet_conn x y)
 
 @[simp] theorem piZero_self (q : Sym2 V → unitInterval) (x : V) : piZero q x x = 0 := by
+  classical
   simp [piZero]
 
 theorem piZero_of_ne (q : Sym2 V → unitInterval) {x y : V} (hxy : x ≠ y) :
     piZero q x y = law q (doubleConn x y) := by
+  classical
   simp [piZero, hxy]
 
 theorem piZero_comm (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y = piZero q y x := by
+  classical
   simp only [piZero, eq_comm, doubleConn_comm x y]
 
 theorem piZero_le_law_doubleConn (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y ≤ law q (doubleConn x y) := by
+  classical
   unfold piZero
   split_ifs <;> simp
 
@@ -217,12 +236,14 @@ theorem piZero_le_tau_sq [Countable V] (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y ≤ tau q x y ^ 2 :=
   (piZero_le_law_doubleConn q x y).trans (law_doubleConn_le_tau_sq q x y)
 
+open scoped Classical in
 /-- The zeroth lace coefficient is bounded by the squared two-point function,
 with its diagonal removed exactly. -/
 @[tag "X30S"]
 theorem piZero_le_offDiagonal_tau_sq [Countable V]
     (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y ≤ if x = y then 0 else tau q x y ^ 2 := by
+  classical
   by_cases h : x = y
   · subst y
     simp
@@ -239,28 +260,34 @@ theorem piZero_le_one (q : Sym2 V → unitInterval) (x y : V) : piZero q x y ≤
 theorem piZero_ne_top (q : Sym2 V → unitInterval) (x y : V) : piZero q x y ≠ ⊤ :=
   ne_top_of_le_ne_top ENNReal.one_ne_top (piZero_le_one q x y)
 
+open scoped Classical in
 /-- Restoring the diagonal recovers the double-connection probability. -/
 theorem law_doubleConn_eq_indicator_add_piZero (q : Sym2 V → unitInterval) (x y : V) :
     law q (doubleConn x y) = (if x = y then 1 else 0) + piZero q x y := by
+  classical
   by_cases h : x = y
   · subst y
     simp
   · simp [piZero, h]
 
+open scoped Classical in
 /-- The diagonal subtraction convention in the usual definition of `Π⁽⁰⁾`. -/
 theorem piZero_eq_sub (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y = law q (doubleConn x y) - (if x = y then 1 else 0) := by
+  classical
   by_cases h : x = y
   · subst y
     simp
   · simp [piZero, h]
 
+open scoped Classical in
 /-- The exact zero-order decomposition, before selecting the first pivotal pair.
 The residual event is connected without being doubly connected. -/
 theorem tau_eq_indicator_add_piZero_add [Countable V]
     (q : Sym2 V → unitInterval) (x y : V) :
     tau q x y = (if x = y then 1 else 0) + piZero q x y +
       law q (conn x y \ doubleConn x y) := by
+  classical
   rw [← law_doubleConn_eq_indicator_add_piZero]
   have h := measure_sdiff_add_inter (μ := law q) (conn x y) (measurableSet_doubleConn x y)
   rw [inter_eq_right.mpr (doubleConn_subset_conn x y)] at h
@@ -268,6 +295,7 @@ theorem tau_eq_indicator_add_piZero_add [Countable V]
 
 theorem piZero_mono [Countable V] {q q' : Sym2 V → unitInterval} (h : q ≤ q') (x y : V) :
     piZero q x y ≤ piZero q' x y := by
+  classical
   by_cases hxy : x = y
   · subst y
     simp
@@ -278,6 +306,7 @@ theorem piZero_mono [Countable V] {q q' : Sym2 V → unitInterval} (h : q ≤ q'
 /-- The zero profile has no off-diagonal lace contribution. -/
 @[simp] theorem piZero_zero [Countable V] (x y : V) :
     piZero (fun _ : Sym2 V => 0) x y = 0 := by
+  classical
   by_cases hxy : x = y
   · subst y
     simp
@@ -290,15 +319,20 @@ theorem piZero_mono [Countable V] {q q' : Sym2 V → unitInterval} (h : q ≤ q'
 
 /-! ### Non-vacuity at the smallest sizes and endpoint parameters -/
 
-example : (∅ : Config Bool) ∉ doubleConn false true := by simp
+example : (∅ : Config Bool) ∉ doubleConn false true := by
+  classical
+  simp
 
-example : ({s(false, true)} : Config Bool) ∉ doubleConn false true := by simp
+example : ({s(false, true)} : Config Bool) ∉ doubleConn false true := by
+  classical
+  simp
 
 example : (univ : Config (Fin 3)) ∈ doubleConn 0 1 :=
   mem_doubleConn_of_triangle (z := 2) (by decide) (by decide) (by decide)
     (mem_univ _) (mem_univ _) (mem_univ _)
 
 example : piZero (fun _ : Sym2 (Fin 3) => 1) 0 1 = 1 := by
+  classical
   rw [piZero_of_ne _ (by decide), law]
   have hμ : prodBernoulli (fun _ : Sym2 (Fin 3) => (1 : unitInterval)) =
       Measure.dirac (univ : Config (Fin 3)) := by

@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
 /-!
 # The nonnegative lace remainder
 
+## Main results
+
 The remainder of order `n` has `n+1` directed pairs and `n+2` independent
 configurations. Its last test is connection through the preceding deleted
 cluster; all earlier tests are `E'`. Replacing the last through-set test by
@@ -25,7 +27,7 @@ or signed expansion identity is asserted by the definitions.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 

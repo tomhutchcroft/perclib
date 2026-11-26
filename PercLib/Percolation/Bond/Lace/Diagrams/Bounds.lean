@@ -11,6 +11,8 @@ public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 /-!
 # Row bounds for pair-state lace diagrams
 
+## Main results
+
 The transfer and terminal row constants are kept separate. Iterating the
 transfer costs `ρ^n`; the final step costs only its own row bound `κ`.
 These deterministic estimates concern the defined diagrams and do not assume
@@ -20,7 +22,7 @@ any unproved comparison with lace coefficients.
 @[expose] public section
 noncomputable section
 
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,6 +33,7 @@ theorem diagramIterate_mass_le_geometric (q : Sym2 V → unitInterval)
     (x : V) (ρ : ℝ≥0∞)
     (hρ : ∀ p, (∑' r, diagramTransfer q p r) ≤ ρ) (n : ℕ) :
     (∑' p, diagramIterate q x n p) ≤ (∑' p, diagramInitial q x p) * ρ ^ n := by
+  classical
   induction n with
   | zero => simp [diagramIterate]
   | succ n ih =>
@@ -51,6 +54,7 @@ theorem laceDiagram_mass_le_geometric (q : Sym2 V → unitInterval)
     (hρ : ∀ p, (∑' r, diagramTransfer q p r) ≤ ρ)
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ) (n : ℕ) :
     (∑' y, laceDiagram q n x y) ≤ (∑' p, diagramInitial q x p) * ρ ^ n * κ := by
+  classical
   calc
     _ = ∑' p, diagramIterate q x n p * (∑' y, diagramTerminal q p y) := by
       unfold laceDiagram
@@ -69,6 +73,7 @@ theorem tsum_laceDiagram_mass_le (q : Sym2 V → unitInterval)
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ) :
     (∑' n : ℕ, ∑' y, laceDiagram q n x y) ≤
       (∑' p, diagramInitial q x p) * (1 - ρ)⁻¹ * κ := by
+  classical
   calc
     _ ≤ ∑' n : ℕ, (∑' p, diagramInitial q x p) * ρ ^ n * κ :=
       ENNReal.tsum_le_tsum (laceDiagram_mass_le_geometric q x ρ κ hρ hκ)
@@ -95,6 +100,7 @@ theorem summable_laceDiagram_toReal (q : Sym2 V → unitInterval)
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ)
     (hinitial : (∑' p, diagramInitial q x p) ≠ ⊤) :
     Summable (fun p : ℕ × V => (laceDiagram q p.1 x p.2).toReal) := by
+  classical
   apply ENNReal.summable_toReal
   rw [ENNReal.tsum_prod']
   exact tsum_laceDiagram_mass_ne_top q x ρ κ hρone hκfinite hρ hκ hinitial

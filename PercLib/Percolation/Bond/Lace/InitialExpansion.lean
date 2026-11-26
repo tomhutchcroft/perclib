@@ -19,6 +19,8 @@ public import PercLib.Percolation.Bond.WalkSum
 /-!
 # The first lace-expansion identity
 
+## Main results
+
 The first-pivotal partition and cutting-bond factorization give an exact
 identity with a nonnegative remainder. Writing the remainder on the left
 avoids subtraction of infinite extended-real sums. Every bond weight is the
@@ -29,7 +31,7 @@ existing off-diagonal kernel, so arbitrary loop probabilities contribute zero.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -49,6 +51,7 @@ theorem prod_doubleConn_tau_eq_avoiding_add_through [Countable V]
       ((law q).prod (law q)) {p : Config V × Config V |
         p.1 ∈ doubleConn x u ∧
         p.2 ∈ throughSet (cluster (p.1 \ {s(u, v)}) x) v y} := by
+  classical
   let B : Set (Config V × Config V) := {p |
     p.1 ∈ doubleConn x u ∧
     ∃ hv : v ∈ (cluster (p.1 \ {s(u, v)}) x)ᶜ,
@@ -91,6 +94,7 @@ theorem firstPivotal_add_remainder_eq_step [Countable V]
       law q (doubleConn x u) *
         offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
         tau q v y := by
+  classical
   by_cases huv : u = v
   · subst v
     simp [cuttingEvent_diag, offDiagonal_self]
@@ -115,6 +119,7 @@ theorem tau_add_initialRemainder_eq_doubleConn_add_step [Countable V]
         ∑' u, ∑' v, law q (doubleConn x u) *
           offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   have ht : tau q x y = law q (doubleConn x y) +
       ∑' u, ∑' v, law q (cuttingEvent univ x y u v) := by
     simpa only [throughSet_univ, laceEPrime_univ, tau] using
@@ -126,6 +131,7 @@ theorem tau_add_initialRemainder_eq_doubleConn_add_step [Countable V]
   rw [← ENNReal.tsum_add]
   exact tsum_congr fun v => firstPivotal_add_remainder_eq_step q x y u v (hfin u v)
 
+open scoped Classical in
 /-- The same first expansion step in the diagonal-subtracted coefficient
 convention `law(doubleConn) = δ + π₀`. -/
 theorem tau_add_initialRemainder_eq_indicator_add_piZero_step [Countable V]
@@ -141,6 +147,7 @@ theorem tau_add_initialRemainder_eq_indicator_add_piZero_step [Countable V]
         ∑' u, ∑' v, ((if x = u then 1 else 0) + piZero q x u) *
           offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   simpa only [law_doubleConn_eq_indicator_add_piZero] using
     tau_add_initialRemainder_eq_doubleConn_add_step q x y hfin
 
@@ -152,6 +159,7 @@ theorem remainderEvent_zero_probability_eq_prod [Countable V]
       ((law q).prod (law q)) {p : Config V × Config V |
         p.1 ∈ doubleConn x (b 0).1 ∧
         p.2 ∈ throughSet (cluster (p.1 \ {s((b 0).1, (b 0).2)}) x) (b 0).2 y} := by
+  classical
   let T : Set (Config V × Config V) := {p | p.1 ∈ doubleConn x (b 0).1 ∧
     p.2 ∈ throughSet (cluster (p.1 \ {s((b 0).1, (b 0).2)}) x) (b 0).2 y}
   have hm : MeasurableSet T :=
@@ -177,6 +185,7 @@ theorem laceRemainder_zero_eq_tsum_prod [Countable V]
           ((law q).prod (law q)) {p : Config V × Config V |
             p.1 ∈ doubleConn x u ∧
             p.2 ∈ throughSet (cluster (p.1 \ {s(u, v)}) x) v y} := by
+  classical
   rw [laceRemainder]
   change (∑' b : Fin 1 → V × V,
       (∏ i : Fin 1, offDiagonal
@@ -204,9 +213,11 @@ theorem tau_add_laceRemainder_zero_eq_doubleConn_add_step [Countable V]
         ∑' u, ∑' v, law q (doubleConn x u) *
           offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   rw [laceRemainder_zero_eq_tsum_prod]
   exact tau_add_initialRemainder_eq_doubleConn_add_step q x y hfin
 
+open scoped Classical in
 /-- In the standard coefficient convention, the first expansion reads
 `τ + r₀ = δ + π₀ + Jτ + π₀Jτ`. The signed remainder is therefore `-r₀`. -/
 @[tag "YLI6"]
@@ -220,6 +231,7 @@ theorem tau_add_laceRemainder_zero_eq_indicator_add_piZero [Countable V]
         ∑' u, ∑' v, piZero q x u *
           offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   rw [tau_add_laceRemainder_zero_eq_doubleConn_add_step q x y hfin]
   simp_rw [law_doubleConn_eq_indicator_add_piZero, add_mul, ENNReal.tsum_add]
   have hi : (∑' u, ∑' v, (if x = u then (1 : ℝ≥0∞) else 0) *

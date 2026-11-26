@@ -12,6 +12,8 @@ public import Mathlib.Tactic.Ring
 /-!
 # Finite alternating telescoping
 
+## Main results
+
 This algebraic identity converts the adjacent nonnegative remainder recurrence
 to a signed finite expansion. It assumes no probabilistic expansion identity.
 -/

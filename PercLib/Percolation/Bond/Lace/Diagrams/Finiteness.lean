@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Convergence
 /-!
 # Finite-order expansion under finite diagram norms
 
+## Main results
+
 A finite transfer norm suffices for every fixed coefficient order. The stricter
 condition that this norm is below one is needed only to sum all orders. Here
 the finite signed expansion is justified directly from the proved finite
@@ -20,7 +22,7 @@ pair-state diagram bounds.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -35,6 +37,7 @@ theorem laceCoefficient_mass_ne_top_of_finite_diagram_bounds
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ)
     (hinitial : (∑' p, diagramInitial q x p) ≠ ⊤) :
     (∑' y, laceCoefficient q n x y) ≠ ⊤ := by
+  classical
   cases n with
   | zero =>
       exact ne_top_of_le_ne_top hinitial (tsum_piZero_le_diagramInitial q x)
@@ -44,6 +47,7 @@ theorem laceCoefficient_mass_ne_top_of_finite_diagram_bounds
           hκfinite)
         (laceCoefficient_mass_le_diagram_geometric q x ρ κ hρ hκ n)
 
+open scoped Classical in
 /-- The actual finite signed lace expansion follows from finite diagram
 norms. The transfer norm need not be less than one, and coefficient-mass
 finiteness is a conclusion of the proved diagram bounds. -/

@@ -11,6 +11,8 @@ public import Mathlib.Analysis.SpecificLimits.Basic
 /-!
 # A geometric coefficient-mass criterion
 
+## Main results
+
 The exact continuation mass `sup_u ∑ v,y J(u,v) τ(v,y)` controls the growth of
 the positive coefficient masses. A value below one gives a direct convergence
 criterion. This criterion is useful at small intensity; it is not the stronger

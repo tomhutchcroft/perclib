@@ -14,6 +14,8 @@ public import Mathlib.Analysis.Normed.Module.FiniteDimension
 /-!
 # Fourier transform of the canonical infinite lace expansion
 
+## Main results
+
 Translation invariance of the profile roots the two-point and step kernels.
 Finite step mass, susceptibility, and total coefficient mass justify Fourier
 summation of the proved infinite expansion. The transformed equation and its
@@ -24,7 +26,7 @@ nonzero denominator are conclusions, not additional hypotheses.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical BigOperators
+open scoped ENNReal BigOperators
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -33,6 +35,7 @@ variable {G : Type*} [AddCommGroup G]
 /-- On a group, the addition-fiber convolution is the usual difference sum. -/
 theorem addRingConvolution_eq_tsum_sub (f g : G → ℂ) (x : G) :
     DiscreteConvolution.addRingConvolution f g x = ∑' u, f u * g (x - u) := by
+  classical
   let e : G ≃ DiscreteConvolution.addFiber x :=
     { toFun := fun u => ⟨(u, x - u),
         DiscreteConvolution.mem_addFiber.mpr (by rw [add_comm, sub_add_cancel])⟩
@@ -52,6 +55,7 @@ theorem addRingConvolution_eq_tsum_sub (f g : G → ℂ) (x : G) :
 theorem summable_norm_addRingConvolution (f g : G → ℂ)
     (hf : Summable fun x => ‖f x‖) (hg : Summable fun x => ‖g x‖) :
     Summable fun x => ‖DiscreteConvolution.addRingConvolution f g x‖ := by
+  classical
   have hs := (summable_mul_of_summable_norm hf hg).hasSum.tsum_fiberwise
     (fun p : G × G => p.1 + p.2)
   have hset (x : G) : (fun p : G × G => p.1 + p.2) ⁻¹' {x} =
@@ -71,6 +75,7 @@ theorem addRingConvolution_nested_eq_tsum (f g h : G → ℂ) (x : G) :
     DiscreteConvolution.addRingConvolution f
       (DiscreteConvolution.addRingConvolution g h) x =
         ∑' u, ∑' v, f u * g (v - u) * h (x - v) := by
+  classical
   rw [addRingConvolution_eq_tsum_sub]
   apply tsum_congr
   intro u
@@ -86,6 +91,7 @@ theorem addRingConvolution_nested_eq_tsum (f g h : G → ℂ) (x : G) :
 theorem tau_eq_rooted_of_add_right (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y)) (x y : G) :
     tau q x y = tau q 0 (y - x) := by
+  classical
   have hp : ∀ a, q (Sym2.map (Equiv.addRight (-x)) a) = q a := by
     intro a
     induction a using Sym2.ind with
@@ -99,6 +105,7 @@ theorem offDiagonal_eq_rooted_of_add_right (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y)) (x y : G) :
     offDiagonal (fun a b : G => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) x y =
       offDiagonal (fun a b : G => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 (y - x) := by
+  classical
   have hp : ∀ a, q (Sym2.map (Equiv.addRight (-x)) a) = q a := by
     intro a
     induction a using Sym2.ind with
@@ -113,6 +120,7 @@ theorem ae_deleted_cluster_finite_of_summable_tau [Countable G]
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y))
     (hτ : (∑' y, tau q 0 y) ≠ ⊤) (a u v : G) :
     ∀ᵐ ω ∂law q, (cluster (ω \ {s(u, v)}) a).Finite := by
+  classical
   have hrow : (∑' y, tau q a y) = ∑' y, tau q 0 y := by
     simp_rw [tau_eq_rooted_of_add_right q hq a]
     simpa only [Equiv.coe_addRight, sub_eq_add_neg] using
@@ -131,6 +139,7 @@ theorem step_tau_le_step_mass_of_add_right (q : Sym2 G → unitInterval)
       (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v * tau q v z) ≤
         ∑' v, offDiagonal (fun a b : G =>
           (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 v := by
+  classical
   calc
     _ ≤ ∑' v, offDiagonal (fun a b : G =>
         (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v :=
@@ -143,6 +152,7 @@ theorem step_tau_le_step_mass_of_add_right (q : Sym2 G → unitInterval)
         (Equiv.addRight (-u)).tsum_eq
           (offDiagonal (fun a b : G => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0)
 
+open scoped Classical in
 /-- The proved infinite expansion, expressed using canonical rooted complex
 kernels and mathlib's discrete convolution. -/
 theorem canonical_lace_convolution_equation [Countable G]
@@ -194,6 +204,7 @@ theorem canonical_lace_convolution_equation [Countable G]
   rw [hstep, hdouble] at h
   simpa only [eq_comm] using h
 
+open scoped Classical in
 /-- Fourier summation of a summable convolution equation. The canonical
 application below supplies this premise from the proved lace expansion. -/
 theorem fourier_eq_of_lace_convolution_equation [Countable G]
@@ -260,6 +271,7 @@ theorem canonical_lace_fourier_equation [Countable G]
     let J : ℂ := ∑' x, ((offDiagonal (fun a b : G =>
       (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 x).toReal : ℂ) * (ψ x : ℂ)
     T = 1 + P + (1 + P) * J * T := by
+  classical
   have hTnorm : Summable (fun x : G => ‖((tau q 0 x).toReal : ℂ)‖) := by
     simpa only [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg ENNReal.toReal_nonneg]
       using ENNReal.summable_toReal hτ
@@ -289,6 +301,7 @@ theorem canonical_lace_fourier_quotient [Countable G]
     let J : ℂ := ∑' x, ((offDiagonal (fun a b : G =>
       (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 x).toReal : ℂ) * (ψ x : ℂ)
     1 - (1 + P) * J ≠ 0 ∧ T = (1 + P) / (1 - (1 + P) * J) := by
+  classical
   have h := canonical_lace_fourier_equation q hq hJ hτ hmass ψ
   exact ⟨lace_fourier_denominator_ne_zero h, eq_lace_fourier_quotient h⟩
 

@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.ThroughExpansion
 /-!
 # Integrating the through-set expansion over earlier layers
 
+## Main results
+
 The vertex set may depend measurably on arbitrary earlier data. Retaining a
 measurable event on those data and integrating the exact fixed-set identity
 gives the product-layer identity needed by the lace remainder recurrence.
@@ -20,7 +22,7 @@ Tonelli's theorem applies to nonnegative terms, without summability assumptions.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -43,6 +45,7 @@ theorem prod_throughSet_add_remainder_eq_prod_laceEPrime_add_step [Countable V]
           (μ.prod (law q)) {p : Ω × Config V | p.1 ∈ E ∧ p.2 ∈ laceEPrime (A p.1) a u} *
             offDiagonal (fun c d : V => (unitInterval.toNNReal (q s(c, d)) : ℝ≥0∞)) u v *
             tau q v y := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun c d : V => (unitInterval.toNNReal (q s(c, d)) : ℝ≥0∞))
   let T : V → Set (Ω × Config V) := fun z =>

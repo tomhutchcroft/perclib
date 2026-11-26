@@ -16,6 +16,8 @@ public import Mathlib.MeasureTheory.Constructions.Pi
 /-!
 # Positive lace coefficients on independent configuration layers
 
+## Main results
+
 For positive order `n+1`, an oriented bond sequence has `n+1` entries and the
 event uses `n+2` independent configurations. The cluster at step `i` is computed
 in layer `i`, with bond `i` deleted, rooted at the target of the preceding bond
@@ -33,7 +35,7 @@ finiteness or convergence is built into the definition.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 

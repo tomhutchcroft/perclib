@@ -7,12 +7,19 @@ module
 public import PercLib.Percolation.Bond.Lace.Diagrams.Defs
 public import PercLib.Percolation.Bond.Lace.Coefficients.Recursion
 
-/-! # Prefix events and their last independent layer -/
+/-!
+# Prefix events and their last independent layer
+
+## Main results
+
+Proves measurability and exact decomposition of canonical coefficient prefixes
+into the previous layers and their last independent configuration.
+-/
 
 @[expose] public section
 noncomputable section
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -26,6 +33,7 @@ variable {V : Type*}
 
 theorem measurableSet_coefficientPrefixEvent [Countable V] (x u : V)
     (n : ℕ) (b : Fin n → V × V) : MeasurableSet (coefficientPrefixEvent x u n b) := by
+  classical
   cases n with
   | zero => exact (measurableSet_doubleConn x u).preimage (measurable_pi_apply 0)
   | succ n => exact measurableSet_coefficientEvent x u b
@@ -41,6 +49,7 @@ theorem measurableSet_markedPrefix [Countable V] (x : V) (n : ℕ)
 theorem prefixIncoming_snoc_last (x : V) {n : ℕ} (b : Fin n → V × V) (c : V × V) :
     Fin.cases x (fun j => ((Fin.snoc b c : Fin (n + 1) → V × V) j).2)
       (Fin.last (n + 1)) = c.2 := by
+  classical
   rw [← Fin.succ_last, Fin.cases_succ, Fin.snoc_last]
 
 /-- Appending the final bond gives a prefix and one independent `E'` section,
@@ -53,6 +62,7 @@ theorem mem_coefficientEvent_snoc_prefix_iff {n : ℕ} (x y : V)
       η ∈ laceEPrime
         (cluster (ω (Fin.last n) \ {s(c.1, c.2)})
           (Fin.cases x (fun j => (b j).2) (Fin.last n))) c.2 y := by
+  classical
   cases n with
   | zero =>
     rw [mem_coefficientEvent_one_iff]
@@ -75,6 +85,7 @@ theorem mem_markedPrefix_snoc_iff {n : ℕ} (x : V)
           (cluster (ω (Fin.last n) \ {s(d.1, d.2)})
             (Fin.cases x (fun j => (b j).2) (Fin.last n))) d.2 c.1 ∩
           {ξ : Config V | ξ \ {s(c.1, c.2)} ∈ conn d.2 a} := by
+  classical
   simp only [mem_inter_iff, coefficientPrefixEvent_succ,
     mem_coefficientEvent_snoc_prefix_iff, mem_ofPred_eq, Fin.snoc_last,
     prefixIncoming_snoc_last]

@@ -13,6 +13,8 @@ public import PercLib.Percolation.Bond.ConnectionKernel
 /-!
 # Transfer norms with the excluded joining diagonal
 
+## Main results
+
 The first part of the transfer retains the actual deleted connector. The
 second part retains the off-diagonal joining connection. Under translations
 this gives the bound `Δ * (M + Moff)`, instead of replacing both terms by `Δ * M`.
@@ -22,7 +24,7 @@ All sums take values in the extended nonnegative reals.
 @[expose] public section
 noncomputable section
 
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -34,6 +36,7 @@ theorem weighted_tau_mass_eq_diagonal_add_offDiagonal
     (q : Sym2 V → unitInterval) (f : V → V → ℝ≥0∞) :
     (∑' z, ∑' t, f z t * tau q z t) =
       (∑' z, f z z) + ∑' z, ∑' t, f z t * offDiagonal (tau q) z t := by
+  classical
   have hrow (z : V) : (∑' t, f z t * tau q z t) =
       f z z + ∑' t, f z t * offDiagonal (tau q) z t := by
     rw [ENNReal.tsum_eq_add_tsum_ite z]
@@ -49,6 +52,7 @@ theorem diagramInterior_mass_eq (q : Sym2 V → unitInterval) (p : V × V) :
     (∑' r, diagramInterior q p r) =
       tau q p.1 p.2 * (∑' u, ∑' w, tau q p.1 u * tau q u w * tau q w p.2) +
       ∑' u, ∑' w, tau q p.1 u * offDiagonal (tau q) p.2 w * tau q w p.1 * tau q w u := by
+  classical
   rw [ENNReal.tsum_prod']
   simp only [diagramInterior, ENNReal.tsum_add]
   congr 1
@@ -76,6 +80,7 @@ theorem diagramTransfer_mass_eq (q : Sym2 V → unitInterval) (p : V × V) :
         (∑' u, ∑' w, tau q s.1 u * tau q u w * tau q w s.2)) +
       ∑' s : V × V, ∑' u, ∑' w, diagramConnector q p s * tau q s.1 u *
         offDiagonal (tau q) s.2 w * tau q w s.1 * tau q w u := by
+  classical
   unfold diagramTransfer
   rw [ENNReal.tsum_comm]
   simp_rw [ENNReal.tsum_mul_left, diagramInterior_mass_eq, mul_add]
@@ -99,7 +104,10 @@ theorem open_triangle_le_of_diagonal_bound [Countable V]
     (q : Sym2 V → unitInterval) (Δ : ℝ≥0∞)
     (hΔ : ∀ x, (∑' u, ∑' v, tau q x u * tau q u v * tau q v x) ≤ Δ) (x y : V) :
     (∑' u, ∑' v, tau q x u * tau q u v * tau q v y) ≤ Δ := by
-  have hs := (triangle_sq_le q x y).trans (mul_le_mul' (hΔ x) (hΔ y))
+  classical
+  have ht := triangle_sq_le (law q) x y
+  simp only [connProb_law] at ht
+  have hs := ht.trans (mul_le_mul' (hΔ x) (hΔ y))
   have hr := ENNReal.rpow_le_rpow hs (by norm_num : (0 : ℝ) ≤ 1 / 2)
   have hroot (z : ℝ≥0∞) : (z ^ 2) ^ (1 / 2 : ℝ) = z := by
     simpa [one_div] using ENNReal.pow_rpow_inv_natCast (n := 2) (by norm_num) z
@@ -115,6 +123,7 @@ theorem diagramTransfer_mass_le_deleted_add [Countable V]
       (∑' s : V × V, diagramConnector q p s * tau q s.1 s.2) * Δ +
       ∑' s : V × V, ∑' u, ∑' w, diagramConnector q p s * tau q s.1 u *
         offDiagonal (tau q) s.2 w * tau q w s.1 * tau q w u := by
+  classical
   rw [diagramTransfer_mass_eq]
   refine add_le_add ?_ le_rfl
   calc
@@ -130,6 +139,7 @@ variable {G : Type*} [AddCommGroup G]
 private theorem tau_add_right (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y)) (x y g : G) :
     tau q (x + g) (y + g) = tau q x y := by
+  classical
   apply tau_eq_of_map_law (Equiv.addRight g)
   apply PercLib.Probability.prodBernoulli_map_image_sym2_invariant
   intro a
@@ -142,6 +152,7 @@ theorem diagonal_triangle_eq_rooted (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y)) (x : G) :
     (∑' u, ∑' v, tau q x u * tau q u v * tau q v x) =
       ∑' u, ∑' v, tau q 0 u * tau q u v * tau q v 0 := by
+  classical
   rw [← (Equiv.addRight x).tsum_eq]
   apply tsum_congr
   intro u
@@ -157,6 +168,7 @@ theorem diagonal_triangle_eq_rooted (q : Sym2 G → unitInterval)
 omit [AddCommGroup G] in
 private theorem offDiagonal_tau_comm (q : Sym2 G → unitInterval) (x y : G) :
     offDiagonal (tau q) x y = offDiagonal (tau q) y x := by
+  classical
   by_cases h : x = y
   · subst y
     rfl
@@ -165,6 +177,7 @@ private theorem offDiagonal_tau_comm (q : Sym2 G → unitInterval) (x y : G) :
 private theorem tsum_four_swap {A B C D : Type*} (f : A → B → C → D → ℝ≥0∞) :
     (∑' a, ∑' b, ∑' c, ∑' d, f a b c d) =
       ∑' c, ∑' d, ∑' a, ∑' b, f a b c d := by
+  classical
   have h := ENNReal.tsum_comm (f := fun p : A × B => fun r : C × D =>
     f p.1 p.2 r.1 r.2)
   simpa only [ENNReal.tsum_prod'] using h
@@ -182,6 +195,7 @@ theorem diagramTransfer_second_mass_le_of_add_right
     (∑' s : G × G, ∑' u, ∑' w, diagramConnector q p s * tau q s.1 u *
       offDiagonal (tau q) s.2 w * tau q w s.1 * tau q w u) ≤
       (∑' u, ∑' w, tau q 0 u * tau q u w * tau q w 0) * Moff := by
+  classical
   let T : G → G → ℝ≥0∞ := fun h t => ∑' v,
     offDiagonal (fun a b : G => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) h v * tau q v t
   have hinner (w : G) :
@@ -257,6 +271,7 @@ theorem diagramTransfer_mass_le_deleted_of_add_right [Countable G]
         (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) h v * tau q v t) *
           offDiagonal (tau q) z t) ≤ Moff) :
     (∑' r, diagramTransfer q p r) ≤ Δ * (Md + Moff) := by
+  classical
   have hdiag (x : G) : (∑' u, ∑' v, tau q x u * tau q u v * tau q v x) ≤ Δ := by
     rw [diagonal_triangle_eq_rooted q hq]
     exact hΔ
@@ -285,6 +300,7 @@ theorem diagramTransfer_mass_le_of_add_right [Countable G]
         (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) h v * tau q v t) *
           offDiagonal (tau q) z t) ≤ Moff) (p : G × G) :
     (∑' r, diagramTransfer q p r) ≤ Δ * (M + Moff) := by
+  classical
   apply diagramTransfer_mass_le_deleted_of_add_right q hq p Δ M Moff hΔ _ hMoff
   calc
     _ ≤ ∑' s : G × G, (tau q p.1 s.1 *

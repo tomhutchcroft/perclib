@@ -12,12 +12,19 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Contraction
 public import PercLib.Percolation.Bond.Lace.InteriorDiagram
 public import PercLib.Percolation.Bond.Lace.Remainder.Recurrence
 
-/-! # From the actual coefficient events to the pair-state diagrams -/
+/-!
+# From the actual coefficient events to the pair-state diagrams
+
+## Main results
+
+Bounds each canonical coefficient by its pair-state diagram through an induction
+on the marked prefix events.
+-/
 
 @[expose] public section
 noncomputable section
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -29,6 +36,7 @@ private theorem law_four_le [Countable V] (q : Sym2 V → unitInterval)
     (ha : law q A ≤ a) (hb : law q B ≤ b) (hc : law q C ≤ c) (hd : law q D ≤ d) :
     law q (disjointOccurrence (disjointOccurrence (disjointOccurrence A B) C) D) ≤
       a * b * c * d := by
+  classical
   have h1 := (countable_profile_bk q hA hB).trans (mul_le_mul' ha hb)
   have h2 := (countable_profile_bk q (isUpperSet_disjointOccurrence hA hB) hC).trans
     (mul_le_mul' h1 hc)
@@ -36,6 +44,7 @@ private theorem law_four_le [Countable V] (q : Sym2 V → unitInterval)
     (isUpperSet_disjointOccurrence (isUpperSet_disjointOccurrence hA hB) hC) hD).trans
     (mul_le_mul' h2 hd)
 
+open scoped Classical in
 private theorem law_interior_geometry_le [Countable V]
     (q : Sym2 V → unitInterval) (v u a z t w : V) (e : Sym2 V) :
     law q (disjointOccurrence
@@ -74,6 +83,7 @@ private theorem law_interior_geometry_le [Countable V]
         (countable_profile_bk q (isUpperSet_conn v w) (isUpperSet_conn w t))
         (countable_profile_bk q (isUpperSet_conn t z) (isUpperSet_conn z u)) le_rfl le_rfl
 
+open scoped Classical in
 /-- The last marked prefix layer is bounded by independent product rectangles
 obtained from the interior six-arm containment. -/
 theorem markedPrefix_snoc_probability_le [Countable V]
@@ -138,6 +148,7 @@ theorem markedPrefix_snoc_probability_le [Countable V]
     mul_le_mul' (le_refl ((Measure.pi (fun _ : Fin (n + 1) => law q)) (P z)))
       (law_interior_geometry_le q d.2 c.1 a z t w s(c.1, c.2))
 
+open scoped Classical in
 /-- Summing the interior rectangles over the earlier bond sequence gives an
 actual recurrence bound for marked coefficient prefixes. -/
 theorem markedCoefficient_succ_le_six_arms [Countable V]
@@ -231,6 +242,7 @@ theorem markedCoefficient_le_diagramIterate [Countable V]
     markedCoefficient q n x c a ≤ ∑' w,
       diagramIterate q x n (w, c.1) *
         law q {ω : Config V | ω \ {s(c.1, c.2)} ∈ conn w a} := by
+  classical
   induction n generalizing c a with
   | zero =>
     exact markedCoefficient_zero_le_diagramInitial q x c a
@@ -258,6 +270,7 @@ probability bound are proved; no diagram hypothesis is assumed. -/
 theorem laceCoefficient_succ_le_laceDiagram [Countable V]
     (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) :
     laceCoefficient q (n + 1) x y ≤ laceDiagram q n x y := by
+  classical
   refine (laceCoefficient_succ_le_tsum_marked_terminal q n x y).trans ?_
   change _ ≤ ∑' p, diagramIterate q x n p * diagramTerminal q p y
   refine le_trans ?_ (le_of_eq

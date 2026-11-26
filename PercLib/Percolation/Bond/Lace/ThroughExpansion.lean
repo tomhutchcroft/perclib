@@ -13,6 +13,8 @@ public import PercLib.Percolation.Bond.Lace.InitialExpansion
 /-!
 # Expanding a connection through a fixed vertex set
 
+## Main results
+
 The through-set partition and cutting-bond factorization give the exact
 nonnegative identity used at every later stage of the lace expansion. The
 residual event keeps `E'` in the current layer and tests a through-set connection
@@ -23,7 +25,7 @@ against its deleted cluster in a fresh independent layer.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -43,6 +45,7 @@ theorem prod_event_tau_eq_avoiding_add_through [Countable V]
               ⟨v, hv⟩ ⟨y, hy⟩} +
       ((law q).prod (law q)) {p : Config V × Config V |
         p.1 ∈ E ∧ p.2 ∈ throughSet (cluster (p.1 \ {s(u, v)}) x) v y} := by
+  classical
   let B : Set (Config V × Config V) := {p | p.1 ∈ E ∧
     ∃ hv : v ∈ (cluster (p.1 \ {s(u, v)}) x)ᶜ,
       ∃ hy : y ∈ (cluster (p.1 \ {s(u, v)}) x)ᶜ,
@@ -82,6 +85,7 @@ theorem cuttingEvent_add_through_remainder_eq_step [Countable V]
       law q (laceEPrime A x u) *
         offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
         tau q v y := by
+  classical
   by_cases huv : u = v
   · subst v
     simp [cuttingEvent_diag, offDiagonal_self]
@@ -107,6 +111,7 @@ theorem law_throughSet_add_remainder_eq_laceEPrime_add_step [Countable V]
         ∑' u, ∑' v, law q (laceEPrime A x u) *
           offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   rw [law_throughSet_eq_add_tsum_cuttingEvent, add_assoc, ← ENNReal.tsum_add]
   congr 1
   apply tsum_congr

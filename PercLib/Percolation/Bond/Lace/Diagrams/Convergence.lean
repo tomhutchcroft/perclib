@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.Lace.Expansion.Infinite
 /-!
 # Coefficient summability from the proved diagram comparison
 
+## Main results
+
 The actual positive coefficients inherit the pair-state geometric estimate.
 The zeroth coefficient is controlled by a slice of the initial diagram, so
 finite initial diagram mass also supplies its summability. The total bound
@@ -22,7 +24,7 @@ retains the actual zeroth mass instead of replacing it by a larger diagram.
 noncomputable section
 
 open Set MeasureTheory Filter
-open scoped ENNReal Classical Topology
+open scoped ENNReal Topology
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,6 +33,7 @@ variable {V : Type*} [Countable V]
 /-- A slice of the initial pair-state diagram dominates the zeroth coefficient. -/
 theorem piZero_le_diagramInitial (q : Sym2 V → unitInterval) (x y : V) :
     piZero q x y ≤ diagramInitial q x (x, y) := by
+  classical
   by_cases hy : y = x
   · subst y
     simp [diagramInitial]
@@ -39,6 +42,7 @@ theorem piZero_le_diagramInitial (q : Sym2 V → unitInterval) (x y : V) :
 /-- Finite initial diagram mass also controls the zeroth coefficient row. -/
 theorem tsum_piZero_le_diagramInitial (q : Sym2 V → unitInterval) (x : V) :
     (∑' y, piZero q x y) ≤ ∑' p, diagramInitial q x p := by
+  classical
   refine (ENNReal.tsum_le_tsum (piZero_le_diagramInitial q x)).trans ?_
   have hi : Function.Injective (fun y : V => (x, y)) :=
     fun _ _ h => congrArg Prod.snd h
@@ -75,6 +79,7 @@ theorem tsum_laceCoefficient_all_mass_le_diagram (q : Sym2 V → unitInterval)
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ) :
     (∑' n : ℕ, ∑' y, laceCoefficient q n x y) ≤
       (∑' y, piZero q x y) + (∑' p, diagramInitial q x p) * (1 - ρ)⁻¹ * κ := by
+  classical
   rw [tsum_eq_zero_add' ENNReal.summable]
   exact add_le_add le_rfl (tsum_laceCoefficient_mass_le_diagram q x ρ κ hρ hκ)
 
@@ -88,6 +93,7 @@ theorem tsum_laceCoefficient_all_mass_ne_top_of_diagram
     (hκ : ∀ p, (∑' y, diagramTerminal q p y) ≤ κ)
     (hinitial : (∑' p, diagramInitial q x p) ≠ ⊤) :
     (∑' n : ℕ, ∑' y, laceCoefficient q n x y) ≠ ⊤ := by
+  classical
   have hzero : (∑' y, piZero q x y) ≠ ⊤ :=
     ne_top_of_le_ne_top hinitial (tsum_piZero_le_diagramInitial q x)
   have hpositive : (∑' n : ℕ, ∑' y, laceCoefficient q (n + 1) x y) ≠ ⊤ :=
@@ -134,6 +140,7 @@ theorem tendsto_signedLaceRemainder_zero_of_diagram_bounds
   tendsto_signedLaceRemainder_zero q x y C hCfinite hC
     (tsum_laceCoefficient_all_mass_ne_top_of_diagram q x ρ κ hρone hκfinite hρ hκ hinitial)
 
+open scoped Classical in
 /-- The infinite signed lace expansion follows from the actual diagram
 contraction criterion, together with finite deleted clusters and a finite
 uniform continuation bound. -/

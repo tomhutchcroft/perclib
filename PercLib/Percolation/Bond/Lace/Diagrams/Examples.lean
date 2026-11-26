@@ -12,6 +12,8 @@ public import Mathlib.Tactic.Basify
 /-!
 # A nonzero example of diagram contraction
 
+## Main results
+
 On two vertices with bond probability `1/4`, the exact uniform transfer norm
 is `1365/4096`, the exact uniform terminal norm is `35/128`, and the initial
 mass is `9/8`. These finite computations verify the hypotheses of the actual
@@ -22,7 +24,7 @@ Loop probabilities do not enter any of these quantities.
 @[expose] public section
 noncomputable section
 
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -34,6 +36,7 @@ theorem diagramTransfer_mass_bool_quarter
     (p : Bool × Bool) :
     (∑' r, diagramTransfer q p r) =
       if p.1 = p.2 then 195 / 1024 else 1365 / 4096 := by
+  classical
   have ht : tau q true false = 1 / 4 := by
     rw [tau_comm, tau_bool_cross, hq]
   rcases p with ⟨b, c⟩
@@ -51,6 +54,7 @@ theorem diagramTerminal_mass_bool_quarter
     (p : Bool × Bool) :
     (∑' y, diagramTerminal q p y) =
       if p.1 = p.2 then 25 / 256 else 35 / 128 := by
+  classical
   have ht : tau q true false = 1 / 4 := by
     rw [tau_comm, tau_bool_cross, hq]
   rcases p with ⟨b, c⟩
@@ -67,6 +71,7 @@ theorem diagramInitial_mass_bool_quarter
     (hq : (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) = 1 / 4)
     (x : Bool) :
     (∑' p, diagramInitial q x p) = 9 / 8 := by
+  classical
   have ht : tau q true false = 1 / 4 := by
     rw [tau_comm, tau_bool_cross, hq]
   cases x <;>
@@ -83,6 +88,7 @@ theorem diagram_bounds_bool_quarter
       (∀ p, (∑' r, diagramTransfer q p r) ≤ 1365 / 4096) ∧
       (∀ p, (∑' y, diagramTerminal q p y) ≤ 35 / 128) ∧
       (∀ x, (∑' p, diagramInitial q x p) ≠ ⊤) := by
+  classical
   refine ⟨by basify; norm_num, by basify, ?_, ?_, ?_⟩
   · intro p
     rw [diagramTransfer_mass_bool_quarter q hq]
@@ -101,6 +107,7 @@ theorem tsum_laceCoefficient_all_mass_bool_quarter_ne_top
     (hq : (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) = 1 / 4)
     (x : Bool) :
     (∑' n : ℕ, ∑' y, laceCoefficient q n x y) ≠ ⊤ := by
+  classical
   obtain ⟨hρone, hκfinite, hρ, hκ, hinitial⟩ := diagram_bounds_bool_quarter q hq
   exact tsum_laceCoefficient_all_mass_ne_top_of_diagram q x
     (1365 / 4096) (35 / 128) hρone hκfinite hρ hκ (hinitial x)
@@ -113,6 +120,7 @@ theorem bool_quarter_has_nonzero_summable_coefficients :
     laceCoefficient q 1 false false = 1 / 16 ∧
       0 < laceCoefficient q 1 false false ∧
       ∀ x, (∑' n : ℕ, ∑' y, laceCoefficient q n x y) ≠ ⊤ := by
+  classical
   let q : Sym2 Bool → unitInterval := fun _ => ⟨1 / 4, by norm_num⟩
   change laceCoefficient q 1 false false = 1 / 16 ∧
     0 < laceCoefficient q 1 false false ∧

@@ -11,6 +11,8 @@ public import Mathlib.MeasureTheory.Measure.Prod
 /-!
 # Exact integration of the last independent lace layer
 
+## Main results
+
 Finite product measures split using mathlib's measure-preserving coordinate
 equivalence. This gives exact nonnegative integral formulas, with no absolute
 summability or finiteness assumption on the sum of coefficients.
@@ -20,7 +22,7 @@ summability or finiteness assumption on the sum of coefficients.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -32,6 +34,7 @@ theorem measure_layers_eq_lintegral_snoc (q : Sym2 V → unitInterval) {n : ℕ}
     (Measure.pi (fun _ : Fin (n + 1) => law q)) S =
       ∫⁻ ω : Fin n → Config V, law q {η | Fin.snoc ω η ∈ S}
         ∂(Measure.pi (fun _ : Fin n => law q)) := by
+  classical
   let e := MeasurableEquiv.piFinSuccAbove (fun _ : Fin (n + 1) => Config V) (Fin.last n)
   have he : (fun p : Config V × (Fin n → Config V) => e.symm p) =
       fun p => Fin.snoc p.2 p.1 := by
@@ -39,7 +42,8 @@ theorem measure_layers_eq_lintegral_snoc (q : Sym2 V → unitInterval) {n : ℕ}
     exact Fin.insertNth_last' p.1 p.2
   have hp := (measurePreserving_piFinSuccAbove
     (fun _ : Fin (n + 1) => law q) (Fin.last n)).symm
-  have hm : Measurable (fun p : Config V × (Fin n → Config V) => (Fin.snoc p.2 p.1 : Fin (n + 1) → Config V)) := by
+  have hm : Measurable (fun p : Config V × (Fin n → Config V) =>
+      (Fin.snoc p.2 p.1 : Fin (n + 1) → Config V)) := by
     rw [← he]
     exact e.symm.measurable
   have hmeasure : ((law q).prod (Measure.pi (fun _ : Fin n => law q)))
@@ -65,6 +69,7 @@ private theorem incoming_snoc_castSucc {n : ℕ} (x : V)
     (b : Fin (n + 1) → V × V) (c : V × V) (i : Fin (n + 1)) :
     (Fin.cases x (fun j => ((Fin.snoc b c : Fin (n + 2) → V × V) j).2) i.castSucc.castSucc : V) =
       Fin.cases x (fun j => (b j).2) i.castSucc := by
+  classical
   refine Fin.cases ?_ (fun j => ?_) i
   · simp
   · simp [Fin.castSucc_succ]
@@ -73,6 +78,7 @@ private theorem outgoing_snoc_castSucc {n : ℕ} (y : V)
     (b : Fin (n + 1) → V × V) (c : V × V) (i : Fin (n + 1)) :
     (Fin.lastCases y (fun j => ((Fin.snoc b c : Fin (n + 2) → V × V) j).1) i.castSucc.succ : V) =
       Fin.lastCases c.1 (fun j => (b j).1) i.succ := by
+  classical
   rw [← Fin.castSucc_succ, Fin.lastCases_castSucc]
   generalize i.succ = j
   refine Fin.lastCases ?_ (fun k => ?_) j
@@ -88,6 +94,7 @@ theorem mem_coefficientEvent_snoc_iff {n : ℕ} (x y : V)
       ω ∈ coefficientEvent x c.1 b ∧
       η ∈ laceEPrime
         (cluster (ω (Fin.last (n + 1)) \ {s(c.1, c.2)}) (b (Fin.last n)).2) c.2 y := by
+  classical
   have hω (i : Fin (n + 1)) :
       (Fin.snoc ω η : Fin (n + 3) → Config V) i.castSucc.succ = ω i.succ := by
     rw [← Fin.castSucc_succ, Fin.snoc_castSucc]
@@ -125,6 +132,7 @@ theorem coefficientEvent_snoc_probability_eq_lintegral [Countable V]
           law q (laceEPrime
             (cluster (ω (Fin.last (n + 1)) \ {s(c.1, c.2)}) (b (Fin.last n)).2) c.2 y)) ω
         ∂(Measure.pi (fun _ : Fin (n + 2) => law q)) := by
+  classical
   rw [coefficientEvent_probability_eq_lintegral_last]
   apply lintegral_congr
   intro ω
@@ -156,6 +164,7 @@ theorem mem_remainderEvent_snoc_iff {n : ℕ} (x y : V)
       ω ∈ coefficientEvent x c.1 b ∧
       η ∈ throughSet
         (cluster (ω (Fin.last (n + 1)) \ {s(c.1, c.2)}) (b (Fin.last n)).2) c.2 y := by
+  classical
   have hω (i : Fin (n + 1)) :
       (Fin.snoc ω η : Fin (n + 3) → Config V) i.castSucc.succ = ω i.succ := by
     rw [← Fin.castSucc_succ, Fin.snoc_castSucc]
@@ -196,6 +205,7 @@ theorem remainderEvent_snoc_probability_eq_lintegral [Countable V]
           law q (throughSet
             (cluster (ω (Fin.last (n + 1)) \ {s(c.1, c.2)}) (b (Fin.last n)).2) c.2 y)) ω
         ∂(Measure.pi (fun _ : Fin (n + 2) => law q)) := by
+  classical
   rw [remainderEvent_probability_eq_lintegral_last]
   apply lintegral_congr
   intro ω

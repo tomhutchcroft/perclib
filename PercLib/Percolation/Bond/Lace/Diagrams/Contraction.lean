@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 /-!
 # Contraction of marked lace diagrams
 
+## Main results
+
 Tonelli rearrangements identify the six-arm successor and the terminal
 three-arm factor with the pair-state transfer and terminal diagrams. The
 identities hold in the extended nonnegative reals without summability or
@@ -20,12 +22,13 @@ countability assumptions.
 @[expose] public section
 noncomputable section
 
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
 variable {V : Type*}
 
+open scoped Classical in
 /-- Contracting the two interior geometries gives precisely one pair-state
 transfer, while retaining the outgoing deleted connection. -/
 theorem marked_successor_contraction
@@ -133,6 +136,7 @@ theorem marked_terminal_contraction
       offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞))
         c.1 c.2 * tau q c.2 t * tau q t z * tau q t y * tau q z y) =
       ∑' p : V × V, f p * diagramTerminal q p y := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞))
   let D : V → V → V → V → ℝ≥0∞ := fun b v w z =>

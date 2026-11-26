@@ -9,12 +9,19 @@ module
 
 public import PercLib.Percolation.Bond.Lace.TerminalDiagram
 
-/-! # The interior six-arm lace diagrams -/
+/-!
+# The interior six-arm lace diagrams
+
+## Main results
+
+Decomposes the interior marked event into two geometries with six disjoint arms,
+retaining deletion and excluding the duplicate zero-length joining arm.
+-/
 
 @[expose] public section
 noncomputable section
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -23,6 +30,7 @@ variable {V : Type*}
 private theorem path_meets_of_throughSet {A : Set V} {ω : Config V} {x y : V}
     (p : (openGraph ω).Walk x y) (h : ω ∈ throughSet A x y) :
     ∃ z ∈ p.support, z ∈ A := by
+  classical
   by_contra hn
   push Not at hn
   exact h.2 ⟨hn x p.start_mem_support, hn y p.end_mem_support, ⟨p.induce Aᶜ hn⟩⟩
@@ -30,6 +38,7 @@ private theorem path_meets_of_throughSet {A : Set V} {ω : Config V} {x y : V}
 private theorem disjoint_edges_of_not_conn {ω : Config V} {a b c d : V}
     (p : (openGraph ω).Walk a b) (r : (openGraph ω).Walk c d)
     (h : ω ∉ conn a c) : p.edges.Disjoint r.edges := by
+  classical
   intro e he hf
   induction e using Sym2.ind with
   | _ s t =>
@@ -40,6 +49,7 @@ private theorem throughSet_tail_of_adj {A : Set V} {ω : Config V} {v y t s : V}
     (h : ω ∈ throughSet A v y) (hnt : ω ∉ throughSet A v t)
     (hvt : ω ∈ conn v t) (hts : (openGraph ω).Adj t s) (hsy : ω ∈ conn s y) :
     ω ∈ throughSet A s y := by
+  classical
   have hav : ∃ hv : v ∈ Aᶜ, ∃ ht : t ∈ Aᶜ,
       ((openGraph ω).induce Aᶜ).Reachable ⟨v, hv⟩ ⟨t, ht⟩ := by
     by_contra hn
@@ -58,6 +68,7 @@ theorem exists_terminal_paths_of_mem_laceEPrime {A : Set V} {ω : Config V} {v u
       p.IsPath ∧ q.IsPath ∧ r.IsPath ∧ p.edges.Disjoint q.edges ∧
       p.edges.Disjoint r.edges ∧ q.edges.Disjoint r.edges ∧
       (∃ z ∈ p.support, z ∈ A) ∧ (∃ z ∈ q.support, z ∈ A) := by
+  classical
   have hrev : ω ∈ conn u v := h.1.1.symm
   rw [conn_eq_doubleConn_union_firstPivotal u v] at hrev
   rcases hrev with hd | hc
@@ -131,6 +142,7 @@ theorem exists_terminal_paths_of_mem_laceEPrime {A : Set V} {ω : Config V} {v u
 private theorem first_contact {G : SimpleGraph V} {a v : V} (r : G.Walk a v)
     (S : Set V) (hv : v ∈ S) :
     ∃ w ∈ S, ∃ b : G.Walk a w, ∀ e ∈ b.edges, ∃ z ∈ e, z ∉ S := by
+  classical
   induction r with
   | nil => exact ⟨_, hv, .nil, by simp⟩
   | @cons a c v hac r ih =>
@@ -147,6 +159,7 @@ private theorem first_contact {G : SimpleGraph V} {a v : V} (r : G.Walk a v)
 private theorem split_edges_mem {ω : Config V} {x y z : V}
     (p : (openGraph ω).Walk x y) (hp : p.IsPath) (hz : z ∈ p.support) :
     {e | e ∈ p.edges} ∈ disjointOccurrence (conn x z) (conn z y) := by
+  classical
   apply (mem_disjointOccurrence_iff_open (isUpperSet_conn x z) (isUpperSet_conn z y) _).mpr
   refine ⟨{e | e ∈ (p.takeUntil z hz).edges}, {e | e ∈ (p.dropUntil z hz).edges},
     List.finite_toSet _, List.finite_toSet _, ?_,
@@ -164,6 +177,7 @@ private theorem four_disjoint_certificates
     (hFω : F ⊆ ω) (hHω : H ⊆ ω) (hKω : K ⊆ ω) (hLω : L ⊆ ω)
     (hFA : F ∈ A) (hHB : H ∈ B) (hKC : K ∈ C) (hLD : L ∈ D) :
     ω ∈ disjointOccurrence (disjointOccurrence (disjointOccurrence A B) C) D := by
+  classical
   apply (mem_disjointOccurrence_three_iff (isUpperSet_disjointOccurrence hA hB) hC hD ω).mpr
   refine ⟨F ∪ H, K, L, hF.union hH, hK, hL,
     disjoint_union_left.mpr ⟨hFK, hHK⟩, disjoint_union_left.mpr ⟨hFL, hHL⟩, hKL,
@@ -183,6 +197,7 @@ private theorem four_walk_certificates {ω : Config V} (e : Sym2 V)
     (hrC : {f | f ∈ r.edges} ∈ C) :
     ω ∈ disjointOccurrence (disjointOccurrence (disjointOccurrence A B) C)
       {η : Config V | η \ {e} ∈ conn w a} := by
+  classical
   apply four_disjoint_certificates hA hB hC
     (fun _ _ h hη => conn_mono (sdiff_subset_sdiff_left h) hη)
     (List.finite_toSet _) (List.finite_toSet _) (List.finite_toSet _) (List.finite_toSet _)
@@ -203,6 +218,7 @@ private theorem four_walk_certificates {ω : Config V} (e : Sym2 V)
   rw [sdiff_singleton_eq_self he, conn_symm w a]
   exact edges_mem_conn b
 
+open scoped Classical in
 /-- An interior lace layer has one of two six-arm diagrams. The outgoing arm
 retains the deleted pair. In the second diagram the stem-attachment vertex
 differs from the terminal-block root, removing their common degenerate case. -/
@@ -221,6 +237,7 @@ theorem laceEPrime_inter_deleted_subset_iUnion_interior
               (disjointOccurrence (disjointOccurrence (conn v w) (conn w t))
                 (disjointOccurrence (conn t (z : V)) (conn (z : V) u))) (conn t u))
             {ω : Config V | ω \ {e} ∈ conn w a}) := by
+  classical
   intro ω h
   obtain ⟨t, p, q, r, hp, hq, hr, hpq, hpr, hqr,
     ⟨zp, hzp, hzpA⟩, ⟨zq, hzq, hzqA⟩⟩ :=
@@ -275,6 +292,7 @@ private theorem law_four_le [Countable V] (q : Sym2 V → unitInterval)
     (ha : law q A ≤ a) (hb : law q B ≤ b) (hc : law q C ≤ c) (hd : law q D ≤ d) :
     law q (disjointOccurrence (disjointOccurrence (disjointOccurrence A B) C) D) ≤
       a * b * c * d := by
+  classical
   have h1 := (countable_profile_bk q hA hB).trans (mul_le_mul' ha hb)
   have h2 := (countable_profile_bk q (isUpperSet_disjointOccurrence hA hB) hC).trans
     (mul_le_mul' h1 hc)
@@ -282,6 +300,7 @@ private theorem law_four_le [Countable V] (q : Sym2 V → unitInterval)
     (isUpperSet_disjointOccurrence (isUpperSet_disjointOccurrence hA hB) hC) hD).trans
     (mul_le_mul' h2 hd)
 
+open scoped Classical in
 /-- BK bounds the two interior diagrams separately, retaining the deleted
 outgoing arm and omitting the duplicate `w=t` term of the second diagram. -/
 theorem law_laceEPrime_inter_deleted_le_interior [Countable V]
@@ -292,6 +311,7 @@ theorem law_laceEPrime_inter_deleted_le_interior [Countable V]
           if w = t then 0 else
             (tau q v w * tau q w t) * (tau q t (z : V) * tau q (z : V) u) * tau q t u) *
           law q {ω : Config V | ω \ {e} ∈ conn w a} := by
+  classical
   refine (measure_mono (laceEPrime_inter_deleted_subset_iUnion_interior A v u a e)).trans
     ((measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun z =>
       (measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun t =>
@@ -320,6 +340,8 @@ theorem law_laceEPrime_inter_deleted_le_interior [Countable V]
         le_rfl le_rfl
 
 example (x : V) (e : Sym2 V) : (∅ : Config V) ∈
-    laceEPrime {x} x x ∩ {ω : Config V | ω \ {e} ∈ conn x x} := by simp [conn_self]
+    laceEPrime {x} x x ∩ {ω : Config V | ω \ {e} ∈ conn x x} := by
+  classical
+  simp [conn_self]
 
 end PercLib.Percolation.Bond.Lace

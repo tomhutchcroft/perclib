@@ -14,6 +14,8 @@ public import Mathlib.Tactic.LinearCombination
 /-!
 # Discrete Fourier algebra for an absolutely summable lace equation
 
+## Main results
+
 The Fourier sums are written inline using a unitary additive character, and
 convolution is mathlib's existing `DiscreteConvolution.addRingConvolution`.
 Absolute summability justifies grouping the product series by the sum of its

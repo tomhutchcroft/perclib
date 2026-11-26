@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.Lace.FirstDiagramRefined
 /-!
 # Sharpness of the remainder bound on two vertices
 
+## Main results
+
 If the only nonloop pair has probability `p`, then the first positive
 coefficient on the diagonal is `p²`, its off-diagonal entry is zero, and the
 first remainder on the diagonal is `p⁴`. The convolution bound is also `p⁴`.
@@ -23,13 +25,14 @@ pairs in successive independent layers are permitted by the definitions.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
 /-- A two-vertex graph cannot doubly connect its distinct vertices. -/
 theorem doubleConn_bool_cross_eq_empty :
     (doubleConn false true : Set (Config Bool)) = ∅ := by
+  classical
   apply eq_empty_iff_forall_notMem.mpr
   intro ω h
   exact Bool.false_ne_true ((bool_deleted_conn ω false true).mp
@@ -38,6 +41,7 @@ theorem doubleConn_bool_cross_eq_empty :
 /-- The first coefficient has no off-diagonal entry on two vertices. -/
 theorem laceCoefficient_one_bool_cross (q : Sym2 Bool → unitInterval) :
     laceCoefficient q 1 false true = 0 := by
+  classical
   unfold laceCoefficient
   apply ENNReal.tsum_eq_zero.mpr
   intro b
@@ -63,6 +67,7 @@ theorem laceCoefficient_one_bool_cross (q : Sym2 Bool → unitInterval) :
 /-- Deleting the sole nonloop pair leaves either root isolated. -/
 theorem bool_deleted_cluster_eq_singleton (ω : Config Bool) (x : Bool) :
     cluster (ω \ {s(false, true)}) x = {x} := by
+  classical
   ext y
   rw [mem_cluster_iff, bool_deleted_conn]
   simp only [mem_singleton_iff, eq_comm]
@@ -72,6 +77,7 @@ two layers; its initial double connection is diagonal. -/
 theorem repeated_remainderEvent_bool_eq_rect :
     remainderEvent false false (fun _ : Fin 2 => (false, true)) =
       Set.pi univ ![(univ : Set (Config Bool)), conn true false, conn true false] := by
+  classical
   ext ω
   have hlast (i : Fin 3) : Fin.lastCases false (fun _ : Fin 2 => false) i = false := by
     refine Fin.lastCases ?_ (fun j => ?_) i
@@ -86,6 +92,7 @@ theorem repeated_remainderEvent_bool_probability (q : Sym2 Bool → unitInterval
     (Measure.pi (fun _ : Fin 3 => law q))
       (remainderEvent false false (fun _ : Fin 2 => (false, true))) =
         (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞)^2 := by
+  classical
   rw [repeated_remainderEvent_bool_eq_rect, Measure.pi_pi, Fin.prod_univ_three]
   change law q univ * tau q true false * tau q true false = _
   rw [measure_univ, one_mul, tau_comm q true false, tau_bool_cross]
@@ -96,6 +103,7 @@ theorem first_remainder_convolution_bool (q : Sym2 Bool → unitInterval) :
     (∑' u, ∑' v, laceCoefficient q 1 false u *
       offDiagonal (fun a b : Bool => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
       tau q v false) = (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞)^4 := by
+  classical
   have ht : tau q true false = (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞) := by
     rw [tau_comm]
     exact tau_bool_cross q
@@ -107,6 +115,7 @@ In particular, it is attained with positive remainder whenever `p > 0`. -/
 theorem laceRemainder_one_bool (q : Sym2 Bool → unitInterval) :
     laceRemainder q 1 false false =
       (unitInterval.toNNReal (q s(false, true)) : ℝ≥0∞)^4 := by
+  classical
   apply le_antisymm
   · exact (laceRemainder_succ_le_tsum_laceCoefficient_mul_tau q 0 false false).trans_eq
       (first_remainder_convolution_bool q)
@@ -129,6 +138,7 @@ theorem remainder_one_bool_attains_one :
         offDiagonal (fun _ _ : Bool =>
           (unitInterval.toNNReal ((1 : unitInterval)) : ℝ≥0∞)) u v *
         tau (fun _ : Sym2 Bool => 1) v false) = 1 := by
+  classical
   constructor
   · simp [laceRemainder_one_bool]
   · simpa using first_remainder_convolution_bool (fun _ : Sym2 Bool => 1)
@@ -142,6 +152,7 @@ theorem one_le_of_universal_remainder_bound (C : ℝ≥0∞)
         ∑' u, ∑' v, laceCoefficient q 1 false u *
           offDiagonal (fun a b : Bool => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v false) : 1 ≤ C := by
+  classical
   have hc := h (fun _ => 1)
   rw [first_remainder_convolution_bool, laceRemainder_one_bool] at hc
   simpa only [unitInterval.toNNReal_one, ENNReal.coe_one, one_pow, mul_one] using hc

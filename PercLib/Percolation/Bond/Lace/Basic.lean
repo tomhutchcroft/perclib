@@ -16,6 +16,8 @@ public import PercLib.Meta.Tag
 /-!
 # Double connections and the zeroth lace coefficient
 
+## Main results
+
 The events use the existing bond configuration and finite-certificate disjoint
 occurrence. Certificates consist of edges, so the two connecting paths may share
 vertices. The event includes `x = y`, witnessed by two empty certificates.
@@ -29,7 +31,7 @@ No higher coefficient or expansion identity is postulated here.
 noncomputable section
 
 open Set PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -41,6 +43,7 @@ This event is certain when the two endpoints coincide. -/
 def doubleConn (x y : V) : Set (Config V) :=
   disjointOccurrence (conn x y) (conn x y)
 
+open scoped Classical in
 /-- The zeroth lace coefficient, with the diagonal contribution removed.
 Equivalently, this is the double-connection probability minus `δ(x,y)`. -/
 @[tag "U8OS"]

@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
 /-!
 # Marked prefixes for the coefficient diagram bound
 
+## Main results
+
 The prefix with no earlier bond is the full initial double connection.
 Positive-length prefixes reuse `coefficientEvent` exactly. Marking the last
 deleted cluster is an auxiliary probability, not a new lace coefficient.
@@ -19,7 +21,7 @@ The specified outgoing pair is not among the earlier weighted bonds.
 @[expose] public section
 noncomputable section
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 

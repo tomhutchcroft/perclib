@@ -10,6 +10,8 @@ public import PercLib.Percolation.Bond.Lace.Coefficients.Recursion
 /-!
 # A coefficient bound for the nonnegative lace remainder
 
+## Main results
+
 Replacing the last through-set event by connection bounds the remainder of
 order `n+1` by the positive coefficient of order `n+1`, followed by one bond
 and a connection. The constant is one. No finiteness or summability assumption
@@ -20,7 +22,7 @@ is needed for this extended nonnegative real inequality.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -34,6 +36,7 @@ theorem remainderEvent_snoc_probability_le [Countable V]
     (Measure.pi (fun _ : Fin (n + 3) => law q)) (remainderEvent x y (Fin.snoc b c)) ≤
       (Measure.pi (fun _ : Fin (n + 2) => law q)) (coefficientEvent x c.1 b) *
         tau q c.2 y := by
+  classical
   rw [remainderEvent_snoc_probability_eq_lintegral]
   calc
     _ ≤ ∫⁻ ω : Fin (n + 2) → Config V,
@@ -61,6 +64,7 @@ theorem laceRemainder_succ_le_tsum_laceCoefficient_mul_tau [Countable V]
       laceCoefficient q (n + 1) x u *
         offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) u v *
           tau q v y := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞))
   have hsplit : laceRemainder q (n + 1) x y =

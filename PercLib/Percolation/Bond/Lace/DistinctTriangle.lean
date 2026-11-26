@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.BoundarySusceptibility
 /-!
 # Bounding the zeroth lace coefficient by distinct-vertex triangles
 
+## Main results
+
 Two edge-disjoint connections include one path avoiding the direct endpoint pair.
 Splitting that path at its first interior vertex supplies three disjoint connection
 certificates. BK therefore bounds the zeroth lace coefficient by the part of the
@@ -25,7 +27,7 @@ triangle, this gives the optimal coefficient four in the mass bound.
 noncomputable section
 
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -35,6 +37,7 @@ private theorem exists_split_of_avoids_direct {F : Config V} {x y : V}
     (hxy : x ≠ y) (hF : F ∈ conn x y) (he : s(x, y) ∉ F) :
     ∃ u, u ≠ x ∧ u ≠ y ∧
       F ∈ disjointOccurrence (conn x u) (conn u y) := by
+  classical
   obtain ⟨p, hp⟩ := (show (openGraph F).Reachable x y from hF).exists_isPath
   have hn : ¬ p.Nil := SimpleGraph.Walk.not_nil_of_ne hxy
   have ha : (openGraph F).Adj x p.snd := p.adj_snd hn
@@ -52,6 +55,7 @@ theorem exists_distinct_triangle_of_mem_doubleConn {ω : Config V} {x y : V}
     (hxy : x ≠ y) (hω : ω ∈ doubleConn x y) :
     ∃ u, u ≠ x ∧ u ≠ y ∧
       ω ∈ disjointOccurrence (disjointOccurrence (conn x u) (conn u y)) (conn x y) := by
+  classical
   obtain ⟨F, H, hFf, hHf, hd, hFω, hHω, hF, hH⟩ :=
     (mem_doubleConn_iff ω x y).mp hω
   have use_witness (F H : Config V) (hFf : F.Finite) (hHf : H.Finite)
@@ -69,6 +73,7 @@ theorem exists_distinct_triangle_of_mem_doubleConn {ω : Config V} {x y : V}
       (fun h => Set.disjoint_left.mp hd he h)
   · exact use_witness F H hFf hHf hd hFω hHω hF hH he
 
+open scoped Classical in
 /-- The zeroth lace coefficient is bounded by the triangle diagram with the
 intermediate vertex and both endpoints all distinct. -/
 theorem piZero_le_distinct_triangle [Countable V]
@@ -76,6 +81,7 @@ theorem piZero_le_distinct_triangle [Countable V]
     piZero q x y ≤ ∑' u,
       if u = x ∨ y = x ∨ u = y then 0 else
         tau q x u * tau q u y * tau q y x := by
+  classical
   by_cases hxy : x = y
   · subst y
     simp
@@ -99,6 +105,7 @@ theorem piZero_le_distinct_triangle [Countable V]
         le_rfl)
   simpa only [law, tau, conn_symm x y] using h
 
+open scoped Classical in
 /-- Summing the pointwise three-connection bound gives exactly the part of the
 closed triangle having three distinct vertices. -/
 theorem tsum_piZero_le_distinct_triangle [Countable V]
@@ -106,6 +113,7 @@ theorem tsum_piZero_le_distinct_triangle [Countable V]
     ∑' y, piZero q x y ≤ ∑' u, ∑' v,
       if u = x ∨ v = x ∨ u = v then 0 else
         tau q x u * tau q u v * tau q v x := by
+  classical
   calc
     ∑' y, piZero q x y ≤ ∑' y, ∑' u,
         if u = x ∨ y = x ∨ u = y then 0 else

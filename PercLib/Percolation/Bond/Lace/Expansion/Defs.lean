@@ -7,6 +7,14 @@ module
 
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 
+/-!
+# The infinite signed lace kernel
+
+## Main results
+
+Defines the alternating series of the canonical nonnegative lace coefficients.
+-/
+
 @[expose] public section
 noncomputable section
 

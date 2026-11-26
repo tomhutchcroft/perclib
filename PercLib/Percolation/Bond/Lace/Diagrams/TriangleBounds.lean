@@ -8,11 +8,19 @@ module
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 public import PercLib.Percolation.Bond.Lace.ThroughSet
 
+/-!
+# Triangle bounds for pair-state diagrams
+
+## Main results
+
+Bounds the initial mass and terminal factor by triangle and deleted-connector masses.
+-/
+
 @[expose] public section
 noncomputable section
 
 open MeasureTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -24,6 +32,7 @@ theorem diagramConnector_le (q : Sym2 V → unitInterval) (p r : V × V) :
     diagramConnector q p r ≤ tau q p.1 r.1 *
       ∑' v, offDiagonal (fun a b : V =>
         (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) p.2 v * tau q v r.2 := by
+  classical
   calc
     _ ≤ ∑' v, offDiagonal (fun a b : V =>
         (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) p.2 v *
@@ -39,6 +48,7 @@ theorem diagramConnector_le (q : Sym2 V → unitInterval) (p r : V × V) :
       intro v
       ac_rfl
 
+open scoped Classical in
 /-- The initial diagonal is exact, rather than being inflated to a bubble. -/
 theorem diagramInitial_mass_eq (q : Sym2 V → unitInterval) (x : V) :
     (∑' p, diagramInitial q x p) = 1 + ∑' h,
@@ -46,14 +56,16 @@ theorem diagramInitial_mass_eq (q : Sym2 V → unitInterval) (x : V) :
   rw [ENNReal.tsum_prod', ENNReal.tsum_comm]
   rw [ENNReal.tsum_eq_add_tsum_ite x]
   simp only [diagramInitial]
-  simp
-  apply tsum_congr
-  intro h
-  by_cases hh : h = x <;> simp [hh]
+  apply congrArg₂ (· + ·)
+  · simp
+  · apply tsum_congr
+    intro h
+    by_cases hh : h = x <;> simp [hh]
 
 theorem diagramInitial_le_triangle_term (q : Sym2 V → unitInterval)
     (x : V) (p : V × V) :
     diagramInitial q x p ≤ tau q x p.1 * tau q x p.2 * tau q p.1 p.2 := by
+  classical
   unfold diagramInitial
   split_ifs with h hx
   · simp [h, hx, tau_self]
@@ -64,6 +76,7 @@ theorem diagramInitial_le_triangle_term (q : Sym2 V → unitInterval)
 theorem diagramInitial_mass_le_triangle (q : Sym2 V → unitInterval) (x : V) :
     (∑' p, diagramInitial q x p) ≤ ∑' s, ∑' h,
       tau q x s * tau q x h * tau q s h := by
+  classical
   calc
     _ ≤ ∑' p : V × V, tau q x p.1 * tau q x p.2 * tau q p.1 p.2 :=
       ENNReal.tsum_le_tsum (diagramInitial_le_triangle_term q x)
@@ -77,6 +90,7 @@ theorem diagramTerminal_mass_le (q : Sym2 V → unitInterval)
     (hB : ∀ z t, (∑' y, tau q z y * tau q t y) ≤ B)
     (hM : (∑' s : V × V, diagramConnector q p s * tau q s.1 s.2) ≤ M) :
     (∑' y, diagramTerminal q p y) ≤ M * B := by
+  classical
   calc
     _ = ∑' s : V × V, (diagramConnector q p s * tau q s.1 s.2) *
         (∑' y, tau q s.1 y * tau q s.2 y) := by

@@ -12,6 +12,8 @@ public import PercLib.Percolation.Bond.Lace.DoubleConnection
 /-!
 # Measurability and endpoint checks for positive lace coefficients
 
+## Main results
+
 The event depends on earlier configurations through their deleted clusters.
 Its measurability uses the joint measurable-set theorem, rather than an
 incorrect fixed-domain measurability argument. Individual event probabilities
@@ -22,7 +24,7 @@ are at most one. The sum over oriented bond sequences may be infinite.
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -31,11 +33,11 @@ variable {V : Type*}
 @[simp] theorem laceCoefficient_zero (q : Sym2 V → unitInterval) (x y : V) :
     laceCoefficient q 0 x y = piZero q x y := rfl
 
-set_option maxHeartbeats 800000 in
 /-- Positive-order event probabilities are genuine measurable events on the
 finite product of configuration spaces. -/
 theorem measurableSet_coefficientEvent [Countable V] {n : ℕ}
     (x y : V) (b : Fin (n + 1) → V × V) : MeasurableSet (coefficientEvent x y b) := by
+  classical
   have hi : ∀ i : Fin (n + 1), MeasurableSet {ω : Fin (n + 2) → Config V |
       ω i.succ ∈ laceEPrime
         (cluster (ω i.castSucc \ {s((b i).1, (b i).2)})
@@ -72,6 +74,7 @@ theorem mem_coefficientEvent_one_iff (x y : V) (b : Fin 1 → V × V)
     ω ∈ coefficientEvent x y b ↔
       ω 0 ∈ doubleConn x (b 0).1 ∧
       ω 1 ∈ laceEPrime (cluster (ω 0 \ {s((b 0).1, (b 0).2)}) x) (b 0).2 y := by
+  classical
   have hlast : Fin.lastCases y (fun j => (b j).1) (1 : Fin 2) = y := by
     change Fin.lastCases y (fun j => (b j).1) (Fin.last 1) = y
     exact Fin.lastCases_last
@@ -80,6 +83,7 @@ theorem mem_coefficientEvent_one_iff (x y : V) (b : Fin 1 → V × V)
 /-- All orders vanish at the zero edge profile. -/
 @[simp] theorem laceCoefficient_zero_profile [Countable V] (n : ℕ) (x y : V) :
     laceCoefficient (fun _ : Sym2 V => 0) n x y = 0 := by
+  classical
   cases n with
   | zero => simp
   | succ n => simp [laceCoefficient, offDiagonal]
@@ -90,12 +94,14 @@ theorem coefficient_weight_eq_zero_of_diag (q : Sym2 V → unitInterval) {n : �
     (b : Fin (n + 1) → V × V) (i : Fin (n + 1)) (hi : (b i).1 = (b i).2) :
     (∏ j, offDiagonal (fun u v : V => (unitInterval.toNNReal (q s(u, v)) : ℝ≥0∞))
       (b j).1 (b j).2) = 0 := by
+  classical
   apply Finset.prod_eq_zero (Finset.mem_univ i)
   simp [offDiagonal, hi]
 
 /-- A through-set connection with no pivotal pair is in `E'`. -/
 theorem mem_laceEPrime_of_mem_doubleConn {A : Set V} {ω : Config V} {x y : V}
     (hd : ω ∈ doubleConn x y) (ht : ω ∈ throughSet A x y) : ω ∈ laceEPrime A x y := by
+  classical
   refine ⟨ht, ?_⟩
   rintro ⟨_, ⟨u, rfl⟩, h⟩
   rcases mem_iUnion.mp h with ⟨v, hp, _⟩
@@ -105,6 +111,7 @@ theorem mem_laceEPrime_of_mem_doubleConn {A : Set V} {ω : Config V} {x y : V}
 double connection is diagonal and must therefore be retained in this event. -/
 example : (fun _ : Fin 2 => (univ : Config (Fin 3))) ∈
     coefficientEvent 0 2 (fun _ : Fin 1 => ((0 : Fin 3), 1)) := by
+  classical
   rw [mem_coefficientEvent_one_iff]
   refine ⟨by simp, mem_laceEPrime_of_mem_doubleConn ?_ ?_⟩
   · exact mem_doubleConn_of_triangle (z := 0) (by decide) (by decide) (by decide)

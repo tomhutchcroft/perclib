@@ -11,6 +11,8 @@ public import PercLib.Percolation.Bond.Lace.PivotalPartition
 /-!
 # The canonical first-pivotal partition
 
+## Main results
+
 When the through-set is the whole vertex space, the no-earlier-cutting event
 is exactly double connection. This identifies the initial term of the lace
 expansion without assuming an edge-Menger theorem or an expansion identity.
@@ -20,7 +22,6 @@ expansion without assuming an edge-Menger theorem or an expansion identity.
 noncomputable section
 
 open Set
-open scoped Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -29,6 +30,7 @@ variable {V : Type*}
 /-- With the full vertex set, the no-earlier-cutting event is double connection. -/
 @[simp] theorem laceEPrime_univ (x y : V) :
     laceEPrime univ x y = doubleConn x y := by
+  classical
   ext ω
   constructor
   · intro h
@@ -58,18 +60,22 @@ variable {V : Type*}
 /-- A connected configuration is double or has its unique first pivotal pair. -/
 theorem conn_eq_doubleConn_union_firstPivotal (x y : V) :
     conn x y = doubleConn x y ∪ ⋃ u, ⋃ v, cuttingEvent univ x y u v := by
+  classical
   simpa using throughSet_eq_laceEPrime_union_cuttingEvent (univ : Set V) x y
 
 theorem disjoint_doubleConn_firstPivotal (x y u v : V) :
     Disjoint (doubleConn x y) (cuttingEvent univ x y u v) := by
+  classical
   simpa using disjoint_laceEPrime_cuttingEvent (univ : Set V) x y u v
 
+open scoped Classical in
 /-- The exact initial lace decomposition, with no loss or double counting. -/
 @[tag "CM8M"]
 theorem tau_eq_indicator_add_piZero_add_firstPivotal [Countable V]
     (q : Sym2 V → unitInterval) (x y : V) :
     tau q x y = (if x = y then 1 else 0) + piZero q x y +
       ∑' u, ∑' v, law q (cuttingEvent univ x y u v) := by
+  classical
   simpa only [tau, throughSet_univ, laceEPrime_univ,
     law_doubleConn_eq_indicator_add_piZero] using
     law_throughSet_eq_add_tsum_cuttingEvent q univ x y

@@ -8,11 +8,19 @@ module
 public import PercLib.Percolation.Bond.Lace.Remainder.Basic
 public import PercLib.Percolation.Bond.Lace.Coefficients.Coefficients
 
+/-!
+# Canonical nonnegative lace remainders
+
+## Main results
+
+Proves measurability, the first-order formula and comparison with the next coefficient.
+-/
+
 @[expose] public section
 noncomputable section
 
 open Set MeasureTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -23,16 +31,17 @@ the positive coefficient event to the remainder event. -/
 theorem coefficientEvent_subset_remainderEvent {n : ℕ}
     (x y : V) (b : Fin (n + 1) → V × V) :
     coefficientEvent x y b ⊆ remainderEvent x y b := by
+  classical
   intro ω h
   refine ⟨h.1, fun i => ?_⟩
   split_ifs
   · exact (h.2 i).1
   · exact h.2 i
 
-set_option maxHeartbeats 800000 in
 /-- Remainder events are measurable even though the last domain is random. -/
 theorem measurableSet_remainderEvent [Countable V] {n : ℕ}
     (x y : V) (b : Fin (n + 1) → V × V) : MeasurableSet (remainderEvent x y b) := by
+  classical
   unfold remainderEvent
   simp only [ofPred_and, ofPred_forall]
   refine ((measurableSet_doubleConn x (b 0).1).preimage (measurable_pi_apply 0)).inter
@@ -51,6 +60,7 @@ theorem measurableSet_remainderEvent [Countable V] {n : ℕ}
 remainder, with exact constant one. -/
 theorem laceCoefficient_succ_le_remainder (q : Sym2 V → unitInterval)
     (n : ℕ) (x y : V) : laceCoefficient q (n + 1) x y ≤ laceRemainder q n x y := by
+  classical
   apply ENNReal.tsum_le_tsum
   intro b
   exact mul_le_mul_right (measure_mono (coefficientEvent_subset_remainderEvent x y b)) _
@@ -61,6 +71,7 @@ theorem mem_remainderEvent_zero_iff (x y : V) (b : Fin 1 → V × V)
     ω ∈ remainderEvent x y b ↔
       ω 0 ∈ doubleConn x (b 0).1 ∧
       ω 1 ∈ throughSet (cluster (ω 0 \ {s((b 0).1, (b 0).2)}) x) (b 0).2 y := by
+  classical
   have hlast : Fin.lastCases y (fun j => (b j).1) (1 : Fin 2) = y := by
     change Fin.lastCases y (fun j => (b j).1) (Fin.last 1) = y
     exact Fin.lastCases_last
@@ -68,6 +79,7 @@ theorem mem_remainderEvent_zero_iff (x y : V) (b : Fin 1 → V × V)
 
 @[simp] theorem laceRemainder_zero_profile (n : ℕ) (x y : V) :
     laceRemainder (fun _ : Sym2 V => 0) n x y = 0 := by
+  classical
   simp [laceRemainder, offDiagonal]
 
 end PercLib.Percolation.Bond.Lace

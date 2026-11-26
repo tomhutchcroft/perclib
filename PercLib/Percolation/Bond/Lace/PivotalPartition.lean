@@ -16,6 +16,8 @@ public import PercLib.Percolation.Bond.Pivotal
 /-!
 # Cutting a through-set connection at its first eligible pivotal pair
 
+## Main results
+
 The deterministic decomposition uses directed pivotal pairs with their
 direction tested after deletion. No equivalence between absence of pivotal
 pairs and double connection is assumed.
@@ -25,7 +27,6 @@ pairs and double connection is assumed.
 noncomputable section
 
 open Set
-open scoped Classical
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -36,6 +37,7 @@ pivotal pair. -/
 theorem conn_prefix_of_pivotal {ω η : Config V} {x y u v : V}
     (hηω : η ⊆ ω) (hp : ω \ {s(u, v)} ∉ conn x y)
     (hη : η ∈ conn x y) : η ∈ conn x u := by
+  classical
   obtain ⟨p⟩ := hη
   have hpη : η \ {s(u, v)} ∉ conn x y :=
     fun h => hp (conn_mono (sdiff_subset_sdiff_left hηω) h)
@@ -46,6 +48,7 @@ directed pivotal for the full connection. -/
 theorem orientedPivotal_of_prefix {ω : Config V} {x y u v a b : V}
     (hxy : ω ∈ conn x y) (he : ω ∈ orientedPivotal x y u v)
     (hf : ω ∈ orientedPivotal x u a b) : ω ∈ orientedPivotal x y a b := by
+  classical
   have hn : ω \ {s(a, b)} ∉ conn x y := by
     intro h
     exact hf.2.1 (conn_prefix_of_pivotal sdiff_subset he.2.1 h)
@@ -61,6 +64,7 @@ to the source than the endpoint of the connection. -/
 theorem dist_lt_of_orientedPivotal {ω : Config V} {x y u v : V}
     (hxy : ω ∈ conn x y) (h : ω ∈ orientedPivotal x y u v) :
     (openGraph ω).dist x u < (openGraph ω).dist x y := by
+  classical
   have huy : u ≠ y := fun huy => h.2.1 (huy ▸ h.2.2.1)
   obtain ⟨p, hp⟩ := hxy.exists_walk_length_eq_dist
   have hu := p.fst_mem_support_of_mem_edges (mem_edges_of_pivotal h.2.1 p)
@@ -75,6 +79,7 @@ theorem throughSet_of_prefix_orientedPivotal {A : Set V} {ω : Config V}
     {x y u v : V} (ha : ω ∈ throughSet A x u)
     (hp : ω ∈ orientedPivotal x y u v) (he : s(u, v) ∈ ω) :
     ω ∈ throughSet A x y := by
+  classical
   refine ⟨by simpa only [insert_eq_of_mem he] using hp.1, ?_⟩
   rintro ⟨hx, hy, ⟨p⟩⟩
   let p' := p.map (SimpleGraph.Embedding.induce Aᶜ).toHom
@@ -98,6 +103,7 @@ Minimizing distance to its initial endpoint terminates even on infinite graphs. 
 theorem exists_cuttingEvent_of_not_laceEPrime {A : Set V} {ω : Config V} {x y : V}
     (h : ω ∈ throughSet A x y) (hn : ω ∉ laceEPrime A x y) :
     ∃ u v, ω ∈ cuttingEvent A x y u v := by
+  classical
   have hex : ∃ n : ℕ, ∃ u v, (openGraph ω).dist x u = n ∧
       ω ∈ orientedPivotal x y u v ∧ ω ∈ throughSet A x u := by
     have hu : ω ∈ ⋃ u, ⋃ v, orientedPivotal x y u v ∩ throughSet A x u := by
@@ -120,6 +126,7 @@ theorem exists_cuttingEvent_of_not_laceEPrime {A : Set V} {ω : Config V} {x y :
 @[tag "VXRP"]
 theorem throughSet_eq_laceEPrime_union_cuttingEvent (A : Set V) (x y : V) :
     throughSet A x y = laceEPrime A x y ∪ ⋃ u, ⋃ v, cuttingEvent A x y u v := by
+  classical
   ext ω
   constructor
   · intro h
@@ -134,6 +141,7 @@ theorem throughSet_eq_laceEPrime_union_cuttingEvent (A : Set V) (x y : V) :
 
 theorem disjoint_laceEPrime_cuttingEvent (A : Set V) (x y u v : V) :
     Disjoint (laceEPrime A x y) (cuttingEvent A x y u v) := by
+  classical
   apply Set.disjoint_left.mpr
   intro ω he hc
   exact he.2 (mem_iUnion.mpr ⟨u, mem_iUnion.mpr ⟨v, hc.1.2, hc.1.1.1⟩⟩)
@@ -142,6 +150,7 @@ theorem disjoint_laceEPrime_cuttingEvent (A : Set V) (x y u v : V) :
 theorem conn_sdiff_of_not_conn_endpoint {ω : Config V} {x y u v : V}
     (hxy : ω ∈ conn x y) (hxu : ω ∉ conn x u) :
     ω \ {s(u, v)} ∈ conn x y := by
+  classical
   obtain ⟨p⟩ := hxy
   have hn : s(u, v) ∉ p.edges := by
     intro he
@@ -156,6 +165,7 @@ its direction on that prefix agrees with its direction on the full connection. -
 theorem orientedPivotal_prefix_of_not_conn {ω : Config V} {x y u v a : V}
     (hp : ω ∈ orientedPivotal x y u v) (ha : ω ∈ conn x a)
     (hn : ω \ {s(u, v)} ∉ conn x a) : ω ∈ orientedPivotal x a u v := by
+  classical
   have hi : insert s(u, v) ω ∈ conn x a := conn_mono (subset_insert _ _) ha
   refine ⟨hi, hn, hp.2.2.1, ?_⟩
   rcases ((pivotal_conn_iff ω x a u v (orientedPivotal_ne hp)).mp ⟨hi, hn⟩).2 with
@@ -169,6 +179,7 @@ theorem orientedPivotal_prefix_or_prefix {ω : Config V} {x y u v a b : V}
     (hxy : ω ∈ conn x y) (he : ω ∈ orientedPivotal x y u v)
     (hf : ω ∈ orientedPivotal x y a b) (hne : s(u, v) ≠ s(a, b)) :
     ω ∈ orientedPivotal x u a b ∨ ω ∈ orientedPivotal x a u v := by
+  classical
   by_cases hxu : ω \ {s(a, b)} ∈ conn x u
   · right
     apply orientedPivotal_prefix_of_not_conn he (conn_mono sdiff_subset hf.2.2.1)
@@ -192,6 +203,7 @@ theorem orientedPivotal_prefix_or_prefix {ω : Config V} {x y u v a b : V}
 theorem cuttingEvent_unique {A : Set V} {ω : Config V} {x y u v a b : V}
     (he : ω ∈ cuttingEvent A x y u v) (hf : ω ∈ cuttingEvent A x y a b) :
     u = a ∧ v = b := by
+  classical
   by_cases hne : s(u, v) = s(a, b)
   · rcases Sym2.eq_iff.mp hne with h | ⟨hua, hvb⟩
     · exact h
@@ -208,6 +220,7 @@ theorem cuttingEvent_unique {A : Set V} {ω : Config V} {x y u v a b : V}
 theorem pairwiseDisjoint_cuttingEvent (A : Set V) (x y : V) :
     Pairwise fun e f : V × V =>
       Disjoint (cuttingEvent A x y e.1 e.2) (cuttingEvent A x y f.1 f.2) := by
+  classical
   intro e f hef
   apply Set.disjoint_left.mpr
   intro ω he hf
@@ -220,6 +233,7 @@ theorem law_throughSet_eq_add_tsum_cuttingEvent [Countable V]
     (q : Sym2 V → unitInterval) (A : Set V) (x y : V) :
     law q (throughSet A x y) = law q (laceEPrime A x y) +
       ∑' u, ∑' v, law q (cuttingEvent A x y u v) := by
+  classical
   have hU : (⋃ u, ⋃ v, cuttingEvent A x y u v) =
       ⋃ e : V × V, cuttingEvent A x y e.1 e.2 := by
     ext ω

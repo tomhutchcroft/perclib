@@ -14,6 +14,8 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Recurrence
 /-!
 # The initial marked layer and final terminal extraction
 
+## Main results
+
 The initial marked probability keeps its certain diagonal contribution exactly.
 The final layer is bounded by the proved terminal four-arm event. These lemmas
 support the all-order coefficient-diagram induction without assuming its result.
@@ -23,7 +25,7 @@ support the all-order coefficient-diagram induction without assuming its result.
 noncomputable section
 
 open Set MeasureTheory PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond.Lace
 
@@ -35,6 +37,7 @@ theorem markedCoefficient_zero_eq [Countable V]
     (q : Sym2 V → unitInterval) (x : V) (c : V × V) (a : V) :
     markedCoefficient q 0 x c a =
       law q (doubleConn x c.1 ∩ {ω : Config V | ω \ {s(c.1, c.2)} ∈ conn x a}) := by
+  classical
   unfold markedCoefficient
   simp only [Fin.prod_univ_zero, one_mul]
   rw [tsum_eq_single (fun i : Fin 0 => Fin.elim0 i)
@@ -54,6 +57,7 @@ theorem markedCoefficient_zero_le_diagramInitial [Countable V]
     markedCoefficient q 0 x c a ≤ ∑' w,
       diagramInitial q x (w, c.1) *
         law q {ω : Config V | ω \ {s(c.1, c.2)} ∈ conn w a} := by
+  classical
   rw [markedCoefficient_zero_eq]
   by_cases hc : c.1 = x
   · simp [hc, diagramInitial]
@@ -68,6 +72,7 @@ private theorem law_terminal_arms_le [Countable V]
     law q (disjointOccurrence
       (disjointOccurrence (disjointOccurrence (conn t z) (conn z y)) (conn t y))
       (conn v t)) ≤ tau q v t * tau q t z * tau q t y * tau q z y := by
+  classical
   have h1 := countable_profile_bk q (isUpperSet_conn t z) (isUpperSet_conn z y)
   have h2 := countable_profile_bk q
     (isUpperSet_disjointOccurrence (isUpperSet_conn t z) (isUpperSet_conn z y))
@@ -92,6 +97,7 @@ theorem coefficientEvent_snoc_probability_le_marked_terminal [Countable V]
             {ω | ω (Fin.last n) \ {s(c.1, c.2)} ∈
               conn (Fin.cases x (fun j => (b j).2) (Fin.last n)) z}) *
         (tau q c.2 t * tau q t z * tau q t y * tau q z y) := by
+  classical
   let M : V → Set (Fin (n + 1) → Config V) := fun z =>
     coefficientPrefixEvent x c.1 n b ∩
       {ω | ω (Fin.last n) \ {s(c.1, c.2)} ∈
@@ -124,6 +130,7 @@ theorem laceCoefficient_succ_le_tsum_marked_terminal [Countable V]
       markedCoefficient q n x c z *
         offDiagonal (fun u v : V => (unitInterval.toNNReal (q s(u, v)) : ℝ≥0∞)) c.1 c.2 *
           tau q c.2 t * tau q t z * tau q t y * tau q z y := by
+  classical
   let J : V → V → ℝ≥0∞ :=
     offDiagonal (fun u v : V => (unitInterval.toNNReal (q s(u, v)) : ℝ≥0∞))
   let W : (Fin n → V × V) → ℝ≥0∞ := fun b => ∏ i, J (b i).1 (b i).2
