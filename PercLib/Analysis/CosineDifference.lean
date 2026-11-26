@@ -64,6 +64,42 @@ private theorem summable_mul_sin_mul_sin {a : ι → ℝ} (ha : Summable a) (l k
   exact (mul_le_of_le_one_right (mul_nonneg (abs_nonneg _) (abs_nonneg _))
     (abs_sin_le_one _)).trans (mul_le_of_le_one_right (abs_nonneg _) (abs_sin_le_one _))
 
+/-- A cosine increment is controlled by the periodic deficit of the increment phase. -/
+theorem cos_add_sub_cos_sq_le (l k : ℝ) :
+    (cos (l + k) - cos l) ^ 2 ≤ 2 * (1 - cos k) := by
+  have hc : cos k = cos (l + k) * cos l + sin (l + k) * sin l := by
+    simpa only [add_sub_cancel_left] using cos_sub (l + k) l
+  nlinarith [sin_sq_add_cos_sq (l + k), sin_sq_add_cos_sq l,
+    sq_nonneg (sin (l + k) - sin l)]
+
+/-- A signed cosine kernel has a squared increment bounded by twice its absolute mass
+ times its absolute cosine moment. This retains the frequency deficit near zero. -/
+theorem tsum_cos_increment_sq_le {a : ι → ℝ} (ha : Summable a) (l k : ι → ℝ) :
+    ((∑' i, a i * cos (l i + k i)) - (∑' i, a i * cos (l i))) ^ 2 ≤
+      2 * (∑' i, |a i|) * ∑' i, |a i| * (1 - cos (k i)) := by
+  classical
+  have hr := (summable_mul_cos ha (fun i => l i + k i)).sub (summable_mul_cos ha l)
+  have hg := (summable_abs_mul_one_sub_cos ha k).mul_left 2
+  have hcs : (∑' i, (a i * cos (l i + k i) - a i * cos (l i))) ^ 2 ≤
+      (∑' i, |a i|) * ∑' i, 2 * (|a i| * (1 - cos (k i))) := by
+    refine le_of_tendsto_of_tendsto' (hr.hasSum.pow 2)
+      (Filter.Tendsto.mul ha.abs.hasSum hg.hasSum) ?_
+    intro s
+    apply Finset.sum_sq_le_sum_mul_sum_of_sq_le_mul s
+      (fun i _ => abs_nonneg _)
+      (fun i _ => mul_nonneg (by norm_num)
+        (mul_nonneg (abs_nonneg _) (sub_nonneg.mpr (cos_le_one _))))
+    intro i _
+    have h := mul_le_mul_of_nonneg_left (cos_add_sub_cos_sq_le (l i) (k i))
+      (sq_nonneg (a i))
+    rw [← mul_sub, mul_pow]
+    calc
+      _ ≤ a i ^ 2 * (2 * (1 - cos (k i))) := h
+      _ = _ := by rw [← sq_abs (a i)]; ring
+  rw [(summable_mul_cos ha (fun i => l i + k i)).tsum_sub (summable_mul_cos ha l),
+    tsum_mul_left] at hcs
+  nlinarith
+
 /-- A cosine kernel has symmetric second difference bounded by twice the absolute
 kernel's cosine deficit. -/
 theorem abs_tsum_cos_second_difference_le {a : ι → ℝ} (ha : Summable a) (l k : ι → ℝ) :

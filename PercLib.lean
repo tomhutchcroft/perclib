@@ -4,6 +4,7 @@ public import PercLib.Analysis.AbelianSums
 public import PercLib.Analysis.BlockPositivity
 public import PercLib.Analysis.ContinuousBootstrap
 public import PercLib.Analysis.CosineDifference
+public import PercLib.Analysis.CosineGaussian
 public import PercLib.Analysis.CosineReciprocal
 public import PercLib.Analysis.CriticalDrivenODE
 public import PercLib.Analysis.CriticalLogODE
@@ -31,6 +32,8 @@ public import PercLib.Analysis.MesoscopicNegligibility
 public import PercLib.Analysis.ModelNorm.Defs
 public import PercLib.Analysis.MomentHierarchy
 public import PercLib.Analysis.MultiplicativeDecrement
+public import PercLib.Analysis.NearestNeighborMoments
+public import PercLib.Analysis.NearestNeighborSymbolBounds
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.QuadraticRecursion
 public import PercLib.Analysis.ReciprocalCutoff
@@ -296,6 +299,7 @@ public import PercLib.Percolation.Bond.Lace.CuttingFactorization
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 public import PercLib.Percolation.Bond.Lace.Diagrams.Bounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.Chains
 public import PercLib.Percolation.Bond.Lace.Diagrams.Coefficients
 public import PercLib.Percolation.Bond.Lace.Diagrams.Contraction
 public import PercLib.Percolation.Bond.Lace.Diagrams.Convergence
@@ -304,6 +308,7 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Examples
 public import PercLib.Percolation.Bond.Lace.Diagrams.Finiteness
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
+public import PercLib.Percolation.Bond.Lace.Diagrams.ReverseBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TotalMass
 public import PercLib.Percolation.Bond.Lace.Diagrams.TransferBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
@@ -313,15 +318,18 @@ public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.BootstrapAlgebra
 public import PercLib.Percolation.Bond.Lace.Expansion.Convolution
+public import PercLib.Percolation.Bond.Lace.Expansion.ConvolutionWeight
 public import PercLib.Percolation.Bond.Lace.Expansion.Defs
 public import PercLib.Percolation.Bond.Lace.Expansion.Finite
 public import PercLib.Percolation.Bond.Lace.Expansion.Fourier
 public import PercLib.Percolation.Bond.Lace.Expansion.Infinite
+public import PercLib.Percolation.Bond.Lace.Expansion.RealFourier
 public import PercLib.Percolation.Bond.Lace.FiniteClusters
 public import PercLib.Percolation.Bond.Lace.FirstDiagram
 public import PercLib.Percolation.Bond.Lace.FirstDiagramRefined
 public import PercLib.Percolation.Bond.Lace.FirstPivotal
 public import PercLib.Percolation.Bond.Lace.Fourier
+public import PercLib.Percolation.Bond.Lace.FourierPositivity
 public import PercLib.Percolation.Bond.Lace.InitialExpansion
 public import PercLib.Percolation.Bond.Lace.InteriorDiagram
 public import PercLib.Percolation.Bond.Lace.JointMeasurability

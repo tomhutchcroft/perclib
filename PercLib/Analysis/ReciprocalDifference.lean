@@ -35,6 +35,18 @@ theorem reciprocal_second_difference {a b c : ℝ}
   field_simp
   ring
 
+/-- Exact product rule for a numerator times a reciprocal. The mixed terms
+use increments of both the numerator and the denominator kernel. -/
+theorem numerator_reciprocal_second_difference {a b c u v w : ℝ}
+    (ha : 1 - a ≠ 0) (hb : 1 - b ≠ 0) (hc : 1 - c ≠ 0) :
+    u * (1 - a)⁻¹ + w * (1 - c)⁻¹ - 2 * v * (1 - b)⁻¹ =
+      (1 - b)⁻¹ * (u + w - 2 * v) +
+      (1 - b)⁻¹ * (1 - a)⁻¹ * (a - b) * (u - v) +
+      (1 - b)⁻¹ * (1 - c)⁻¹ * (c - b) * (w - v) +
+      v * ((1 - a)⁻¹ + (1 - c)⁻¹ - 2 * (1 - b)⁻¹) := by
+  field_simp
+  ring
+
 /-- A denominator estimate with separate second and first difference controls.
 Keeping the reciprocal factors absolute avoids a sign assumption. -/
 theorem abs_reciprocal_second_difference_le {a b c u v : ℝ}
