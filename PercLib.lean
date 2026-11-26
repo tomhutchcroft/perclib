@@ -157,6 +157,7 @@ public import PercLib.Percolation.Bond.Lace.Sharpness
 public import PercLib.Percolation.Bond.Lace.TerminalDiagram
 public import PercLib.Percolation.Bond.Lace.ThroughExpansion
 public import PercLib.Percolation.Bond.Lace.ThroughSet
+public import PercLib.Percolation.Bond.Lace.Transport
 public import PercLib.Percolation.Bond.Lace.TwoPaths
 public import PercLib.Percolation.Bond.LocalConnectivity
 public import PercLib.Percolation.Bond.LocalConvergence
