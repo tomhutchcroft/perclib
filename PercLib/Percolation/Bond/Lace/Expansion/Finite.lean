@@ -93,6 +93,7 @@ set_option maxHeartbeats 800000 in
 /-- The finite signed lace expansion with the actual alternating coefficient
 kernel and convolution. Finite coefficient row masses and a finite continuation
 bound justify every conversion and interchange in the identity. -/
+@[tag "XMUG"]
 theorem finite_lace_expansion (q : Sym2 V → unitInterval)
     (N : ℕ) (x y : V)
     (hfin : ∀ a u v : V, ∀ᵐ ω ∂law q, (cluster (ω \ {s(u, v)}) a).Finite)

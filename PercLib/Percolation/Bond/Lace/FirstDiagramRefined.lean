@@ -239,6 +239,7 @@ theorem coefficientEvent_one_probability_le_refined_diagram [Countable V]
 /-- The first positive lace coefficient with the retained endpoint and deleted
 bond gains. All terms are explicit two-point probabilities and their one-bond
 deletions; loop weights vanish by the canonical off-diagonal kernel. -/
+@[tag "LCX2"]
 theorem laceCoefficient_one_le_refined_diagram [Countable V]
     (q : Sym2 V → unitInterval) (x y : V) :
     laceCoefficient q 1 x y ≤ ∑' u, ∑' v,

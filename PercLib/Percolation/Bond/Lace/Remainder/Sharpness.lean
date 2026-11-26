@@ -135,6 +135,7 @@ theorem remainder_one_bool_attains_one :
 
 /-- Every universal multiplier in the remainder convolution bound is at least
 one. Testing only two-vertex profiles already forces this value. -/
+@[tag "4PAZ"]
 theorem one_le_of_universal_remainder_bound (C : ℝ≥0∞)
     (h : ∀ q : Sym2 Bool → unitInterval,
       laceRemainder q 1 false false ≤ C *

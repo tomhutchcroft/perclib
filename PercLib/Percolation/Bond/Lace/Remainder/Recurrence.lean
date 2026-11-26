@@ -192,6 +192,7 @@ theorem remainderEvent_add_tsum_snoc_eq_coefficientEvent_add_step [Countable V]
 /-- The exact nonnegative lace recurrence at every order. The finiteness
 hypothesis is the cutting-factorization hypothesis, uniform over the root and
 the deleted bond; no finiteness of coefficients or remainders is assumed. -/
+@[tag "G1IE"]
 theorem laceRemainder_add_succ_eq_laceCoefficient_add_step [Countable V]
     (q : Sym2 V → unitInterval) (n : ℕ) (x y : V)
     (hfin : ∀ a u v : V, ∀ᵐ η ∂law q, (cluster (η \ {s(u, v)}) a).Finite) :
