@@ -194,6 +194,51 @@ theorem diagramMarkedJoiningSecondCore_mono_weight (q : Sym2 G → unitInterval)
   ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ =>
     ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ => mul_le_mul' le_rfl (hw _)
 
+/-- The initial route mark is on the second coordinate. The outgoing pair
+is translated together with the endpoint of the remaining chain. -/
+def diagramMarkedInitialCore (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞)
+    (x : G) (r : G × G) : ℝ≥0∞ :=
+  ∑' s, ∑' y, w (s.2 - x) * diagramInitial q x s *
+    diagramConnector q s (r.1 + y, r.2 + y)
+
+/-- The terminal route mark starts at the second coordinate when `true`,
+and at the first coordinate when `false`. The deleted connector remains actual. -/
+def diagramMarkedTerminalCore (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞)
+    (ε : Bool) (p : G × G) : ℝ≥0∞ :=
+  ∑' s, ∑' y, diagramConnector q p s * tau q s.1 s.2 * tau q s.1 y * tau q s.2 y *
+    w (y - (if ε then s.2 else s.1))
+
+theorem diagramMarkedInitialCore_eq_tsum (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (x : G) (r : G × G) :
+    diagramMarkedInitialCore q w x r =
+      ∑' s, ∑' y, w (s.2 - x) * diagramInitial q x s *
+        diagramConnector q s (r.1 + y, r.2 + y) := rfl
+
+theorem diagramMarkedTerminalCore_eq_tsum (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (ε : Bool) (p : G × G) :
+    diagramMarkedTerminalCore q w ε p =
+      ∑' s, ∑' y, diagramConnector q p s * tau q s.1 s.2 * tau q s.1 y * tau q s.2 y *
+        w (y - (if ε then s.2 else s.1)) := rfl
+
+@[simp] theorem diagramMarkedInitialCore_zero_weight (q : Sym2 G → unitInterval)
+    (x : G) (r : G × G) : diagramMarkedInitialCore q (fun _ => 0) x r = 0 := by
+  simp [diagramMarkedInitialCore]
+
+@[simp] theorem diagramMarkedTerminalCore_zero_weight (q : Sym2 G → unitInterval)
+    (ε : Bool) (p : G × G) : diagramMarkedTerminalCore q (fun _ => 0) ε p = 0 := by
+  simp [diagramMarkedTerminalCore]
+
+theorem diagramMarkedInitialCore_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (x : G) (r : G × G) :
+    diagramMarkedInitialCore q w x r ≤ diagramMarkedInitialCore q w' x r :=
+  ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ =>
+    mul_le_mul' (mul_le_mul' (hw _) le_rfl) le_rfl
+
+theorem diagramMarkedTerminalCore_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (ε : Bool) (p : G × G) :
+    diagramMarkedTerminalCore q w ε p ≤ diagramMarkedTerminalCore q w' ε p :=
+  ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ => mul_le_mul' le_rfl (hw _)
+
 end Marked
 
 end PercLib.Percolation.Bond.Lace

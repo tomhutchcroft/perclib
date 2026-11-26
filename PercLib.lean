@@ -24,6 +24,8 @@ public import PercLib.Analysis.HomogeneousBallIntegrals
 public import PercLib.Analysis.InverseSquareBlock
 public import PercLib.Analysis.LaplaceUniqueness
 public import PercLib.Analysis.LatticeCosineWeight
+public import PercLib.Analysis.LatticeFourier.Bounds
+public import PercLib.Analysis.LatticeFourier.Defs
 public import PercLib.Analysis.LatticeFourierDifference
 public import PercLib.Analysis.LazyWalkComparison
 public import PercLib.Analysis.LazyWalkThresholds
@@ -39,6 +41,8 @@ public import PercLib.Analysis.NearestNeighborPairing
 public import PercLib.Analysis.NearestNeighborResolvent
 public import PercLib.Analysis.NearestNeighborResolventPrefix
 public import PercLib.Analysis.NearestNeighborResolventTail
+public import PercLib.Analysis.NearestNeighborResolventTailConstants
+public import PercLib.Analysis.NearestNeighborResolventUniform
 public import PercLib.Analysis.NearestNeighborSymbolBounds
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.PowerLawSeriesTail
@@ -315,6 +319,7 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Examples
 public import PercLib.Percolation.Bond.Lace.Diagrams.Finiteness
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedConnectorBounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedEnds
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedJoiningBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedSums
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
@@ -325,6 +330,7 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Weighted
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
+public import PercLib.Percolation.Bond.Lace.Events.Continuity
 public import PercLib.Percolation.Bond.Lace.Events.Localization
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.BootstrapAlgebra

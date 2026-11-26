@@ -6,6 +6,7 @@ New proofs for this project; no upstream Lean code is copied.
 module
 
 public import PercLib.Percolation.Bond.SpatialMoments.FourierContinuity
+public import PercLib.Analysis.NearestNeighborSymbolBounds
 
 /-!
 # Continuity of the actual Fourier-ratio supremum
@@ -108,18 +109,6 @@ private theorem abs_ratio_sub_le {a b lam mu D A B : ℝ}
 
 variable {d : ℕ}
 
-private theorem abs_average_cos_le_one (hd : 0 < d) (k : Fin d → ℝ) :
-    |(d : ℝ)⁻¹ * ∑ i, cos (k i)| ≤ 1 := by
-  have hdim : (0 : ℝ) < d := by exact_mod_cast hd
-  have hsum : |∑ i, cos (k i)| ≤ (d : ℝ) := by
-    calc
-      _ ≤ ∑ i, |cos (k i)| := Finset.abs_sum_le_sum_abs _ _
-      _ ≤ ∑ _i : Fin d, (1 : ℝ) := Finset.sum_le_sum fun i _ => abs_cos_le_one (k i)
-      _ = _ := by simp
-  rw [abs_mul, abs_of_pos (inv_pos.mpr hdim)]
-  exact (mul_le_mul_of_nonneg_left hsum (inv_nonneg.mpr hdim.le)).trans_eq
-    (inv_mul_cancel₀ hdim.ne')
-
 private theorem abs_tau_cosine_tsum_le_chi (q : Sym2 (LatticeSite d) → unitInterval)
     (hchi : chi q 0 ≠ ⊤) (k : Fin d → ℝ) :
     |∑' x, (tau q 0 x).toReal * cos (∑ i, k i * (x i : ℝ))| ≤ (chi q 0).toReal := by
@@ -185,7 +174,8 @@ theorem eventually_fourier_ratio_sub_lt (hd : 0 < d)
       (summable_mul_cos (hsum β hchi) _)] at h
     exact h.trans_eq (tsum_abs_tau_toReal_sub_eq_abs_chi_toReal_sub hcomp 0 hb hchi)
   exact (abs_ratio_sub_le (one_sub_inv_toReal_chi_mem_Ico _ 0 hb)
-    (abs_average_cos_le_one hd k) hdiff (abs_tau_cosine_tsum_le_chi _ hchi k)).trans_lt hsmall
+    (abs_nearestNeighborSymbol_le_one hd k) hdiff
+    (abs_tau_cosine_tsum_le_chi _ hchi k)).trans_lt hsmall
 
 /-- The supremum of the absolute actual Fourier ratio is continuous at every
 finite-susceptibility intensity of a transitive finite-row model. Its boundedness
@@ -215,7 +205,7 @@ theorem continuousAt_fourier_ratio_sup (hd : 0 < d)
       _ ≤ (chi (intensityProfile J β) 0).toReal * 2 :=
         mul_le_mul (abs_tau_cosine_tsum_le_chi _ hchi k)
           (abs_one_sub_mul_le_two (one_sub_inv_toReal_chi_mem_Ico _ 0 hchi)
-            (abs_average_cos_le_one hd k)) (abs_nonneg _) ENNReal.toReal_nonneg
+            (abs_nearestNeighborSymbol_le_one hd k)) (abs_nonneg _) ENNReal.toReal_nonneg
       _ = _ := by ring
   apply tendsto_ciSup_of_uniform_abs_sub_lt hbounded
   intro ε hε
