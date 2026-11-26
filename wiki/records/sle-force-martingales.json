@@ -1,0 +1,64 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-force-martingales",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 138
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Mixed interior and boundary product weight",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 5, Theorem 6 and Remark 7; v1 compared with v2/v3 and the journal Theorem 6",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "One-point logarithmic drifts and pair interactions combine into a stochastic exponential. This proves the full chordal mixed-mark formula for kappa positive, with pair exponent rho_i rho_j/(4 kappa)."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Stopped change of measure",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 5, Theorem 6 and Remark 7; v1 compared with v2/v3 and the journal Theorem 6",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Bounded stochastic-logarithm integrand on compact stops gives a true martingale by Novikov and the required force drift by Girsanov. Includes the all-boundary formula and the kappa6 weights (2,-2) specialization; no terminal conditioning claim."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "First-version pair exponent",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 5, Theorem 6 and Remark 7; v1 compared with v2/v3 and the journal Theorem 6",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "The v1 half-sized interaction exponent leaves a nonzero relative drift, equal to 1/20 in an explicit two-interior-mark example. Version 2, version 3 and the journal already use the corrected exponent; this is a version-specific correction, not a new journal error."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "TSCX",
+      "proof_uses": [],
+      "reason": "One-point logarithmic drifts and pair interactions combine into a stochastic exponential. This proves the full chordal mixed-mark formula for kappa positive, with pair exponent rho_i rho_j/(4 kappa)."
+    },
+    {
+      "order": 1,
+      "tag": "NAG9",
+      "proof_uses": [
+        "TSCX"
+      ],
+      "reason": "Bounded stochastic-logarithm integrand on compact stops gives a true martingale by Novikov and the required force drift by Girsanov. Includes the all-boundary formula and the kappa6 weights (2,-2) specialization; no terminal conditioning claim."
+    },
+    {
+      "order": 2,
+      "tag": "42Z5",
+      "proof_uses": [
+        "TSCX"
+      ],
+      "reason": "The v1 half-sized interaction exponent leaves a nonzero relative drift, equal to 1/20 in an explicit two-interior-mark example. Version 2, version 3 and the journal already use the corrected exponent; this is a version-specific correction, not a new journal error."
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 642 (Q-214), written on 2026-11-16 by PROVER-F. No upstream proof is
-copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -50,7 +51,7 @@ theorem ghost_exp_natCast (h : ℝ) (m : ℕ) :
       ENNReal.ofReal (Real.exp (-h)) ^ m :=
   PercLib.Percolation.Bond.exp_neg_mul_natCast h m
 
-/-- **0NVH, pointwise.** `1 - e^{-hT} = (1 - e^{-h}) ∑_{n ≥ 0} e^{-hn} 1{T ≥ n + 1}`. -/
+/-- **Pointwise.** `1 - e^{-hT} = (1 - e^{-h}) ∑_{n ≥ 0} e^{-hn} 1{T ≥ n + 1}`. -/
 theorem one_sub_ghost_eq_tsum {h : ℝ} (hh : 0 < h) (T : ℕ∞) :
     1 - EReal.exp (-((h : EReal) * ((T : ℝ≥0∞) : EReal))) =
       ENNReal.ofReal (1 - Real.exp (-h)) * ∑' n : ℕ,
@@ -123,7 +124,7 @@ theorem one_sub_exp_le_mul_min_add {h : ℝ} (hh : 0 < h) (N : ℕ) (T : ℕ∞)
 
 variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {T : Ω → ℕ∞}
 
-/-- **0NVH, the series.** `M(h) = (1 - e^{-h}) ∑_{n ≥ 1} e^{-h(n-1)} P(T ≥ n)`, written with
+/-- **The series.** `M(h) = (1 - e^{-h}) ∑_{n ≥ 1} e^{-h(n-1)} P(T ≥ n)`, written with
 `n + 1` in place of `n`. -/
 theorem lintegral_ghost_eq_tsum (hT : Measurable T) {h : ℝ} (hh : 0 < h) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal)))) ∂μ =
@@ -144,14 +145,14 @@ theorem lintegral_ghost_eq_tsum (hT : Measurable T) {h : ℝ} (hh : 0 < h) :
   refine lintegral_congr fun ω => ?_
   simp [Set.indicator]
 
-/-- **0NVH, lower bound.** `(1 - e^{-hN}) P(T ≥ N) ≤ M(h)`. -/
+/-- **Lower bound.** `(1 - e^{-hN}) P(T ≥ N) ≤ M(h)`. -/
 theorem mul_measure_le_lintegral_ghost (hT : Measurable T) {h : ℝ} (hh : 0 < h) (N : ℕ) :
     ENNReal.ofReal (1 - Real.exp (-(h * N))) * μ {ω | (N : ℕ∞) ≤ T ω} ≤
       ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal)))) ∂μ :=
   (mul_le_mul_of_nonneg_left (measure_mono fun _ hω => one_sub_exp_ge_of_natCast_le hh hω)
     bot_le).trans (mul_meas_ge_le_lintegral₀ (measurable_one_sub_exp hT _).aemeasurable _)
 
-/-- **0NVH, upper bound.** `M(h) ≤ h E[min(T, N)] + P(T ≥ N)`. -/
+/-- **Upper bound.** `M(h) ≤ h E[min(T, N)] + P(T ≥ N)`. -/
 theorem lintegral_ghost_le (hT : Measurable T) {h : ℝ} (hh : 0 < h) (N : ℕ) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal)))) ∂μ ≤
       ENNReal.ofReal h * ∫⁻ ω, ((min (T ω) N : ℕ∞) : ℝ≥0∞) ∂μ +
@@ -204,7 +205,7 @@ theorem tendsto_one_sub_ghost (t : ℕ∞) :
 
 variable [IsProbabilityMeasure μ]
 
-/-- **8B62, first limit.** `M(h) → P(T = ⊤)` as `h ↓ 0`. -/
+/-- **First limit.** `M(h) → P(T = ⊤)` as `h ↓ 0`. -/
 theorem tendsto_lintegral_ghost (hT : Measurable T) :
     Tendsto (fun h : ℝ => ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal)))) ∂μ)
       (𝓝[>] 0) (𝓝 (μ {ω | T ω = ⊤})) := by
@@ -220,7 +221,7 @@ theorem tendsto_lintegral_ghost (hT : Measurable T) :
     (by simp) (Eventually.of_forall fun ω => tendsto_one_sub_ghost (T ω))
 
 omit [IsProbabilityMeasure μ] in
-/-- **8B62, second limit.** `M(h)/h → E T` in `ℝ≥0∞` as `h ↓ 0`. -/
+/-- **Second limit.** `M(h)/h → E T` in `ℝ≥0∞` as `h ↓ 0`. -/
 theorem tendsto_lintegral_ghost_div (hT : Measurable T) :
     Tendsto (fun h : ℝ => (∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal))))
       ∂μ) / ENNReal.ofReal h) (𝓝[>] 0) (𝓝 (∫⁻ ω, (T ω : ℝ≥0∞) ∂μ)) := by
@@ -334,7 +335,7 @@ theorem ghost_toReal_le (hT : Measurable T) {h : ℝ} (hh : 0 < h) (m : ℕ) :
     (ENNReal.sum_ne_top.2 fun j _ => hfin _)) (hfin _), ENNReal.toReal_mul,
     ENNReal.toReal_ofReal hh.le, ENNReal.toReal_sum fun j _ => hfin _] at this
 
-/-- **Real form of the 0NVH lower bound.** `(1 - e^{-hN}) P(T ≥ N) ≤ M(h)`. -/
+/-- **Real form of the lower bound.** `(1 - e^{-hN}) P(T ≥ N) ≤ M(h)`. -/
 theorem le_ghost_toReal (hT : Measurable T) {h : ℝ} (hh : 0 < h) (N : ℕ) :
     (1 - Real.exp (-(h * N))) * (μ {ω | (N : ℕ∞) ≤ T ω}).toReal ≤
       (∫⁻ ω, (1 - EReal.exp (-((h : EReal) * ((T ω : ℝ≥0∞) : EReal)))) ∂μ).toReal := by
@@ -391,6 +392,7 @@ theorem ceil_one_div_bounds {h : ℝ} (hh : 0 < h) (h1 : h ≤ 1) :
 
 /-- **3C2F.** For `0 < α < 1`, `P(T ≥ n) ≍ n^{-α}` as `n → ∞` if and only if
 `M(h) ≍ h^α` as `h ↓ 0` (two-sided bounds by positive constants). -/
+@[tag "3C2F"]
 theorem tail_asymp_iff_ghost_asymp (hT : Measurable T) {α : ℝ} (hα : 0 < α) (hα1 : α < 1) :
     (∃ c > 0, ∃ C > 0, ∃ N : ℕ, ∀ n : ℕ, N ≤ n → 1 ≤ n →
       c * (n : ℝ) ^ (-α) ≤ (μ {ω | (n : ℕ∞) ≤ T ω}).toReal ∧
@@ -570,6 +572,7 @@ theorem lipschitzOnWith_rpow_Icc {p : ℝ} (hp : 1 ≤ p) :
 /-- **CVCN.** Let `m : (0, ∞) → [0, 1]` be nondecreasing and absolutely continuous on every
 `[a, b] ⊆ (0, ∞)`, with `A m^r m' ≥ 1 - m^q` almost everywhere (`A, r, q > 0`). Then for
 every `a ∈ (0, 1)` and `h > 0`, `m(h) ≥ min(a, ((r+1)(1 - a^q) h / A)^{1/(r+1)})`. -/
+@[tag "CVCN"]
 theorem min_le_of_ghost_ode {m : ℝ → ℝ} {A r q : ℝ} (hA : 0 < A) (hr : 0 < r) (hq : 0 < q)
     (hm01 : ∀ s, 0 < s → 0 ≤ m s ∧ m s ≤ 1) (hmono : MonotoneOn m (Ioi 0))
     (hac : ∀ a b, 0 < a → a ≤ b → AbsolutelyContinuousOnInterval m a b)
@@ -616,7 +619,8 @@ theorem min_le_of_ghost_ode {m : ℝ → ℝ} {A r q : ℝ} (hA : 0 < A) (hr : 0
   have hKh : K * h ≤ m h ^ (r + 1) := by
     refine le_of_forall_pos_le_add fun δ hδ => ?_
     by_cases hK0' : K = 0
-    · rw [hK0', zero_mul]; exact (Real.rpow_nonneg (hm01 h hh).1 _).trans (le_add_of_nonneg_right hδ.le)
+    · rw [hK0', zero_mul]; exact (Real.rpow_nonneg (hm01 h hh).1 _).trans
+        (le_add_of_nonneg_right hδ.le)
     have hKpos : 0 < K := lt_of_le_of_ne hK0 (Ne.symm hK0')
     set ε := min (h / 2) (δ / K) with hε
     have hε0 : 0 < ε := lt_min (by linarith) (by positivity)
@@ -634,7 +638,7 @@ theorem min_le_of_ghost_ode {m : ℝ → ℝ} {A r q : ℝ} (hA : 0 < A) (hr : 0
     _ = m h := by
         rw [← Real.rpow_mul hmh0, mul_one_div_cancel (by linarith), Real.rpow_one]
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
 section Witness
 

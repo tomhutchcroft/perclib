@@ -1,10 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-Shared elementary analysis lemmas, collected on 2026-11-16 by PROVER-F from proofs already in
-this library (PRs 491, 506, 536, 538, 544, 549), so that each statement is proved once. No
-upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+Shared elementary analysis lemmas, collected on 2026-11-16 from proofs already in this library, so
+that each statement is proved once. No upstream proof is copied.
 -/
 module
 

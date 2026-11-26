@@ -1,0 +1,101 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-graph-criticality",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 177
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Susceptibility normalization",
+      "locator": "17 March 2017 author manuscript, Section 13.3, printed pp.161\u2013168 / PDF indices172\u2013179; 13.3.1.",
+      "relationship": "Written finite-graph deductions with the full triangle programme separate",
+      "status": "pending",
+      "note": "The susceptibility level, exponential parameter and threshold ranges are explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Finite triangle constant mode and complete graph",
+      "locator": "17 March 2017 author manuscript, Section 13.3, printed pp.161\u2013168 / PDF indices172\u2013179; 13.3.2\u201313.3.5.",
+      "relationship": "Written finite-graph deductions with the full triangle programme separate",
+      "status": "pending",
+      "note": "The susceptibility level, exponential parameter and threshold ranges are explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Optimized root-cluster exponential tail",
+      "locator": "17 March 2017 author manuscript, Section 13.3, printed pp.161\u2013168 / PDF indices172\u2013179; Lemma 13.10; 13.3.18\u201313.3.20.",
+      "relationship": "Written finite-graph deductions with the full triangle programme separate",
+      "status": "pending",
+      "note": "The susceptibility level, exponential parameter and threshold ranges are explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Largest-component exponential bounds",
+      "locator": "17 March 2017 author manuscript, Section 13.3, printed pp.161\u2013168 / PDF indices172\u2013179; Theorem 13.8 upper bound; 13.3.21\u201313.3.22; Exercise 13.8.",
+      "relationship": "Written finite-graph deductions with the full triangle programme separate",
+      "status": "pending",
+      "note": "The susceptibility level, exponential parameter and threshold ranges are explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "One-sided comparison of critical parameters",
+      "locator": "17 March 2017 author manuscript, Section 13.3, printed pp.161\u2013168 / PDF indices172\u2013179; Exercise 13.9.",
+      "relationship": "Written finite-graph deductions with the full triangle programme separate",
+      "status": "pending",
+      "note": "The susceptibility level, exponential parameter and threshold ranges are explicit."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 1,
+      "tag": "R2Y7",
+      "proof_uses": [
+        "70KD"
+      ],
+      "reason": "Finite triangle constant mode and complete graph under the displayed finite-volume and susceptibility hypotheses."
+    },
+    {
+      "order": 2,
+      "tag": "4A0G",
+      "proof_uses": [
+        "XLWI"
+      ],
+      "reason": "Optimized root-cluster exponential tail under the displayed finite-volume and susceptibility hypotheses."
+    },
+    {
+      "order": 3,
+      "tag": "3RIO",
+      "proof_uses": [
+        "4A0G"
+      ],
+      "reason": "Largest-component exponential bounds under the displayed finite-volume and susceptibility hypotheses."
+    },
+    {
+      "order": 4,
+      "tag": "FUZK",
+      "proof_uses": [
+        "6JZB",
+        "VUI1",
+        "0Y4K",
+        "F7N7"
+      ],
+      "reason": "One-sided comparison of critical parameters under the displayed finite-volume and susceptibility hypotheses."
+    },
+    {
+      "order": 5,
+      "tag": "6JZB",
+      "proof_uses": [],
+      "reason": "Expansion over configurations gives the polynomial and the common-uniform coupling gives strict monotonicity; no other wiki assertion is invoked."
+    }
+  ]
+}

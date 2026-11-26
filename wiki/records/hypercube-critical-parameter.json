@@ -1,0 +1,138 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hypercube-critical-parameter",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 180
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hofstad-nachmias-unlacing",
+      "order": 0,
+      "label": "Local endpoint bounds",
+      "locator": "arXiv:1210.8213v1, Lemma 3.2, printed pp.13–14 / PDF indices12–13",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "hofstad-nachmias-unlacing",
+      "order": 1,
+      "label": "Truncated long-path estimate",
+      "locator": "arXiv:1210.8213v1, use of Lemma 2.3 in Section 3, printed p.16 / PDF index15",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "hofstad-nachmias-unlacing",
+      "order": 2,
+      "label": "Frontier counting with both common neighbours",
+      "locator": "arXiv:1210.8213v1, conditional inequality immediately before (3.6), printed pp.14–15 / PDF indices13–14",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "hofstad-nachmias-unlacing",
+      "order": 3,
+      "label": "Corrected growth induction",
+      "locator": "arXiv:1210.8213v1, Lemma 3.3 and (3.6)–(3.16), printed pp.14–17 / PDF indices13–16",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "hofstad-nachmias-unlacing",
+      "order": 4,
+      "label": "Critical-parameter upper bound",
+      "locator": "arXiv:1210.8213v1, Proposition 3.1, printed pp.13,18 / PDF indices12,17",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 5,
+      "label": "Sharp short-loop order",
+      "locator": "JEMS 19 (2017), Lemma 7.1 and proof, printed pp.793–796 / PDF indices68–71",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 6,
+      "label": "Triangle up to the susceptibility threshold",
+      "locator": "Heydenreich–van der Hofstad, 17 March 2017 manuscript, Section 13.4, Theorem 13.13 and Lemma 13.19",
+      "relationship": "Written proof with the displayed corrections and named inputs",
+      "status": "pending",
+      "note": "The source diagnoses are provisional; no new compiled association is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 1,
+      "tag": "0N08",
+      "proof_uses": [
+        "HJAT"
+      ],
+      "reason": "Truncated long-path estimate with the stated hypotheses and finite Reimer input where used."
+    },
+    {
+      "order": 3,
+      "tag": "JQGZ",
+      "proof_uses": [
+        "V395",
+        "0N08",
+        "N19V",
+        "GIF2",
+        "LLAT"
+      ],
+      "reason": "Corrected growth induction with the stated hypotheses and finite Reimer input where used."
+    },
+    {
+      "order": 4,
+      "tag": "EFAQ",
+      "proof_uses": [
+        "JQGZ",
+        "6JZB"
+      ],
+      "reason": "Critical-parameter upper bound with the stated hypotheses and finite Reimer input where used."
+    },
+    {
+      "order": 5,
+      "tag": "X9SI",
+      "proof_uses": [
+        "1PM2"
+      ],
+      "reason": "Sharp short-loop order with the stated hypotheses and finite Reimer input where used."
+    },
+    {
+      "order": 6,
+      "tag": "87Y4",
+      "proof_uses": [
+        "EFAQ",
+        "X9SI",
+        "GIF2",
+        "PROF"
+      ],
+      "reason": "Triangle up to the susceptibility threshold with the stated hypotheses and finite Reimer input where used."
+    },
+    {
+      "order": 7,
+      "tag": "V395",
+      "proof_uses": [],
+      "reason": "Explicit path counts and a conditional bound on downward Hamming steps over finitely many patterns; no other wiki assertion is invoked."
+    },
+    {
+      "order": 8,
+      "tag": "N19V",
+      "proof_uses": [],
+      "reason": "The inequality 1-(1-p)^a >= ap - C(a,2)p^2 and counting of common neighbours; no other wiki assertion is invoked."
+    }
+  ]
+}

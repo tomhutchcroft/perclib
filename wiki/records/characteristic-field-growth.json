@@ -1,0 +1,89 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "characteristic-field-growth",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 197
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 0,
+      "label": "Characteristic lower bound from zero field",
+      "locator": "Section A.1, (A.7), and Section A.4, (A.39)–(A.50); new characteristic integration replaces the rectangle",
+      "relationship": "New written proof from the previously proved differential inequality; replaces the invalid rectangle choices",
+      "status": "pending",
+      "note": "Publisher PDF extracted text; polynomial errors and additive versus multiplicative normalization explicit. No visual-page check, compiled association, infinite-graph extension or giant-component conclusion."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 1,
+      "label": "Sharp supercritical lower field scale",
+      "locator": "Section A.4, Lemma A.6, printed pp.804–805 / PDF indices79–80; new explicit finite field threshold",
+      "relationship": "New written proof from the previously proved differential inequality; replaces the invalid rectangle choices",
+      "status": "pending",
+      "note": "Publisher PDF extracted text; polynomial errors and additive versus multiplicative normalization explicit. No visual-page check, compiled association, infinite-graph extension or giant-component conclusion."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 2,
+      "label": "Polynomial lower root-tail error",
+      "locator": "Proposition A.2, (A.3), and Section A.4, (A.51)–(A.54); new lower-tail exponent 1/3-alpha",
+      "relationship": "New written proof from the previously proved differential inequality; replaces the invalid rectangle choices",
+      "status": "pending",
+      "note": "Publisher PDF extracted text; polynomial errors and additive versus multiplicative normalization explicit. No visual-page check, compiled association, infinite-graph extension or giant-component conclusion."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 3,
+      "label": "Matching polynomial root-tail error",
+      "locator": "Propositions A.1–A.2, printed p.799 / PDF index74; combination with the corrected sharp upper-field argument",
+      "relationship": "New written proof from the previously proved differential inequality; replaces the invalid rectangle choices",
+      "status": "pending",
+      "note": "Publisher PDF extracted text; polynomial errors and additive versus multiplicative normalization explicit. No visual-page check, compiled association, infinite-graph extension or giant-component conclusion."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "5ZBS",
+      "proof_uses": [
+        "BJU4"
+      ],
+      "reason": "Characteristic lower bound from zero field. The finite zero-field extension, stopped characteristic and applicable field range are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "BFAM",
+      "proof_uses": [
+        "5ZBS"
+      ],
+      "reason": "Sharp supercritical lower field scale. The finite zero-field extension, stopped characteristic and applicable field range are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "AQPE",
+      "proof_uses": [
+        "BFAM",
+        "F5Y5",
+        "E4NT",
+        "1T2M"
+      ],
+      "reason": "Polynomial lower root-tail error. The finite zero-field extension, stopped characteristic and applicable field range are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "YHLB",
+      "proof_uses": [
+        "AQPE",
+        "6SGU",
+        "UF7P",
+        "R2Y7"
+      ],
+      "reason": "Matching polynomial root-tail error. The finite zero-field extension, stopped characteristic and applicable field range are explicit."
+    }
+  ]
+}

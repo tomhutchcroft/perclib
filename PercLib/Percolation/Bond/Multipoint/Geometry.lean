@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-205 (issue 633), part 1: positivity, monotonicity and scaling of the recursive three-part
-distance `S(A)` (wiki tag Y4H4, article `multipoint-trees`; T. Hutchcroft, *Critical
-long-range percolation I*, arXiv:2508.18807v1, §I.2). New proofs; no upstream code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Positivity, monotonicity and scaling of the recursive three-part distance `S(A)` (wiki tag Y4H4,
+article `multipoint-trees`; T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1,
+§I.2). New proofs; no upstream code is copied.
 -/
 module
 
@@ -165,7 +169,8 @@ variable {Y : Type*} [MetricSpace Y] [DecidableEq Y]
 /-- For `|A| ≤ 2`, `c^|A| diam(A)² ≤ diam(f A)²` when `c d ≤ d ∘ f` on `A`. -/
 theorem pow_card_mul_diam_sq_le_image {f : X → Y} {c : ℝ} (hc : 0 ≤ c) {A : Finset X}
     (hA : A.card ≤ 2) (hf : ∀ x ∈ A, ∀ y ∈ A, c * dist x y ≤ dist (f x) (f y)) :
-    c ^ A.card * Metric.diam (A : Set X) ^ 2 ≤ Metric.diam ((A.image f : Finset Y) : Set Y) ^ 2 := by
+    c ^ A.card * Metric.diam (A : Set X) ^ 2 ≤ Metric.diam
+        ((A.image f : Finset Y) : Set Y) ^ 2 := by
   rcases Nat.lt_or_ge A.card 2 with h | h
   · have hs : (A : Set X).Subsingleton := fun x hx y hy =>
       Finset.card_le_one.1 (by omega) x hx y hy
@@ -301,7 +306,7 @@ theorem threePartDistance_image_smul {E : Type*} [NormedAddCommGroup E] [NormedS
         rw [← mul_assoc, mul_inv_cancel₀ hpos.ne', one_mul]
     _ ≤ c ^ A.card * threePartDistance A := mul_le_mul_of_nonneg_left h hpos.le
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- `A = {0, 1, 3} ⊆ ℝ`: `S(A) > 0`, and `S(2 • A) = 8 S(A)`. -/
 example : 0 < threePartDistance ({0, 1, 3} : Finset ℝ) :=
@@ -312,5 +317,188 @@ example : threePartDistance (({0, 1, 3} : Finset ℝ).image ((2 : ℝ) • ·)) 
     2 ^ 3 * threePartDistance ({0, 1, 3} : Finset ℝ) := by
   rw [threePartDistance_image_smul two_pos, card_insert_of_notMem (by norm_num),
     card_pair (by norm_num)]
+
+/-! ### Covariance -/
+
+section Covariance
+
+variable {Y : Type*} [MetricSpace Y] [DecidableEq Y]
+
+omit [MetricSpace X] in
+/-- The three pairwise unions of a partition cover each point twice, so the products of a
+weight over them multiply to the square of the product over `A`. -/
+theorem prod_partition_unions_eq_sq {M : Type*} [CommMonoid M] (l : X → M) {A p₁ p₂ : Finset X}
+    (h₁ : p₁ ⊆ A) (h₂ : p₂ ⊆ A) (hd : Disjoint p₁ p₂) :
+    (∏ x ∈ p₁ ∪ p₂, l x) * (∏ x ∈ p₂ ∪ (A \ (p₁ ∪ p₂)), l x) *
+        (∏ x ∈ (A \ (p₁ ∪ p₂)) ∪ p₁, l x) = (∏ x ∈ A, l x) ^ 2 := by
+  have hd2 : Disjoint p₂ (A \ (p₁ ∪ p₂)) := disjoint_sdiff.mono_left subset_union_right
+  have hd3 : Disjoint (A \ (p₁ ∪ p₂)) p₁ := (disjoint_sdiff.mono_left subset_union_left).symm
+  have hA := prod_sdiff (f := l) (union_subset h₁ h₂)
+  rw [prod_union hd, prod_union hd2, prod_union hd3, ← hA, prod_union hd, sq]
+  ac_rfl
+
+/-- **Covariance, one inequality.** If `f` is injective on `A`, `l ≥ 0` on `A` and
+`l x l y d(x, y)² ≤ d(f x, f y)²` on `A`, then `(∏_{x ∈ A} l x) S(A) ≤ S(f A)`. -/
+theorem prod_mul_threePartDistance_le_image {f : X → Y} {l : X → ℝ} :
+    ∀ (A : Finset X), (∀ x ∈ A, 0 ≤ l x) → Set.InjOn f A →
+      (∀ x ∈ A, ∀ y ∈ A, l x * l y * dist x y ^ 2 ≤ dist (f x) (f y) ^ 2) →
+      (∏ x ∈ A, l x) * threePartDistance A ≤ threePartDistance (A.image f) := by
+  intro A
+  induction hn : A.card using Nat.strong_induction_on generalizing A with
+  | _ n ih =>
+  intro hl hinj hf
+  have hcard : (A.image f).card = A.card := card_image_of_injOn hinj
+  by_cases h3 : 3 ≤ n
+  · obtain ⟨q₁, q₂, h₁, h₂, hd, hn₁, hn₂, hn₃, heq⟩ :=
+      exists_threePartDistance_eq (A := A.image f) (by omega)
+    set p₁ := A.filter fun x => f x ∈ q₁
+    set p₂ := A.filter fun x => f x ∈ q₂
+    have himg : ∀ {q : Finset Y}, q ⊆ A.image f → (A.filter fun x => f x ∈ q).image f = q :=
+      fun {q} hq => by
+        ext y
+        simp only [mem_image, mem_filter]
+        constructor
+        · rintro ⟨x, ⟨_, hx⟩, rfl⟩; exact hx
+        · intro hy
+          obtain ⟨x, hx, rfl⟩ := mem_image.1 (hq hy)
+          exact ⟨x, ⟨hx, hy⟩, rfl⟩
+    have hp₁ : p₁ ⊆ A := filter_subset _ _
+    have hp₂ : p₂ ⊆ A := filter_subset _ _
+    have hi₁ : p₁.image f = q₁ := himg h₁
+    have hi₂ : p₂.image f = q₂ := himg h₂
+    have hpd : Disjoint p₁ p₂ := by
+      rw [disjoint_left]
+      intro x hx₁ hx₂
+      exact disjoint_left.1 hd (mem_filter.1 hx₁).2 (mem_filter.1 hx₂).2
+    have hi₃ : (A \ (p₁ ∪ p₂)).image f = A.image f \ (q₁ ∪ q₂) := by
+      rw [image_sdiff_of_injOn hinj (union_subset hp₁ hp₂), image_union, hi₁, hi₂]
+    have hpn₁ : p₁.Nonempty := Finset.Nonempty.of_image (f := f) (by rw [hi₁]; exact hn₁)
+    have hpn₂ : p₂.Nonempty := Finset.Nonempty.of_image (f := f) (by rw [hi₂]; exact hn₂)
+    have hpn₃ : (A \ (p₁ ∪ p₂)).Nonempty :=
+      Finset.Nonempty.of_image (f := f) (by rw [hi₃]; exact hn₃)
+    obtain ⟨c₁, c₂, c₃, cA⟩ := card_partition_parts hp₁ hp₂ hpd
+    have := hpn₁.card_pos; have := hpn₂.card_pos; have := hpn₃.card_pos
+    have hprod := prod_partition_unions_eq_sq l hp₁ hp₂ hpd
+    set p₃ := A \ (p₁ ∪ p₂)
+    have hU₁ : p₁ ∪ p₂ ⊆ A := union_subset hp₁ hp₂
+    have hU₂ : p₂ ∪ p₃ ⊆ A := union_subset hp₂ sdiff_subset
+    have hU₃ : p₃ ∪ p₁ ⊆ A := union_subset sdiff_subset hp₁
+    have hlt₁ : (p₁ ∪ p₂).card < n := hn ▸ card_union_lt hp₁ hp₂ hpn₃
+    have hlt₂ : (p₂ ∪ p₃).card < n := by omega
+    have hlt₃ : (p₃ ∪ p₁).card < n := by omega
+    have hsub : ∀ {s : Finset X}, s ⊆ A → (∀ x ∈ s, 0 ≤ l x) ∧ Set.InjOn f s ∧
+        ∀ x ∈ s, ∀ y ∈ s, l x * l y * dist x y ^ 2 ≤ dist (f x) (f y) ^ 2 :=
+      fun hs => ⟨fun x hx => hl x (hs hx), hinj.mono (by exact_mod_cast hs),
+        fun x hx y hy => hf x (hs hx) y (hs hy)⟩
+    have e₁ := ih _ hlt₁ _ rfl (hsub hU₁).1 (hsub hU₁).2.1 (hsub hU₁).2.2
+    have e₂ := ih _ hlt₂ _ rfl (hsub hU₂).1 (hsub hU₂).2.1 (hsub hU₂).2.2
+    have e₃ := ih _ hlt₃ _ rfl (hsub hU₃).1 (hsub hU₃).2.1 (hsub hU₃).2.2
+    rw [image_union, hi₁, hi₂] at e₁
+    rw [image_union, hi₂, hi₃] at e₂
+    rw [image_union, hi₃, hi₁] at e₃
+    rw [heq]
+    have hle := threePartDistance_le_of_partition (A := A) (by omega) hp₁ hp₂ hpd hpn₁ hpn₂ hpn₃
+    have hP : 0 ≤ ∏ x ∈ A, l x := prod_nonneg hl
+    have hPs : ∀ {s : Finset X}, s ⊆ A → 0 ≤ ∏ x ∈ s, l x := fun hs =>
+      prod_nonneg (hsub hs).1
+    calc (∏ x ∈ A, l x) * threePartDistance A
+        ≤ (∏ x ∈ A, l x) * Real.sqrt (threePartDistance (p₁ ∪ p₂) *
+            threePartDistance (p₂ ∪ p₃) * threePartDistance (p₃ ∪ p₁)) :=
+          mul_le_mul_of_nonneg_left hle hP
+      _ = Real.sqrt ((∏ x ∈ p₁ ∪ p₂, l x) * threePartDistance (p₁ ∪ p₂) *
+            ((∏ x ∈ p₂ ∪ p₃, l x) * threePartDistance (p₂ ∪ p₃)) *
+            ((∏ x ∈ p₃ ∪ p₁, l x) * threePartDistance (p₃ ∪ p₁))) := by
+          rw [← Real.sqrt_sq hP, ← hprod,
+            ← Real.sqrt_mul (mul_nonneg (mul_nonneg (hPs hU₁) (hPs hU₂)) (hPs hU₃))]
+          congr 1
+          ring
+      _ ≤ _ := by
+          refine Real.sqrt_le_sqrt (mul_le_mul (mul_le_mul e₁ e₂ ?_ ?_) e₃ ?_ ?_)
+          · exact mul_nonneg (hPs hU₂) (threePartDistance_nonneg _)
+          · exact threePartDistance_nonneg _
+          · exact mul_nonneg (hPs hU₃) (threePartDistance_nonneg _)
+          · exact mul_nonneg (threePartDistance_nonneg _) (threePartDistance_nonneg _)
+  · have h2 : A.card ≤ 2 := by omega
+    have h2' : (A.image f).card ≤ 2 := hcard ▸ h2
+    rw [threePartDistance, threePartDistance]
+    simp only [h2, h2', ite_true]
+    rcases Nat.lt_or_ge A.card 2 with h | h
+    · have hs : (A : Set X).Subsingleton := fun x hx y hy =>
+        Finset.card_le_one.1 (by omega) x hx y hy
+      rw [Metric.diam_subsingleton hs]
+      simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow, mul_zero]
+      positivity
+    · obtain ⟨x, y, hxy, rfl⟩ := card_eq_two.1 (le_antisymm h2 h)
+      rw [prod_pair hxy, image_insert, image_singleton]
+      simp only [coe_insert, coe_singleton, Metric.diam_pair]
+      exact hf x (by simp) y (by simp)
+
+/-- **Covariance.** If `f` is injective on `A`, `l > 0` on `A` and
+`d(f x, f y)² = l x l y d(x, y)²` on `A`, then `S(f A) = S(A) ∏_{x ∈ A} l x`. -/
+theorem threePartDistance_image_eq_mul_prod {f : X → Y} {l : X → ℝ} {A : Finset X}
+    (hl : ∀ x ∈ A, 0 < l x) (hinj : Set.InjOn f A)
+    (hf : ∀ x ∈ A, ∀ y ∈ A, dist (f x) (f y) ^ 2 = l x * l y * dist x y ^ 2) :
+    threePartDistance (A.image f) = threePartDistance A * ∏ x ∈ A, l x := by
+  rcases A.eq_empty_or_nonempty with rfl | ⟨a, ha⟩
+  · rw [image_empty, prod_empty, mul_one, threePartDistance, threePartDistance]
+    simp
+  have : Nonempty X := ⟨a⟩
+  have hP : 0 < ∏ x ∈ A, l x := prod_pos hl
+  have hle := prod_mul_threePartDistance_le_image A (fun x hx => (hl x hx).le) hinj
+    fun x hx y hy => (hf x hx y hy).ge
+  set g := Function.invFunOn f A
+  have hgf : ∀ x ∈ A, g (f x) = x := fun x hx => hinj.leftInvOn_invFunOn hx
+  have hrev := prod_mul_threePartDistance_le_image (f := g) (l := fun y => (l (g y))⁻¹)
+    (A.image f)
+    (by
+      simp only [mem_image, forall_exists_index, and_imp, forall_apply_eq_imp_iff₂]
+      intro x hx
+      rw [hgf x hx]
+      exact (inv_pos.2 (hl x hx)).le)
+    (by
+      simp only [Set.InjOn, coe_image, Set.mem_image, mem_coe, forall_exists_index, and_imp,
+        forall_apply_eq_imp_iff₂]
+      intro x hx y hy hxy
+      rw [hgf x hx, hgf y hy] at hxy
+      rw [hxy])
+    (by
+      simp only [mem_image, forall_exists_index, and_imp, forall_apply_eq_imp_iff₂]
+      intro x hx y hy
+      rw [hgf x hx, hgf y hy, hf x hx y hy]
+      have := (hl x hx).ne'
+      have := (hl y hy).ne'
+      field_simp
+      rfl)
+  rw [prod_image hinj, image_image, prod_congr rfl fun x hx => by rw [hgf x hx],
+    prod_inv_distrib] at hrev
+  have himg : A.image (g ∘ f) = A := by
+    rw [show A.image (g ∘ f) = A.image id from image_congr fun x hx => hgf x hx, image_id]
+  rw [himg] at hrev
+  have hrev' : threePartDistance (A.image f) ≤ threePartDistance A * ∏ x ∈ A, l x := by
+    rw [inv_mul_le_iff₀ hP] at hrev
+    linarith
+  linarith
+
+/-- If `d(f x, f y) = c d(x, y)` on `A` with `c > 0`, then `S(f A) = c^|A| S(A)`. -/
+theorem threePartDistance_image_of_dist_eq_mul {f : X → Y} {c : ℝ} (hc : 0 < c)
+    {A : Finset X} (hf : ∀ x ∈ A, ∀ y ∈ A, dist (f x) (f y) = c * dist x y) :
+    threePartDistance (A.image f) = c ^ A.card * threePartDistance A := by
+  have hinj : Set.InjOn f A := fun x hx y hy hxy => by
+    have h := hf x hx y hy
+    rw [hxy, dist_self] at h
+    exact dist_eq_zero.1 ((mul_eq_zero.1 h.symm).resolve_left hc.ne')
+  rw [threePartDistance_image_eq_mul_prod (l := fun _ => c) (fun _ _ => hc) hinj
+    fun x hx y hy => by rw [hf x hx y hy]; ring, prod_const, mul_comm]
+
+/-- **Similarities.** In a real normed space, `S(c U A + v) = c^|A| S(A)` for `c > 0`, a linear
+isometry `U` and a translation `v`. -/
+theorem threePartDistance_image_smul_linearIsometry_add {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] [DecidableEq E] {c : ℝ} (hc : 0 < c) (U : E →ₗᵢ[ℝ] E) (v : E)
+    (A : Finset E) :
+    threePartDistance (A.image fun x => c • U x + v) = c ^ A.card * threePartDistance A :=
+  threePartDistance_image_of_dist_eq_mul hc fun x _ y _ => by
+    rw [dist_add_right, dist_smul₀, Real.norm_eq_abs, abs_of_pos hc, U.dist_map]
+
+end Covariance
 
 end PercLib.Percolation.Bond

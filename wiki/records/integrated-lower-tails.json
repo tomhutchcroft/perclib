@@ -1,0 +1,152 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "integrated-lower-tails",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 14
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 14,
+      "label": "Integrated lower tails from moment bounds",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-size-bias-truncation",
+      "order": 0,
+      "label": "Truncated first moments with extended thresholds",
+      "locator": "Named public declaration start lines: 29, 40, 49, 93, 100, 113, 122, 134, 151, 160",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source distinguishes extended integral identities from probability normalization. Positive finite first moment is required for a size-biased probability law, but the second moment may be infinite. LLGA has a broader extended-value form with finite first moment."
+    },
+    {
+      "source": "perclib-discrete-layer-cake",
+      "order": 0,
+      "label": "Discrete moment and tail identities",
+      "locator": "Explicit public declaration start lines: 48, 55, 68, 89, 114, 124, 147, 182, 233",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Nine public results include arbitrary-measure, extended-value first and positive-integer moment formulas and a constant-three witness. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-tail-comparison",
+      "order": 0,
+      "label": "Escape, window means and pointwise lower tails",
+      "locator": "Explicit public declaration start lines: 51, 62, 81, 97, 105, 170, 223, 243",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results give HPE6 and MBV2 with explicit constants. The volume estimate permits arbitrary measures and unnested windows; the logarithmic exponent is an input. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-train10-layercake",
+      "order": 0,
+      "label": "Real-moment layer-cake identities",
+      "locator": "Explicit public theorem start lines: 43, 50, 67, 95, 101, 142, 169",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled status inferred."
+    },
+    {
+      "source": "perclib-train10-paleyzygmund",
+      "order": 0,
+      "label": "Paley–Zygmund and cluster moments",
+      "locator": "Explicit public theorem start lines: 43, 51, 73, 104, 112, 150, 160",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled status inferred."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Universal off-critical capped mean",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Proposition III.3.7",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Includes real caps, infinite susceptibility and the continuity/range justification for the intermediate value argument."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "XU1Y",
+      "proof_uses": [
+        "LLGA",
+        "Y84V",
+        "5LNL"
+      ],
+      "reason": "Includes real caps, infinite susceptibility and the continuity/range justification for the intermediate value argument."
+    },
+    {
+      "order": 1,
+      "tag": "7GS6",
+      "proof_uses": [
+        "VYTG",
+        "5LNL",
+        "LLGA",
+        "Y84V",
+        "RDF0"
+      ],
+      "reason": "Analytic moments and threshold divergence justify the moment-ratio scale. Truncation, tree-graph second moments and endpoint domination give the integrated bound; finite-set sharpness identifies the threshold."
+    },
+    {
+      "order": 2,
+      "tag": "QW2L",
+      "proof_uses": [],
+      "reason": "A scale enlarged by the square of the upper logarithmic factor separates the initial mass from the monotone tail; the ceiling and initial range are retained."
+    },
+    {
+      "order": 3,
+      "tag": "F75G",
+      "proof_uses": [
+        "LLGA",
+        "CSY8"
+      ],
+      "reason": "An intermediate-value choice of t, the truncated mean bound (LLGA) with lambda=2 and stochastic domination give the claim; the integer form uses the tail-sum identity (CSY8)."
+    },
+    {
+      "order": 4,
+      "tag": "36PN",
+      "proof_uses": [
+        "JZ47",
+        "L0TE",
+        "5LNL",
+        "Y84V",
+        "F75G"
+      ],
+      "reason": "The row-sum bound (JZ47), finite-set sharpness (L0TE) and right-openness with endpoint divergence (5LNL) give a continuous unbounded susceptibility; the tree-graph bound (Y84V) supplies cubic moments for the interpolation theorem F75G."
+    },
+    {
+      "order": 5,
+      "tag": "UPMK",
+      "proof_uses": [
+        "MXGM",
+        "Y84V",
+        "F75G",
+        "QS3L",
+        "MBV2",
+        "1EJP"
+      ],
+      "reason": "MXGM gives continuity and the susceptibility lower bound, Y84V and F75G the integrated tail; QS3L and the pointwise upgrade MBV2 give the tail from the susceptibility, and 1EJP the converse."
+    },
+    {
+      "order": 6,
+      "tag": "9PE0",
+      "proof_uses": [
+        "UPMK",
+        "LZCK",
+        "Y84V",
+        "Z9K8",
+        "MXGM"
+      ],
+      "reason": "UPMK links the first two conditions; LZCK and the tree-graph bound (Y84V) give the fourth from the first; Z9K8 with the universal derivative bounds of MXGM give the third; integration returns the first."
+    }
+  ]
+}

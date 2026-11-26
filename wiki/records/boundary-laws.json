@@ -1,0 +1,105 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "boundary-laws",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 10
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 2,
+      "label": "Boundary wiring and first exit",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "dct-sharpness",
+      "order": 1,
+      "label": "Restricted-domain first-exit inequality",
+      "locator": "arXiv:1502.03050v3, Lemma 1.5, printed page 6",
+      "relationship": "Countable product-law generalization",
+      "status": "pending",
+      "note": "USAC retains the domain, target set and suffix connection. The source intensity profile is a specialization; the wiki proof needs countability and product independence, not transitivity. This is pending mathematical correspondence, not a compiled association."
+    },
+    {
+      "source": "perclib-boundary-wiring",
+      "order": 0,
+      "label": "Independent boundary marks and their laws",
+      "locator": "Named statement start lines in the pinned source: 23, 31, 41, 65, 129, 150",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "AGF6 and ZANA cover countable boundary/internal independence and boundary marginal laws. QH7Q in finite-transcripts covers arbitrary injective sampling, arbitrary disjoint block families, and fixed-vertex closed products without requiring the vertex to lie inside a boundary domain. Its countable closed-product event may include a diagonal coordinate; the boundary interpretation does not."
+    },
+    {
+      "source": "perclib-first-exit",
+      "order": 0,
+      "label": "First-exit decomposition and the boundary functional",
+      "locator": "Named statement start lines in the pinned source: 24, 42, 75, 101, 126, 139, 145, 161, 185",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "ROY9 covers finite-domain escape, infinite-cluster comparison, singleton and zero-boundary cases. 6J9C supplies the exact ray escape and boundary sums, with both endpoint parameters. Its discussion retains deterministic first exit on arbitrary domains and independence for a countable domain in an arbitrary ambient space. The two source representations of the boundary sum describe the same nonnegative quantity."
+    },
+    {
+      "source": "perclib-cluster-law",
+      "order": 0,
+      "label": "Prescribed finite cluster and the law outside it",
+      "locator": "Named theorem start lines: 81, 121, 128, 135, 147, 182, 197, 214",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "R3I9 records the exact event decomposition and countable product-law factorization. E7R2 records independence from strictly exterior measurable events and the induced-exterior connection formula. The boundary product and conditional-law interpretation are extra consequences. Internal connectivity has a finite-coordinate measurability argument even without countable ambient vertices; the source exports its measurability under Countable V. Existing boundary and first-exit records are unchanged."
+    },
+    {
+      "source": "perclib-boundary-contraction",
+      "order": 0,
+      "label": "Cluster exploration and boundary contraction",
+      "locator": "Named public declaration start lines: 46, 64, 71, 120, 133, 150, 361, 441, 460, 473, 481, 617, 635, 655, 669",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source proves restricted first exit by exposing the internal cluster and taking its last exit, using disjoint coordinate blocks. Uniform contraction is solved in finite induced domains before exhaustion; the finite susceptibility is never assumed."
+    },
+    {
+      "source": "perclib-wiring-collapse",
+      "order": 0,
+      "label": "Collapse of configurations and the ghost law",
+      "locator": "Named public declaration start lines: 40, 50, 72, 83, 90, 124, 139, 157, 180, 192, 210, 218, 232, 273, 285, 326",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "Collapse preserves the product intensity law when each pair fibre has summable intensity. Ghost connection detects escape; agreement of original and collapsed internal connections requires that the root not reach the ghost."
+    },
+    {
+      "source": "perclib-boundary-forest-associations",
+      "order": 0,
+      "label": "Boundary, forest and walk assertion wrappers",
+      "locator": "Explicit public theorem/lemma start lines: 27, 43, 77, 94, 102, 132, 151, 172, 215, 247, 278, 392, 406",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 13 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "R3I9",
+      "proof_uses": [
+        "DYU8",
+        "QH7Q"
+      ],
+      "reason": "Internal and boundary coordinate blocks are disjoint, and countable boundary closure has its product probability."
+    },
+    {
+      "order": 1,
+      "tag": "E7R2",
+      "proof_uses": [
+        "R3I9",
+        "DYU8"
+      ],
+      "reason": "The fixed cluster event depends only on pairs meeting the prescribed set; exterior coordinates form a disjoint block."
+    }
+  ]
+}

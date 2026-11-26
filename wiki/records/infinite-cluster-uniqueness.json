@@ -1,0 +1,22 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "infinite-cluster-uniqueness",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 5
+    }
+  ],
+  "sourceOccurrences": [],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "6GNC",
+      "proof_uses": [
+        "DK14"
+      ],
+      "reason": "Translation-invariant events are shown to be trivial by finite-coordinate approximation (DK14) and a disjoint translate; a forced-open finite path then excludes finite values k>=2."
+    }
+  ]
+}

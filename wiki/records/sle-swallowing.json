@@ -1,0 +1,119 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-swallowing",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 135
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Integrable bounded-domain exit",
+      "locator": "Annals of Mathematics 161 (2005), Lemma 6.5 proof, printed pp.906–907",
+      "relationship": "Written alternative proof",
+      "status": "pending",
+      "note": "The real part of a complex harmonic martingale has uniformly positive quadratic-variation rate inside a half-disk, giving a bound on expected exit or singularity time."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Finite physical lifetime",
+      "locator": "Annals of Mathematics 161 (2005), Lemma 6.5, printed pp.906–907",
+      "relationship": "Written alternative proof",
+      "status": "pending",
+      "note": "The positive imaginary part controls exit through large circles. The assertion is for each fixed nonzero point of the closed half-plane, for every kappa>4; simultaneous quantifiers and trace interpretation remain separate."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Simultaneous swallowing of boundary points",
+      "locator": "Annals of Mathematics 161 (2005), Diffusion underlying Lemma 6.6, printed p.908",
+      "relationship": "Written diffusion theorem",
+      "status": "pending",
+      "note": "The ratio generator, scale function, endpoint classification and bounded optional stopping give an incomplete beta law for equality of two swallowing times, without a trace assumption."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Trace boundary hitting distribution",
+      "locator": "Annals of Mathematics 161 (2005), Lemma 6.6 and equation (6.13), printed p.908",
+      "relationship": "Conditional trace interpretation",
+      "status": "pending",
+      "note": "Assumes trace existence, dilation invariance and the source geometric comparison. The proof excludes atoms by dilation, identifies the beta law, and checks the hypergeometric normalization. This does not prove the geometric input."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 4,
+      "label": "Interior lifetime classification below eight",
+      "locator": "arXiv:math/0106036v4, Corollary 5.3, the definition and Theorem 6.4, Lemma 6.5, Exercise 6.7, and Corollary 8.2. Lemma 7.3 is the stronger origin-engulfment assertion, not proved by the nonempty-interior consequence.",
+      "relationship": "Written consequences of the proved trace, dimension and lifetime estimates",
+      "status": "pending",
+      "note": "The small-ball estimate gives positive distance from the full trace for each fixed interior point. Simplicity gives infinite lifetime for positive kappa at most four; finite lifetime and connected-component geometry swallow an entire trace-free disk simultaneously for kappa between four and eight. This covers Exercise 6.7 and the interior part of Theorem 6.4; the event depends on the fixed point."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 5,
+      "label": "Nonempty hull interior at every positive time",
+      "locator": "arXiv:math/0106036v4, Corollary 5.3, the definition and Theorem 6.4, Lemma 6.5, Exercise 6.7, and Corollary 8.2. Lemma 7.3 is the stronger origin-engulfment assertion, not proved by the nonempty-interior consequence.",
+      "relationship": "Written consequences of the proved trace, dimension and lifetime estimates",
+      "status": "pending",
+      "note": "One fixed swallowed disk gives eventual nonempty interior almost surely. Scaling makes the probability constant in positive time, and monotonicity makes that constant one. Rational times give the all-times statement. This does not locate the disk near zero or prove Lemma 7.3."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "JCIS",
+      "proof_uses": [],
+      "reason": "The real part of a complex harmonic martingale has uniformly positive quadratic-variation rate inside a half-disk, giving a bound on expected exit or singularity time."
+    },
+    {
+      "order": 1,
+      "tag": "6DV8",
+      "proof_uses": [
+        "JCIS"
+      ],
+      "reason": "The positive imaginary part controls exit through large circles. The assertion is for each fixed nonzero point of the closed half-plane, for every kappa>4; simultaneous quantifiers and trace interpretation remain separate."
+    },
+    {
+      "order": 2,
+      "tag": "KQIN",
+      "proof_uses": [
+        "6DV8"
+      ],
+      "reason": "The ratio generator, scale function, endpoint classification and bounded optional stopping give an incomplete beta law for equality of two swallowing times, without a trace assumption."
+    },
+    {
+      "order": 3,
+      "tag": "2L0Z",
+      "proof_uses": [
+        "KQIN"
+      ],
+      "reason": "Assumes trace existence, dilation invariance and the source geometric comparison. The proof excludes atoms by dilation, identifies the beta law, and checks the hypergeometric normalization. This does not prove the geometric input."
+    },
+    {
+      "order": 4,
+      "tag": "O0MI",
+      "proof_uses": [
+        "VEZ7",
+        "MN2A",
+        "CKFH",
+        "6DV8"
+      ],
+      "reason": "The small-ball estimate gives positive distance from the full trace for each fixed interior point. Simplicity gives infinite lifetime for positive kappa at most four; finite lifetime and connected-component geometry swallow an entire trace-free disk simultaneously for kappa between four and eight. This covers Exercise 6.7 and the interior part of Theorem 6.4; the event depends on the fixed point."
+    },
+    {
+      "order": 5,
+      "tag": "CPJC",
+      "proof_uses": [
+        "O0MI",
+        "NHWR"
+      ],
+      "reason": "One fixed swallowed disk gives eventual nonempty interior almost surely. Scaling makes the probability constant in positive time, and monotonicity makes that constant one. Rational times give the all-times statement. This does not locate the disk near zero or prove Lemma 7.3."
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New finite-cylinder transport of PercLib's finite-profile Russo formula. The latter
 carries its near-critical-diffusivity attribution in Russo.lean; no upstream proof
 is copied here. Ambient coordinate types are arbitrary, with no countability assumption.
@@ -9,10 +13,24 @@ module
 public import PercLib.Probability.Russo
 public import PercLib.Probability.FiniteContinuity
 
+/-!
+# Russo formula for finite cylinders
+
+The finite-profile Russo formula transported to cylinder events on an arbitrary ambient coordinate
+type, with the pivotal and intensity forms.
+
+## Main results
+
+* `finite_event_difference_hasDerivWithinAt`
+* `cylinder_difference_hasDerivWithinAt`
+* `forced_difference_eq_pivotal`
+* `cylinder_pivotal_hasDerivWithinAt`
+* `cylinder_intensity_hasDerivWithinAt`
+-/
+
 @[expose] public section
 noncomputable section
 open MeasureTheory Set
-open scoped Classical
 namespace PercLib.Probability
 variable {ι : Type*}
 
@@ -137,7 +155,7 @@ theorem cylinder_intensity_hasDerivWithinAt
     (F : Finset ι) (B : Set (Set F)) (J : ι → ℝ) (β : ℝ)
     (p : ℝ → ι → unitInterval)
     (ht : ∀ e ∈ F, (p β e : ℝ) = 1 - Real.exp (-β * J e))
-    (hs : ∀ b ∈ Ici (0:ℝ), ∀ e ∈ F, (p b e : ℝ) = 1 - Real.exp (-b * J e)) :
+    (hs : ∀ b ∈ Ici (0 : ℝ), ∀ e ∈ F, (p b e : ℝ) = 1 - Real.exp (-b * J e)) :
     HasDerivWithinAt
       (fun b => (prodBernoulli (p b)).real {ω | (Subtype.val ⁻¹' ω : Set F) ∈ B})
       (∑ e : F, (J e * Real.exp (-β * J e)) *
@@ -159,7 +177,7 @@ example (B : Set (Set (∅ : Finset ι))) (p : ℝ → ι → unitInterval) (s :
     (by simp) p s (by simp) (by simp)
 
 -- A genuine cylinder in an infinite product, including the endpoint parameters.
-example (t : ℝ) (ht : t ∈ Icc (0:ℝ) 1) :
+example (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
     HasDerivWithinAt
       (fun u => (prodBernoulli (fun _ : ℕ => projIcc 0 1 zero_le_one u)).real {ω | 0 ∈ ω})
       1 (Icc 0 1) t := by
@@ -177,7 +195,7 @@ example (t : ℝ) (ht : t ∈ Icc (0:ℝ) 1) :
   simpa [F] using h
 
 -- Closing that coordinate is a decreasing cylinder with derivative minus one.
-example (t : ℝ) (ht : t ∈ Icc (0:ℝ) 1) :
+example (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
     HasDerivWithinAt
       (fun u => (prodBernoulli (fun _ : ℕ => projIcc 0 1 zero_le_one u)).real {ω | 0 ∉ ω})
       (-1) (Icc 0 1) t := by

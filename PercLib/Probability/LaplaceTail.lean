@@ -1,9 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 453 (Q-119), written on 2026-11-16 by PROVER-G, against pinned mathlib.
-No upstream proof is copied; no Tauberian theorem is used.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16, against pinned mathlib. No upstream proof is copied; no Tauberian
+theorem is used.
 -/
 module
 
@@ -168,7 +170,7 @@ theorem measure_le_div_sqrt_of_bound (hT : Measurable T) {C : ℝ}
   have := hC n hn
   nlinarith
 
-/-- **MIFH, analytic.** If `G(t)/√t → a > 0` as `t ↓ 0`, then `P(T ≥ n) ≍ n^{-1/2}`: there
+/-- **Analytic.** If `G(t)/√t → a > 0` as `t ↓ 0`, then `P(T ≥ n) ≍ n^{-1/2}`: there
 are `C, c > 0` and `N` with `P(T ≥ n) ≤ C/√n` for `n ≥ 1` and `P(T ≥ n) ≥ c/√n` for
 `n ≥ N`. -/
 theorem exists_tail_bounds_of_laplace (hT : Measurable T) {a : ℝ} (ha : 0 < a)
@@ -257,7 +259,8 @@ theorem exists_tail_bounds_of_laplace (hT : Measurable T) {a : ℝ} (ha : 0 < a)
           rw [mul_one_div]
           exact hup j (Finset.mem_Icc.1 hj).1
       _ = C * ∑ j ∈ Icc 1 n, 1 / Real.sqrt j := (Finset.mul_sum _ _ _).symm
-      _ ≤ C * (2 * Real.sqrt n) := mul_le_mul_of_nonneg_left (PercLib.Analysis.sum_Icc_one_div_sqrt_le_two_mul n) hC0.le
+      _ ≤ C * (2 * Real.sqrt n) := mul_le_mul_of_nonneg_left
+          (PercLib.Analysis.sum_Icc_one_div_sqrt_le_two_mul n) hC0.le
   -- `G(t) ≥ (a/2) √t`
   have hsqt : Real.sqrt t = 1 / (Real.sqrt L * Real.sqrt n) := by
     rw [ht, Real.sqrt_div' _ (by positivity), Real.sqrt_one, Real.sqrt_mul (by linarith)]
@@ -338,7 +341,7 @@ theorem tendsto_one_sub_exp_neg_div :
     rw [div_le_one ht]
     linarith [Real.add_one_le_exp (-t)]
 
-/-- **D-5 witness.** On `ℕ` put mass `c_n = (2n-1)!!/((n+1)! 2^{n+1})` at `n` and let
+/-- **Non-vacuity witness.** On `ℕ` put mass `c_n = (2n-1)!!/((n+1)! 2^{n+1})` at `n` and let
 `T(n) = n + 1`, so that `E[s^T] = 1 - √(1 - s)`. Then `G(t) = √(1 - e^{-t})`,
 `G(t)/√t → 1`, and the tail bounds hold. -/
 example : ∃ C > 0, ∃ c > 0, ∃ N : ℕ, (∀ n : ℕ, 1 ≤ n →

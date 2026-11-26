@@ -1,7 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-107 (issue 441, roadmap item AHY3), on the D-2 interface
-and the rooted-tree conventions of `PercLib.Models.Tree`. No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the rooted-tree conventions of
+`PercLib.Models.Tree`. No source text or code is copied.
 -/
 module
 
@@ -83,7 +87,8 @@ theorem exists_kernel : ∃ J : Sym2 (ℕ × List (Fin 2)) → ℝ≥0, ∀ a b,
     fun a b => ?_⟩
   · by_cases h : a.1 = b.1 ∧ ((∃ x, b.2 = x :: a.2) ∨ ∃ x, a.2 = x :: b.2)
     · dsimp only
-      rw [ite_eq_left_of_eq_true _ _ (eq_true h), ite_eq_left_of_eq_true _ _ (eq_true ((treeAdj_symm a b).1 h)),
+      rw [ite_eq_left_of_eq_true _ _ (eq_true h), ite_eq_left_of_eq_true _ _
+          (eq_true ((treeAdj_symm a b).1 h)),
         h.1]
     · dsimp only
       rw [ite_eq_right_of_eq_false _ _ (eq_false h),
@@ -205,7 +210,7 @@ private theorem law_root_eq (β : ℝ≥0) (n : ℕ) :
         have hb1 : b1 = n := hG'.1.symm
         subst hb1
         refine ih b2 rfl (conn_trans h0 (mem_conn_of_mem (fun h => hab.2 (by rw [h])) ?_))
-        show Sym2.map f s(u₀, b2) ∈ ω
+        change Sym2.map f s(u₀, b2) ∈ ω
         rw [Sym2.map_mk]
         exact hab.1
     have hsub : cluster ω (n, []) ⊆ f '' cluster (Sym2.map f ⁻¹' ω : Config (List (Fin 2))) [] := by
@@ -273,7 +278,7 @@ theorem law_cluster_infinite_pos_iff (β : ℝ≥0) (v : ℕ × List (Fin 2)) :
       refine (SimpleGraph.Adj.reachable ?_)
       rw [SimpleGraph.fromEdgeSet_adj]
       refine ⟨?_, by simp⟩
-      show 0 < intensityProfile J β s((n, x :: u), (n, u))
+      change 0 < intensityProfile J β s((n, x :: u), (n, u))
       rw [intensityProfile_pos_iff J hβ]
       have h := hJ (n, x :: u) (n, u)
       have hc : (n, x :: u).1 = (n, u).1 ∧ ((∃ y, (n, u).2 = y :: (n, x :: u).2) ∨
@@ -370,7 +375,18 @@ theorem encard_positive_neighbours_le_three (v : ℕ × List (Fin 2)) :
 
 end Model
 
-/-! ### Non-vacuity (D-5) -/
+/-- **The unattained threshold.** Some countable intensity model has global threshold `1` while
+every rooted threshold is strictly greater than `1`. -/
+theorem exists_globalCriticalIntensity_eq_one_lt_rootCriticalIntensity :
+    ∃ J : Sym2 (ℕ × List (Fin 2)) → ℝ≥0,
+      globalCriticalIntensity J = 1 ∧ ∀ v, 1 < rootCriticalIntensity J v := by
+  obtain ⟨J, hJ⟩ := exists_kernel
+  refine ⟨J, globalCriticalIntensity_eq_one hJ, fun v => ?_⟩
+  rw [rootCriticalIntensity_eq hJ v, ENNReal.one_lt_ofReal]
+  have : 0 < 1 / ((v.1 : ℝ) + 1) := by positivity
+  linarith
+
+/-! ### Non-vacuity -/
 
 /-- The model exists, and at `k = 1` (the tree with index `0`) the root threshold is `2`. -/
 example : ∃ J : Sym2 (ℕ × List (Fin 2)) → ℝ≥0, rootCriticalIntensity J (0, []) = 2 ∧

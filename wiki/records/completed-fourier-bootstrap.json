@@ -1,0 +1,122 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "completed-fourier-bootstrap",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 166
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Mass and ratio improvement",
+      "locator": "17 March 2017 author manuscript, Lemma 8.11, (8.4.6)–(8.4.13), printed pp.103–104 / PDF indices114–115.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "The susceptibility identity is solved with the correct minus sign. Fourier positivity and a positive numerator establish positivity of the effective reciprocal."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Second-difference improvement",
+      "locator": "17 March 2017 author manuscript, Lemma 8.12, (8.4.15)–(8.4.29), printed pp.105–107 / PDF indices116–118.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "An exact quotient-product identity and absolute-kernel increment bounds give an explicit improving estimate. Positivity is proved before applying the reciprocal lemma."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Completed bootstrap",
+      "locator": "17 March 2017 author manuscript, Propositions 8.8 and8.10, Lemma 8.9 and Exercise 8.6, printed pp.101–107 / PDF indices112–118.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "Continuity of all three suprema and a pointwise weak-to-strong implication close the argument without assuming a global weak bound."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Critical consequences",
+      "locator": "17 March 2017 author manuscript, Corollary 8.13, printed pp.107–108 / PDF indices118–119.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "Spatial monotone convergence supplies the critical triangle. Coefficient norm convergence, a positive denominator bound and integrable domination then justify the critical Fourier density."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Explicit constants in the nearest-neighbour bootstrap",
+      "locator": "Independent numerical quantification of the 17 March 2017 manuscript Chapter 8 argument, Lemmas 8.5-8.7 and 8.11-8.12, Propositions 8.8 and 8.10, and Corollary 8.13; printed pp.96-108 / PDF indices107-119",
+      "relationship": "Independent explicit constants for the existing written proof, not a source claim about a numerical dimension threshold",
+      "status": "pending",
+      "note": "The walk input is checked by a finite rational certificate. With weak bootstrap bound two, the weighted coefficient constant is at most 50000000/d; d>=10^11 closes the bootstrap and gives the critical hypotheses for FWHO. No claim is made at dimensions near six or at the conditional dimensions 15, 40, 64 or100; no new source erratum or compiled status is asserted."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "W2WX",
+      "proof_uses": [
+        "6G0E",
+        "TTS1"
+      ],
+      "reason": "The susceptibility identity is solved with the correct minus sign. Fourier positivity and a positive numerator establish positivity of the effective reciprocal."
+    },
+    {
+      "order": 1,
+      "tag": "12ZK",
+      "proof_uses": [
+        "W2WX",
+        "84XD",
+        "TTS1"
+      ],
+      "reason": "An exact quotient-product identity and absolute-kernel increment bounds give an explicit improving estimate. Positivity is proved before applying the reciprocal lemma."
+    },
+    {
+      "order": 2,
+      "tag": "MYG7",
+      "proof_uses": [
+        "W2WX",
+        "12ZK",
+        "NL05",
+        "6G0E",
+        "54IO"
+      ],
+      "reason": "Continuity of all three suprema and a pointwise weak-to-strong implication close the argument without assuming a global weak bound."
+    },
+    {
+      "order": 3,
+      "tag": "F7N7",
+      "proof_uses": [
+        "MYG7",
+        "6G0E",
+        "3W22",
+        "5W46",
+        "JQLC",
+        "TTS1"
+      ],
+      "reason": "Spatial monotone convergence supplies the critical triangle. Coefficient norm convergence, a positive denominator bound and integrable domination then justify the critical Fourier density."
+    },
+    {
+      "order": 4,
+      "tag": "7GNW",
+      "proof_uses": [
+        "66SP",
+        "NOTF",
+        "W2WX",
+        "12ZK",
+        "NL05",
+        "3W22",
+        "5W46",
+        "JQLC",
+        "TTS1",
+        "NI0W",
+        "FWHO"
+      ],
+      "reason": "An explicit pointwise improvement closes by continuity for d>=10^11. Critical coefficient convergence and Fourier domination supply every hypothesis of the sixth-norm spatial theorem, without invoking an unspecified dimension threshold."
+    }
+  ]
+}

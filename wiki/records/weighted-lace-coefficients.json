@@ -1,0 +1,90 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "weighted-lace-coefficients",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 163
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Reversed chain mass",
+      "locator": "17 March 2017 author manuscript, (7.5.20) and Exercise 7.5, printed pp.85\u201386, PDF indices96\u201397.",
+      "relationship": "Written weighted-diagram proof with explicit bootstrap premises",
+      "status": "pending",
+      "note": "A direct column-mass estimate treats both terms of B2; no pointwise kernel-reversal identity is assumed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "All-order weighted estimate",
+      "locator": "17 March 2017 author manuscript, Proposition 7.4, (7.5.4), and Section 7.5.2, printed pp.82\u201387, PDF indices93\u201398.",
+      "relationship": "Written weighted-diagram proof with explicit bootstrap premises",
+      "status": "pending",
+      "note": "An explicit alternating route distributes the cosine weight. Both end sums, the parity-dependent connectors, and the two central terms are calculated; the first central term is bounded by T squared times W through two summable factors."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Refined first coefficient",
+      "locator": "17 March 2017 author manuscript, Lemma 7.2, (7.2.15), and Section 7.5.3, printed pp.73 and87, PDF indices84 and98.",
+      "relationship": "Written weighted-diagram proof with explicit bootstrap premises",
+      "status": "pending",
+      "note": "Removing both trivial triangles leaves the W(0;k) term. The nontrivial triangle mass is at most three halves T; explicit estimates give 31/2 times T Delta W, hence the stated constant 16."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Weighted convergence criterion",
+      "locator": "17 March 2017 author manuscript, Section 7.1 and Section 7.6, conditional on the diagram estimates sought in Chapter 8.",
+      "relationship": "Written weighted-diagram proof with explicit bootstrap premises",
+      "status": "pending",
+      "note": "Polynomially weighted geometric summation gives summable coefficient frequency bounds and then absolute second moments. Bounds on W and H, and any needed quantitative smallness, remain explicit premises."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "RZML",
+      "proof_uses": [
+        "SJIL"
+      ],
+      "reason": "A direct column-mass estimate treats both terms of B2; no pointwise kernel-reversal identity is assumed."
+    },
+    {
+      "order": 1,
+      "tag": "09JN",
+      "proof_uses": [
+        "RZML",
+        "NJT0",
+        "SJIL"
+      ],
+      "reason": "An explicit alternating route distributes the cosine weight. Both end sums, the parity-dependent connectors, and the two central terms are calculated; the first central term is bounded by T squared times W through two summable factors."
+    },
+    {
+      "order": 2,
+      "tag": "IT43",
+      "proof_uses": [
+        "NJT0",
+        "SJIL"
+      ],
+      "reason": "Removing both trivial triangles leaves the W(0;k) term. The nontrivial triangle mass is at most three halves T; explicit estimates give 31/2 times T Delta W, hence the stated constant 16."
+    },
+    {
+      "order": 3,
+      "tag": "VL4L",
+      "proof_uses": [
+        "09JN",
+        "IT43",
+        "NJT0",
+        "SJIL",
+        "22TW"
+      ],
+      "reason": "Polynomially weighted geometric summation gives summable coefficient frequency bounds and then absolute second moments. Bounds on W and H, and any needed quantitative smallness, remain explicit premises."
+    }
+  ]
+}

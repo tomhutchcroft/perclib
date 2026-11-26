@@ -1,0 +1,309 @@
+{
+  "sourceCommit": "b6c3ddbec915b1a89075835c8ebfbbbdc8b97ccb",
+  "sourcePath": "wiki/prototype/content/math-pages.json",
+  "articles": {
+    "product-model": {
+      "prototypeId": "PC-000101",
+      "metadataSha256": "197e2e808af3e667851094251afe3692d1f301239345cb36ad99a835b2a8f78a",
+      "sections": {
+        "law": {
+          "title": "The configuration law",
+          "sha256": "0469d789a1b1d223a1b9a8edd8971b409bbceba1004331f6cfbeda0395a3468f"
+        },
+        "families": {
+          "title": "Parameterised families",
+          "sha256": "919d654d07329d2cb9d3c1f6611a357df257befa4438fdd6c4b087116fce751b"
+        },
+        "scope": {
+          "title": "What the model does—and does not—assume",
+          "sha256": "b3980d55a054f2021949faf7eb15e4613007d43eed17ceff7300d53392b65d10"
+        }
+      }
+    },
+    "connectivity": {
+      "prototypeId": "PC-000102",
+      "metadataSha256": "4d2715a361d08f43dbc58c090db5e1376842eb08f4eabe892d68b00e551fd9e4",
+      "sections": {
+        "paths": {
+          "title": "Connection events",
+          "sha256": "9b93bc4e677532207bfe0b921b2d141c543dc112c3edc4ebc29ddf94d06b0d18"
+        },
+        "restriction": {
+          "title": "Three different objects",
+          "sha256": "13c81ebbf96403bec93dd8e172876bff3c94d7cc5c882ffe0cf409e1bddb0e64"
+        },
+        "exhaustion": {
+          "title": "Exhaustion by finite regions",
+          "sha256": "38aa47a77786e16e7cb4874d8bc6325b2a59095589c94e18c7cd70c9c229a74a"
+        },
+        "volume": {
+          "title": "Possibly infinite volume",
+          "sha256": "789c7b0fa3fec8e3a5c06fd3aba828d972b6a0424a8816c858a19c6c2eb53caf"
+        }
+      }
+    },
+    "susceptibility": {
+      "prototypeId": "PC-000103",
+      "metadataSha256": "d34a76ea26c5823c73625bd018755c0fb3f8561347b9a0a025af523dcb4454cb",
+      "sections": {
+        "definition": {
+          "title": "Definition and the sum identity",
+          "sha256": "31660cd545f0949a9eafaeadaa4536fa2e0177fed9cc933282b9a77347721a38"
+        },
+        "tails": {
+          "title": "The same quantity through tails",
+          "sha256": "9b89ad2403a3444312f1976ace48fa59d491093c176772a016b5cc3577a68d9a"
+        },
+        "variants": {
+          "title": "Related quantities with different meanings",
+          "sha256": "f30a1ec1c2a9c1a67e3fabca21cfe0d9c0225dd39b201514ba6a58de387859c6"
+        },
+        "uses": {
+          "title": "Why susceptibility is a central interface",
+          "sha256": "e4372b1b9e1e3b649122db641a62249ece83e329945651ff2d8aae10009f0f52"
+        }
+      }
+    },
+    "subcritical-bound": {
+      "prototypeId": "PC-000104",
+      "metadataSha256": "2d2402ef3f78399950943c47aeaf742ded34a135e9f5ae0d335d81ef86f1050b",
+      "sections": {
+        "statement": {
+          "title": "The theorem",
+          "sha256": "9279054a441c9d7900d958f09ab0412efe4bb4d97acd4b993605ecd5b5ac2751"
+        },
+        "proof-paths": {
+          "title": "1. Use simple path witnesses",
+          "sha256": "d0b544983db691e11d87dc4dcec3bad41b9ed128692b56632dfdd83e142e55d8"
+        },
+        "proof-walks": {
+          "title": "2. Enlarge the deterministic sum",
+          "sha256": "f99591c88f66f23cf9ee141ec18085c251faf817205cebe1297a3a05d91c1be6"
+        },
+        "proof-recurrence": {
+          "title": "3. Bound every walk length",
+          "sha256": "30d4439e2a7cc191f9d32620be3285dd444847b017058a4bec69dcd6a4084fc3"
+        },
+        "proof-sum": {
+          "title": "4. Sum the geometric series",
+          "sha256": "a8e70ee286671c2e20f7471475c911d455a868c66ba016feb370d322b197f3e3"
+        },
+        "proof-finiteness": {
+          "title": "5. Pass from expectation to almost-sure finiteness",
+          "sha256": "276ca5e8027419dcfe17e51a2bf8ea37a63a5bcced583fa9ae0e1524446f7874"
+        },
+        "intensity": {
+          "title": "Consequence for an intensity family",
+          "sha256": "e15d36e54f1da0fecf2c243afc0cb48005da5bb8fdeee638c2a734d0d731c1de"
+        }
+      }
+    },
+    "criticality": {
+      "prototypeId": "PC-000105",
+      "metadataSha256": "2c83178805bab58d0df6d25664529c187030699fa230688e08e2a21d271a0adc",
+      "sections": {
+        "infinite": {
+          "title": "Infinite-volume thresholds",
+          "sha256": "d404e8ece28095d445dfbe444a7835f5a01953532eeb5440a0e1e7e11edaf524"
+        },
+        "endpoints": {
+          "title": "What a threshold does not decide",
+          "sha256": "3436c82c6e5279c6d0313d68f7126a0dc1adbfa1f2f29a80cb84abd8d6f17ac5"
+        },
+        "finite": {
+          "title": "Finite graphs need another notion",
+          "sha256": "fe004ff816b5d6bc40a44942028326ac2e6e316b11425358369153fc9772d5fd"
+        }
+      }
+    },
+    "sharpness": {
+      "prototypeId": "PC-000106",
+      "metadataSha256": "959bbb653c34acda250ef9fb3bd35234e128213f884643de8f68d7015f0cd547",
+      "sections": {
+        "statement": {
+          "title": "A precise lattice statement",
+          "sha256": "6c3bbbe6270d23a9a13d6642f46370ba7e3fd2f20c2480670b0b72cb8c4ab185"
+        },
+        "certificate": {
+          "title": "The finite-set certificate",
+          "sha256": "0f591b21c0e55e76ba9c33a22f4ca4649b50008c9bc0bf18475c76a771588fc5"
+        },
+        "long-range": {
+          "title": "What survives for long-range percolation",
+          "sha256": "f4d391e02d95464bc0c4fe11e570a755eeeac028d03dc112a4a71890ab775cd7"
+        },
+        "route": {
+          "title": "Proof ingredients and scope",
+          "sha256": "59e655c043fdea666f42e5d49ee63e0974bed8f166eb168b68713fe24f3afd93"
+        }
+      }
+    },
+    "triangle-condition": {
+      "prototypeId": "PC-000107",
+      "metadataSha256": "3d47f4f27aa366ce88ad6a14145cee780e952faf8ce97a3777a05cf120cb5482",
+      "sections": {
+        "diagram": {
+          "title": "The diagram",
+          "sha256": "0764ef33f428c97ff1f105e966b6c53dc35668051a2bdeadd445d0b4caf5666e"
+        },
+        "consequences": {
+          "title": "A conditional mean-field theorem",
+          "sha256": "a595610b297162690bf53b18a7c740603f1c2dc9096fe0911178c84da66364d9"
+        },
+        "scope": {
+          "title": "Spatial estimates and quantitative variants",
+          "sha256": "4536e6a8d8cc44e43589b53c220f24219688a99e6aea4d3b8bf0d3d35d8b3557"
+        },
+        "history": {
+          "title": "History and attribution",
+          "sha256": "4a86d0485c248bf6db02a352780d501d0daa1a56f344644d8e6d0c3708a38d83"
+        },
+        "references": {
+          "title": "References",
+          "sha256": "e3379cdbafa75fcd3a7e6892cd5dc3c8fd5e2173924d94f06890fab3c8107890"
+        }
+      }
+    },
+    "universal-tightness": {
+      "prototypeId": "PC-000108",
+      "metadataSha256": "1c9537428ac803e60149cb8b99af9d20c8bbbd4711c32998e772c6d6b15c0566",
+      "sections": {
+        "scale": {
+          "title": "Choose the observable before the scale",
+          "sha256": "b2f79575f5d9746b8d755e2b81639866a539b1d39cb4ec242bafc83e55902a4e"
+        },
+        "statement": {
+          "title": "Two-sided control at the quantile scale",
+          "sha256": "21f72548f4fbc3a49cc70b06ea405315e11a20692eb3c97d3f92ecd589122718"
+        },
+        "mechanism": {
+          "title": "The combinatorial mechanism",
+          "sha256": "ac80a063ea594897582f560094d76b497e52ee5ad34214382d4474e6d5648392"
+        },
+        "moments": {
+          "title": "From tails to moments",
+          "sha256": "d838cf881ca052efbd455a4e2c05e2a9d4aff5b92d00efaca0c10ce068a96629"
+        }
+      }
+    },
+    "cutoff-families": {
+      "prototypeId": "PC-000109",
+      "metadataSha256": "d4650fc0483a18922d0f05cf5885e99d60938a150f206d82b385682948b2a17f",
+      "sections": {
+        "definition": {
+          "title": "An integrated cutoff",
+          "sha256": "b94731fa5420dcc465b8d595588eada953afbb7560cc819a8dc456055f318fdd"
+        },
+        "comparison": {
+          "title": "Compare with hard truncation",
+          "sha256": "c9e8e48c8eb911c194c6f040de0ed3ca90e73a130e91d577a6808ac0964a0754"
+        },
+        "derivative": {
+          "title": "Differentiate the family actually defined",
+          "sha256": "8ee00df7c807e39952bde85879cb5107267ff1e7db059e1064eb27daa6fddf6d"
+        },
+        "observables": {
+          "title": "What a cutoff argument tracks",
+          "sha256": "ed0ec91fee7ec910e82dad9cbdfc5cdf34a255e764e9e440ccade71423cc545e"
+        }
+      }
+    },
+    "hierarchical-two-point": {
+      "prototypeId": "PC-000110",
+      "metadataSha256": "7ac718c7454cfc5e3d3f465216c235039a5823924c8da260f850857de0e9919b",
+      "sections": {
+        "model": {
+          "title": "Definitions and setting",
+          "sha256": "3021ea13d3dbe52098c0b48ecba37e780099629f209d84538a7ff4b4df89115b"
+        },
+        "statement": {
+          "title": "Statement",
+          "sha256": "fd3728538c2dce60c6fa5c6e9caf3c181c9974dd406d91903f829a8241bc1603"
+        },
+        "examples": {
+          "title": "Examples and non-examples",
+          "sha256": "fc1aededffc12607f0a4d20bf8824e13ec96691ea970219b130b0c739f6d314f"
+        },
+        "idea": {
+          "title": "Idea of the proof",
+          "sha256": "4a0f3042dfd0e487b89deb598e813c53cfacd16f1e5246ce6b2722088e7fc14c"
+        },
+        "proof": {
+          "title": "Proof",
+          "sha256": "ac07915a32beaadca8ac1a522466c2ee24083e0cfb4c47e7c1f9256c94271757"
+        },
+        "consequence": {
+          "title": "Consequences and applications",
+          "sha256": "bd23a843e833d6542f651b9bfb6164fa8a73165e8649f1ee51ce664a6394e1b4"
+        },
+        "position": {
+          "title": "Variants and generalisations",
+          "sha256": "34ad173e028ffa6c927037dc0a145f215b7c2afa99b8afb2bb91de1a73afa06d"
+        },
+        "history": {
+          "title": "History and attribution",
+          "sha256": "0107c7b6a2b96edb8d02a33ea8a1a703ccb33bb416e7a251a04ddc8b8a7b799a"
+        },
+        "references": {
+          "title": "References",
+          "sha256": "e3db4b4fbd21f9f0d904809b21cd56f7ea54a022e04a27f7b0e70e113fe6b83b"
+        }
+      },
+      "lead": {
+        "sha256": "4007a383b9913b5587743e74e1c7db10305e5945d9eed07860b1ffccb47dae29"
+      }
+    },
+    "finite-random-graphs": {
+      "prototypeId": "PC-000111",
+      "metadataSha256": "a566d577e99b9da8290a334a9f2608c4ee96df005bcc18585d6a7b028cf4eec2",
+      "sections": {
+        "identity": {
+          "title": "Susceptibility from the component partition",
+          "sha256": "2ea69c0065fb4d477f84f7b76645fb898f2fafac652dc9fd64a632761b32a8d6"
+        },
+        "erdos-renyi": {
+          "title": "A concrete subcritical calculation",
+          "sha256": "99bb4a4b45c1197abbb780a2c32154c6fec641946bbabb8db3282474f4227afd"
+        },
+        "window": {
+          "title": "The critical window of the Erdős–Rényi graph",
+          "sha256": "f51df7ce7c18421437151e6c493ccf0c6066e65c29c3cab3d1362d5b6e7e7c68"
+        },
+        "connections": {
+          "title": "Exploration and other finite hosts",
+          "sha256": "c5ee11ce333f3ea10edd7802c75b1f32c71dbaa92a605b1417ff6dc207520eb5"
+        },
+        "history": {
+          "title": "History and attribution",
+          "sha256": "24146cff457933ed0fe4802d7b4a9e1e6f0f3863fd58736a3cfe34fb53cf7b31"
+        },
+        "references": {
+          "title": "References",
+          "sha256": "62b0e653f9ba5dd65ae3b7279004dda37ad61947d1da3e4b1c40c9098a453272"
+        }
+      }
+    },
+    "exploration": {
+      "prototypeId": "PC-000112",
+      "metadataSha256": "7448432010007305ae515fb640861d8055fad4f50ba6efa6722ab000e3f32c87",
+      "sections": {
+        "principle": {
+          "title": "The deferred-decision principle",
+          "sha256": "5e0a2d291b471848e725b99efb1abcec09187d0a87bda8d2ecafec536d574bd7"
+        },
+        "cluster": {
+          "title": "Exploring a cluster",
+          "sha256": "7e9e551213ecfe3c095be8b194d8b3c3e993a17750bedcef911c9deecc09c839"
+        },
+        "comparison": {
+          "title": "Why branching comparisons appear",
+          "sha256": "baf6499d7009c6364701c0cdaaa4a1fabeff7f97d0999c8e5f80f19e74fd9d62"
+        },
+        "uses": {
+          "title": "Decision trees and broader applications",
+          "sha256": "b8773002b366bb93ecf6b7ddc40a59af4aa08a31c0df656701869685df1679fb"
+        }
+      }
+    }
+  }
+}

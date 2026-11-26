@@ -1,16 +1,26 @@
 /-
-The independence argument adapts the method of bondPercolation_inter_of_disjoint
-and bondPercolation_finiteEnergy in Tom Hutchcroft's near-critical-diffusivity,
-Percolation/Literature/FiniteEnergy.lean at
-c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under native-source permission R-3.
-Here the assignment is fixed, the profile is inhomogeneous, and the law is
-PercLib's existing prodBernoulli. The overwrite proof uses mathlib directly.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The independence argument adapts the method of bondPercolation_inter_of_disjoint and
+bondPercolation_finiteEnergy in Percolation/Literature/FiniteEnergy.lean at
+tomhutchcroft/near-critical-diffusivity, revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under
+Tom Hutchcroft's reuse permission recorded in `docs/DECISIONS.md`. Licence status: that file lies in
+the source's `Percolation/Literature/` tree, which holds code vendored from the `percolation/`
+project of `anthropics/formal-math` (Apache-2.0; see the source's `third_party/formal-math/`). For
+any vendored part, the Apache-2.0 licence and its notices are those retained in
+`third_party/percolation/`; no other upstream licence is asserted. Here the assignment is fixed, the
+profile is inhomogeneous, and the law is PercLib's existing prodBernoulli. The overwrite proof uses
+mathlib directly.
 -/
 module
 
 public import PercLib.Probability.Cylinder
 public import PercLib.Probability.DeterminedIndependence
 public import PercLib.Probability.ProdBernoulliIndependence
+public import PercLib.Probability.Superposition
 public import Mathlib.Data.Sym.Sym2
 
 /-! # Finite-energy identities
@@ -212,6 +222,170 @@ theorem prodBernoulli_inter_bond_closed {V : Type*} (p : Sym2 V → unitInterval
   classical
   simpa [Set.inter_singleton_eq_empty] using
     prodBernoulli_inter_pattern p {e} ∅ (Finset.empty_subset _) B hB (by simpa using houtside)
+
+/-! ### Images of events under a finite overwrite -/
+
+/-- The event that a configuration has a prescribed trace on a finite set is measurable. -/
+theorem measurableSet_setOf_inter_eq (F : Finset ι) (A : Set ι) :
+    MeasurableSet {ω : Set ι | ω ∩ (F : Set ι) = A} := by
+  classical
+  by_cases hA : A ⊆ F
+  · have : {ω : Set ι | ω ∩ (F : Set ι) = A} = ⋂ i ∈ F, {ω | i ∈ ω ↔ i ∈ A} := by
+      ext ω
+      simp only [Set.mem_ofPred_eq, Set.mem_iInter]
+      constructor
+      · rintro rfl i hi
+        simp [hi]
+      · intro h
+        ext i
+        by_cases hi : i ∈ F
+        · simpa [hi] using h i hi
+        · simp only [Set.mem_inter_iff, Finset.mem_coe, hi, and_false, false_iff]
+          exact fun h' => hi (hA h')
+    rw [this]
+    refine Finset.measurableSet_biInter F fun i _ => ?_
+    by_cases hiA : i ∈ A
+    · simpa [hiA] using measurableSet_mem i
+    · have := (measurableSet_mem i).compl
+      simpa [hiA, Set.compl_def] using this
+  · have : {ω : Set ι | ω ∩ (F : Set ι) = A} = ∅ := by
+      ext ω
+      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
+      rintro rfl
+      exact hA Set.inter_subset_right
+    rw [this]
+    exact MeasurableSet.empty
+
+/-- Exact probability of a finite assignment, in real form. -/
+theorem prodBernoulli_real_inter_finset_eq [DecidableEq ι] (p : ι → unitInterval)
+    (F a : Finset ι) (ha : a ⊆ F) :
+    (prodBernoulli p).real {ω | ω ∩ (F : Set ι) = (a : Set ι)} =
+      (∏ i ∈ a, (p i : ℝ)) * ∏ i ∈ F \ a, (1 - (p i : ℝ)) := by
+  classical
+  rw [measureReal_def, prodBernoulli_inter_finset_eq p F a ha, ENNReal.toReal_mul,
+    ENNReal.toReal_prod, ENNReal.toReal_prod]
+  simp [unitInterval.coe_symm_eq]
+
+/-- Assembling an outside configuration with a fixed block assignment is measurable. -/
+theorem measurable_image_val_union (P : Set ι) (b : Set ι) :
+    Measurable (fun ξ : Set P => (Subtype.val '' ξ : Set ι) ∪ b) :=
+  (measurable_image_val P).union measurable_const
+
+/-- The outside configurations that admit an assignment on `F` lying in `A`. -/
+theorem measurableSet_setOf_exists_image_val_union_mem (F : Finset ι) {A : Set (Set ι)}
+    (hA : MeasurableSet A) :
+    MeasurableSet {ξ : Set ((F : Set ι)ᶜ : Set ι) |
+      ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A} := by
+  have : {ξ : Set ((F : Set ι)ᶜ : Set ι) |
+      ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A} =
+      ⋃ b ∈ F.powerset, (fun ξ : Set ((F : Set ι)ᶜ : Set ι) =>
+        (Subtype.val '' ξ : Set ι) ∪ (b : Set ι)) ⁻¹' A := by
+    ext ξ; simp
+  rw [this]
+  exact Finset.measurableSet_biUnion _ fun b _ => measurable_image_val_union _ _ hA
+
+/-- The image of an event under a finite overwrite: the overwritten block carries the
+prescribed assignment and the outside part admits some assignment in the event. -/
+theorem image_overwrite_eq [DecidableEq ι] (F a : Finset ι) (ha : a ⊆ F) (A : Set (Set ι)) :
+    (fun ω => (ω \ (F : Set ι)) ∪ (a : Set ι)) '' A =
+      {ω | {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω} ∈
+          {ξ : Set ((F : Set ι)ᶜ : Set ι) |
+            ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A}} ∩
+        {ω | ω ∩ (F : Set ι) = (a : Set ι)} := by
+  have hval : ∀ ω : Set ι,
+      (Subtype.val '' {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω} : Set ι) = ω \ F := by
+    intro ω; ext i; simp [and_comm]
+  classical
+  ext ω
+  simp only [Set.mem_image, Set.mem_inter_iff, Set.mem_ofPred_eq, Finset.mem_powerset, hval]
+  constructor
+  · rintro ⟨η, hη, rfl⟩
+    refine ⟨⟨F.filter (· ∈ η), Finset.filter_subset _ _, ?_⟩, ?_⟩
+    · convert hη using 1
+      ext i
+      by_cases hi : i ∈ F
+      · by_cases hai : i ∈ a <;> simp [hi, hai]
+      · simp [hi, show i ∉ a from fun h => hi (ha h)]
+    · ext i
+      by_cases hi : i ∈ F
+      · by_cases hai : i ∈ a <;> simp [hi, hai]
+      · simp [hi, show i ∉ a from fun h => hi (ha h)]
+  · rintro ⟨⟨b, hb, hA⟩, hωF⟩
+    refine ⟨_, hA, ?_⟩
+    ext i
+    by_cases hi : i ∈ F
+    · have := Set.ext_iff.1 hωF i
+      simp only [Set.mem_inter_iff, Finset.mem_coe, hi, and_true] at this
+      simpa [hi] using this.symm
+    · have hb' : i ∉ b := fun h => hi (hb h)
+      have hai : i ∉ a := fun h => hi (ha h)
+      simp [hi, hb', hai]
+
+/-- Every configuration of `A` restricts to an outside configuration admitting an
+assignment on `F` in `A`. -/
+theorem prodBernoulli_le_prodBernoulli_compl_exists_union_mem (p : ι → unitInterval)
+    (F : Finset ι) {A : Set (Set ι)} (hA : MeasurableSet A) :
+    prodBernoulli p A ≤ prodBernoulli (fun i : ((F : Set ι)ᶜ : Set ι) => p i)
+      {ξ | ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A} := by
+  classical
+  have hm : Measurable (fun ω : Set ι => (Subtype.val ⁻¹' ω : Set ((F : Set ι)ᶜ : Set ι))) :=
+    Measurable.of_mem fun i => (measurableSet_mem i.val).mem
+  rw [← prodBernoulli_map_preimage_val p, Measure.map_apply hm
+    (measurableSet_setOf_exists_image_val_union_mem F hA)]
+  refine measure_mono fun ω hω => ⟨F.filter (· ∈ ω), Finset.mem_powerset.2
+    (Finset.filter_subset _ _), ?_⟩
+  convert hω using 1
+  ext i
+  by_cases hi : i ∈ F <;> simp [hi]
+
+/-- **Image of a finite overwrite, measurability.** -/
+theorem measurableSet_image_overwrite [DecidableEq ι] (F a : Finset ι) (ha : a ⊆ F)
+    {A : Set (Set ι)} (hA : MeasurableSet A) :
+    MeasurableSet ((fun ω => (ω \ (F : Set ι)) ∪ (a : Set ι)) '' A) := by
+  rw [image_overwrite_eq F a ha A]
+  refine MeasurableSet.inter ?_ (measurableSet_setOf_inter_eq F a)
+  exact (measurableSet_setOf_exists_image_val_union_mem F hA).preimage
+    (Measurable.of_mem fun i => (measurableSet_mem i.val).mem)
+
+/-- **Image of a finite overwrite, probability.** -/
+theorem prodBernoulli_image_overwrite [DecidableEq ι] (p : ι → unitInterval)
+    (F a : Finset ι) (ha : a ⊆ F) {A : Set (Set ι)} (hA : MeasurableSet A) :
+    prodBernoulli p ((fun ω => (ω \ (F : Set ι)) ∪ (a : Set ι)) '' A) =
+      (∏ i ∈ a, (unitInterval.toNNReal (p i) : ℝ≥0∞)) *
+        (∏ i ∈ F \ a, (unitInterval.toNNReal (unitInterval.symm (p i)) : ℝ≥0∞)) *
+        prodBernoulli (fun i : ((F : Set ι)ᶜ : Set ι) => p i)
+          {ξ | ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A} := by
+  have hS := measurableSet_setOf_exists_image_val_union_mem F hA
+  have hm : Measurable (fun ω : Set ι => {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω}) :=
+    Measurable.of_mem fun i => (measurableSet_mem i.val).mem
+  have hm' : Measurable (fun ω : Set ι => (Subtype.val ⁻¹' ω : Set ((F : Set ι)ᶜ : Set ι))) :=
+    hm
+  rw [image_overwrite_eq F a ha A, prodBernoulli_inter_pattern p F a ha
+    {ω | {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω} ∈
+      {ξ : Set ((F : Set ι)ᶜ : Set ι) |
+        ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A}} (hS.preimage hm),
+    ← prodBernoulli_map_preimage_val p, Measure.map_apply hm' hS, mul_assoc, mul_comm]
+  · rfl
+  · intro ω ω' h
+    have : {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω} =
+        {i : ((F : Set ι)ᶜ : Set ι) | (i : ι) ∈ ω'} := by
+      ext i
+      have := Set.ext_iff.1 h i
+      have hi : (i : ι) ∉ F := i.2
+      simpa [hi] using this
+    simp only [Set.mem_ofPred_eq, this]
+
+/-- **Image of a finite overwrite, lower bound.** -/
+theorem mul_prodBernoulli_le_mul_prodBernoulli_compl_exists_union_mem [DecidableEq ι]
+    (p : ι → unitInterval) (F a : Finset ι) {A : Set (Set ι)} (hA : MeasurableSet A) :
+    (∏ i ∈ a, (unitInterval.toNNReal (p i) : ℝ≥0∞)) *
+        (∏ i ∈ F \ a, (unitInterval.toNNReal (unitInterval.symm (p i)) : ℝ≥0∞)) *
+        prodBernoulli p A ≤
+      (∏ i ∈ a, (unitInterval.toNNReal (p i) : ℝ≥0∞)) *
+        (∏ i ∈ F \ a, (unitInterval.toNNReal (unitInterval.symm (p i)) : ℝ≥0∞)) *
+        prodBernoulli (fun i : ((F : Set ι)ᶜ : Set ι) => p i)
+          {ξ | ∃ b ∈ F.powerset, (Subtype.val '' ξ : Set ι) ∪ (b : Set ι) ∈ A} :=
+  mul_le_mul_right (prodBernoulli_le_prodBernoulli_compl_exists_union_mem p F hA) _
 
 -- Endpoint, empty-block, non-vacuity, and diagonal witnesses.
 example : prodBernoulli (fun b : Bool => if b then 1 else 0)

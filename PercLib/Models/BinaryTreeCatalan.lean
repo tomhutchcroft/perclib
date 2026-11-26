@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-72 (issue 379), on the D-2 interface and the rooted-tree
-conventions of `PercLib.Models.Tree`, using mathlib's `BinaryTree.treesOfNumNodesEq` and
-`catalan`. No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the rooted-tree conventions of
+`PercLib.Models.Tree`, using mathlib's `BinaryTree.treesOfNumNodesEq` and `catalan`. No source text
+or code is copied.
 -/
 module
 
@@ -563,6 +567,7 @@ theorem binaryTree_law_cluster_card_eq_catalan (p : unitInterval)
 `p ∈ [0, 1]`,
 `P(|K([])| = n, K([]) finite) = (1/(n+1)) · C(2n, n) · p^(n-1) · (1-p)^(n+1)`,
 with `0^0 = 1`. -/
+@[tag "9K6O"]
 theorem binaryTree_law_cluster_card_eq (p : unitInterval)
     (q : Sym2 (List (Fin 2)) → unitInterval)
     (hq : ∀ e, ¬ e.IsDiag → q e =
@@ -587,7 +592,21 @@ theorem binaryTree_law_cluster_card_eq (p : unitInterval)
   · rw [ENNReal.ofReal_eq_coe_nnreal hp0]; rfl
   · rw [ENNReal.ofReal_eq_coe_nnreal hp1]; rfl
 
-/-! ### Non-vacuity (D-5): `n = 1` and `n = 2` -/
+
+/-- **The Catalan law in real form**: for `n ≥ 1`,
+`P(|K([])| = n, K([]) finite) = Cat(n) p^(n-1) (1-p)^(n+1)`. -/
+theorem binaryTree_law_cluster_card_toReal (p : unitInterval)
+    (q : Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then p
+        else 0)
+    {n : ℕ} (hn : 1 ≤ n) :
+    (law q {ω | (cluster ω []).ncard = n ∧ (cluster ω []).Finite}).toReal =
+      (catalan n : ℝ) * (p : ℝ) ^ (n - 1) * (1 - (p : ℝ)) ^ (n + 1) := by
+  rw [binaryTree_law_cluster_card_eq_catalan p q hq hn]
+  simp [ENNReal.toReal_mul, ENNReal.toReal_pow, unitInterval.coe_symm_eq]
+
+/-! ### Non-vacuity: `n = 1` and `n = 2` -/
 
 /-- `n = 1`: probability `(1-p)^2`. -/
 example (p : unitInterval) :

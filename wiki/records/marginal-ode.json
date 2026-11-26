@@ -1,0 +1,157 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "marginal-ode",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 13
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 0,
+      "label": "A marginal ODE and its logarithmic correction",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 54,
+      "label": "Polynomial mixed-moment induction",
+      "locator": "arXiv:2508.18807v1 HTML, Lemmas I.5.26-I.5.29, Proposition I.5.30 and proof of Theorem I.5.21",
+      "relationship": "Signed analytic step, exact derivative and conditional recurrence closure",
+      "status": "pending",
+      "note": "2KB9 supplies the signed ODE lemma; VMEJ the absolute moment bound; 1K61 the exact two-cluster derivative. IX97 proves the diagram recurrence by generating functions, and GY8M closes the induction conditional on the factorized differential equation and one-point/scalar boundary limits. The source collision estimate is still a separate model input. Three formula/proof-line diagnoses are provisional and confined to the inspected HTML."
+    },
+    {
+      "source": "perclib-riccati-comparison",
+      "order": 0,
+      "label": "Riccati comparison and the exact remainder",
+      "locator": "Explicit public declaration start lines: 50, 60, 161, 247, 266, 373",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Six public results give derivative comparisons without continuity of the derivative and the bounded-error reciprocal identity. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-logarithmic-corrections",
+      "order": 0,
+      "label": "Quadratic and deficit logarithmic bounds",
+      "locator": "Explicit public declaration start lines: 62, 71, 79, 89, 272, 423, 433, 511, 542",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Nine public results implement 6PGV and OP8F, with absolute continuity and the exact deficit difference explicit. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-double-factorial-convolution",
+      "order": 0,
+      "label": "The shifted double-factorial convolution",
+      "locator": "Explicit public declaration start lines: 49, 65, 79, 120, 134, 144",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Six public results derive the convolution by Pascal recurrence, retaining the endpoint convention. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-shared-elementary",
+      "order": 0,
+      "label": "Shared elementary analytic estimates",
+      "locator": "Explicit public declaration start lines: 38, 47, 68, 86",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Four existing estimates are collected in one module, retaining their positivity and integrability hypotheses. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-moment-hierarchy",
+      "order": 0,
+      "label": "Closed moment hierarchies and slow corrections",
+      "locator": "Explicit public theorem/lemma start lines: 52, 99, 119, 139, 155, 164, 263, 272, 285, 324, 496, 506, 522, 580, 613, 778",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 16 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 41,
+      "label": "Inverse logarithm in the critical moment normalization",
+      "locator": "Remark I.1.16, PDF p. 17",
+      "relationship": "Versioned source comparison",
+      "status": "pending",
+      "note": "Corrects the positive half-power printed in the inverse normalization; original QKHV is preserved."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 21,
+      "label": "Inverse logarithm and volume-tail coefficient",
+      "locator": "Prose between (III.1.18) and (III.1.19), PDF p. 15",
+      "relationship": "Versioned source comparison",
+      "status": "pending",
+      "note": "The inverse has a positive quarter-power divided by alpha, while its named coefficient A_n^* has a negative half-power; the final tail coefficient is unchanged."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 50,
+      "label": "An asymptotic linear equation with dominant driving term",
+      "locator": "Lemma I.4.21",
+      "relationship": "Source statement with complete proof",
+      "status": "pending",
+      "note": "B5SL states Lemma I.4.21 with the same hypotheses and both conclusions; its proof reduces the asymptotic equation to the signed linear theorem 2KB9."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 0,
+      "source": "hutchcroft-lrp-1",
+      "tag": "B5SL",
+      "source_url": "https://arxiv.org/abs/2508.18807v1",
+      "edition": "arXiv:2508.18807v1",
+      "locator": "Lemma I.4.21 (f' ~ r^{-1}(af+h) with h non-negligible).",
+      "relationship": "source-statement",
+      "note": "Same hypotheses (a>0; h positive, measurable, regularly varying of index b>0; f differentiable with f'(r) ~ (af(r)+h(r))/r; b>a) and both conclusions (f ~ h/(b-a); f eventually positive and regularly varying of index b on a half-line). Domain (0,infinity) for h as in the source; the same domain for f, which the source leaves implicit."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "2KB9",
+      "proof_uses": [],
+      "reason": "A regularly varying integrating factor and a positive forcing-index gap identify signed asymptotics without differentiating the normalization."
+    },
+    {
+      "order": 1,
+      "tag": "09N5",
+      "proof_uses": [],
+      "reason": "The proof transforms the equation to a linear one for w=u^{-gamma} and solves it with an integrating factor; it invokes no other wiki assertion."
+    },
+    {
+      "order": 2,
+      "tag": "QKHV",
+      "proof_uses": [
+        "9PSJ"
+      ],
+      "reason": "The proof inverts the scale s(r) and substitutes F(t)^alpha into the cutoff-to-full transfer theorem (9PSJ) with its coefficient c_*."
+    },
+    {
+      "order": 3,
+      "tag": "SR9U",
+      "proof_uses": [],
+      "reason": "The proof integrates the transformed linear equation w'=a gamma C directly; it invokes no other wiki assertion."
+    },
+    {
+      "order": 4,
+      "tag": "63GS",
+      "proof_uses": [],
+      "reason": "The proof solves the explicit linear equation w'-w/t=a gamma C in closed form; it invokes no other wiki assertion."
+    },
+    {
+      "order": 5,
+      "tag": "B5SL",
+      "proof_uses": [
+        "2KB9",
+        "3491"
+      ],
+      "reason": "The asymptotic relation becomes the exact equation rf'=(1-theta)(af+h) with theta->0; after local boundedness of h (uniform convergence theorem) and local absolute continuity of f, the signed linear theorem 2KB9 with A=1 gives f/h->1/(b-a), and regular variation of f follows from that of h (3491)."
+    }
+  ]
+}

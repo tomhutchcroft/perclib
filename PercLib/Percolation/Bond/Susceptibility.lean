@@ -1,9 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New glue for the D-2 interface, using pinned mathlib's measurable set cardinality,
-ENNReal cardinality sum, and Tonelli theorem. No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New glue for the bond interface, using pinned mathlib's measurable set cardinality, ENNReal
+cardinality sum, and Tonelli theorem. No upstream proof is copied.
 -/
 module
 
@@ -50,7 +52,7 @@ theorem encard_cluster_eq_tsum (ω : Config V) (x : V) :
   rw [← ENNReal.tsum_set_one, tsum_subtype (cluster ω x) (fun _ => (1 : ℝ≥0∞))]
   congr 1
 
-/-- The P-3 target: measurable ENat volume and the infinite-valued identity. -/
+/-- Measurable `ℕ∞`-valued cluster volume and the infinite-valued identity `χ = ∑ τ`. -/
 def SusceptibilityIdentity (V : Type*) [Countable V] : Prop :=
   (∀ x : V, Measurable (fun ω : Config V => (cluster ω x).encard)) ∧
     ∀ (q : Sym2 V → unitInterval) (x : V), chi q x = ∑' y, tau q x y

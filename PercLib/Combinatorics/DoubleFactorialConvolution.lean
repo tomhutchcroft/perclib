@@ -1,14 +1,17 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Ported for issue 526 (Q-159) on 2026-11-16 by PROVER-E from pull request 488 of this
-repository, contributed by yujinhkim: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Ported on 2026-11-16 from the work of contributor yujinhkim: source repository `yujinhkim/lrp`,
+branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
 `PercLib/CriticalLRP/Analysis/Lemma_I_4_23.lean` and
 `PercLib/CriticalLRP/VolumeMoments/DFactorial.lean`; licence Apache-2.0, as declared in that
 commit's file headers and `third_party/critical-lrp/NOTICE.md`. Upstream origin
 `yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not
-independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1, Lemma I.4.23, p. 49.
+independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range percolation
+I*, arXiv:2508.18807v1, Lemma I.4.23, p. 49.
 
 Changes from the source: focused imports instead of `import Mathlib`; no `autoImplicit` and no
 disabled linters; the namespace is `PercLib.Combinatorics`; the source's helper definitions
@@ -140,7 +143,7 @@ theorem lemma_I_4_23 (n : ℕ) (hn : 1 ≤ n) :
   have hk' : k < n := mem_range.1 hk
   rw [show 2 * n - 2 * k - 3 = 2 * (n - 1 - k) - 1 by omega]
 
-/-- **D-5 / sanity check** at `n = 3`: `1·1·3 + 3·1·1 + 3·3·1 = 15 = 5‼`. -/
+/-- **Sanity check** at `n = 3`: `1·1·3 + 3·1·1 + 3·3·1 = 15 = 5‼`. -/
 theorem lemma_I_4_23_three :
     ∑ k ∈ range 3, (3 : ℕ).choose k * (2 * k - 1)‼ * (2 * 3 - 2 * k - 3)‼ = (2 * 3 - 1)‼ :=
   lemma_I_4_23 3 (by norm_num)

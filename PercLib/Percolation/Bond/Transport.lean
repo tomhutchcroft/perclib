@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 125, Q-9). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -20,7 +22,7 @@ whenever it carries one law to another, the two-point function, the probability 
 infinite cluster and the susceptibility are carried along too. No countability is needed.
 
 The hypothesis `(law q).map (fun ω => Sym2.map σ '' ω) = law q'` is supplied elsewhere
-(S-1) when `q = q' ∘ Sym2.map σ`; it is not proved here.
+(`prodBernoulli_map_image_sym2_invariant`) when `q = q' ∘ Sym2.map σ`; it is not proved here.
 -/
 
 @[expose] public section
@@ -169,6 +171,12 @@ theorem lintegral_map_image_sym2Map (σ : V ≃ W) (μ : Measure (Config V))
     _ = ∫⁻ ω, f (E ω) ∂μ := lintegral_map_equiv f E
     _ = _ := by rw [hE]
 
+/-- The connection probability under the push-forward of any measure along a vertex
+bijection, at the image vertices, is the connection probability under the measure. -/
+theorem connProb_map_image_sym2Map (σ : V ≃ W) (μ : Measure (Config V)) (x y : V) :
+    connProb (μ.map fun ω => Sym2.map σ '' ω) (σ x) (σ y) = connProb μ x y := by
+  rw [connProb, map_image_sym2Map_apply, preimage_conn_image, connProb]
+
 /-! ### Laws -/
 
 variable {q : Sym2 V → unitInterval} {q' : Sym2 W → unitInterval}
@@ -177,7 +185,7 @@ variable {q : Sym2 V → unitInterval} {q' : Sym2 W → unitInterval}
 theorem tau_eq_of_map_law (σ : V ≃ W)
     (h : (law q).map (fun ω => Sym2.map σ '' ω) = law q') (x y : V) :
     tau q' (σ x) (σ y) = tau q x y := by
-  rw [tau, ← h, map_image_sym2Map_apply, preimage_conn_image, tau]
+  rw [← connProb_law, ← h, connProb_map_image_sym2Map, connProb_law]
 
 /-- The probability that the cluster is infinite is carried along `σ` when the laws are. -/
 theorem law_cluster_infinite_eq_of_map_law (σ : V ≃ W)

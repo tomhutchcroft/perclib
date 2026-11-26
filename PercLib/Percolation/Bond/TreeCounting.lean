@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 194, Q-34). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -279,7 +281,8 @@ example (p : unitInterval) (n : ℕ) :
       (((2 : ℕ) : ℝ≥0∞) ^ 2 * (unitInterval.toNNReal p : ℝ≥0∞)) ^ n :=
   law_le_encard_cluster_le (⊤ : SimpleGraph (Fin 3)) (fun v => Nat.lt_succ_iff.1 (by
     simp)) _ p
-    (fun e hd he => absurd (SimpleGraph.edgeSet_top ▸ hd : e ∈ (⊤ : SimpleGraph (Fin 3)).edgeSet) he)
+    (fun e hd he => absurd (SimpleGraph.edgeSet_top ▸ hd : e ∈
+        (⊤ : SimpleGraph (Fin 3)).edgeSet) he)
     (fun _ _ => le_rfl) 0 n
 
 end PercLib.Percolation.Bond

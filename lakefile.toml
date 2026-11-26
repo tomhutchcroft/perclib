@@ -4,6 +4,14 @@ defaultTargets = ["PercLib"]
 
 [leanOptions]
 autoImplicit = false
+# mathlib's standard linter set (Mathlib/Init.lean, `linter.mathlibStandardSet`), as mathlib's
+# own lakefile enables it. Three of its linters stay off until their fallout is decided:
+# `style.header` (six adapted files keep their upstream notices), and
+# `unusedFintypeInType` / `unusedDecidableInType` (clearing them changes statements).
+weak.linter.mathlibStandardSet = true
+weak.linter.style.header = false
+weak.linter.unusedFintypeInType = false
+weak.linter.unusedDecidableInType = false
 
 [[require]]
 name = "mathlib"

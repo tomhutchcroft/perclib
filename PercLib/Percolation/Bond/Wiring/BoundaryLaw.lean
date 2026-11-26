@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New boundary-wiring proofs using pinned mathlib product measures and independence
 (56a005855ea17e0b0958f73ec801ae140b0a1679), on the canonical bond law.
 No new intensity definition or sharpness inequality is introduced.
@@ -10,10 +14,25 @@ public import PercLib.Percolation.Bond.Basic
 public import PercLib.Probability.ProdBernoulliIndependence
 public import Mathlib.Analysis.SpecialFunctions.Exponential
 
+/-!
+# Boundary wiring
+
+The ghost indicators of the boundary of a domain are independent of the internal edges; a ghost is
+closed exactly when all its exterior bonds are, with an exponential formula for summable
+intensities.
+
+## Main results
+
+* `law_iIndepFun_injective_blocks`
+* `law_iIndepFun_boundary_internal`
+* `law_boundary_closed`
+* `law_boundary_closed_exponential`
+-/
+
 @[expose] public section
 
 open MeasureTheory ProbabilityTheory Set PercLib.Probability
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond
 
@@ -128,7 +147,8 @@ theorem law_iIndepFun_boundary_internal (q : Sym2 V → unitInterval) (Λ : Set 
 /-- The ghost at x is closed exactly when all its exterior bonds are closed. -/
 theorem law_boundary_closed (q : Sym2 V → unitInterval) (Λ : Set V) (x : V) :
     law q {ω | ∀ y : (Λᶜ : Set V), s(x, (y : V)) ∉ ω} =
-      ∏' y : (Λᶜ : Set V), (unitInterval.toNNReal (unitInterval.symm (q s(x, (y : V)))) : ℝ≥0∞) := by
+      ∏' y : (Λᶜ : Set V), (unitInterval.toNNReal (unitInterval.symm (q s(x, (y : V)))) :
+          ℝ≥0∞) := by
   have h := law_map_injective_coordinates q (fun y : (Λᶜ : Set V) => s(x, (y : V)))
     (boundary_pair_injective x Λ)
   have hm : MeasurableSet (Set.pi Set.univ (fun _ : (Λᶜ : Set V) => ({False} : Set Prop))) := by

@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 197 (Q-37, deterministic part and the union bound), written on
-2026-11-15 by PROVER-E. No upstream proof is copied. Source of the model: G. Grimmett,
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied. Source of the model: G. Grimmett,
 *Percolation* (2nd ed., 1999), the rooted tree example; the statements here are elementary.
 -/
 module
@@ -29,6 +30,15 @@ root is `s(w.drop (m + 1), w.drop m)`.
 * With open probability `p` on tree edges and `0` on other pairs (any value on the
   diagonal), the probability that the root reaches depth `n` is at most `(k p)ⁿ`
   (`law_reach_depth_le`).
+* Reaching depth `n` is witnessed by an open chain to the root
+  (`exists_reachable_nil_iff_of_subset`), the root cluster is infinite exactly when the root
+  reaches every depth (`cluster_nil_infinite_iff_forall_reach_depth`), and the root reaches
+  depth `0` almost surely (`law_reach_depth_zero`).
+* For `k = 0` the root cluster is `{[]}` (`cluster_nil_eq_singleton_of_eq_zero`); at `p = 1`
+  every tree edge is almost surely open (`ae_kTree_edgeSet_subset_of_eq_one`).
+* The two deterministic statements also hold when only the open graph lies in the tree,
+  so open diagonal pairs are allowed (`reachable_nil_iff_of_openGraph_le`,
+  `cluster_nil_infinite_iff_forall_reach_depth_of_openGraph_le`).
 
 This file adds no definition.
 -/
@@ -240,6 +250,115 @@ theorem law_cluster_nil_infinite_eq_zero (p : unitInterval)
   rw [hdiag]
   exact le_antisymm (ge_of_tendsto' (ENNReal.tendsto_pow_atTop_nhds_zero_of_lt_one hkp) hle)
     zero_le
+
+/-! ### Depth events, the start of the depth sequence and the trivial cases -/
+
+/-- **Reaching depth `n` in a tree configuration** is witnessed by a word of length `n`
+whose edges to the root are all open. -/
+theorem exists_reachable_nil_iff_of_subset {ω : Config (List (Fin k))}
+    (hω : ω ⊆ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet)
+    (n : ℕ) :
+    (∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w) ↔
+      ∃ w : List (Fin k), w.length = n ∧ ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω := by
+  refine exists_congr fun w => and_congr_right fun hw => ?_
+  rw [reachable_nil_iff_of_subset hω, hw]
+
+/-- **The root cluster is infinite exactly when the root reaches every depth** (tree
+configurations). -/
+theorem cluster_nil_infinite_iff_forall_reach_depth {ω : Config (List (Fin k))}
+    (hω : ω ⊆ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet) :
+    (cluster ω []).Infinite ↔
+      ∀ n, ∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w := by
+  rw [cluster_nil_infinite_iff hω]
+  exact forall_congr' fun n => (exists_reachable_nil_iff_of_subset hω n).symm
+
+/-- The root reaches depth `0` with probability one, for every profile. -/
+theorem law_reach_depth_zero (q : Sym2 (List (Fin k)) → unitInterval) :
+    law q {ω | ∃ w : List (Fin k), w.length = 0 ∧ (openGraph ω).Reachable [] w} = 1 := by
+  have : {ω : Config (List (Fin k)) |
+      ∃ w : List (Fin k), w.length = 0 ∧ (openGraph ω).Reachable [] w} = univ :=
+    eq_univ_of_forall fun ω => ⟨[], rfl, SimpleGraph.Reachable.refl _⟩
+  rw [this, measure_univ]
+
+/-- Over an empty alphabet the root is the only word, so its cluster is `{[]}`. -/
+theorem cluster_nil_eq_singleton {α : Type*} [IsEmpty α] (ω : Config (List α)) :
+    cluster ω [] = {[]} := by
+  ext w
+  cases w with
+  | nil => simpa using mem_cluster_self ω []
+  | cons a _ => exact isEmptyElim a
+
+/-- **The tree with no children.** For `k = 0` the root cluster is `{[]}`. -/
+theorem cluster_nil_eq_singleton_of_eq_zero (hk : k = 0) (ω : Config (List (Fin k))) :
+    cluster ω [] = {[]} := by
+  subst hk
+  exact cluster_nil_eq_singleton ω
+
+/-- If every edge of a graph has open probability one, then almost surely every edge of the
+graph is open. -/
+theorem ae_edgeSet_subset_of_forall_eq_one {V : Type*} [Countable V] (G : SimpleGraph V)
+    (q : Sym2 V → unitInterval) (hq : ∀ e ∈ G.edgeSet, q e = 1) :
+    ∀ᵐ ω ∂law q, G.edgeSet ⊆ ω := by
+  have he (e : Sym2 V) : ∀ᵐ ω ∂law q, e ∈ G.edgeSet → e ∈ ω := by
+    by_cases h : e ∈ G.edgeSet
+    · have h1 : law q {ω | e ∈ ω} = 1 := by
+        simpa [law, hq e h] using PercLib.Probability.prodBernoulli_setOf_mem q e
+      have h0 : law q {ω | e ∈ ω}ᶜ = 0 := by
+        rw [prob_compl_eq_zero_iff (measurableSet_mem e)]
+        exact h1
+      rw [ae_iff]
+      simpa [h, Set.compl_ofPred] using h0
+    · exact Filter.Eventually.of_forall fun _ h' => absurd h' h
+  filter_upwards [ae_all_iff.mpr he] with ω hω
+  exact fun e he' => hω e he'
+
+/-- **At `p = 1` every tree edge is open.** With open probability `1` on tree edges (any
+values elsewhere), almost surely every edge of the tree is open. -/
+theorem ae_kTree_edgeSet_subset_of_eq_one (p : unitInterval)
+    (q : Sym2 (List (Fin k)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+        else 0)
+    (hp : p = 1) :
+    ∀ᵐ ω ∂law q,
+      (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet ⊆ ω :=
+  ae_edgeSet_subset_of_forall_eq_one _ q fun e he => by
+    rw [hq e (SimpleGraph.not_isDiag_of_mem_edgeSet _ he)]
+    simp [he, hp]
+
+/-! ### Configurations whose open graph lies in the tree -/
+
+/-- **Reaching a word when the open graph lies in the tree.** Open diagonal pairs are
+allowed: a word is joined to the root iff every edge on its way to the root is open. -/
+theorem reachable_nil_iff_of_openGraph_le {ω : Config (List (Fin k))}
+    (hω : openGraph ω ≤ SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u)
+    (w : List (Fin k)) :
+    (openGraph ω).Reachable [] w ↔ ∀ m < w.length, s(w.drop (m + 1), w.drop m) ∈ ω := by
+  have hs : ω \ Sym2.diagSet ⊆
+      (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet :=
+    by simpa [openGraph] using hω
+  rw [← openGraph_sdiff_diagSet ω, reachable_nil_iff_of_subset hs]
+  refine forall₂_congr fun m hm => ?_
+  have hnd : ¬ (s(w.drop (m + 1), w.drop m)).IsDiag := by
+    intro hd
+    have := congrArg List.length (Sym2.mk_isDiag_iff.mp hd)
+    simp at this
+    omega
+  simp [Sym2.mem_diagSet, hnd]
+
+/-- **The root cluster is infinite exactly when it reaches every depth**, for a configuration
+whose open graph lies in the tree (open diagonal pairs allowed). -/
+theorem cluster_nil_infinite_iff_forall_reach_depth_of_openGraph_le
+    {ω : Config (List (Fin k))}
+    (hω : openGraph ω ≤ SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u) :
+    (cluster ω []).Infinite ↔
+      ∀ n, ∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w := by
+  have hs : ω \ Sym2.diagSet ⊆
+      (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet :=
+    by simpa [openGraph] using hω
+  have hc : cluster ω [] = cluster (ω \ Sym2.diagSet) [] := by
+    simp only [cluster, openGraph_sdiff_diagSet]
+  rw [hc, cluster_nil_infinite_iff_forall_reach_depth hs, openGraph_sdiff_diagSet]
 
 /-! ### Non-vacuity -/
 

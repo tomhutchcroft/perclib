@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 211, Q-41): the measure form of mathlib's `fkg` and `holley`
+Authors: PercLib contributors
+-/
+/-
+New for this project: the measure form of mathlib's `fkg` and `holley`
 (`Mathlib/Combinatorics/SetFamily/FourFunctions.lean`). No upstream proof is copied.
 -/
 module
@@ -63,7 +65,8 @@ theorem integral_mul_integral_le_of_latticeCondition (μ : Measure (Set E))
   rw [integral_fintype Integrable.of_finite, integral_fintype Integrable.of_finite,
     integral_fintype Integrable.of_finite]
   simp only [smul_eq_mul]
-  have h := fkg (f := f) (g := g) (μ := fun ω : Set E => μ.real {ω}) (fun _ => measureReal_nonneg) hf₀ hg₀ hf hg
+  have h := fkg (f := f) (g := g) (μ := fun ω : Set E => μ.real {ω})
+      (fun _ => measureReal_nonneg) hf₀ hg₀ hf hg
     (real_latticeCondition μ hμ)
   have hsum : ∑ ω : Set E, μ.real {ω} = 1 := by
     rw [sum_measureReal_singleton, Finset.coe_univ]
@@ -80,8 +83,10 @@ theorem measure_inter_ge_of_latticeCondition (μ : Measure (Set E)) [IsProbabili
   have h := integral_mul_integral_le_of_latticeCondition μ hμ
     (f := fun ω => if ω ∈ A then (1 : ℝ) else 0) (g := fun ω => if ω ∈ B then (1 : ℝ) else 0)
     (fun ω => by dsimp; split_ifs <;> norm_num) (fun ω => by dsimp; split_ifs <;> norm_num)
-    (fun ω η hle => by dsimp; split_ifs with h1 h2 <;> first | exact absurd (hA hle h1) h2 | norm_num)
-    (fun ω η hle => by dsimp; split_ifs with h1 h2 <;> first | exact absurd (hB hle h1) h2 | norm_num)
+    (fun ω η hle => by
+      dsimp; split_ifs with h1 h2 <;> first | exact absurd (hA hle h1) h2 | norm_num)
+    (fun ω η hle => by
+      dsimp; split_ifs with h1 h2 <;> first | exact absurd (hB hle h1) h2 | norm_num)
   rw [integral_fintype Integrable.of_finite, integral_fintype Integrable.of_finite,
     integral_fintype Integrable.of_finite] at h
   simp only [smul_eq_mul] at h
@@ -116,7 +121,8 @@ theorem measure_le_of_holley (μ ν : Measure (Set E)) [IsProbabilityMeasure μ]
     (f := fun ω => μ.real {ω}) (g := fun ω => ν.real {ω})
     (fun ω => by dsimp; split_ifs <;> norm_num) (fun _ => measureReal_nonneg)
     (fun _ => measureReal_nonneg)
-    (fun ω η hle => by dsimp; split_ifs with h1 h2 <;> first | exact absurd (hA hle h1) h2 | norm_num)
+    (fun ω η hle => by
+      dsimp; split_ifs with h1 h2 <;> first | exact absurd (hA hle h1) h2 | norm_num)
     hsum hr
   have e1 : ∑ ω : Set E, (if ω ∈ A then (1 : ℝ) else 0) * μ.real {ω} = μ.real A := by
     rw [measureReal_eq_sum_indicator μ A]
@@ -127,6 +133,39 @@ theorem measure_le_of_holley (μ ν : Measure (Set E)) [IsProbabilityMeasure μ]
   rw [e1, e2] at hh
   rw [← ofReal_measureReal (measure_ne_top μ A), ← ofReal_measureReal (measure_ne_top ν A)]
   exact ENNReal.ofReal_le_ofReal hh
+
+/-- **Holley, observable form.** Under Holley's condition, `E_μ f ≤ E_ν f` for every increasing
+real function `f`. No full support is assumed. -/
+theorem integral_le_of_holley (μ ν : Measure (Set E)) [IsProbabilityMeasure μ]
+    [IsProbabilityMeasure ν]
+    (h : ∀ ω η : Set E, μ {ω} * ν {η} ≤ μ {ω ∩ η} * ν {ω ∪ η})
+    {f : Set E → ℝ} (hf : Monotone f) : ∫ ω, f ω ∂μ ≤ ∫ ω, f ω ∂ν := by
+  classical
+  have hr : ∀ ω η : Set E, μ.real {ω} * ν.real {η} ≤ μ.real {ω ⊓ η} * ν.real {ω ⊔ η} := by
+    intro ω η
+    simp only [measureReal_def, ← ENNReal.toReal_mul]
+    exact ENNReal.toReal_mono (ENNReal.mul_ne_top (measure_ne_top _ _) (measure_ne_top _ _))
+      (h ω η)
+  have hμ1 : ∑ ω : Set E, μ.real {ω} = 1 := by
+    rw [sum_measureReal_singleton, Finset.coe_univ]
+    simp
+  have hν1 : ∑ ω : Set E, ν.real {ω} = 1 := by
+    rw [sum_measureReal_singleton, Finset.coe_univ]
+    simp
+  -- shift `f` by its minimum `f ∅` to make it nonnegative
+  have hh := holley (μ := fun ω : Set E => f ω - f ∅)
+    (f := fun ω => μ.real {ω}) (g := fun ω => ν.real {ω})
+    (fun ω => sub_nonneg.2 (hf (empty_subset ω))) (fun _ => measureReal_nonneg)
+    (fun _ => measureReal_nonneg) (fun ω η hle => sub_le_sub_right (hf hle) _)
+    (hμ1.trans hν1.symm) hr
+  have key : ∀ ρ : Measure (Set E), IsProbabilityMeasure ρ → ∑ ω : Set E, ρ.real {ω} = 1 →
+      ∫ ω, f ω ∂ρ = ∑ ω : Set E, (f ω - f ∅) * ρ.real {ω} + f ∅ := by
+    intro ρ _ hρ
+    rw [integral_fintype (Integrable.of_finite)]
+    simp only [smul_eq_mul, sub_mul, Finset.sum_sub_distrib, ← Finset.mul_sum, hρ, mul_one]
+    simp only [mul_comm, sub_add_cancel]
+  rw [key μ inferInstance hμ1, key ν inferInstance hν1]
+  linarith
 
 /-! ### Product measures -/
 
@@ -183,7 +222,8 @@ example (p : E → unitInterval) {A B : Set (Set E)} (hA : IsUpperSet A) (hB : I
   measure_inter_ge_of_latticeCondition _ (fun ω η => (prodBernoulli_latticeCondition p ω η).le)
     hA hB
 
-/-- The monotone comparison of S-2 on a finite index set, re-derived from Holley. -/
+/-- The monotone comparison of `PercLib.Probability.Coupling.Monotone` on a finite index set,
+re-derived from Holley. -/
 example (p q : E → unitInterval) (hpq : p ≤ q) {A : Set (Set E)} (hA : IsUpperSet A) :
     prodBernoulli p A ≤ prodBernoulli q A :=
   measure_le_of_holley _ _ (prodBernoulli_holley p q hpq) hA

@@ -1,10 +1,16 @@
 /-
-Deterministic set-coordinate consequences of PercLib's finite-profile Russo API.
-The force/flip/difference method originates in NearCritical/Russo.lean at
-Tom Hutchcroft's near-critical-diffusivity revision
-c820fea91a7482c1755de0ec94ecb9f59ccfcacc, reused under permission R-3.
-We reuse the existing pivotal and force definitions, and their proved identities;
-no probability or differentiation theorem is reproved here.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Deterministic set-coordinate consequences of PercLib's finite-profile Russo API. The
+force/flip/difference method originates in NearCritical/Russo.lean at
+tomhutchcroft/near-critical-diffusivity, revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc, reused
+under Tom Hutchcroft's reuse permission recorded in `docs/DECISIONS.md`. The native source has no
+licence header; no upstream licence is asserted. We reuse the existing pivotal and
+force definitions, and their proved identities; no probability or differentiation theorem is
+reproved here.
 -/
 module
 
@@ -22,44 +28,51 @@ for bond connectivity, even though they remain coordinates of the probability la
 @[expose] public section
 
 open MeasureTheory Set
-open scoped Classical
 
 namespace PercLib.Probability.FiniteProfile
 
 variable {E : Type*}
 
+open Classical in
 /-- The canonical set is recovered from its Boolean membership encoding. -/
 theorem toSet_decide_mem (ω : Set E) : toSet (fun i => decide (i ∈ ω)) = ω := by
   ext i
   simp [toSet]
 
+open Classical in
 /-- Existing Boolean pivotality, expressed by insertion and deletion of a set coordinate. -/
 theorem pivotal_decide_iff (A : Set (Set E)) (e : E) (ω : Set E) :
     pivotal A e (fun i => decide (i ∈ ω)) ↔ insert e ω ∈ A ∧ ω \ {e} ∉ A := by
   simp only [pivotal, toSet_force_true, toSet_force_false, toSet_decide_mem]
 
+open Classical in
 /-- The forced-open test can equivalently be performed after deleting the coordinate. -/
 theorem pivotal_decide_iff_insert_sdiff (A : Set (Set E)) (e : E) (ω : Set E) :
     pivotal A e (fun i => decide (i ∈ ω)) ↔
       insert e (ω \ {e}) ∈ A ∧ ω \ {e} ∉ A := by
   rw [Set.insert_sdiff_singleton, pivotal_decide_iff]
 
+open Classical in
 /-- Changing only the tested coordinate leaves pivotality unchanged. -/
 theorem pivotal_decide_of_sdiff_eq (A : Set (Set E)) (e : E) {ω ω' : Set E}
     (h : ω \ {e} = ω' \ {e}) :
     pivotal A e (fun i => decide (i ∈ ω)) ↔ pivotal A e (fun i => decide (i ∈ ω')) := by
   simp only [pivotal_decide_iff_insert_sdiff, h]
 
+open Classical in
 theorem pivotal_decide_insert (A : Set (Set E)) (e : E) (ω : Set E) :
     pivotal A e (fun i => decide (i ∈ insert e ω)) ↔
       pivotal A e (fun i => decide (i ∈ ω)) := by
-  simpa using pivotal_decide_of_sdiff_eq A e (ω := insert e ω) (ω' := ω) (by ext i; by_cases hi : i = e <;> simp [hi])
+  simpa using pivotal_decide_of_sdiff_eq A e (ω := insert e ω) (ω' := ω)
+      (by ext i; by_cases hi : i = e <;> simp [hi])
 
+open Classical in
 theorem pivotal_decide_sdiff (A : Set (Set E)) (e : E) (ω : Set E) :
     pivotal A e (fun i => decide (i ∈ ω \ {e})) ↔
       pivotal A e (fun i => decide (i ∈ ω)) := by
   simpa using pivotal_decide_of_sdiff_eq A e (ω := ω \ {e}) (ω' := ω) (by ext i; simp)
 
+open Classical in
 /-- Pivotality is measurable whenever the original event is measurable. -/
 theorem measurableSet_pivotal_decide {A : Set (Set E)} (hA : MeasurableSet A) (e : E) :
     MeasurableSet {ω : Set E | pivotal A e (fun i => decide (i ∈ ω))} := by
@@ -71,11 +84,13 @@ theorem measurableSet_pivotal_decide {A : Set (Set E)} (hA : MeasurableSet A) (e
       fun_prop)).inter
     (hA.preimage (by fun_prop : Measurable (fun ω : Set E => ω \ {e}))).compl
 
+open Classical in
 /-- In particular no measurability hypothesis is needed on a finite index space. -/
 theorem measurableSet_pivotal_decide_finite [Finite E] (A : Set (Set E)) (e : E) :
     MeasurableSet {ω : Set E | pivotal A e (fun i => decide (i ∈ ω))} :=
   measurableSet_pivotal_decide (MeasurableSet.of_discrete) e
 
+open Classical in
 /-- For increasing events, the forced indicator increment is exactly the pivotal indicator. -/
 theorem indicator_insert_sub_sdiff {A : Set (Set E)} (hA : IsUpperSet A) (e : E)
     (ω : Set E) :
@@ -86,6 +101,7 @@ theorem indicator_insert_sub_sdiff {A : Set (Set E)} (hA : IsUpperSet A) (e : E)
     toSet_decide_mem, Set.indicator, Set.mem_ofPred_eq] using
     difference_eventValue hA e (fun i => decide (i ∈ ω))
 
+open Classical in
 /-- Split an increasing event into its pivotal-open part and its part already true
 with the coordinate closed. -/
 theorem event_eq_pivotal_open_union {A : Set (Set E)} (hA : IsUpperSet A) (e : E) :
@@ -105,6 +121,7 @@ theorem event_eq_pivotal_open_union {A : Set (Set E)} (hA : IsUpperSet A) (e : E
     · simpa [Set.insert_eq_of_mem he] using ho
     · exact hA Set.sdiff_subset hc
 
+open Classical in
 /-- The two parts in the pivotal decomposition are disjoint. -/
 theorem disjoint_pivotal_open_closed (A : Set (Set E)) (e : E) :
     Disjoint {ω : Set E | pivotal A e (fun i => decide (i ∈ ω)) ∧ e ∈ ω}
@@ -119,6 +136,7 @@ namespace PercLib.Percolation.Bond
 
 open PercLib.Probability.FiniteProfile
 
+open Classical in
 /-- Diagonal coordinates never affect connectivity and hence are never pivotal.
 This deterministic statement does not require a finite or countable vertex type. -/
 theorem not_pivotal_conn_diag {V : Type*} (x y v : V) (ω : Config V) :
@@ -137,6 +155,7 @@ theorem not_pivotal_conn_diag {V : Type*} (x y v : V) (ω : Config V) :
   rw [hg]
   exact fun h => h.2 h.1
 
+open Classical in
 /-- The one genuine bond of a two-vertex graph is pivotal in every configuration. -/
 example (ω : Config Bool) :
     pivotal (conn false true) s(false, true) (fun e => decide (e ∈ ω)) := by
@@ -152,6 +171,7 @@ example (ω : Config Bool) :
     rw [hg, SimpleGraph.reachable_bot] at h
     exact Bool.false_ne_true h
 
+open Classical in
 example (ω : Config Bool) :
     ¬ pivotal (conn false true) s(false, false) (fun e => decide (e ∈ ω)) :=
   not_pivotal_conn_diag false true false ω
@@ -166,6 +186,7 @@ example (ω : Set Unit) :
       {η : Set Unit | () ∈ η}.indicator (fun _ => (1 : ℝ)) (ω \ {()}) = 1 := by
   simp
 
+open Classical in
 example (ω : Set Bool) : ¬ pivotal (Set.univ : Set (Set Bool)) false
     (fun e => decide (e ∈ ω)) := by
   simp [pivotal_decide_iff]

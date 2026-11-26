@@ -1,0 +1,106 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "borgs-chayes-finite-window",
+  "entries": [
+    {
+      "id": "singleton-truncated-mean",
+      "title": "The singleton truncated mean is an isolation probability",
+      "status": "provisional",
+      "locator": "arXiv:math/0401069v1, 8 January 2004, document dated 6 May 2003, Section 9, proof of (9.8), printed p.35 / PDF index34, final sentence treating 1<s<2. Extracted text checked; PDF rendering and the 2005 journal version were not checked.",
+      "claim": "For 1<s<2, the proof describes the truncated susceptibility on the left of (9.8) as equal to one.",
+      "problem": "Only clusters of size one contribute, so the mean is P(|C_o|=1)=(1-p)^m on an m-regular simple graph. For example it is 1/8 on K4 at p=1/2, rather than one.",
+      "correction": "Replace equality with the bound chi_<s=P(|C_o|=1)<=1. The same conclusion then follows from M(p,1/s)>=1/s. The article also proves the uniform stronger estimate chi_<s<=2sM(p,1/s) directly, including all real s>=1.",
+      "tags": [
+        "E4NT",
+        "RD1J"
+      ],
+      "issues": [],
+      "leanImpact": "A restricted first moment retains the probability of the singleton event. Use the isolation-product identity or the bound by one; the variance statement and all downstream exponents remain unchanged. No compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the root-isolation probability, bounded by one, in the singleton cutoff case.",
+        "scale": "local",
+        "impact": "A one-line repair to the proof; no theorem hypothesis, constant in the source conclusion, or critical exponent changes."
+      }
+    },
+    {
+      "id": "sharp-threshold-denominator",
+      "title": "The sharpened critical-threshold upper bound needs a positive denominator",
+      "status": "provisional",
+      "locator": "arXiv:math/0401069v1, 8 January 2004, document dated 6 May 2003, Theorem 1.5, (1.30), printed p.7 / PDF index6, and its proof in Section 4.1, printed p.19 / PDF index18. Section 1.2 standing condition also checked. Extracted text only; visual PDF and journal version not compared.",
+      "claim": "The sharpened threshold upper bound divides 1-h by D0=1-kappa-nu h/(1-a), assuming only a=kappa+nu<1; here h=1/chi(pc), kappa=K1/m and nu=K2 chi(pc)^3/N.",
+      "problem": "The denominator can be negative. On the single-edge complete graph with pc=1/10, K1=0 and K2=1, the strong triangle bound holds on the whole interval and 1<chi(pc)<N, but a=1331/2000 and D0=-541/669. The asserted upper bound is then negative while m pc=1/10.",
+      "correction": "Require D0>0 when using the displayed source formula. Alternatively, retain D*=1-kappa-nu h/(1-a+a h) in the denominator; the article proves D*>=1-a>0 and 1-h<=m pc<=(1-h)/D* throughout the original a<1 range.",
+      "tags": [
+        "AJQL",
+        "UQEG",
+        "IWRH"
+      ],
+      "issues": [],
+      "leanImpact": "A formal threshold bound must retain a positive denominator or assume positivity before taking reciprocals. The susceptibility integral and fixed-constant asymptotics remain valid. No existing Lean statement or evidence was changed; the corrected prose statement has no compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the positive denominator D*, or add D0>0 to the weaker source formula.",
+        "scale": "statement",
+        "impact": "An explicit finite-graph upper bound changes, or gains a positivity hypothesis. The repair preserves the full a<1 range using D* and leaves the susceptibility estimate and critical exponents unchanged."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "early-magnetization-coefficient",
+      "title": "The early magnetization proof was corrected in the later author manuscript",
+      "locator": "May 2003 preprint, arXiv:math/0401069v1, Lemmas 5.5 and A.5, (5.16), (A.20), (A.34)–(A.38) and (A.47), printed pp.22 and40–43 / PDF indices21 and39–42. Compared with the September 14, 2004 author manuscript, Lemma A.4, (A.22), (A.39)–(A.43) and (A.52), printed pp.40–44 / PDF indices39–43. Extracted text only.",
+      "claim": "The early version takes the maximum of the full triangle, including its diagonal, and uses a cubic factor (1-eta)^3 in its double-green lower bound.",
+      "problem": "The full triangle maximum is at least one, so the displayed coefficient cannot yield the intended positive field estimate. With the intended diagonal-subtracted convention, the cubic factor still does not follow from substituting a lower bound for a term that is subtracted. The early endpoint label and unsummed branch vertex are also corrected in the later version.",
+      "correction": "The September 2004 author manuscript already uses max(T^3-delta), the correct endpoint, an upper bound for the subtracted magnetization and the factor (1-eta)^2-eta, with an explicit branch-vertex sum. Use this argument in the range eta<=1, or the positive-part version proved here. The remaining unrestricted-scope issue is recorded separately.",
+      "tags": [
+        "CHWM",
+        "60X1"
+      ],
+      "leanImpact": "Use the later source formulas, with the sign of the lower-bound factor explicit. The cubic coefficient is not an available theorem from the early proof. This entry records an observed author-version repair, not a new claim about the journal text or a compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Already corrected in the September 2004 author manuscript; use its subtraction and triangle normalization.",
+        "scale": "statement",
+        "impact": "The early proof and coefficient change. The later manuscript supplies the replacement; its small-triangle mean-field conclusions survive. The separate positivity qualification is still required, and the publisher version was not checked."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "magnetization-coefficient-scope",
+      "title": "The finite magnetization polynomial needs a triangle-size restriction",
+      "locator": "September 14, 2004 author manuscript hosted by Microsoft Research, Appendix A.2, Lemma A.4, (A.21)–(A.22) and final step of (A.43), printed pp.40 and43 / PDF indices39 and42. Extracted text checked; publisher version and visual PDF not compared.",
+      "claim": "The differential inequality is stated for all 0<p<1 and 0<gamma<1 with a polynomial coefficient containing (1-eta)^2-eta.",
+      "problem": "The proof multiplies lower bounds involving 1-eta without restricting its sign. The unrestricted inequality is false: on K4 with p=gamma=1/2, eta=549/64, M=437/512, chi_gamma=21/64 and the proposed right side divided by M is 8336249145/2147483648>1.",
+      "correction": "Add eta<=1, or replace (1-eta)^2 by (max(1-eta,0))^2. The article gives a full finite-graph cutting proof of the latter statement, including the signed deletion loss and the two marked-cluster estimate.",
+      "tags": [
+        "60X1",
+        "EHH4",
+        "NBKI"
+      ],
+      "leanImpact": "A finite formal interface must encode the triangle-size hypothesis before multiplying lower bounds, or use the positive-part coefficient. The generic p interval alone is insufficient. Existing wiki statements remain unchanged and no new compiled association is supplied.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restrict eta to at most one, or use the positive-part coefficient; the corrected finite inequality is proved.",
+        "scale": "statement",
+        "impact": "The generic lemma gains a hypothesis or changes its coefficient outside the small-triangle range. Its intended small-triangle application and critical exponents are unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:math/0401069v1 (8 January 2004; document dated 6 May 2003)",
+    "checkedUrl": "https://arxiv.org/abs/math/0401069v1",
+    "method": "The preprint and the September 2004 author manuscript were compared in extracted text at the cited magnetization passages. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The singleton-cutoff and threshold-denominator reports are scoped to the early preprint. The early magnetization-coefficient report records a correction already made by the authors. The separate unrestricted-polynomial report concerns the September 2004 manuscript. The 2005 publisher text has not been compared. All four reports remain provisional.",
+    "comparisons": [
+      {
+        "version": "Author manuscript dated 14 September 2004",
+        "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/11/Random-Subgraphs-of-Finite-Graphs-I-The-Scaling-Window-Under-the-Triangle-Condition.pdf",
+        "status": "compared",
+        "findings": "Appendix A.2 already corrects the early diagonal subtraction, cubic coefficient, endpoint label and branch-vertex sum. Its Lemma A.4, (A.21)–(A.22) and the last step of (A.43), still give the unrestricted polynomial underlying the separate scope report. This comparison covers those passages only, not the other two entries or the journal edition."
+      }
+    ]
+  }
+}

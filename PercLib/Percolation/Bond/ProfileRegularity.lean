@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 156, Q-22, items 1, 2 and the first half of 4). No upstream
-proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -20,7 +21,7 @@ public import Mathlib.Topology.Semicontinuity.Basic
 Profiles carry the pointwise order and the product topology.
 
 * `τ`, `χ`, `θ` and the probability that some cluster is infinite are monotone in the
-  profile (from the monotone coupling S-2).
+  profile (from the monotone coupling).
 * The probability of an event determined by finitely many pairs is continuous in the profile.
 * `τ` is lower semicontinuous, as the supremum over a finite exhaustion of internal connection
   probabilities.
@@ -46,6 +47,7 @@ theorem tau_mono [Countable V] {q q' : Sym2 V → unitInterval} (h : q ≤ q') (
   prodBernoulli_mono_event q q' h (measurableSet_conn x y) (isUpperSet_conn x y)
 
 /-- The susceptibility is monotone in the profile. -/
+@[tag "EDWA"]
 theorem chi_mono [Countable V] {q q' : Sym2 V → unitInterval} (h : q ≤ q') (x : V) :
     chi q x ≤ chi q' x :=
   lintegral_prodBernoulli_mono q q' h
@@ -101,12 +103,11 @@ theorem continuous_prodBernoulli_of_determined {ι : Type*} (F : Finset ι) {E :
 profile. -/
 theorem continuous_law_localConn (S : Finset V) (x y : V) :
     Continuous fun q : Sym2 V → unitInterval =>
-      law q {ω : Config V | ∃ hx : x ∈ (S : Set V), ∃ hy : y ∈ (S : Set V),
-        ((openGraph ω).induce (S : Set V)).Reachable ⟨x, hx⟩ ⟨y, hy⟩} := by
+      law q (localConn (S : Set V) x y) := by
   classical
   set F : Finset (Sym2 V) := (S ×ˢ S).image fun z => s(z.1, z.2) with hF
   refine continuous_prodBernoulli_of_determined F fun ω ω' h => ?_
-  simp only [mem_ofPred_eq]
+  simp only [mem_localConn]
   refine exists_congr fun hx => exists_congr fun hy => localConn_iff_of_agree _ _ _
     fun a ha b hb => ?_
   have hab : s(a, b) ∈ (F : Set (Sym2 V)) := by
@@ -134,8 +135,7 @@ theorem lowerSemicontinuous_tau [Countable V] (x y : V) :
   obtain ⟨S, hS, hcover⟩ := exists_finset_exhaustion (V := V)
   have hS' : Monotone fun n => (S n : Set V) := fun m n hmn => Finset.coe_subset.2 (hS hmn)
   have heq : (fun q : Sym2 V → unitInterval => tau q x y) = fun q =>
-      ⨆ n, law q {ω : Config V | ∃ hx : x ∈ (S n : Set V), ∃ hy : y ∈ (S n : Set V),
-        ((openGraph ω).induce (S n : Set V)).Reachable ⟨x, hx⟩ ⟨y, hy⟩} := by
+      ⨆ n, law q (localConn (S n : Set V) x y) := by
     funext q
     exact tau_eq_iSup_localConn q hS' hcover x y
   rw [heq]

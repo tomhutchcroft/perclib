@@ -1,0 +1,52 @@
+# Abelian sums and binary-tree moments
+
+This inventory records **26 explicit named public theorem or lemma starts in 3 complete files / 802 lines** at private lrp merged main f51f639c15d742034cc6e2058008c79f48392873. Each file has been read in full. Private helpers and anonymous witnesses are excluded from the public declaration count.
+
+## Analysis/AbelianSums
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L53](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | If b_n is asymptotic to nonnegative d_n, the exponentially damped d-series converge at each positive parameter and diverge as that parameter decreases to zero, then the damped b- and d-sums are asymptotically equivalent. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L111](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | An absolutely summable real sequence has damped sums converging to its full sum as the positive damping parameter tends to zero. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L128](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | The rising factorial is the product of the successive factors a+j. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L137](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | The generalized binomial coefficient equals the rising factorial divided by n!. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L144](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | These coefficients are positive when a>0. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L150](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | The binomial generating series equals (1-x)^(-a) for 0<=x<1 and any real a. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L162](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | For a>0 the generalized binomial coefficient is asymptotic to n^(a-1)/Gamma(a). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L188](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | For any real a, lambda^a (1-exp(-lambda))^(-a) tends to one as lambda decreases to zero. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L203](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | If b_n is asymptotic to c n^(a-1), a,c>0, then lambda^a times its damped sum tends to c Gamma(a); b need not be everywhere nonnegative. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L259](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | For positive lambda, the damped reciprocal series equals -log(1-exp(-lambda)); the zero-index term is zero. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L273](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | This logarithm is asymptotic to log(1/lambda). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L297](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/AbelianSums.lean) | If b_n is asymptotic to c/n with c>0, its damped sum is asymptotic to c log(1/lambda), without an everywhere nonnegative assumption on b. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+
+## Models/BinaryTreeMoments
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L49](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | A real parameter approaching one half is eventually strictly between zero and one. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L54](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | For 0<p<1, p not one half, the damping base 4p(1-p) is strictly between zero and one. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L63](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | Its negative logarithm tends to zero through positive values as p approaches one half from either side. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L76](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | The damping parameter is asymptotic to 4(p-1/2)^2. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L104](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | The series over positive indices equals a series with zero term explicitly removed; this identity alone does not establish convergence. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L121](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | For any real s, the weighted Catalan coefficients are asymptotic to pi^(-1/2) n^(s-3/2). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L136](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | For s>1/2, the moment series is asymptotic to Gamma(s-1/2) lambda^(-(s-1/2))/sqrt(pi). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L168](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | At s=1/2 it is asymptotic to log(1/lambda)/sqrt(pi). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L203](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | For every real s<1/2, the critical series converges and the near-critical series tends to it; no lower bound s>=0 is needed in the theorem. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L235](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMoments.lean) | For s>1/2, the ratio of successive moment series is asymptotic to (s-1/2)/(4(p-1/2)^2). | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+
+## Models/BinaryTreeMomentLaw
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L40](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMomentLaw.lean) | The event that a cluster is finite with natural cardinal n is the event that its extended cardinal equals n. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L56](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMomentLaw.lean) | The nth Catalan number is at most 4^n. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L63](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMomentLaw.lean) | For 0<p<1, p not one half, the exponentially damped Catalan moment series converges for every real exponent. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+| [L98](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/BinaryTreeMomentLaw.lean) | For the rooted binary-tree profile, 0<p<1 and p not one half, the nonnegative integral of cluster-size power restricted to finite clusters equals the real Catalan moment series, for every real exponent. Diagonal profile values are arbitrary. | [Argument](../articles/binary-tree-percolation.md#section-abelian-source) |
+
+## Scope and provenance
+
+The Abelian comparison permits finitely many negative coefficients; it assumes a nonnegative comparison sequence and divergence of its damped sum. The summable case uses Lean's unordered real summability, hence **absolute summability**, not merely convergence of the ordered partial sums. These are Abelian implications from coefficient asymptotics to sum asymptotics, not a Tauberian converse.
+
+The analytic moment equivalents use a punctured neighbourhood of p=1/2, allowing approach from either side. Their identification with the bond law is in the separate third file, and its integral is explicitly zero on infinite clusters. It is neither an unconditional positive moment above criticality nor a conditional expectation given extinction. The latter would require dividing by the extinction probability. Every real exponent is allowed in the off-critical identification; the analytic finite-limit theorem is also stated for every real s<1/2, beyond its nonnegative-exponent header description. The critical point is excluded from the real-series identification because the series may diverge there. Dropping a zero-index term is only an algebraic identity of real sums; the independent convergence proof prevents interpreting a divergent real sum as a probability moment.
+
+All three headers record new project proofs, using the previously read Catalan asymptotic module. The Abelian header mentions Feller as standard mathematical context; no edition-specific Feller correspondence has been checked here. The source proof uses binomial generating functions and Euler's Gamma limit, whereas the article's existing proof uses an improper Riemann-sum comparison. Both routes are retained distinctly. No new published-paper error is asserted.

@@ -1,0 +1,58 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "fourier-spatial-moment-bridge",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 203
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "The integer-moment Fourier bridge",
+      "locator": "Section 4.1.1\u20134.1.2, Lemma 4.1 and (4.4)\u2013(4.13), printed pp.567\u2013569 / PDF indices37\u201339",
+      "relationship": "Written integer-order argument with denominator regularization and explicit Fejer justification of convolution sums",
+      "status": "pending",
+      "note": "Mixed derivatives and the spatial bound are proved from absolute moments. Even coordinate weights give the convolution bounds. Fractional orders and the two-mark diagram lemma remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "2ZOB",
+      "proof_uses": [],
+      "reason": "Moment bounds and evenness control differentiated numerator and denominator; induction on the quotient identity gives the uniform regularized derivative estimate."
+    },
+    {
+      "order": 1,
+      "tag": "1165",
+      "proof_uses": [
+        "2ZOB"
+      ],
+      "reason": "Integration by parts is first performed with a positive denominator regularization; L1 convergence passes to the critical inverse integral."
+    },
+    {
+      "order": 2,
+      "tag": "BNKQ",
+      "proof_uses": [
+        "2ZOB",
+        "1165"
+      ],
+      "reason": "Holder bounds and positive Fejer multipliers identify finite-support convolutions; monotone convergence gives the nonnegative critical sums."
+    },
+    {
+      "order": 3,
+      "tag": "CMEX",
+      "proof_uses": [
+        "F7N7",
+        "QA8C",
+        "1165",
+        "BNKQ"
+      ],
+      "reason": "The completed critical Fourier bootstrap supplies the gap and second moments, giving the first spatial bound and weighted bubble/triangle sums without assuming spatial decay."
+    }
+  ]
+}

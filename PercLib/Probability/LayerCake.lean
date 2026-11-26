@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 466 (Q-132), written on 2026-11-16 by PROVER-F. No upstream proof is
-copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -23,7 +24,7 @@ Let `T : Ω → ℕ∞` be measurable under a measure `μ`.
 * `lintegral_indicator_lt_eq`: for a real `X ≥ 0` and `t ≥ 0`,
   `∫⁻ X 1{X > t} = t μ{X > t} + ∫_t^∞ μ{X > s} ds`, from mathlib's layer cake.
 
-The ghost identity of item 3 of the issue,
+The ghost identity
 `∫⁻ (1 - e^{-hT}) = (1 - e^{-h}) ∑_{n ≥ 1} e^{-h(n-1)} μ {n ≤ T}`, is
 `PercLib.Probability.lintegral_ghost_eq_tsum` (`GhostTransform.lean`) and is not repeated.
 The cluster case of the first identity is `chi_eq_tsum_law_le_encard`.
@@ -47,6 +48,7 @@ theorem measurableSet_natCast_le (hT : Measurable T) (n : ℕ) :
 /-! ### First moments -/
 
 /-- **Tail sum.** `∫⁻ T = ∑_{n ≥ 0} μ {n + 1 ≤ T}`. -/
+@[tag "CSY8"]
 theorem lintegral_toENNReal_eq_tsum (hT : Measurable T) :
     ∫⁻ ω, (T ω : ℝ≥0∞) ∂μ = ∑' n : ℕ, μ {ω | ((n + 1 : ℕ) : ℕ∞) ≤ T ω} := by
   have hpt : ∀ ω, (T ω : ℝ≥0∞) = ∑' n : ℕ,
@@ -206,7 +208,7 @@ theorem lintegral_indicator_lt_eq {X : Ω → ℝ} (hX : Measurable X) (hX0 : �
     · rfl
     · exact ⟨fun h' => absurd h' (by linarith [ht]), fun h' => absurd (hs.trans h') h⟩
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
 /-- `T ≡ k`: the tail sum is `k`. -/
 example (k : ℕ) : ∑' n : ℕ, (Measure.dirac ()) {_ω : Unit | ((n + 1 : ℕ) : ℕ∞) ≤ (k : ℕ∞)} =
@@ -241,8 +243,11 @@ example {p : ℝ} (hp : 0 < p) :
   exact this.symm
 
 /-- Item 4 for `X ≡ 2` and `t = 1`: both sides are `2`. -/
-example : ∫⁻ _ω, {_ω : Unit | (1 : ℝ) < 2}.indicator (fun _ => ENNReal.ofReal 2) () ∂(Measure.dirac ()) =
+example : ∫⁻ _ω, {_ω : Unit | (1 : ℝ) < 2}.indicator (fun _ => ENNReal.ofReal 2)
+    () ∂(Measure.dirac ()) =
     ENNReal.ofReal 1 * (Measure.dirac ()) {_ω : Unit | (1 : ℝ) < 2} +
       ∫⁻ s in Ioi (1 : ℝ), (Measure.dirac ()) {_ω : Unit | s < 2} :=
   lintegral_indicator_lt_eq (X := fun _ => (2 : ℝ)) measurable_const (fun _ => by norm_num)
     zero_le_one
+
+end PercLib.Probability

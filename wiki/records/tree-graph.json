@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "tree-graph",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 8
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-branch-point",
+      "order": 0,
+      "label": "Finite branch decomposition and three-point tree bound",
+      "locator": "Named public declaration start lines: 48, 77, 175, 182, 239, 266",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The deterministic split allows repeated target positions and arbitrary finite edge witnesses, with a prescribed label orienting the probability recursion. Countability enters the probability sum, not the finite decomposition. L82Q is the two-target specialization."
+    },
+    {
+      "source": "perclib-tree-graph-interface",
+      "order": 0,
+      "label": "The tree-graph target and its elementary witnesses",
+      "locator": "Named public theorem start lines: 30, 49",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "One proposition-valued definition and two named witness theorems. The definition alone does not prove the general inequality; the later branch-point module supplies its proof. No correspondence status is upgraded."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "L82Q",
+      "proof_uses": [
+        "JRCI"
+      ],
+      "reason": "Two applications of countable BK to the branch-point disjoint occurrence."
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "critical-arm-bounds",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 170
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Intrinsic ball second moment",
+      "locator": "17 March 2017 author manuscript, (11.3.6) and Exercise 11.8, printed pp.141\u2013142 / PDF indices152\u2013153.",
+      "relationship": "Written arm and dimension deductions; external spatial inputs explicit",
+      "status": "pending",
+      "note": "A shortest-path tree supplies three disjoint bounded-length witnesses, including coincident marks."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Annulus lower bound",
+      "locator": "17 March 2017 author manuscript, Proof of the lower bound in (11.3.1), following (11.3.6), printed p.142 / PDF index153.",
+      "relationship": "Written arm and dimension deductions; external spatial inputs explicit",
+      "status": "pending",
+      "note": "The occupied annulus forces its inner radius; that event is enough for the reciprocal-radius bound."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Completed intrinsic estimate",
+      "locator": "17 March 2017 author manuscript, Lemma 11.6, Exercise 11.7 and the intrinsic part of Theorem 11.5, printed pp.139\u2013143 / PDF indices150\u2013154.",
+      "relationship": "Written arm and dimension deductions; external spatial inputs explicit",
+      "status": "pending",
+      "note": "Existing renewal and stopping-layer results give both intrinsic bounds, with no spatial asymptotic input."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Conditional extrinsic lower bound",
+      "locator": "17 March 2017 author manuscript, Exercise 11.9, printed p.143 / PDF index154.",
+      "relationship": "Written arm and dimension deductions; external spatial inputs explicit",
+      "status": "pending",
+      "note": "The annular vertex count has first moment of order n squared and second moment at most a constant times n to the sixth under the two-point hypotheses."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Dimension obstruction",
+      "locator": "17 March 2017 author manuscript, Corollary 11.7 and (11.4.1)\u2013(11.4.3), printed pp.144\u2013145 / PDF indices155\u2013156.",
+      "relationship": "Written arm and dimension deductions; external spatial inputs explicit",
+      "status": "pending",
+      "note": "Disjoint endpoint boxes give an independent-arm product. The corrected power is n to the 2-d."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "RP0G",
+      "proof_uses": [],
+      "reason": "A shortest-path tree supplies three disjoint bounded-length witnesses, including coincident marks."
+    },
+    {
+      "order": 1,
+      "tag": "9TXI",
+      "proof_uses": [
+        "RP0G"
+      ],
+      "reason": "The occupied annulus forces its inner radius; that event is enough for the reciprocal-radius bound."
+    },
+    {
+      "order": 2,
+      "tag": "W73R",
+      "proof_uses": [
+        "9TXI",
+        "93RC",
+        "0Y4K",
+        "JQLC",
+        "R5XZ",
+        "74SS",
+        "KEO7"
+      ],
+      "reason": "Existing renewal and stopping-layer results give both intrinsic bounds, with no spatial asymptotic input."
+    },
+    {
+      "order": 3,
+      "tag": "CGM9",
+      "proof_uses": [],
+      "reason": "The annular vertex count has first moment of order n squared and second moment at most a constant times n to the sixth under the two-point hypotheses."
+    },
+    {
+      "order": 4,
+      "tag": "2RZH",
+      "proof_uses": [],
+      "reason": "Disjoint endpoint boxes give an independent-arm product. The corrected power is n to the 2-d."
+    }
+  ]
+}

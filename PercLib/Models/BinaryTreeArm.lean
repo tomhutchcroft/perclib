@@ -1,8 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-73: the critical arm recursion on the rooted binary tree and the exact two-point function
-on rooted trees. New for this project; no upstream proof is copied, and no new definition
-is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The critical arm recursion on the rooted binary tree and the exact two-point function on rooted
+trees. New for this project; no upstream proof is copied, and no new definition is introduced.
 -/
 module
 
@@ -84,7 +87,7 @@ theorem reachable_kTree (w : List (Fin k)) :
 
 /-! ### The two-point function -/
 
-/-- **NDIC, item 2.** On the rooted `k`-ary tree with open probability `p` on tree edges and
+/-- **Item 2.** On the rooted `k`-ary tree with open probability `p` on tree edges and
 `0` on all other pairs (any value on the diagonal), `tau q x y = p ^ dist(x,y)` for every
 `p ∈ [0,1]` and all vertices, with `p ^ 0 = 1`. -/
 theorem tau_kTree_eq_pow (p : unitInterval) (q : Sym2 (List (Fin k)) → unitInterval)
@@ -199,7 +202,7 @@ private theorem toReal_half :
   rw [ENNReal.coe_toReal]
   rfl
 
-/-- **NDIC, item 1**, start: `r_0 = 1`. -/
+/-- **Item 1**, start: `r_0 = 1`. -/
 theorem binaryArm_zero :
     (law (fun e : Sym2 (List (Fin 2)) =>
         if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
@@ -211,7 +214,7 @@ theorem binaryArm_zero :
     Set.eq_univ_of_forall fun ω => ⟨[], rfl, fun m hm => absurd hm (Nat.not_lt_zero m)⟩
   rw [this, measure_univ, ENNReal.toReal_one]
 
-/-- **NDIC, item 1**, recursion: `r_(n+1) = r_n − r_n²/4` at `p = 1/2`. -/
+/-- **Item 1**, recursion: `r_(n+1) = r_n − r_n²/4` at `p = 1/2`. -/
 theorem binaryArm_succ (n : ℕ) :
     (law (fun e : Sym2 (List (Fin 2)) =>
         if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
@@ -245,7 +248,7 @@ theorem binaryArm_succ (n : ℕ) :
     ENNReal.toReal_one]
   ring
 
-/-- **NDIC, item 1**, asymptotics: `n · r_n → 4` at `p = 1/2`. -/
+/-- **Item 1**, asymptotics: `n · r_n → 4` at `p = 1/2`. -/
 theorem tendsto_mul_binaryArm :
     Tendsto (fun n : ℕ => (n : ℝ) *
       (law (fun e : Sym2 (List (Fin 2)) =>
@@ -255,7 +258,82 @@ theorem tendsto_mul_binaryArm :
         ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω}).toReal) atTop (𝓝 4) :=
   tendsto_mul_of_arm_recursion _ binaryArm_zero binaryArm_succ
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-- At `p = 1/2` with any diagonal, the probability that the root cluster reaches generation
+`n` equals the ancestral-chain probability `r_n` of the zero-diagonal profile. -/
+theorem law_reach_depth_eq_binaryArm (q : Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
+        (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0) (n : ℕ) :
+    law q {ω | ∃ w ∈ cluster ω [], w.length = n} =
+      law (fun e : Sym2 (List (Fin 2)) =>
+          if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
+            (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0)
+        {ω | ∃ w : List (Fin 2), w.length = n ∧
+          ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω} := by
+  set G := (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u)
+  set q0 : Sym2 (List (Fin 2)) → unitInterval := fun e =>
+    if e ∈ G.edgeSet then (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0
+  have hset : {ω : Config (List (Fin 2)) | ∃ w ∈ cluster ω [], w.length = n} =
+      {ω | ∃ w : List (Fin 2), w.length = n ∧ (openGraph ω).Reachable [] w} := by
+    ext ω
+    exact ⟨fun ⟨w, h1, h2⟩ => ⟨w, h2, h1⟩, fun ⟨w, h1, h2⟩ => ⟨w, h2, h1⟩⟩
+  rw [hset]
+  have h1 : law q {ω : Config (List (Fin 2)) |
+        ∃ w : List (Fin 2), w.length = n ∧ (openGraph ω).Reachable [] w} =
+      law q0 {ω : Config (List (Fin 2)) |
+        ∃ w : List (Fin 2), w.length = n ∧ (openGraph ω).Reachable [] w} := by
+    refine law_event_eq_of_offDiagonal q q0 (fun e he => hq e he)
+      (measurableSet_reach_depth n) ?_
+    intro ω ω' h
+    have hg : openGraph ω = openGraph ω' := by
+      rw [← openGraph_sdiff_diagSet ω, h, openGraph_sdiff_diagSet]
+    simp only [Set.mem_ofPred_eq, hg]
+  rw [h1]
+  refine measure_congr ?_
+  refine (ae_config_subset_host G q0 (fun e he => by simp [q0, he])).mono fun ω hω => ?_
+  refine propext ⟨fun ⟨w, hl, h⟩ => ⟨w, hl, ?_⟩, fun ⟨w, hl, h⟩ => ⟨w, hl, ?_⟩⟩
+  · subst hl
+    exact (reachable_nil_iff_of_subset hω w).1 h
+  · subst hl
+    exact (reachable_nil_iff_of_subset hω w).2 h
+
+/-- **Item 1**, start, for any diagonal: `r_0 = 1`. -/
+theorem binaryTree_law_reach_depth_zero (q : Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
+        (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0) :
+    (law q {ω | ∃ w ∈ cluster ω [], w.length = 0}).toReal = 1 := by
+  rw [law_reach_depth_eq_binaryArm q hq]
+  exact binaryArm_zero
+
+/-- **Item 1**, recursion, for any diagonal: `r_(n+1) = r_n − r_n²/4`. -/
+theorem binaryTree_law_reach_depth_succ (q : Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
+        (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0) (n : ℕ) :
+    (law q {ω | ∃ w ∈ cluster ω [], w.length = n + 1}).toReal =
+      (law q {ω | ∃ w ∈ cluster ω [], w.length = n}).toReal -
+        (law q {ω | ∃ w ∈ cluster ω [], w.length = n}).toReal ^ 2 / 4 := by
+  rw [law_reach_depth_eq_binaryArm q hq, law_reach_depth_eq_binaryArm q hq]
+  exact binaryArm_succ n
+
+open Asymptotics in
+/-- **Item 1**, asymptotics, for any diagonal: `r_n ~ 4/n`. -/
+theorem binaryTree_law_reach_depth_isEquivalent (q : Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then
+        (⟨1 / 2, by norm_num, by norm_num⟩ : unitInterval) else 0) :
+    (fun n : ℕ => (law q {ω | ∃ w ∈ cluster ω [], w.length = n}).toReal)
+      ~[atTop] (fun n : ℕ => 4 / (n : ℝ)) := by
+  simp_rw [law_reach_depth_eq_binaryArm q hq]
+  refine isEquivalent_of_tendsto_one ?_
+  have h := tendsto_mul_binaryArm.div_const 4
+  rw [show (4 : ℝ) / 4 = 1 by norm_num] at h
+  refine h.congr fun n => ?_
+  simp only [Pi.div_apply]
+  rw [div_div_eq_mul_div, mul_comm]
+
+/-! ### Non-vacuity witnesses -/
 
 /-- `r_1 = 3/4`. -/
 example :

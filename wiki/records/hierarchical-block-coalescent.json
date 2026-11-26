@@ -1,0 +1,95 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hierarchical-block-coalescent",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 11
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 7,
+      "label": "Exact block layers of hierarchical percolation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 0,
+      "label": "Exact radial block layers",
+      "locator": "Section 1.1; equations (1.1)–(1.2)",
+      "relationship": "Written derivation",
+      "status": "pending",
+      "note": "VI3Y proves the independent-layer coupling and distinguishes eta_B from the induced full graph and from the full-cluster intersection. Exact power law only."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 3,
+      "label": "Scale recursion",
+      "locator": "Equations (2.2)–(2.3) and (2.5)–(2.7)",
+      "relationship": "Written derivation",
+      "status": "pending",
+      "note": "54V4 supplies the full multinomial gluing proof and rooted identity."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 7,
+      "label": "Uniform block comparisons and mean error",
+      "locator": "Corollary 3.7; Proposition 4.5; Lemma 4.8 and Corollary 4.9",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "X2A4 proves the fixed-index block comparisons, variance bound and exact mean error. Concentration is conditional on an explicit maximum-to-mean ratio; the critical mean lower bound and hydrodynamic condition are not inferred."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 38,
+      "label": "Periodic block kernel",
+      "locator": "Section 7.1",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "YY9S defines the finite quotient by the tail subgroup and computes Jper-Jfree=L^(-(d+alpha)n) q/(1-q). It supplies the exact added final coalescent time, without periodic asymptotic claims."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 4,
+      "tag": "54V4",
+      "proof_uses": [
+        "VI3Y",
+        "Z960"
+      ],
+      "reason": "Independent child layers give the initial recursion; translation invariance gives the rooted identity."
+    },
+    {
+      "order": 5,
+      "tag": "X2A4",
+      "proof_uses": [
+        "VI3Y",
+        "25TW",
+        "25Z4",
+        "Z960",
+        "22H8"
+      ],
+      "reason": "The layer decomposition and the finite coalescent give independent intermediate bonds, hence moment control and covariance; the finite generator supplies the exact mean equation."
+    },
+    {
+      "order": 36,
+      "tag": "YY9S",
+      "proof_uses": [
+        "VI3Y"
+      ],
+      "reason": "Count fibres of the projection to the first n coordinate blocks, sum the geometric kernel tail, and interpret the added constant intensity as an independent final coalescent interval."
+    },
+    {
+      "order": 62,
+      "tag": "VI3Y",
+      "proof_uses": [],
+      "reason": "Independent exponential clocks per block and pair give the stated weights by a geometric series; no other wiki assertion is invoked."
+    }
+  ]
+}

@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 435 (Q-101), written on 2026-11-16 by PROVER-E: the three-vertex
-counterexample showing that the lower bound for the boundary functional of the wiki page
-boundary-susceptibility (tag 67GX) needs the positive part (tag JTBG). No upstream proof is
-copied, no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: the three-vertex counterexample showing that the lower bound for
+the boundary functional of the wiki page boundary-susceptibility (tag 67GX) needs the positive part
+(tag JTBG). No upstream proof is copied, no definition is added and no Input is introduced.
 -/
 module
 
@@ -45,7 +48,9 @@ namespace PercLib.Percolation.Bond
 /-- `3/5 < 1 - e^{-99/100}`, from `1 + x + x²/2 + x³/6 ≤ e^x`. -/
 theorem three_fifths_lt_one_sub_exp : (3 / 5 : ℝ) < 1 - Real.exp (-(99 / 100)) := by
   have h := Real.sum_le_exp_of_nonneg (show (0 : ℝ) ≤ 99 / 100 by norm_num) 4
-  simp [Finset.sum_range_succ, Nat.factorial] at h
+  simp only [Finset.sum_range_succ, Finset.range_one, Finset.sum_singleton, pow_zero, Nat.factorial,
+      Nat.cast_one, ne_eq, one_ne_zero, not_false_eq_true, div_self, pow_one, Nat.succ_eq_add_one,
+      zero_add, mul_one, div_one, Nat.reduceAdd, Nat.cast_ofNat, Nat.reduceMul] at h
   have hpos := Real.exp_pos (99 / 100 : ℝ)
   have hinv : Real.exp (-(99 / 100)) = (Real.exp (99 / 100))⁻¹ := Real.exp_neg _
   rw [hinv]
@@ -115,7 +120,11 @@ theorem tau_three_path (h01 : J s(0, 1) = 99 / 100) (h12 : J s(1, 2) = 1 / 100)
   · rw [tau_eq_prod_of_ae_le_acyclic _ hG hhost
       ⟨SimpleGraph.Walk.cons a01 (SimpleGraph.Walk.cons a12 .nil),
         by simp [SimpleGraph.Walk.isPath_def]⟩]
-    simp [hq, h01, h12]
+    simp only [Fin.isValue, SimpleGraph.Walk.edges_cons, SimpleGraph.Walk.edges_nil,
+        List.toFinset_cons, List.toFinset_nil, insert_empty_eq, hq, Finset.mem_singleton, Sym2.eq,
+        Sym2.rel_iff', Prod.mk.injEq, zero_ne_one, Fin.reduceEq, and_self, Prod.swap_prod_mk,
+        and_true, or_self, not_false_eq_true, Finset.prod_insert, h01, NNReal.coe_div,
+        NNReal.coe_ofNat, Finset.prod_singleton, h12, one_div, NNReal.coe_inv]
     rw [ENNReal.ofReal_mul (sub_nonneg.2 (Real.exp_le_one_iff.2 (by norm_num)))]
 
 /-- The three susceptibilities. -/
@@ -191,13 +200,10 @@ theorem boundary_functional_three_path (h12 : J s(1, 2) = 1 / 100) (h02 : J s(0,
     ∑ v ∈ ({0, 1} : Finset (Fin 3)), ∑' z,
         (if z ∈ ({0, 1} : Finset (Fin 3)) then 0 else (J s(v, z) : ℝ)) *
           ∑' w, (law (intensityProfile J 1)).real
-            {ω | ∃ hz : z ∈ ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ),
-              ∃ hw : w ∈ ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ),
-              ((openGraph ω).induce ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ)).Reachable
-                ⟨z, hz⟩ ⟨w, hw⟩} = 1 / 100 := by
+            (localConn ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ) z w) = 1 / 100 := by
   simp only [tsum_fintype, Fin.sum_univ_three]
   rw [Finset.sum_pair (by decide)]
-  simp [h12, h02]
+  simp [h12, h02, localConn]
 
 /-- The unsigned square `(χ_min |S| - ∑_{u,v ∈ S} τ(u,v))² / (β² χ_max Q(S))` at `β = 1`,
 `S = {0, 1}` exceeds `841/10050`. -/
@@ -235,10 +241,10 @@ theorem unsigned_square_three_path_gt (h01 : J s(0, 1) = 99 / 100)
   rw [lt_div_iff₀ hD0]
   nlinarith
 
-/-- **The positive part is needed (JTBG).** In the three-vertex model at `β = 1` with
-`S = {0, 1}`, the boundary functional `Φ_1(S) = 1/100` is smaller than the unsigned square
-`(χ_min |S| - ∑_{u,v ∈ S} τ(u,v))² / (β² χ_max Q(S))`. So the lower bound of 67GX fails if
-the positive part is dropped. -/
+/-- **The positive part is needed.** In the three-vertex model at `β = 1` with `S = {0, 1}`, the
+boundary functional `Φ_1(S) = 1/100` is smaller than the unsigned square
+`(χ_min |S| - ∑_{u,v ∈ S} τ(u,v))² / (β² χ_max Q(S))`. So the lower bound of
+`boundary_susceptibility_bound` fails if the positive part is dropped. -/
 theorem not_boundary_bound_unsigned (h01 : J s(0, 1) = 99 / 100)
     (h12 : J s(1, 2) = 1 / 100) (h02 : J s(0, 2) = 0) :
     ¬ (((⨅ u, chi (intensityProfile J 1) u).toReal * (({0, 1} : Finset (Fin 3)).card : ℝ) -
@@ -250,10 +256,7 @@ theorem not_boundary_bound_unsigned (h01 : J s(0, 1) = 99 / 100)
       ∑ v ∈ ({0, 1} : Finset (Fin 3)), ∑' z,
         (if z ∈ ({0, 1} : Finset (Fin 3)) then 0 else (J s(v, z) : ℝ)) *
           ∑' w, (law (intensityProfile J 1)).real
-            {ω | ∃ hz : z ∈ ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ),
-              ∃ hw : w ∈ ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ),
-              ((openGraph ω).induce ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ)).Reachable
-                ⟨z, hz⟩ ⟨w, hw⟩}) := by
+            (localConn ((({0, 1} : Finset (Fin 3)) : Set (Fin 3))ᶜ) z w)) := by
   rw [boundary_functional_three_path h12 h02, not_le]
   exact lt_trans (by norm_num) (unsigned_square_three_path_gt h01 h12 h02)
 
@@ -261,7 +264,7 @@ end Model
 
 /-! ### Non-vacuity -/
 
-/-- The kernel of the issue satisfies the three hypotheses, so the failing inequality
+/-- The three-vertex kernel satisfies the three hypotheses, so the failing inequality
 `not_boundary_bound_unsigned` holds for an actual model. -/
 example := not_boundary_bound_unsigned (J := fun e : Sym2 (Fin 3) =>
     if e = s(0, 1) then 99 / 100 else if e = s(1, 2) then 1 / 100 else 0)

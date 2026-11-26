@@ -1,0 +1,105 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "boundary-susceptibility",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 15
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 1,
+      "label": "Susceptibility beyond a finite boundary",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 1,
+      "label": "Boundary formula and proof arithmetic",
+      "locator": "Lemma 2.1 and equations (2.4)–(2.5); PDF printed pp. 11–12",
+      "relationship": "Correction and weaker proved consequence",
+      "note": "Independent counterexamples address both the nontransitive boundary formula and the stronger small-intensity derivative formula."
+    },
+    {
+      "source": "perclib-boundary-susceptibility",
+      "order": 0,
+      "label": "Deletion, last exit and corrected boundary susceptibility",
+      "locator": "Named public declaration start lines: 50, 58, 64, 82, 90, 104, 116, 127, 138, 161, 202, 210, 219, 242, 270, 277, 300, 389, 411, 438",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "7902 allows arbitrary deleted sets and endpoints; 67GX requires normalized off-diagonal rows and uniformly finite susceptibility for its real quotient. Empty sets and zero intensity use totalized real division. Later random-cluster and derivative arguments are separate."
+    },
+    {
+      "source": "perclib-boundary-counterexample",
+      "order": 0,
+      "label": "Three-vertex counterexample to the unsigned boundary square",
+      "locator": "Named public declaration start lines: 46, 59, 73, 79, 93, 122, 145, 173, 190, 204, 242",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "JTBG has the prescribed proper-edge intensities and arbitrary diagonals. The source computes exact finite-model quantities and proves the rational contradiction, with an explicit kernel witness. The existing published-paper erratum remains provisional."
+    },
+    {
+      "source": "perclib-normalized-small-intensity",
+      "order": 0,
+      "label": "Normalized small-intensity bounds",
+      "locator": "Explicit public declaration start lines: 48, 63, 87, 93, 100, 155, 173, 184, 195, 228, 244, 253, 267, 273, 291",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fifteen public results prove numerical susceptibility and triangle bounds using row normalization, without needing transitivity. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-normalized-small-intensity-line",
+      "order": 0,
+      "label": "The normalized line obstruction",
+      "locator": "Explicit public declaration start lines: 43, 80, 89, 126, 136, 143, 161, 208, 220, 232, 238, 245, 259, 274, 288, 308",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Sixteen public results give the exact line formulas and the quantitative strict inequality for 0<beta<1/48. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "T7VI",
+      "proof_uses": [
+        "L82Q",
+        "AFH6",
+        "IZAO"
+      ],
+      "reason": "The first bound applies the three-point tree-graph inequality (L82Q), the second the four-point tree shapes of the multipoint tree bound (AFH6), with mass transport and the diagram comparison IZAO for finiteness."
+    },
+    {
+      "order": 1,
+      "tag": "4KBG",
+      "proof_uses": [
+        "6JBS",
+        "BNY8",
+        "67GX",
+        "T7VI",
+        "IZAO",
+        "MXGM"
+      ],
+      "reason": "The derivative comes from the finite-domain Russo identity (6JBS) bounded by BK (BNY8); the boundary estimate (67GX), the weighted moment bounds (T7VI) and B<=A<=Delta^2 (IZAO) give the lower bound, and MXGM gives the lower susceptibility bound."
+    },
+    {
+      "order": 2,
+      "tag": "MTYL",
+      "proof_uses": [],
+      "reason": "The proof is an explicit computation of the two-point function, susceptibility and triangle on Z and invokes no other wiki assertion."
+    },
+    {
+      "order": 3,
+      "tag": "1EWX",
+      "proof_uses": [
+        "MXGM"
+      ],
+      "reason": "The susceptibility and triangle bounds are proved directly by path and walk sums; the derivative bound applies the local regularity and upper derivative estimate MXGM."
+    }
+  ]
+}

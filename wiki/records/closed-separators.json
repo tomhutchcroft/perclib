@@ -1,0 +1,66 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "closed-separators",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 33
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-closed-certificates",
+      "order": 0,
+      "label": "Closed separators, finite vertex witnesses and decreasing events",
+      "locator": "Named theorem start lines: 33, 40, 53, 64, 75, 88, 116, 120, 126",
+      "relationship": "Complete grouped deterministic source contracts with explicit certificate scope",
+      "status": "pending",
+      "note": "GA03 and 2C4E give the closed cluster boundary, stability of closed-boundary sets under connection, the first-exit walk argument and the two equivalent separator characterizations. The empty walk handles equal endpoints. NBY2 retains that the source finite-cluster witness is a finite vertex set. Finite coordinate certificates on a locally finite host are additional, and the unrestricted empty-configuration example prevents conflation. YIM4 keeps the root-in-set hypothesis. ZQI1 gives both deterministic decreasing properties; measurability on countable vertices is an additional deduction. These qualifications do not diagnose a false source theorem."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "2C4E",
+      "proof_uses": [
+        "GA03",
+        "T90E",
+        "6WC8"
+      ],
+      "reason": "Cluster closure and the first edge leaving a vertex set give both separator characterizations."
+    },
+    {
+      "order": 1,
+      "tag": "NBY2",
+      "proof_uses": [
+        "2C4E"
+      ],
+      "reason": "The cluster is the finite vertex witness; local finiteness makes its host boundary finite."
+    },
+    {
+      "order": 2,
+      "tag": "YIM4",
+      "proof_uses": [
+        "2C4E"
+      ],
+      "reason": "A path leaving the prescribed set gives a forbidden edge from the root cluster to the complement."
+    },
+    {
+      "order": 3,
+      "tag": "ZQI1",
+      "proof_uses": [
+        "T90E",
+        "2C4E",
+        "7QJG"
+      ],
+      "reason": "Closing coordinates shrinks clusters. On countable vertices, nonconnection is a measurable complement and finite-cluster events are countable unions of closed-boundary events."
+    },
+    {
+      "order": 4,
+      "tag": "GA03",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

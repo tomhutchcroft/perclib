@@ -1,0 +1,137 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "open-degree-laws",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 21
+    },
+    {
+      "collection": "methods",
+      "order": 32
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-degree",
+      "order": 0,
+      "label": "Degree and boundary first moments",
+      "locator": "Named theorem start lines: 37, 45, 53, 63, 68, 75, 84, 97, 102",
+      "relationship": "Complete grouped source-contract exposition",
+      "status": "pending",
+      "note": "PMHN distinguishes raw incident coordinates from loop-free graph degree. SZLN gives adjacency marginals, measurable countable degree, the extended expectation and Markov bound; the source also includes the tautological zero-threshold case. TOTD covers finite pair sets on arbitrary vertices and outgoing boundary pairs on countable vertices. A crossing bond is counted once, through its orientation out of the finite set. The first-moment identities use only marginals; no infinite-expectation implication is inferred without independence."
+    },
+    {
+      "source": "perclib-degree-generating",
+      "order": 0,
+      "label": "Incident-coordinate products and isolation",
+      "locator": "Named theorem start lines: 42, 59, 68, 84, 113, 139",
+      "relationship": "Complete grouped source contracts with additional infinite-product deductions",
+      "status": "pending",
+      "note": "TEYJ includes extended nonnegative generating parameters, the one-coordinate factor, mutual independence and the finite zero-parameter product. TYZP interprets the pointwise infimum of powers as the generating function of the limiting count only for parameters in [0,1], with 0^0 = 1 and 1^infinity = 1. UNJ6 erases the root from each exhaustion set. The source exports the isolation product but not the additional positivity characterization or XJ74 infinite-row deduction."
+    },
+    {
+      "source": "perclib-first-moment",
+      "order": 0,
+      "label": "Finite counts from indicator sums",
+      "locator": "Named theorem start lines: 34, 39, 50",
+      "relationship": "Grouped source-contract exposition",
+      "status": "pending",
+      "note": "The arbitrary-set extended cardinality identity and finite indicator expectation are explained before CPD6. TOTD retains its existing bond-specific statement. No uncountable Tonelli interchange is claimed."
+    },
+    {
+      "source": "perclib-concentration",
+      "order": 0,
+      "label": "Finite independent-count laws and concentration",
+      "locator": "Named theorem start lines: 38, 47, 52, 64, 76, 83, 91, 99, 119, 145, 154, 201, 206, 213",
+      "relationship": "Complete grouped source contracts with elementary expository extensions",
+      "status": "pending",
+      "note": "CPD6 supplies the binomial specialization and the more general assignment sum. XSA6 proves the centered exponential-moment bound and both one-sided tails, with the empty coordinate set stated separately rather than using division by zero. The two-sided bound is an expository union-bound consequence. Raw pair counts may include loops; graph degree excludes them. No random-coordinate-set concentration or cluster-volume concentration follows."
+    },
+    {
+      "source": "perclib-infinite-degree",
+      "order": 0,
+      "label": "Infinite rows and zero critical intensity",
+      "locator": "Named public theorem start lines: 41, 49, 74, 119, 128, 142, 188, 201, 218",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "XJ74 gives the infinite-degree conclusion by the product generating function. The source instead uses the second Borel–Cantelli lemma. VNRG supplies the finite-intensity truncation estimate and the root/global threshold consequences at one specified vertex. No transitivity, uniform row hypothesis or claim about other roots is added."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "SZLN",
+      "proof_uses": [
+        "PMHN"
+      ],
+      "reason": "The degree is the countable sum of off-diagonal adjacency indicators."
+    },
+    {
+      "order": 1,
+      "tag": "TEYJ",
+      "proof_uses": [
+        "PMHN",
+        "DYU8"
+      ],
+      "reason": "Incident pair coordinates are distinct, so their measurable factors are independent and their nonnegative expectation factors."
+    },
+    {
+      "order": 2,
+      "tag": "TYZP",
+      "proof_uses": [
+        "TEYJ"
+      ],
+      "reason": "Increasing counts give decreasing bounded powers when the generating parameter lies in [0,1]."
+    },
+    {
+      "order": 3,
+      "tag": "UNJ6",
+      "proof_uses": [
+        "TYZP"
+      ],
+      "reason": "The zero-parameter limit gives isolation; elementary logarithmic bounds characterize positivity of the infinite product."
+    },
+    {
+      "order": 4,
+      "tag": "XJ74",
+      "proof_uses": [
+        "SZLN",
+        "TYZP"
+      ],
+      "reason": "The finite first moment gives finite degree. If the row diverges, the generating function vanishes at every fixed parameter strictly between zero and one."
+    },
+    {
+      "order": 5,
+      "tag": "CPD6",
+      "proof_uses": [
+        "DYU8"
+      ],
+      "reason": "Finite assignment probabilities factor over independent coordinates; summing the assignments gives the count law."
+    },
+    {
+      "order": 6,
+      "tag": "XSA6",
+      "proof_uses": [
+        "DYU8"
+      ],
+      "reason": "Independence factors centered exponential moments. The single-coordinate bound follows by differentiating its log moment generating function."
+    },
+    {
+      "order": 7,
+      "tag": "VNRG",
+      "proof_uses": [
+        "XJ74",
+        "1C8G"
+      ],
+      "reason": "Truncate the divergent finite intensity row, compare it to the probability row, then apply the independent degree criterion and the threshold definitions."
+    },
+    {
+      "order": 8,
+      "tag": "PMHN",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

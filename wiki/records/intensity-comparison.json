@@ -1,0 +1,89 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "intensity-comparison",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 40
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-intensity-monotone",
+      "order": 0,
+      "label": "Sprinkling and intensity thresholds",
+      "locator": "Named theorem start lines: 38, 45, 57, 71, 86, 90, 100, 108, 116, 123",
+      "relationship": "Complete grouped source contracts; explicit countability distinctions and separate expository deductions",
+      "status": "pending",
+      "note": "Thresholds are infima of finite positive-probability parameters, not susceptibility thresholds. Root positivity follows from support connectivity, not equality of rooted survival probabilities. Positive scaling permits infinite thresholds, while zero scaling is separate. Off-diagonal kernel comparison and the finite-set large-intensity consequence are article deductions; the source compares full coordinate profiles. No formal status or independent correspondence verdict is authored."
+    },
+    {
+      "source": "perclib-root-independence",
+      "order": 1,
+      "label": "Support paths and root-independent thresholds",
+      "locator": "Named theorem start lines: 42, 49, 57, 69, 87, 98, 103, 110, 121, 138, 148, 171, 184",
+      "relationship": "Complete grouped source contracts; explicit countability distinctions and separate expository deductions",
+      "status": "pending",
+      "note": "Thresholds are infima of finite positive-probability parameters, not susceptibility thresholds. Root positivity follows from support connectivity, not equality of rooted survival probabilities. Positive scaling permits infinite thresholds, while zero scaling is separate. Off-diagonal kernel comparison and the finite-set large-intensity consequence are article deductions; the source compares full coordinate profiles. No formal status or independent correspondence verdict is authored. The qualitative support-component and threshold consequences were already explained under C3OO and 1C8G; IYVA retains the stronger full-two-point coefficient in the survival comparison and explicitly links those prior assertions."
+    },
+    {
+      "source": "perclib-intensity-scaling",
+      "order": 2,
+      "label": "Kernel rescaling, comparison and large intensity",
+      "locator": "Named theorem start lines: 48, 59, 83, 88, 93, 99, 108, 119, 128, 134, 142, 153, 160, 167, 176, 182, 187, 198, 205, 228",
+      "relationship": "Complete grouped source contracts; explicit countability distinctions and separate expository deductions",
+      "status": "pending",
+      "note": "Thresholds are infima of finite positive-probability parameters, not susceptibility thresholds. Root positivity follows from support connectivity, not equality of rooted survival probabilities. Positive scaling permits infinite thresholds, while zero scaling is separate. Off-diagonal kernel comparison and the finite-set large-intensity consequence are article deductions; the source compares full coordinate profiles. No formal status or independent correspondence verdict is authored."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "TWLQ",
+      "proof_uses": [
+        "A65C",
+        "5PAT",
+        "8DAH"
+      ],
+      "reason": "Independent intensity layers establish monotonicity; the threshold implications follow from the infimum definitions."
+    },
+    {
+      "order": 1,
+      "tag": "IYVA",
+      "proof_uses": [
+        "X5SS",
+        "9IPM",
+        "JZN0"
+      ],
+      "reason": "Harris and a positive finite support path transfer survival; countable unions identify global positivity."
+    },
+    {
+      "order": 2,
+      "tag": "IJOB",
+      "proof_uses": [
+        "A65C",
+        "8DAH"
+      ],
+      "reason": "Equality of scaled profiles and order-preserving reparametrisation identify the percolating-parameter infima."
+    },
+    {
+      "order": 3,
+      "tag": "CKJQ",
+      "proof_uses": [
+        "EYCQ",
+        "6B9V",
+        "8DAH"
+      ],
+      "reason": "Loop erasure and ordered product coupling compare graph observables; inclusion of parameter sets reverses the threshold ordering."
+    },
+    {
+      "order": 4,
+      "tag": "QZVQ",
+      "proof_uses": [
+        "9IPM"
+      ],
+      "reason": "The finite product of positive-support opening probabilities tends to one and squeezes the two-point measure."
+    }
+  ]
+}

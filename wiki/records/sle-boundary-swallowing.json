@@ -1,0 +1,87 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-boundary-swallowing",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 148
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "First collision, first boundary hit and separated intervals",
+      "locator": "arXiv:math/0106036v4, Sections 6–7: Theorem 6.4, the remark after Lemma 6.5, Lemma 6.6 and equation (6.13), Lemma 7.3, and Theorem 7.1. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written boundary-flow and geometric proof with explicit classical inputs",
+      "status": "pending",
+      "note": "The deterministic argument uses order of real flows and backward continuation to locate the collision tip. Local Schwarz reflection proves that preceding compact intervals are separated from the future domain; full inverse-map boundary continuity is an explicit hypothesis."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "The boundary beta law and fixed-real-point swallowing",
+      "locator": "arXiv:math/0106036v4, Sections 6–7: Theorem 6.4, the remark after Lemma 6.5, Lemma 6.6 and equation (6.13), Lemma 7.3, and Theorem 7.1. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written boundary-flow and geometric proof with explicit classical inputs",
+      "status": "pending",
+      "note": "The deterministic collision equivalence and the proved co-swallowing law remove the geometric input retained in 2L0Z. The beta tail excludes a hit at each fixed real point and gives positive probability that a prescribed interval is separated from the domain. The trace theorem is supplied by MN2A."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Immediate origin engulfment between four and eight",
+      "locator": "arXiv:math/0106036v4, Sections 6–7: Theorem 6.4, the remark after Lemma 6.5, Lemma 6.6 and equation (6.13), Lemma 7.3, and Theorem 7.1. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written boundary-flow and geometric proof with explicit classical inputs",
+      "status": "pending",
+      "note": "At the finite swallowing time of one, all boundary preimages of zero form a compact set strictly left of the driver. A measurable deterministic interval contains that set with positive probability. Strong Markov and interval swallowing give eventual separation; scaling and the Brownian germ law give separation at every positive time."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Intermediate-regime transience and simultaneous finite lifetimes",
+      "locator": "arXiv:math/0106036v4, Sections 6–7: Theorem 6.4, the remark after Lemma 6.5, Lemma 6.6 and equation (6.13), Lemma 7.3, and Theorem 7.1. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written boundary-flow and geometric proof with explicit classical inputs",
+      "status": "pending",
+      "note": "The monotone distance from zero to the domain has square-root scaling and tends to infinity. Future tips stay outside each earlier domain distance. Every compact set is covered by a hull, and local real-flow continuation excludes any surviving real point inside the growing half-disk. No uncountable intersection of fixed-point events is used."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "E5JX",
+      "proof_uses": [],
+      "reason": "The deterministic argument uses order of real flows and backward continuation to locate the collision tip. Local Schwarz reflection proves that preceding compact intervals are separated from the future domain; full inverse-map boundary continuity is an explicit hypothesis."
+    },
+    {
+      "order": 1,
+      "tag": "U8XU",
+      "proof_uses": [
+        "E5JX",
+        "MN2A",
+        "6DV8",
+        "KQIN"
+      ],
+      "reason": "The deterministic collision equivalence and the proved co-swallowing law remove the geometric input retained in 2L0Z. The beta tail excludes a hit at each fixed real point and gives positive probability that a prescribed interval is separated from the domain. The trace theorem is supplied by MN2A."
+    },
+    {
+      "order": 2,
+      "tag": "ZI7H",
+      "proof_uses": [
+        "E5JX",
+        "U8XU",
+        "MN2A",
+        "6DV8"
+      ],
+      "reason": "At the finite swallowing time of one, all boundary preimages of zero form a compact set strictly left of the driver. A measurable deterministic interval contains that set with positive probability. Strong Markov and interval swallowing give eventual separation; scaling and the Brownian germ law give separation at every positive time."
+    },
+    {
+      "order": 3,
+      "tag": "G09W",
+      "proof_uses": [
+        "ZI7H"
+      ],
+      "reason": "The monotone distance from zero to the domain has square-root scaling and tends to infinity. Future tips stay outside each earlier domain distance. Every compact set is covered by a hull, and local real-flow continuation excludes any surviving real point inside the growing half-disk. No uncountable intersection of fixed-point events is used."
+    }
+  ]
+}

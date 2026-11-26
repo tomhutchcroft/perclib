@@ -1,0 +1,158 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-lrp-1",
+  "entries": [
+    {
+      "id": "levy-first-moment-weight",
+      "title": "First-moment weighting in the displacement-density proof",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML, proof of Lemma I.5.17; compare the bounded-jump Lévy measure in (I.5.16). PDF p. 72 located by text extraction on 16 November 2026; the extracted 2 does not distinguish a norm subscript from a square. The PDF glyph placement remains visually unverified, and the first-moment diagnosis refers to the inspected HTML.",
+      "claim": "The density argument calls the measure (Euclidean norm of x, capped at one) times Pi finite.",
+      "problem": "Near zero, the displayed Lévy density is comparable to norm(x) to the power -d-alpha. Its first absolute moment is infinite for 1 <= alpha < 2, a range allowed in the spatial theorem. Absolute continuity of this weighted measure does not make its mass finite. This does not refute the asserted existence of a displacement density.",
+      "correction": "MWZ7 proves existence of a density by Fourier inversion: the characteristic exponent is bounded below by a positive multiple of norm(xi)^alpha at large frequencies, making each positive-time characteristic function integrable. Mixture over the exponential time then gives the probability density kappa. The proof uses the finite second truncated moment, and norm equivalence gives the same small-ball lower bound for the paper’s general norm.",
+      "tags": [
+        "MWZ7"
+      ],
+      "issues": [],
+      "leanImpact": "Do not introduce finiteness of the first absolute Lévy moment as an input for the whole alpha < 2 regime. Use the finite second truncated moment and justify Fourier inversion and the exponential mixture, or verify the exact hypotheses of the cited absolute-continuity theorem. The source diagnosis is provisional; no compiled Lévy-process result is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Construct the displacement density by Fourier inversion and exponential-time mixing.",
+        "scale": "substantial",
+        "impact": "Replaces the divergent first-moment argument using the finite truncated second moment; density existence and the small-ball conclusion survive."
+      }
+    },
+    {
+      "id": "spatial-normalization-indices",
+      "title": "Regular-variation indices after changing to spatial radius",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML and PDF p. 93, opening of section I.5.4 after the definitions of eta(R) and zeta(R); compare (I.1.14) and the proof of Lemma I.5.36. PDF text extraction checked 16 November 2026: it also assigns indices -alpha and 2 alpha. No later edition or author confirmation is established.",
+      "claim": "The normalization paragraph assigns eta and zeta indices -alpha and 2 alpha as functions of the spatial radius R.",
+      "problem": "For alpha > 2, the spatial scale has index alpha/2 in the cutoff radius, so its inverse has index 2/alpha. Composition therefore gives indices -2 and 4 in R. The stated indices agree with these only in the alpha <= 2 regimes. This is a mismatch of scale variables, not a counterexample to the scaling-limit theorem.",
+      "correction": "Use beta = min(alpha, 2): eta has index -beta and zeta has index 2 beta. 57FJ proves the composition rule with explicit hypotheses. At alpha = 2 the indices agree, with logarithmic terms retained in the slowly varying factors. The later s-factor in the proof of Lemma I.5.36 already uses min(alpha, 2).",
+      "tags": [
+        "57FJ",
+        "L9YJ",
+        "BB3O"
+      ],
+      "issues": [],
+      "leanImpact": "Distinguish the cutoff-radius parameter from the physical-radius parameter in any formal scaling interface. Compose the moment scales with the inverse spatial scale before asserting regular-variation indices or estimating the omitted-edge term. No Lean scaling theorem is claimed; the source diagnosis awaits author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use min(alpha,2) in the regular-variation indices after changing spatial scale.",
+        "scale": "local",
+        "impact": "Corrects the scale bookkeeping; it does not change the scaling-limit theorem."
+      }
+    },
+    {
+      "id": "mixed-moment-cluster-index",
+      "title": "The moved marked vertices belong to the second cluster",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML and PDF p. 85, identity in Lemma I.5.28; compare the two separate cluster sums in (I.5.35), on the same printed page. PDF text extraction checked 16 November 2026: the lemma also sums every marked vertex over K. Author confirmation remains pending.",
+      "claim": "The displayed mixed-moment derivative sums every marked vertex over the root cluster, including the vertices assigned to the other side of the joining edge.",
+      "problem": "Opening a closed edge adds the cluster at its other endpoint. In the expansion of the change of a product of cluster sums, each factor assigned to the new side must be summed over that other cluster. Using the old root cluster for both sets of marked vertices gives a different observable. The following display (I.5.35) uses the two separate cluster sums.",
+      "correction": "Use the exact product-increment formula 1K61: vertices indexed by I lie in K_y and the remaining vertices lie in K_0, with y outside K_0. The finite-volume identity and its dominated countable-volume passage are proved, including for signed polynomial weights.",
+      "tags": [
+        "1K61",
+        "GY8M"
+      ],
+      "issues": [],
+      "leanImpact": "In a formal mixed-moment Russo identity, retain the two distinct cluster carriers until the separately justified factorization step. A product of root-cluster moments cannot replace the exact derivative by definition. No Lean mixed-moment theorem is claimed; author confirmation remains pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Put the new marked vertices in the other endpoint's cluster.",
+        "scale": "notation",
+        "impact": "An index correction in the merger formula; the following source display already separates the clusters correctly."
+      }
+    },
+    {
+      "id": "mixed-moment-radius-factor",
+      "title": "Missing radius power in the factorized mixed-moment formula",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML and PDF p. 85, Lemma I.5.29; compare the explicit r to the q(S) factor in (I.5.44), PDF p. 91. Both PDF displays checked by text extraction on 16 November 2026. The lemma omits the factor retained in the later recurrence; author confirmation remains pending.",
+      "claim": "The factorized derivative contains an integral of the joining-displacement monomial over the unit ball, without the radius power supplied by that monomial.",
+      "problem": "If its degree is q, summing this weight over the radius-r ball produces an additional factor r^q beyond the volume factor. For a quadratic monomial assigned entirely to the joining displacement, the missing factor is r squared. The normalization of the remaining cluster factors does not supply it.",
+      "correction": "Include r^{q(S)} multiplying the unit-ball integral in each split. GY8M states this factor explicitly and derives both the long-range recurrence and the disappearance of positive-q terms when r/sigma(r) tends to zero. The later source equation (I.5.44) already retains this factor.",
+      "tags": [
+        "1K61",
+        "IX97",
+        "GY8M"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the dilation Jacobian and polynomial homogeneity as separate factors when passing from a discrete ball sum to a unit-ball integral. In the effectively long-range regime the omitted term has leading order; it cannot be absorbed into the displayed little-o error. This is a provisional formula correction, not a claim that the final theorem is false.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the radius to the degree of each displacement monomial.",
+        "scale": "local",
+        "impact": "Restores a missing factor in the recurrence; the later asymptotic argument retains it already."
+      }
+    },
+    {
+      "id": "signed-ode-shift-derivative",
+      "title": "Derivative of the integral shift in the signed ODE proof",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML and PDF p. 83, proof of Lemma I.5.26, differentiating f_lambda after its integral definition. PDF text extraction checked 16 November 2026: the first equality also adds lambda h(r), while the integral has integrand h(s)/s. Author confirmation remains pending.",
+      "claim": "After defining f_lambda(r) = f(r) + lambda times the integral of h(s)/s, the first derivative equality adds lambda h(r).",
+      "problem": "The derivative of that integral is h(r)/r, so the equality is missing the denominator r. The subsequent rearrangement has the intended overall 1/r scale.",
+      "correction": "Replace the added term by lambda h(r)/r. The direct integrating-factor proof 2KB9 avoids the shift and proves a stronger signed statement without assuming a prior O(h) bound.",
+      "tags": [
+        "2KB9"
+      ],
+      "issues": [],
+      "leanImpact": "Differentiate the normalized integral with its full integrand. The stronger analytic lemma may be proved directly using a regularly varying integrating factor; it supplies no percolation differential estimate. The source statement is not contradicted by this provisional proof-line typo.",
+      "resolution": {
+        "status": "found",
+        "summary": "Divide the added shift term by the radius, or use an integrating factor.",
+        "scale": "notation",
+        "impact": "Corrects the derivative display; the intended signed ODE conclusion survives."
+      }
+    },
+    {
+      "id": "karamata-tail-constant",
+      "title": "Karamata integral tail constant for index below minus one",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML and PDF p. 26, Lemma I.2.10, second conclusion. PDF text extraction checked 16 November 2026: it also prints the coefficient 1/(1-alpha) for alpha < -1. Later editions have not been verified and author confirmation remains pending.",
+      "claim": "For regular-variation index alpha < -1, the tail integral is given the coefficient 1/(1-alpha) relative to r f(r).",
+      "problem": "Take f(s)=s^(-2). Its integral from r to infinity equals 1/r, so the ratio to r f(r) is exactly one; the printed coefficient would be one third.",
+      "correction": "The coefficient is -1/(alpha+1). For an eventually positive measurable regularly varying f, the substitution s=r u expresses the normalized tail as the integral of f(r u)/f(r) over u >= 1. Choose epsilon > 0 with alpha+epsilon < -1. Potter bounds dominate the ratio, uniformly for large r, by C u^(alpha+epsilon). Dominated convergence gives the integral of u^alpha, namely -1/(alpha+1). Local integrability on (0,infinity) also gives finiteness of the tail starting from every positive r.",
+      "tags": [
+        "3491"
+      ],
+      "issues": [],
+      "leanImpact": "The Karamata port at 1bdaebc5d4b426d29db41ba1e64d106ae779551b already states the corrected tail ratio, with measurability and local integrability explicit. Retain that constant. The source and its review were inspected; the PR was open with source-gate repairs requested, and WIKI has not built it or assigned a formal status. This concerns the integral-tail theorem, not the fractional-index Laplace-tail equivalence SLGY. Author confirmation remains pending. Update, 16 November 2026: the PR metadata and AUDITOR review now record approval at b8f9a0f0b46c6a21b0a02349a1b059adb976e02a. The tail constant is retained and the interface uses measurability on a tail. The PR remains open and unmerged, with its dependency chain still awaiting integration. WIKI has not compiled this revision; AUDITOR approval does not substitute for Tom’s confirmation of the erratum.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the tail coefficient -1/(alpha+1) and Potter domination.",
+        "scale": "local",
+        "impact": "An explicit asymptotic constant is corrected by the standard tail-integral argument."
+      }
+    },
+    {
+      "id": "critical-inverse-log-sign",
+      "title": "Sign of the inverse normalization at the critical dimension",
+      "status": "provisional",
+      "locator": "arXiv:2508.18807v1 HTML Remark I.1.16 and PDF p. 17, following Theorem I.1.15. Both text renditions checked 16 November 2026.",
+      "claim": "In the long-range critical-dimensional case the remark gives a negative half-power of log r in A_r, but a positive half-power of log n in A_n^*, where the inverse radius is (A_n^*)^(-1/(2 alpha)) times n^(1/(2 alpha)).",
+      "problem": "These two powers do not satisfy the inverse relation specified in Theorem I.1.15. The positive power for A_n^* would also give a negative quarter-power in the tail formula (I.1.17), contrary to the claimed critical tail in Part III.",
+      "correction": "With A_r asymptotic to A times (log r)^(-1/2), the inverse radius is asymptotic to A^(-1/(2 alpha)) times (2 alpha)^(-1/(4 alpha)) times n^(1/(2 alpha)) times (log n)^(1/(4 alpha)). Thus A_n^* is asymptotic to A sqrt(2 alpha) times (log n)^(-1/2). The calculation appended to QKHV proves the substitution and retains the final positive-quarter-power tail.",
+      "tags": [
+        "QKHV"
+      ],
+      "issues": [],
+      "leanImpact": "Preserve the defining inverse relation and distinguish the exponent of the inverse radius from that of its named coefficient. The same sign mismatch appears in the Part III introduction. No conclusion about the full percolation proof or compiled correspondence is inferred; provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Give the inverse normalization a negative half-log power.",
+        "scale": "local",
+        "impact": "The inverse formula and its coefficient change; the final positive-quarter-log tail is retained."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2508.18807v1",
+    "checkedUrl": "https://arxiv.org/abs/2508.18807v1",
+    "method": "Versioned HTML and extracted PDF text were compared at the reported passages. For Lemma I.5.17, the first-moment diagnosis is supported by HTML only: the extracted PDF “2” does not resolve a norm subscript versus a square, and the glyph has not been visually checked. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The seven reports apply to v1, with the Lemma I.5.17 rendition limitation stated above. Agreement of the other six checked text passages does not extend that diagnosis to the ambiguous PDF formula. No later-edition comparison is recorded. All reports remain provisional; repairs and formal status are separate.",
+    "comparisons": []
+  }
+}

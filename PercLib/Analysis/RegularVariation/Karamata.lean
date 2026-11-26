@@ -1,20 +1,23 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-162 (issue 529): Karamata's integral theorem under Potter bounds, Lemma I.2.10 of
-T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, p. 26 (citing Feller,
-Theorem VIII.9.1).
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Karamata's integral theorem under Potter bounds, Lemma I.2.10 of T. Hutchcroft, *Critical long-range
+percolation I*, arXiv:2508.18807v1, p. 26 (citing Feller, Theorem VIII.9.1).
 
-Ported from pull request 488 (contributor `yujinhkim`): repository `yujinhkim/lrp`, branch
+Ported from the work of contributor `yujinhkim`: repository `yujinhkim/lrp`, branch
 `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
 `PercLib/CriticalLRP/Analysis/Karamata.lean` and `PercLib/CriticalLRP/Analysis/KaramataMain.lean`;
 licence Apache-2.0 as declared in that commit's file headers and
 `third_party/critical-lrp/NOTICE.md`; upstream `yujinhkim/Critical-Long-range-percolation` at
 `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified: the two files are merged; the source's
-definition `HasPotterBounds f α` is written out as the explicit hypothesis it abbreviates
-(issue 529; Potter's bounds, Bingham–Goldie–Teugels Theorem 1.5.6, are removed by Q-164);
-`RegularlyVaryingAtTop f α` becomes `RegularlyVarying α f` of
-`PercLib/Analysis/RegularVariation/Defs.lean`; `import Mathlib`, `autoImplicit` and disabled
-linters are removed.
+definition `HasPotterBounds f α` is written out as the explicit hypothesis it abbreviates (Potter's
+bounds, Bingham–Goldie–Teugels Theorem 1.5.6, are proved in
+`PercLib/Analysis/RegularVariation/UniformConvergence.lean`); `RegularlyVaryingAtTop f α` becomes
+`RegularlyVarying α f` of `PercLib/Analysis/RegularVariation/Defs.lean`; `import Mathlib`,
+`autoImplicit` and disabled linters are removed.
 -/
 module
 
@@ -58,7 +61,7 @@ theorem potter_lower {f : ℝ → ℝ} {α ε X : ℝ}
 /-- If `f` is eventually non-zero and satisfies Potter's bounds of index `α > -1`,
 then `|f|` is at least a positive power of `r`, so `r f r → ∞`. -/
 theorem tendsto_r_mul_of_potter {f : ℝ → ℝ} {α : ℝ} (hα : -1 < α)
-    (hposf : ∀ᶠ x in atTop, 0 < f x) 
+    (hposf : ∀ᶠ x in atTop, 0 < f x)
     (hpot : (∀ ε : ℝ, 0 < ε → ∃ X : ℝ, 1 ≤ X ∧ ∀ x y : ℝ, X ≤ y → y ≤ x →
       (1 - ε) * (x / y) ^ (α - ε) * |f y| ≤ |f x| ∧
         |f x| ≤ (1 + ε) * (x / y) ^ (α + ε) * |f y|)) :
@@ -130,7 +133,7 @@ theorem tendsto_r_mul_of_potter {f : ℝ → ℝ} {α : ℝ} (hα : -1 < α)
 /-- **Upper block.** For `0 < δ < 1`, the integral over `[δr, r]` satisfies
 `(∫_{δr}^r f)/(r f(r)) → (1-δ^{α+1})/(α+1)`. -/
 theorem tendsto_upper_block {f : ℝ → ℝ} {α η X δ : ℝ}
-    (hη0 : 0 < η) (hη1 : η < 1/2) (hαη : -1 < α - η) (hXpos : 0 < X)
+    (hη0 : 0 < η) (hη1 : η < 1 / 2) (hαη : -1 < α - η) (hXpos : 0 < X)
     (hδ0 : 0 < δ) (hδ1 : δ < 1)
     (hpotX : ∀ x y : ℝ, X ≤ y → y ≤ x →
       (1 - η) * (x / y) ^ (α - η) * |f y| ≤ |f x| ∧
@@ -182,7 +185,8 @@ theorem tendsto_upper_block {f : ℝ → ℝ} {α η X δ : ℝ}
             nlinarith [mul_nonneg h4 hfr.le]
     · have hcont : ContinuousOn (fun u : ℝ => 2 * u ^ (α - η)) (uIcc δ 1) := by
         intro u hu
-        have hu0 : u ≠ 0 := ne_of_gt (lt_of_lt_of_le hδ0 (by rw [uIcc_of_le hδ1.le] at hu; exact hu.1))
+        have hu0 : u ≠ 0 := ne_of_gt (lt_of_lt_of_le hδ0
+            (by rw [uIcc_of_le hδ1.le] at hu; exact hu.1))
         exact ((Real.continuousAt_rpow_const u (α - η) (Or.inl hu0)).const_mul 2).continuousWithinAt
       exact hcont.intervalIntegrable
     · filter_upwards with u hu
@@ -215,7 +219,7 @@ it is the (tedious) assembly of the three proven blocks.
 /-- **Lower block.** If `f` is locally integrable on `(0,∞)` then
 `∫_X^{δr} |f| ≤ 2δ^{α+1-η}/(α+1-η) · r f(r)` eventually. -/
 theorem lower_block_bound {f : ℝ → ℝ} {α η X δ : ℝ}
-    (hη0 : 0 < η) (hη12 : η < 1/2) (hαη : -1 < α - η) (hXpos : 0 < X)
+    (hη0 : 0 < η) (hη12 : η < 1 / 2) (hαη : -1 < α - η) (hXpos : 0 < X)
     (hδ0 : 0 < δ) (hδ1 : δ < 1)
     (hloc : LocallyIntegrableOn f (Ioi 0))
     (hpotX : ∀ x y : ℝ, X ≤ y → y ≤ x →
@@ -292,7 +296,8 @@ theorem lower_block_bound {f : ℝ → ℝ} {α η X δ : ℝ}
   have hzero : (0:ℝ) ∉ uIcc X (δ * r) := by
     rw [uIcc_of_le hXδr]
     exact fun h => (not_le.2 hXpos) h.1
-  have hInt : ∫ s in X..δ * r, s ^ (α - η) = ((δ * r) ^ (α - η + 1) - X ^ (α - η + 1)) / (α - η + 1) := by
+  have hInt : ∫ s in X..δ * r, s ^ (α - η) = ((δ * r) ^ (α - η + 1) - X ^ (α - η + 1)) /
+      (α - η + 1) := by
     rw [integral_rpow (Or.inr ⟨by intro h; linarith, hzero⟩)]
   have hInt_le : ∫ s in X..δ * r, s ^ (α - η) ≤ (δ * r) ^ (α - η + 1) / (α - η + 1) := by
     rw [hInt]
@@ -327,7 +332,6 @@ theorem lemma_I_2_10 {f : ℝ → ℝ} {α : ℝ} (hα : -1 < α)
     (hmeas : Measurable f) (hloc : LocallyIntegrableOn f (Ioi 0))
     (hposf : ∀ᶠ x in atTop, 0 < f x)
     (hrv : RegularlyVarying α f)
-    
     (hpot : (∀ ε : ℝ, 0 < ε → ∃ X : ℝ, 1 ≤ X ∧ ∀ x y : ℝ, X ≤ y → y ≤ x →
       (1 - ε) * (x / y) ^ (α - ε) * |f y| ≤ |f x| ∧
         |f x| ≤ (1 + ε) * (x / y) ^ (α + ε) * |f y|)) :
@@ -383,7 +387,8 @@ theorem lemma_I_2_10 {f : ℝ → ℝ} {α : ℝ} (hα : -1 < α)
       2 * δ ^ (α + 1 - η) / (α + 1 - η) < ε / 8 ∧ δ ^ (α + 1) / (α + 1) < ε / 8 := by
     obtain ⟨δA, hδApos, hδA⟩ := Metric.tendsto_nhdsWithin_nhds.1 hlimA (ε/8) (by linarith)
     obtain ⟨δB, hδBpos, hδB⟩ := Metric.tendsto_nhdsWithin_nhds.1 hlimB (ε/8) (by linarith)
-    refine ⟨min (min (δA/2) (δB/2)) (1/2), lt_min (lt_min (by linarith) (by linarith)) (by norm_num),
+    refine ⟨min (min (δA/2) (δB/2)) (1/2), lt_min (lt_min (by linarith) (by linarith))
+        (by norm_num),
       lt_of_le_of_lt (min_le_right _ _) (by norm_num), ?_, ?_⟩
     · have hpos : 0 < min (min (δA/2) (δB/2)) (1/2) :=
         lt_min (lt_min (by linarith) (by linarith)) (by norm_num)
@@ -524,7 +529,7 @@ theorem lemma_I_2_10 {f : ℝ → ℝ} {α : ℝ} (hα : -1 < α)
     rw [Real.dist_eq]
     exact hN n hn⟩
 
-/-! ### Witness (D-5): the constant function `1` (index `0`) -/
+/-! ### Witness: the constant function `1` (index `0`) -/
 
 example : Tendsto (fun r => (∫ s in (1 : ℝ)..r, (fun _ : ℝ => (1 : ℝ)) s) / (r * 1)) atTop
     (𝓝 (1 / (0 + 1))) :=

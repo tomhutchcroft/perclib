@@ -5,12 +5,11 @@ and ProdBernoulliProofs.lean at the same revision.
 Released under the Apache License 2.0; see third_party/percolation/LICENSE
 and third_party/percolation/NOTICE.
 
-Modified for this project on 2026-11-12: namespace, focused Mathlib imports, Lean 4.35
-public declarations, MeasurableEquiv.setOfPred, and Mathlib's equivalent
-bernoulliMeasure spelling. The indicator specialization is stated directly
-as a theorem. The constant-parameter specialization is a new corollary.
-Renamed on 2026-11-13: the project root namespace and library became PercLib
-(docs/DECISIONS.md, D-11). No definition, statement or proof was changed.
+Modified for this project on 2026-11-12: namespace, focused Mathlib imports, Lean 4.35 public
+declarations, MeasurableEquiv.setOfPred, and Mathlib's equivalent bernoulliMeasure spelling. The
+indicator specialization is stated directly as a theorem. The constant-parameter specialization is a
+new corollary. Renamed on 2026-11-13: the project root namespace and library became PercLib
+(docs/DECISIONS.md). No definition, statement or proof was changed.
 -/
 module
 

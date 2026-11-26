@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "covariance-russo",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 14
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 21,
+      "label": "Russo's formula in covariance form",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-train5-covariance-russo",
+      "order": 0,
+      "label": "Train 5 source contracts",
+      "locator": "Named public declaration start lines: 31, 59, 67, 90, 99, 119, 145",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "VVDC and DUYN match the probability specializations; the polynomial appendix explains the unrestricted real-profile algebra. Increasingness is needed for the covariance sign, not the identities. Positive intensity and positive weight are retained wherever division occurs. 8IGH remains conditional on its stated revealment inequality."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8IGH",
+      "proof_uses": [
+        "DUYN"
+      ],
+      "reason": "The proof bounds the input sum by R times the exact covariance expansion of F'(beta), with nonnegative covariances and c_beta(e)>=1/beta, all from DUYN."
+    }
+  ]
+}

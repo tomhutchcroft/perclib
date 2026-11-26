@@ -1,0 +1,68 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "connection-paths",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 35
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-path-lower-bounds",
+      "order": 0,
+      "label": "Specified walks, independent alternatives and finite parallel routes",
+      "locator": "Named theorem start lines: 39, 49, 57, 66, 75, 82, 98, 116, 130",
+      "relationship": "Complete grouped source contracts with a heterogeneous finite-model extension",
+      "status": "pending",
+      "note": "9IPM uses the set of distinct walk bonds and does not require a simple walk. 8V8H factors the failure events over pairwise disjoint deterministic bond sets; shared vertices are permitted. Both retain the source arbitrary-vertex scope as outer-measure inequalities. YPNG specializes to the source homogeneous complete bipartite graph with two endpoints and k middle vertices, while its separate heterogeneous formulation and arbitrary loop probabilities are elementary extensions. The adjacency-closed-set argument covers the source deterministic reachability helper. No formal status or reviewed correspondence is authored."
+    },
+    {
+      "source": "perclib-connection-pivotal",
+      "order": 0,
+      "label": "Pivotal and derivative contracts",
+      "locator": "Named public theorem start lines: 39, 71, 97, 114, 123, 131, 147, 164, 172, 182",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "The deleted-configuration endpoint characterization and shortest-open-path bound are deterministic on arbitrary vertices. The counting bound requires a realized connection and uses open-graph distance. Diagonal and noninternal pairs are excluded for internal connection; restriction commutes with forcing an internal pair."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "9IPM",
+      "proof_uses": [
+        "T90E",
+        "DYU8"
+      ],
+      "reason": "A finite open walk connects its endpoints, and independence gives the finite-cylinder product."
+    },
+    {
+      "order": 1,
+      "tag": "8V8H",
+      "proof_uses": [
+        "9IPM",
+        "DYU8"
+      ],
+      "reason": "Each walk event implies connection; independence of disjoint coordinate blocks factors all the failure probabilities."
+    },
+    {
+      "order": 2,
+      "tag": "YPNG",
+      "proof_uses": [
+        "8V8H"
+      ],
+      "reason": "The lower-bound event is the entire connection event on the finite parallel host, as shown by the adjacency-closed set."
+    },
+    {
+      "order": 0,
+      "tag": "61PY",
+      "proof_uses": [
+        "LNKT",
+        "7BMQ"
+      ],
+      "reason": "Uses the existing forcing, block-independence, finite derivative or graph restriction results with their stated scopes."
+    }
+  ]
+}

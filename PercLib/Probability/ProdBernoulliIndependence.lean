@@ -1,10 +1,19 @@
 /-
-Adapted and generalised from Tom Hutchcroft's near-critical-diffusivity,
-Percolation/Literature/BernoulliPercolation.lean at
-c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under the native-source permission R-3.
-Source declarations: bondPercolation_iIndepFun_mem, bondPercolation_indep_holds.
-The profile is arbitrary and no countability, host, or diagonal hypothesis remains.
-Block consequences use mathlib's independence API directly.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Adapted and generalised from Percolation/Literature/BernoulliPercolation.lean at
+tomhutchcroft/near-critical-diffusivity, revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under
+Tom Hutchcroft's reuse permission recorded in `docs/DECISIONS.md`. Licence status: that file lies in
+the source's `Percolation/Literature/` tree, which holds code vendored from the `percolation/`
+project of `anthropics/formal-math` (Apache-2.0; see the source's `third_party/formal-math/`). For
+any vendored part, the Apache-2.0 licence and its notices are those retained in
+`third_party/percolation/`; no other upstream licence is asserted. Source declarations:
+bondPercolation_iIndepFun_mem, bondPercolation_indep_holds. The profile is arbitrary and no
+countability, host, or diagonal hypothesis remains. Block consequences use mathlib's independence
+API directly.
 -/
 module
 

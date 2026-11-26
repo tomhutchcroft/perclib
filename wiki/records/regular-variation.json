@@ -1,0 +1,57 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "regular-variation",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 9
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 33,
+      "label": "Regular variation and Karamata's Tauberian theorem",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-train10-analysis-regularvariation-defs",
+      "order": 0,
+      "label": "Regular-variation and logarithmic-error interfaces",
+      "locator": "Explicit public theorem start lines: 59, 64, 72, 86, 90, 94, 97, 99, 102, 105, 108, 112, 128, 142, 178, 194, 199, 213, 257, 261, 264, 269, 291, 299, 303, 308, 313, 319, 323, 342",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete source read at dfbc5b4f4e964374431189c682520bff85e008e6; definitions and source attribution are inventoried separately."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "LTJ1",
+      "proof_uses": [],
+      "reason": "The proof integrates h e^{-ht} up to X and applies Tonelli; it invokes no other wiki assertion."
+    },
+    {
+      "order": 1,
+      "tag": "SLGY",
+      "proof_uses": [
+        "LTJ1"
+      ],
+      "reason": "Both directions start from the tail integral for one minus the Laplace transform (LTJ1); the forward direction uses dominated convergence and the converse uses moment convergence and monotonicity."
+    },
+    {
+      "order": 2,
+      "tag": "PVM9",
+      "proof_uses": [
+        "BFM4",
+        "OVG9",
+        "SLGY"
+      ],
+      "reason": "The proof uses critical extinction (BFM4), the critical generating-function asymptotic (OVG9) and Karamata's Tauberian theorem for regularly varying tails (SLGY) with alpha=1/2."
+    }
+  ]
+}

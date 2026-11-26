@@ -1,18 +1,18 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-Adapted from pull request 488: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files
-`PercLib/CriticalLRP/Tightness/MomentRatioAux.lean` and
-`PercLib/CriticalLRP/Tightness/TailEstimates.lean`, contributed by `yujinhkim`.
-Licence: Apache-2.0, as declared in those files' headers and in
-`third_party/critical-lrp/NOTICE.md` of that commit (upstream origin
-`yujinhkim/Critical-Long-range-percolation` at
-3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf, not independently verified).
-Changes: namespace `PercLib.Probability`; `ofReal_mul_meas_le_lintegral` is not ported
-(it is mathlib's `mul_meas_ge_le_lintegral₀` at `ε = ofReal a`), and
-`ofReal_pow_mul_meas_le_lintegral` is reproved from that lemma; focused imports;
-`autoImplicit` off.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Adapted from the source repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files `PercLib/CriticalLRP/Tightness/MomentRatioAux.lean`
+and `PercLib/CriticalLRP/Tightness/TailEstimates.lean`, contributed by `yujinhkim`. Licence:
+Apache-2.0, as declared in those files' headers and in `third_party/critical-lrp/NOTICE.md` of that
+commit (upstream origin `yujinhkim/Critical-Long-range-percolation` at
+3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf, not independently verified). Changes: namespace
+`PercLib.Probability`; `ofReal_mul_meas_le_lintegral` is not ported (it is mathlib's
+`mul_meas_ge_le_lintegral₀` at `ε = ofReal a`), and `ofReal_pow_mul_meas_le_lintegral` is reproved
+from that lemma; focused imports; `autoImplicit` off.
 -/
 module
 
@@ -254,7 +254,7 @@ theorem tsum_pow_mul_exp_neg_succ_le (j : ℕ) {c : ℝ} (hc0 : 0 < c) (hc1 : c 
     _ = ENNReal.ofReal ((2 : ℝ) ^ j * (j.factorial : ℝ) * c⁻¹ ^ j * (4 / c)) := by
         rw [← ENNReal.ofReal_mul (by positivity)]
 
-/-! ### D-5 witness: `c = 1` satisfies `0 < c ≤ 1` -/
+/-! ### Non-vacuity witness: `c = 1` satisfies `0 < c ≤ 1` -/
 
 example : (∑' n : ℕ, ENNReal.ofReal (Real.exp (-(((n : ℝ) + 1) * 1)))) ≤ ENNReal.ofReal (2 / 1)
     ∧ (∑' n : ℕ, (((n : ℝ≥0∞) + 1) ^ 2 * ENNReal.ofReal (Real.exp (-(((n : ℝ) + 1) * 1)))))

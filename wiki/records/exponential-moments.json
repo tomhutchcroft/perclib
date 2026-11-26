@@ -1,0 +1,101 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "exponential-moments",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 15
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 42,
+      "label": "From tree-graph moments to exponential tails",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-exponential-moment-series",
+      "order": 0,
+      "label": "Exponential series and explicit tails",
+      "locator": "Named public declaration start lines: 26, 33, 44, 52, 60, 74, 98, 121, 145, 156, 191, 239, 251, 274, 294, 310, 330",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The analytic exports derive 0BQB and SNB3 from full double-factorial moment bounds. The ordinary exponential bound includes its endpoint; the weighted bound does not. The positive scale need not equal the mean, and weighted statements allow an arbitrary measure."
+    },
+    {
+      "source": "perclib-finite-range-decay",
+      "order": 0,
+      "label": "Moment comparison and conditional finite-range decay",
+      "locator": "Explicit public declaration start lines: 39, 58, 78, 204, 234, 252, 290, 319, 328",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Nine public results prove IXEZ and the geometric and conditional-tail steps of YVJT. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-tail-sums",
+      "order": 0,
+      "label": "Power and geometric-tail estimates",
+      "locator": "Explicit public theorem/lemma start lines: 47, 68, 88, 108, 119, 127, 140, 152, 165, 195",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 10 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-real-moment-ratios",
+      "order": 0,
+      "label": "Real moment ratios from an exponential tail",
+      "locator": "Explicit public theorem/lemma start lines: 51, 60, 88, 122, 203, 386, 479",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 7 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-train10-percolation-bond-tightness-momentratio",
+      "order": 0,
+      "label": "Window moments from proved rooted damping",
+      "locator": "Explicit public theorem start lines: 64, 318, 326, 338, 360, 382, 408, 424, 431, 457, 463, 477, 493",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "VYTG",
+      "proof_uses": [
+        "IW3P",
+        "MLLO",
+        "XLWI"
+      ],
+      "reason": "A sparse independent layer yields exponential integrability at a larger parameter; the finite-cluster majorant and Cauchy estimates give the quantitative extension."
+    },
+    {
+      "order": 1,
+      "tag": "XLWI",
+      "proof_uses": [
+        "Y84V"
+      ],
+      "reason": "The uniform-susceptibility tree-graph moment bound (Y84V) is summed into the exponential series, followed by integration and Markov's inequality."
+    },
+    {
+      "order": 2,
+      "tag": "YVJT",
+      "proof_uses": [
+        "XLWI"
+      ],
+      "reason": "An exit path forces |K_o| > r/R, and the uniform-susceptibility volume bound (XLWI) gives the spatial decay."
+    },
+    {
+      "order": 3,
+      "tag": "IW3P",
+      "proof_uses": [],
+      "reason": "The finite-cluster expansion is bounded termwise by complex-exponential estimates and summed under the assumed exponential moment via monotone coupling; no other wiki assertion is invoked."
+    }
+  ]
+}

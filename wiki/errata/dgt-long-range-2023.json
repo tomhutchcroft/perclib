@@ -1,0 +1,54 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "dgt-long-range-2023",
+  "entries": [
+    {
+      "id": "block-square-integral",
+      "title": "The square integral in the block-joining estimate",
+      "status": "provisional",
+      "locator": "arXiv:2011.04642v2, section 2.3, proof of Lemma 2, PDF p. 4; unnumbered integral before (7), HTML equation (12). Versioned HTML and PDF text compared; no visual PDF check.",
+      "claim": "The displayed square integral is evaluated as log(1 + 2A/(8K)), leading to a joining estimate with numerator 8.",
+      "problem": "The correct integral is log((8K+A)^2 / (8K(8K+2A))). At A=8K it equals log(4/3), whereas the displayed expression is log 3.",
+      "correction": "PAFY proves the exact integral and a discrete bound retaining the integer floor. Numerator 64 gives a valid summable bound with the same exponent; enlarge the minimum separation constant. This repairs this estimate only.",
+      "tags": [
+        "PAFY",
+        "JZG4"
+      ],
+      "issues": [],
+      "leanImpact": "Use the corrected integral identity and an explicit integer truncation. The comparison and summable-tail argument are written in PAFY. A complete wiki proof of JZG4 uses only PAFY's integral identity, with its own discrete comparison, and not the source's Lemma 2 numerics. No compiled declaration is supplied. The published theorem is not contradicted by this numerical error.",
+      "resolution": {
+        "status": "found",
+        "summary": "Evaluate the block integral correctly and enlarge the separation constant.",
+        "scale": "local",
+        "impact": "The summable bound keeps its exponent; this repairs the cited estimate only."
+      }
+    },
+    {
+      "id": "bridge-box-edge-bound",
+      "title": "The edge-joining term in the bridge estimate",
+      "status": "provisional",
+      "locator": "arXiv:2011.04642v2, section 2.4, proof of Lemma 3 (lem:2 in the e-print TeX source), HTML equation (21) and the first line of HTML equation (29) (TeX labels eq:ojs and eq:3a). Versioned HTML and e-print TeX source compared; no visual PDF check.",
+      "claim": "The probability that some edge of omega other than {x,y} joins [x-R,x+R) and [y-R,y+R) is bounded above by |B_R|^2 e^{-beta(K-2R)}.",
+      "problem": "This is not an upper bound. Each such edge has length greater than K-2R and is open with probability 1-e^{-beta/l^2}, of order beta/l^2, so the true probability is of polynomial order R^2 beta/K^2, which exceeds |B_R|^2 e^{-beta(K-2R)} for large K.",
+      "correction": "Replace |B_R|^2 e^{-beta(K-2R)} by |B_R|^2 (1-e^{-beta/(K-2R)^2}), which is at most |B_R|^2 beta/(K-2R)^2. The argument only needs this term to tend to 0 as K tends to infinity with R fixed, so the lemma and Theorem 1(ii) are unaffected.",
+      "tags": [
+        "67W9"
+      ],
+      "issues": [],
+      "leanImpact": "The wiki proof of 67W9 bounds the corresponding probability by 4R^2L'/(25K^2) from the tail of q and does not use the source's exponential term. No compiled declaration is supplied. The published theorem is not contradicted by this estimate.",
+      "resolution": {
+        "status": "found",
+        "summary": "Union-bound over the |B_R|^2 possible joining edges, each of length greater than K-2R and so open with probability at most 1-e^{-beta/(K-2R)^2}.",
+        "scale": "local",
+        "impact": "The term still tends to zero as K grows with R fixed; Lemma 3 and Theorem 1(ii) are unaffected."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2011.04642v2",
+    "checkedUrl": "https://arxiv.org/html/2011.04642v2",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

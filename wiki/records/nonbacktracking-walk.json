@@ -1,0 +1,99 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "nonbacktracking-walk",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 168
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Walk recurrence",
+      "locator": "17 March 2017 author manuscript, Section 10.2, (10.2.1)\u2013(10.2.6), printed pp.125\u2013126 / PDF indices136\u2013137.",
+      "relationship": "Written walk and conditional matrix proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "Counting the first forbidden reversal distinguishes n=2 from later steps and proves the absolute convergence domain."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Walk and directional resolvents",
+      "locator": "17 March 2017 author manuscript, Lemma 10.3; Exercise 10.1; (10.2.8) and (10.2.11)\u2013(10.2.19), printed pp.126\u2013128 / PDF indices137\u2013139.",
+      "relationship": "Written walk and conditional matrix proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "The scalar recurrence and the directional matrix inverse give the same quotient. The random-walk series comparison is asserted on the real subcritical interval."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical summation convention",
+      "locator": "17 March 2017 author manuscript, Critical clause of Lemma 10.3 and (10.2.9), printed p.126 / PDF index137.",
+      "relationship": "Written walk and conditional matrix proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "The bipartite-frequency length series fails the term test. Its radial value is retained, and the spatial Fourier density is justified only in the integrable dimensions."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Restricted connections",
+      "locator": "17 March 2017 author manuscript, (10.3.8) and Exercise 10.2, printed p.129 / PDF index140.",
+      "relationship": "Written walk and conditional matrix proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "A deterministic set-difference identity uses the actual deleted set and surviving endpoints. The target-outside-cluster condition is supplied by pivotality, not by definition."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Conditional matrix reduction",
+      "locator": "17 March 2017 author manuscript, (10.3.12)\u2013(10.3.21) and Exercise 10.4, printed pp.130\u2013131 / PDF indices141\u2013142.",
+      "relationship": "Written walk and conditional matrix proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "Exact elimination retains Fourier-shift signs, the connector parameter and the negative correction. Matrix invertibility and scalar nonvanishing are separate conditions."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "0MK8",
+      "proof_uses": [],
+      "reason": "Counting the first forbidden reversal distinguishes n=2 from later steps and proves the absolute convergence domain."
+    },
+    {
+      "order": 1,
+      "tag": "IRTD",
+      "proof_uses": [
+        "0MK8"
+      ],
+      "reason": "The scalar recurrence and the directional matrix inverse give the same quotient. The random-walk series comparison is asserted on the real subcritical interval."
+    },
+    {
+      "order": 2,
+      "tag": "NB44",
+      "proof_uses": [
+        "0MK8",
+        "IRTD",
+        "KCOF",
+        "TTS1"
+      ],
+      "reason": "The bipartite-frequency length series fails the term test. Its radial value is retained, and the spatial Fourier density is justified only in the integrable dimensions."
+    },
+    {
+      "order": 3,
+      "tag": "WSKG",
+      "proof_uses": [],
+      "reason": "A deterministic set-difference identity uses the actual deleted set and surviving endpoints. The target-outside-cluster condition is supplied by pivotality, not by definition."
+    },
+    {
+      "order": 4,
+      "tag": "V49E",
+      "proof_uses": [
+        "IRTD"
+      ],
+      "reason": "Exact elimination retains Fourier-shift signs, the connector parameter and the negative correction. Matrix invertibility and scalar nonvanishing are separate conditions."
+    }
+  ]
+}

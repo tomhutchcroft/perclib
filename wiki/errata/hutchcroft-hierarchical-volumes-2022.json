@@ -1,0 +1,517 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-hierarchical-volumes-2022",
+  "versionAudit": {
+    "checkedVersion": "arXiv:2211.05686v1 (2022 preprint)",
+    "checkedUrl": "https://arxiv.org/html/2211.05686v1",
+    "method": "Versioned HTML and extracted PDF text compared at the passages identified in the entry locators. No visual-PDF audit is claimed.",
+    "scope": "All 23 current entries report discrepancies in this preprint version. Their repair assessments concern the written corrections in the wiki; the reports remain provisional and do not establish an error in the published article.",
+    "comparisons": [
+      {
+        "version": "Published article: Proceedings of the London Mathematical Society 130(1), e70023 (2025)",
+        "url": "https://authors.library.caltech.edu/records/yvmkn-8m670",
+        "status": "pending",
+        "findings": "The publisher and Caltech records identify the published version (DOI 10.1112/plms.70023), but its mathematical passages have not been compared. Whether any reported discrepancy persists or was corrected in that edition is not established here."
+      }
+    ]
+  },
+  "entries": [
+    {
+      "id": "coalescent-holding-rate",
+      "title": "An ordered-pair factor in the coalescent holding rate",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, section 2, initial unnumbered transition display, printed p.15 (PDF index14), before (2.1). Versioned HTML and extracted PDF text compared; no visual-PDF or journal-version check.",
+      "claim": "The holding-probability line subtracts epsilon times the sum of |A||B| over ordered distinct blocks A,B.",
+      "problem": "Every unordered pair merges once at rate |A||B|. For two singleton blocks the holding probability is exp(-epsilon), whereas the printed ordered sum gives 1-2epsilon+o(epsilon).",
+      "correction": "Insert one half before the ordered sum, or sum over unordered pairs. Z960 derives the rate (N^2-S_2)/2 and the finite generator from independent exponential clocks. Equation (2.1) already has the correct factor, and 22H8 retains the printed single-moment normalization. No defect in the volume-tail conclusions is diagnosed.",
+      "tags": [
+        "Z960",
+        "22H8"
+      ],
+      "issues": [],
+      "leanImpact": "A finite coalescent implementation must prove the unordered-pair rate and corresponding generator normalization. The moment hierarchy then follows by finite binomial expansion and diagonal subtraction. No compiled declaration or source-author confirmation is supplied.",
+      "resolution": {
+        "status": "found",
+        "summary": "Insert one half in the ordered-pair coalescent holding rate.",
+        "scale": "local",
+        "impact": "Corrects the rate convention; the later generator formula already uses the right factor."
+      }
+    },
+    {
+      "id": "moment-index-dependence",
+      "title": "Power-sum moments require constants depending on the indices",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, proof of Corollary 3.7, equation (3.12), printed p.24 (PDF index23). Versioned HTML and extracted PDF text compared; no visual-PDF or journal comparison.",
+      "claim": "The displayed bound controls E S_p^k by C^k k! (E S_p)^k with a constant universal in p, k, the scale and intermediate time.",
+      "problem": "In a fixed critical hierarchical model with L=2 and d=1, its level-one block at time -log(1-2^(-p)) has E S_p at most 3 and E S_p^2 at least 2^p. These times are admissible for every sufficiently large p. The normalized second moment therefore diverges with p, contradicting a universal C.",
+      "correction": "25TW proves E S_p^k <= D_(pk) (E S_p)^k with D_r=e(18e)^r Gamma(r+1), using the universal exponential tail of the norm S_p^(1/p). Hölder and Harris give the fixed-index conclusions of Corollary 3.7; X2A4 supplies their block applications. No failure of those conclusions or of the tail theorems is asserted.",
+      "tags": [
+        "3109",
+        "25TW",
+        "X2A4"
+      ],
+      "issues": [],
+      "leanImpact": "Quantify moment constants after fixing the norm and power indices. Derive the moment exponent pk before applying tail integration; do not infer exponential moments of S_p from an exponential tail for S_p^(1/p). No compiled association or source confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Allow the norm-moment comparison constant to depend on its moment indices.",
+        "scale": "statement",
+        "impact": "The uniform quantifier is false; fixed-index applications remain valid."
+      }
+    },
+    {
+      "id": "norm-proof-boundaries",
+      "title": "Positive amplification scales, atomic quantiles and the initial block",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Lemma 3.5/(3.7), proof of Theorem 3.2, and Corollary 3.7/(3.11), printed pp.22–24 (PDF indices21–23). Versioned HTML and extracted PDF text compared.",
+      "claim": "The amplification quantifier includes k=0; the real quantile argument claims a strict bound at twice its infimum; the child-quantile bound includes n=0.",
+      "problem": "At k=0 a nontrivial probability q would have to satisfy q<=q^(4/3). On two vertices with the edge open with probability 1/e, the maximum norm has real quantile 1 and probability exactly 1/e of reaching twice it. At n=0 the child quantity M_(-1) is undefined.",
+      "correction": "Require integer k>=1 in amplification, as in its proof; use the weak inequality at twice the real quantile; and require n>=1 in the child bound, treating the deterministic singleton at n=0 separately. 3109 and X2A4 give complete proofs under these conventions. The terminal integer quantile is kept distinct from the real infimum quantile.",
+      "tags": [
+        "3109",
+        "X2A4"
+      ],
+      "issues": [],
+      "leanImpact": "Separate the positive-scale splitting lemma from the trivial zero-scale identity. Use non-strict probability bounds for atomic distributions, and an explicit base case for the hierarchical recursion. No negative-index quantile, compiled correspondence or source-author confirmation is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "Separate the singleton base case and retain the valid quantile endpoint inequalities.",
+        "scale": "local",
+        "impact": "Repairs boundary cases of the norm proof without changing its intended estimates."
+      }
+    },
+    {
+      "id": "first-moment-terminal-amplitude",
+      "title": "Initial and terminal first-moment coefficients differ",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Theorems 1.4 and 1.6 at p=1, printed pp.9–10 (PDF indices8–9), compared with (2.2)–(2.3), Lemma 4.10 and Corollaries 4.11/4.13. Versioned HTML and extracted PDF text checked. Wiley full-text links returned the abstract; the journal formulas and visual PDF glyphs were not audited.",
+      "claim": "For the terminal truncated-block cluster K_n, both theorem displays give first-moment coefficient (L^alpha-1)/(L^alpha beta_c).",
+      "problem": "The exact reciprocal-mean identity in Lemma 4.10 gives E|K_n| >= ((L^alpha-1)/beta_c) L^(alpha n) for every n. This contradicts the smaller printed asymptotic coefficient, since L^alpha>1. Under hydrodynamics the same identity gives an equivalent with the larger coefficient. The smaller coefficient belongs to the initial coalescent time after division by the block volume.",
+      "correction": "W2VN proves the exact series, the sharp lower bound and the terminal first-moment equivalent under hydrodynamics. 6WO3 supplies hydrodynamics for d>3alpha; at d=3alpha it remains a separate input. Replace the terminal p=1 coefficient by (L^alpha-1)/beta_c. Higher-moment amplitudes and the later constant A require a separate audit, so no blanket correction to them is made.",
+      "tags": [
+        "2VXH",
+        "6WO3",
+        "W2VN"
+      ],
+      "issues": [],
+      "leanImpact": "Keep initial and terminal block observables distinct, with the rooted identity only at the specified time. Carry the factor Q in gluing and substitute t=t_n before dividing by L^(dn). This is a written correction, with no compiled association or source-author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the terminal first-moment amplitude (L^alpha-1)/beta_c.",
+        "scale": "statement",
+        "impact": "An asymptotic constant changes, not the growth exponent. This entry does not certify the paper's other amplitudes."
+      }
+    },
+    {
+      "id": "reciprocal-mean-remainder",
+      "title": "The reciprocal recursion needs an upper bound and the integration variable",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, proof of Lemma 4.10 after the finite iteration and its final integration display, printed p.31 (PDF index30), HTML lines731 and735–736. Extracted PDF text agrees with the HTML.",
+      "claim": "A scaled reciprocal bounded away from zero is used to discard its geometrically weighted terminal remainder; the final integrals write epsilon_(n,t) ds.",
+      "problem": "A positive lower bound alone does not make q^(k+1) U_(n+k+1) vanish when 0<q<1. For example U_j=q^(-j) has a constant nonzero remainder at each fixed n. Integrating the reciprocal differential equation also requires the error at the integration variable, not the terminal time.",
+      "correction": "Use the upper bound U_j<=C, supplied by the lower mean estimate in (4.4), to bound the remainder by C q^(k+1). Replace the integrands by epsilon_(n,s). W2VN gives the full finite iteration, dominated geometric-series passage and corrected integration. The statement of Lemma 4.10 already has the correct time variable and is retained.",
+      "tags": [
+        "2VXH",
+        "W2VN"
+      ],
+      "issues": [],
+      "leanImpact": "State the vanishing-remainder lemma with a uniform upper bound and 0<q<1. Integrate the error function using a bound variable. These local repairs preserve the reciprocal-mean formula; no compiled association or source confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the uniform upper bound in the reciprocal-mean remainder and retain its time index.",
+        "scale": "local",
+        "impact": "The mean asymptotic is recovered with a valid dominated remainder estimate."
+      }
+    },
+    {
+      "id": "moment-scale-exponents",
+      "title": "Second-moment growth and the higher-moment contraction exponents",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, second display of Proposition 4.14, printed p.31 (PDF index30); final scale recurrence in the proof of Proposition 4.17, printed p.38 (PDF index37). Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The high-dimensional second-moment display has exponent d+alpha. Later the normalizing moment b_n is said to grow by L^(d+(2p-1)alpha), giving contraction L^(-(p-1)alpha).",
+      "problem": "The second-moment time ratio and exact gluing give growth L^(d+3alpha). For b_n=(2p-5)!! nu_n^(p-2) mu_n^(-(p-3)), its scale exponent is (p-2)(d+3alpha)-(p-3)(d+alpha)=d+(2p-3)alpha. Dividing the homogeneous growth L^(d+p alpha) by this gives L^(-(p-3)alpha), not the printed factor.",
+      "correction": "Use d+3alpha in Proposition 4.14 and d+(2p-3)alpha in the normalizing recurrence. I7HB proves the positive second-moment amplitude. ANYT proves an exact ratio ODE and strict contraction L^(-(p-3)alpha) for p>=4, avoiding subtraction of asymptotic equivalents. The moment conclusion survives. FY23 now also reconstructs the full high-dimensional rooted moment family with the terminal first-moment prefactor from the earlier entry; the critical logarithmic amplitude remains separate.",
+      "tags": [
+        "I7HB",
+        "ANYT",
+        "FY23"
+      ],
+      "issues": [],
+      "leanImpact": "Track homogeneity in Q under gluing and derive the exponent from the powers of nu and mu. The contraction lemma needs the positive gap p-3 and p>=4. Separate the zero-gap second-moment amplitude from the higher-moment induction. Written repairs only; no compiled association or source-author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the scale exponents and use the exact ratio ODE for contraction.",
+        "scale": "local",
+        "impact": "The moment recurrence changes, but the high-dimensional moment conclusion survives."
+      }
+    },
+    {
+      "id": "heuristic-moment-half-factor",
+      "title": "The heuristic higher-moment recursion drops the ordered-pair half-factor",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, equations (4.17)–(4.18) and the A_p recursion after (4.19), printed p.34 (PDF index33). Versioned HTML and extracted PDF text agree. The later exact equation (4.20) retains the half-factor.",
+      "claim": "The internal binomial sum in the heuristic derivative and coefficient recurrence has no factor 1/2, while its claimed solution is A_p=(2p-5)!!.",
+      "problem": "At p=4 the printed recursion gives A_4=binom(4,2) A_3^2=6, whereas the claimed solution gives 3. The finite coalescent generator uses an ordered-pair sum with factor 1/2.",
+      "correction": "Insert 1/2 before the internal sum in (4.17), and use 1/[2(p-3)] in (4.18) and the A_p recurrence. ANYT derives the identity half sum binom(p,k) a_(k+1) a_(p-k+1)=(p-3)a_p directly from the exponential generating series. The later formal hierarchy already has the correct factor and its conclusion is retained.",
+      "tags": [
+        "22H8",
+        "ANYT"
+      ],
+      "issues": [],
+      "leanImpact": "Preserve the unordered-to-ordered merger factor when separating endpoint and internal terms. Check the p=4 coefficient before invoking the general convolution identity. No compiled association or source confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the factor one half in the heuristic moment recurrence.",
+        "scale": "notation",
+        "impact": "The later formal hierarchy already has this factor; its conclusion is unchanged."
+      }
+    },
+    {
+      "id": "low-dimensional-growth-bookkeeping",
+      "title": "The growth display and the initial child quantile in the maximum proof",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, display before (5.4) and (5.6), printed p.41 (PDF index40). Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The integrated third-moment display first omits its initial moment factor and then prints d+3alpha(1-3C delta^2), whereas (5.4) uses d+3alpha(1-C delta^2). The initial child estimate in (5.6) uses the current rather than the previous maximum index.",
+      "problem": "Integrating the logarithmic derivative retains nu_n(0) and yields d+3alpha(1-C delta^2). The cited child estimate (3.11) directly supplies M_(n1-1), not M_(n1). This diagnoses the quoted derivation, without asserting that an estimate with a changed constant and current index is impossible.",
+      "correction": "Q8JZ starts each bad interval at a scale a whose predecessor is good. It uses nu_a(0)>=M_(a-1)^3/(8e), integrates with the corrected growth exponent, and bounds every bad-run length before invoking monotonicity. The maximum theorem and moment consequences are retained; the singleton base case is explicit.",
+      "tags": [
+        "Q8JZ",
+        "X2A4",
+        "W2VN"
+      ],
+      "issues": [],
+      "leanImpact": "Retain the initial value when integrating a logarithmic derivative. Index child quantiles at n-1 and handle n=0 separately. Formalize finite bad intervals before excluding an infinite one. Written repair only; no compiled association or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Start bad intervals after a good scale and retain the initial moment and corrected growth exponent.",
+        "scale": "substantial",
+        "impact": "Reconstructs the interval-growth argument; the maximum theorem and moment consequences survive."
+      }
+    },
+    {
+      "id": "capped-merger-maximization",
+      "title": "A false intermediate maximization in the capped-merger proof",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, fourth case in the proof of Lemma 5.4, printed p.47 (PDF index46), extracted PDF lines4640–4648. Versioned HTML and extracted PDF text agree; no journal-formula or visual-PDF comparison.",
+      "claim": "For x>=m/2 with x,y<=m and x+y>=m, the proof bounds x(m-x)+y(m-y) by 2x(m-x).",
+      "problem": "Taking m=10, x=8 and y=5 gives 41 on the left and 32 on the claimed upper side. The desired upper bound 2xy is nevertheless valid.",
+      "correction": "Use m(x+y)-x^2-y^2 <= (x+y)^2-x^2-y^2 = 2xy directly. RHK3 checks all cap cases, proves the differential inequality by distinct-cluster comparison, and derives the third-power drift without this maximization. Lemma 5.4 and the later tail theorem are retained.",
+      "tags": [
+        "RHK3",
+        "25Z4"
+      ],
+      "issues": [],
+      "leanImpact": "Prove the capped increment directly by cases, including a cap below one. The counterexample concerns an intermediate bound, not the generator conclusion. No compiled association or source-author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Bound the capped merger directly by 2xy.",
+        "scale": "local",
+        "impact": "Bypasses the false maximization step; the differential inequality and tail theorem remain valid."
+      }
+    },
+    {
+      "id": "capped-normalization-and-scales",
+      "title": "Block volume and time indices in the capped-mean argument",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, opening of section 5.3, printed p.46 (PDF index45), and proof of Corollary 5.5, printed p.48 (PDF index47). Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The capped rooted identity uses L^d where the level-n block has L^(dn) vertices. The backward proof mixes X_(ell,t_n), a derivative with scale n, and t/t_n while proving a bound at scale ell.",
+      "problem": "Counting each vertex in its cluster gives E T_m(X_(n,t_n))=L^(dn) E min(|K_n|,m). At scale ell the endpoint is t_ell, the derivative observable is X_(ell,s), and its dimensionless time is t/t_ell.",
+      "correction": "RHK3 proves the correctly normalized rooted identity and the finite recurrence U_j<=beta_c+L^(-alpha)U_(j+1). It carries the terminal remainder explicitly to obtain a uniform backward lower bound. L3QJ then proves the stronger capped mesoscopic estimate, including all small scales and positive real caps.",
+      "tags": [
+        "RHK3",
+        "L3QJ",
+        "54V4"
+      ],
+      "issues": [],
+      "leanImpact": "Track the block cardinality Q^n independently of the one-step gluing factor Q. Keep each time variable attached to its own level in the finite backward induction. No compiled association or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the rooted-volume normalization and consistent layer and time indices.",
+        "scale": "local",
+        "impact": "Repairs the finite recurrence and terminal remainder; the capped estimate survives."
+      }
+    },
+    {
+      "id": "norm-threshold-tail-integration",
+      "title": "The tail weight and the passage from moment divergence to non-tightness",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, proof of Corollary 1.15 in section 5.2, printed pp.45–46 (PDF indices44–45), extracted PDF lines4484–4547. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The endpoint calculation uses a weight m^(p-1) multiplying the cluster tail and identifies p-1-theta as -1 at p=1+theta. It then passes from divergent expected norm power to failure of tightness.",
+      "problem": "At p=1+theta the printed exponent is zero. Tail integration for E T^(p-1) uses x^(p-2), giving the required exponent -1. Divergence of expectations alone does not imply non-tightness, because rare large values can carry those expectations.",
+      "correction": "THZF uses the correct tail-integration power, obtains endpoint expected norm power comparable to n+1, and applies the universal norm moment comparison and lower-tail estimate from 3109. The endpoint norm then diverges in probability. Above the threshold it constructs compact sets by uniform small-coordinate mass bounds. Corollary 1.15 is retained.",
+      "tags": [
+        "THZF",
+        "ZDDE",
+        "3109"
+      ],
+      "issues": [],
+      "leanImpact": "Use power increments or the integral with derivative (p-1)x^(p-2), and prove the compactness and probability statements separately from moment estimates. The endpoint argument needs the norm lower-tail theorem. No compiled association or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the tail integral and use lower-tail and moment comparison to prove divergence in probability.",
+        "scale": "substantial",
+        "impact": "A new tightness argument is needed beyond divergent expectations; the norm-threshold conclusion is retained."
+      }
+    },
+    {
+      "id": "backward-maximum-volume-factor",
+      "title": "The backward maximum argument omits the block-volume factor",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, proof of Lemma 5.9, printed p.51 (PDF index50), extracted lines5259–5284. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The displayed logarithmic third-moment derivative is bounded by C L^(alpha n), and the terminal third moment is bounded by C M_n L^(alpha n).",
+      "problem": "These are block power sums, not rooted moments. The cited generator and mean estimates give nu_n prime <= C L^((d+alpha)n) nu_n and nu_n(t_n) <= C M_n L^((d+alpha)n). The factor L^(dn) must be retained in both places.",
+      "correction": "O7W9 integrates over t_n=beta_c L^(-(d+alpha)n) to get a uniform factor, then uses exact gluing to bound a_n<=D a_(n-1), where a_n is the terminal third moment. Combining c M_n^3<=a_n<=C M_n v_n^2 yields an explicit positive lower constant at every fixed earlier scale. Lemma 5.9 is retained.",
+      "tags": [
+        "O7W9",
+        "2VXH",
+        "X2A4"
+      ],
+      "issues": [],
+      "leanImpact": "Keep rooted moments and block power sums distinct; carry the factor Q^n before integrating or comparing scales. The time interval cancels v_n squared only after integration. No compiled association or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the block-volume factor through integration and exact gluing.",
+        "scale": "local",
+        "impact": "The factors cancel at the correct time scale; the backward-maximum lemma survives."
+      }
+    },
+    {
+      "id": "selected-maxima-connection-count",
+      "title": "The endpoint count in the connection estimate needs two escape factors",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, proof of Proposition 5.8, printed pp.51–53 (PDF indices50–52), especially (5.24) on printed p.52. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "After a bound for each endpoint pair, (5.24) sums over two level-(n-ell) blocks without their L^(2d(n-ell)) endpoint factor. Combining this with the stated probability that a root is in a maximal cluster is then said to give decay L^(-(d-alpha)ell). The earlier separation display uses L^(r+1).",
+      "problem": "The stated endpoint sum and root probability would instead leave L^(2alpha n-(d+alpha)ell+(d-alpha)r), which is not uniform in n for fixed ell. The geometric separation between distinct level-(n-r) blocks is at least L^(n-r+1). The final decay therefore needs additional path information, not just insertion of the omitted cardinality.",
+      "correction": "OAE2 chooses one largest cluster per block with a deterministic tie rule. Its selection event factors into internal connectivity and a decreasing constraint on other edges, permitting an opposite-monotonicity Harris bound. A connecting path must leave each selected cluster through a layer above m=n-ell. The first and last edges each supply an L^(-alpha m) factor; an explicit shell convolution bounds their connection diagram by C L^(-2alpha m) L^(-(d-alpha)h). Averaging selected sizes, each at most C L^((d+alpha)m/2), gives C L^(-(d-alpha)(h-m)). YUJ9 obtains the required decay in ell-r and proves Proposition 5.8 uniformly over the entire time interval. No estimate for the total mass of all tied maxima is needed.",
+      "tags": [
+        "OAE2",
+        "YUJ9",
+        "ADJZ",
+        "F4CV",
+        "7YNX"
+      ],
+      "issues": [],
+      "leanImpact": "Keep lower and higher copies of an edge as separate product coordinates. The path must have interior outside the two selected clusters; its first and last edges are higher-layer edges, with a separate direct-edge case. Track endpoint sums through expected selected volumes. Selection is not an increasing event, so ordinary increasing-event BK cannot be applied to it. Harris on the remaining coordinates supplies the needed comparison. Written repair only; neither a theorem counterexample nor a compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Control selected maxima using their decreasing selection constraints and the first and last exiting edges.",
+        "scale": "substantial",
+        "impact": "A new connection-diagram estimate is required; inserting the missing cardinality alone does not work. The proposition is recovered."
+      }
+    },
+    {
+      "id": "critical-capped-sign-and-drift",
+      "title": "Critical capped-moment proof: sign, upper limit and drift profile",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Lemma 6.2, (6.6) and the final drift display; printed pp.54–56 (PDF indices53–55), extracted lines5538–5828. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The statement prints delta<0. Failure of hydrodynamics is used to assert a positive lower limit in (6.6), and the final drift displays use A-t/t_n without its reciprocal or 1/t_n. The displayed diagonal error terms also lose their factor three.",
+      "problem": "The cap parameter must be positive. Failure of convergence only provides a positive upper limit of the normalized third moment; a positive lower limit has not been established at that stage. The drift coefficient has scale v_n squared and is G_n(t)=1/[t_n(A-t/t_n)]. Multiplication of the first distinct-cluster estimate by three also multiplies its errors.",
+      "correction": "NHNY fixes a cap at the later scale before propagating it backwards, then makes a diagonal choice. It uses only one sufficiently large scale from the positive upper limit. Harris gives nu prime >=3 tau nu-3m ES4+3c v_n^5. Since m=o(v_n), this is at least 3(1+gamma)G_n nu. Integrating G_n gives alpha log L; gluing makes the normalized third moment grow geometrically, a contradiction. The conclusion of Lemma 6.2 is retained.",
+      "tags": [
+        "NHNY",
+        "RHK3",
+        "YUJ9"
+      ],
+      "issues": [],
+      "leanImpact": "Formalize the quantifiers for fixed cap, later scale and diagonal sequence separately. Keep limsup distinct from liminf until the growth implication has been iterated. Preserve the reciprocal time profile and all generator coefficients. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Propagate a fixed cap backwards and use one large scale from a positive limsup in the corrected drift argument.",
+        "scale": "substantial",
+        "impact": "Rebuilds the critical contradiction without assuming a positive liminf; the lemma's conclusion survives."
+      }
+    },
+    {
+      "id": "critical-terminal-cap-normalization",
+      "title": "Critical good scales need rooted normalization and a terminal-time argument",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Opening of the proof of Theorem 6.1; printed p.57 (PDF index56), extracted lines5969–5983. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The set of good scales is defined by L^(-(d+alpha)n) times the expected capped rooted volume, and its infinitude is inferred directly from a lemma taking an infimum over time.",
+      "problem": "A rooted moment requires L^(-alpha n), since its block counterpart is larger by Q^n=L^(dn). The printed weaker normalization does not give the small factor used in (6.13). Smallness at some intermediate time also needs propagation to the terminal time.",
+      "correction": "NHNY first obtains tau(u)<=C zeta v_n^2 at infinitely many scales. From tau prime<=tau squared, tau(t_n)<=tau(u)/[1-(t_n-u)tau(u)]<=2C zeta v_n^2 for small fixed zeta. Divide by Q^n and choose zeta for the desired tolerance. This yields infinitely many n with E min(T_n,delta v_n)<epsilon L^(alpha n), exactly the bound used by 837P and UL8V.",
+      "tags": [
+        "NHNY",
+        "837P",
+        "UL8V"
+      ],
+      "issues": [],
+      "leanImpact": "Track block versus rooted normalization through the identity tau_terminal=Q^n E min(T_n,m). The denominator in the reciprocal differential estimate must be positive before it is inverted. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Normalize by the rooted volume and propagate the small intermediate moment to terminal time.",
+        "scale": "local",
+        "impact": "Supplies the terminal small factor actually needed by the following critical argument."
+      }
+    },
+    {
+      "id": "critical-suppression-time-index",
+      "title": "Suppressed-edge survival uses previous clusters and the full finite transcript",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Theorem 6.1, (6.14)–(6.17); printed pp.60–61 (PDF indices59–60), extracted lines6307–6473. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The recursion removes next-layer edges between the previous clusters, but (6.15) charges edges between the current clusters. The count defining tilde G_n omits m<=n, and (6.14) conditions only on the terminal pair although its count uses the earlier history.",
+      "problem": "Edges acquired during the current layer need not have been suppressed and may already have been inspected. The asserted conditional independence applies to the uninspected coordinates selected from the previous clusters. A history-dependent count must be measurable for the sigma-algebra used in the conditional expectation.",
+      "correction": "EH4L records a finite transcript. On terminal distinctness, the conditional survival probability is exp[-beta_c sum_(m=N)^(n-1) L^(-s(m+1)) |tilde K_m(0)| |tilde K_m(x)|]. Each large scale before n contributes at least delta^2 L^(-s); only the last counted scale is lost. BK on disjoint open tree witnesses in the original product configuration bounds the remaining weighted smaller-cluster product by chi_n squared. The exponential decay and Theorem 6.1 survive with the corrected constant.",
+      "tags": [
+        "EH4L",
+        "UL8V",
+        "AUUG"
+      ],
+      "issues": [],
+      "leanImpact": "Model the revealed-coordinate transcript and predictable suppressed sets explicitly. Do not assign a product law to the modified configuration. The BK comparison uses its disjoint open witnesses in the original independent coordinates. Preserve the one-level shift and finite count. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use a finite exploration transcript and suppress only uninspected edges between previous-layer clusters.",
+        "scale": "substantial",
+        "impact": "The conditional-independence argument is replaced; exponential decay and the theorem survive with a corrected constant."
+      }
+    },
+    {
+      "id": "fourth-moment-discovery-and-pair-coefficient",
+      "title": "The fourth-moment comparison drops avoidance and undercounts pair terms",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Lemma 6.11 and its proof, printed pp.70–72 (PDF indices69–71), especially extracted lines8420–8461 and8531–8651. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The last BK equality identifies P(|C_i|^p>=r) with P(Z_i>=r), although Z_i vanishes when its cluster contains an earlier vertex. The independent fourth-moment expansion then uses coefficient two on unordered pairs.",
+      "problem": "The two marginal probabilities need not coincide. For two vertices joined with probability theta and i=2, P(|C_i|^p>=1)=1 but P(Z_i>=1)=1-theta. The independent centered fourth moment has coefficient six, not two, on unordered pairs of variances.",
+      "correction": "I2YU conditions on C_i=B avoiding earlier vertices. The outside law remains product, and deleting B can only decrease the power sum of clusters meeting earlier seeds. Averaging gives the required negative quadrant dependence with P(Z_i>=r) retained. A finite summation-by-parts proof supplies convex comparison. Expansion with coefficient six yields E(S_p-E S_p)^4 <= E S_4p+3(E S_2p)^2. This sufficient corrected bound proves all remainder estimates in LWRN. No counterexample to the sharper printed final inequality is claimed.",
+      "tags": [
+        "I2YU",
+        "LWRN"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the cluster avoidance event in the conditional law. Prove monotonicity of the partial power sum for p>=1. Independent fourth moments require all six placements of a pair of squared centered variables. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the discovery probability in conditional comparison and use coefficient six in the fourth-moment expansion.",
+        "scale": "substantial",
+        "impact": "A sufficient weaker moment bound is proved and supplies all required remainders; the sharper printed bound is not established by this repair."
+      }
+    },
+    {
+      "id": "critical-integral-and-amplitude",
+      "title": "The terminal time integral changes the critical amplitude",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Corollary 6.7 and proof of Theorem 1.6 in section 6.2, printed pp.64–66 (PDF indices63–65), especially extracted lines7011–7040 and the subsequent H and A1 displays. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The source evaluates integral_u^1 (1-v/A)^(-3) dv as A/2[(1-u/A)^(-2)-q^2], where q=L^-alpha and A=1/(1-q), and uses the resulting H profile to compute the critical amplitude.",
+      "problem": "At u=1 the integral is zero, while the printed expression is positive. Direct integration gives A/2[q^-2-(1-u/A)^-2]. The printed H profile also fails H_(n+1)(0)=H_n(t_n) after the stated scale ratios are inserted. In addition, the displayed A1 integral changes the sign of the second term relative to epsilon3-H. These errors affect the amplitude, not only an intermediate display.",
+      "correction": "5B41 evaluates the exact mean-error series with a uniform geometric dominating bound. With phi=1-u/A and r_n=nu_n(0)^2/mu_n(0)^3, H/r_n tends to [q^-2-phi^-2+(q^-2-1)/(L^(d-2alpha)-1)]/(2phi). At d=3alpha, integrating 3G(epsilon3-H) gives 2(q^-3-1)r_n. WQ7B derives B0=(1-q)^(3/2)/(2 beta_c^(3/2) sqrt(q^-3-1)) for nu_n(0)/(n^-1/2 L^((d+3alpha)n)). Equivalently the denominator is beta_c^(3/2) sqrt(4L^(6alpha)-4L^(3alpha)), in place of the printed sqrt(5L^(6alpha)-2L^(3alpha)-3L^(2alpha)). Terminal rooted moments have c1=(1-q)/(beta_c q) and D=1/[2 sqrt(beta_c q(1+q+q²))]: E T_n^k ~ (2k-3)!! c1 D^(k-1) n^(-(k-1)/2) L^((2k-1)alpha n). The exponents are preserved; initial and terminal constants are distinguished.",
+      "tags": [
+        "5B41",
+        "WQ7B",
+        "W2VN",
+        "LWRN"
+      ],
+      "issues": [],
+      "leanImpact": "The small correction can change sign within a level; use an additive uniform expansion and positivity of its integral, not a pointwise positive equivalent. Prove domination for the future-scale sum before exchanging limit and sum. Check endpoint gluing and convert block moments to terminal rooted moments explicitly. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Recompute the critical integral, mean-error profile, and initial and terminal amplitudes.",
+        "scale": "statement",
+        "impact": "The numerical asymptotic amplitudes change substantially; the critical exponents and logarithmic powers are preserved."
+      }
+    },
+    {
+      "id": "polynomial-recursion-missing-power",
+      "title": "The recursion proof loses the exponent gamma",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Lemma 6.4, printed p.62 (PDF index61), extracted lines6535–6553. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The exponential upper estimates contain A a_n where the recurrence contains A a_n^gamma.",
+      "problem": "The ratio a_n^gamma/a_(n+1)^gamma is exp[gamma(1+delta_n)A a_n^gamma], so the power cannot be dropped unless gamma=1.",
+      "correction": "Retain a_n^gamma in both exponential displays. S23T gives a shorter proof: a_n tends to zero and a_(n+1)^(-gamma)-a_n^(-gamma) tends to gamma A. Summing proves the same asymptotic conclusion.",
+      "tags": [
+        "S23T",
+        "WQ7B"
+      ],
+      "issues": [],
+      "leanImpact": "Keep real powers in the exponent and justify a_n tending to zero before applying the first-order exponential expansion. Written repair only; no source confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the missing power, or sum increments of the reciprocal power directly.",
+        "scale": "local",
+        "impact": "The recursion proof changes locally; its asymptotic conclusion is unchanged."
+      }
+    },
+    {
+      "id": "gaussian-fluctuation-moment-index",
+      "title": "The Gaussian fluctuation conjecture uses squared-normal moments",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Remark 6.14, printed p.74 (PDF index73), extracted lines9235–9264. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The kth moment of a centered variance-normalized power sum is conjectured to tend to 1(k even)(2k-1)!! as for a standard normal limit.",
+      "problem": "For k=2 the left side equals one whenever the variance is positive, whereas the displayed right side is three. The kth moment of a standard normal is (k-1)!! for even k and zero for odd k.",
+      "correction": "Replace (2k-1)!! by (k-1)!! when k is even. Equivalently, the 2jth moment is (2j-1)!!. This index correction alone does not prove a fluctuation limit. MFGT supplies a separate written proof of the Gaussian limit and all fixed moments for every fixed finite collection of integer powers p>=2 in the critical exact hierarchical model with d>=3 alpha. Independent mathematical review remains pending; noninteger powers and comparable kernels are outside that result.",
+      "tags": [
+        "LWRN",
+        "MFGT"
+      ],
+      "issues": [],
+      "leanImpact": "Distinguish standard-normal fluctuation moments from the squared-normal moments of the volume-biased law. No central limit theorem follows from the covariance equivalent alone. MFGT additionally uses centered multivariate generator estimates, uniform integrability and independent-child gluing. Written arguments only; independent mathematical review, source confirmation and a compiled association remain pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use (k-1)!! for the even kth Gaussian moment.",
+        "scale": "notation",
+        "impact": "The displayed moment index requires a local notation correction. Establishing the limit is a separate, substantial argument: MFGT gives a written proof for fixed integer powers in the exact critical model, pending independent mathematical review. This does not resolve noninteger powers or comparable kernels."
+      }
+    },
+    {
+      "id": "critical-tail-proof-endpoints",
+      "title": "The critical tail proof needs level and ghost-intensity endpoint restrictions",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, Lemma 6.15 and the last optimization in section 6.4, printed pp.75–77 (PDF indices74–76), extracted lines9269–9279 and9569–9588; Theorem 1.7 at lines533–543. Versioned HTML and extracted PDF text compared; no visual-PDF or journal-formula comparison.",
+      "claim": "Lemma 6.15 uses n^(-1/2) while quantifying over n>=0. The optimized bound M(h)<=C h^(1/2)(-log h)^(1/4) is then stated for every h>0.",
+      "problem": "The level-zero scale is undefined. At h=1 the displayed ghost upper bound is zero, whereas M(1)>=1-e^(-1)>0 because every cluster contains its root. The fourth root is not real for h>1. Theorem 1.7 itself correctly restricts the tail threshold to k>=2 and is unaffected.",
+      "correction": "9GFG uses (n+1)^(-1/2)L^(2alpha n), proves the small-volume bound for all sufficiently large n from the biased limit, and shrinks delta to handle the finitely many earlier levels. Equivalently the original scale can be retained with n>=1. FMVJ uses the optimized logarithmic expression only as h tends to zero and takes n=ceil([log(1/h)+(1/2)log log(1/h)]/[2alpha log L]). This explicitly means the logarithm of the full balancing product. F62A retains the valid unoptimized estimate for every h>0 and chooses the absorption tolerance after fixing both comparison constants. The final all-threshold statement uses log(2+m). No error is asserted solely from the source logarithm lacking parentheses.",
+      "tags": [
+        "9GFG",
+        "F62A",
+        "FMVJ"
+      ],
+      "issues": [],
+      "leanImpact": "Separate n=0 from the asymptotic scale, quantify the finite initial segment, and restrict logarithmic real powers to positive arguments. Prove bounded successive scale ratios and integer rounding bounds; retain both constants in ghost absorption. These are written local repairs, with no confirmed erratum or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Handle the zero scale separately and restrict the optimized ghost formula to small fields.",
+        "scale": "local",
+        "impact": "Repairs endpoint ranges and finitely many scales; the stated cluster-tail theorem is unchanged."
+      }
+    },
+    {
+      "id": "periodic-quotient-subgroup",
+      "title": "The periodic finite block is the quotient by the tail subgroup",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, section 7.1, printed pp.77–78 (PDF indices76–77), extracted lines9614–9643; HTML2600–2607. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The periodic kernel on the finite subgroup B_n is defined by summing over z congruent to y modulo B_n.",
+      "problem": "Literal group congruence modulo B_n puts all y in B_n in the same coset, so it cannot distinguish the vertices of the asserted finite quotient. H/B_n is infinite. The subsequent shell count instead uses points whose first n coordinate blocks equal y.",
+      "correction": "YY9S uses the projection pi_n onto the first n coordinates, with kernel T_n consisting of tail-supported elements. Then H/T_n is B_n and Jper(x,y)=sum_(pi_n z=y) J_infty(x,z) for distinct x,y. The following source calculation is preserved and evaluates explicitly to Jper-Jfree=L^(-(d+alpha)n)q/(1-q), q=L^-alpha. At intensity beta this adds final coalescent time beta L^(-(d+alpha)n)q/(1-q). No periodic cluster-size asymptotic is inferred.",
+      "tags": [
+        "YY9S"
+      ],
+      "issues": [],
+      "leanImpact": "Distinguish the embedded finite subgroup from the kernel of coordinate projection. Use fibres of the homomorphism, count each tail shell, establish convergence and omit diagonal loops before identifying the added edge layer. Written repair only; no confirmation or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Quotient by the tail-coordinate subgroup, not the finite block.",
+        "scale": "statement",
+        "impact": "The quotient definition changes to the intended finite graph; the subsequent shell calculation survives, with no periodic asymptotic inferred."
+      }
+    },
+    {
+      "id": "spin-energy-conventions-and-domain",
+      "title": "The spin comparison needs a consistent energy convention and a finite partition function",
+      "status": "provisional",
+      "locator": "arXiv:2211.05686v1, section 7.2 spin-system comparison, printed pp.79–80 (PDF indices78–79), extracted lines9754–9851; HTML2633–2645. Versioned HTML and extracted PDF text compared; no journal-formula or visual-PDF comparison.",
+      "claim": "The ordered energy sum_(x,y) J(x,y) phi_x phi_y is said to be equivalent to a positive squared-gradient interaction after single-site reweighting. The subsequent spin recursion uses r sum_(i<j)x_i x_j and is declared on all probability measures on R.",
+      "problem": "Expansion with the same symmetric J gives a negative one-half ordered gradient term, not a positive one. The ordered energy counts each cross-child pair twice, so the displayed block bias is missing a factor two under that convention. Finally the normalizing integral can be infinite: for Q Gaussian inputs of variance v, an interaction kappa sum_(i<j)x_i x_j is integrable only if kappa(Q-1)v<1.",
+      "correction": "YXL0 states E_ordered=sum_x r_x phi_x^2-(1/2)sum_(x,y)J(x,y)(phi_x-phi_y)^2. For the ordered hierarchical energy it derives the bias exp[2r sum_(i<j)x_i x_j], r=L^(-(d+alpha)), on the domain 0<Z(mu)<infinity. Bounded-support inputs have all iterates defined and give the exact finite-block recursion. Gaussian input has output variance qv/[1-2r(Q-1)v], q=L^-alpha, with positive fixed point (1-q)/[2r(Q-1)]. Alternatively define the original energy over unordered pairs and retain coefficient r throughout; its Gaussian domain and fixed point use r in place of 2r. Neither convention defines the spin map on every probability law. These changes concern the spin comparison, not a percolation theorem.",
+      "tags": [
+        "YXL0"
+      ],
+      "issues": [],
+      "leanImpact": "Declare ordered versus unordered pair sums, prove the exact quadratic identity, keep the cross-child factor in the block decomposition, and require integrability before normalizing a measure. A Gaussian precision-matrix calculation verifies the domain and fixed point. No universality, non-Gaussian fixed-point or compiled theorem claim.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use a consistent ordered or unordered energy and restrict the spin map to finite positive normalizing integrals.",
+        "scale": "statement",
+        "impact": "The sign, interaction coefficient, Gaussian fixed point and domain change; this concerns the spin comparison, not a percolation theorem."
+      }
+    }
+  ]
+}

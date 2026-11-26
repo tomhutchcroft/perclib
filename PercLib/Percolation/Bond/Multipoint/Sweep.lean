@@ -1,11 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 633 (Q-205, part 2), written on 2026-11-16 by PROVER-F. Statements from
-the wiki article `multipoint-trees` (tags CS13, 9YE6); T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1, §I.2. No upstream proof is copied and no definition is
-added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. Statements from the wiki article `multipoint-trees` (tags CS13,
+9YE6); T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, §I.2. No upstream
+proof is copied and no definition is added.
 -/
 module
 
@@ -25,7 +26,9 @@ every tree before the minimum is taken.
 * `sweepProduct_image_smul` (item 3): `Sweep(c • A) = c^|A| Sweep(A)` for `c > 0` in a
   normed space;
 * `threePartDistance_triple` (item 4, 9YE6): `S({x, y, z}) = d(x, y) d(y, z) d(z, x)` for
-  distinct points.
+  distinct points;
+* `threePartDistance_quad` (9YE6): for four distinct points, `S` is the minimum over the three
+  pairings `{u, v} ⊔ {w, z}` of `d(u, v) d(w, z) √(d(u, w) d(u, z) d(v, w) d(v, z))`.
 -/
 
 @[expose] public section
@@ -246,7 +249,7 @@ theorem sweepProduct_image_smul {E : Type*} [NormedAddCommGroup E] [NormedSpace 
 
 /-! ### Item 4: three points -/
 
-/-- **Item 4 (9YE6), three points.** `S({x, y, z}) = d(x, y) d(y, z) d(z, x)` for distinct
+/-- **Item 4, three points.** `S({x, y, z}) = d(x, y) d(y, z) d(z, x)` for distinct
 `x, y, z`. -/
 theorem threePartDistance_triple {x y z : X} (hxy : x ≠ y) (hyz : y ≠ z) (hxz : x ≠ z) :
     threePartDistance ({x, y, z} : Finset X) = dist x y * dist y z * dist z x := by
@@ -288,7 +291,7 @@ theorem threePartDistance_triple {x y z : X} (hxy : x ≠ y) (hyz : y ≠ z) (hx
     | ring1
     | (rw [dist_comm a b, dist_comm b c, dist_comm c a]; ring1)
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- `A = {0, 1, 3} ⊆ ℝ`: `Sweep(A) > 0`, `Sweep(2 • A) = 2³ Sweep(A)`, and
 `S(A) = 1 · 2 · 3 = 6`. -/
@@ -305,5 +308,140 @@ example : threePartDistance ({0, 1, 3} : Finset ℝ) = 6 := by
   rw [threePartDistance_triple (by norm_num) (by norm_num) (by norm_num)]
   simp only [Real.dist_eq]
   norm_num
+
+/-! ### Four points -/
+
+/-- The value of the partition `{u} ⊔ {v} ⊔ {w, z}` of four distinct points. -/
+theorem sqrt_threePartDistance_pair_mul_triple_mul_triple {u v w z : X} (huw : u ≠ w)
+    (huz : u ≠ z) (hvw : v ≠ w) (hvz : v ≠ z) (hwz : w ≠ z) :
+    Real.sqrt (threePartDistance ({u, v} : Finset X) * threePartDistance ({v, w, z} : Finset X) *
+        threePartDistance ({w, z, u} : Finset X)) =
+      dist u v * dist w z * Real.sqrt (dist u w * dist u z * dist v w * dist v z) := by
+  rw [threePartDistance_pair, threePartDistance_triple hvw hwz hvz,
+    threePartDistance_triple hwz (Ne.symm huz) (Ne.symm huw), dist_comm z v, dist_comm z u,
+    show dist u v ^ 2 * (dist v w * dist w z * dist v z) * (dist w z * dist u z * dist u w) =
+      (dist u v * dist w z) ^ 2 * (dist u w * dist u z * dist v w * dist v z) by ring,
+    Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (by positivity)]
+
+/-- Every pairing term of four distinct points of `{a, b, c, d}` is at least the minimum of
+the three pairing terms. -/
+private theorem min_pairing_le {a b c d u v w z : X}
+    (hu : u ∈ ({a, b, c, d} : Finset X)) (hv : v ∈ ({a, b, c, d} : Finset X))
+    (hw : w ∈ ({a, b, c, d} : Finset X)) (hz : z ∈ ({a, b, c, d} : Finset X)) (huv : u ≠ v)
+    (huw : u ≠ w) (huz : u ≠ z) (hvw : v ≠ w) (hvz : v ≠ z) (hwz : w ≠ z) :
+    min (min (dist a b * dist c d * Real.sqrt (dist a c * dist a d * dist b c * dist b d))
+        (dist a c * dist b d * Real.sqrt (dist a b * dist a d * dist c b * dist c d)))
+        (dist a d * dist b c * Real.sqrt (dist a b * dist a c * dist d b * dist d c)) ≤
+      dist u v * dist w z * Real.sqrt (dist u w * dist u z * dist v w * dist v z) := by
+  simp only [mem_insert, mem_singleton] at hu hv hw hz
+  simp only [Real.sqrt_mul', dist_nonneg]
+  rcases hu with rfl | rfl | rfl | rfl <;> rcases hv with rfl | rfl | rfl | rfl <;>
+    rcases hw with rfl | rfl | rfl | rfl <;> rcases hz with rfl | rfl | rfl | rfl <;>
+    first
+    | exact absurd rfl huv | exact absurd rfl huw | exact absurd rfl huz
+    | exact absurd rfl hvw | exact absurd rfl hvz | exact absurd rfl hwz
+    | (refine (min_le_left _ _).trans ((min_le_left _ _).trans_eq ?_)
+       (try simp only [dist_comm]); all_goals ring1)
+    | (refine (min_le_left _ _).trans ((min_le_right _ _).trans_eq ?_)
+       (try simp only [dist_comm]); all_goals ring1)
+    | (refine (min_le_right _ _).trans_eq ?_
+       (try simp only [dist_comm]); all_goals ring1)
+
+/-- For disjoint parts `s₁, s₂, s₃ ⊆ {a, b, c, d}` of sizes `1, 1, 2`, the value
+`√(S(s₁ ∪ s₂) S(s₂ ∪ s₃) S(s₃ ∪ s₁))` is at least the minimum of the three pairing terms. -/
+private theorem min_pairing_le_sqrt_partition {a b c d : X} {s₁ s₂ s₃ : Finset X}
+    (h₁ : s₁ ⊆ {a, b, c, d}) (h₂ : s₂ ⊆ {a, b, c, d}) (h₃ : s₃ ⊆ {a, b, c, d})
+    (h₁₂ : Disjoint s₁ s₂) (h₂₃ : Disjoint s₂ s₃) (h₃₁ : Disjoint s₃ s₁) (hc₁ : s₁.card = 1)
+    (hc₂ : s₂.card = 1) (hc₃ : s₃.card = 2) :
+    min (min (dist a b * dist c d * Real.sqrt (dist a c * dist a d * dist b c * dist b d))
+        (dist a c * dist b d * Real.sqrt (dist a b * dist a d * dist c b * dist c d)))
+        (dist a d * dist b c * Real.sqrt (dist a b * dist a c * dist d b * dist d c)) ≤
+      Real.sqrt (threePartDistance (s₁ ∪ s₂) * threePartDistance (s₂ ∪ s₃) *
+        threePartDistance (s₃ ∪ s₁)) := by
+  obtain ⟨u, rfl⟩ := card_eq_one.1 hc₁
+  obtain ⟨v, rfl⟩ := card_eq_one.1 hc₂
+  obtain ⟨w, z, hwz, rfl⟩ := card_eq_two.1 hc₃
+  have hne : ∀ {s t : Finset X} {x y : X}, Disjoint s t → x ∈ s → y ∈ t → x ≠ y :=
+    fun hst hx hy hxy => disjoint_left.1 hst hx (hxy ▸ hy)
+  have hu : u ∈ ({u} : Finset X) := mem_singleton_self u
+  have hv : v ∈ ({v} : Finset X) := mem_singleton_self v
+  have hw : w ∈ ({w, z} : Finset X) := mem_insert_self w {z}
+  have hz : z ∈ ({w, z} : Finset X) := mem_insert_of_mem (mem_singleton_self z)
+  rw [show ({u} : Finset X) ∪ {v} = {u, v} from rfl,
+    show ({v} : Finset X) ∪ {w, z} = {v, w, z} from rfl,
+    show ({w, z} : Finset X) ∪ {u} = {w, z, u} by
+      ext; simp only [mem_union, mem_insert, mem_singleton]; tauto,
+    sqrt_threePartDistance_pair_mul_triple_mul_triple (hne h₃₁.symm hu hw)
+      (hne h₃₁.symm hu hz) (hne h₂₃ hv hw) (hne h₂₃ hv hz) hwz]
+  exact min_pairing_le (h₁ hu) (h₂ hv) (h₃ hw) (h₃ hz) (hne h₁₂ hu hv) (hne h₃₁.symm hu hw)
+    (hne h₃₁.symm hu hz) (hne h₂₃ hv hw) (hne h₂₃ hv hz) hwz
+
+/-- **Four points** (9YE6). For distinct `a, b, c, d`, `S({a, b, c, d})` is the minimum over the
+three pairings `{u, v} ⊔ {w, z}` of `d(u, v) d(w, z) √(d(u, w) d(u, z) d(v, w) d(v, z))`. -/
+theorem threePartDistance_quad {a b c d : X} (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    threePartDistance ({a, b, c, d} : Finset X) =
+      min (min (dist a b * dist c d * Real.sqrt (dist a c * dist a d * dist b c * dist b d))
+        (dist a c * dist b d * Real.sqrt (dist a b * dist a d * dist c b * dist c d)))
+        (dist a d * dist b c * Real.sqrt (dist a b * dist a c * dist d b * dist d c)) := by
+  set A : Finset X := {a, b, c, d} with hA_def
+  have hcard : A.card = 4 := by
+    rw [hA_def, card_insert_of_notMem (by simp [hab, hac, had]),
+      card_insert_of_notMem (by simp [hbc, hbd]), card_pair hcd]
+  -- the value of the partition `{u} ⊔ {v} ⊔ {w, z}`
+  have hval : ∀ {u v w z : X}, u ∈ A → v ∈ A → w ∈ A → z ∈ A → u ≠ v → u ≠ w → u ≠ z →
+      v ≠ w → v ≠ z → w ≠ z →
+      threePartDistance A ≤
+        dist u v * dist w z * Real.sqrt (dist u w * dist u z * dist v w * dist v z) := by
+    intro u v w z hu hv hw hz huv huw huz hvw hvz hwz
+    have h3 : A \ ({u} ∪ {v}) = {w, z} := by
+      have hAeq : A = {u, v, w, z} := by
+        refine (eq_of_subset_of_card_le (fun x hx => ?_) ?_).symm
+        · simp only [mem_insert, mem_singleton] at hx
+          rcases hx with rfl | rfl | rfl | rfl <;> assumption
+        · rw [hcard, card_insert_of_notMem (by simp [huv, huw, huz]),
+            card_insert_of_notMem (by simp [hvw, hvz]), card_pair hwz]
+      rw [hAeq]
+      ext x
+      simp only [mem_sdiff, mem_union, mem_insert, mem_singleton]
+      constructor
+      · rintro ⟨h, h'⟩; tauto
+      · rintro (rfl | rfl)
+        · exact ⟨by tauto, by rintro (h | h) <;> simp_all⟩
+        · exact ⟨by tauto, by rintro (h | h) <;> simp_all⟩
+    have hle := threePartDistance_le_of_partition (A := A) (p₁ := {u}) (p₂ := {v}) (by omega)
+      (singleton_subset_iff.2 hu) (singleton_subset_iff.2 hv)
+      (disjoint_singleton.2 huv) (singleton_nonempty u) (singleton_nonempty v)
+      (by rw [h3]; exact insert_nonempty _ _)
+    rw [h3, show ({u} : Finset X) ∪ {v} = {u, v} from rfl,
+      show ({v} : Finset X) ∪ {w, z} = {v, w, z} from rfl,
+      show ({w, z} : Finset X) ∪ {u} = {w, z, u} by
+        ext; simp only [mem_union, mem_insert, mem_singleton]; tauto,
+      sqrt_threePartDistance_pair_mul_triple_mul_triple huw huz hvw hvz hwz] at hle
+    exact hle
+  have ha : a ∈ A := by simp [hA_def]
+  have hb : b ∈ A := by simp [hA_def]
+  have hc : c ∈ A := by simp [hA_def]
+  have hd : d ∈ A := by simp [hA_def]
+  refine le_antisymm (le_min (le_min ?_ ?_) ?_) ?_
+  · exact hval ha hb hc hd hab hac had hbc hbd hcd
+  · exact hval ha hc hb hd hac hab had (Ne.symm hbc) hcd hbd
+  · exact hval ha hd hb hc had hab hac (Ne.symm hbd) (Ne.symm hcd) hbc
+  -- the minimum is attained at a partition with parts of sizes `1, 1, 2`
+  obtain ⟨p₁, p₂, h₁, h₂, hdj, hn₁, hn₂, hn₃, heq⟩ := exists_threePartDistance_eq (A := A)
+    (by omega)
+  obtain ⟨-, -, -, hsum⟩ := card_partition_parts h₁ h₂ hdj
+  have hd2 : Disjoint p₂ (A \ (p₁ ∪ p₂)) := disjoint_sdiff.mono_left subset_union_right
+  have hd3 : Disjoint (A \ (p₁ ∪ p₂)) p₁ := (disjoint_sdiff.mono_left subset_union_left).symm
+  have := hn₁.card_pos; have := hn₂.card_pos; have := hn₃.card_pos
+  rw [heq]
+  set p₃ := A \ (p₁ ∪ p₂)
+  have hp₃ : p₃ ⊆ A := sdiff_subset
+  rcases (by omega : p₁.card = 2 ∨ p₂.card = 2 ∨ p₃.card = 2) with h | h | h
+  · have := min_pairing_le_sqrt_partition h₂ hp₃ h₁ hd2 hd3 hdj (by omega) (by omega) h
+    rwa [← mul_rotate (threePartDistance (p₁ ∪ p₂))] at this
+  · have := min_pairing_le_sqrt_partition hp₃ h₁ h₂ hd3 hdj hd2 (by omega) (by omega) h
+    rwa [mul_rotate (threePartDistance (p₃ ∪ p₁))] at this
+  · exact min_pairing_le_sqrt_partition h₁ h₂ hp₃ hdj hd2 hd3 (by omega) (by omega) h
 
 end PercLib.Percolation.Bond

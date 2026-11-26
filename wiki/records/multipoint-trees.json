@@ -1,0 +1,701 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "multipoint-trees",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 16
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 50,
+      "label": "Multipoint tree-graph bounds",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 59,
+      "label": "Multiscale cluster persistence and multipoint joining",
+      "locator": "arXiv:2508.18808v1 HTML, §II.5.3, Proposition II.5.9 and Lemma II.5.11",
+      "relationship": "Detailed conditional reconstruction with explicit input and coupling contracts",
+      "status": "pending",
+      "note": "F4RR–2BBE separate the last-exit estimate, localized moments, conditional persistence and the association recurrence. The power-law application uses YJ5E; identification of every model satisfying the paper’s wCL assumptions remains separate. A provisional erratum records the mismatched index ranges in the displayed tower identity."
+    },
+    {
+      "source": "perclib-branch-point",
+      "order": 0,
+      "label": "Finite branch decomposition and three-point tree bound",
+      "locator": "Named public declaration start lines: 48, 77, 175, 182, 239, 266",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The deterministic split allows repeated target positions and arbitrary finite edge witnesses, with a prescribed label orienting the probability recursion. Countability enters the probability sum, not the finite decomposition. L82Q is the two-target specialization."
+    },
+    {
+      "source": "perclib-tree-moments",
+      "order": 0,
+      "label": "Branch recursion and double-factorial cluster moments",
+      "locator": "Named public declaration start lines: 47, 67, 83, 115, 173, 189, 201, 209, 218, 227, 233, 263, 306, 327, 385",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "Y84V follows by tuple factorization and strong induction with a uniform susceptibility bound. The source allows infinite M; its informative finite-moment specialization retains M finite. Moment zero is allowed for tuple identities but the bound starts at one. The full shape-indexed AFH6 formula is separate."
+    },
+    {
+      "source": "perclib-heavy-second-moment",
+      "order": 0,
+      "label": "Finite root mean with divergent moments",
+      "locator": "Explicit public declaration start lines: 42, 64, 94, 117, 135, 150, 157, 169, 175, 188, 197, 205, 243, 270, 306",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fifteen public results construct HRS7 and prove its moment and susceptibility conclusions. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-multipoint-interface",
+      "order": 0,
+      "label": "Multipoint shapes and metric geometry",
+      "locator": "Explicit public theorem start lines: 84, 91, 116, 126, 154, 157, 161, 188, 267, 279",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten contracts and seven definitions or structures give the small tree-shape counts and pair geometry evaluations. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 60,
+      "label": "Geometric multipoint recursion, spread and covariance",
+      "locator": "arXiv:2508.18808v1 §II.3: (II.3.1)–(II.3.8), Theorem II.3.1, Corollaries II.3.4/II.3.8, Definition II.3.5, Lemmas II.3.6/II.3.7 and Proposition II.3.9",
+      "relationship": "Deterministic proofs and explicitly conditional probabilistic comparisons",
+      "status": "pending",
+      "note": "0VKF supplies insertion/spread/sweep comparisons in finite metric spaces; WDGK gives recursion/sweep equivalence. C4A5 retains the higher-order probability inequality as input. Three provisional local formula corrections preserve the source conclusions. Decision-tree proof and source correspondence are not independently certified."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 61,
+      "label": "Regular multigraph expansion of the higher-point bound",
+      "locator": "arXiv:2508.18808v1 §II.3, equation (II.3.3), PDF p. 24",
+      "relationship": "Algebraic proof under the stated higher-order input",
+      "status": "pending",
+      "note": "L3HA proves the degree 2^(n-2), connectivity, finite multiplicity bounds and the equivalence of the two finite-sum forms, including zero pair probabilities. Theorem II.3.1 remains an explicit input."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 62,
+      "label": "Volume moments and weak localization",
+      "locator": "arXiv:2508.18808v1 §II.4.1, Lemmas II.4.6–II.4.7, PDF pp. 33–35",
+      "relationship": "Proof with explicit inputs and summation repair",
+      "status": "pending",
+      "note": "Connected ordering, path decomposition of the marked weight, repeated-position partitions, and the third-moment ratio are explicit; higher-point probabilities remain an input."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 73,
+      "label": "Mass in separated windows",
+      "locator": "arXiv:2508.18808v1 §II.6.1, Lemma II.6.5, PDF pp. 59–60",
+      "relationship": "Proof with explicit hypotheses and endpoint cases",
+      "status": "pending",
+      "note": "Keeps the two ball centers distinct, uses the maximum over matching bounds, and handles repeated marked vertices by the three- and two-point inequalities."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Mixed third-moment bound",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.11, use of the generalized tree-graph inequality",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Retains one three-point connection in the four-mark tree and sums two independent BK factors."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 1,
+      "label": "Mixed spatial-window moment",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Equation (III.3.1)",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Cauchy–Schwarz summation of the cited Gladkov inequality, with repeated positions and finite susceptibility explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 2,
+      "label": "Radial first-connection spatial moments",
+      "locator": "arXiv:2508.18809v1 §III.5.1, definitions before (III.5.3) and exact derivative preceding (III.5.5)",
+      "relationship": "Proof of the first-connection machinery with explicit remaining inputs",
+      "status": "pending",
+      "note": "The finite merger formula passes to the countable radial process by stabilization and dominated convergence, with a starting radius below the smallest lattice distance. Distinctness is not incorrectly treated as monotone."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 3,
+      "label": "Terminal growth of a stopped spatial moment",
+      "locator": "arXiv:2508.18809v1 §III.5.1, equation (III.5.7); PDF printed p. 71",
+      "relationship": "Proof of the first-connection machinery with explicit remaining inputs",
+      "status": "pending",
+      "note": "Last-exit paths, the omitted row and the binomial expansion give the full weighted stopped-growth inequality. The stronger spatial mixed moments, rapid tails and vertex-factor asymptotics remain separate inputs to Lemma III.5.2."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 4,
+      "label": "Uniform rapid spatial tails for mixed cluster sums",
+      "locator": "arXiv:2508.18809v1 equation (III.5.2) and its preceding degree-increment estimate",
+      "relationship": "Spatial upper bounds and conditional mixed-moment/tail proof",
+      "status": "pending",
+      "note": "Increasing the degree at the far marked vertex gives every polynomial tail bound. A normalized supremum plus an exponential term constructs a positive nonincreasing common envelope. The corrected product index is recorded provisionally."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 5,
+      "label": "Generalized tree-graph moment bound",
+      "locator": "arXiv:2508.18807v1 / arXiv:2508.18809v1 Part I Lemma I.4.16; input to Part III weighted moment bounds",
+      "relationship": "Critical volume-moment proof supplying the spatial mixed-moment input",
+      "status": "pending",
+      "note": "Choose nonadjacent internal branch vertices and retain their three-point events. Summation on the resulting incidence tree gives one m2 per selected star and one chi per remaining edge, without summing selected centres."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 0,
+      "label": "Generalized tree-graph inequality",
+      "locator": "arXiv:2508.18807v1 Lemma I.4.16, statement and internal-star proof; HTML lines 1096–1138",
+      "relationship": "Proof used by the critical Part III assembly",
+      "status": "pending",
+      "note": "Choose nonadjacent internal branch vertices and retain their three-point events. Summation on the resulting incidence tree gives one m2 per selected star and one chi per remaining edge, without summing selected centres."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 6,
+      "label": "Quantitative stopped spatial moments",
+      "locator": "arXiv:2508.18809v1 §III.5.1, equations (III.5.3)–(III.5.6)",
+      "relationship": "Completed critical-dimension proof with explicit hydrodynamic/Reimer dependency",
+      "status": "pending",
+      "note": "Distinct-cluster comparison separates all four far-weight terms. Global radius ratios and rapid decay control the singular integrals. The initial radius is below the shortest lattice distance, and the far starting value is absorbed over a factor-two interval."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 7,
+      "label": "Averaged weighted critical three-point bound",
+      "locator": "arXiv:2508.18809v1 §III.5.1, Lemma III.5.2, using (III.5.7)",
+      "relationship": "Completed critical-dimension proof with explicit hydrodynamic/Reimer dependency",
+      "status": "pending",
+      "note": "The near integral retains a strictly negative exponent, including at degree zero. The far bound loses only a fixed polynomial under the vertex-factor ratio estimate; a common rapid envelope absorbs it."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 8,
+      "label": "Critical three-point function with rapid cutoff decay",
+      "locator": "arXiv:2508.18809v1 §III.5.1, Proposition III.5.1 and equations (III.5.8)–(III.5.10)",
+      "relationship": "Completed critical-dimension proof with explicit hydrodynamic/Reimer dependency",
+      "status": "pending",
+      "note": "Finite-box Russo counts the three possible two-component partitions once. In every pairing a mark in the paired component is at least half the maximum distance from the singleton. Weighted Markov estimates give every tail power; rate integration and finite-path convergence give the cutoff and full-model bounds."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 9,
+      "label": "Three-point tree convolution",
+      "locator": "arXiv:2508.18809v1 Remark III.5.3, (III.5.11), PDF pp. 73–74",
+      "relationship": "Geometric comparison with explicit finite diagonal values",
+      "status": "pending",
+      "note": "Nearest-root cells and dyadic shells give both separation powers for d>2alpha. The diagonal is finite, and constants accommodate arbitrary norm balls."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 10,
+      "label": "Critical local mass and scale persistence",
+      "locator": "arXiv:2508.18809v1 §III.5.2, (III.5.12) and Lemma III.5.5, PDF pp. 74–75",
+      "relationship": "Written critical-dimension proof; source correspondence pending review",
+      "status": "pending",
+      "note": "A fixed dilated ball replaces the source unit ball. Mixed tails localize two moments, Holder supplies the mass event, and truncated-mass negligibility plus the added-layer row gives uniform conditional persistence. No unit-ball scaling limit is claimed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 11,
+      "label": "Matching critical three-point lower bound",
+      "locator": "arXiv:2508.18809v1 Proposition III.5.4 and (III.5.13)–(III.5.15), PDF pp. 74–76",
+      "relationship": "Written critical-dimension proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Two separated fresh-edge intervals join the marks. Conditional Harris keeps the future mass events while the first connection is made. The second-moment factors at the larger scale cancel; bounded radii and possible initial flat kernel intervals are included."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 12,
+      "label": "Critical multipoint lower bound with sweep vertex factors",
+      "locator": "arXiv:2508.18809v1 Remark III.5.6 and (III.5.16), PDF p. 76",
+      "relationship": "Written critical-dimension proof; source correspondence pending review",
+      "status": "pending",
+      "note": "For every rooted tree, order marks by their sweep radii and join at separated cutoffs. Conditional Harris preserves all later mass events. The n-1 fresh-edge factors retain the individual vertex factors, with constants uniform in positions and the tree. Only d=3alpha, alpha<2 is supplied; no matching general upper bound is claimed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 13,
+      "label": "Critical double three-point diagram",
+      "locator": "arXiv:2508.18809v1 Proof of Lemma III.6.16, analytic diagram estimate",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Separate the coincident-root contribution; Potter bounds and rapid tails give S_s <= C(r^(2alpha+s)+V^2 r^(3alpha+s)). All four spatial-weight placements are summed explicitly. The disjoint-witness reduction for a coupled cut event is not assumed proved."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 14,
+      "label": "Disjoint witnesses for a joint vertex cut",
+      "locator": "arXiv:2508.18809v1 Proof of Lemma III.6.16, combinatorial implication",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "A minimal separator in the union of two avoiding paths meets both deletion sets. Each separator vertex neighbours both terminal components, yielding finite edge-disjoint three-point witnesses. The graph can be infinite."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 15,
+      "label": "Critical coupled joint-cut estimate",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.16",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Restricted-cluster inclusion reduces the coupled weight to independent root weights. The minimal-separator lemma supplies disjoint three-point witnesses; BK and the existing weighted diagram complete the critical estimate. Interception and final decoupling remain open."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 16,
+      "label": "Arbitrary root powers in the critical joint-cut diagram",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, extension of the III.6.16 proof to third-cluster power one",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "The four diagram summations retain the exact powers V^(i+j+1) and r^((2i+2j+7)alpha+s), including i=0 and j=0. The minimal-separator witnesses give the coupled joint-cut bound. No extra power of the third cluster is included."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 17,
+      "label": "Higher marked-kernel products at critical dimension",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, analytic extension of the III.6.16 estimate",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "The Lq bound holds for fixed 2<=q<3, including the diagonal by the logarithmic lower bound on V. Pointwise and spatial Holder use exact L1 sums of higher marked kernels; the exponents are V^(a+b+2) and r^((2a+2b+3)alpha+s). No moment order grows with the cutoff."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 18,
+      "label": "Cluster powers on disjoint connected witnesses",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, witness attachment needed for higher powers in III.6.11",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "A finite forest attaches arbitrary labelled cluster marks to either of two edge-disjoint connected witnesses. Countable BK and Tonelli give a binomial convolution of marked connection moments. Shared vertices, singleton witnesses and repeated marks are included."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 19,
+      "label": "All-power critical joint cuts",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, extension of III.6.16 to all tuple powers in III.6.11",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Higher marked-kernel products give a relative O(V^2) joint-cut bound with arbitrary first, second and third cluster powers. A union over failed labelled coordinates handles the full target tuple. The (0,1,2) case is covered; interception and final decoupling remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "F4RR",
+      "proof_uses": [
+        "BEJT"
+      ],
+      "reason": "The independent-layer last-exit exploration also controls expected cluster size conditional on the original cluster."
+    },
+    {
+      "order": 1,
+      "tag": "D6CQ",
+      "proof_uses": [
+        "QMN5",
+        "AWWU"
+      ],
+      "reason": "Use the ordered negligibility limit and localization, then Hölder with the stated moment scales; no moment order is substituted for negligibility."
+    },
+    {
+      "order": 2,
+      "tag": "JC24",
+      "proof_uses": [
+        "F4RR",
+        "D6CQ"
+      ],
+      "reason": "Weight the cluster-extension estimate by the small-scale bad event and divide by the fixed large-scale local-mass lower bound."
+    },
+    {
+      "order": 3,
+      "tag": "L5IG",
+      "proof_uses": [
+        "JC24",
+        "CS13"
+      ],
+      "reason": "Order and separate the sweep radii, then use conditional Harris on fresh independent Poisson increments."
+    },
+    {
+      "order": 4,
+      "tag": "2BBE",
+      "proof_uses": [
+        "YJ5E",
+        "D6CQ",
+        "JC24",
+        "L5IG",
+        "C4E9",
+        "WDGK",
+        "C4A5"
+      ],
+      "reason": "The cutoff criterion supplies moments and negligibility, the soft kernel supplies both row and joining bounds, and the upper bound retains the separate higher-point assumptions."
+    },
+    {
+      "order": 5,
+      "tag": "0VKF",
+      "proof_uses": [
+        "WDGK",
+        "ESZG",
+        "CS13"
+      ],
+      "reason": "Use the minimum-product-tree ultrametric, its exact sweep identity and threshold class counts; no probabilistic inequality is required."
+    },
+    {
+      "order": 6,
+      "tag": "L3HA",
+      "proof_uses": [],
+      "reason": "Finite algebraic induction from the explicitly assumed three-part inequalities; integer expansion gives degree and connectivity, and Holder compares the two finite-sum forms."
+    },
+    {
+      "order": 7,
+      "tag": "1EWL",
+      "proof_uses": [
+        "L3HA"
+      ],
+      "reason": "Connected ordering, path decomposition of the marked weight, repeated-position partitions, and the third-moment ratio are explicit; higher-point probabilities remain an input."
+    },
+    {
+      "order": 8,
+      "tag": "9ZEL",
+      "proof_uses": [
+        "2GTM",
+        "87RB"
+      ],
+      "reason": "Keeps the two ball centers distinct, uses the maximum over matching bounds, and handles repeated marked vertices by the three- and two-point inequalities."
+    },
+    {
+      "order": 9,
+      "tag": "9WYX",
+      "proof_uses": [
+        "AFH6"
+      ],
+      "reason": "Retains one three-point connection in the four-mark tree and sums two independent BK factors."
+    },
+    {
+      "order": 10,
+      "tag": "BIXQ",
+      "proof_uses": [
+        "87RB"
+      ],
+      "reason": "Cauchy–Schwarz summation of the cited Gladkov inequality, with repeated positions and finite susceptibility explicit."
+    },
+    {
+      "order": 11,
+      "tag": "87RB",
+      "proof_uses": [
+        "C7UK"
+      ],
+      "reason": "The previously cited finite theorem is now proved by adaptive BK and stopped DFS; the existing countable exhaustion and repeated-vertex cases are retained."
+    },
+    {
+      "order": 12,
+      "tag": "2GTM",
+      "proof_uses": [
+        "5BQO"
+      ],
+      "reason": "The previously stated higher-order probability premise is now supplied, with a stronger constant; the old conditional assertion and proof are preserved."
+    },
+    {
+      "order": 13,
+      "tag": "C4A5",
+      "proof_uses": [
+        "5BQO"
+      ],
+      "reason": "The previously stated higher-order probability premise is now supplied, with a stronger constant; the old conditional assertion and proof are preserved."
+    },
+    {
+      "order": 14,
+      "tag": "FMUH",
+      "proof_uses": [
+        "88ZH",
+        "C0OR",
+        "DR1W"
+      ],
+      "reason": "The finite merger formula passes to the countable radial process by stabilization and dominated convergence, with a starting radius below the smallest lattice distance. Distinctness is not incorrectly treated as monotone."
+    },
+    {
+      "order": 15,
+      "tag": "JDX7",
+      "proof_uses": [
+        "DTOX",
+        "FMUH",
+        "NE2Q"
+      ],
+      "reason": "Last-exit paths, the omitted row and the binomial expansion give the full weighted stopped-growth inequality. The stronger spatial mixed moments, rapid tails and vertex-factor asymptotics remain separate inputs to Lemma III.5.2."
+    },
+    {
+      "order": 16,
+      "tag": "3M2Y",
+      "proof_uses": [
+        "AR3F"
+      ],
+      "reason": "Increasing the degree at the far marked vertex gives every polynomial tail bound. A normalized supremum plus an exponential term constructs a positive nonincreasing common envelope. The corrected product index is recorded provisionally."
+    },
+    {
+      "order": 17,
+      "tag": "65MV",
+      "proof_uses": [
+        "AFH6",
+        "9WYX"
+      ],
+      "reason": "Choose nonadjacent internal branch vertices and retain their three-point events. Summation on the resulting incidence tree gives one m2 per selected star and one chi per remaining edge, without summing selected centres."
+    },
+    {
+      "order": 18,
+      "tag": "7GBI",
+      "proof_uses": [
+        "FMUH",
+        "AR3F",
+        "3M2Y",
+        "RM79",
+        "121D",
+        "1AC7",
+        "DR1W",
+        "BCKB"
+      ],
+      "reason": "Distinct-cluster comparison separates all four far-weight terms. Global radius ratios and rapid decay control the singular integrals. The initial radius is below the shortest lattice distance, and the far starting value is absorbed over a factor-two interval."
+    },
+    {
+      "order": 19,
+      "tag": "2CQ5",
+      "proof_uses": [
+        "7GBI",
+        "JDX7",
+        "YU52",
+        "121D",
+        "3M2Y"
+      ],
+      "reason": "The near integral retains a strictly negative exponent, including at degree zero. The far bound loses only a fixed polynomial under the vertex-factor ratio estimate; a common rapid envelope absorbs it."
+    },
+    {
+      "order": 20,
+      "tag": "8JMB",
+      "proof_uses": [
+        "2CQ5",
+        "1AC7",
+        "YU52",
+        "121D",
+        "DR1W",
+        "3M2Y",
+        "BCKB",
+        "L3TC"
+      ],
+      "reason": "Finite-box Russo counts the three possible two-component partitions once. In every pairing a mark in the paired component is at least half the maximum distance from the singleton. Weighted Markov estimates give every tail power; rate integration and finite-path convergence give the cutoff and full-model bounds."
+    },
+    {
+      "order": 21,
+      "tag": "54OK",
+      "proof_uses": [
+        "AFH6",
+        "87RB",
+        "8JMB"
+      ],
+      "reason": "Nearest-root cells and dyadic shells give both separation powers for d>2alpha. The diagonal is finite, and constants accommodate arbitrary norm balls."
+    },
+    {
+      "order": 22,
+      "tag": "3N3Q",
+      "proof_uses": [
+        "326J",
+        "3M2Y",
+        "RM79",
+        "F4RR",
+        "NE2Q",
+        "121D"
+      ],
+      "reason": "A fixed dilated ball replaces the source unit ball. Mixed tails localize two moments, Holder supplies the mass event, and truncated-mass negligibility plus the added-layer row gives uniform conditional persistence. No unit-ball scaling limit is claimed."
+    },
+    {
+      "order": 23,
+      "tag": "KBOM",
+      "proof_uses": [
+        "3N3Q",
+        "8JMB",
+        "C0OR",
+        "121D",
+        "BCKB",
+        "L3TC"
+      ],
+      "reason": "Two separated fresh-edge intervals join the marks. Conditional Harris keeps the future mass events while the first connection is made. The second-moment factors at the larger scale cancel; bounded radii and possible initial flat kernel intervals are included."
+    },
+    {
+      "order": 24,
+      "tag": "3K2W",
+      "proof_uses": [
+        "CS13",
+        "3N3Q",
+        "KBOM",
+        "121D",
+        "L5IG"
+      ],
+      "reason": "For every rooted tree, order marks by their sweep radii and join at separated cutoffs. Conditional Harris preserves all later mass events. The n-1 fresh-edge factors retain the individual vertex factors, with constants uniform in positions and the tree. Only d=3alpha, alpha<2 is supplied; no matching general upper bound is claimed."
+    },
+    {
+      "order": 25,
+      "tag": "BX1G",
+      "proof_uses": [
+        "2CQ5",
+        "121D",
+        "5J3U",
+        "YU52",
+        "SE64",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "Separate the coincident-root contribution; Potter bounds and rapid tails give S_s <= C(r^(2alpha+s)+V^2 r^(3alpha+s)). All four spatial-weight placements are summed explicitly. The disjoint-witness reduction for a coupled cut event is not assumed proved."
+    },
+    {
+      "order": 26,
+      "tag": "RIH3",
+      "proof_uses": [],
+      "reason": "A minimal separator in the union of two avoiding paths meets both deletion sets. Each separator vertex neighbours both terminal components, yielding finite edge-disjoint three-point witnesses. The graph can be infinite."
+    },
+    {
+      "order": 27,
+      "tag": "1P14",
+      "proof_uses": [
+        "7GBI",
+        "DR5Q",
+        "RIH3",
+        "BX1G"
+      ],
+      "reason": "Restricted-cluster inclusion reduces the coupled weight to independent root weights. The minimal-separator lemma supplies disjoint three-point witnesses; BK and the existing weighted diagram complete the critical estimate. Interception and final decoupling remain open."
+    },
+    {
+      "order": 28,
+      "tag": "CWM1",
+      "proof_uses": [
+        "7GBI",
+        "DVHL",
+        "BX1G",
+        "RIH3",
+        "DR5Q",
+        "1P14"
+      ],
+      "reason": "The four diagram summations retain the exact powers V^(i+j+1) and r^((2i+2j+7)alpha+s), including i=0 and j=0. The minimal-separator witnesses give the coupled joint-cut bound. No extra power of the third cluster is included."
+    },
+    {
+      "order": 29,
+      "tag": "RT01",
+      "proof_uses": [
+        "7GBI",
+        "2CQ5",
+        "121D",
+        "5J3U",
+        "YU52",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "The Lq bound holds for fixed 2<=q<3, including the diagonal by the logarithmic lower bound on V. Pointwise and spatial Holder use exact L1 sums of higher marked kernels; the exponents are V^(a+b+2) and r^((2a+2b+3)alpha+s). No moment order grows with the cutoff."
+    },
+    {
+      "order": 30,
+      "tag": "AK2E",
+      "proof_uses": [
+        "JRCI"
+      ],
+      "reason": "A finite forest attaches arbitrary labelled cluster marks to either of two edge-disjoint connected witnesses. Countable BK and Tonelli give a binomial convolution of marked connection moments. Shared vertices, singleton witnesses and repeated marks are included."
+    },
+    {
+      "order": 31,
+      "tag": "B9Z5",
+      "proof_uses": [
+        "7GBI",
+        "AK2E",
+        "RT01",
+        "DVHL",
+        "SE64",
+        "AR3F",
+        "RM79",
+        "DR5Q",
+        "RIH3",
+        "5J3U"
+      ],
+      "reason": "Higher marked-kernel products give a relative O(V^2) joint-cut bound with arbitrary first, second and third cluster powers. A union over failed labelled coordinates handles the full target tuple. The (0,1,2) case is covered; interception and final decoupling remain separate."
+    },
+    {
+      "order": 32,
+      "tag": "SO5J",
+      "proof_uses": [],
+      "reason": "The proof counts by the degree sum and removes the last leaf to get the recursion; it invokes no other wiki assertion."
+    },
+    {
+      "order": 33,
+      "tag": "AFH6",
+      "proof_uses": [
+        "SO5J",
+        "BNY8",
+        "HP3X"
+      ],
+      "reason": "The proof builds a trivalent tree witness with 2k-3 edge paths over the shapes counted in SO5J, applies finite-coordinate BK (BNY8) iterated through associativity of disjoint occurrence (HP3X), and exhausts the bonds."
+    },
+    {
+      "order": 34,
+      "tag": "5PHR",
+      "proof_uses": [],
+      "reason": "The proof is an explicit three-vertex counterexample; it invokes no other wiki assertion."
+    },
+    {
+      "order": 35,
+      "tag": "HRS7",
+      "proof_uses": [],
+      "reason": "The proof is an explicit construction computed with Tonelli; it invokes no other wiki assertion."
+    },
+    {
+      "order": 36,
+      "tag": "5PBL",
+      "proof_uses": [],
+      "reason": "The proof reparametrises s=c lambda and uses regular variation of f; it invokes no other wiki assertion."
+    },
+    {
+      "order": 37,
+      "tag": "N76U",
+      "proof_uses": [],
+      "reason": "The proof uses the Moebius distance identity and transitivity on pairs and triples; the Gladkov inequality (87RB) appears only in the remark after the proof."
+    },
+    {
+      "order": 38,
+      "tag": "9YE6",
+      "proof_uses": [
+        "Y4H4"
+      ],
+      "reason": "The proof inserts the three-point formula into the recursive definition of S (Y4H4) and inducts on subsets for the covariance identity."
+    },
+    {
+      "order": 39,
+      "tag": "ESZG",
+      "proof_uses": [
+        "Y4H4",
+        "CS13"
+      ],
+      "reason": "The proof compares both the recursive quantity (Y4H4) and the sweep product (CS13) with the Kruskal spanning-tree expression by a threshold-count integral."
+    },
+    {
+      "order": 40,
+      "tag": "WDGK",
+      "proof_uses": [
+        "ESZG"
+      ],
+      "reason": "The proof reduces to the spanning-tree ultrametric u, where recursive and sweep products coincide by ESZG, and compares d with u up to the factor n-1."
+    },
+    {
+      "order": 41,
+      "tag": "FAT3",
+      "proof_uses": [
+        "X5SS",
+        "C4A5",
+        "WDGK"
+      ],
+      "reason": "The proof combines arm and circuit events by the Harris inequality (X5SS) and glues them deterministically; the conditional upper bound is C4A5 and WDGK identifies the two geometric quantities."
+    }
+  ]
+}

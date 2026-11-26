@@ -1,0 +1,328 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "size-biased-laws",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 10
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 2,
+      "label": "Size-biased laws, cutoff limits and critical trees",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 53,
+      "label": "Cutoff displacement and superprocess moment method",
+      "locator": "arXiv:2508.18807v1 HTML, section I.5.4: normalization, (I.5.49)-(I.5.50), Lemmas I.5.32-I.5.37; moment formula (I.1.11)",
+      "relationship": "Analytic ingredients and conditional identification",
+      "status": "pending",
+      "note": "AYPN/L9YJ control added mass from the full tail; BB3O transfers the finite weighted laws and large-volume conditioning. 57FJ tracks the spatial scale. 5VYE/42PB supply continuum tree bounds and resolvent rescaling; ALO4 gives spatial tightness. DX2Y/W9BP reconstruct the canonical double limit from explicit cutoff-diagram, full-tail, spatial-moment and canonical-measure inputs. Isotropic jump normalization is stated; general-norm Green estimates and percolation polynomial asymptotics remain separate. The scale-index diagnosis is provisional."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 53,
+      "label": "Removing the cutoff and canonical compact-test moments",
+      "locator": "arXiv:2508.18807v1 HTML, section I.5.4: normalization, (I.5.49)-(I.5.50), Lemmas I.5.32-I.5.37; moment formula (I.1.11)",
+      "relationship": "Conditional transfer and explicit analytic estimates",
+      "status": "pending",
+      "note": "AYPN/L9YJ control added mass from the full tail; BB3O transfers the finite weighted laws and large-volume conditioning. 57FJ tracks the spatial scale. 5VYE/42PB supply continuum tree bounds and resolvent rescaling; ALO4 gives spatial tightness. DX2Y/W9BP reconstruct the canonical double limit from explicit cutoff-diagram, full-tail, spatial-moment and canonical-measure inputs. Isotropic jump normalization is stated; general-norm Green estimates and percolation polynomial asymptotics remain separate. The scale-index diagnosis is provisional."
+    },
+    {
+      "source": "perclib-size-bias-truncation",
+      "order": 0,
+      "label": "Truncated moments and size-biased normalization",
+      "locator": "Named public declaration start lines: 29, 40, 49, 93, 100, 113, 122, 134, 151, 160",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source distinguishes extended integral identities from probability normalization. Positive finite first moment is required for a size-biased probability law, but the second moment may be infinite. LLGA has a broader extended-value form with finite first moment."
+    },
+    {
+      "source": "perclib-independent-layer-ghost",
+      "order": 0,
+      "label": "Marks and independent coordinate blocks",
+      "locator": "Explicit public declaration start lines: 53, 56, 60, 76, 92, 125, 136, 141, 154, 159, 175, 195, 204, 217, 230, 242, 256, 261, 277, 299, 312",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-one public results identify product marginals, union laws and ghost integrals, retaining countability and extended-volume conventions. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-independent-layer-exploration",
+      "order": 0,
+      "label": "Last exits and independent exploration events",
+      "locator": "Explicit public declaration start lines: 51, 65, 107, 114, 135, 139, 144, 155, 167, 185, 303, 319, 333",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Thirteen public results establish the outside-cluster inclusion and exact four-event factorization, including null cluster events. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-independent-layer",
+      "order": 0,
+      "label": "Ghost comparison and sparse-layer susceptibility",
+      "locator": "Explicit public declaration start lines: 53, 57, 71, 84, 219, 243, 251, 262, 279, 284, 290, 308, 317, 368, 437",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fifteen public results prove BEJT and MLLO. The source excludes infinite union clusters before applying Fatou to the exponentially damped volume. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-size-bias-limits",
+      "order": 0,
+      "label": "Size-biased weak limits and spatial escape",
+      "locator": "Explicit public declaration start lines: 49, 56, 78, 138, 156, 172, 190, 199, 212, 231, 245, 259, 289, 354, 369, 390, 423, 523, 536, 592, 618, 637",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-two public results give the fixed-threshold tail and varying-field Laplace limits and the escaping-point-mass example. Probability normalization, non-atomic thresholds and support assumptions remain explicit. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-soft-cutoff",
+      "order": 0,
+      "label": "Soft-cutoff omitted rows",
+      "locator": "Explicit public declaration start lines: 42, 48, 54, 64, 93, 104, 117, 124, 144, 231",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten public results bound the omitted and added rows, with Euclidean counting and the positive-part convention explicit. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-moment-determinacy",
+      "order": 0,
+      "label": "Moment determinacy and exponential series",
+      "locator": "Explicit public theorem/lemma start lines: 46, 64, 79, 90, 99, 120, 148, 194, 218, 294, 343",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 11 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-train10-conditional",
+      "order": 0,
+      "label": "Conditional hard-cutoff ghost comparison",
+      "locator": "Explicit public theorem start lines: 44, 52, 67, 99, 115",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled status inferred."
+    },
+    {
+      "source": "perclib-train10-models-longrange-omittedlayer",
+      "order": 0,
+      "label": "Omitted power-law rows in a specified norm",
+      "locator": "Explicit public theorem start lines: 64, 75, 90, 96, 110, 127, 158, 167, 273, 280, 297, 316, 337",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "0OEW",
+      "proof_uses": [
+        "DGVA",
+        "N9P5"
+      ],
+      "reason": "Differentiate the progeny generating equation at positive field, normalize the finite-progeny expectation, and apply Laplace-transform convergence."
+    },
+    {
+      "order": 1,
+      "tag": "KOY8",
+      "proof_uses": [
+        "0OEW",
+        "7W00",
+        "N9P5"
+      ],
+      "reason": "Apply the fixed-scale size-bias transfer to the finite-progeny law and keep the survival atom separate."
+    },
+    {
+      "order": 2,
+      "tag": "RMFH",
+      "proof_uses": [
+        "XCA8",
+        "BFM4",
+        "NT0R"
+      ],
+      "reason": "The marked-tree product weights realize the consistent size-biased restrictions; extinction of the countably many ordinary grafts gives a unique infinite ray."
+    },
+    {
+      "order": 3,
+      "tag": "SYJ4",
+      "proof_uses": [
+        "RMFH",
+        "8WO7"
+      ],
+      "reason": "The branching conditional density is dominated by the spine density up to a scalar. A mixture decomposition bounds total variation, and the survival ratio tends to one for r=o(R)."
+    },
+    {
+      "order": 4,
+      "tag": "OBSY",
+      "proof_uses": [
+        "AYHV",
+        "RMFH",
+        "SYJ4",
+        "8WO7"
+      ],
+      "reason": "Uniform integrability permits biasing the Yaglom limit. The branching survival weight gives comparable-horizon laws; total variation transfers the spine limit when the horizon is much farther away."
+    },
+    {
+      "order": 5,
+      "tag": "Y3SX",
+      "proof_uses": [
+        "XA7C",
+        "GFEM"
+      ],
+      "reason": "Size bias inserts one marked vertex; finite moment-measure convergence gives spatial tightness and the exponential total-mass bound gives uniqueness."
+    },
+    {
+      "order": 6,
+      "tag": "45EB",
+      "proof_uses": [
+        "GFEM",
+        "Y3SX"
+      ],
+      "reason": "Gamma duplication identifies the mixed edge lengths; the unit-mass CRT reduced-tree law and construction of its spatial motion remain explicit cited inputs."
+    },
+    {
+      "order": 7,
+      "tag": "AYPN",
+      "proof_uses": [],
+      "reason": "Condition on the lower cluster and use the last exit to a ghost-marked vertex; the outside product law and added-edge row bound control the discrepancy."
+    },
+    {
+      "order": 8,
+      "tag": "L9YJ",
+      "proof_uses": [
+        "AYPN",
+        "3491",
+        "C4E9"
+      ],
+      "reason": "A truncated-tail integral and fixed-multiplier regular variation make the omitted mass negligible at the rare-event normalization."
+    },
+    {
+      "order": 9,
+      "tag": "BB3O",
+      "proof_uses": [
+        "L9YJ"
+      ],
+      "reason": "Bounded-Lipschitz tests transfer finite weighted laws; upper-tail control and absence of a threshold atom justify conditioning."
+    },
+    {
+      "order": 10,
+      "tag": "DX2Y",
+      "proof_uses": [
+        "57FJ",
+        "GFEM",
+        "42PB",
+        "Y3SX",
+        "45EB"
+      ],
+      "reason": "Undo size bias away from zero mass, retain the scale factors, and change all tree coordinates to identify the rescaled-kernel diagrams."
+    },
+    {
+      "order": 11,
+      "tag": "W9BP",
+      "proof_uses": [
+        "5VYE",
+        "42PB",
+        "DX2Y",
+        "ALO4",
+        "BB3O"
+      ],
+      "reason": "Weight first by a compact local mass to obtain finite measures; factorial moments identify that limit, and spatial tightness then replaces local mass by total mass."
+    },
+    {
+      "order": 12,
+      "tag": "E22E",
+      "proof_uses": [
+        "6L9Z",
+        "X5SS"
+      ],
+      "reason": "Diagonal finite-dimensional compactness gives subsequences. Local finiteness makes fixed-ball escape cylindrical; volume bias bounds nonescape by ball size divided by susceptibility. Harris survives on increasing cylinders."
+    },
+    {
+      "order": 13,
+      "tag": "Q7E9",
+      "proof_uses": [
+        "BSI3"
+      ],
+      "reason": "The cited construction requires a global two-sided critical spatial bound. BSI3 supplies the asymptotic in the stated model ranges; positivity and finitely many exceptional sites give global constants."
+    },
+    {
+      "order": 14,
+      "tag": "6L9Z",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 15,
+      "tag": "0N85",
+      "proof_uses": [],
+      "reason": "The proof uses tightness, uniform integrability and the moment generating function of N^2; it invokes no other wiki assertion."
+    },
+    {
+      "order": 16,
+      "tag": "9PSJ",
+      "proof_uses": [
+        "7W00",
+        "SLGY"
+      ],
+      "reason": "The proof takes the fixed-scale ghost-transform limit (7W00), squeezes the transform with the comparison, and applies the Karamata Laplace-tail theorem (SLGY) to obtain the tail."
+    },
+    {
+      "order": 17,
+      "tag": "26NT",
+      "proof_uses": [
+        "K3DB",
+        "0N85",
+        "C4E9",
+        "BEJT",
+        "0CUF",
+        "9PSJ"
+      ],
+      "reason": "The proof gets the biased limit from K3DB and 0N85, the ghost comparison from C4E9 and BEJT with cutoff finiteness from 0CUF, and applies the transfer theorem 9PSJ."
+    },
+    {
+      "order": 18,
+      "tag": "SBWK",
+      "proof_uses": [
+        "8WO7",
+        "UKY4"
+      ],
+      "reason": "The proof writes the survival probability through the branching property and uses the critical survival asymptotic (8WO7) and E Z_r=1 (UKY4) for dominated convergence."
+    },
+    {
+      "order": 19,
+      "tag": "XCA8",
+      "proof_uses": [],
+      "reason": "The proof uses the martingale identity E[Z_r|F_s]=Z_s of a critical process; it invokes no other wiki assertion."
+    },
+    {
+      "order": 20,
+      "tag": "JNOW",
+      "proof_uses": [
+        "UKY4",
+        "XCA8"
+      ],
+      "reason": "The proof computes E Z_r^2 by induction using E Z_r=1 (UKY4) and transfers means to earlier levels by consistency of the size-biased restrictions (XCA8)."
+    },
+    {
+      "order": 21,
+      "tag": "4AVL",
+      "proof_uses": [
+        "UKY4",
+        "8WO7"
+      ],
+      "reason": "The proof uses E Z_n=1 (UKY4) and absorption of extinction, and the asymptotic comes from Q_r ~ 2/(sigma^2 r) (8WO7)."
+    },
+    {
+      "order": 22,
+      "tag": "XA7C",
+      "proof_uses": [],
+      "reason": "The proof expands the products and applies Tonelli; it invokes no other wiki assertion."
+    }
+  ]
+}

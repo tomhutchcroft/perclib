@@ -1,0 +1,137 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-transcripts",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 4
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-configuration-conditioning",
+      "order": 0,
+      "label": "Countable configuration space",
+      "locator": "Standard-Borel instance and countable unordered-pair configuration example",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "784S gives a complete separable metric realizing the coordinate sigma-algebra; it does not extend the claim to arbitrary uncountable coordinate sets."
+    },
+    {
+      "source": "perclib-configuration-conditioning",
+      "order": 1,
+      "label": "Conditional configuration law",
+      "locator": "Single-bond conditional-distribution example",
+      "relationship": "Explicit expository extension",
+      "status": "pending",
+      "note": "D9KI constructs a version for any deterministic observed subset of countably many coordinates. This stronger explicit kernel is not claimed as a theorem exported by the inspected module, and it is not an infinite adaptive-exploration theorem."
+    },
+    {
+      "source": "perclib-block-independence",
+      "order": 0,
+      "label": "Coordinate and block independence",
+      "locator": "Named statement start lines in the pinned source: 29, 44, 50, 57, 65, 74, 83",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "DYU8 includes mutual coordinate independence, two deterministic disjoint blocks, measurable block observables and event factorization. The blocks and ambient type can be infinite or uncountable. The fixed-block statement does not assert independence for randomly selected blocks."
+    },
+    {
+      "source": "perclib-exploration-transcripts",
+      "order": 0,
+      "label": "Finite adaptive transcript laws",
+      "locator": "Named statement start lines in the pinned source: 24, 32, 50, 79, 110, 127",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "QH7Q supplies the arbitrary-index injective sampling law. EE11 gives finite transcript weights and factorization against arbitrary measurable events on the complement. 86IX identifies adaptive answers with their fixed-string cylinder without a no-repeat hypothesis; only the subsequent product formula requires distinct queries along that string. Conditional division in 56TE requires positive transcript probability and is an expository consequence. No independence of the random queried set is inferred. Empty transcripts and distinct loop/non-loop coordinates are included. Infinite explorations and general randomized rules are not established by this source module."
+    },
+    {
+      "source": "perclib-determined-events",
+      "order": 0,
+      "label": "Source contracts and their scope",
+      "locator": "Named public theorem start lines: 31, 51, 67, 80, 92",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "FH29 supplies closed extension, the deterministic restriction representation, its measurability consequence and finite-family factorization for fixed disjoint blocks. No global countability or block finiteness is imposed; random queried sets and configuration-dependent witnesses do not satisfy the fixed-block hypothesis merely by being disjoint."
+    },
+    {
+      "source": "perclib-symmetry-associations",
+      "order": 0,
+      "label": "Diagonal and block-independence associations",
+      "locator": "Named public declaration start lines: 70, 77",
+      "relationship": "Source-inspected association with explicit scope distinctions",
+      "status": "pending",
+      "note": "784S supplies standard Borel instances for the existing countable coordinate spaces. DYU8 bundles independence of arbitrary fixed disjoint blocks, measurable block observables and the coordinate family. It does not assert independence for adaptively selected blocks. Compiled evidence and independent fingerprint-bound review remain separate."
+    },
+    {
+      "source": "perclib-finite-energy",
+      "order": 0,
+      "label": "Finite assignments and overwrite laws",
+      "locator": "Named public theorem start lines: 33, 85, 127, 152, 174, 193, 207, 220",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "DL0X supplies the arbitrary-block pushforward. EE11 and FH29 supply finite assignment factorization with measurable outside events. The finite-image equality and lower bound are identified as deductions; they are not claimed as source exports. Strict interior probabilities suffice for every assignment, but a specified assignment needs only its own nonzero factors. Loops remain configuration coordinates."
+    },
+    {
+      "source": "perclib-product-associations",
+      "order": 0,
+      "label": "Relabelling, transcripts and cylinder associations",
+      "locator": "Named public theorem start lines: 19, 33, 44, 62, 79, 97",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "6RZ8 and VEUZ retain measurable bijections and law transport. EE11 and 56TE distinguish factorization from positive-probability conditional division. The helper restricts to arbitrary coordinate subsets; 5PAT reuses the frozen product-model assertion without editing it."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Sequential product-law cluster coupling",
+      "locator": "arXiv:2508.18809v1 Section III.6.3 coupling construction and equations III.6.35–III.6.37",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Countably many finite cluster records and fixed-block independence prove preservation of the product law, even with infinitely many boundary coordinates. Repeated roots and zero/one probabilities are included. The three coupled cut events are exact vertex-deletion events in the independent third copy."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "FH29",
+      "proof_uses": [
+        "DYU8",
+        "QH7Q"
+      ],
+      "reason": "The argument uses the existing finite-cylinder or fixed-block product law, preserving measurability and the stated index-set scope."
+    },
+    {
+      "order": 1,
+      "tag": "DL0X",
+      "proof_uses": [
+        "EE11",
+        "FH29"
+      ],
+      "reason": "Identify the overwrite pushforward on finite cylinders; for a finite block take the finite union of measurable sections and factor its assignment probability."
+    },
+    {
+      "order": 2,
+      "tag": "DR5Q",
+      "proof_uses": [
+        "DYU8",
+        "FH29"
+      ],
+      "reason": "Countably many finite cluster records and fixed-block independence prove preservation of the product law, even with infinitely many boundary coordinates. Repeated roots and zero/one probabilities are included. The three coupled cut events are exact vertex-deletion events in the independent third copy."
+    },
+    {
+      "order": 3,
+      "tag": "D9KI",
+      "proof_uses": [],
+      "reason": "Measurability of the assembly map, cylinder uniqueness and Fubini; no other wiki assertion is invoked."
+    },
+    {
+      "order": 4,
+      "tag": "QH7Q",
+      "proof_uses": [
+        "DYU8"
+      ],
+      "reason": "Injective sampling is identified on cylinders; mutual block independence follows by induction from fixed-block independence (DYU8), and the closed product by continuity from above."
+    }
+  ]
+}

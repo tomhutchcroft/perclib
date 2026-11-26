@@ -1,0 +1,86 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-derivative-lower-bounds",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 150
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Fractional moments of the tilted physical clock",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Lemma 3.3 and proof (3.12)–(3.15); Section 8.2, the lower-bound use of Lemma 3.3 in Theorem 8.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written lower-bound proof using an alternative tilted-diffusion moment argument",
+      "status": "pending",
+      "note": "A smooth exponential Lyapunov function and unit-interval Brownian maximum bounds control the terminal ratio and the exponentially weighted clock. The strict inward drift greater than one gives a summable exponent uniformly over the initial point and clock horizon."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "A bounded-time portion of the derivative moment",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Lemma 3.3 and proof (3.12)–(3.15); Section 8.2, the lower-bound use of Lemma 3.3 in Theorem 8.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written lower-bound proof using an alternative tilted-diffusion moment argument",
+      "status": "pending",
+      "note": "Girsanov changes the hyperbolic ratio drift to beta=2+kappa/4-kappa*b. For beta greater than one, the clock and endpoint moment bounds retain uniformly positive tilted probability. Removing the martingale density gives a lower derivative moment on a bounded-time, bounded-endpoint event for every allowed real b."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "The complete fixed-time derivative lower bound",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Lemma 3.3 and proof (3.12)–(3.15); Section 8.2, the lower-bound use of Lemma 3.3 in Theorem 8.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written lower-bound proof using an alternative tilted-diffusion moment argument",
+      "status": "pending",
+      "note": "The two-sided log-derivative comparison supplies the bounded loss at a later physical time for all real moment orders. Reverse/inverse equality in law and scaling produce one positive constant for the input radius, image-height cutoff and lower coefficient. This completes Lemma 3.3 by an alternative fractional-moment argument."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "The exact expected localized grid threshold",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Lemma 3.3 and proof (3.12)–(3.15); Section 8.2, the lower-bound use of Lemma 3.3 in Theorem 8.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written lower-bound proof using an alternative tilted-diffusion moment argument",
+      "status": "pending",
+      "note": "At the smaller parameter root, the lower estimate gives a positive expected contribution from each fine dyadic level in any fixed positive horizontal window. Tonelli yields divergence at the exponent, and the deterministic upper bound on derivative scale gives divergence below it. No almost-sure divergence or global Whitney comparison is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "CUBE",
+      "proof_uses": [],
+      "reason": "A smooth exponential Lyapunov function and unit-interval Brownian maximum bounds control the terminal ratio and the exponentially weighted clock. The strict inward drift greater than one gives a summable exponent uniformly over the initial point and clock horizon."
+    },
+    {
+      "order": 1,
+      "tag": "G4U8",
+      "proof_uses": [
+        "CUBE",
+        "O0VQ",
+        "AXSH"
+      ],
+      "reason": "Girsanov changes the hyperbolic ratio drift to beta=2+kappa/4-kappa*b. For beta greater than one, the clock and endpoint moment bounds retain uniformly positive tilted probability. Removing the martingale density gives a lower derivative moment on a bounded-time, bounded-endpoint event for every allowed real b."
+    },
+    {
+      "order": 2,
+      "tag": "7NGO",
+      "proof_uses": [
+        "G4U8",
+        "O0VQ",
+        "HHBC"
+      ],
+      "reason": "The two-sided log-derivative comparison supplies the bounded loss at a later physical time for all real moment orders. Reverse/inverse equality in law and scaling produce one positive constant for the input radius, image-height cutoff and lower coefficient. This completes Lemma 3.3 by an alternative fractional-moment argument."
+    },
+    {
+      "order": 3,
+      "tag": "T3F8",
+      "proof_uses": [
+        "7NGO",
+        "AVHR"
+      ],
+      "reason": "At the smaller parameter root, the lower estimate gives a positive expected contribution from each fine dyadic level in any fixed positive horizontal window. Tonelli yields divergence at the exponent, and the deterministic upper bound on derivative scale gives divergence below it. No almost-sure divergence or global Whitney comparison is claimed."
+    }
+  ]
+}

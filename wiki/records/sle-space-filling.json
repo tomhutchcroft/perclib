@@ -1,0 +1,85 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-space-filling",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 144
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Density and absence of pockets",
+      "locator": "Rohde–Schramm (2005), large-parameter part of Theorem 6.4; Lemma 7.3, Theorem 7.1, Corollary 7.4 and update, pp.910–911. Theorem 5.1 (p.899, including its cited kappa8 extension) and the area conclusion of Corollary 5.3 (p.901) are named inputs. Compared with arXiv:math/0106036v4 Sections 5–7.",
+      "relationship": "Written geometric and probabilistic consequences under explicit trace and boundary-area hypotheses",
+      "status": "pending",
+      "note": "A countable dense set of fixed-point distance statements gives density. A pathwise component argument then identifies the interior hull with the past trace simultaneously at all times, without assuming transience."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Finite hitting time of a fixed point",
+      "locator": "Rohde–Schramm (2005), large-parameter part of Theorem 6.4; Lemma 7.3, Theorem 7.1, Corollary 7.4 and update, pp.910–911. Theorem 5.1 (p.899, including its cited kappa8 extension) and the area conclusion of Corollary 5.3 (p.901) are named inputs. Compared with arXiv:math/0106036v4 Sections 5–7.",
+      "relationship": "Written geometric and probabilistic consequences under explicit trace and boundary-area hypotheses",
+      "status": "pending",
+      "note": "The simultaneous hull identity and finite physical lifetime prove that every fixed interior point is first hit at its Loewner lifetime. This fixed-point statement is not itself a simultaneous filling claim."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Immediate origin engulfment",
+      "locator": "Rohde–Schramm (2005), large-parameter part of Theorem 6.4; Lemma 7.3, Theorem 7.1, Corollary 7.4 and update, pp.910–911. Theorem 5.1 (p.899, including its cited kappa8 extension) and the area conclusion of Corollary 5.3 (p.901) are named inputs. Compared with arXiv:math/0106036v4 Sections 5–7.",
+      "relationship": "Written geometric and probabilistic consequences under explicit trace and boundary-area hypotheses",
+      "status": "pending",
+      "note": "Strong Markov at a fixed point lifetime and the full inverse-map boundary limit turn failure of engulfment into a boundary-area contradiction at deterministic times. Scaling and the Brownian germ zero-one law then give engulfment at every positive time. The trace theorem and zero-area boundary theorem are explicit inputs."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Transience and finite-time compact coverage",
+      "locator": "Rohde–Schramm (2005), large-parameter part of Theorem 6.4; Lemma 7.3, Theorem 7.1, Corollary 7.4 and update, pp.910–911. Theorem 5.1 (p.899, including its cited kappa8 extension) and the area conclusion of Corollary 5.3 (p.901) are named inputs. Compared with arXiv:math/0106036v4 Sections 5–7.",
+      "relationship": "Written geometric and probabilistic consequences under explicit trace and boundary-area hypotheses",
+      "status": "pending",
+      "note": "Scaling and monotonicity make the swallowed neighborhood grow without bound. Future trace points stay outside it, while the past trace contains its closed smaller half-disks. Thus the trace is transient and fills every compact subset in finite time. The statement includes kappa eight under the cited trace extension."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "UELC",
+      "proof_uses": [
+        "VEZ7"
+      ],
+      "reason": "A countable dense set of fixed-point distance statements gives density. A pathwise component argument then identifies the interior hull with the past trace simultaneously at all times, without assuming transience."
+    },
+    {
+      "order": 1,
+      "tag": "KFWY",
+      "proof_uses": [
+        "UELC",
+        "6DV8"
+      ],
+      "reason": "The simultaneous hull identity and finite physical lifetime prove that every fixed interior point is first hit at its Loewner lifetime. This fixed-point statement is not itself a simultaneous filling claim."
+    },
+    {
+      "order": 2,
+      "tag": "ZS6G",
+      "proof_uses": [
+        "KFWY"
+      ],
+      "reason": "Strong Markov at a fixed point lifetime and the full inverse-map boundary limit turn failure of engulfment into a boundary-area contradiction at deterministic times. Scaling and the Brownian germ zero-one law then give engulfment at every positive time. The trace theorem and zero-area boundary theorem are explicit inputs."
+    },
+    {
+      "order": 3,
+      "tag": "R2A0",
+      "proof_uses": [
+        "ZS6G",
+        "UELC"
+      ],
+      "reason": "Scaling and monotonicity make the swallowed neighborhood grow without bound. Future trace points stay outside it, while the past trace contains its closed smaller half-disks. Thus the trace is transient and fills every compact subset in finite time. The statement includes kappa eight under the cited trace extension."
+    }
+  ]
+}

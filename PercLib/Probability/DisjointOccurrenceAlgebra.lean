@@ -1,6 +1,9 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New deterministic proofs over PercLib's existing finite-certificate convention.
 No upstream proof is copied; all configurations remain sets of coordinates.
 -/
@@ -95,7 +98,8 @@ theorem mem_disjointOccurrence_three_iff {A B C : Set (Set E)}
 /-- Increasing-event disjoint occurrence is associative. -/
 theorem disjointOccurrence_assoc {A B C : Set (Set E)}
     (hA : IsUpperSet A) (hB : IsUpperSet B) (hC : IsUpperSet C) :
-    disjointOccurrence (disjointOccurrence A B) C = disjointOccurrence A (disjointOccurrence B C) := by
+    disjointOccurrence (disjointOccurrence A B) C =
+        disjointOccurrence A (disjointOccurrence B C) := by
   rw [disjointOccurrence_comm A (disjointOccurrence B C)]
   ext ω
   rw [mem_disjointOccurrence_three_iff hA hB hC,

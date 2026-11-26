@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 432 (Q-98, part 2), written on 2026-11-16 by PROVER-G. No upstream proof
-is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied.
 -/
 module
 
@@ -283,7 +284,10 @@ theorem prodBernoulli_three_explore_eq [Countable V] {h : ℝ} (hh : 0 < h)
     rcases i with (e | e) | x <;> simp [P1, P2, P3] at hi h3
   have hdis4 : Disjoint (P1 ∪ P2 ∪ P3) P4 := by
     refine Set.disjoint_left.2 fun i hi h4 => ?_
-    rcases i with (e | e) | x <;> simp [P1, P2, P3, P4, hM, hout] at hi h4
+    rcases i with (e | e) | x <;> simp only [hM, union_singleton, mem_insert_iff, Sum.inl.injEq,
+        reduceCtorEq, mem_union, mem_image, mem_ofPred_eq, exists_eq_right, SetLike.mem_coe,
+        and_false, exists_false, or_false, false_or, hout, mem_compl_iff, P1, P2, P3, P4,
+        Sum.inr.injEq, or_self] at hi h4
     · obtain ⟨x, hx, hxC⟩ := hi
       exact h4 x hx hxC
     · subst hi

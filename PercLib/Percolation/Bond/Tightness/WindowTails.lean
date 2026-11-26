@@ -1,13 +1,16 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-105 (issue 439, roadmap T-6), on the D-2 interface.
-Source motivation: T. Hutchcroft, arXiv:2008.11197v2, §2 (consequences of universal
-tightness), and the wiki statements MJEP, 7VCS and DEZI.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface. Source motivation: T. Hutchcroft, arXiv:2008.11197v2,
+§2 (consequences of universal tightness), and the wiki statements MJEP, 7VCS and DEZI. No source
+text or code is copied.
 -/
 module
 
-public import PercLib.Percolation.Bond.Tightness.FromBK
+public import PercLib.Percolation.Bond.Tightness.BKStep
 public import PercLib.Percolation.Bond.WindowPartition
 public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 public import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
@@ -16,7 +19,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Integral
 /-! # Window tails with damping, fractional moments, and exponent relations
 
 * MJEP, `law_le_clusterIntersection_le_damped` and `lintegral_rpow_clusterIntersection_le`:
-  under `UniversalTightness V` and a window tail `P(n ≤ X) ≤ A n^(-θ)` (`0 ≤ θ < 1`),
+  by universal tightness, under a window tail `P(n ≤ X) ≤ A n^(-θ)` (`0 ≤ θ < 1`),
   `P(n ≤ X) ≤ e A (18/n)^θ e^(-n/(18M))` for `n ≥ 1`, and for real `p > θ`
   `E X^p ≤ e A 18^p p Γ(p-θ) M^(p-θ)`.
 * 7VCS, `dimension_bounds_of_hyperscaling`: exponent inequalities from the WRHL bounds,
@@ -47,10 +50,10 @@ theorem rpow_le_exp_self {x θ : ℝ} (hx : 0 ≤ x) (hθ0 : 0 ≤ θ) (hθ1 : �
       _ ≤ x + 1 := by linarith
       _ ≤ Real.exp x := Real.add_one_le_exp x
 
-/-- **MJEP, tail.** Under `UniversalTightness V`, if `P(n ≤ X_u) ≤ A n^(-θ)` for all
+/-- **Tail.** By universal tightness, if `P(n ≤ X_u) ≤ A n^(-θ)` for all
 `n ≥ 1`, with `A ≥ 0` and `0 ≤ θ < 1`, then for `n ≥ 1`
 `P(n ≤ X_u) ≤ e A (18/n)^θ e^(-n/(18M))`, `M = tightnessScale q Λ`. -/
-theorem law_le_clusterIntersection_le_damped [Countable V] (hUT : UniversalTightness V)
+theorem law_le_clusterIntersection_le_damped [Countable V]
     (q : Sym2 V → unitInterval) {Λ : Finset V} (hΛ : Λ.Nonempty) (u : V) {A θ : ℝ}
     (hA : 0 ≤ A) (hθ0 : 0 ≤ θ) (hθ1 : θ < 1)
     (htail : ∀ n : ℕ, 1 ≤ n →
@@ -98,7 +101,7 @@ theorem law_le_clusterIntersection_le_damped [Countable V] (hUT : UniversalTight
       · intro h; exact_mod_cast h
       · intro h; exact_mod_cast h
     rw [hev]
-    refine ((hUT q Λ hΛ).2.2 u a ha1).trans ?_
+    refine (law_mul_tightnessScale_le_clusterIntersection_le q hΛ u ha1).trans ?_
     have hMt := htail M (by omega)
     calc ENNReal.ofReal (Real.exp 1) * law q {ω | M ≤ clusterIntersection Λ ω u} *
           ENNReal.ofReal (Real.exp (-a / 9))
@@ -133,10 +136,10 @@ theorem law_le_clusterIntersection_le_damped [Countable V] (hUT : UniversalTight
             _ = 18 ^ θ * (M : ℝ) ^ θ := by rw [← mul_assoc, mul_comm (Real.exp (-y)), hyy,
                 one_mul]
 
-/-- **MJEP, fractional moments.** Under the hypotheses of
+/-- **Fractional moments.** Under the hypotheses of
 `law_le_clusterIntersection_le_damped`, for every real `p > θ`,
 `E X_u^p ≤ e A 18^p p Γ(p-θ) M^(p-θ)`. -/
-theorem lintegral_rpow_clusterIntersection_le [Countable V] (hUT : UniversalTightness V)
+theorem lintegral_rpow_clusterIntersection_le [Countable V]
     (q : Sym2 V → unitInterval) {Λ : Finset V} (hΛ : Λ.Nonempty) (u : V) {A θ : ℝ}
     (hA : 0 ≤ A) (hθ0 : 0 ≤ θ) (hθ1 : θ < 1)
     (htail : ∀ n : ℕ, 1 ≤ n →
@@ -174,7 +177,7 @@ theorem lintegral_rpow_clusterIntersection_le [Countable V] (hUT : UniversalTigh
         {ω | n ≤ clusterIntersection Λ ω u} := by
       ext ω; simp only [Set.mem_ofPred_eq, hn, Nat.ceil_le]
     rw [hev]
-    have h1 := law_le_clusterIntersection_le_damped hUT q hΛ u hA hθ0 hθ1 htail n hn1
+    have h1 := law_le_clusterIntersection_le_damped q hΛ u hA hθ0 hθ1 htail n hn1
     refine (mul_le_mul' h1 le_rfl).trans ?_
     rw [← ENNReal.ofReal_mul (by positivity), ← ENNReal.ofReal_mul hc0]
     refine ENNReal.ofReal_le_ofReal ?_
@@ -242,7 +245,7 @@ theorem exponent_le_of_le_rpow {x y : ℝ → ℝ} {a b k C : ℝ}
   rw [← mul_div_assoc, ← add_div, div_le_div_iff_of_pos_right hlogR]
   exact hlog
 
-/-- **7VCS.** Let `N_R, M_R, s_R > 0` with `log N_R / log R → d > 0`,
+/-- **Hyperscaling exponent inequalities.** Let `N_R, M_R, s_R > 0` with `log N_R / log R → d > 0`,
 `log M_R / log R → d_f` and `log s_R / log R → s`. If for some `δ > 1` and constants
 `C₁, C₂`, eventually `M_R ≤ C₁ N_R^(δ/(δ+1))` and `s_R / N_R ≤ C₂ N_R^(-2/(δ+1))`, then
 `d_f / d ≤ δ/(δ+1)` and `s ≤ d (δ-1)/(δ+1)`. -/
@@ -317,11 +320,11 @@ theorem exponent_eq_of_abs_log_le {f : ℝ → ℝ} {a b B B' : ℝ}
   rw [abs_mul, abs_of_pos hlogpos] at hdiff
   nlinarith
 
-/-- **DEZI.** Real functions of `r → ∞` (all relations eventually in `r`, with positive
-lower constants): `|Λ_r| ≍ r^d`, `v_r ≍ r^(d_f)`, `E N_r ≍ r^κ`,
-`E ∑ S² ≍ v_r² E N_r`, `E X_r ≍ r^α`, the OB0A identity `E X_r = E ∑ S² / |Λ_r|`,
-`P(Z ≥ n) ≍ n^(-1/δ)` for `n ≥ 1`, and `P(Z ≥ ⌈v_r⌉) ≍ v_r E N_r / |Λ_r|`. If `d_f > 0` and
-`δ > 0`, then `α = 2 d_f + κ - d` and `d_f / δ = d - d_f - κ > 0`. -/
+/-- **Exponent relations.** Real functions of `r → ∞` (all relations eventually in `r`, with
+positive lower constants): `|Λ_r| ≍ r^d`, `v_r ≍ r^(d_f)`, `E N_r ≍ r^κ`, `E ∑ S² ≍ v_r² E N_r`,
+`E X_r ≍ r^α`, the sampled-root identity `E X_r = E ∑ S² / |Λ_r|`, `P(Z ≥ n) ≍ n^(-1/δ)` for
+`n ≥ 1`, and `P(Z ≥ ⌈v_r⌉) ≍ v_r E N_r / |Λ_r|`. If `d_f > 0` and `δ > 0`, then `α = 2 d_f + κ - d`
+and `d_f / δ = d - d_f - κ > 0`. -/
 theorem exponent_relations {Λ v EN ES EX : ℝ → ℝ} {F : ℕ → ℝ} {d df κ α δ : ℝ}
     (hdf : 0 < df) (hδ : 0 < δ)
     (hΛ : ∃ c C : ℝ, 0 < c ∧ ∀ᶠ r in atTop, c * r ^ d ≤ Λ r ∧ Λ r ≤ C * r ^ d)
@@ -470,7 +473,7 @@ theorem exponent_relations {Λ v EN ES EX : ℝ → ℝ} {F : ℕ → ℝ} {d df
     rw [h', hδ'] at this
     linarith
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- The window tail with `A = 1`, `θ = 0` holds for every window and root. -/
 theorem window_tail_one [Countable V] (q : Sym2 V → unitInterval) (Λ : Finset V) (u : V)
@@ -479,19 +482,19 @@ theorem window_tail_one [Countable V] (q : Sym2 V → unitInterval) (Λ : Finset
   simp only [neg_zero, Real.rpow_zero, mul_one, ENNReal.ofReal_one]
   exact prob_le_one
 
-/-- MJEP on `Unit` with `Λ = {()}`, `A = 1`, `θ = 0`: every hypothesis holds. -/
+/-- The window-tail damping on `Unit` with `Λ = {()}`, `A = 1`, `θ = 0`: every hypothesis holds. -/
 example (q : Sym2 Unit → unitInterval) (n : ℕ) (hn : 1 ≤ n) :
     law q {ω | n ≤ clusterIntersection {()} ω ()} ≤
       ENNReal.ofReal (Real.exp 1 * 1 * (18 / (n : ℝ)) ^ (0 : ℝ) *
         Real.exp (-(n : ℝ) / (18 * tightnessScale q {()}))) :=
-  law_le_clusterIntersection_le_damped universalTightness_unit q (Finset.singleton_nonempty _)
+  law_le_clusterIntersection_le_damped q (Finset.singleton_nonempty _)
     () zero_le_one le_rfl zero_lt_one (window_tail_one q _ ()) n hn
 
 example (q : Sym2 Unit → unitInterval) :
     ∫⁻ ω, ENNReal.ofReal ((clusterIntersection {()} ω () : ℝ) ^ (2 : ℝ)) ∂(law q) ≤
       ENNReal.ofReal (Real.exp 1 * 1 * 18 ^ (2 : ℝ) * 2 * Real.Gamma (2 - 0) *
         (tightnessScale q {()} : ℝ) ^ ((2 : ℝ) - 0)) :=
-  lintegral_rpow_clusterIntersection_le universalTightness_unit q
+  lintegral_rpow_clusterIntersection_le q
     (Finset.singleton_nonempty _) () zero_le_one le_rfl zero_lt_one (window_tail_one q _ ())
     (by norm_num)
 
@@ -502,7 +505,8 @@ theorem tendsto_log_rpow_div_log (a : ℝ) :
   filter_upwards [eventually_gt_atTop 1] with R hR
   rw [Real.log_rpow (by linarith), mul_div_assoc, div_self (Real.log_pos hR).ne', mul_one]
 
-/-- 7VCS with equality: `N_R = R`, `M_R = R^(2/3)`, `s_R = R^(1/3)`, `δ = 2`. -/
+/-- `dimension_bounds_of_hyperscaling` with equality: `N_R = R`, `M_R = R^(2/3)`, `s_R = R^(1/3)`,
+`δ = 2`. -/
 example : (2 / 3 : ℝ) / 1 ≤ 2 / (2 + 1) ∧ (1 / 3 : ℝ) ≤ 1 * (2 - 1) / (2 + 1) :=
   dimension_bounds_of_hyperscaling (N := fun R => R ^ (1 : ℝ)) (Mr := fun R => R ^ (2 / 3 : ℝ))
     (s := fun R => R ^ (1 / 3 : ℝ)) (C₁ := 1) (C₂ := 1) one_pos one_lt_two
@@ -517,7 +521,7 @@ example : (2 / 3 : ℝ) / 1 ≤ 2 / (2 + 1) ∧ (1 / 3 : ℝ) ≤ 1 * (2 - 1) / 
           ← Real.rpow_add hR]
         norm_num)
 
-/-- DEZI with pure powers: `|Λ_r| = r^3`, `v_r = r^2`, `E N_r = 1`, `E ∑ S² = r^4`,
+/-- `exponent_relations` with pure powers: `|Λ_r| = r^3`, `v_r = r^2`, `E N_r = 1`, `E ∑ S² = r^4`,
 `E X_r = r^4 / r^3`, `P(Z ≥ n) = n^(-1/2)`; then `α = 1`, `d_f/δ = 1 = d - d_f - κ`. -/
 example : (1 : ℝ) = 2 * 2 + 0 - 3 ∧ (2 : ℝ) / 2 = 3 - 2 - 0 ∧ (0 : ℝ) < 3 - 2 - 0 := by
   refine exponent_relations (Λ := fun r => r ^ (3 : ℝ)) (v := fun r => r ^ (2 : ℝ))
@@ -542,7 +546,7 @@ example : (1 : ℝ) = 2 * 2 + 0 - 3 ∧ (2 : ℝ) / 2 = 3 - 2 - 0 ∧ (0 : ℝ) 
     have hc1 : r ^ (2 : ℝ) ≤ (⌈r ^ (2 : ℝ)⌉₊ : ℝ) := Nat.le_ceil _
     have hc2 : (⌈r ^ (2 : ℝ)⌉₊ : ℝ) ≤ 2 * r ^ (2 : ℝ) := by
       have := Nat.ceil_lt_add_one (show 0 ≤ r ^ (2 : ℝ) by linarith); linarith
-    show 1 / 2 * (r ^ (2 : ℝ) * 1 / r ^ (3 : ℝ)) ≤ (⌈r ^ (2 : ℝ)⌉₊ : ℝ) ^ (-1 / 2 : ℝ) ∧
+    change 1 / 2 * (r ^ (2 : ℝ) * 1 / r ^ (3 : ℝ)) ≤ (⌈r ^ (2 : ℝ)⌉₊ : ℝ) ^ (-1 / 2 : ℝ) ∧
       (⌈r ^ (2 : ℝ)⌉₊ : ℝ) ^ (-1 / 2 : ℝ) ≤ 1 * (r ^ (2 : ℝ) * 1 / r ^ (3 : ℝ))
     rw [hv]
     constructor

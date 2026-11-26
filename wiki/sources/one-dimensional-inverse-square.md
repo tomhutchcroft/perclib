@@ -1,0 +1,7 @@
+# One-dimensional inverse-square transitions
+
+Read Aizenman–Newman, [Proposition 1.1 and its setup](https://doi.org/10.1007/BF01205489), and Duminil-Copin–Garban–Tassion, [arXiv:2011.04642v2, Theorem 1 and the block estimate in section 2.3](https://arxiv.org/html/2011.04642v2), on 17 November 2026. The latter HTML was compared with PDF text at the integral on printed page 4. No rendered PDF or later published version was checked.
+
+[67W9](../articles/integrated-susceptibility.md#section-marginal-density-input) and [JZG4](../articles/integrated-susceptibility.md#section-marginal-existence-input) have written proofs; 67W9 follows Duminil-Copin–Garban–Tassion, section 2.4. [NLDF](../articles/integrated-susceptibility.md#section-marginal-transition) gives the written sublattice comparison and critical endpoint deduction for general comparable kernels. [0OQL](../articles/profile-continuity.md#section-summable-theta) supplies the needed continuity from finite-cluster atom probabilities, without a locally finite host.
+
+The [provisional erratum](../errata/dgt-long-range-2023.json) has the local replacement calculation [PAFY](../articles/integrated-susceptibility.md#section-marginal-integral-repair). The larger constant is absorbed by the convergent power tail. No other step of the block renormalization argument, and no FK or Potts conclusion, is certified by this reading. Existing errata are preserved; no new compiled association is asserted.

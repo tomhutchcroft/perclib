@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 178, Q-28). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -19,10 +21,10 @@ non-diagonal pair `e`. Then `τ`, `χ` and `θ` at `q` are at most those at `q'`
 points.
 
 Route: pulling a configuration on `W` back along `Sym2.map f` turns `law q'` into
-`law (q' ∘ Sym2.map f)` (identified on the all-open events of finite sets); connections in
-the pulled-back configuration push forward along `f`; and `q`, with its diagonal set to `0`,
-is dominated by `q' ∘ Sym2.map f`, so the monotone coupling S-2 and diagonal insensitivity
-S-4 finish the comparison.
+`law (q' ∘ Sym2.map f)` (identified on the all-open events of finite sets); connections in the
+pulled-back configuration push forward along `f`; and `q`, with its diagonal set to `0`, is
+dominated by `q' ∘ Sym2.map f`, so the monotone coupling and diagonal insensitivity finish the
+comparison.
 -/
 
 @[expose] public section

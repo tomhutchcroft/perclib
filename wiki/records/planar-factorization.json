@@ -1,0 +1,159 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "planar-factorization",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 132
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "conijn-factorization-2015",
+      "order": 0,
+      "label": "Local conditions and point versions",
+      "locator": "arXiv:1502.04387v3, Definitions 7–9",
+      "relationship": "Definition with explicit conventions",
+      "status": "pending",
+      "note": "Definitions with explicit wired boundaries and boundary-centred or entirely bulk boxes."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 1,
+      "label": "Uniform conditional point completion",
+      "locator": "arXiv:1502.04387v3, Proposition 10 proof, (3.17)–(3.27)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Written proof from critical triangular-site RSW and product Harris; no association under a condition or coupling-success event is assumed."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 2,
+      "label": "Annular coupling and relative errors",
+      "locator": "arXiv:1502.04387v3, Lemma 11; Proposition 10, (3.5)–(3.16)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Common annular mass, conditional sampling and an unrevealed core give a uniform power bound for the relative completion error."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 3,
+      "label": "Conformal radius with the full domain boundary",
+      "locator": "arXiv:1502.04387v3, Section 2, (2.2)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Koebe and Schwarz give the boundary minimum. The omitted real boundary has a strip counterexample; the source diagnosis is provisional."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 4,
+      "label": "From continuum neighbourhoods to sites",
+      "locator": "arXiv:1502.04387v3, Theorem 1; Theorem 3; section 3.2, (3.28)–(3.33)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Written implication from the cited continuum neighbourhood formula and critical-site RSW. Six relative factors and fixed-radius liminf/limsup preserve the order of limits."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 5,
+      "label": "Boundary-interval attachment ratio",
+      "locator": "arXiv:1502.04387v3, Theorem 2; Theorem 4 and Lemma 5; section 3.3, (3.34)–(3.44)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Written proof from the stated continuum density inputs and critical-site RSW. The two sites may belong to distinct clusters meeting the interval."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 6,
+      "label": "Strip-coordinate cancellation",
+      "locator": "arXiv:1502.04387v3, Section 3.3, (3.40)–(3.44)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Möbius normalization, the arcsine map and the harmonic-measure half-angle identity cancel every remaining geometric factor."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 7,
+      "label": "Monotonicity of the strip ratio",
+      "locator": "arXiv:1502.04387v3, Theorem 2 formula; consequence of (2.7)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "New consequence of the explicit formula: positive hypergeometric coefficients and their tilted mean prove strict increase and the endpoint equivalents."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 8,
+      "label": "Continuum inputs for the interval and three-point limits",
+      "locator": "Theorem 1.1; Lemma 2.2; Proposition 4.1 and Remark 4",
+      "relationship": "Cited continuum input, with the lattice passage proved separately",
+      "status": "pending",
+      "note": "The SLE and spectral derivations remain uncovered. IP6C and 7O0U transfer these formulas to individual triangular-lattice sites; V456 proves the final algebra."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "R77Z",
+      "proof_uses": [
+        "83WA"
+      ],
+      "reason": "Written proof from critical triangular-site RSW and product Harris; no association under a condition or coupling-success event is assumed."
+    },
+    {
+      "order": 1,
+      "tag": "XP8A",
+      "proof_uses": [
+        "83WA",
+        "R77Z",
+        "KJWA"
+      ],
+      "reason": "Common annular mass, conditional sampling and an unrevealed core give a uniform power bound for the relative completion error."
+    },
+    {
+      "order": 2,
+      "tag": "7GOV",
+      "proof_uses": [],
+      "reason": "Koebe and Schwarz give the boundary minimum. The omitted real boundary has a strip counterexample; the source diagnosis is provisional."
+    },
+    {
+      "order": 3,
+      "tag": "IP6C",
+      "proof_uses": [
+        "83WA",
+        "7GOV",
+        "XP8A"
+      ],
+      "reason": "Written implication from the cited continuum neighbourhood formula and critical-site RSW. Six relative factors and fixed-radius liminf/limsup preserve the order of limits."
+    },
+    {
+      "order": 4,
+      "tag": "7O0U",
+      "proof_uses": [
+        "83WA",
+        "7GOV",
+        "XP8A",
+        "V456"
+      ],
+      "reason": "Written proof from the stated continuum density inputs and critical-site RSW. The two sites may belong to distinct clusters meeting the interval."
+    },
+    {
+      "order": 5,
+      "tag": "V456",
+      "proof_uses": [],
+      "reason": "Möbius normalization, the arcsine map and the harmonic-measure half-angle identity cancel every remaining geometric factor."
+    },
+    {
+      "order": 6,
+      "tag": "ZZ9Q",
+      "proof_uses": [],
+      "reason": "New consequence of the explicit formula: positive hypergeometric coefficients and their tilted mean prove strict increase and the endpoint equivalents."
+    },
+    {
+      "order": 7,
+      "tag": "83WA",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

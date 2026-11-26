@@ -1,0 +1,296 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "integrated-susceptibility",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 8
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 45,
+      "label": "Integrating susceptibility inequalities",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-boundary-susceptibility",
+      "order": 0,
+      "label": "Deletion, last exit and corrected boundary susceptibility",
+      "locator": "Named public declaration start lines: 50, 58, 64, 82, 90, 104, 116, 127, 138, 161, 202, 210, 219, 242, 270, 277, 300, 389, 411, 438",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "7902 allows arbitrary deleted sets and endpoints; 67GX requires normalized off-diagonal rows and uniformly finite susceptibility for its real quotient. Empty sets and zero intensity use totalized real division. Later random-cluster and derivative arguments are separate."
+    },
+    {
+      "source": "perclib-susceptibility-derivative",
+      "order": 0,
+      "label": "Finite-volume susceptibility derivative",
+      "locator": "Named public declaration start lines: 40, 55, 99, 105, 130, 167, 178, 192, 217, 298, 318",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "TAVM is obtained from finite-coordinate Russo and two oriented pivotal witnesses. The ambient vertex type is arbitrary. A right derivative is included at zero; the two-sided derivative is asserted only at positive intensity. Infinite-volume identities and stronger lower derivative bounds are separate."
+    },
+    {
+      "source": "perclib-susceptibility-regularity",
+      "order": 0,
+      "label": "Integrated susceptibility and reciprocal control",
+      "locator": "Explicit public declaration start lines: 59, 74, 118, 124, 149, 186, 197, 211, 236, 317, 337, 360, 385, 401, 413, 449, 509, 573, 582, 622, 673, 705, 753, 784, 855, 863",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-six public results, including eleven earlier finite-volume contracts and fifteen extensions. Local regularity and reciprocal control allow zero row sum; endpoint blow-up is separate. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-independent-layer",
+      "order": 0,
+      "label": "Ghost comparison and sparse-layer susceptibility",
+      "locator": "Explicit public declaration start lines: 53, 57, 71, 84, 219, 243, 251, 262, 279, 284, 290, 308, 317, 368, 437",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fifteen public results prove BEJT and MLLO. The source excludes infinite union clusters before applying Fatou to the exponentially damped volume. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-independent-layer-intensity",
+      "order": 0,
+      "label": "Quantitative right-openness in intensity",
+      "locator": "Explicit public declaration start lines: 50, 56, 63, 73, 86, 112, 127, 139",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results give the susceptibility step, right-openness and the extended threshold lower bound, including zero-row kernels. Finite-threshold divergence is separate. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-logarithmic-corrections",
+      "order": 0,
+      "label": "Quadratic and deficit logarithmic bounds",
+      "locator": "Explicit public declaration start lines: 62, 71, 79, 89, 272, 423, 433, 511, 542",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Nine public results implement 6PGV and OP8F, with absolute continuity and the exact deficit difference explicit. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-susceptibility-endpoint",
+      "order": 0,
+      "label": "Finite susceptibility endpoints",
+      "locator": "Explicit public declaration start lines: 42, 69, 107",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Three results prove endpoint divergence and the reciprocal blow-up lower bound. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-free-group-tree",
+      "order": 0,
+      "label": "A transitive finite-row endpoint witness",
+      "locator": "Explicit public declaration start lines: 53, 68, 83, 99, 123, 136, 143, 164, 188, 219, 252, 307",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twelve results construct the free-group model and verify a finite positive susceptibility endpoint. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-train10-models-longrange-finitesusceptibility",
+      "order": 0,
+      "label": "Subcritical susceptibility for displacement kernels",
+      "locator": "Explicit public theorem start lines: 48, 59, 68, 76, 89, 101, 119",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    },
+    {
+      "source": "perclib-train10-percolation-bond-localconvergence",
+      "order": 0,
+      "label": "Transport of finite-set certificates",
+      "locator": "Explicit public theorem start lines: 48, 68, 85, 174, 213, 221, 228, 237, 323",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 50,
+      "label": "Two-cluster transport through an added intensity layer",
+      "locator": "arXiv:2508.18809v1, Lemma III.3.15, (III.3.15)",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "Use last exits, fresh added coordinates and the correct outside continuation endpoints; sum before passing to countable volume."
+    },
+    {
+      "source": "aizenman-newman-1986",
+      "order": 0,
+      "label": "The density constraint",
+      "locator": "Proposition 1.1, pp. 613\u2013614, equations (1.5)\u2013(1.6)",
+      "relationship": "Written deduction",
+      "status": "pending",
+      "note": "67W9 states this result with regularity and the limsup coefficient retained, and is proved on the page following Duminil-Copin, Garban and Tassion, section 2.4."
+    },
+    {
+      "source": "dgt-long-range-2023",
+      "order": 0,
+      "label": "Existence input and block-integral repair",
+      "locator": "Theorem 1(i); section 2.3, Lemma 2 proof, PDF p. 4; HTML equations (12)\u2013(15)",
+      "relationship": "Written deduction",
+      "status": "pending",
+      "note": "JZG4 is proved in the wiki by a written block renormalization following section 2.3, with its own constants and discrete comparison; it uses PAFY's integral identity but not the source's Lemma 2 numerics. PAFY supplies a local numerical repair of the source's estimate, provisional pending Tom confirmation; no compiled association is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "5FCO",
+      "proof_uses": [
+        "Y84V"
+      ],
+      "reason": "Use last exits, fresh added coordinates and the correct outside continuation endpoints; sum before passing to countable volume."
+    },
+    {
+      "order": 1,
+      "tag": "NLDF",
+      "proof_uses": [
+        "67W9",
+        "JZG4",
+        "0OQL",
+        "6B9V"
+      ],
+      "reason": "Sublattice domination proves a finite threshold. The density bound 67W9 and written right continuity give a positive critical density; positive isolation probability makes the lower threshold bound strict."
+    },
+    {
+      "order": 2,
+      "tag": "XP2Y",
+      "proof_uses": [
+        "AKFN",
+        "NUJY",
+        "NLDF",
+        "JK7V",
+        "0OQL",
+        "5LNL",
+        "L0TE",
+        "RDF0"
+      ],
+      "reason": "An embedded plane, the heavy-edge theorem, closed cuts and the inverse-square theorem give the classification. Sharpness identifies the susceptibility endpoint; finite-cluster atoms give continuity."
+    },
+    {
+      "order": 3,
+      "tag": "GQJY",
+      "proof_uses": [],
+      "reason": "Local chain rules and endpoint divergence integrate the corrected square; the logarithmic antiderivative first gives a polynomial bound, avoiding a circular logarithm substitution."
+    },
+    {
+      "order": 4,
+      "tag": "4800",
+      "proof_uses": [
+        "6JBS",
+        "BNY8"
+      ],
+      "reason": "The finite-volume pivotal derivative formula (6JBS) is bounded uniformly by finite-coordinate BK (BNY8), passed to the limit by dominated convergence, and translated to the root."
+    },
+    {
+      "order": 5,
+      "tag": "J1LW",
+      "proof_uses": [
+        "7902",
+        "L82Q"
+      ],
+      "reason": "Conditioning on K_x gives the expectation identity; the deletion bound (7902) and the three-point tree-graph inequality (L82Q) give the five-factor error."
+    },
+    {
+      "order": 6,
+      "tag": "4960",
+      "proof_uses": [
+        "J1LW",
+        "4800"
+      ],
+      "reason": "The five-factor bound J1LW is weighted by J(o,y) and summed, with the two-cluster identity (4800) identifying the main term with chi'."
+    },
+    {
+      "order": 7,
+      "tag": "TC6Q",
+      "proof_uses": [],
+      "reason": "Integration of the differential inequality for 1/chi using monotonicity of chi; no other wiki assertion is invoked."
+    },
+    {
+      "order": 8,
+      "tag": "W9IY",
+      "proof_uses": [
+        "TC6Q"
+      ],
+      "reason": "The reciprocal integral in the integrated bound TC6Q is restricted to a short interval where the diagram bound controls D."
+    },
+    {
+      "order": 9,
+      "tag": "5LNL",
+      "proof_uses": [
+        "MLLO",
+        "E771"
+      ],
+      "reason": "Sprinkling an independent sparse layer and MLLO give right-openness; the row-sum bound (E771) gives b_chi>=1/L, and monotone coupling gives endpoint divergence."
+    },
+    {
+      "order": 10,
+      "tag": "NUJY",
+      "proof_uses": [],
+      "reason": "A Peierls dual-cycle count with a union bound and a path count for the lower bound; no other wiki assertion is invoked."
+    },
+    {
+      "order": 11,
+      "tag": "EBVV",
+      "proof_uses": [
+        "NUJY",
+        "5LNL"
+      ],
+      "reason": "The Peierls bound on a retained coordinate plane (NUJY) gives beta_c finite; 5LNL gives the row-sum lower bound and endpoint divergence."
+    },
+    {
+      "order": 12,
+      "tag": "65PY",
+      "proof_uses": [
+        "JZ47"
+      ],
+      "reason": "A growing-block renormalisation with a union-bound recursion gives an infinite cluster; the row-sum bound (JZ47) gives beta_c>0."
+    },
+    {
+      "order": 13,
+      "tag": "IU3W",
+      "proof_uses": [
+        "L0TE",
+        "HATE",
+        "4IHK"
+      ],
+      "reason": "Above p_c every finite-set functional is at least one by the threshold identification L0TE; the wired-boundary calculation (HATE) with the homogeneous Russo formula (4IHK) gives the differential inequality that is integrated."
+    },
+    {
+      "order": 14,
+      "tag": "468P",
+      "proof_uses": [
+        "RDF0",
+        "YLZV"
+      ],
+      "reason": "Below p_c(G) the finite-set characterisation (RDF0) gives a contracting set, transported by the local isomorphism, and the certificate bound (YLZV) gives finite susceptibility on G_n."
+    },
+    {
+      "order": 15,
+      "tag": "PAFY",
+      "proof_uses": [],
+      "reason": "Direct integration and a comparison of the lattice sum with the integral; no other wiki assertion is invoked."
+    },
+    {
+      "order": 16,
+      "tag": "JZG4",
+      "proof_uses": [
+        "PAFY"
+      ],
+      "reason": "Multiscale good-block renormalization: overlapping good blocks merge, two disjoint bad blocks are a squared error, and a single bad spot is bridged by one long edge whose failure probability is bounded through the inverse-square block integral (PAFY)."
+    },
+    {
+      "order": 17,
+      "tag": "67W9",
+      "proof_uses": [
+        "F4CV",
+        "H0OC"
+      ],
+      "reason": "A renormalization inequality for crossings by short edges, with bridges bounded through the inverse-square tail and Harris for decreasing events, keeps the non-crossing probability bounded below; closed long edges and the zero-one law then exclude percolation when the tail coefficient times the squared density is below one."
+    }
+  ]
+}

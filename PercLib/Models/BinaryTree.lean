@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-71 (issue 378), on the D-2 interface and the rooted-tree
-conventions of `PercLib.Models.Tree`. Source of the model: G. Grimmett, *Percolation*
-(2nd ed., 1999), the rooted tree example. No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the rooted-tree conventions of
+`PercLib.Models.Tree`. Source of the model: G. Grimmett, *Percolation* (2nd ed., 1999), the rooted
+tree example. No source text or code is copied.
 -/
 module
 
@@ -60,7 +64,7 @@ theorem tau_nil_eq (p : unitInterval) (q : Sym2 (List (Fin k)) → unitInterval)
   have hdiag : law q (conn [] w) = law q₀ (conn [] w) := by
     refine law_event_eq_of_offDiagonal q q₀ (fun e he => hq e he) (measurableSet_conn _ _)
       fun ω ω' h => ?_
-    show (openGraph ω).Reachable [] w ↔ (openGraph ω').Reachable [] w
+    change (openGraph ω).Reachable [] w ↔ (openGraph ω').Reachable [] w
     rw [← openGraph_sdiff_diagSet ω, h, openGraph_sdiff_diagSet]
   change law q (conn [] w) = _
   rw [hdiag]
@@ -72,7 +76,7 @@ theorem tau_nil_eq (p : unitInterval) (q : Sym2 (List (Fin k)) → unitInterval)
     refine measure_congr ?_
     filter_upwards [hsupp] with ω hω
     refine propext ?_
-    show (openGraph ω).Reachable [] w ↔ (F : Set _) ⊆ ω
+    change (openGraph ω).Reachable [] w ↔ (F : Set _) ⊆ ω
     rw [reachable_nil_iff_of_subset hω]
     constructor
     · intro h e he
@@ -328,7 +332,7 @@ theorem binaryTree_chi_lt_top_iff (p : unitInterval) (q : Sym2 (List (Fin 2)) �
     rw [binaryTree_chi_of_lt p q hq hp]
     exact ENNReal.ofReal_lt_top
 
-/-! ### Non-vacuity (D-5): `p = 0`, `p = 1/2`, `p = 1` -/
+/-! ### Non-vacuity: `p = 0`, `p = 1/2`, `p = 1` -/
 
 example : chi (fun e : Sym2 (List (Fin 2)) =>
       if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then

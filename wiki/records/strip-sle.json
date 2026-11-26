@@ -1,0 +1,65 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "strip-sle",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 137
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Exponential normalization",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 4, Definition 5 and the following coordinate-change assertion; boundary-force specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Direct differentiation of the exponential conjugacy derives the chordal Loewner equation, its capacity clock and both endpoint marks."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Strip boundary-force covariance",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 4, Definition 5 and the following coordinate-change assertion; boundary-force specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Itô calculus proves covariance for balanced weights, first under exp(2z), then under any conformal map to H by the proved chordal Möbius result. Both boundary components and endpoint marks are included; collision and new-target stops are retained."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "Dipolar endpoint forces",
+      "locator": "Schramm–Wilson, arXiv:math/0505368; Section 4, Definition 5 and the following coordinate-change assertion; boundary-force specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Equal added weights at the two strip ends cancel in the original driver. They restore the balance and become the two compensating chordal endpoint forces."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "1AUW",
+      "proof_uses": [],
+      "reason": "Direct differentiation of the exponential conjugacy derives the chordal Loewner equation, its capacity clock and both endpoint marks."
+    },
+    {
+      "order": 1,
+      "tag": "YEJS",
+      "proof_uses": [
+        "1AUW",
+        "6RZ1"
+      ],
+      "reason": "Itô calculus proves covariance for balanced weights, first under exp(2z), then under any conformal map to H by the proved chordal Möbius result. Both boundary components and endpoint marks are included; collision and new-target stops are retained."
+    },
+    {
+      "order": 2,
+      "tag": "EKFY",
+      "proof_uses": [
+        "YEJS"
+      ],
+      "reason": "Equal added weights at the two strip ends cancel in the original driver. They restore the balance and become the two compensating chordal endpoint forces."
+    }
+  ]
+}

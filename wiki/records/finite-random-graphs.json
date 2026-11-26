@@ -1,0 +1,73 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-random-graphs",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 5
+    },
+    {
+      "collection": "critical-theory",
+      "order": 3
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Finite-size scaling and random graphs",
+      "locator": "Author manuscript · Chapter 13",
+      "relationship": "Source theorem family",
+      "status": "pending",
+      "note": "Critical windows on finite graphs require definitions distinct from infinite-cluster thresholds."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "CY0D",
+      "proof_uses": [
+        "6WC8"
+      ],
+      "reason": "The root cluster of 6WC8 at a uniform root is the component containing it, which is the component of size |C_i| with probability |C_i|/n."
+    },
+    {
+      "order": 1,
+      "tag": "XCGS",
+      "proof_uses": [
+        "CY0D",
+        "8DSI"
+      ],
+      "reason": "Averaging the conditional identity CY0D over configurations gives the averaged susceptibility of 8DSI."
+    },
+    {
+      "order": 2,
+      "tag": "MIQ7",
+      "proof_uses": [
+        "53Z9"
+      ],
+      "reason": "The row sum of G(n,p) is (n-1)p, and the uniform row-sum bound gives the susceptibility bound at every root, hence for the average."
+    },
+    {
+      "order": 3,
+      "tag": "PXP9",
+      "proof_uses": [
+        "XCGS",
+        "MIQ7"
+      ],
+      "reason": "Markov's inequality for the largest squared component, bounded by the second component moment of XCGS, combined with the susceptibility bound MIQ7."
+    },
+    {
+      "order": 4,
+      "tag": "F9EV",
+      "proof_uses": [
+        "38XP",
+        "Y0FX",
+        "25Z4",
+        "TUD2"
+      ],
+      "reason": "With theta = lambda the window is that of 38XP, which gives the two-sided bound for L_1 and the upper bound for every L_j <= L_1. For j >= 2, the Y0FX tails bound the mean of the vertex count in components of size between n^{2/3}/A and n^{2/3}, the 25Z4 distinct-cluster comparison and the TUD2 root-sum identity bound its variance, and Chebyshev's inequality gives at least j such components."
+    }
+  ]
+}

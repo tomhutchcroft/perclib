@@ -1,0 +1,82 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-tip-continuity",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 146
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Short-time localization",
+      "locator": "arXiv:math/0106036v4, Section 3.3, Theorem 3.6 and (3.19)–(3.24); the almost-every-time observation and kappa-eight update immediately following its proof. The fixed-time input is Theorem 5.2.",
+      "relationship": "Written proof via deterministic time grids and explicit quantifiers",
+      "status": "pending",
+      "note": "A backward-flow invariant rectangle and Koebe distortion control a full height-time strip by one derivative at its deterministic left endpoint."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Uniform radial convergence and joint continuity",
+      "locator": "arXiv:math/0106036v4, Section 3.3, Theorem 3.6 and (3.19)–(3.24); the almost-every-time observation and kappa-eight update immediately following its proof. The fixed-time input is Theorem 5.2.",
+      "relationship": "Written proof via deterministic time grids and explicit quantifiers",
+      "status": "pending",
+      "note": "A deterministic mesh of length 4^(-n)/(n+1)^2 makes Brownian oscillations summable; the derivative tail has a strict lambda-2-sigma*q margin. Vertical telescoping is uniform in time, and countable horizons/exponents give one probability-one event."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Time modulus of the radial tip curve",
+      "locator": "arXiv:math/0106036v4, Section 3.3, Theorem 3.6 and (3.19)–(3.24); the almost-every-time observation and kappa-eight update immediately following its proof. The fixed-time input is Theorem 5.2.",
+      "relationship": "Written proof via deterministic time grids and explicit quantifiers",
+      "status": "pending",
+      "note": "Adjacent mesh intervals and uniform radial error give u^(sigma/2)(1+abs(log u))^sigma; every beta<sigma0/2 is admissible. These are sufficient, not optimal, exponents."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Almost-every-time radial limits at kappa eight",
+      "locator": "arXiv:math/0106036v4, Section 3.3, Theorem 3.6 and (3.19)–(3.24); the almost-every-time observation and kappa-eight update immediately following its proof. The fixed-time input is Theorem 5.2.",
+      "relationship": "Written proof via deterministic time grids and explicit quantifiers",
+      "status": "pending",
+      "note": "Fixed-time Holder extension and the measurable radial Cauchy criterion permit Fubini on integer time horizons. This gives no uniform convergence or full kappa-eight trace construction."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "4ENF",
+      "proof_uses": [],
+      "reason": "A backward-flow invariant rectangle and Koebe distortion control a full height-time strip by one derivative at its deterministic left endpoint."
+    },
+    {
+      "order": 1,
+      "tag": "N7TT",
+      "proof_uses": [
+        "4ENF",
+        "M7AF"
+      ],
+      "reason": "A deterministic mesh of length 4^(-n)/(n+1)^2 makes Brownian oscillations summable; the derivative tail has a strict lambda-2-sigma*q margin. Vertical telescoping is uniform in time, and countable horizons/exponents give one probability-one event."
+    },
+    {
+      "order": 2,
+      "tag": "MV6M",
+      "proof_uses": [
+        "N7TT"
+      ],
+      "reason": "Adjacent mesh intervals and uniform radial error give u^(sigma/2)(1+abs(log u))^sigma; every beta<sigma0/2 is admissible. These are sufficient, not optimal, exponents."
+    },
+    {
+      "order": 3,
+      "tag": "YVFR",
+      "proof_uses": [
+        "OLNV"
+      ],
+      "reason": "Fixed-time Holder extension and the measurable radial Cauchy criterion permit Fubini on integer time horizons. This gives no uniform convergence or full kappa-eight trace construction."
+    }
+  ]
+}

@@ -73,7 +73,8 @@ variable {Y : Type*} [MeasurableSpace Y] [LinearOrder Y] (ν : Measure Y) [IsPro
 /-- **Chebyshev's integral inequality** (the case `n = 1` of Harris' lemma; Grimmett, *Percolation*
 (1999), proof of Thm. (2.4), p. 35): if `φ, ψ` are increasing bounded measurable functions on a
 linearly ordered probability space then `∫ φ * ∫ ψ ≤ ∫ φ ψ`, because
-`0 ≤ ∫∫ (φ x - φ y)(ψ x - ψ y) = 2 (∫ φ ψ - ∫ φ ∫ ψ)`. [cite: GrimmettPercolation1999, Thm. 2.4 (proof, case n = 1)] -/
+`0 ≤ ∫∫ (φ x - φ y)(ψ x - ψ y) = 2 (∫ φ ψ - ∫ φ ∫ ψ)`. [cite: GrimmettPercolation1999, Thm. 2.4
+(proof, case n = 1)] -/
 theorem integral_mul_integral_le_integral_mul_of_monotone {φ ψ : Y → ℝ} (hφ : Monotone φ)
     (hψ : Monotone ψ) (hφm : Measurable φ) (hψm : Measurable ψ) {C : ℝ} (hφb : ∀ y, ‖φ y‖ ≤ C)
     (hψb : ∀ y, ‖ψ y‖ ≤ C) :
@@ -214,7 +215,8 @@ theorem integral_integral_piecewise {f : (Π i, X i) → ℝ} (hf : Integrable f
     _ = ∫ ω, f ω ∂infinitePi μ := by rw [infinitePi_prod_map_piecewise]
 
 /-- Averaging an increasing function gives an increasing function (product measure!): the map
-`ω ↦ ∫ f (s.piecewise ω η) dμ∞(η)` is monotone if `f` is. [cite: GrimmettPercolation1999, Thm. 2.4 (proof)] -/
+`ω ↦ ∫ f (s.piecewise ω η) dμ∞(η)` is monotone if `f` is. [cite: GrimmettPercolation1999, Thm. 2.4
+(proof)] -/
 theorem monotone_integral_piecewise [∀ i, Preorder (X i)] {f : (Π i, X i) → ℝ} (hf : Monotone f)
     (hfm : Measurable f) {C : ℝ} (hb : ∀ ω, ‖f ω‖ ≤ C) :
     Monotone fun ω => ∫ η, f (s.piecewise ω η) ∂infinitePi μ := by
@@ -329,7 +331,8 @@ theorem infinitePi_harris_dependsOn [DecidableEq ι] [∀ i, LinearOrder (X i)] 
       simp only [e]
       rw [← infinitePi_map_eval μ i, integral_map (measurable_pi_apply i).aemeasurable]
       exact (hhm.comp (measurable_update ω)).aestronglyMeasurable
-    have key : ∀ ω, (∫ η, f (s.piecewise ω η) ∂infinitePi μ) * (∫ η, g (s.piecewise ω η) ∂infinitePi μ)
+    have key : ∀ ω, (∫ η, f (s.piecewise ω η) ∂infinitePi μ) *
+        (∫ η, g (s.piecewise ω η) ∂infinitePi μ)
         ≤ ∫ η, f (s.piecewise ω η) * g (s.piecewise ω η) ∂infinitePi μ := by
       intro ω
       rw [red hfs hfm, red hgs hgm, red hfgs (hfm.mul hgm)]
@@ -337,11 +340,13 @@ theorem infinitePi_harris_dependsOn [DecidableEq ι] [∀ i, LinearOrder (X i)] 
         (hg.comp update_mono) (hfm.comp (measurable_update ω)) (hgm.comp (measurable_update ω))
         (fun x => hfb _) (fun x => hgb _)
     -- Step 2: induction hypothesis for the averaged functions, which depend on `s` only.
-    have hF := ih (monotone_integral_piecewise μ hf hfm hfb) (monotone_integral_piecewise μ hg hgm hgb)
+    have hF := ih (monotone_integral_piecewise μ hf hfm hfb)
+        (monotone_integral_piecewise μ hg hgm hgb)
       (measurable_integral_piecewise μ hfm) (measurable_integral_piecewise μ hgm)
       (dependsOn_integral_piecewise μ f) (dependsOn_integral_piecewise μ g)
       (norm_integral_piecewise_le μ hfb) (norm_integral_piecewise_le μ hgb)
-    rw [integral_integral_piecewise μ (iB hfm hfb), integral_integral_piecewise μ (iB hgm hgb)] at hF
+    rw [integral_integral_piecewise μ (iB hfm hfb),
+        integral_integral_piecewise μ (iB hgm hgb)] at hF
     calc (∫ ω, f ω ∂infinitePi μ) * (∫ ω, g ω ∂infinitePi μ)
         ≤ ∫ ω, (∫ η, f (s.piecewise ω η) ∂infinitePi μ) * (∫ η, g (s.piecewise ω η) ∂infinitePi μ)
             ∂infinitePi μ := hF
@@ -360,7 +365,8 @@ theorem infinitePi_harris_dependsOn [DecidableEq ι] [∀ i, LinearOrder (X i)] 
 Thm. (2.4), p. 36): for a measurable set `A`, the averages `T_s 1_A` converge to `1_A` in `L¹(μ∞)`
 along the directed set of finite coordinate sets `s`. Proof: approximate `A` in measure by a
 measurable cylinder (`Measure.MeasureDense.of_generateFrom_isSetAlgebra_finite`), which `T_s`
-fixes, and use that `T_s` is an `L¹` contraction. [cite: GrimmettPercolation1999, Thm. 2.4 (proof, (2.11))] -/
+fixes, and use that `T_s` is an `L¹` contraction. [cite: GrimmettPercolation1999, Thm. 2.4 (proof,
+(2.11))] -/
 theorem exists_integral_norm_integral_piecewise_indicator_sub_le [DecidableEq ι]
     {A : Set (Π i, X i)} (hA : MeasurableSet A) {ε : ℝ} (hε : 0 < ε) :
     ∃ s₀ : Finset ι, ∀ s : Finset ι, s₀ ⊆ s →

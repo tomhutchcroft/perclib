@@ -1,22 +1,27 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-164 (issue 531): the Kestelman–Borwein–Ditor theorem, the uniform convergence
-theorem for measurable regularly varying functions (Bingham–Goldie–Teugels, Theorem 1.2.1),
-and Potter's bounds (BGT Theorem 1.5.6), as used on p. 25 and in Lemma I.2.10 of
-T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The Kestelman–Borwein–Ditor theorem, the uniform convergence theorem for measurable regularly
+varying functions (Bingham–Goldie–Teugels, Theorem 1.2.1), and Potter's bounds (BGT Theorem 1.5.6),
+as used on p. 25 and in Lemma I.2.10 of T. Hutchcroft, *Critical long-range percolation I*,
+arXiv:2508.18807v1.
 
-Ported from pull request 488 (contributor `yujinhkim`): repository `yujinhkim/lrp`, branch
+Ported from the work of contributor `yujinhkim`: repository `yujinhkim/lrp`, branch
 `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
 `PercLib/CriticalLRP/Analysis/UniformConvergence.lean` (its first part, through
-`hasPotterBounds_of_regularlyVarying`); licence Apache-2.0 as declared in that commit's file
-headers and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`.
-Modified: `RegularlyVaryingAtTop f α` becomes `RegularlyVarying α f` of
-`PercLib/Analysis/RegularVariation/Defs.lean` (each proof first recovers the source's two
-components from it); `HasPotterBounds f α` is written out, so
+`hasPotterBounds_of_regularlyVarying`, and, in the section "Part 2", its remaining statements
+except `slowlyVarying_div_rpow`) and file `PercLib/CriticalLRP/Analysis/PotterBounded.lean` (in
+"Part 2"); licence Apache-2.0 as declared in that commit's file headers and
+`third_party/critical-lrp/NOTICE.md`; upstream `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified: `RegularlyVaryingAtTop f α` becomes
+`RegularlyVarying α f` of `PercLib/Analysis/RegularVariation/Defs.lean` (each proof first recovers
+the source's two components from it); `HasPotterBounds f α` is written out, so
 `hasPotterBounds_of_regularlyVarying` is `potterBounds_of_regularlyVarying`; the source's
-`volume_preimage_add_right` is mathlib's `measure_preimage_add_right`, used directly;
-`import Mathlib`, `autoImplicit`, disabled linters and `#print` lines are removed.
+`volume_preimage_add_right` is mathlib's `measure_preimage_add_right`, used directly; `import
+Mathlib`, `autoImplicit`, disabled linters and `#print` lines are removed.
 -/
 module
 
@@ -307,7 +312,8 @@ theorem tendsto_uniformly_abs_ratio_of_regularlyVarying {f : ℝ → ℝ} {α : 
   set H : ℝ → ℝ := fun x => Real.log |f (Real.exp x)| - α * x with hHdef
   have hHmeas : Measurable H := by
     refine Measurable.sub ?_ ?_
-    · exact Real.measurable_log.comp ((continuous_abs.measurable.comp hmeas).comp Real.measurable_exp)
+    · exact Real.measurable_log.comp ((continuous_abs.measurable.comp hmeas).comp
+        Real.measurable_exp)
     · exact measurable_const.mul measurable_id
   have hHadd : ∀ u : ℝ, Tendsto (fun x : ℝ => H (x + u) - H x) atTop (𝓝 0) := by
     intro u
@@ -475,7 +481,8 @@ theorem potter_core {f : ℝ → ℝ} {α : ℝ} (hmeas : Measurable f)
   set H : ℝ → ℝ := fun x => Real.log |f (Real.exp x)| - α * x with hHdef
   have hHmeas : Measurable H := by
     refine Measurable.sub ?_ ?_
-    · exact Real.measurable_log.comp ((continuous_abs.measurable.comp hmeas).comp Real.measurable_exp)
+    · exact Real.measurable_log.comp ((continuous_abs.measurable.comp hmeas).comp
+        Real.measurable_exp)
     · exact measurable_const.mul measurable_id
   have hHadd : ∀ u : ℝ, Tendsto (fun x : ℝ => H (x + u) - H x) atTop (𝓝 0) := by
     intro u
@@ -602,7 +609,7 @@ theorem potter_core {f : ℝ → ℝ} {α : ℝ} (hmeas : Measurable f)
         rw [hwdef]; ring
       rw [← Real.exp_log (div_pos hfxa hfya), h3]
     rw [h1, h2, Real.exp_add, Real.rpow_def_of_pos hxypos, hxylog]
-    ring
+    ring_nf
   have hexp_le : Real.exp w ≤ (x / y) ^ ε' * Real.exp ε' := by
     have h1 : w ≤ (T + 1) * ε' := (abs_le.1 hwabs).2
     have h2 : Real.exp w ≤ Real.exp ((T + 1) * ε') := Real.exp_le_exp.2 h1
@@ -733,7 +740,7 @@ theorem potterBounds_of_regularlyVarying {f : ℝ → ℝ} {α : ℝ} (hmeas : M
 
 
 
-/-! ## Part 2 (Q-164, issue 531)
+/-! ## Part 2
 
 Ported from the same source file (its remaining statements; `slowlyVarying_div_rpow` is not
 ported, being the forward direction of `regularlyVarying_iff_slowlyVarying_div_rpow` of
@@ -1038,7 +1045,8 @@ theorem isLogErrorFunction_of_regularlyVarying {f : ℝ → ℝ} {α : ℝ} (hα
         have h1 : IntegrableOn (fun x : ℝ => x ^ (α + ε - 1)) (Ioi X) :=
           (integrableOn_Ioi_rpow_iff hXpos).2 hεlt'
         exact h1.const_mul _
-      refine hcmp.mono' (((continuous_abs.measurable.comp hmeas).div measurable_id).aestronglyMeasurable.restrict) ?_
+      refine hcmp.mono' (((continuous_abs.measurable.comp hmeas).div
+          measurable_id).aestronglyMeasurable.restrict) ?_
       filter_upwards [ae_restrict_mem measurableSet_Ioi] with x hx
       have hxX : X ≤ x := le_of_lt hx
       have hx0 : 0 < x := lt_of_lt_of_le hXpos hxX
@@ -1067,7 +1075,7 @@ theorem isLogErrorFunction_of_regularlyVarying {f : ℝ → ℝ} {α : ℝ} (hα
     exact hbound x hx
 
 
-/-! ### Witness (D-5) -/
+/-! ### Witness -/
 
 example {a : ℝ} :
     ∀ ε : ℝ, 0 < ε → ∃ X : ℝ, 1 ≤ X ∧ ∀ x y : ℝ, X ≤ y → y ≤ x →

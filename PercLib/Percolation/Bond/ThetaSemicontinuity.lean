@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 156, Q-22, item 3 and the second half of item 4). No upstream
-proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 

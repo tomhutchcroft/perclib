@@ -1,0 +1,568 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-lrp-3",
+  "entries": [
+    {
+      "id": "critical-inverse-log-signs",
+      "title": "Logarithm signs in the introductory inverse-scale calculation",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML §III.1.3 and PDF p. 15, prose after (III.1.18) and before (III.1.19). Both text renditions checked 16 November 2026.",
+      "claim": "After the negative-half-log second-moment ratio in (III.1.18), the prose describes a positive-half-log function to be inverted and also assigns a positive half-power to the inverse normalization A_n^*. The displayed inverse radius and final tail use positive quarter-powers.",
+      "problem": "The displayed inverse radius inverts the negative-half-log scale of (III.1.18), not the positive-half-log function named in the prose. Expressing that radius as (A_n^*)^(-1/(2 alpha)) times n^(1/(2 alpha)) forces A_n^* to have a negative half-power. The printed positive power would produce a tail with the wrong logarithmic sign.",
+      "correction": "Use s(r) asymptotic to A r^(2 alpha)(log r)^(-1/2) and A_n^* asymptotic to A sqrt(2 alpha)(log n)^(-1/2). The inverse radius and the final positive-quarter-power tail in (III.1.19) then agree. QKHV and its appended inverse calculation give the coefficient under explicit moment and transfer inputs.",
+      "tags": [
+        "QKHV"
+      ],
+      "issues": [],
+      "leanImpact": "Check the algebraic inverse identity before transporting a power-log equivalent. This repairs two signs in the introductory calculation; it does not change Theorem III.1.2 or certify its probabilistic inputs. The repeated sign in Part I Remark I.1.16 is recorded on that source page. Provisional pending Tom confirmation; no compiled association claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the logarithmic signs in the scale and inverse normalization.",
+        "scale": "local",
+        "impact": "Restores consistency with the inverse radius and final tail; the positive-quarter-log conclusion is retained."
+      }
+    },
+    {
+      "id": "modified-intensity-chain-factor",
+      "title": "Missing alpha in the modified-intensity chain rule",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, proof of Lemma III.3.4, first chain-rule display; PDF p. 33. Both text renditions checked 16 November 2026.",
+      "claim": "For the path beta(r,lambda)=beta_c(1-lambda r^(-alpha)), the exact derivative display multiplies the intensity partial derivative by lambda beta_c r^(-alpha-1).",
+      "problem": "Differentiating the stated path also gives a factor alpha. The displayed equality is missing it unless alpha=1. It can be absorbed in the later comparison constants when alpha is fixed and positive, but not omitted from the exact chain rule.",
+      "correction": "Use alpha lambda beta_c r^(-alpha-1) for the intensity coefficient. The application paragraph of 1BO9 states this derivative explicitly; its good-interval conclusion permits constants depending on alpha.",
+      "tags": [
+        "1BO9"
+      ],
+      "issues": [],
+      "leanImpact": "Differentiate the path before applying the two-parameter chain rule. Keep the exact coefficient until passing to inequalities with constants. This local display correction does not refute Lemma III.3.4. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore alpha in the derivative of the modified intensity.",
+        "scale": "notation",
+        "impact": "An exact coefficient changes; fixed-alpha comparison bounds are unaffected."
+      }
+    },
+    {
+      "id": "modified-reciprocal-integral",
+      "title": "Squared denominator and intensity variable in the reciprocal comparison",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, proof of Corollary III.3.12, display immediately after (III.3.13); PDF p. 33. Both text renditions checked 16 November 2026.",
+      "claim": "The difference of two reciprocal susceptibilities at fixed cutoff is written as an integral with one power of susceptibility in the denominator and with dr as its differential, although the endpoints and derivative are intensity parameters.",
+      "problem": "For a positive function F, the derivative of 1/F is -F_prime/F^2. The printed single-power integrand is a logarithmic derivative; moreover the cutoff radius is held fixed, so the integration variable is beta. The quadratic derivative upper bound in (III.3.13) gives the claimed constant bound only after division by F squared.",
+      "correction": "Integrate (partial_beta F)/F^2 with respect to beta from beta_c(1-lambda r^(-alpha)) to beta_c. Rearranging gives 1/chi_lambda <= 1/chi_0 + lambda beta_c |J| r^(-alpha). AGX4 proves the ensuing lower limit and finiteness of the third-moment interval class, including lambda=0 separately.",
+      "tags": [
+        "AGX4"
+      ],
+      "issues": [],
+      "leanImpact": "Use the reciprocal chain rule at fixed cutoff and retain the squared denominator through the integral estimate. Require finite positive susceptibility and absolute continuity before integrating. The repaired identity preserves Corollary III.3.12 under its model inputs. Provisional pending Tom confirmation; no compiled association claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Integrate the intensity derivative divided by the square of susceptibility.",
+        "scale": "local",
+        "impact": "Repairs the reciprocal calculation and retains the interval-class conclusion."
+      }
+    },
+    {
+      "id": "last-large-quantile-scale",
+      "title": "The last large-quantile scale needs its own normalized threshold",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Proof of Lemma III.3.14, definition of r_0 and the following sentence; PDF printed p. 35. Both text renditions checked 16 November 2026.",
+      "claim": "The supremum defining r_0 uses a quantile indexed by R(r), with no normalized radius factor in its threshold, and the explanation invokes a positive liminf.",
+      "problem": "The displayed condition does not depend on the candidate radius being maximized and omits its factor r_0^(2 alpha). The failure hypothesis gives only a positive limsup; it does not give the positive liminf cited in the next clause.",
+      "correction": "If using a last-scale argument, take the supremum of u <= r such that M_tilde_lambda(u) >= a_lambda u^(2 alpha), using the unbounded set supplied by the limsup and treating possible nonattainment. 0HMO instead uses a continuous susceptibility band-crossing argument that requires no regularity of the integer quantile.",
+      "tags": [
+        "0HMO",
+        "CXTO"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the radius variable and normalization in the predicate defining a selected scale. The replacement argument avoids an unjustified attainment or continuity premise and preserves the simultaneous-scale conclusion. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use a continuous susceptibility band-crossing argument instead of the faulty last-quantile-scale choice.",
+        "scale": "substantial",
+        "impact": "Avoids unattained suprema and unsupported quantile regularity; the intended conclusion survives."
+      }
+    },
+    {
+      "id": "added-layer-endpoints",
+      "title": "Continuation probabilities and row sums must use the exit endpoints",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Lemma III.3.15 proof, (III.3.15) and the immediately following increment-row estimate; PDF printed p. 36. Both text renditions checked 16 November 2026.",
+      "claim": "After exit edges (a,b) and (u,v), the continuation factors are written from the original roots 0 and y. The next row estimate sums over x while its first two summands still contain the fixed pair (a,b).",
+      "problem": "The unexplored paths begin at b and v, not at the original roots. The first two printed row summands are independent of x, so their displayed sums would be infinite when the increment is positive. These indices do not describe the claimed path decomposition or row bound.",
+      "correction": "Use tau_r(b,x) and tau_r(v,z) for the continuation factors, and sum the increment over its second endpoint with the first endpoint fixed. 5FCO conditions on the two smaller clusters, uses last exits and an independent added layer, then sums the corrected probabilities. 1AQ4 proves the resulting derivative transport estimate.",
+      "tags": [
+        "5FCO",
+        "1AQ4"
+      ],
+      "issues": [],
+      "leanImpact": "The endpoint in a connection event must match the terminal vertex of the selected exit edge. The increment row and the final susceptibility sum are separate sums. The corrected aggregate estimate retains Lemma III.3.15. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the exit vertices in continuation probabilities and sum over the variable endpoint.",
+        "scale": "notation",
+        "impact": "Repairs the path decomposition and row sums; the transport estimate is retained."
+      }
+    },
+    {
+      "id": "fictitious-lambda-power",
+      "title": "The initial derivative lower bound has a positive twelfth power of lambda",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Sentence immediately after Lemma III.3.16, before (III.3.16); PDF printed p. 37. Both text renditions checked 16 November 2026.",
+      "claim": "The sentence says the right side of the derivative lower bound has order at least lambda^(-12) when lambda is small and positive.",
+      "problem": "The established estimate is A_lambda <= C/lambda, while the derivative bound is proportional to A_lambda^(-12). Taking that negative power yields a lower bound proportional to lambda^(12), not lambda^(-12). The later exponent lambda^(25) in (III.3.18) is consistent with the positive power.",
+      "correction": "Replace the negative twelfth power in that explanatory sentence by the positive twelfth power. SQGG keeps the A_lambda dependence through the derivative transport argument and only then substitutes the good-scale bound.",
+      "tags": [
+        "SQGG"
+      ],
+      "issues": [],
+      "leanImpact": "Track inequality reversal under negative powers before substituting the parameter estimate. The theorem statement of Lemma III.3.16 is unchanged; this corrects its interpretation, not the later stronger all-scale theorem. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Change the explanatory lambda power from negative twelve to positive twelve.",
+        "scale": "notation",
+        "impact": "The later exponent already has the intended sign; the conclusion is unchanged."
+      }
+    },
+    {
+      "id": "cap-radius-power",
+      "title": "The cap estimate supplies the first power of the radius exponent",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML proof of Proposition III.3.13, the display between the definition of R(r) and the cubic second-moment conclusion; PDF printed p. 40. Both text renditions checked 16 November 2026.",
+      "claim": "Applying the critical capped-mean estimate at radius R(s), the display bounds the susceptibility by a constant times R(s)^(2 alpha).",
+      "problem": "Lemma III.3.18 bounds that capped mean by R(s)^alpha. The printed weaker power does not imply the cubic second-moment inequality asserted immediately afterwards when substituted into R(s)^(4 alpha) proportional to chi(s) m2(s).",
+      "correction": "Use chi(s) <= C R(s)^alpha. Raising this to the fourth power and substituting the definition yields m2(s) >= c chi(s)^3. BTM3 carries out this substitution with a separately named comparison radius U.",
+      "tags": [
+        "0NU2",
+        "BTM3"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the cap scale R^(2 alpha) distinct from the expectation bound R^alpha. The corrected exponent supplies the stated cubic moment consequence and preserves the intended proof. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the available radius-to-alpha capped-mean bound.",
+        "scale": "local",
+        "impact": "Corrects the intermediate power and recovers the cubic moment inequality."
+      }
+    },
+    {
+      "id": "biased-tail-conversion",
+      "title": "The unbiasing event and its square-root scale must agree",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML proof of Lemma III.3.21, unbiasing display and following interpolation; PDF printed pp. 41–42, in particular p. 42. Both renditions checked 16 November 2026.",
+      "claim": "The event on the probability side begins at half the biased mean, while the indicator on the expectation side begins at the whole biased mean. The final denominator is written as the square root of the unweighted mean. The interpolation then invokes radii between zero and the target radius.",
+      "problem": "Changing the lower threshold changes the event, so the displayed change-of-measure equality is not valid as written. The inequality chi >= sqrt(g), with g=m2/chi, converts chi/g into a lower bound g^(-1/2); it does not give the printed chi^(-1/2) bound. The modified intensity is not nonnegative at every radius below one, and the moment estimates used here have only been established for r >= 1.",
+      "correction": "Use the same event {g/2 <= X <= B lambda^(-4) g} on both sides and conclude a lower bound c lambda^8 g^(-1/2). Apply continuity of g on [1,r] for the thresholds it crosses; handle thresholds below g(1)/2 using the radius-one bound and its uniform finite upper bound. 2Z34 proves the intended tail conclusion without claiming monotonicity of g.",
+      "tags": [
+        "2Z34"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the size-biased law, event indicator, and moment ratio explicit in a change-of-measure identity. The interpolation needs a continuous ratio on an admissible parameter interval, with its initial range treated separately. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the same event under size bias and use continuity only above radius one.",
+        "scale": "local",
+        "impact": "Repairs the threshold, power conversion and initial range; the desired tail bound survives."
+      }
+    },
+    {
+      "id": "mesoscopic-selected-radius",
+      "title": "The selected scale must also index the percolation law",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Lemma III.3.22, its first integrated display, and (III.3.23) and the following displays; PDF printed pp. 42–43. Selected statement and adjacent formulas compared 16 November 2026.",
+      "claim": "The minimum in the statement varies s but leaves the expectation at r. The next integrated display also uses the law indexed by r inside the s integral. After setting R=mu r, later minima use an upper endpoint mu R.",
+      "problem": "The proof needs a low capped mean for the law at the selected radius s, not a rescaling of a single law at r. Keeping that expectation fixed does not establish the hypothesis used in (III.3.25) and the following differential argument. The interval endpoint after the stated substitution is mu r.",
+      "correction": "Index the law and its cap by s inside the interval estimate, and use s in [r,mu r] after the substitution. A convenient precise formulation is 2HXZ: for every sufficiently large r, some s in [r,L r] has T_lambda(s,delta s^(2 alpha)) <= (1-eta)(alpha/beta_c)s^alpha. It implies the same estimate for the smaller fixed cap delta r^(2 alpha). The proof retains the actual modified-intensity coefficient before taking its asymptotic.",
+      "tags": [
+        "2HXZ",
+        "Q7O9"
+      ],
+      "issues": [],
+      "leanImpact": "Bind the selected scale consistently in the probability measure, cap, and normalization. Replace a limsup used at finite radius by an eventual estimate with a strictly smaller margin. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Index both the cluster law and cap by the selected radius.",
+        "scale": "local",
+        "impact": "Repairs the interval argument and its endpoint; the intended low-cap conclusion is retained."
+      }
+    },
+    {
+      "id": "riccati-linear-rearrangement",
+      "title": "Extra radius factor in the rearranged Riccati estimate",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Lemma III.3.23 and the final display of its proof; PDF printed pp. 44–45. Both renditions checked 16 November 2026.",
+      "claim": "After factoring (R/r)^e outside the reciprocal, the last term in the bracket retains an extra factor R^e. The proof final display also interchanges A and alpha-e in the negative term.",
+      "problem": "Dividing the valid integrated reciprocal inequality by r^e gives the last term A (R/r)^e / ((alpha-e) R^alpha), without an additional R^e. The printed statement fails already at R=r: take alpha=2, e=A=1 and f(t)=t^2/(1+t), which satisfies the differential equality. At r=R=2 it claims 4/3 <= 1.",
+      "correction": "Use the bracket 1/f(r) - A/((alpha-e)r^alpha) + A/((alpha-e)r^alpha) (r/R)^(alpha-e). State 0 <= e < alpha explicitly, and retain local absolute continuity for integrated applications. 19IN proves positivity of the denominator and the uniform propagation below a strict threshold.",
+      "tags": [
+        "19IN",
+        "Q7O9"
+      ],
+      "issues": [],
+      "leanImpact": "Check the algebraic identity at equal endpoints before taking reciprocals. The integrating-factor differential inequality remains usable after these local corrections; the subsequent negligibility proof does not require the erroneous formula. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the corrected Riccati denominator and state 0<=e<alpha.",
+        "scale": "statement",
+        "impact": "The printed comparison is false as written; the corrected propagation statement is proved."
+      }
+    },
+    {
+      "id": "restricted-cluster-heredity",
+      "title": "The restricted-cluster comparison needs a hereditary class and consistent paths",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 HTML Lemma III.4.2, the geodesic-choice paragraph, and (III.4.3); PDF printed pp. 48–49. Statement and coupling passage compared 16 November 2026.",
+      "claim": "The comparison is stated for every class of finite vertex sets, and the coupling proof replaces the test on a smaller cluster by the test on the original cluster for an arbitrary nonnegative function F. The preceding geodesic choice is required to be equivariant but not consistent under restriction.",
+      "problem": "A path can survive deletion while the cluster leaves an arbitrary prescribed class. On the normalized radial lattice with norm 2 times the sup norm, alpha=d/3, j(t)=t^(-d-alpha)/(d+alpha), and cutoff r=3, choose positive beta with beta times the full intensity row at most 1/4. Then chi<=4/3 and m2/chi<=16/9<3^d. Delete the complement of B={-1,0,1}^d and take the singleton class {B}. The event K^W=B has positive probability and forces every y in B into the root full cluster, making the left side zero. For ell=1 the root zero-edge path qualifies for every center probability measure, so the right side is positive. OTH1 gives the full argument.",
+      "correction": "Restrict the cluster class to be downward closed among finite root-containing vertex sets. Choose shortest paths by a fixed root-relative lexicographic displacement rule, so a surviving chosen path remains chosen in a subgraph. Under finite susceptibility and second moment, XFCJ proves the comparison by conditional exterior resampling. The upper-bound classes on weighted cluster volumes used later in the paper satisfy downward closure. X86B keeps the separate nonmonotone Reimer input explicit for the next geodesic estimate.",
+      "tags": [
+        "BN7Z",
+        "XFCJ",
+        "OTH1",
+        "X86B"
+      ],
+      "issues": [],
+      "leanImpact": "A formal interface for this comparison must not quantify over arbitrary cluster classes without a restriction-stability hypothesis. The selected path must be stable when it survives deletion; a separately chosen shortest path need not be. The center law requires a finite positive second moment. The repaired statement suffices for the source's indicated classes, but this does not certify the entire gluing lemma or its final contradiction. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Require downward-closed cluster classes and a deletion-stable shortest-path rule.",
+        "scale": "statement",
+        "impact": "The arbitrary-class assertion is false. The classes used later in the paper satisfy the new hypothesis."
+      }
+    },
+    {
+      "id": "gluing-window-radius",
+      "title": "The local surplus is at radius 2r, while the next subtraction uses radius r",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.4 and Case 1 of Lemma III.4.1 after (III.4.9); HTML lines 1390–1394 and PDF printed pp. 52, 54–56. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "Lemma III.4.4 supplies a distinct-cluster contribution on the event that the root cluster has a large intersection with B_(2r). Its application after (III.4.9) instead uses a large intersection with B_r, and the restricted class was capped only in B_r.",
+      "problem": "A lower bound with an indicator of a large radius-2r intersection does not give the same lower bound with the smaller radius-r indicator. The rooted subtraction therefore does not follow from the lemma as stated.",
+      "correction": "Retain B_(2r) in both the surplus and the restricted-cluster class. Cover B_(2r) by a bounded number N of lattice-centred translates of B_r. Mix half of the squared-volume-biased center law with mass 1/(2N) at each covering centre. An averaged cap with this mixture controls both the original weighted volume and the B_(2r) intersection, after decreasing its coefficient. 9CER proves the gluing conclusion with the required radius-r averaged cap and a common strict gap on bounded-susceptibility scales.",
+      "tags": [
+        "20LA",
+        "9CER"
+      ],
+      "leanImpact": "A formal bridge must preserve the observation radius through the indicator and cluster subtraction. The chosen deterministic centre law may be altered by a finite mixture; the resulting implication must be proved before strengthening the class. This repairs the source proof route without changing the gluing conclusion. No compiled theorem is claimed. Provisional pending Tom confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the radius-2r intersection, cover it by radius-r balls and mix the centre laws.",
+        "scale": "substantial",
+        "impact": "The gluing proof needs an additional geometric and averaging argument; the desired radius-r conclusion survives."
+      }
+    },
+    {
+      "id": "gluing-normalized-errors",
+      "title": "The gluing proof needs normalized truncation errors and consistent band scales",
+      "locator": "arXiv:2508.18809v1 (III.4.8), its subsequent band decomposition, and the two limits preceding (III.4.9); repeated truncation limit in Case 2. HTML lines 1353–1388, 1428–1434; PDF printed pp. 54–57. Case-1 displays compared in HTML and PDF text on 16 November 2026.",
+      "claim": "The displayed logarithmic derivative after (III.4.8) is bounded below by c alpha rather than c alpha/r. With ell=sqrt(r^alpha t_r), the proof also claims r^alpha t_r/ell tends to zero from t_r=o(r^alpha). The small-quantile band switches from upper endpoint 2C1 to 2 gamma, and the complementary quantile threshold is written eta r^alpha instead of eta r^(2 alpha).",
+      "problem": "The calculus implication retains a factor 1/r. Moreover r^alpha t_r/ell equals ell, which need not vanish: t_r=r^(alpha/2) already gives a divergent value while t_r/r^alpha tends to zero. The derivative comparison needs the cluster-volume error only after division by r^alpha. The changed band endpoint and quantile power do not describe the stated complementary cases.",
+      "correction": "JY26 uses ell/r^alpha=t_r/ell=sqrt(t_r/r^alpha), both tending to zero, and proves a uniform o(r^alpha) error. 9CER keeps the band gamma<=q<=2A and separates M_0(r)<=eta r^(2 alpha) from its complement. Its conclusion is (log q)' >= b/r almost everywhere in the band; integration on multiplicative intervals supplies the contradiction.",
+      "tags": [
+        "JY26",
+        "9CER",
+        "F42K"
+      ],
+      "leanImpact": "State the error after the normalization used by the target differential inequality. The band argument requires local absolute continuity and a 1/r derivative gain, not a pointwise derivative at every radius. Separate the observation quantile scale r^(2 alpha) from the susceptibility scale r^alpha. No formal correspondence is asserted. Provisional pending Tom confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Normalize the errors by r^alpha and retain the 1/r logarithmic-derivative gain.",
+        "scale": "local",
+        "impact": "Repairs the vanishing-error and band bookkeeping; the integrated contradiction survives."
+      }
+    },
+    {
+      "id": "gluing-modified-growth",
+      "title": "The modified-law case adds an unsupported cap and loses the derivative-gain scale",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.4.1, Case 2, the class definition after the bad-parameter assumption and (III.4.10) through its logarithmic derivative consequence; HTML lines 1404–1439, PDF printed pp. 56–58. The class and (III.4.10) compared in HTML and PDF text on 16 November 2026.",
+      "claim": "The bad-parameter assumption bounds the mass excluded by one averaged-volume cap, but the subsequent class also imposes a rooted B_r cap. In (III.4.10), the intensity contribution after normalization by beta_c |j'(r)| |B_r| chi is displayed as a constant, whereas the following logarithmic derivative uses a gain of order 1/r.",
+      "problem": "The additional rooted cap does not follow from the displayed averaged-cap assumption for the unchanged centre law. A constant in the normalization of (III.4.10) yields only an order r^(-alpha-1) logarithmic derivative contribution. An order r^alpha term in that normalization is needed for the later order 1/r gain.",
+      "correction": "F42K omits the unnecessary rooted cap. The already available uniform cubic second moment gives D_lambda/chi_lambda >= k chi_lambda-C. Reciprocal transport gives chi_lambda >= r^alpha/(2 lambda beta_c M) eventually, so beta_lambda'(r)D_lambda/chi_lambda >= b/r with b>0 uniform for small lambda. Keep the actual beta_lambda(r) coefficient in the cutoff contribution. The combined logarithmic derivative is at least [alpha/(1+alpha lambda M)+b-o(1)]/r, contradicting the fixed-parameter O(r^alpha) upper bound for every sufficiently small lambda.",
+      "tags": [
+        "F42K",
+        "JY26",
+        "XHJ4",
+        "AGX4",
+        "VW2E"
+      ],
+      "leanImpact": "The modified-kernel Russo identity must retain both derivatives and their coefficients. The intensity gain uses a normalized susceptibility lower bound, not merely chi_lambda>=c/lambda. Fixed-parameter error convergence and a parameter-uniform positive gain have different quantifiers. General finite Reimer remains an explicit external premise; no compiled result is claimed. Provisional pending Tom confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Drop the unsupported rooted cap and use the cubic moment bound for the modified-intensity gain.",
+        "scale": "substantial",
+        "impact": "Replaces the growth mechanism in the gluing contradiction; the intended conclusion survives."
+      }
+    },
+    {
+      "id": "many-scales-recursion",
+      "title": "The scale recursion needs a weighted tail budget and parameter-dependent separation",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.4.5: scale selection after (III.4.11), averaging after (III.4.13), and passage to (III.4.12). HTML lines 1509–1545; PDF printed pp. 59–61. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "The selected scales have ratio at least 32 and an unweighted missing-row tail bound e^(-i)/(2C0^2). The subsequent normalized recurrence has contraction coefficient 1-delta and additive error e^(-i). The claimed all-selected-scales estimate is stated at every later terminal radius, while the displayed induction ends at the last selected radius.",
+      "problem": "After division by the new scale to the power alpha, the row-tail term is multiplied by the old expected cluster size, at most C0 r_i^alpha; the displayed tail budget does not include that factor. The old-cluster term also leaves (r_i/r_(i+1))^alpha in the contraction coefficient in addition to (1-delta)^2. A fixed ratio 32 alone does not supply the required delta-dependent inequality. A separate conditional growth estimate is needed to extend the normalized last-selected-scale bound to an arbitrary later radius.",
+      "correction": "In 2YIE choose (r_i/r_(i+1))^alpha<=delta(1-delta), retaining ratio at least 32, and C0^2 r_i^alpha T(r_i,r_(i+1)/2)<=4^(-i)/2. Choose the matching rooted spatial-tail budget with coefficient C0 rho(r_i). Summability and finite susceptibility allow all conditions simultaneously. This yields f_(i+1)<=(1-delta)f_i+4^(-i), uniformly over skipped scales, deleted domains and root shifts. WKM2 supplies the terminal estimate E[X_R|history]<=X_s(1+rho(s)chi(R)); the susceptibility lower bound completes the extension.",
+      "tags": [
+        "NE2Q",
+        "WKM2",
+        "2YIE"
+      ],
+      "leanImpact": "A formal recursive scale construction should carry the old-scale weight in the tail budget and the deficit-dependent spacing inequality explicitly. The normalized recurrence and the arbitrary terminal-radius estimate are separate interfaces. No closedness or least element of the admissible set is needed. Provisional pending Tom confirmation; no compiled theorem is claimed.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Choose scale ratios and tail budgets with all volume factors retained, then prove terminal-radius transport.",
+        "scale": "substantial",
+        "impact": "Rebuilds the recursive contraction and extension to arbitrary later radii."
+      }
+    },
+    {
+      "id": "many-scales-conditioning",
+      "title": "The second-cluster filtration reveals future scales and its recurrence loses the radius normalization",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.4.5, opening case split and final two-cluster argument after (III.4.12). HTML lines 1497, 1546–1558; PDF printed pp. 59, 61–62. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "The filtration G_i includes the second-root clusters through R_max(i,N_g), while the next conditional estimate concerns R_(i+1). Its main term is written (1-delta)|K_y^(R_i)| without a radius ratio. The indexing also includes i=N_g although R_(i+1) is then undefined. The proof opens with a limsup case split rather than the liminf split in the statement.",
+      "problem": "For i<=N_g, the displayed filtration already reveals all listed second-root scales, so it does not describe the intended sequential revelation. The preceding one-cluster contraction is for volumes divided by the scale to the power alpha; an unnormalized recurrence requires the corresponding growth factor. The limsup split also does not cover the finite-liminf but unbounded-limsup alternative supplied by the gluing lemma.",
+      "correction": "QXP9 conditions only on the first-root clusters at the finitely many selected scales and the terminal scale. Given this history, the exterior process off the final first-root cluster remains product, and the subset of first-root good scales is fixed. Apply the domain-uniform estimate 2YIE directly to the other root on that subset, then average. This avoids a random second-root filtration and transfers the correctly normalized estimate, including its terminal radius. Use exactly the two liminf alternatives of 9CER and F42K, and index the block by n+1 through n+N.",
+      "tags": [
+        "WKM2",
+        "2YIE",
+        "QXP9"
+      ],
+      "leanImpact": "The conditional exterior-law statement must concern the whole finite list of clocks used, not just a one-time marginal. Random selected indices become deterministic only after conditioning on the first cluster history, and uniformity over the resulting deleted set is essential. Distinctness is checked at the terminal scale. Provisional pending Tom confirmation; no new formal status is asserted.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Condition on the first-root history and apply the domain-uniform estimate to the fixed subset of scales.",
+        "scale": "substantial",
+        "impact": "Replaces the invalid sequential conditioning and restores the normalized two-root estimate."
+      }
+    },
+    {
+      "id": "recentering-partition",
+      "title": "The recentering calculation changes window radii and reverses the Markov factor",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.6: (III.4.14)–(III.4.16), random ordering of B_(2r), and the concluding partition sum. HTML lines 1733–1768; PDF printed pp. 63–65. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "Equation (III.4.16) has lower bound epsilon/delta after a weighted event of mass epsilon r^alpha with averaged volume exceeding delta r^(2 alpha). The ordering of B_(2r) is equated to a sum over clusters meeting B_(4r); a later rooted average at radius 2r is estimated using the radius-4r lower bound. The final partition identity also changes B_(4r) to B_(2r).",
+      "problem": "The threshold multiplication gives epsilon times delta, not epsilon/delta. An ordering of B_(2r) enumerates clusters meeting that same set. A lower bound for the radius-4r averaged volume does not imply the displayed lower bound at radius 2r, and its global partition sum is |B_(4r)| chi. The rooted B_(8r) cap also needs a fixed centre; the free x after the averaged sum is not its intended meaning.",
+      "correction": "43QA gives a direct quantitative replacement. Sum root-relative radius-4r averages over roots in B_(2r), with the local cap at each root. A cluster contributing any such root has at most m vertices in B_(2r), while each translated average is bounded by its radius-6r average. Taking expectations in the partition sum gives E[X V4; |K intersect B_(8r)|<=m] <= m |B_(6r)|/|B_(2r)| chi. Weighted Markov then gives C eta/delta times chi for the recentering error, uniformly over every centre probability measure.",
+      "tags": [
+        "43QA",
+        "LHT3"
+      ],
+      "leanImpact": "A recentering interface can use only an invariant random partition with finite mean; it does not need percolation independence or a selected ordering. Keep root-relative and absolute centres distinct, and retain the observation radius in each partition identity. Provisional pending Tom confirmation; no compiled association is claimed.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Use a quantitative translated partition sum and weighted Markov inequality.",
+        "scale": "substantial",
+        "impact": "Replaces the faulty recentering calculation; a uniform recentering bound is recovered."
+      }
+    },
+    {
+      "id": "recentering-scale-count",
+      "title": "The recentering union bound uses the wrong bad-scale threshold",
+      "locator": "arXiv:2508.18809v1 opening proof of Lemma III.4.6, union bound and application of Lemma III.4.5. HTML around lines 1639–1660; PDF printed p. 63, lines 6039–6110 in the extracted text. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "The first term of the union bound counts at least delta N averaged-bad scales, then receives the exponentially small bound from Lemma III.4.5.",
+      "problem": "Lemma III.4.5 controls at least (1-delta)N bad scales. Its stated estimate does not bound the larger event of merely delta N bad scales when delta is small.",
+      "correction": "Split according to whether at most delta N scales are averaged-good. That is exactly the event of at least (1-delta)N averaged-bad scales. On its complement, if at most eta N are rooted-good and eta<=delta/2, at least delta N/2 are averaged-good but fail the rooted test. LHT3 bounds the latter contribution by the quantitative recentering estimate and weighted Markov, yielding C(1-delta)^N+C′ eta/delta^2.",
+      "tags": [
+        "QXP9",
+        "43QA",
+        "LHT3"
+      ],
+      "leanImpact": "Track counts of good and bad scales through the complement relation before applying the probability estimate. The volume threshold, allowed fraction of failures and decay coefficient can be decreased together only with their event inclusions justified. Provisional pending Tom confirmation; no new formal status is asserted.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Split at the complementary good-scale threshold and apply weighted Markov to the remaining failures.",
+        "scale": "local",
+        "impact": "Repairs the mismatch in scale counts; the intended many-scale estimate survives."
+      }
+    },
+    {
+      "id": "joining-cutoff-window",
+      "title": "The joining interval ends at the largest permitted cross distance",
+      "locator": "arXiv:2508.18809v1 proof of Proposition III.3.1, explanation of (III.4.18). HTML lines 1816–1817; PDF printed p. 66, extracted lines 6553–6578. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "For two large cluster intersections inside B_(16r), the proof uses the new edges between cutoffs 16r and 32r to claim a joining intensity of order at least eta^2 from their cardinalities.",
+      "problem": "Cross distances may reach 32r. At that distance the soft-cutoff intensity at radius 32r is still zero, and its increment over [16r,32r] vanishes. Thus containment and cardinality alone do not supply the uniform pairwise lower bound used in this estimate; a separate geometric argument would be needed for that window.",
+      "correction": "L3TC uses the interval [32r,64r]. Every cross distance is at most 32r, so each increment is at least beta_lambda(32r)[j(32r)-j(64r)] >= c r^(-d-alpha). Choose consecutive selected radii with ratio at least 64 and require the terminal cutoff beyond 64 times the last scale. The integrated rate then gains c eta^2 per rooted-good scale. The finite-state likelihood identity 7IVI supplies the exponential damping without an informal conditional-independence assertion, and finite induced-box exhaustion passes the bound to the countable graph.",
+      "tags": [
+        "7IVI",
+        "LHT3",
+        "L3TC"
+      ],
+      "leanImpact": "A soft-cutoff joining bound must keep the terminal cutoff strictly larger than the maximum cross distance. The finite merger-suppression identity and the countable exhaustion are separate proof obligations. This repairs the route to modified hydrodynamics; ordinary critical hydrodynamics remains a later transfer. Provisional pending Tom confirmation; no compiled theorem is claimed.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Move joining to [32r,64r] and use the finite-state likelihood identity.",
+        "scale": "substantial",
+        "impact": "The scale window and selected radii change, and a precise damping argument replaces informal independence; the decay conclusion survives."
+      }
+    },
+    {
+      "id": "local-moment-translation",
+      "title": "The mixed local-moment term loses the transformed window centres",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.4.7, the mass-transport display for the mixed term. HTML lines 1886–1891; PDF printed pp. 67–68, especially extracted lines 6767–6788. Compared in HTML and PDF text on 16 November 2026.",
+      "claim": "After moving the second observed vertex to the root, the display replaces the transformed window constraint by membership of both observed vertices in B_(2R)(x).",
+      "problem": "The stated geometric implication does not hold for an arbitrary observation centre x. For example, in one dimension R=1, x=b=10 and a=1 give a,0 in B_R(x-b), but a is not in B_(2R)(x). An explicit translation also changes the sign and centre associated with the old root. Thus the printed coordinate manipulation does not justify that bound term by term.",
+      "correction": "9JTA first applies BK, then translates each product of connection probabilities by minus the second observed vertex. With v′=-v and u′=u-v, the constraints are v′ in -x+B_R and u′-v′ in x+B_R, so u′ lies in B_(2R). Keep the two different window centres and use Cauchy–Schwarz, followed by a bounded ball cover. This gives the required mixed-moment bound. The finite-box integrated argument and integral Gronwall supply the transport estimate without differentiating a supremum.",
+      "tags": [
+        "9JTA",
+        "BCKB"
+      ],
+      "leanImpact": "Formalize the bijective change of summation variables with its translated observation sets. The two-window Cauchy–Schwarz estimate and finite cover are separate from BK. The wiki supplies the finite-susceptibility parameter range used in the transfer, with integral inequalities and almost-everywhere derivatives; no compiled association or stronger all-intensity differentiability claim is inferred. Provisional pending Tom confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Translate after BK while retaining the two distinct window centres.",
+        "scale": "local",
+        "impact": "Repairs the geometry; Cauchy–Schwarz, a ball cover and integrated transport recover the bound."
+      }
+    },
+    {
+      "id": "weighted-tail-product-index",
+      "title": "The weighted tail display includes an unbound first factor",
+      "locator": "arXiv:2508.18809v1 equation (III.5.2), HTML lines 1947–1953 and PDF printed p. 69, extracted lines 6930–6975; compared on 16 November 2026.",
+      "claim": "The displayed tail moment multiplies the outside-cluster volume by a sum over x2,...,xn, but the product in that sum runs from i=1 to n. Only p2,...,pn are specified.",
+      "problem": "The variables x1 and p1 are unbound in this display. Its immediately preceding derivation has the product from i=2 and already accounts for the first marked vertex through the outside volume. The mismatch is present in both the HTML and PDF.",
+      "correction": "Start the product at i=2, and read the total-degree condition as p2+...+pn=p. Equivalently use the all-marked-vertex formula in 3M2Y and set p1=0; the outside sum over x1 then becomes the outside-cluster volume. The preceding Markov estimate and the rapid-envelope construction prove this form under the mixed-moment input.",
+      "tags": [
+        "AR3F",
+        "3M2Y"
+      ],
+      "leanImpact": "A future formal statement should bind the far marked vertex separately or quantify all n vertices with first degree zero, with explicit empty-product conventions at n=1. This is an index correction, not a new probabilistic hypothesis. The stronger volume-moment input remains unproved by this entry; no compiled correspondence is claimed. Provisional pending Tom confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Start the weighted product at the second marked vertex.",
+        "scale": "notation",
+        "impact": "Binds the variables consistently with the preceding derivation; the conditional tail estimate is unchanged."
+      }
+    },
+    {
+      "id": "first-deficit-susceptibility-power",
+      "title": "The first deficit moment normalization loses a susceptibility factor",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 Theorem III.6.6, (III.6.13), and the following proof of Proposition III.6.2; HTML and PDF p. 83 (zero-based PDF page 82), both checked 16 November 2026.",
+      "claim": "Equation (III.6.13) normalizes the first deficit moment by V_r^2 chi_r^4. The ensuing unit-ball calculation on the same PDF page uses V_r^2 chi_r^5 and rewrites it as m2(r)^2/chi_r.",
+      "problem": "With V_r=m2(r)/chi_r^3, V_r^2 chi_r^4 equals m2(r)^2/chi_r^2, not m2(r)^2/chi_r. Dividing the printed fourth-power normalization by the first deficit denominator |B_r| chi_r^2 would give m2(r)^2/(|B_r| chi_r^4), one susceptibility factor smaller than (III.6.15). The discrepancy occurs in both HTML and PDF.",
+      "correction": "Use V_r^2 chi_r^5 as the first deficit-measure normalization, consistent with the next unit-ball display and (III.6.15). Keep the second normalization V_r^3 chi_r^7. The cutoff-hydrodynamics discussion states the two limits as remaining inputs and derives the deficit gap only conditionally on them; it does not assert a completed proof of Theorem III.6.6.",
+      "tags": [
+        "5J3U",
+        "OP8F"
+      ],
+      "issues": [],
+      "leanImpact": "Before transporting a spatial deficit limit to a moment ODE, verify the susceptibility power after inserting V=m2/chi^3 and after dividing by the deficit denominator. The existing analytic deficit-gap implication OP8F does not supply the probabilistic limits. No compiled association, new Lean proof or source-author confirmation is claimed. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the fifth rather than fourth susceptibility power in the first deficit normalization.",
+        "scale": "notation",
+        "impact": "Corrects the algebraic normalization only. The deficit limits and Theorem III.6.6 remain conditional on unresolved inputs."
+      }
+    },
+    {
+      "id": "weighted-geodesic-unbound-target",
+      "title": "The weighted geodesic estimate uses an unbound target",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.18 and its proof; HTML lines 2643, 2651, 2668 and PDF printed pp. 98–99 (zero-based pages 97–98), checked 16 November 2026.",
+      "claim": "The sum is over targets a in the root cluster and over vertices on the path from 0 to a, but its chemical-distance factor is written with endpoint x.",
+      "problem": "The variable x is not bound in that display. Both the HTML and PDF retain this mismatch; the intended target is the summed vertex a, as in the subsequent moment argument.",
+      "correction": "Use d_chem(0,a)^q. V7V5 proves the stronger critical estimate with (d_chem(0,a)+1)^q and includes both path endpoints. Its uniform path vertex is normalized by the number of vertices, so the auxiliary averaging identity is exact even for the zero-length root path.",
+      "tags": [
+        "V7V5"
+      ],
+      "issues": [],
+      "leanImpact": "Bind the chemical-distance target and choose an explicit path convention: inclusive vertex cardinality is edge length plus one. The critical estimate is a written wiki proof with explicit hydrodynamic inputs, not a compiled Lean result. This index correction does not settle the later triple-interaction argument. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the summed target vertex a in the chemical-distance weight.",
+        "scale": "notation",
+        "impact": "Corrects the unbound variable; the stronger written critical estimate also handles the root path."
+      }
+    },
+    {
+      "id": "interception-diagram-missing-link",
+      "title": "The printed interception diagram loses the link to the root cluster",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.6.17, HTML lines 2700–2704 and PDF printed p. 101 (zero-based page 100), extracted lines 10807–10839; both checked 16 November 2026.",
+      "claim": "The proof bounds interception by an unrestricted sum over x,y,a,b,c of a root-cluster factor marked at c, an x-cluster factor marked at b, and a selected y-to-a path containing b, and says this sum has the required negligible order.",
+      "problem": "The mark c has no relation to the second cluster or path in the displayed product. At p=q=0, keep c=0, b=a=x and y=x-v for a fixed v with positive connection probability. Each x contributes chi*m2*tau(0,v)>0, so the printed sum is infinite. The diagnosis applies to ordinary radial lattice cutoffs with an allowed edge, not an exceptional graph.",
+      "correction": "FIXER's resolution supplies the completed prose repair LK8Z/O10I/R6CI. A surviving simple path in the third configuration supplies two edge-disjoint connections. Its intersection b with the unrestricted second cluster has every second-configuration x-to-b path meeting the first cluster; retain c on a fixed such geodesic. Independence, BK, translation covariance and marked fifth-moment Cauchy–Schwarz bound the error by C r^(p+q) V^3 chi^11 sqrt(C2/chi^3), negligible at the source scale. IEOH remains a separate estimate and is not the diagram forced by this event. The dropped-link display remains divergent; the lemma statement is unchanged.",
+      "tags": [
+        "ZGVN",
+        "IEOH",
+        "LK8Z",
+        "O10I",
+        "R6CI"
+      ],
+      "issues": [],
+      "leanImpact": "The mathematical interception gap is repaired in prose using the named earlier source results, without the final logarithmic asymptotics. Formalize the deterministic surviving-path inclusion, the marked translation identity and the counted-target Cauchy–Schwarz estimates, then their source inputs. Full coupling-law construction and assembly of the triple-interaction expansion remain distinct obligations. No compiled proof or source-author confirmation is claimed. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "FIXER restores the missing interception mark and proves the resulting diagram estimate in LK8Z/O10I/R6CI.",
+        "scale": "substantial",
+        "impact": "A substantial witness and moment argument is required; the lemma statement survives. The printed dropped-link diagram is still divergent."
+      }
+    },
+    {
+      "id": "deficit-ode-merger-forcing",
+      "title": "The deficit ODE forcing terms disagree with the merger formulas",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1, Lemma III.6.13; HTML lines 2449–2459 and PDF printed pp. 90–91 (zero-based pages 89–90), extracted lines 9266–9402. Compare Lemma III.6.12 and the later proof of Theorem III.6.6, HTML lines 2503–2514 and 2533–2541. Both renditions checked 16 November 2026.",
+      "claim": "The stated first deficit ODE uses the moment of kappa^3*1_B as its independent forcing; the second uses three times the moment of kappa^4*1_B.",
+      "problem": "The merging equivalents in III.6.12 and the later proof instead use kappa^4*1_B and (kappa^4+2kappa^5)*1_B. At the quadratic test ell(x)^2, the respective differences are one and two times the positive variance of ell under kappa, so these are nonvanishing coefficient discrepancies, although constant tests have the same masses. Both PDF and HTML retain them.",
+      "correction": "Use the first forcing alpha times the moment of kappa^4*1_B and the second alpha times the moment of (kappa^4+2kappa^5)*1_B, with their respective h1 r^p and h2 r^p scales after multiplying the derivative equation by r. ENWJ states these equations as additional hypotheses, proves their conditional polynomial limits, and uses labelled linear-factor subsets to retain multiplicities. It does not claim the unresolved triple-interaction argument establishes the equations.",
+      "tags": [
+        "ENWJ",
+        "J2QW",
+        "RDLW"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the two deficit ODEs as explicit obligations until their probabilistic derivation is repaired. Their independent merger forcing is supplied by J2QW and cannot be replaced by a matching mass-only coefficient. Signed polynomial tests require additive error statements. The conditional analytic consequences do not certify the original lemma, a compiled result, or author confirmation. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "partial",
+        "summary": "The forcing coefficients are corrected and their conditional ODE consequences are proved.",
+        "scale": "substantial",
+        "impact": "The triple-interaction derivation of those equations remains unresolved; the conditional calculation is not a completed repair of the theorem."
+      }
+    },
+    {
+      "id": "joint-cut-repeated-path-condition",
+      "title": "The joint-cut proof repeats one path-avoidance condition",
+      "status": "provisional",
+      "locator": "arXiv:2508.18809v1, first sentence of the proof of Lemma III.6.16; HTML line 2688 and PDF printed p. 100 (zero-based page 99), extracted lines 10708–10726. Both renditions checked 16 November 2026.",
+      "claim": "Both paths in the first sentence are described as meeting the first root cluster while avoiding the independent second root cluster. The next sentence asserts two disjoint three-point witnesses.",
+      "problem": "The duplicated condition supplies no path avoiding the first cluster, and does not by itself justify the two different cluster marks used by the next diagram. The two three-point witnesses necessarily share their marked vertices, so the disjointness used by BK must concern edges.",
+      "correction": "On the joint-cut event one path avoids A and meets B, while another avoids C and meets A, where B is the second cluster restricted off A and B is contained in C. RIH3 proves the witness implication using a minimal separator for A union B. The two witnesses have common vertex set exactly the two marked separator vertices and disjoint edge sets. 1P14 then proves the critical coupled estimate using BX1G.",
+      "tags": [
+        "RIH3",
+        "1P14",
+        "DR5Q"
+      ],
+      "issues": [],
+      "leanImpact": "Represent the two distinct avoiding paths and prove the finite-witness separator lemma before applying BK. Vertex-disjoint witnesses would be the wrong requirement. This corrects the local proof formulation and supplies the critical implication; it does not resolve the separate interception estimate, assert compiled Lean correspondence, or constitute source-author confirmation. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the two different avoidance conditions and edge-disjoint witnesses from a minimal separator.",
+        "scale": "local",
+        "impact": "Repairs the path implication and BK argument; shared marked vertices are allowed."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2508.18809v1",
+    "checkedUrl": "https://arxiv.org/abs/2508.18809v1",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

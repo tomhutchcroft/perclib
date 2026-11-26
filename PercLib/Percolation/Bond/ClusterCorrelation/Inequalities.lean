@@ -1,20 +1,22 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-199 (issue 627): proofs of Lemma I.2.1 (i)–(iii) of T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1, the targets `DisjointClusterBK`,
-`ClusterFunctionalHarris` and `ClusterCovarianceUpper` of
-`PercLib/Percolation/Bond/ClusterCorrelation/Defs.lean`.
-The statements come from pull request 488: repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
-`PercLib/CriticalLRP/BK/FunctionalIndicator.lean`, `PercLib/CriticalLRP/BK/FunctionalFromBelow.lean`,
-`PercLib/CriticalLRP/BK/FunctionalInterface.lean`, `PercLib/CriticalLRP/BK/BorelReduction.lean`
-and `PercLib/CriticalLRP/Correlation/Hrest.lean`; licence Apache-2.0 as declared in those
-file headers and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`
-(not independently verified). Contributor: yujinhkim. The proofs are new: (i) uses the
-restoration map (`map_restoreMap`) instead of the source's BK route, so neither the source's
-continuity-from-below hypothesis nor `p < 1` is needed; (ii) is Harris for increasing
-`ℝ≥0∞`-valued functions, `prodBernoulli_lintegral_mul_le`.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Proofs of Lemma I.2.1 (i)–(iii) of T. Hutchcroft, *Critical long-range percolation I*,
+arXiv:2508.18807v1, the targets `DisjointClusterBK`, `ClusterFunctionalHarris` and
+`ClusterCovarianceUpper` of `PercLib/Percolation/Bond/ClusterCorrelation/Defs.lean`. The statements
+come from the repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files `PercLib/CriticalLRP/BK/FunctionalIndicator.lean`,
+`PercLib/CriticalLRP/BK/FunctionalFromBelow.lean`,
+`PercLib/CriticalLRP/BK/FunctionalInterface.lean`, `PercLib/CriticalLRP/BK/BorelReduction.lean` and
+`PercLib/CriticalLRP/Correlation/Hrest.lean`; licence Apache-2.0 as declared in those file headers
+and `third_party/critical-lrp/NOTICE.md`; upstream `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not independently verified). Contributor: yujinhkim. The
+proofs are new: (i) uses the restoration map (`map_restoreMap`) instead of the source's BK route, so
+neither the source's continuity-from-below hypothesis nor `p < 1` is needed; (ii) is Harris for
+increasing `ℝ≥0∞`-valued functions, `prodBernoulli_lintegral_mul_le`.
 -/
 module
 
@@ -29,7 +31,7 @@ public import PercLib.Probability.HarrisDecreasing
 * `clusterFunctionalHarris` (I.2.1(ii)), `clusterCovarianceUpper` (I.2.1(iii)).
 
 No hypothesis beyond monotonicity and measurability of `F` and `G` is used; in particular
-the continuity from below assumed by pull request 488 is not needed.
+the continuity from below assumed by the source formalisation is not needed.
 -/
 
 @[expose] public section
@@ -85,7 +87,7 @@ theorem clusterCovarianceUpper [Countable V] : ClusterCovarianceUpper V := by
   rw [hsplit, add_comm]
   exact add_le_add (disjointClusterBK q x y F G hF hG hFm hGm) le_rfl
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- `F = G = |·|` (the cluster volume) on `Bool`: the three inequalities hold. -/
 example (q : Sym2 Bool → unitInterval) :

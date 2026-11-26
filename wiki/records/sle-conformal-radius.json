@@ -1,0 +1,84 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-conformal-radius",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 134
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "The conformal-radius clock",
+      "locator": "Annals of Mathematics161(2005), Lemma6.3 proof, (6.3), printed pp.904–905",
+      "relationship": "Written proof from explicit foundational tools",
+      "status": "pending",
+      "note": "Direct Loewner/Itô calculation identifies logarithmic inverse radius with the lifetime of the angular diffusion. The maximal-clock argument is included; ordinary SLE only."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Exact inverse-radius moments",
+      "locator": "Annals of Mathematics161(2005), Lemma6.3, (6.6)–(6.9), printed pp.903–906",
+      "relationship": "Written proof from explicit foundational tools",
+      "status": "pending",
+      "note": "Alternative written proof for every 0<kappa<8 and real p<1-kappa/8. Euler positivity supplies a uniform lower bound and justifies finite moments before optional stopping; negative moments are handled separately."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Sharp threshold and the kappa8 transition",
+      "locator": "Annals of Mathematics161(2005), Lemma6.3, printed pp.903–906",
+      "relationship": "Written proof from explicit foundational tools",
+      "status": "pending",
+      "note": "A positive angular eigenfunction gives a survival lower bound and divergence at the endpoint. A scale-function argument proves infinite radius-clock lifetime for kappa>=8, including equality."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Terminal boundary-distance exponent",
+      "locator": "Annals of Mathematics161(2005), Equation(6.2), printed pp.903–904; consequence of Lemma6.3",
+      "relationship": "Written proof from explicit foundational tools",
+      "status": "pending",
+      "note": "Koebe and the moment/survival bounds give the distance exponent. The statement uses Loewner-domain boundaries; identifying the full trace and proving its dimension remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "LZCO",
+      "proof_uses": [],
+      "reason": "Direct Loewner/Itô calculation identifies logarithmic inverse radius with the lifetime of the angular diffusion. The maximal-clock argument is included; ordinary SLE only."
+    },
+    {
+      "order": 1,
+      "tag": "K0WT",
+      "proof_uses": [
+        "LZCO"
+      ],
+      "reason": "Alternative written proof for every 0<kappa<8 and real p<1-kappa/8. Euler positivity supplies a uniform lower bound and justifies finite moments before optional stopping; negative moments are handled separately."
+    },
+    {
+      "order": 2,
+      "tag": "ILR6",
+      "proof_uses": [
+        "LZCO",
+        "K0WT"
+      ],
+      "reason": "A positive angular eigenfunction gives a survival lower bound and divergence at the endpoint. A scale-function argument proves infinite radius-clock lifetime for kappa>=8, including equality."
+    },
+    {
+      "order": 3,
+      "tag": "DC8Q",
+      "proof_uses": [
+        "LZCO",
+        "K0WT",
+        "ILR6"
+      ],
+      "reason": "Koebe and the moment/survival bounds give the distance exponent. The statement uses Loewner-domain boundaries; identifying the full trace and proving its dimension remain separate."
+    }
+  ]
+}

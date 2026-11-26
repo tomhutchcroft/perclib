@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "spatial-lace-coefficient-bounds",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 172
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "First-coefficient spatial diagram",
+      "locator": "17 March 2017 author manuscript, Exercise 11.4 and (11.2.7)\u2013(11.2.9), printed p.138 / PDF index149; diagram from Chapter 7.",
+      "relationship": "Written exercise proof under the spatial bootstrap hypothesis",
+      "status": "pending",
+      "note": "Two long edges reduce the first-coefficient diagram to four finite sums for d>6. No all-order pointwise or moment estimate is inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "4CGW",
+      "proof_uses": [
+        "IDIL"
+      ],
+      "reason": "Power convolution bounds make all four residual diagrams summable."
+    },
+    {
+      "order": 1,
+      "tag": "P8KQ",
+      "proof_uses": [
+        "4CGW",
+        "SJIL"
+      ],
+      "reason": "The established first-coefficient witness diagram, nearest-neighbour comparability and shell sums give the spatial and moment bounds."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 perclib
 https://github.com/tomhutchcroft/perclib
 
-Licensing of this repository (DECISIONS.md, R-2, answered 12 November 2026)
+Licensing of this repository (DECISIONS.md, R-2, answered 12 and 21 November 2026)
 
 1. Lean sources and tooling are licensed under the Apache License, Version 2.0.
    The licence text is in LICENSE. This covers PercLib.lean, PercLib/, scripts/,
@@ -11,3 +11,9 @@ Licensing of this repository (DECISIONS.md, R-2, answered 12 November 2026)
    adapted from Apache-2.0 sources. Their upstream licence and notices are
    retained in third_party/percolation/, and the exact source revisions are in
    each file header and in docs/UPSTREAM_REUSE.md.
+
+3. The wiki prose in wiki/ (articles, reading maps, errata, records, COVERAGE.md
+   and descriptive text) is (c) Tom Hutchcroft and the PercLib contributors and
+   is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0),
+   https://creativecommons.org/licenses/by/4.0/ . The wiki's build code and
+   tooling are Apache-2.0. See wiki/NOTICE.

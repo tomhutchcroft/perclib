@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New deterministic glue using mathlib's existing connected-component quotient and
 finite fiber sums at revision 56a005855ea17e0b0958f73ec801ae140b0a1679.
 No new component quotient and no copied upstream proof.
@@ -8,6 +12,21 @@ module
 
 public import PercLib.Percolation.Bond.Basic
 public import Mathlib.Topology.Algebra.InfiniteSum.Defs
+
+/-!
+# Clusters as connected components
+
+Clusters of the open graph are the supports of mathlib's connected components, so they partition the
+vertex set, and sums over roots of functions of the cluster size regroup as sums over components.
+
+## Main results
+
+* `cluster_eq_component_supp`
+* `cluster_eq_or_disjoint`
+* `tsum_cluster_ncard_function`
+* `tsum_cluster_ncard_eq_tsum_component_sq`
+* `tsum_internal_cluster_ncard`
+-/
 
 @[expose] public section
 

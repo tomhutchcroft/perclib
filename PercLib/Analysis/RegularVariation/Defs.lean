@@ -1,13 +1,22 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-136 (issue 470): slow and regular variation at infinity (wiki tag 3491), following
-Bingham–Goldie–Teugels, *Regular Variation*, §1.1–1.4, and the wiki article
-`regular-variation`. Mathlib at the pinned revision has no such notion. New definitions
-and proofs; nothing is copied for them. Q-140 (issue 507) adds `LogarithmicallyIntegrable`,
-`IsLogErrorFunction` and `genInv`, adapted from pull request 488 as recorded in the section
-header below (licence Apache-2.0). Pull request 488 (`yujinhkim/lrp`, branch `critical-lrp-1`)
-has a variant `RegularlyVaryingAtTop` that asks only for eventual non-vanishing and no
-measurability; it is not used here.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Slow and regular variation at infinity (wiki tag 3491), following Bingham–Goldie–Teugels, *Regular
+Variation*, §1.1–1.4, and the wiki article `regular-variation`. Mathlib at the pinned revision has
+no such notion. New definitions and proofs; nothing is copied for them. The definitions
+`LogarithmicallyIntegrable`, `IsLogErrorFunction` and `genInv` are adapted from the work of
+contributor `yujinhkim`: repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
+`PercLib/CriticalLRP/Analysis/RegularVariation.lean` (`LogarithmicallyIntegrable`,
+`IsLogErrorFunction`) and `PercLib/CriticalLRP/Analysis/GeneralInverse.lean` (`genInv`); licence
+Apache-2.0 as declared in those file headers and `third_party/critical-lrp/NOTICE.md`; upstream
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. The
+section header before `LogarithmicallyIntegrable` records what was changed. That repository has a
+variant `RegularlyVaryingAtTop` that asks only for eventual non-vanishing and no measurability; it
+is not used here.
 -/
 module
 
@@ -37,15 +46,14 @@ open scoped Topology
 namespace PercLib.Analysis
 
 /-- `L` is **slowly varying at infinity**: `L` is measurable on some tail `[a, ∞)`, eventually
-positive, and `L (c x) / L x → 1` as `x → ∞` for every fixed `c > 0` (BGT §1.2; wiki tag
-3491). -/
+positive, and `L (c x) / L x → 1` as `x → ∞` for every fixed `c > 0` (BGT §1.2). -/
 def SlowlyVarying (L : ℝ → ℝ) : Prop :=
   (∃ a, Measurable ((Ici a).domRestrict L)) ∧ (∀ᶠ x in atTop, 0 < L x) ∧
     ∀ c : ℝ, 0 < c → Tendsto (fun x => L (c * x) / L x) atTop (𝓝 1)
 
 /-- `f` is **regularly varying at infinity with index `ρ`**: `f` is measurable on some tail
 `[a, ∞)`, eventually positive, and `f (c x) / f x → c ^ ρ` as `x → ∞` for every fixed `c > 0`
-(BGT §1.4; wiki tag 3491). The equivalent form `f x = x ^ ρ L x` with `L` slowly varying is
+(BGT §1.4). The equivalent form `f x = x ^ ρ L x` with `L` slowly varying is
 `regularlyVarying_iff_slowlyVarying_div_rpow`. -/
 def RegularlyVarying (ρ : ℝ) (f : ℝ → ℝ) : Prop :=
   (∃ a, Measurable ((Ici a).domRestrict f)) ∧ (∀ᶠ x in atTop, 0 < f x) ∧
@@ -188,7 +196,7 @@ theorem SlowlyVarying.rpow_mul (h : SlowlyVarying L) (ρ : ℝ) :
   dsimp only
   rw [Real.mul_rpow hc.le hx.le, mul_assoc, mul_div_assoc, mul_div_mul_left _ _ hxρ]
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- A positive constant is slowly varying. -/
 theorem slowlyVarying_const {a : ℝ} (ha : 0 < a) : SlowlyVarying (fun _ => a) :=
@@ -219,17 +227,16 @@ example : SlowlyVarying Real.log := slowlyVarying_log
 example : RegularlyVarying 2 (fun x => x ^ (2 : ℝ) * Real.log x) :=
   regularlyVarying_rpow_mul_log 2
 
-/-! ### Logarithmic integrability, log-error functions and the generalized inverse (Q-140)
+/-! ### Logarithmic integrability, log-error functions and the generalized inverse
 
-The next three definitions are adapted from pull request 488:
-repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
-`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
+The next three definitions are adapted from the repository `yujinhkim/lrp`, branch `critical-lrp-1`,
+commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
 `PercLib/CriticalLRP/Analysis/RegularVariation.lean` (`LogarithmicallyIntegrable`,
-`IsLogErrorFunction`) and `PercLib/CriticalLRP/Analysis/GeneralInverse.lean` (`genInv`,
-there written through an auxiliary `levelSet`, which is inlined here); licence Apache-2.0 as
-declared in those file headers; upstream `yujinhkim/Critical-Long-range-percolation` at
-`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. The statements are unchanged; the API lemmas
-and witnesses below are new. -/
+`IsLogErrorFunction`) and `PercLib/CriticalLRP/Analysis/GeneralInverse.lean` (`genInv`, there
+written through an auxiliary `levelSet`, which is inlined here); licence Apache-2.0 as declared in
+those file headers; upstream `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. The statements are unchanged; the API lemmas and
+witnesses below are new. -/
 
 /-- `h` is **logarithmically integrable**: `h` is measurable on some tail `[a, ∞)` (as for
 `RegularlyVarying`) and `∫_{r₀}^∞ |h r| dr / r < ∞` for some `r₀ > 0` (Hutchcroft, *Critical
@@ -278,7 +285,7 @@ theorem LogarithmicallyIntegrable.mono (hh : LogarithmicallyIntegrable h)
       (volume.restrict (Ioi (max (max r₀ R) a))) :=
     (((continuous_abs.measurable.comp hF).div measurable_id).aestronglyMeasurable).congr
       (ae_restrict_of_forall_mem measurableSet_Ioi fun r hr => by
-        show |F r| / r = |h' r| / r
+        change |F r| / r = |h' r| / r
         rw [hFeq r ((le_max_right _ _).trans hr.le)])
   refine (hint.mono_set (Ioi_subset_Ioi ((le_max_left _ _).trans (le_max_left _ _)))).mono'
     hmeas (ae_restrict_of_forall_mem measurableSet_Ioi fun r hr => ?_)
@@ -314,7 +321,7 @@ theorem genInv_eq_zero_of_forall_lt (hlt : ∀ x, x₀ ≤ x → f x < y) : genI
   rw [genInv_def, show {x | x₀ ≤ x ∧ y ≤ f x} = ∅ from
     eq_empty_of_forall_notMem fun x hx => (hlt x hx.1).not_ge hx.2, Real.sInf_empty]
 
-/-! #### Witnesses (D-5) -/
+/-! #### Witnesses -/
 
 theorem isLogErrorFunction_zero : IsLogErrorFunction (fun _ => 0) :=
   ⟨⟨⟨0, measurable_const⟩, 1, one_pos, by simp⟩, tendsto_const_nhds⟩

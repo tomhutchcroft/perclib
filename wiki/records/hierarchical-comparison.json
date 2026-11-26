@@ -1,0 +1,144 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hierarchical-comparison",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 16
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 0,
+      "label": "Hierarchical layers and good blocks",
+      "locator": "arXiv:2202.07634v2 HTML §2.1; §2.2, (2.8)–(2.9)",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "Defines all translated nested grids using digit weight L^(m-1); restricted paths retain exterior edges."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 1,
+      "label": "Good hierarchies and continuity",
+      "locator": "arXiv:2202.07634v2 HTML Lemma 2.1, Proposition 2.2 and Lemma 2.3",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "Compactness and a common-uniform coupling under finite full clusters; no incorrect mismatch equality."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 2,
+      "label": "Maximum-cluster renormalization",
+      "locator": "arXiv:2202.07634v2 HTML Lemma 2.6, Proposition 2.4 and Corollary 2.5",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "Conditional joining after revealing the shared restricted law; tightness handles dependent child maxima."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 3,
+      "label": "Restricted pair-sum renormalization",
+      "locator": "arXiv:2202.07634v2 HTML Lemmas 2.8–2.9 and Proposition 2.7",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "Rooted damping gives cap retention; Harris supplies the product and finite susceptibility rules out growth along ancestors."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 4,
+      "label": "Simultaneous ancestor selection",
+      "locator": "arXiv:2202.07634v2 HTML Lemma 2.11 and Corollary 2.12",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "Finite counting with a summable exceptional fraction, followed by compactness."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 5,
+      "label": "Full-space critical two-point bound",
+      "locator": "arXiv:2202.07634v2 HTML Lemma 2.10 and proof of Theorem 1.1 in §2.4",
+      "relationship": "Proof with explicit conventions and local source corrections",
+      "status": "pending",
+      "note": "BK on independent layer coordinates, the squared 4^k factor, interior cubes and the critical endpoint."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 7,
+      "label": "Improved critical volume tail",
+      "locator": "arXiv:2202.07634v2 Corollary1.4 and all of §3",
+      "relationship": "Written deduction with existing probability inputs",
+      "status": "pending",
+      "note": "The stated source bound follows, with an independently derived square-root intensity prefactor before conversion. Finite witnesses give the critical limit; I328 supplies additional subcritical consequences. No exponent equality, pointwise estimate or triangle condition is inferred."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "F2G0",
+      "proof_uses": [
+        "EKDO",
+        "DYUM"
+      ],
+      "reason": "Compactness and a common-uniform coupling under finite full clusters; no incorrect mismatch equality."
+    },
+    {
+      "order": 1,
+      "tag": "27T8",
+      "proof_uses": [
+        "F2G0",
+        "12NL",
+        "DYUM"
+      ],
+      "reason": "Conditional joining after revealing the shared restricted law; tightness handles dependent child maxima."
+    },
+    {
+      "order": 2,
+      "tag": "2P4M",
+      "proof_uses": [
+        "27T8",
+        "12NL"
+      ],
+      "reason": "Rooted damping gives cap retention; Harris supplies the product and finite susceptibility rules out growth along ancestors."
+    },
+    {
+      "order": 3,
+      "tag": "F9QT",
+      "proof_uses": [
+        "F2G0",
+        "2P4M"
+      ],
+      "reason": "Finite counting with a summable exceptional fraction, followed by compactness."
+    },
+    {
+      "order": 4,
+      "tag": "MRZO",
+      "proof_uses": [
+        "EKDO",
+        "F9QT",
+        "KXV3"
+      ],
+      "reason": "BK on independent layer coordinates, the squared 4^k factor, interior cubes and the critical endpoint."
+    },
+    {
+      "order": 5,
+      "tag": "QV5S",
+      "proof_uses": [
+        "GW20",
+        "MRZO",
+        "27T8",
+        "DYUM",
+        "KXV3",
+        "I328"
+      ],
+      "reason": "The stated source bound follows, with an independently derived square-root intensity prefactor before conversion. Finite witnesses give the critical limit; I328 supplies additional subcritical consequences. No exponent equality, pointwise estimate or triangle condition is inferred."
+    },
+    {
+      "order": 6,
+      "tag": "EKDO",
+      "proof_uses": [],
+      "reason": "A definition; the remarks on nesting, translation closure and the union law are direct checks invoking no other wiki assertion."
+    }
+  ],
+  "occursIn": []
+}

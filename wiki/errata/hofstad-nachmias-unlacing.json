@@ -1,0 +1,82 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hofstad-nachmias-unlacing",
+  "entries": [
+    {
+      "id": "two-common-neighbours",
+      "title": "Two frontier vertices can have two undiscovered common neighbours",
+      "status": "provisional",
+      "locator": "arXiv:1210.8213v1 (31 October 2012), Lemma 3.3 proof, unnumbered conditional inequality before (3.6), printed pp.14–15 / PDF indices13–14; also EURANDOM report2013-026, (3.7), printed p.20 / PDF index20. Extracted text compared; journal and visual comparison unavailable.",
+      "claim": "The conditional lower bound subtracts p^2/2 times the number of ordered frontier pairs at Hamming distance two.",
+      "problem": "A pair has two common neighbours. Both can be outside the explored ball. On Q4, take root34, open paths 34–4–14–1 and 34–3–23–2, and close every other edge incident to depths0–2. The frontier is {1,2}; its two common neighbours empty-set and12 are undiscovered. The true conditional next-sphere mean is 6p−2p^2, below the displayed 6p−p^2 for 0<p<1.",
+      "correction": "Weight each ordered pair by its number of undiscovered common neighbours. Pairs with a common open predecessor contribute at most one; all remaining pairs contribute at most two. The latter have branching tails of length at least two, so their short-loop contribution is O(m^-3), and the long-tail contribution is also O(m^-3). The corrected induction retains the coefficient5/2 and the stated critical-parameter upper bound.",
+      "tags": [
+        "N19V",
+        "JQGZ",
+        "EFAQ"
+      ],
+      "issues": [],
+      "leanImpact": "Use the corrected exploration identity and full edge-state certificates. This is a written repair with finite nonmonotone Reimer as a named input; no compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "A full corrected induction is supplied, with the extra collisions absorbed in the third-order error.",
+        "scale": "substantial",
+        "impact": "The conditional inequality is false as written. Repairing it requires separating two kinds of collision and checking their orders; the final upper bound and triangle conclusion are unchanged."
+      }
+    },
+    {
+      "id": "unrevealed-frontier",
+      "title": "Frontier edges are unrevealed rather than open off the whole ball",
+      "status": "provisional",
+      "locator": "arXiv:1210.8213v1, definition(3.2), the open-contact paragraph and term(*) after(3.6), and bound(3.7), printed pp.14–15 / PDF indices13–14; compared with EURANDOM report2013-026, definition(3.3) and (3.8)–(3.9), printed pp.19–21 / PDF indices19–21. Extracted text; journal and visual comparison unavailable.",
+      "claim": "An edge incident to w in the previous sphere is described as open off B(k−2), then assigned conditional probability p and counted among at most m−1 available edges.",
+      "problem": "The source defines off a vertex set by closing every incident edge. Since w belongs to B(k−2), the displayed event is impossible. Also at the root generation k=2 there is no known parent to remove from m possibilities.",
+      "correction": "For k>=3 condition on the exposure of edges incident to B(k−3). A vertex in S(k−2) has a known parent and at most m−1 unrevealed edges; each has conditional open probability p. Handle k=2 directly: s2=m(m−1)p^2−binom(m,2)p^4.",
+      "tags": [
+        "JQGZ"
+      ],
+      "issues": [],
+      "leanImpact": "Use the corrected exploration identity and full edge-state certificates. This is a written repair with finite nonmonotone Reimer as a named input; no compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the earlier exposure history and calculate the root generation separately.",
+        "scale": "local",
+        "impact": "This repairs the conditioning language and one boundary case. The desired (m−1)p^2 subtraction for k>=3 and the growth conclusion remain valid."
+      }
+    },
+    {
+      "id": "nonmonotone-certificates",
+      "title": "Deleting complementary edge sets does not define nonmonotone disjoint occurrence",
+      "status": "provisional",
+      "locator": "arXiv:1210.8213v1, definition immediately before(3.4), printed p.14 / PDF index13, and exact-distance use in Lemma3.3. EURANDOM report2013-026, printed pp.19–20 / PDF indices19–20, already corrects the definition to full certificates. Extracted text compared; journal and visual comparison unavailable.",
+      "claim": "Disjoint occurrence is defined by closing complementary edge sets and checking membership, then the BKR product inequality is stated for arbitrary events.",
+      "problem": "For one Bernoulli edge, take both events to be that the edge is closed. Under the displayed deletion definition their disjoint occurrence has probability1−p, exceeding(1−p)^2 for0<p<1. Standard full-certificate disjoint occurrence is empty in this example.",
+      "correction": "Require disjoint coordinate sets whose actual states force the events under every completion. For the exact-distance event, use all open and closed edge states incident to the smaller intrinsic ball; the two geodesic tails lie outside that certificate. Apply the actual finite Reimer theorem. The later EURANDOM report already makes this definition correction; the defect is specific to the checked arXiv v1.",
+      "tags": [
+        "JQGZ"
+      ],
+      "issues": [],
+      "leanImpact": "Use the corrected exploration identity and full edge-state certificates. This is a written repair with finite nonmonotone Reimer as a named input; no compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "The later report already uses full certificates; the wiki follows that corrected definition and checks the exploration witnesses.",
+        "scale": "statement",
+        "impact": "A definition correction in the later report resolves the arXiv v1 problem. It is essential for nonmonotone events but leaves increasing path applications and the intended growth conclusion unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1210.8213v1 (31 October 2012)",
+    "checkedUrl": "https://arxiv.org/abs/1210.8213v1",
+    "method": "Section 3 of the early preprint and EURANDOM report 2013-026 were read in extracted text. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The three reports distinguish two problems observed in both checked texts from a disjoint-occurrence definition already corrected in the later report. The Metrika 77(1) (2014), 23–50 journal text has not been compared. All reports remain provisional; the later author correction is credited separately from the wiki repairs.",
+    "comparisons": [
+      {
+        "version": "EURANDOM report 2013-026",
+        "url": "https://www.eurandom.tue.nl/reports/2013/026-report.pdf",
+        "status": "compared",
+        "findings": "The full-certificate definition on pp.19–20 already repairs the early nonmonotone definition. The two-common-neighbours and unrevealed-frontier problems remain in the recorded comparison of (3.7)–(3.9), pp.20–21. This does not establish their presence in the journal edition."
+      }
+    ]
+  }
+}

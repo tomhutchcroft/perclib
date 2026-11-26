@@ -1,24 +1,44 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New continuity consequences of PercLib.Probability.ProductExpectation, whose
-finite-profile formula is adapted from near-critical-diffusivity under R-3.
-This file copies no upstream proof. It uses finite sums/products and the product
-topology from mathlib at 56a005855ea17e0b0958f73ec801ae140b0a1679.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New continuity consequences of PercLib.Probability.ProductExpectation, whose finite-profile formula
+is adapted from near-critical-diffusivity under Tom Hutchcroft's reuse permission recorded in
+`docs/DECISIONS.md`. This file copies no upstream proof. It uses finite sums/products and the
+product topology from mathlib at 56a005855ea17e0b0958f73ec801ae140b0a1679.
 -/
 module
 
 public import PercLib.Probability.ProductExpectation
 public import PercLib.Percolation.Bond.Basic
 
+/-!
+# Continuity of finite-event probabilities
+
+Probabilities of events depending on finitely many coordinates are multiaffine, hence continuous, in
+the profile; in particular connection probabilities on finite domains are continuous.
+
+## Main results
+
+* `prodBernoulli_finite_apply`
+* `continuous_prodBernoulli_cylinder`
+* `tendsto_prodBernoulli_cylinder`
+* `continuous_tau_finite`
+* `tendsto_tau_finite_domain`
+-/
+
 @[expose] public section
 
 open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Probability
 
 variable {ι : Type*}
 
+open Classical in
 /-- Finite event probabilities are sums of multiaffine configuration weights. -/
 theorem prodBernoulli_finite_apply [Fintype ι] (p : ι → unitInterval) (A : Set (Set ι)) :
     prodBernoulli p A = ∑ ω ∈ A.toFinset, ∏ i : ι,
@@ -27,6 +47,7 @@ theorem prodBernoulli_finite_apply [Fintype ι] (p : ι → unitInterval) (A : S
   simpa only [prodBernoulli_singleton, Set.coe_toFinset] using
     (sum_measure_singleton (μ := prodBernoulli p) (s := A.toFinset)).symm
 
+open Classical in
 /-- Any event on finitely many coordinates has continuous probability, including endpoints. -/
 theorem continuous_prodBernoulli_finite_apply [Finite ι] (A : Set (Set ι)) :
     Continuous (fun p : ι → unitInterval => prodBernoulli p A) := by
@@ -56,6 +77,7 @@ theorem prodBernoulli_cylinder_apply (p : ι → unitInterval) (F : Finset ι)
   rw [← prodBernoulli_map_restrict p F, Measure.map_apply hm (Set.toFinite A).measurableSet]
   rfl
 
+open Classical in
 /-- Explicit finite multiaffine formula on an arbitrary ambient coordinate type. -/
 theorem prodBernoulli_cylinder_sum (p : ι → unitInterval) (F : Finset ι)
     (A : Set (Set F)) :

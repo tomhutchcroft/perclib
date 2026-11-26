@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
+Authors: PercLib contributors
+-/
+/-
 Adapted from NearCritical/FiniteExpectation.lean at
 tomhutchcroft/near-critical-diffusivity@c820fea91a7482c1755de0ec94ecb9f59ccfcacc,
-under Tom Hutchcroft's reuse permission (docs/DECISIONS.md R-3).
+under Tom Hutchcroft's reuse permission recorded in `docs/DECISIONS.md`.
 The native upstream file has no licence header; no upstream Apache licence is asserted.
 Changed on 2026-11-14: Set configurations, PercLib namespace and boundary examples.
 -/
@@ -28,7 +30,6 @@ and Russo formula are separate results.
 namespace PercLib.Probability
 
 open Polynomial MeasureTheory
-open scoped Classical
 
 variable {E : Type*} [Fintype E]
 
@@ -67,13 +68,15 @@ theorem eval_annealedPolynomial_eq_integral (p : unitInterval) (f : Set E → �
 
 example (p : ℝ) (f : Set Empty → ℝ) : finiteExpectation p f = f ∅ := by
   classical
-  simp [finiteExpectation]
+  simp only [finiteExpectation, Finset.univ_unique, Finset.univ_eq_empty, Finset.prod_empty,
+      mul_one, Finset.sum_singleton]
   exact congrArg f (Subsingleton.elim _ _)
 
 example (p : ℝ) : finiteExpectation p (fun _ : Set E => 0) = 0 := by
   classical
   simp [finiteExpectation]
 
+open Classical in
 example (p : ℝ) : finiteExpectation p (fun ω : Set Unit => if () ∈ ω then 1 else 0) = p := by
   classical
   unfold finiteExpectation

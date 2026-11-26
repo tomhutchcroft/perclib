@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 119 (Q-3), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied.
 -/
 module
 
@@ -25,7 +26,11 @@ Write `θ(x) = law q {ω | (cluster ω x).Infinite}`. This file proves:
 * `law_exists_cluster_infinite_pos_iff`: an infinite cluster exists with positive
   probability exactly when some `θ(x)` is positive;
 * `globalCriticalIntensity_le_rootCriticalIntensity` and, for a preconnected support,
-  `rootCriticalIntensity_eq_globalCriticalIntensity`.
+  `rootCriticalIntensity_eq_globalCriticalIntensity`;
+* `globalCriticalIntensity_eq_iInf_rootCriticalIntensity`: on a countable vertex set the
+  global threshold is the infimum of the root thresholds;
+* `rootCriticalIntensity_eq_of_reachable`: the root threshold is constant on each component
+  of the support graph of `J`.
 
 This file adds no definition.
 -/
@@ -182,6 +187,64 @@ theorem rootCriticalIntensity_eq_of_preconnected [Countable V] (J : Sym2 V → �
   rw [rootCriticalIntensity_eq_globalCriticalIntensity J hJ,
     rootCriticalIntensity_eq_globalCriticalIntensity J hJ]
 
+/-- **The threshold for some infinite cluster is the infimum of the root thresholds.** On a
+countable vertex set the event that some cluster is infinite is the countable union of the
+root events, so the set of supercritical parameters is the union of the root ones. -/
+theorem globalCriticalIntensity_eq_iInf_rootCriticalIntensity [Countable V]
+    (J : Sym2 V → ℝ≥0) :
+    globalCriticalIntensity J = ⨅ x, rootCriticalIntensity J x := by
+  unfold globalCriticalIntensity rootCriticalIntensity
+  rw [← sInf_iUnion]
+  congr 1
+  ext b
+  simp only [mem_iUnion, mem_ofPred_eq]
+  constructor
+  · rintro ⟨β, rfl, h⟩
+    obtain ⟨x, hx⟩ := (law_exists_cluster_infinite_pos_iff _).1 h
+    exact ⟨x, β, rfl, hx⟩
+  · rintro ⟨x, β, rfl, hx⟩
+    exact ⟨β, rfl, (law_exists_cluster_infinite_pos_iff _).2 ⟨x, hx⟩⟩
+
+/-- At every intensity, two roots joined in the support graph of `J` percolate with
+positive probability together. At `β = 0` neither percolates. -/
+theorem law_intensity_cluster_infinite_pos_iff_of_reachable [Countable V]
+    (J : Sym2 V → ℝ≥0) {x y : V} (h : (SimpleGraph.fromEdgeSet {e | 0 < J e}).Reachable x y)
+    (β : ℝ≥0) :
+    0 < law (intensityProfile J β) {ω | (cluster ω x).Infinite} ↔
+      0 < law (intensityProfile J β) {ω | (cluster ω y).Infinite} := by
+  rcases eq_zero_or_pos β with rfl | hβ
+  · have h0 := law_exists_cluster_infinite_eq_zero_of_forall_eq_zero
+      (intensityProfile_zero J)
+    have h1 : ∀ z : V, law (intensityProfile J 0) {ω | (cluster ω z).Infinite} = 0 :=
+      fun z => measure_mono_null (fun ω (hω : (cluster ω z).Infinite) => (⟨z, hω⟩ :
+        ∃ y, (cluster ω y).Infinite)) h0
+    rw [h1 x, h1 y]
+  · have hsupp : {e | 0 < intensityProfile J β e} = {e | 0 < J e} := by
+      ext e
+      exact intensityProfile_pos_iff J hβ e
+    have key : ∀ a b : V, (SimpleGraph.fromEdgeSet {e | 0 < J e}).Reachable a b →
+        0 < law (intensityProfile J β) {ω | (cluster ω a).Infinite} →
+          0 < law (intensityProfile J β) {ω | (cluster ω b).Infinite} := by
+      intro a b hab ha
+      rw [← hsupp] at hab
+      exact lt_of_lt_of_le (ENNReal.mul_pos (tau_pos_of_reachable _ hab).ne' ha.ne')
+        (tau_mul_law_cluster_infinite_le _ a b)
+    exact ⟨key x y h, key y x h.symm⟩
+
+/-- **The root critical intensity is constant on each component of the support graph of
+`J`.** No transitivity is assumed. -/
+theorem rootCriticalIntensity_eq_of_reachable [Countable V] (J : Sym2 V → ℝ≥0) {x y : V}
+    (h : (SimpleGraph.fromEdgeSet {e | 0 < J e}).Reachable x y) :
+    rootCriticalIntensity J x = rootCriticalIntensity J y := by
+  unfold rootCriticalIntensity
+  congr 1
+  ext b
+  constructor
+  · rintro ⟨β, rfl, hβ⟩
+    exact ⟨β, rfl, (law_intensity_cluster_infinite_pos_iff_of_reachable J h β).1 hβ⟩
+  · rintro ⟨β, rfl, hβ⟩
+    exact ⟨β, rfl, (law_intensity_cluster_infinite_pos_iff_of_reachable J h β).2 hβ⟩
+
 /-! ### Non-vacuity -/
 
 /-- On `Bool` with the one pair open with probability `1/2`, the support graph joins the
@@ -200,7 +263,8 @@ example (J : Sym2 Unit → ℝ≥0) : rootCriticalIntensity J () = globalCritica
     cases a; cases b; exact SimpleGraph.Reachable.refl _) ()
 
 /-- The preconnectedness hypothesis is not automatic: `J = 0` on `Bool`. -/
-example : ¬ (SimpleGraph.fromEdgeSet {e : Sym2 Bool | 0 < (0 : Sym2 Bool → ℝ≥0) e}).Preconnected := by
+example : ¬ (SimpleGraph.fromEdgeSet {e : Sym2 Bool | 0 <
+    (0 : Sym2 Bool → ℝ≥0) e}).Preconnected := by
   intro h
   obtain ⟨w⟩ := h false true
   cases w with

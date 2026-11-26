@@ -1,0 +1,65 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-coordinate-changes",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 136
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Deterministic target normalization",
+      "locator": "arXiv:math/0505368v1, Section 3, Theorem 3 and Remark 4; chordal boundary specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Explicit Möbius normalization from the first two Loewner derivatives at the unswallowed target. Direct differentiation proves the image Loewner equation, capacity clock and -3 times second-derivative correction."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Chordal boundary-force covariance",
+      "locator": "arXiv:math/0505368v1, Section 3, Theorem 3 and Remark 4; chordal boundary specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Written proof of the chordal-to-chordal boundary case of Theorem 3. The force-weight sum cancels the Itô correction; arbitrary weights add the compensating force at the image of the old target. All stopping restrictions retained."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "Transfer of bulk martingales",
+      "locator": "arXiv:math/0505368v1, Section 3, Theorem 3 and Remark 4; chordal boundary specialization",
+      "relationship": "Written proof from deterministic Loewner and stochastic-calculus foundations",
+      "status": "pending",
+      "note": "Derivative-chain and covariance identities relate the two observables pathwise, then compact time change transfers the local-martingale property. No terminal expectation or limit is asserted."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "C6T0",
+      "proof_uses": [],
+      "reason": "Explicit Möbius normalization from the first two Loewner derivatives at the unswallowed target. Direct differentiation proves the image Loewner equation, capacity clock and -3 times second-derivative correction."
+    },
+    {
+      "order": 1,
+      "tag": "6RZ1",
+      "proof_uses": [
+        "C6T0"
+      ],
+      "reason": "Written proof of the chordal-to-chordal boundary case of Theorem 3. The force-weight sum cancels the Itô correction; arbitrary weights add the compensating force at the image of the old target. All stopping restrictions retained."
+    },
+    {
+      "order": 2,
+      "tag": "0INI",
+      "proof_uses": [
+        "C6T0",
+        "6RZ1"
+      ],
+      "reason": "Derivative-chain and covariance identities relate the two observables pathwise, then compact time change transfers the local-martingale property. No terminal expectation or limit is asserted."
+    }
+  ]
+}

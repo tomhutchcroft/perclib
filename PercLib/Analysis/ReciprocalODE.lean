@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 454 (Q-120), written on 2026-11-16 by PROVER-G, against pinned mathlib.
-No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16, against pinned mathlib. No upstream proof is copied.
 -/
 module
 
@@ -14,6 +15,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import PercLib.Meta.Tag
 
 /-!
 # Reciprocal differential inequalities, truncated means and a logarithmic upgrade
@@ -48,8 +50,8 @@ namespace PercLib.Analysis
 
 /-! ### 1. OP4X -/
 
-/-- **OP4X.** Let `T > 0` be absolutely continuous on `[r₀, R]`, `a ≥ 0` integrable there and
-`T' ≤ a T²` a.e. Then `T(ℓ) ≥ (1/T(R) + ∫_ℓ^R a)⁻¹` for `r₀ ≤ ℓ ≤ R`. -/
+/-- **Reciprocal ODE lower bound.** Let `T > 0` be absolutely continuous on `[r₀, R]`, `a ≥ 0`
+integrable there and `T' ≤ a T²` a.e. Then `T(ℓ) ≥ (1/T(R) + ∫_ℓ^R a)⁻¹` for `r₀ ≤ ℓ ≤ R`. -/
 theorem le_of_deriv_le_mul_sq {T a : ℝ → ℝ} {r₀ R : ℝ}
     (hT : AbsolutelyContinuousOnInterval T r₀ R) (hpos : ∀ s ∈ Icc r₀ R, 0 < T s)
     (ha : IntervalIntegrable a volume r₀ R) (ha0 : ∀ s ∈ Icc r₀ R, 0 ≤ a s)
@@ -90,7 +92,7 @@ theorem le_of_deriv_le_mul_sq {T a : ℝ → ℝ} {r₀ R : ℝ}
   rw [inv_le_comm₀ (by positivity) hTl, one_div]
   linarith
 
-/-- **OP4X, power-law form.** If moreover `0 < r₀`, `α, A, ε > 0`, `a(s) ≤ A s^{-α-1}` on
+/-- **Power-law form.** If moreover `0 < r₀`, `α, A, ε > 0`, `a(s) ≤ A s^{-α-1}` on
 `[r₀, R]` and `T(R) ≥ ε R^α`, then
 `T(ℓ) ≥ ℓ^α / (A/α + (ε⁻¹ - A/α)(ℓ/R)^α)`. -/
 theorem rpow_div_le_of_deriv_le_mul_sq {T a : ℝ → ℝ} {r₀ R : ℝ} (hr₀ : 0 < r₀)
@@ -209,7 +211,7 @@ theorem twoPoint_mul {r : ℝ} (hr : 1 ≤ r) : r ^ (α - κ) * r ^ κ = r ^ α 
   rw [← rpow_add (by linarith)]
   ring_nf
 
-/-- **J5R6, mean.** `E X_r = (2 - p_r) r^α`. -/
+/-- **Mean.** `E X_r = (2 - p_r) r^α`. -/
 theorem integral_id_twoPoint {r : ℝ} (hr : 1 ≤ r) (hακ : α < κ) :
     ∫ x, x ∂(ENNReal.ofReal (r ^ (α - κ)) • Measure.dirac (r ^ κ) +
       ENNReal.ofReal (1 - r ^ (α - κ)) • Measure.dirac (r ^ α)) = (2 - r ^ (α - κ)) * r ^ α := by
@@ -217,7 +219,7 @@ theorem integral_id_twoPoint {r : ℝ} (hr : 1 ≤ r) (hακ : α < κ) :
   rw [integral_twoPoint_dirac (fun x => x) hp0.le (by linarith), twoPoint_mul hr]
   ring
 
-/-- **J5R6, second moment.** `E X_r² = r^{α+κ} + (1 - p_r) r^{2α}`. -/
+/-- **Second moment.** `E X_r² = r^{α+κ} + (1 - p_r) r^{2α}`. -/
 theorem integral_sq_twoPoint {r : ℝ} (hr : 1 ≤ r) (hακ : α < κ) :
     ∫ x, x ^ 2 ∂(ENNReal.ofReal (r ^ (α - κ)) • Measure.dirac (r ^ κ) +
       ENNReal.ofReal (1 - r ^ (α - κ)) • Measure.dirac (r ^ α)) =
@@ -231,7 +233,7 @@ theorem integral_sq_twoPoint {r : ℝ} (hr : 1 ≤ r) (hακ : α < κ) :
   · ring_nf
   · ring_nf
 
-/-- **J5R6, truncated mean.** For `0 < δ ≤ 1`,
+/-- **Truncated mean.** For `0 < δ ≤ 1`,
 `E min(X_r, δ r^κ) / E X_r → (1 + δ)/2` as `r → ∞`. -/
 theorem tendsto_truncated_ratio (hακ : α < κ) {δ : ℝ} (hδ : 0 < δ) (hδ1 : δ ≤ 1) :
     Tendsto (fun r : ℝ => (∫ x, min x (δ * r ^ κ) ∂(ENNReal.ofReal (r ^ (α - κ)) •
@@ -262,7 +264,7 @@ theorem tendsto_truncated_ratio (hακ : α < κ) {δ : ℝ} (hδ : 0 < δ) (hδ
   rw [← hmul]
   ring
 
-/-- **J5R6, iterated limit.** `lim_{δ ↓ 0} lim_{r → ∞} E min(X_r, δ r^κ)/E X_r = 1/2`, in the
+/-- **Iterated limit.** `lim_{δ ↓ 0} lim_{r → ∞} E min(X_r, δ r^κ)/E X_r = 1/2`, in the
 form: for every `ε > 0` there is `δ₀ > 0` such that for `0 < δ < δ₀`, eventually in `r` the
 ratio is within `ε` of `1/2`. -/
 theorem truncated_ratio_iterated_limit (hακ : α < κ) {ε : ℝ} (hε : 0 < ε) :
@@ -308,6 +310,7 @@ theorem integral_neg_div_mul_log_sq {r s C : ℝ} (hr : 1 < r) (hrs : r ≤ s) :
 /-- **TJXV.** Let `R₀ > 1` and `c > 0`. Suppose `W` is absolutely continuous on every
 `[R₀, R]`, `W(r) ≥ c/√(log r)` and `W'(r) ≥ -C/(r (log r)²)` for almost every `r ≥ R₀`.
 Then `W` is eventually bounded below by a positive constant. -/
+@[tag "TJXV"]
 theorem exists_pos_le_of_log_deriv {W : ℝ → ℝ} {R₀ c C : ℝ} (hR₀ : 1 < R₀) (hc : 0 < c)
     (hW : ∀ R, R₀ ≤ R → AbsolutelyContinuousOnInterval W R₀ R)
     (hlow : ∀ r, R₀ ≤ r → c / Real.sqrt (Real.log r) ≤ W r)
@@ -372,7 +375,8 @@ theorem exists_pos_le_of_log_deriv {W : ℝ → ℝ} {R₀ c C : ℝ} (hR₀ : 1
 
 /-! ### Non-vacuity -/
 
-/-- `W ≡ 1` satisfies the hypotheses of TJXV with `R₀ = e`, `c = 1`, `C = 0`. -/
+/-- `W ≡ 1` satisfies the hypotheses of `exists_pos_le_of_log_deriv` with `R₀ = e`, `c = 1`,
+`C = 0`. -/
 example : ∃ η > 0, ∃ R, ∀ r, R ≤ r → η ≤ (fun _ : ℝ => (1 : ℝ)) r := by
   refine exists_pos_le_of_log_deriv (R₀ := Real.exp 1) (c := 1) (C := 0)
     (Real.one_lt_exp_iff.2 one_pos) one_pos
@@ -383,8 +387,8 @@ example : ∃ η > 0, ∃ R, ∀ r, R ≤ r → η ≤ (fun _ : ℝ => (1 : ℝ)
   rw [div_le_one (Real.sqrt_pos.2 (by linarith))]
   exact Real.one_le_sqrt.2 h1
 
-/-- `T(s) = s^α/(A/α)` and `a(s) = A s^{-α-1}` on `[r₀, R]`, `0 < r₀`, satisfy
-`T' = a T²` and `T(R) = (α/A) R^α`. OP4X then holds with equality, `T(ℓ) ≥ ℓ^α/(A/α)`. -/
+/-- `T(s) = s^α/(A/α)` and `a(s) = A s^{-α-1}` on `[r₀, R]`, `0 < r₀`, satisfy `T' = a T²` and
+`T(R) = (α/A) R^α`. `le_of_deriv_le_mul_sq` then holds with equality, `T(ℓ) ≥ ℓ^α/(A/α)`. -/
 example {α A r₀ R : ℝ} (hα : 0 < α) (hA : 0 < A) (hr₀ : 0 < r₀) {ℓ : ℝ}
     (hℓ : ℓ ∈ Icc r₀ R) :
     ℓ ^ α / (A / α + ((α / A)⁻¹ - A / α) * (ℓ / R) ^ α) ≤ ℓ ^ α / (A / α) := by

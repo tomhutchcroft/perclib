@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New finite-transcript proofs on the canonical Bernoulli law, using pinned mathlib
 product measures and the existing PercLib block-independence API. Adaptive queries
 are functions of the previously recorded bits; no independence of the random
@@ -13,10 +17,25 @@ public import PercLib.Probability.ProductExpectation
 public import PercLib.Probability.ProdBernoulliIndependence
 public import Mathlib.Data.Sym.Sym2
 
+/-!
+# Exploration transcripts
+
+Finite transcripts of queried coordinates, fixed or adaptive, have the product of their bit weights
+as probability and factor from events on the unqueried coordinates.
+
+## Main results
+
+* `prodBernoulli_transcript`
+* `prodBernoulli_transcript_inter`
+* `adaptive_answers_eq_iff`
+* `prodBernoulli_adaptive_answers`
+* `prodBernoulli_adaptive_answers_inter`
+-/
+
 @[expose] public section
 
 open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Probability
 
@@ -57,7 +76,8 @@ theorem prodBernoulli_transcript_inter [Fintype J] (p : ι → unitInterval)
       (∏ j, if b j then (unitInterval.toNNReal (p (e j)) : ℝ≥0∞)
         else (unitInterval.toNNReal (unitInterval.symm (p (e j))) : ℝ≥0∞)) *
       prodBernoulli p {ω | (Subtype.val ⁻¹' ω : Set ((Set.range e)ᶜ : Set ι)) ∈ B} := by
-  let A : Set (Set (Set.range e)) := {η | ∀ j, (⟨e j, Set.mem_range_self j⟩ : Set.range e) ∈ η ↔ b j = true}
+  let A : Set (Set (Set.range e)) := {η | ∀ j, (⟨e j, Set.mem_range_self j⟩ : Set.range e) ∈ η ↔
+      b j = true}
   have hA : MeasurableSet A := by
     simp only [A, Set.ofPred_forall]
     apply MeasurableSet.iInter
@@ -161,6 +181,7 @@ example (p : Sym2 Bool → unitInterval) :
     prodBernoulli_transcript p (fun b : Bool => if b then s(false, false) else s(false, true)) he id
 
 -- A one-step deterministic execution satisfies the adaptive hypotheses.
+open Classical in
 example (p : ι → unitInterval) (i : ι) (b : Fin 1 → Bool) :
     prodBernoulli p {ω | (fun _ : Fin 1 => decide (i ∈ ω)) = b} =
       ∏ k, if b k then (unitInterval.toNNReal (p i) : ℝ≥0∞)

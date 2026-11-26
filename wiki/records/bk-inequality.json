@@ -1,0 +1,60 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "bk-inequality",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 11
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 18,
+      "label": "The van den Berg–Kesten inequality",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-low-density-bk",
+      "order": 0,
+      "label": "Homogeneous low-density BK induction",
+      "locator": "Named statement start lines in the pinned source: 35, 41, 47, 53, 81, 131, 138, 157, 167, 178, 214, 259, 305, 310, 332, 346, 374, 395, 414, 422",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "The source proves homogeneous finite-coordinate BK for probabilities at most one half. The article explains increasing sections, the closed-section identity, open-section containment, inclusion-exclusion indicator bound, weighted recursion and arithmetic remainder. Its algebra paragraph preserves arbitrary-real-parameter splitting and coordinate reindexing, versus nonnegative probability weights needed for monotonicity. Finite indicator expectations become probabilities only on the probability interval. The article goes further through inhomogeneous induction, independent OR blocks, endpoint limits and countable witnesses; those extensions are not attributed to this source module."
+    },
+    {
+      "source": "perclib-finite-profile-bk",
+      "order": 0,
+      "label": "Finite BK for arbitrary profiles",
+      "locator": "Named public declaration start lines: 45, 53, 59, 91, 100, 115, 125, 138, 154, 235, 283, 349, 379, 399, 425, 465, 473",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The full source supplies the inhomogeneous induction, exact block refinement and endpoint passage for BNY8. The earlier low-density module supplies only its narrower homogeneous part."
+    },
+    {
+      "source": "perclib-countable-profile-bk",
+      "order": 0,
+      "label": "Countable BK with finite certificates",
+      "locator": "Named public declaration start lines: 46, 58, 63, 74, 107, 133, 156, 166, 174, 191, 226, 235, 244",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies JRCI and the repeated product bound AUUG, with increasing events allowed to be nonmeasurable when their probabilities are read as outer measures. Only the finite-witness disjoint occurrence is exhausted."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 6,
+      "source": "hutchcroft-book",
+      "tag": "BNY8",
+      "relationship": "source-statement",
+      "edition": "In preparation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "note": "Credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "proofUses": []
+}

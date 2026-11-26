@@ -1,0 +1,134 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "infinite-cluster-zero-one",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 5
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 0,
+      "label": "The infinite-cluster zero-one law",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-intensity-definitions",
+      "order": 1,
+      "label": "Root/global thresholds and positive-support components",
+      "locator": "Definitions and interface comments at pinned main 3c0755b692bb6fa71ff6521ce423948feae4fe40",
+      "relationship": "Expository consequences of the inspected threshold conventions",
+      "note": "The global-infimum identity, positive-path comparison, non-attainment example and decorated-ray separation of susceptibility from percolation are additional prose arguments, not asserted compiled correspondences. Finite parameters, extended thresholds and infimum of the empty set infinity are retained."
+    },
+    {
+      "source": "perclib-product-zero-one",
+      "order": 2,
+      "label": "Finite-modification invariance on an arbitrary coordinate set",
+      "locator": "Named theorem start lines: 36, 42, 54, 87",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "D1CH retains measurability and pointwise insertion equivalence, derives deletion and finite-modification invariance, and proves the outside-finite-set tail property and zero-one conclusion. It generalizes the product-space step of H0OC without removing the graph event measurability requirement. No countability of the coordinate set or strict interior profile assumption is added."
+    },
+    {
+      "source": "perclib-product-mixing",
+      "order": 3,
+      "label": "Finite-cylinder approximation, mixing and invariant observables",
+      "locator": "Named theorem start lines: 44, 58, 68, 99, 106, 187, 197, 211, 242, 252",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "DK14 preserves arbitrary finite measures for approximation. MJD2 preserves law invariance and eventual finite-set separation, and proves the collision criterion and profile-invariance sufficient conditions. DRQ2 gives event ergodicity and constancy of measurable extended-integer observables; no boundedness or integrability is assumed. The lattice application specializes to non-loop coordinates and links the existing 6GNC argument; no new uniqueness result or compiled association is claimed."
+    },
+    {
+      "source": "perclib-bond-ergodicity",
+      "order": 4,
+      "label": "Translation ergodicity of bond laws on infinite groups",
+      "locator": "Named theorem start lines: 38, 52, 60, 67, 76, 96, 115",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "WUAF retains arbitrary infinite groups, right translations and profile invariance including diagonal pairs, with explicit measurability of events/observables. Distinct translations give at most two collisions per fixed pair. Mixing along such a sequence and the diagonal-erasure graph extension are expository consequences. The integer nonempty-configuration witness concerns raw pair coordinates, not percolation. No compiled correspondence is asserted."
+    },
+    {
+      "source": "perclib-zero-one-examples",
+      "order": 0,
+      "label": "Prescribed root probability and finite-host thresholds",
+      "locator": "Named public declaration start lines: 35, 49, 57, 107, 129, 133, 139, 149",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The concrete model uses the integer line plus one root, all p in [0,1], arbitrary extra line bonds and arbitrary diagonal marginals. The finite-host global result allows an empty vertex set; the root result requires a vertex. KB1L remains unchanged in the frozen criticality article."
+    },
+    {
+      "source": "perclib-decorated-ray",
+      "order": 0,
+      "label": "A decorated ray separates susceptibility from percolation",
+      "locator": "Named public declaration start lines: 46, 102, 110, 123, 177, 204, 244, 311, 326, 423, 576, 602, 630",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The connected host on natural-number pairs has additional isolated vertices outside the positive-intensity component. SA9P concerns root susceptibility; positive-path transfer applies within that component. The source proves all-cluster finiteness with weaker support and backbone hypotheses, and the susceptibility threshold with the specific pendant weights. No compiled tag association is inferred."
+    },
+    {
+      "source": "perclib-path-comparison",
+      "order": 0,
+      "label": "Cluster comparison between roots",
+      "locator": "Named public declaration start lines: 36, 41, 52, 59, 67, 75, 83, 89, 99",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies C3OO through a stronger comparison with the two-point probability. Walk weights use each distinct unordered edge once; positivity is required only for transferring qualitative root properties."
+    },
+    {
+      "source": "perclib-bond-zero-one",
+      "order": 0,
+      "label": "Global percolation and finite modifications",
+      "locator": "Named public theorem start lines: 38, 59, 76, 83",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "D106 and H0OC provide the deterministic finite-change proof and the countable global zero-one law. The source permits the empty vertex type as well; its event is empty and has probability zero. It does not give a rooted zero-one law, uniqueness or spatial ergodicity."
+    },
+    {
+      "source": "perclib-unattained-threshold",
+      "order": 0,
+      "label": "A global threshold attained by no root",
+      "locator": "Explicit public declaration start lines: 51, 70, 76, 221, 245, 253, 287, 295, 309, 316, 324, 334, 344",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Thirteen public results construct the bounded-degree disjoint-tree example and identify its rooted and global parameter sets. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "D106",
+      "proof_uses": [],
+      "reason": "Deleting or adding one edge changes components finitely; no other wiki assertion is invoked."
+    },
+    {
+      "order": 1,
+      "tag": "0YH8",
+      "proof_uses": [
+        "H0OC"
+      ],
+      "reason": "A positive root probability makes the global probability positive and hence one by the global zero-one law (H0OC); the converse is countable subadditivity."
+    },
+    {
+      "order": 2,
+      "tag": "1C8G",
+      "proof_uses": [
+        "C3OO"
+      ],
+      "reason": "The global event is a countable union of root events; the positive-path comparison (C3OO) makes rooted thresholds equal within each support component."
+    },
+    {
+      "order": 3,
+      "tag": "D1CH",
+      "proof_uses": [
+        "DK14"
+      ],
+      "reason": "Finite-modification invariance places A in every outside sigma-algebra, and approximation by a finite-coordinate event (DK14) gives P(A)=P(A)^2."
+    }
+  ]
+}

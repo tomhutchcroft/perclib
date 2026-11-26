@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 455 (Q-121, item 1), written on 2026-11-16 by PROVER-G, against pinned
-mathlib. No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16, against pinned mathlib. No upstream proof is copied.
 -/
 module
 
@@ -18,6 +19,7 @@ public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 public import Mathlib.Analysis.Asymptotics.AsymptoticEquivalent
 public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import PercLib.Meta.Tag
 
 /-!
 # Logarithmic corrections from a quadratic differential inequality (6PGV)
@@ -37,7 +39,14 @@ No divergence at the endpoint is assumed.
 `D(β_c - u) ≤ C (log(1/u))^a` for small `u > 0`, with `C > 0`, `a ≥ 0`, then
 `χ(β_c - ε) = O(ε⁻¹ (log(1/ε))^{2a})` as `ε ↓ 0`.
 
-The proof bounds `(1/χ)' ≤ -1/(3s²D²) + 2/(3s²χ(β))` on `[β, s₁]` and integrates. It uses
+Both are corollaries of the forms with a general linear term
+`χ' ≥ (χ² - κχD)/(3β²D²)`, `κ ≥ 0` (`le_of_deriv_ge_sq_sub_mul_div`,
+`isBigO_of_deriv_ge_sq_sub_mul_div`), with prefactor `1 + κ(β_c - β)/(3ββ_c)`. The case
+`κ = 1`, i.e. `χ' ≥ χ(χ - D)/(3β²D²)`, is `le_of_deriv_ge_mul_sub_div`, with the explicit
+eventual bounds `exists_le_inv_mul_log_rpow_of_deriv_ge_mul_sub_div` and
+`exists_le_inv_of_deriv_ge_mul_sub_div`.
+
+The proof bounds `(1/χ)' ≤ -1/(3s²D²) + κ/(3s²χ(β))` on `[β, s₁]` and integrates. It uses
 `(χ - D)₊² ≥ χ² - 2χD`, `D ≥ 1` and the monotonicity of `χ`.
 
 **OP8F** (`op8f_asymptotics`). Suppose `m' = a m² (1 - e₁)`, `f' = 3 a m f (1 - e₂)` and
@@ -84,26 +93,28 @@ theorem measurable_inv_three_sq_mul_sq {D : ℝ → ℝ} (hD : Measurable D) :
 
 variable {β₀ βc : ℝ} {χ D : ℝ → ℝ}
 
-/-- **6PGV.** Let `0 ≤ β₀ < β_c`, `χ > 0` nondecreasing and locally absolutely continuous on
-`(β₀, β_c)`, `D ≥ 1` measurable and `χ' ≥ (χ - D)₊²/(3β²D²)` a.e. on `(β₀, β_c)`. Then
-`χ(β) ≤ (1 + 2(β_c - β)/(3ββ_c)) (∫_β^{β_c} ds/(3s²D(s)²))⁻¹` for every `β ∈ (β₀, β_c)`. -/
-theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β)
+/-- **Integrated susceptibility bound, general linear term.** Let `0 ≤ β₀ < β_c`, `κ ≥ 0`,
+`χ > 0` nondecreasing and locally absolutely continuous on `(β₀, β_c)`, `D ≥ 1` measurable and
+`χ' ≥ (χ² - κχD)/(3β²D²)` a.e. on `(β₀, β_c)`. Then
+`χ(β) ≤ (1 + κ(β_c - β)/(3ββ_c)) (∫_β^{β_c} ds/(3s²D(s)²))⁻¹` for every `β ∈ (β₀, β_c)`. -/
+theorem le_of_deriv_ge_sq_sub_mul_div {κ : ℝ} (hβ₀ : 0 ≤ β₀) (hκ : 0 ≤ κ)
+    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β)
     (hmono : MonotoneOn χ (Ioo β₀ βc))
     (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
     (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
     (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
-      max (χ β - D β) 0 ^ 2 / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+      (χ β ^ 2 - κ * χ β * D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
     {β : ℝ} (hβ : β ∈ Ioo β₀ βc) :
-    χ β ≤ (1 + 2 * (βc - β) / (3 * β * βc)) * (∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2))⁻¹ := by
+    χ β ≤ (1 + κ * (βc - β) / (3 * β * βc)) * (∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2))⁻¹ := by
   have hβ0 : 0 < β := lt_of_le_of_lt hβ₀ hβ.1
   have hβc0 : 0 < βc := hβ0.trans hβ.2
   have hχβ := hpos β hβ
   set I := ∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2) with hI
-  set J := 2 * (βc - β) / (3 * β * βc) with hJ
+  set J := κ * (βc - β) / (3 * β * βc) with hJ
   have hJ0 : 0 ≤ J := by
     have := hβ.2
     rw [hJ]
-    exact div_nonneg (by linarith) (by positivity)
+    exact div_nonneg (mul_nonneg hκ (by linarith)) (by positivity)
   -- integrability of `1/(3s²D²)` on subintervals of `[β, β_c]`
   have hfint : ∀ p q, β ≤ p → p ≤ q → q ≤ βc →
       IntervalIntegrable (fun s => 1 / (3 * s ^ 2 * D s ^ 2)) volume p q := by
@@ -143,7 +154,7 @@ theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β�
         rw [uIcc_of_le hs₁.1.le] at hs
         exact hχge s hs) hacχ
     -- the derivative bound
-    set g : ℝ → ℝ := fun s => -(1 / (3 * s ^ 2 * D s ^ 2)) + 2 / (3 * χ β) * (1 / s ^ 2) with hg
+    set g : ℝ → ℝ := fun s => -(1 / (3 * s ^ 2 * D s ^ 2)) + κ / (3 * χ β) * (1 / s ^ 2) with hg
     have hgint : IntervalIntegrable g volume β s₁ := by
       refine (hfint β s₁ le_rfl hs₁.1.le hs₁.2.le).neg.add ?_
       refine (ContinuousOn.intervalIntegrable ?_).const_mul _
@@ -159,34 +170,24 @@ theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β�
       have hd' := (hd (by rwa [uIcc_of_le hs₁.1.le])).hasDerivAt
       have h2 : HasDerivAt (fun s => (χ s)⁻¹) (-(deriv χ s) / (χ s) ^ 2) s := hd'.inv hχs.ne'
       rw [h2.deriv]
-      have hds := hs hsI'
-      -- `(χ - D)₊² ≥ χ² - 2χD`
-      have hsq : χ s ^ 2 - 2 * χ s * D s ≤ max (χ s - D s) 0 ^ 2 := by
-        rcases le_total (χ s - D s) 0 with h | h
-        · rw [max_eq_right h]
-          nlinarith
-        · rw [max_eq_left h]
-          nlinarith [sq_nonneg (D s)]
-      have hden : 0 < 3 * s ^ 2 * D s ^ 2 := by positivity
-      have hlow : (χ s ^ 2 - 2 * χ s * D s) / (3 * s ^ 2 * D s ^ 2) ≤ deriv χ s :=
-        (div_le_div_of_nonneg_right hsq hden.le).trans hds
-      have e1 : (χ s ^ 2 - 2 * χ s * D s) / (3 * s ^ 2 * D s ^ 2) / χ s ^ 2 =
-          1 / (3 * s ^ 2 * D s ^ 2) - 2 / (3 * χ s) * (1 / (s ^ 2 * D s)) := by
+      have hlow := hs hsI'
+      have e1 : (χ s ^ 2 - κ * χ s * D s) / (3 * s ^ 2 * D s ^ 2) / χ s ^ 2 =
+          1 / (3 * s ^ 2 * D s ^ 2) - κ / (3 * χ s) * (1 / (s ^ 2 * D s)) := by
         field_simp
       have hstep : -(deriv χ s) / χ s ^ 2 ≤
-          -(1 / (3 * s ^ 2 * D s ^ 2)) + 2 / (3 * χ s) * (1 / (s ^ 2 * D s)) := by
+          -(1 / (3 * s ^ 2 * D s ^ 2)) + κ / (3 * χ s) * (1 / (s ^ 2 * D s)) := by
         have := div_le_div_of_nonneg_right hlow (by positivity : (0 : ℝ) ≤ χ s ^ 2)
         rw [e1] at this
         rw [neg_div]
         linarith
       refine hstep.trans ?_
       simp only [hg]
-      have h3 : 2 / (3 * χ s) ≤ 2 / (3 * χ β) :=
-        div_le_div_of_nonneg_left (by norm_num) (by positivity) (by linarith [hχge s hsI])
+      have h3 : κ / (3 * χ s) ≤ κ / (3 * χ β) :=
+        div_le_div_of_nonneg_left hκ (by positivity) (by linarith [hχge s hsI])
       have h4 : 1 / (s ^ 2 * D s) ≤ 1 / s ^ 2 :=
         div_le_div_of_nonneg_left zero_le_one (by positivity) (by nlinarith [sq_nonneg s])
       have h5 : 0 ≤ 1 / (s ^ 2 * D s) := by positivity
-      nlinarith [mul_le_mul h3 h4 h5 (by positivity)]
+      nlinarith [mul_le_mul h3 h4 h5 (by positivity : 0 ≤ κ / (3 * χ β))]
     have hFTC := sub_le_integral_of_ae_deriv_le hs₁.1.le hU hgint hderU
     -- evaluate `∫ g`
     have hinv2 : ∫ s in β..s₁, 1 / s ^ 2 = 1 / β - 1 / s₁ := by
@@ -205,10 +206,10 @@ theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β�
         rw [uIcc_of_le hs₁.1.le] at hs
         exact pow_ne_zero 2 (hβ0.trans_le hs.1).ne'
     have hgval : ∫ s in β..s₁, g s =
-        -(∫ s in β..s₁, 1 / (3 * s ^ 2 * D s ^ 2)) + 2 / (3 * χ β) * (1 / β - 1 / s₁) := by
+        -(∫ s in β..s₁, 1 / (3 * s ^ 2 * D s ^ 2)) + κ / (3 * χ β) * (1 / β - 1 / s₁) := by
       simp only [hg]
       rw [integral_add (f := fun s => -(1 / (3 * s ^ 2 * D s ^ 2)))
-        (g := fun s => 2 / (3 * χ β) * (1 / s ^ 2)) (hfint β s₁ le_rfl hs₁.1.le hs₁.2.le).neg,
+        (g := fun s => κ / (3 * χ β) * (1 / s ^ 2)) (hfint β s₁ le_rfl hs₁.1.le hs₁.2.le).neg,
         intervalIntegral.integral_neg,
         intervalIntegral.integral_const_mul, hinv2]
       refine (ContinuousOn.intervalIntegrable ?_).const_mul _
@@ -217,11 +218,11 @@ theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β�
       exact pow_ne_zero 2 (hβ0.trans_le hs.1).ne'
     rw [hgval] at hFTC
     have hχs₁ := hpos s₁ hs₁I
-    have hbound : 2 / (3 * χ β) * (1 / β - 1 / s₁) ≤ J / χ β := by
+    have hbound : κ / (3 * χ β) * (1 / β - 1 / s₁) ≤ J / χ β := by
       have h1 : 1 / β - 1 / s₁ ≤ 1 / β - 1 / βc := by
         have := one_div_le_one_div_of_le (hβ0.trans hs₁.1) hs₁.2.le
         linarith
-      have e : J / χ β = 2 / (3 * χ β) * (1 / β - 1 / βc) := by
+      have e : J / χ β = κ / (3 * χ β) * (1 / β - 1 / βc) := by
         rw [hJ]
         field_simp
       rw [e]
@@ -267,15 +268,87 @@ theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β�
   rw [← div_eq_mul_inv, le_div_iff₀ hIpos, mul_comm, ← le_div_iff₀ hχβ]
   exact hIle
 
-/-- **6PGV, logarithmic form.** Under the hypotheses of `le_of_deriv_ge_sq_div`, if moreover
-`D(β_c - u) ≤ C (log(1/u))^a` for all small `u > 0`, with `C > 0` and `a ≥ 0`, then
-`χ(β_c - ε) = O(ε⁻¹ (log(1/ε))^{2a})` as `ε ↓ 0`. -/
-theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
-    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β) (hmono : MonotoneOn χ (Ioo β₀ βc))
+/-- For `0 ≤ β₀ < β < β_c` and `D ≥ 1` measurable on `(β₀, β_c)`, the function
+`1/(3s²D(s)²)` is integrable on `[β, β_c]` and its integral there is strictly positive. -/
+theorem intervalIntegrable_and_integral_pos_inv_three_sq_mul_sq (hβ₀ : 0 ≤ β₀)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β) {β : ℝ} (hβ : β ∈ Ioo β₀ βc) :
+    IntervalIntegrable (fun s => 1 / (3 * s ^ 2 * D s ^ 2)) volume β βc ∧
+      0 < ∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2) := by
+  have hβ0 : 0 < β := lt_of_le_of_lt hβ₀ hβ.1
+  have hint : IntervalIntegrable (fun s => 1 / (3 * s ^ 2 * D s ^ 2)) volume β βc := by
+    refine intervalIntegrable_of_bound_Ioo (M := 1 / (3 * β ^ 2)) hβ.2.le
+      (measurable_inv_three_sq_mul_sq hD) fun s hs => ?_
+    have hs0 : 0 < s := hβ0.trans hs.1
+    have hDs := hD1 s ⟨hβ.1.trans hs.1, hs.2⟩
+    rw [abs_of_nonneg (by positivity), div_le_div_iff₀ (by positivity) (by positivity)]
+    have : β ^ 2 ≤ s ^ 2 := pow_le_pow_left₀ hβ0.le hs.1.le 2
+    nlinarith [mul_le_mul this (one_le_pow₀ hDs (n := 2)) zero_le_one (by positivity)]
+  refine ⟨hint, intervalIntegral_pos_of_pos_on hint (fun s hs => ?_) hβ.2⟩
+  have hs0 : 0 < s := hβ0.trans hs.1
+  have hDs := hD1 s ⟨hβ.1.trans hs.1, hs.2⟩
+  positivity
+
+/-- `(x - d)₊² ≥ x² - 2xd` for `x, d ≥ 0`. -/
+theorem sq_sub_two_mul_mul_le_max_sub_sq {x d : ℝ} (hx : 0 ≤ x) (hd : 0 ≤ d) :
+    x ^ 2 - 2 * x * d ≤ max (x - d) 0 ^ 2 := by
+  rcases le_total (x - d) 0 with h | h
+  · rw [max_eq_right h]
+    nlinarith
+  · rw [max_eq_left h]
+    nlinarith [sq_nonneg d]
+
+/-- The squared positive-part inequality `χ' ≥ (χ - D)₊²/(3β²D²)` implies the linear form
+`χ' ≥ (χ² - 2χD)/(3β²D²)`. -/
+theorem ae_sq_sub_two_mul_div_le_deriv (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β)
+    (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      max (χ β - D β) 0 ^ 2 / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β) :
+    ∀ᵐ β, β ∈ Ioo β₀ βc → (χ β ^ 2 - 2 * χ β * D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β :=
+  hder.mono fun s h hs => (div_le_div_of_nonneg_right
+    (sq_sub_two_mul_mul_le_max_sub_sq (hpos s hs).le (zero_le_one.trans (hD1 s hs)))
+    (by positivity)).trans (h hs)
+
+/-- **Integrated susceptibility bound.** Let `0 ≤ β₀ < β_c`, `χ > 0` nondecreasing and locally
+absolutely continuous on `(β₀, β_c)`, `D ≥ 1` measurable and `χ' ≥ (χ - D)₊²/(3β²D²)` a.e. on
+`(β₀, β_c)`. Then `χ(β) ≤ (1 + 2(β_c - β)/(3ββ_c)) (∫_β^{β_c} ds/(3s²D(s)²))⁻¹` for every
+`β ∈ (β₀, β_c)`. -/
+theorem le_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β)
+    (hmono : MonotoneOn χ (Ioo β₀ βc))
     (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
     (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
     (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
       max (χ β - D β) 0 ^ 2 / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+    {β : ℝ} (hβ : β ∈ Ioo β₀ βc) :
+    χ β ≤ (1 + 2 * (βc - β) / (3 * β * βc)) * (∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2))⁻¹ :=
+  le_of_deriv_ge_sq_sub_mul_div hβ₀ zero_le_two hpos hmono hac hD hD1
+    (ae_sq_sub_two_mul_div_le_deriv hpos hD1 hder) hβ
+
+/-- **Integrated susceptibility bound with the linear term `χ(χ - D)`.** Let `0 ≤ β₀ < β_c`,
+`χ > 0` nondecreasing and locally absolutely continuous on `(β₀, β_c)`, `D ≥ 1` measurable and
+`χ' ≥ χ(χ - D)/(3β²D²)` a.e. on `(β₀, β_c)`. Then
+`χ(β) ≤ (1 + (β_c - β)/(3ββ_c)) (∫_β^{β_c} ds/(3s²D(s)²))⁻¹` for every `β ∈ (β₀, β_c)`. -/
+theorem le_of_deriv_ge_mul_sub_div (hβ₀ : 0 ≤ β₀) (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β)
+    (hmono : MonotoneOn χ (Ioo β₀ βc))
+    (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      χ β * (χ β - D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+    {β : ℝ} (hβ : β ∈ Ioo β₀ βc) :
+    χ β ≤ (1 + (βc - β) / (3 * β * βc)) * (∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2))⁻¹ := by
+  have := le_of_deriv_ge_sq_sub_mul_div hβ₀ zero_le_one hpos hmono hac hD hD1
+    (hder.mono fun s h hs => le_of_eq_of_le (by ring) (h hs)) hβ
+  rwa [one_mul] at this
+
+/-- **Logarithmic form, general linear term.** Under the hypotheses of
+`le_of_deriv_ge_sq_sub_mul_div`, if moreover
+`D(β_c - u) ≤ C (log(1/u))^a` for all small `u > 0`, with `C > 0` and `a ≥ 0`, then
+`χ(β_c - ε) = O(ε⁻¹ (log(1/ε))^{2a})` as `ε ↓ 0`. -/
+theorem isBigO_of_deriv_ge_sq_sub_mul_div {κ : ℝ} (hβ₀ : 0 ≤ β₀) (hκ : 0 ≤ κ) (hlt : β₀ < βc)
+    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β) (hmono : MonotoneOn χ (Ioo β₀ βc))
+    (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      (χ β ^ 2 - κ * χ β * D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
     {C a : ℝ} (hC : 0 < C) (ha : 0 ≤ a)
     (hDlog : ∀ᶠ u in 𝓝[>] 0, D (βc - u) ≤ C * Real.log (1 / u) ^ a) :
     (fun ε => χ (βc - ε)) =O[𝓝[>] 0] fun ε => ε⁻¹ * Real.log (1 / ε) ^ (2 * a) := by
@@ -283,7 +356,7 @@ theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
   obtain ⟨δ, hδ, hδD⟩ : ∃ δ > 0, ∀ u, 0 < u → u < δ → D (βc - u) ≤ C * Real.log (1 / u) ^ a := by
     obtain ⟨δ, hδ, h⟩ := Metric.eventually_nhds_iff.1 (eventually_nhdsWithin_iff.1 hDlog)
     exact ⟨δ, hδ, fun u hu hu' => h (by rwa [Real.dist_eq, sub_zero, abs_of_pos hu]) hu⟩
-  set K₁ := 1 + 4 / (3 * βc ^ 2)
+  set K₁ := 1 + 2 * κ / (3 * βc ^ 2)
   set K := K₁ * (6 * βc ^ 2 * C ^ 2 * 4 ^ a)
   refine IsBigO.of_bound K ?_
   have hev : ∀ᶠ ε in 𝓝[>] (0 : ℝ), ε ∈ Ioo 0 (min δ (min (1 / 2) (min (βc / 2) (βc - β₀)))) :=
@@ -299,14 +372,15 @@ theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
   set β := βc - ε with hβeq
   have hβ : β ∈ Ioo β₀ βc := ⟨by linarith, by linarith⟩
   have hβ0 : 0 < β := by linarith
-  have hmain := le_of_deriv_ge_sq_div hβ₀ hpos hmono hac hD hD1 hder hβ
+  have hmain := le_of_deriv_ge_sq_sub_mul_div hβ₀ hκ hpos hmono hac hD hD1 hder hβ
   -- `1 + J ≤ K₁`
-  have hJ : 1 + 2 * (βc - β) / (3 * β * βc) ≤ K₁ := by
-    have : 2 * (βc - β) / (3 * β * βc) ≤ 4 / (3 * βc ^ 2) := by
+  have hJ : 1 + κ * (βc - β) / (3 * β * βc) ≤ K₁ := by
+    have : κ * (βc - β) / (3 * β * βc) ≤ 2 * κ / (3 * βc ^ 2) := by
       rw [div_le_div_iff₀ (by positivity) (by positivity)]
       have : βc - β = ε := by rw [hβeq]; ring
       rw [this]
-      nlinarith
+      have h1 : ε * βc ≤ 2 * β := by nlinarith
+      nlinarith [mul_le_mul_of_nonneg_left h1 hκ]
     linarith
   -- the logarithm
   have hL : 0 < Real.log (1 / ε) :=
@@ -375,7 +449,7 @@ theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
   have hχ := hpos β hβ
   rw [Real.norm_of_nonneg hχ.le,
     Real.norm_of_nonneg (mul_nonneg (inv_nonneg.2 hε0.le) (Real.rpow_nonneg hL.le _))]
-  calc χ β ≤ (1 + 2 * (βc - β) / (3 * β * βc)) *
+  calc χ β ≤ (1 + κ * (βc - β) / (3 * β * βc)) *
         (∫ s in β..βc, 1 / (3 * s ^ 2 * D s ^ 2))⁻¹ := hmain
     _ ≤ K₁ * (ε / 2 * m)⁻¹ :=
         mul_le_mul hJ (inv_anti₀ hIpos hI) (inv_nonneg.2 (hIpos.le.trans hI)) (by positivity)
@@ -396,6 +470,68 @@ theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
         simp only [m, K, e1]
         field_simp
         ring
+
+/-- **Logarithmic form.** Under the hypotheses of `le_of_deriv_ge_sq_div`, if moreover
+`D(β_c - u) ≤ C (log(1/u))^a` for all small `u > 0`, with `C > 0` and `a ≥ 0`, then
+`χ(β_c - ε) = O(ε⁻¹ (log(1/ε))^{2a})` as `ε ↓ 0`. -/
+theorem isBigO_of_deriv_ge_sq_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
+    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β) (hmono : MonotoneOn χ (Ioo β₀ βc))
+    (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      max (χ β - D β) 0 ^ 2 / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+    {C a : ℝ} (hC : 0 < C) (ha : 0 ≤ a)
+    (hDlog : ∀ᶠ u in 𝓝[>] 0, D (βc - u) ≤ C * Real.log (1 / u) ^ a) :
+    (fun ε => χ (βc - ε)) =O[𝓝[>] 0] fun ε => ε⁻¹ * Real.log (1 / ε) ^ (2 * a) :=
+  isBigO_of_deriv_ge_sq_sub_mul_div hβ₀ zero_le_two hlt hpos hmono hac hD hD1
+    (ae_sq_sub_two_mul_div_le_deriv hpos hD1 hder) hC ha hDlog
+
+/-- **Logarithmic form for the linear term `χ(χ - D)`.** Under the hypotheses of
+`le_of_deriv_ge_mul_sub_div`, suppose `D(β_c - u) ≤ C (log(1/u))^a` for `0 < u < ε₀`, with
+`C > 0`, `a ≥ 0` and `ε₀ > 0`. Then there are `C' > 0` and `ε₁ > 0` with
+`χ(β_c - ε) ≤ C' ε⁻¹ (log(1/ε))^{2a}` for `0 < ε < ε₁`. -/
+theorem exists_le_inv_mul_log_rpow_of_deriv_ge_mul_sub_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
+    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β) (hmono : MonotoneOn χ (Ioo β₀ βc))
+    (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      χ β * (χ β - D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+    {C a ε₀ : ℝ} (hC : 0 < C) (ha : 0 ≤ a) (hε₀ : 0 < ε₀)
+    (hDlog : ∀ u, 0 < u → u < ε₀ → D (βc - u) ≤ C * Real.log (1 / u) ^ a) :
+    ∃ C' > 0, ∃ ε₁ > 0, ∀ ε, 0 < ε → ε < ε₁ →
+      χ (βc - ε) ≤ C' * (ε⁻¹ * Real.log (1 / ε) ^ (2 * a)) := by
+  have hev : ∀ᶠ u in 𝓝[>] (0 : ℝ), D (βc - u) ≤ C * Real.log (1 / u) ^ a := by
+    filter_upwards [Ioo_mem_nhdsGT hε₀] with u hu using hDlog u hu.1 hu.2
+  obtain ⟨c, hc⟩ := (isBigO_of_deriv_ge_sq_sub_mul_div hβ₀ zero_le_one hlt hpos hmono hac hD
+    hD1 (hder.mono fun s h hs => le_of_eq_of_le (by ring) (h hs)) hC ha hev).bound
+  have hlt' : (0 : ℝ) < min 1 (βc - β₀) := lt_min one_pos (by linarith)
+  obtain ⟨ε₁, hε₁, h⟩ := (nhdsGT_basis (0 : ℝ)).eventually_iff.1
+    (hc.and (Ioo_mem_nhdsGT hlt'))
+  refine ⟨max c 1, by positivity, ε₁, hε₁, fun ε hε hε' => ?_⟩
+  obtain ⟨h1, h2⟩ := h ⟨hε, hε'⟩
+  have hε1 : ε ≤ 1 := h2.2.le.trans (min_le_left _ _)
+  have hεb : ε < βc - β₀ := h2.2.trans_le (min_le_right _ _)
+  have hL : 0 ≤ Real.log (1 / ε) := Real.log_nonneg (by rw [le_div_iff₀ hε]; linarith)
+  rw [Real.norm_of_nonneg (hpos _ ⟨by linarith, by linarith⟩).le,
+    Real.norm_of_nonneg (mul_nonneg (inv_nonneg.2 hε.le) (Real.rpow_nonneg hL _))] at h1
+  exact h1.trans (mul_le_mul_of_nonneg_right (le_max_left _ _)
+    (mul_nonneg (inv_nonneg.2 hε.le) (Real.rpow_nonneg hL _)))
+
+/-- **Bounded diagrams.** Under the hypotheses of `le_of_deriv_ge_mul_sub_div`, if
+`D(β_c - u) ≤ C` for `0 < u < ε₀`, then `χ(β_c - ε) ≤ C' ε⁻¹` for `0 < ε < ε₁`, for some
+`C', ε₁ > 0`. -/
+theorem exists_le_inv_of_deriv_ge_mul_sub_div (hβ₀ : 0 ≤ β₀) (hlt : β₀ < βc)
+    (hpos : ∀ β ∈ Ioo β₀ βc, 0 < χ β) (hmono : MonotoneOn χ (Ioo β₀ βc))
+    (hac : ∀ p q, β₀ < p → p ≤ q → q < βc → AbsolutelyContinuousOnInterval χ p q)
+    (hD : Measurable D) (hD1 : ∀ β ∈ Ioo β₀ βc, 1 ≤ D β)
+    (hder : ∀ᵐ β, β ∈ Ioo β₀ βc →
+      χ β * (χ β - D β) / (3 * β ^ 2 * D β ^ 2) ≤ deriv χ β)
+    {C ε₀ : ℝ} (hC : 0 < C) (hε₀ : 0 < ε₀) (hDb : ∀ u, 0 < u → u < ε₀ → D (βc - u) ≤ C) :
+    ∃ C' > 0, ∃ ε₁ > 0, ∀ ε, 0 < ε → ε < ε₁ → χ (βc - ε) ≤ C' * ε⁻¹ := by
+  obtain ⟨C', hC', ε₁, hε₁, h⟩ := exists_le_inv_mul_log_rpow_of_deriv_ge_mul_sub_div hβ₀ hlt
+    hpos hmono hac hD hD1 hder hC le_rfl hε₀ (a := 0) fun u hu hu' => by
+      simpa using hDb u hu hu'
+  exact ⟨C', hC', ε₁, hε₁, fun ε hε hε' => by simpa using h ε hε hε'⟩
 
 /-! ### Non-vacuity: `D ≡ 1`, `χ ≡ 1` (the equality case `χ' = (χ - D)₊²/(3β²D²) = 0`) -/
 
@@ -530,6 +666,7 @@ theorem absolutelyContinuousOnInterval_inv {u : ℝ → ℝ} {p q : ℝ} (hpq : 
 
 Then `f/m³ ~ (6 K a₀ c⁴ log r / ν)^{-1/2}` and
 `f ~ c √(ν/(6 K a₀)) r^{3α}/√(log r)`. -/
+@[tag "OP8F"]
 theorem op8f_asymptotics {α a₀ c ν K r₀ : ℝ} (ha₀ : 0 < a₀) (hc : 0 < c)
     (hν : 0 < ν) (hK : 0 < K) (hr₀ : 1 < r₀) {m f a b e₁ e₂ ε : ℝ → ℝ}
     (hm0 : ∀ r, r₀ ≤ r → 0 < m r) (hf0 : ∀ r, r₀ ≤ r → 0 < f r)
@@ -700,10 +837,10 @@ theorem op8f_asymptotics {α a₀ c ν K r₀ : ℝ} (ha₀ : 0 < a₀) (hc : 0 
     have : 0 < Real.sqrt (Real.log r) := Real.sqrt_pos.2 hlr
     field_simp
 
-/-- **D-5 witness for OP8F.** Take `α = a₀ = c = ν = K = 1` and `r₀ = 2`, with `m(r) = r`,
-`a(r) = r^{-2}`, `b(r) = r³`, `e₁ = 0`, `ε = 0`, `f(r) = r³/√(6 log r)` and
-`e₂(r) = 1/(6 log r)`. Every hypothesis holds, and the theorem gives
-`f/m³ ~ (6 log r)^{-1/2}`, which is exact. -/
+/-- **Non-vacuity witness for `op8f_asymptotics`.** Take `α = a₀ = c = ν = K = 1` and `r₀ = 2`, with
+`m(r) = r`, `a(r) = r^{-2}`, `b(r) = r³`, `e₁ = 0`, `ε = 0`, `f(r) = r³/√(6 log r)` and
+`e₂(r) = 1/(6 log r)`. Every hypothesis holds, and the theorem gives `f/m³ ~ (6 log r)^{-1/2}`,
+which is exact. -/
 example : ((fun r : ℝ => (r ^ 3 / Real.sqrt (6 * Real.log r)) / r ^ 3) ~[atTop]
       fun r => (6 * 1 * 1 * 1 ^ 4 * Real.log r / 1) ^ (-(1 / 2 : ℝ))) ∧
     (fun r : ℝ => r ^ 3 / Real.sqrt (6 * Real.log r)) ~[atTop]
@@ -754,7 +891,7 @@ example : ((fun r : ℝ => (r ^ 3 / Real.sqrt (6 * Real.log r)) / r ^ 3) ~[atTop
     IsEquivalent.refl IsEquivalent.refl
     (Eventually.of_forall fun r hr => by
       have hr0 : 0 < r := by linarith
-      show deriv (fun r : ℝ => r) r = 1 * r ^ (-1 - 1 : ℝ) * r ^ 2 * (1 - 0)
+      change deriv (fun r : ℝ => r) r = 1 * r ^ (-1 - 1 : ℝ) * r ^ 2 * (1 - 0)
       rw [deriv_id'', show (-1 - 1 : ℝ) = -((2 : ℕ) : ℝ) by norm_num, Real.rpow_neg hr0.le,
         Real.rpow_natCast, sub_zero]
       field_simp)

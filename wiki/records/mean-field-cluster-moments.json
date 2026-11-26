@@ -1,0 +1,111 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "mean-field-cluster-moments",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 199
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "nguyen-gap-1987",
+      "order": 0,
+      "label": "Moment comparison after the second-moment estimate",
+      "locator": "Sections 2–3, Theorem 3 and (4), (7)–(10), printed pp.238–241",
+      "relationship": "Primary-source comparison with separately proved bond-model deductions",
+      "status": "pending",
+      "note": "The paper treats site clusters. The wiki uses its existing bond exploration-score argument and tree-graph estimates, then gives a real-order size-biased deduction. No site normalization is transferred unchanged."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "The subcritical moment-gap conclusion",
+      "locator": "17 March 2017 author manuscript, Theorem 11.1 and (11.1.2), printed p.135 / PDF index146",
+      "relationship": "Primary-source comparison with separately proved bond-model deductions",
+      "status": "pending",
+      "note": "The classical bootstrap now supplies a written proof for all sufficiently large d, with q=2d retained. The numerical d>=11 threshold and the general finite-triangle implication remain separate."
+    },
+    {
+      "source": "nguyen-gap-1987",
+      "order": 2,
+      "label": "Cutoff probability and inverse-volume comparison",
+      "locator": "Section 3, Proposition (5)–(6) and its proof, printed pp.240–242",
+      "relationship": "Primary-source comparison with separately proved bond-model deductions",
+      "status": "pending",
+      "note": "The new fixed-cutoff conclusions are stated at u chi^2 for 0<u<=1/16. They neither substitute the exact moment ratio nor identify a singular free-energy contribution. The fractional-moment and logarithmic-borderline deductions are additional results here."
+    },
+    {
+      "source": "nguyen-gap-1987",
+      "order": 3,
+      "label": "Finite-triangle conclusions through the corrected boundary argument",
+      "locator": "Independent deduction using the corrected quantitative triangle inequality; compare Chapter 4 of the 17 March 2017 Heydenreich–van der Hofstad manuscript and Nguyen (1987), Sections 2–3",
+      "relationship": "Written alternative proof of the finite-triangle implication, with model-dependent constants",
+      "status": "pending",
+      "note": "The corrected squared positive-part inequality supplies the susceptibility upper bound without small off-diagonal triangles. Endpoint entropy comparison supplies the critical tail, and the score and size-biased arguments give the moment cutoff. The classical endpoint-separation proof remains separate; no source erratum or formal status is changed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "2DZD",
+      "proof_uses": [
+        "6L9Z"
+      ],
+      "reason": "Second moments determine the gap scale. Written deduction; all parameter, moment and cutoff ranges are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "36ZQ",
+      "proof_uses": [
+        "2DZD",
+        "0Y4K",
+        "4GNM",
+        "Y84V",
+        "IK5Y",
+        "C2V4",
+        "F7N7"
+      ],
+      "reason": "High-dimensional lattice gap exponents. Written deduction; all parameter, moment and cutoff ranges are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "76EV",
+      "proof_uses": [
+        "2DZD",
+        "36ZQ",
+        "74SS",
+        "0BQB",
+        "IK5Y"
+      ],
+      "reason": "Cutoff tails and real-order cluster moments. Written deduction; all parameter, moment and cutoff ranges are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "EKKI",
+      "proof_uses": [
+        "2DZD",
+        "36ZQ",
+        "74SS"
+      ],
+      "reason": "Large-cluster probability and inverse-volume density. Written deduction; all parameter, moment and cutoff ranges are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "7T8L",
+      "proof_uses": [
+        "ADWR",
+        "I23O",
+        "4KBG",
+        "4GNM",
+        "Y84V",
+        "IK5Y",
+        "2DZD",
+        "0BQB",
+        "EKKI"
+      ],
+      "reason": "The finite-triangle derivative lower bound and score inequality give a cubic second moment. Moment-ratio continuity, a size-biased band and the critical/exponential upper tails give the general cutoff and all positive real moment orders."
+    }
+  ]
+}

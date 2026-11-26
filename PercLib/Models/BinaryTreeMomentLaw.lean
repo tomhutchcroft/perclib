@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 450 (Q-116, part 3), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied.
 -/
 module
 
@@ -21,7 +22,7 @@ and every real `s`,
 `E_p[|K|^s; |K| < ∞] = ((1-p)/p) ∑_{n ≥ 1} n^s Cat(n) 4^{-n} e^{-λ(p) n}`,
 `λ(p) = -log(4p(1-p))` (`lintegral_cluster_rpow_eq_moment`). The right side is the series
 `M_s(p)` of `PercLib/Models/BinaryTreeMoments.lean`, written with the index `n + 1`. The
-proof sums the Catalan law `binaryTree_law_cluster_card_eq_catalan` (PR #419).
+proof sums the Catalan law `binaryTree_law_cluster_card_eq_catalan`.
 At `p = 1/2` the real series need not converge, which is why `p ≠ 1/2` is assumed.
 This file adds no definition.
 -/
@@ -32,7 +33,6 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability PercLib.Percolation.Bond
 open scoped ENNReal NNReal
-open Classical
 
 namespace PercLib.Models
 
@@ -93,7 +93,8 @@ theorem summable_moment_terms {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (hp : p ≠ 
         gcongr
     _ = _ := by ring
 
-/-- **GGVG, identification.** On the rooted binary tree with open probability `p ∈ (0,1)`,
+open Classical in
+/-- **Identification.** On the rooted binary tree with open probability `p ∈ (0,1)`,
 `p ≠ 1/2`, `E_p[|K|^s; |K| < ∞] = ((1-p)/p) ∑_{n≥1} n^s Cat(n) 4^{-n} e^{-λ(p) n}`. -/
 theorem lintegral_cluster_rpow_eq_moment (p : unitInterval)
     (q : Sym2 (List (Fin 2)) → unitInterval)
@@ -165,7 +166,7 @@ theorem lintegral_cluster_rpow_eq_moment (p : unitInterval)
   field_simp
   ring
 
-/-- D-5: the hypotheses hold at `p = 1/4` with `q` the tree profile, for every `s`. -/
+/-- Non-vacuity: the hypotheses hold at `p = 1/4` with `q` the tree profile, for every `s`. -/
 example (s : ℝ) := lintegral_cluster_rpow_eq_moment
   (⟨1 / 4, by norm_num, by norm_num⟩ : unitInterval)
   (fun e => if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet

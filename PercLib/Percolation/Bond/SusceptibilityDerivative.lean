@@ -1,9 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 433 (Q-99), written on 2026-11-16 by PROVER-E: the derivative bound for
-the finite-volume susceptibility (wiki integrated-susceptibility, tag TAVM) and the integrated
-mean-field inequality for the susceptibility of a transitive kernel (tag MXGM). No upstream
-proof is copied, no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: the derivative bound for the finite-volume susceptibility (wiki
+integrated-susceptibility, tag TAVM) and the integrated mean-field inequality for the susceptibility
+of a transitive kernel (tag MXGM). No upstream proof is copied, no definition is added and no Input
+is introduced.
 -/
 module
 
@@ -39,7 +43,8 @@ For a transitive kernel (`∀ x y, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2
 countable `V` with finite off-diagonal row sum `R`, `M_F ≤ χ(β)` and `R_F ≤ R`, so the
 finite-volume derivative is at most `R χ(β)²`. Integrating and exhausting `V` by finite sets
 gives `χ(t) - χ(s) ≤ R ∫_s^t χ(u)² du` wherever `χ` is finite (`chi_sub_le_integral`,
-tag MXGM), and hence `χ` is Lipschitz on compact subintervals (`lipschitzOnWith_chi`),
+tag MXGM), and hence `χ` is Lipschitz on compact subintervals (`lipschitzOnWith_chi`) and
+locally Lipschitz on open intervals (`locallyLipschitzOn_chi`),
 differentiable almost everywhere (`ae_differentiableAt_chi`) with derivative in `[0, R χ²]`
 (`hasDerivAt_chi_mem_Icc`). Finally `1/χ(s) - 1/χ(t) ≤ R (t - s)` (`inv_chi_sub_le`).
 The endpoint blow-up `χ(β) ≥ 1/(R (b - β))` when `χ(b) = ∞` is left to a later file, which
@@ -49,7 +54,7 @@ will carry its non-vacuity witness.
 @[expose] public section
 noncomputable section
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 variable {V : Type*}
@@ -130,8 +135,8 @@ theorem mem_disjointOccurrence_localConn_of_restrict {ω : Config V} {x a b y : 
   rw [mem_disjointOccurrence_iff_open (isUpperSet_conn x a) (isUpperSet_conn b y)] at h
   obtain ⟨F, H, hF, hH, hd, hFω, hHω, hFc, hHc⟩ := h
   have hinj := sym2_map_val_injective S
-  rw [mem_disjointOccurrence_iff_open (isUpperSet_localConn _ x a)
-    (isUpperSet_localConn _ b y)]
+  rw [mem_disjointOccurrence_iff_open (isUpperSet_setOf_reachable_induce _ x a)
+    (isUpperSet_setOf_reachable_induce _ b y)]
   refine ⟨Sym2.map Subtype.val '' F, Sym2.map Subtype.val '' H, hF.image _, hH.image _,
     (Set.disjoint_image_iff hinj).2 hd, ?_, ?_, ?_, ?_⟩
   · rintro _ ⟨f, hf, rfl⟩
@@ -204,9 +209,10 @@ theorem measureReal_disjointOccurrence_localConn_le (q : Sym2 V → unitInterval
         (law q).real {ω : Config V | ((openGraph ω).induce (S : Set V)).Reachable b y} := by
   rw [localConn_eq_preimage_restrict S x a, localConn_eq_preimage_restrict S b y]
   refine cylinder_profile_bk q S.sym2 _ _ ?_ ?_
-  · exact fun η η' h hη => isUpperSet_localConn _ x a (image_mono h) hη
-  · exact fun η η' h hη => isUpperSet_localConn _ b y (image_mono h) hη
+  · exact fun η η' h hη => isUpperSet_setOf_reachable_induce _ x a (image_mono h) hη
+  · exact fun η η' h hη => isUpperSet_setOf_reachable_induce _ b y (image_mono h) hη
 
+open Classical in
 /-- The probability that `e` is pivotal for `x ↔_S y` is at most
 `∑ τ_S(x,a) τ_S(b,y)` over the two orientations `(a,b)` of `e`. -/
 theorem measureReal_pivotal_localConn_le (q : Sym2 V → unitInterval) {e : Sym2 V}
@@ -233,6 +239,7 @@ theorem measureReal_pivotal_localConn_le (q : Sym2 V → unitInterval) {e : Sym2
     ((measureReal_biUnion_finset_le _ _).trans ?_)
   exact Finset.sum_le_sum fun p _ => measureReal_disjointOccurrence_localConn_le S q _ _ _ _
 
+open Classical in
 /-- The Russo derivative of `χ_S(o)` is at most `R_S χ_S(o) M_S`. -/
 theorem russo_finiteChi_le (J : Sym2 V → ℝ≥0) (o : (S : Set V)) {β : ℝ} (hβ : 0 ≤ β) :
     (∑ y : (S : Set V), ∑ e ∈ S.sym2, ((J e : ℝ) * Real.exp (-β * J e)) *
@@ -311,7 +318,8 @@ theorem russo_finiteChi_le (J : Sym2 V → ℝ≥0) (o : (S : Set V)) {β : ℝ}
         rw [← Finset.sum_mul]
         ring
 
-/-- **TAVM, right derivative.** At every `β ≥ 0` the finite-volume susceptibility
+open Classical in
+/-- **Right derivative.** At every `β ≥ 0` the finite-volume susceptibility
 `β ↦ χ_S(o) = ∑_{y ∈ S} τ_S(o,y)` has a derivative `D` within `[0, ∞)` with
 `0 ≤ D ≤ R_S χ_S(o) M_S`, where `R_S = max_{u ∈ S} ∑_{v ∈ S, v ≠ u} J(u,v)` and
 `M_S = max_{u ∈ S} χ_S(u)`. -/
@@ -333,8 +341,10 @@ theorem hasDerivWithinAt_finiteChi_le (J : Sym2 V → ℝ≥0) (o : (S : Set V))
       (mul_nonneg (J e).coe_nonneg (Real.exp_pos _).le) measureReal_nonneg,
     russo_finiteChi_le S J o hβ⟩
 
+open Classical in
 /-- **TAVM.** At every `β > 0` the finite-volume susceptibility `β ↦ χ_S(o)` has a
 derivative `D` with `0 ≤ D ≤ R_S χ_S(o) M_S`. -/
+@[tag "TAVM"]
 theorem hasDerivAt_finiteChi_le (J : Sym2 V → ℝ≥0) (o : (S : Set V)) {β : ℝ}
     (hβ : 0 < β) :
     ∃ D, HasDerivAt (fun b : ℝ => ∑ y : (S : Set V),
@@ -373,13 +383,14 @@ theorem law_map_image_of_invariant {q : Sym2 V → unitInterval} (σ : V ≃ V)
   rw [Sym2.map_map, σ.self_comp_symm, Sym2.map_id, id] at h
   exact h.symm
 
+open Classical in
 /-- For a transitive kernel, the off-diagonal row sums do not depend on the vertex. -/
 theorem rowSum_eq_of_transitive (J : Sym2 V → ℝ≥0)
     (hJ : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e) (u o : V) :
-    ∑' v, (if v = u then 0 else (J s(u, v) : ℝ≥0∞)) =
-      ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) := by
+    rowSum (fun e => (J e : ℝ≥0∞)) u =
+      rowSum (fun e => (J e : ℝ≥0∞)) o := by
   obtain ⟨σ, hσo, hσ⟩ := hJ o u
-  rw [← hσo, ← σ.tsum_eq]
+  rw [← hσo, rowSum_def, rowSum_def, ← σ.tsum_eq]
   refine tsum_congr fun w => ?_
   rw [σ.injective.eq_iff, ← Sym2.map_mk, hσ]
 
@@ -400,6 +411,7 @@ theorem finiteChi_le_chi [Countable V] (q : Sym2 V → unitInterval) (S : Finset
     _ ≤ ∑' y, tau q x y := ENNReal.sum_le_tsum S
     _ = chi q x := (chi_eq_tsum_tau q x).symm
 
+open Classical in
 /-- On a countable vertex set the susceptibility is the supremum of finite-volume
 susceptibilities along an exhaustion by finite sets containing the root. -/
 theorem exists_chi_eq_iSup_finiteChi [Countable V] (q : Sym2 V → unitInterval) (o : V) :
@@ -436,19 +448,20 @@ variable [Countable V] (J : Sym2 V → ℝ≥0)
   (hJ : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
 
 include hJ in
+open Classical in
 /-- On a transitive kernel the Russo derivative of a finite-volume susceptibility is at most
 `R χ(β)²`, where `R` is the off-diagonal row sum of `J` and `χ(β)` the susceptibility. -/
 theorem russo_finiteChi_le_rowSum_mul_sq (S : Finset V) (o : (S : Set V)) {β : ℝ}
     (hβ : 0 ≤ β) (hχ : chi (intensityProfile J β.toNNReal) o ≠ ⊤)
-    (hR : ∑' v, (if v = (o : V) then 0 else (J s((o : V), v) : ℝ≥0∞)) ≠ ⊤) :
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) (o : V) ≠ ⊤) :
     (∑ y : (S : Set V), ∑ e ∈ S.sym2, ((J e : ℝ) * Real.exp (-β * J e)) *
         (law (intensityProfile J β.toNNReal)).real
           {ω | insert e ω ∈ {ω : Config V | ((openGraph ω).induce (S : Set V)).Reachable o y} ∧
             ω \ {e} ∉ {ω : Config V | ((openGraph ω).induce (S : Set V)).Reachable o y}}) ≤
-      (∑' v, (if v = (o : V) then 0 else (J s((o : V), v) : ℝ≥0∞))).toReal *
+      (rowSum (fun e => (J e : ℝ≥0∞)) (o : V)).toReal *
         (chi (intensityProfile J β.toNNReal) o).toReal ^ 2 := by
   set q := intensityProfile J β.toNNReal
-  set R := (∑' v, (if v = (o : V) then 0 else (J s((o : V), v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) (o : V)).toReal
   set χ := (chi q o).toReal
   have hχS : ∀ u : (S : Set V), ∑ y : (S : Set V), (law q).real
       {ω : Config V | ((openGraph ω).induce (S : Set V)).Reachable u y} ≤ χ := by
@@ -472,7 +485,7 @@ theorem russo_finiteChi_le_rowSum_mul_sq (S : Finset V) (o : (S : Set V)) {β : 
         simp
     rw [h1]
     refine ENNReal.toReal_mono hR ?_
-    rw [← hrow]
+    rw [← hrow, rowSum_def]
     exact ENNReal.sum_le_tsum S
   have hnn : ∀ u y : (S : Set V), 0 ≤ (law q).real
       {ω : Config V | ((openGraph ω).induce (S : Set V)).Reachable u y} :=
@@ -495,18 +508,18 @@ theorem russo_finiteChi_le_rowSum_mul_sq (S : Finset V) (o : (S : Set V)) {β : 
     (mul_nonneg (hR0.trans (Finset.sup'_le _ _ fun u _ => hRS u)) (hχS0.trans (hχS o)))
 
 include hJ in
-/-- **MXGM, integrated form.** For a transitive kernel with finite off-diagonal row sum `R`,
+/-- **Integrated form.** For a transitive kernel with finite off-diagonal row sum `R`,
 if `χ(β) = chi q_β o` is finite for `β ∈ (a,b)`, `0 ≤ a`, then for `a < s ≤ t < b`,
 `χ(t) - χ(s) ≤ R ∫_s^t χ(u)² du`. -/
 theorem chi_sub_le_integral (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) {s t : ℝ}
     (hs : a < s) (hst : s ≤ t) (ht : t < b) :
     (chi (intensityProfile J t.toNNReal) o).toReal -
         (chi (intensityProfile J s.toNNReal) o).toReal ≤
-      (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal *
+      (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal *
         ∫ u in s..t, (chi (intensityProfile J u.toNNReal) o).toReal ^ 2 := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hmem : ∀ u ∈ Icc s t, u ∈ Ioo a b := fun u hu =>
     ⟨hs.trans_le hu.1, hu.2.trans_lt ht⟩
@@ -569,16 +582,16 @@ theorem monotoneOn_toReal_chi (o : V) {A : Set ℝ}
     (chi_mono (fun e => intensityProfile_mono J (Real.toNNReal_le_toNNReal huv) e) o)
 
 include hJ in
-/-- **MXGM, Lipschitz form.** Under the hypotheses of `chi_sub_le_integral`, the
+/-- **Lipschitz form.** Under the hypotheses of `chi_sub_le_integral`, the
 susceptibility is Lipschitz on every `[s,t] ⊆ (a,b)`, with constant `R χ(t)²`. -/
 theorem lipschitzOnWith_chi (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) {s t : ℝ}
     (hs : a < s) (ht : t < b) :
-    LipschitzOnWith (Real.toNNReal ((∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal *
+    LipschitzOnWith (Real.toNNReal ((rowSum (fun e => (J e : ℝ≥0∞)) o).toReal *
         (chi (intensityProfile J t.toNNReal) o).toReal ^ 2))
       (fun u : ℝ => (chi (intensityProfile J u.toNNReal) o).toReal) (Icc s t) := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hmem : ∀ u ∈ Icc s t, u ∈ Ioo a b := fun u hu =>
     ⟨hs.trans_le hu.1, hu.2.trans_lt ht⟩
@@ -663,14 +676,14 @@ theorem sub_le_of_step_le {g : ℝ → ℝ} {s t A B : ℝ} (hst : s ≤ t) (hB 
 include hJ in
 /-- `χ(v) - χ(u) ≤ R (v - u) χ(v)²` for `a < u ≤ v < b`. -/
 theorem chi_sub_le_mul_sq (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) {u v : ℝ}
     (hu : a < u) (huv : u ≤ v) (hv : v < b) :
     (chi (intensityProfile J v.toNNReal) o).toReal -
         (chi (intensityProfile J u.toNNReal) o).toReal ≤
-      (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal * (v - u) *
+      (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal * (v - u) *
         (chi (intensityProfile J v.toNNReal) o).toReal ^ 2 := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hR0 : 0 ≤ R := ENNReal.toReal_nonneg
   have hmono := monotoneOn_toReal_chi J o hfin
@@ -695,13 +708,13 @@ include hJ in
 /-- **Comparison for `1/χ`.** Under the hypotheses of `chi_sub_le_integral`,
 `1/χ(s) - 1/χ(t) ≤ R (t - s)` for `a < s ≤ t < b`. -/
 theorem inv_chi_sub_le (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) {s t : ℝ}
     (hs : a < s) (hst : s ≤ t) (ht : t < b) :
     1 / (chi (intensityProfile J s.toNNReal) o).toReal -
         1 / (chi (intensityProfile J t.toNNReal) o).toReal ≤
-      (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal * (t - s) := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+      (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal * (t - s) := by
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hmem : ∀ u, s ≤ u → u ≤ t → u ∈ Ioo a b := fun u h1 h2 =>
     ⟨hs.trans_le h1, h2.trans_lt ht⟩
@@ -740,16 +753,16 @@ theorem inv_chi_sub_le (o : V)
   nlinarith [mul_nonneg hR0 hvu, mul_nonneg (mul_nonneg hR0 hvu) hv0.le]
 
 include hJ in
-/-- **MXGM, derivative.** Wherever `β ↦ χ(β)` is differentiable in `(a,b)`, its derivative
+/-- **Derivative.** Wherever `β ↦ χ(β)` is differentiable in `(a,b)`, its derivative
 lies in `[0, R χ(β)²]`. -/
 theorem hasDerivAt_chi_mem_Icc (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) {β D : ℝ}
     (hβ : β ∈ Ioo a b)
     (hD : HasDerivAt (fun u : ℝ => (chi (intensityProfile J u.toNNReal) o).toReal) D β) :
-    0 ≤ D ∧ D ≤ (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal *
+    0 ≤ D ∧ D ≤ (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal *
       (chi (intensityProfile J β.toNNReal) o).toReal ^ 2 := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hslope : Filter.Tendsto (slope χ β) (nhdsWithin β (Ioi β)) (nhds D) := by
     have := hasDerivWithinAt_iff_tendsto_slope.1 (hD.hasDerivWithinAt (s := Ioi β))
@@ -771,10 +784,10 @@ theorem hasDerivAt_chi_mem_Icc (o : V)
     linarith
 
 include hJ in
-/-- **MXGM, almost-everywhere differentiability.** `β ↦ χ(β)` is differentiable at almost
+/-- **Almost-everywhere differentiability.** `β ↦ χ(β)` is differentiable at almost
 every `β ∈ (a,b)` (Rademacher, applied on compact subintervals). -/
 theorem ae_differentiableAt_chi (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) :
     ∀ᵐ β, β ∈ Ioo a b →
       DifferentiableAt ℝ (fun u : ℝ => (chi (intensityProfile J u.toNNReal) o).toReal) β := by
@@ -808,7 +821,7 @@ end MXGM
 
 /-! ### Non-vacuity -/
 
-/-- `F = {o}`: `χ_F ≡ 1`, so the derivative of TAVM is `0`. -/
+/-- `F = {o}`: `χ_F ≡ 1`, so the derivative of `hasDerivAt_finiteChi_le` is `0`. -/
 example (J : Sym2 V → ℝ≥0) (o : V) {β : ℝ} (hβ : 0 < β) :
     ∃ D, HasDerivAt (fun b : ℝ => ∑ y : (({o} : Finset V) : Set V),
         (law (intensityProfile J b.toNNReal)).real
@@ -837,7 +850,8 @@ example (J : Sym2 V → ℝ≥0) (o : V) {β : ℝ} (hβ : 0 < β) :
   rw [hconst] at hD
   exact hD.unique (hasDerivAt_const β 1)
 
-/-- Two vertices with one pair of intensity `1`: TAVM applies at every `β > 0`. -/
+/-- Two vertices with one pair of intensity `1`: `hasDerivAt_finiteChi_le` applies at every `β > 0`.
+-/
 example {β : ℝ} (hβ : 0 < β) :=
   hasDerivAt_finiteChi_le (Finset.univ : Finset Bool)
     (fun e : Sym2 Bool => if e = s(false, true) then 1 else 0)
@@ -868,27 +882,26 @@ theorem bool_pair_transitive : ∀ x y : Bool, ∃ σ : Bool ≃ Bool, σ x = y 
 /-- The comparison `1/χ(s) - 1/χ(t) ≤ R (t - s)` on two vertices, for `0 < s ≤ t`. -/
 example {s t : ℝ} (hs : 0 < s) (hst : s ≤ t) :=
   inv_chi_sub_le (fun e : Sym2 Bool => if e = s(false, true) then (1 : ℝ≥0) else 0)
-    bool_pair_transitive false (by simp [tsum_fintype]) le_rfl (b := t + 1)
+    bool_pair_transitive false (by simp [rowSum_def, tsum_fintype]) le_rfl (b := t + 1)
     (fun β _ => chi_bool_ne_top _ _ _) hs hst (by linarith)
 
 /-- Almost-everywhere differentiability and the derivative bound on two vertices. -/
 example : ∀ᵐ β, β ∈ Ioo (0 : ℝ) 1 → DifferentiableAt ℝ (fun u : ℝ => (chi (intensityProfile
     (fun e : Sym2 Bool => if e = s(false, true) then (1 : ℝ≥0) else 0) u.toNNReal)
       false).toReal) β :=
-  ae_differentiableAt_chi _ bool_pair_transitive false (by simp [tsum_fintype]) le_rfl
+  ae_differentiableAt_chi _ bool_pair_transitive false (by simp [rowSum_def, tsum_fintype]) le_rfl
     fun β _ => chi_bool_ne_top _ _ _
 
-/-- MXGM on two vertices joined by a pair of intensity `1`: the kernel is transitive (the
-swap of the two vertices), `R = 1`, and every susceptibility is at most `2`, so the
-integrated inequality holds on `(0, b)` for every `b`. -/
+/-- The integrated mean-field inequality on two vertices joined by a pair of intensity `1`: the
+kernel is transitive (the swap of the two vertices), `R = 1`, and every susceptibility is at most
+`2`, so the integrated inequality holds on `(0, b)` for every `b`. -/
 example {s t b : ℝ} (hs : 0 < s) (hst : s ≤ t) (ht : t < b) :
     (chi (intensityProfile (fun e : Sym2 Bool => if e = s(false, true) then 1 else 0)
         t.toNNReal) false).toReal -
       (chi (intensityProfile (fun e : Sym2 Bool => if e = s(false, true) then 1 else 0)
         s.toNNReal) false).toReal ≤
-      (∑' v, (if v = false then 0 else
-        ((fun e : Sym2 Bool => if e = s(false, true) then (1 : ℝ≥0) else 0) s(false, v) :
-          ℝ≥0∞))).toReal *
+      (rowSum (fun e' => ((fun e : Sym2 Bool => if e = s(false, true) then (1 : ℝ≥0) else 0) e' :
+        ℝ≥0∞)) false).toReal *
         ∫ u in s..t, (chi (intensityProfile
           (fun e : Sym2 Bool => if e = s(false, true) then 1 else 0) u.toNNReal)
             false).toReal ^ 2 := by
@@ -911,9 +924,36 @@ example {s t b : ℝ} (hs : 0 < s) (hst : s ≤ t) (ht : t < b) :
         · simp only [hxy, Sym2.map_mk]
           cases u <;> cases v <;> simp [Sym2.eq_swap]
   convert chi_sub_le_integral (fun e : Sym2 Bool => if e = s(false, true) then (1 : ℝ≥0) else 0)
-    hJ false (by simp [tsum_fintype]) le_rfl
+    hJ false (by simp [rowSum_def, tsum_fintype]) le_rfl
     (fun β _ => hchi _ _ _) hs hst ht using 4
-  funext v
-  cases v <;> simp
 
 end PercLib.Percolation.Bond
+
+/-! ### Local Lipschitz continuity -/
+
+namespace PercLib.Models.NormalizedSmallIntensity
+
+open PercLib.Percolation.Bond
+
+variable {V : Type*} [Countable V]
+
+open Set in
+/-- **Local Lipschitz continuity of `χ`.** In a transitive intensity model with finite
+off-diagonal row sum at `o` and susceptibility finite on `(a, b)`, `0 ≤ a`, the real
+susceptibility `β ↦ χ_β(o)` is locally Lipschitz on `(a, b)`. -/
+theorem locallyLipschitzOn_chi (J : Sym2 V → ℝ≥0)
+    (hJ : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e) (o : V)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤) {a b : ℝ} (ha : 0 ≤ a)
+    (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤) :
+    LocallyLipschitzOn (Ioo a b)
+      (fun u : ℝ => (chi (intensityProfile J u.toNNReal) o).toReal) := by
+  intro β hβ
+  have hs : a < (a + β) / 2 := by linarith [hβ.1]
+  have hs' : (a + β) / 2 < β := by linarith [hβ.1]
+  have ht : (β + b) / 2 < b := by linarith [hβ.2]
+  have ht' : β < (β + b) / 2 := by linarith [hβ.2]
+  exact ⟨_, Icc ((a + β) / 2) ((β + b) / 2),
+    mem_nhdsWithin_of_mem_nhds (Icc_mem_nhds hs' ht'),
+    lipschitzOnWith_chi J hJ o hR ha hfin hs ht⟩
+
+end PercLib.Models.NormalizedSmallIntensity

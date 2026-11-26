@@ -1,0 +1,54 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "dct-sharpness",
+  "entries": [
+    {
+      "id": "closed-pivotal-derivative",
+      "title": "The intensity derivative uses closed pivotality",
+      "status": "provisional",
+      "locator": "arXiv:1502.03050v3, Section 1.3, proof of Lemma 1.4, equation (1.8); the same formula appears in Section 1.5, equation (1.15).",
+      "claim": "The derivative sums rates times state-independent pivotal probabilities without the closed-edge factor.",
+      "problem": "For the single-bond event the derivative is $J e^{-\\beta J}$, whereas the displayed formula gives $J$. Pivotality was defined independently of the bond state.",
+      "correction": "IENL gives $\\frac{d}{d\\beta}\\mathbb P_\\beta(A)=\\sum_e J_e e^{-\\beta J_e}\\mathbb P_\\beta(e\\text{ pivotal})=\\sum_eJ_e\\mathbb P_\\beta(e\\text{ closed pivotal})$ for finite increasing events. FIXER derives the finite-set differential inequality by wiring the exterior to a sink and conditioning on the unexplored interior. This repairs the sharpness argument without differentiating an infinite-volume limit.",
+      "tags": [
+        "71GK",
+        "IENL"
+      ],
+      "issues": [],
+      "leanImpact": "When composing the product-coordinate Russo formula 71GK with the intensity parametrisation in IENL, retain the derivative of the bond-opening probability. A finite-set sharpness proof can then condition on the finite sink exploration and pass to the limit afterwards. It must not replace state-independent pivotality by closed pivotality without the closed-edge factor. The complete source PercLib/Percolation/Bond/WiredDerivativeFormula.lean and its collapse/unexplored-region dependencies at 22d8485da86b12aa41d1985b07939d2e6e612e26 now implement this finite-domain escape argument. The two-vertex appendix evaluates both escape as 1-exp(-beta) and its derivative as exp(-beta). This records implementation of the workaround, not author confirmation or a compiled correspondence review.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use closed pivotality, or retain the exponential factor for state-independent pivotality.",
+        "scale": "local",
+        "impact": "The finite-set differential argument is repaired; the sharpness conclusion is retained."
+      }
+    },
+    {
+      "id": "critical-field-saturation",
+      "title": "Critical field lower bounds require saturation",
+      "status": "provisional",
+      "locator": "arXiv:1502.03050v3, Proposition 1.3 (printed p. 5) and Proposition 2.3 (p. 11); final conclusions of Sections 1.5 and 2.6.",
+      "claim": "The percolation and Ising magnetizations are bounded below by positive multiples of h^(1/2) and h^(1/3), respectively, for every h>0.",
+      "problem": "Both magnetizations are at most one, while these powers are unbounded. No fixed positive constant can make the stated global ranges hold.",
+      "correction": "Restrict to small fields or saturate the power at one. Under its explicit transitive summable-kernel and finite-critical-intensity hypotheses, 36PN proves $M(h)\\geq\\frac{1-e^{-1}}{2\\sqrt2}\\min\\{\\sqrt h,1\\}$ for every h>0 by moment interpolation. For Ising, saturation would be $\\min\\{h^{1/3},1\\}$; the separate Ising proof is not supplied by 36PN.",
+      "tags": [
+        "36PN"
+      ],
+      "issues": [],
+      "leanImpact": "36PN is a percolation replacement only. A source wrapper must keep its hypotheses and field range. A bounded, nondecreasing magnetization extends a small-field power bound to a saturated global one; this observation does not establish the small-field Ising input or formalise that model.",
+      "resolution": {
+        "status": "partial",
+        "summary": "The saturated percolation lower bound is proved; the corresponding Ising proof is not supplied here.",
+        "scale": "statement",
+        "impact": "Restrict the field range or cap the power at one. This changes the global statement, while retaining its small-field form."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1502.03050v3 (submitted 21 January 2018; PDF dated 23 January 2018)",
+    "checkedUrl": "https://arxiv.org/abs/1502.03050v3",
+    "method": "The locators and reading map identify the 23-page preprint and the derivative and field-range passages. The map distinguishes its printed date from the experimental HTML date. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

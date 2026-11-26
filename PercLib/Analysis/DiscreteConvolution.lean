@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 465 (Q-131), written on 2026-11-16 by PROVER-F. No upstream proof is
-copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -38,7 +39,6 @@ applications.
 noncomputable section
 
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Analysis
 
@@ -153,6 +153,7 @@ section Powers
 
 variable (μ : Γ → ℝ≥0∞)
 
+open Classical in
 /-- Convolution with the indicator of `1` on the right. -/
 theorem conv_indicator_one (f : Γ → ℝ≥0∞) (x : Γ) :
     ∑' y, f y * (if y⁻¹ * x = 1 then 1 else 0) = f x := by
@@ -161,6 +162,7 @@ theorem conv_indicator_one (f : Γ → ℝ≥0∞) (x : Γ) :
     simp [this]]
   simp
 
+open Classical in
 /-- `μ^{*(a+b)} = μ^{*a} ⋆ μ^{*b}`. -/
 theorem convPow_add (a b : ℕ) (x : Γ) :
     (Nat.rec (fun z => if z = 1 then 1 else 0)
@@ -172,19 +174,21 @@ theorem convPow_add (a b : ℕ) (x : Γ) :
   induction b generalizing x with
   | zero => exact (conv_indicator_one _ x).symm
   | succ b ih =>
-    show ∑' z, (Nat.rec (fun z => if z = 1 then 1 else 0)
+    change ∑' z, (Nat.rec (fun z => if z = 1 then 1 else 0)
         (fun _ ν z => ∑' y, ν y * μ (y⁻¹ * z)) (a + b) : Γ → ℝ≥0∞) z * μ (z⁻¹ * x) = _
     simp_rw [ih]
     rw [conv_assoc]
 
+open Classical in
 /-- `μ^{*1} = μ`. -/
 theorem convPow_one (x : Γ) :
     (Nat.rec (fun z => if z = 1 then 1 else 0)
         (fun _ ν z => ∑' y, ν y * μ (y⁻¹ * z)) 1 : Γ → ℝ≥0∞) x = μ x := by
-  show ∑' y, (if y = 1 then (1 : ℝ≥0∞) else 0) * μ (y⁻¹ * x) = μ x
+  change ∑' y, (if y = 1 then (1 : ℝ≥0∞) else 0) * μ (y⁻¹ * x) = μ x
   rw [tsum_eq_single 1 fun y hy => by simp [hy]]
   simp
 
+open Classical in
 /-- The convolution powers of a symmetric `μ` are symmetric. -/
 theorem convPow_inv (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ) :
     (Nat.rec (fun z => if z = 1 then 1 else 0)
@@ -193,7 +197,7 @@ theorem convPow_inv (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ) :
         (fun _ ν z => ∑' y, ν y * μ (y⁻¹ * z)) n : Γ → ℝ≥0∞) x := by
   induction n generalizing x with
   | zero =>
-    show (if x⁻¹ = 1 then (1 : ℝ≥0∞) else 0) = if x = 1 then 1 else 0
+    change (if x⁻¹ = 1 then (1 : ℝ≥0∞) else 0) = if x = 1 then 1 else 0
     simp
   | succ n ih =>
     -- `μ^{*(n+1)} = μ ⋆ μ^{*n}` as well as `μ^{*n} ⋆ μ`.
@@ -205,7 +209,7 @@ theorem convPow_inv (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ) :
       rw [show n + 1 = 1 + n by ring, convPow_add]
       simp_rw [convPow_one]
     rw [hcomm x]
-    show ∑' y, (Nat.rec (fun z => if z = 1 then 1 else 0)
+    change ∑' y, (Nat.rec (fun z => if z = 1 then 1 else 0)
         (fun _ ν z => ∑' y, ν y * μ (y⁻¹ * z)) n : Γ → ℝ≥0∞) y * μ (y⁻¹ * x⁻¹) = _
     rw [← (Equiv.mulLeft x⁻¹).tsum_eq]
     refine tsum_congr fun w => ?_
@@ -213,6 +217,7 @@ theorem convPow_inv (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ) :
     rw [mul_comm, ← hμ, ← ih]
     congr 2 <;> group
 
+open Classical in
 /-- **Return probabilities, second moment.** `∑ (μ^{*n})² = μ^{*2n}(1)`. -/
 theorem tsum_sq_convPow (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) :
     ∑' x, (Nat.rec (fun z => if z = 1 then 1 else 0)
@@ -223,6 +228,7 @@ theorem tsum_sq_convPow (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) :
   refine tsum_congr fun y => ?_
   rw [mul_one, convPow_inv μ hμ, sq]
 
+open Classical in
 /-- **Return probabilities, maximum at the identity.** `μ^{*2n}(x) ≤ μ^{*2n}(1)`. -/
 theorem convPow_le_convPow_one (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ) :
     (Nat.rec (fun z => if z = 1 then 1 else 0)
@@ -237,7 +243,7 @@ theorem convPow_le_convPow_one (hμ : ∀ y, μ y⁻¹ = μ y) (n : ℕ) (x : Γ
 
 end Powers
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
 /-- On `ℤ` (written multiplicatively), the indicator of `{0, 1}` convolved with itself takes
 the value `2` at `1`. -/
@@ -257,6 +263,7 @@ example : ∑' y : Multiplicative ℤ,
   simp only [h1, h2, true_or, or_true, ↓reduceIte, mul_one]
   norm_num
 
+open Classical in
 /-- Item 4 for the simple random walk `μ = ½(δ₁ + δ₋₁)` on `ℤ`: it is symmetric, so the
 return probability bounds hold at `n = 1`. -/
 example (x : Multiplicative ℤ) :

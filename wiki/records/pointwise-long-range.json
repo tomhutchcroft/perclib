@@ -1,0 +1,257 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "pointwise-long-range",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 131
+    },
+    {
+      "collection": "critical-theory",
+      "order": 131
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 0,
+      "label": "Translated-box exit inequality",
+      "locator": "Lemma2.2, equation(2.1), printed pp.7–8",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "0VB3 counts centre intervals and retains the bond probability, before applying the power-law upper bound. The decomposition itself works for every positive alpha."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 1,
+      "label": "Analytic contraction over scales",
+      "locator": "Proposition2.1 proof, equations(2.2)–(2.4), printed pp.8–10",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "PIZX separates the averaged bound and exit inequality from percolation. The short-distance factor epsilon^(1-alpha) contracts; the far shells sum as2^(-dl)."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 2,
+      "label": "Critical upper bound and localization input",
+      "locator": "Proposition2.1; upper half of Theorem1.4; PartII cited input to random-box localization",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "TGF9 combines MRZO,0VB3 andPIZX. Monotone domination supplies the upper input toYUHF for finite-range cutoffs; a cutoff susceptibility lower bound remains separate."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 3,
+      "label": "Internal finite-size criterion",
+      "locator": "Lemma 2.4, printed p.10/PDF index9; HTML243–251",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "AXYA proves the stronger internal-mean formulation by averaging the boundary functional and applying the finite-size criterion."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 4,
+      "label": "Half-susceptibility radius and confined clusters",
+      "locator": "Corollary 2.5 and Proposition 2.3, printed p.10/PDF index9; HTML235–255",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "6G4B retains both power envelopes and proves uniform susceptibility comparison and saturation of internal box means. The upper-only corollary has an explicit nearest-neighbour counterexample."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 5,
+      "label": "Separated weighted kernel convolution",
+      "locator": "Lemma 2.6, printed p.11/PDF index10; HTML256–276",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "SFR0 bounds each weighted row before applying separation of the middle kernel; 0<alpha<1 and the regularized origin are explicit."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 6,
+      "label": "Near-critical upper bound",
+      "locator": "Proposition 2.3 / proof headed Theorem 1.5, equations (2.5)–(2.6), printed pp.11–12/PDF indices10–11; HTML277–310",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "CQK2 uses two independent box centres, the original short-edge restriction and a finite truncated amplitude. YUHF supplies finiteness using TGF9, without a cutoff susceptibility lower bound."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 7,
+      "label": "Confined pointwise lower bound",
+      "locator": "Proposition 2.8, printed pp.14–15/PDF indices13–14; HTML349–375",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Two independent induced root clusters have internal mean of order n^alpha by 6G4B. The critical full-window quantile and rooted damping preserve that first moment in the second-moment bound. All pairs of joining bonds are counted, including shared endpoints."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 8,
+      "label": "Triangle growth at the crossover scale",
+      "locator": "Section 2.3, proof of Theorem 1.1 through equation (2.7), printed p.13/PDF index12; HTML314–334",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Dyadic largest-side shells prove bounded/logarithmic/power growth without requiring the intermediate inner convolution estimate 2alpha<d. The distance-to-criticality conversion and mean-field consequences remain separate."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 9,
+      "label": "Theorem 1.1: all three mean-field consequences",
+      "locator": "Theorem 1.1, printed pp.3–4; section 2.3 conclusion, printed p.13/PDF index12",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Row normalization, the corrected square, self-dependent diagram integration and entropy comparison prove both regimes, with explicit pointwise tail lower bounds."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 10,
+      "label": "Remark 2.7: susceptibility bound with corrected differential premise",
+      "locator": "Remark 2.7, printed p.14/PDF index13, extracted lines1066–1085",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The diagram exponent q=3-d/alpha lies below one half, so integration gives the stated susceptibility power at the finite critical endpoint."
+    },
+    {
+      "source": "hutchcroft-pointwise-2024",
+      "order": 11,
+      "label": "Remark 2.7: limiting exponents under existence hypotheses",
+      "locator": "Remark 2.7, printed p.14/PDF index13, extracted lines1089–1094",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Entropy comparison applies when g<2; the integrated lower tail and logarithmic limits bound any existing exponents and squeeze their limiting values."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "0VB3",
+      "proof_uses": [
+        "AUUG"
+      ],
+      "reason": "A simple first-exit path gives three disjoint witnesses; averaging the centre intervals yields the crossing penalty."
+    },
+    {
+      "order": 1,
+      "tag": "PIZX",
+      "proof_uses": [],
+      "reason": "Separated endpoints use two spatial averages; nearby endpoints use the previous scale and an integrable short-distance shell sum; far endpoints retain the kernel exponent before the geometric sum."
+    },
+    {
+      "order": 2,
+      "tag": "TGF9",
+      "proof_uses": [
+        "KXV3",
+        "MRZO",
+        "0VB3",
+        "PIZX"
+      ],
+      "reason": "The lower power envelope supplies a finite critical point and sharp averaged upper bound. The translated-box decomposition and analytic contraction then give the critical pointwise upper bound."
+    },
+    {
+      "order": 3,
+      "tag": "AXYA",
+      "proof_uses": [
+        "PTM2",
+        "31X5",
+        "YLZV"
+      ],
+      "reason": "AXYA proves the stronger internal-mean formulation by averaging the boundary functional and applying the finite-size criterion."
+    },
+    {
+      "order": 4,
+      "tag": "6G4B",
+      "proof_uses": [
+        "AXYA",
+        "KXV3",
+        "L0TE",
+        "MRZO",
+        "VVB0"
+      ],
+      "reason": "6G4B retains both power envelopes and proves uniform susceptibility comparison and saturation of internal box means. The upper-only corollary has an explicit nearest-neighbour counterexample."
+    },
+    {
+      "order": 5,
+      "tag": "SFR0",
+      "proof_uses": [],
+      "reason": "SFR0 bounds each weighted row before applying separation of the middle kernel; 0<alpha<1 and the regularized origin are explicit."
+    },
+    {
+      "order": 6,
+      "tag": "CQK2",
+      "proof_uses": [
+        "TGF9",
+        "YUHF",
+        "6G4B",
+        "SFR0",
+        "AUUG"
+      ],
+      "reason": "CQK2 uses two independent box centres, the original short-edge restriction and a finite truncated amplitude. YUHF supplies finiteness using TGF9, without a cutoff susceptibility lower bound."
+    },
+    {
+      "order": 7,
+      "tag": "TQ77",
+      "proof_uses": [
+        "6G4B",
+        "MRZO",
+        "12NL",
+        "BZDZ"
+      ],
+      "reason": "Two independent induced root clusters have internal mean of order n^alpha by 6G4B. The critical full-window quantile and rooted damping preserve that first moment in the second-moment bound. All pairs of joining bonds are counted, including shared endpoints."
+    },
+    {
+      "order": 8,
+      "tag": "RCTO",
+      "proof_uses": [
+        "TGF9",
+        "CQK2",
+        "6G4B",
+        "MRZO"
+      ],
+      "reason": "Dyadic largest-side shells prove bounded/logarithmic/power growth without requiring the intermediate inner convolution estimate 2alpha<d. The distance-to-criticality conversion and mean-field consequences remain separate."
+    },
+    {
+      "order": 9,
+      "tag": "A3S7",
+      "proof_uses": [
+        "KXV3",
+        "L0TE",
+        "RDF0",
+        "4KBG",
+        "MXGM",
+        "RCTO",
+        "6G4B",
+        "GQJY",
+        "QS3L",
+        "36PN",
+        "MBV2",
+        "QW2L"
+      ],
+      "reason": "Row normalization, the corrected square, self-dependent diagram integration and entropy comparison prove both regimes, with explicit pointwise tail lower bounds."
+    },
+    {
+      "order": 10,
+      "tag": "YYSP",
+      "proof_uses": [
+        "RCTO",
+        "6G4B",
+        "4KBG",
+        "MXGM",
+        "RDF0",
+        "GQJY"
+      ],
+      "reason": "The diagram exponent q=3-d/alpha lies below one half, so integration gives the stated susceptibility power at the finite critical endpoint."
+    },
+    {
+      "order": 11,
+      "tag": "LKWW",
+      "proof_uses": [
+        "YYSP",
+        "X8T6",
+        "36PN",
+        "L0TE"
+      ],
+      "reason": "Entropy comparison applies when g<2; the integrated lower tail and logarithmic limits bound any existing exponents and squeeze their limiting values."
+    }
+  ]
+}

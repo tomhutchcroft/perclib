@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
+Authors: PercLib contributors
+-/
+/-
 Adapted from NearCritical/ProductExpectation.lean at
 tomhutchcroft/near-critical-diffusivity@c820fea91a7482c1755de0ec94ecb9f59ccfcacc,
-under Tom Hutchcroft's reuse permission (docs/DECISIONS.md R-3).
+under Tom Hutchcroft's reuse permission recorded in `docs/DECISIONS.md`.
 The native upstream file has no licence header; no upstream Apache licence is asserted.
 Changed on 2026-11-14: canonical Set configurations and prodBernoulli, arbitrary
 coordinate profiles and ambient indices, with no lattice probability foundation.
@@ -27,12 +29,13 @@ including mixtures of zero and one, are handled under the existing law.
 noncomputable section
 
 open MeasureTheory ProbabilityTheory
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Probability
 
 variable {ι : Type*}
 
+open Classical in
 /-- Full configuration masses for finite, inhomogeneous Bernoulli coordinates. -/
 theorem prodBernoulli_singleton [Fintype ι] (p : ι → unitInterval) (ω : Set ι) :
     prodBernoulli p {ω} = ∏ i : ι,
@@ -56,6 +59,7 @@ theorem prodBernoulli_singleton [Fintype ι] (p : ι → unitInterval) (ω : Set
   intro i _
   by_cases hi : i ∈ ω <;> simp [hi, bernoulliMeasure_def]
 
+open Classical in
 theorem prodBernoulli_real_singleton [Fintype ι] (p : ι → unitInterval) (ω : Set ι) :
     (prodBernoulli p).real {ω} =
       ∏ i : ι, if i ∈ ω then (p i : ℝ) else 1 - (p i : ℝ) := by
@@ -64,6 +68,7 @@ theorem prodBernoulli_real_singleton [Fintype ι] (p : ι → unitInterval) (ω 
   intro i _
   by_cases hi : i ∈ ω <;> simp [hi]
 
+open Classical in
 /-- Every real observable on finite configurations has the explicit weighted-sum integral. -/
 theorem integral_prodBernoulli [Fintype ι] (p : ι → unitInterval) (f : Set ι → ℝ) :
     ∫ ω, f ω ∂prodBernoulli p =
@@ -92,6 +97,7 @@ theorem prodBernoulli_map_restrict (p : ι → unitInterval) (s : Finset ι) :
   rw [← Measure.map_map hs (Finset.measurable_restrict _),
     Measure.infinitePi_map_restrict, Measure.infinitePi_eq_pi]
 
+open Classical in
 /-- Finite-cylinder expectations on arbitrary ambient indices, with arbitrary profiles. -/
 theorem integral_prodBernoulli_cylinder (p : ι → unitInterval) (s : Finset ι)
     (f : Set s → ℝ) :
@@ -107,14 +113,17 @@ theorem integral_prodBernoulli_cylinder (p : ι → unitInterval) (s : Finset ι
 example (p : Empty → unitInterval) (f : Set Empty → ℝ) :
     ∫ ω, f ω ∂prodBernoulli p = f ∅ := by
   rw [integral_prodBernoulli]
-  simp
+  simp only [Finset.univ_unique, Finset.univ_eq_empty, Finset.prod_empty, mul_one,
+      Finset.sum_singleton]
   exact congrArg f (Subsingleton.elim _ _)
 
+open Classical in
 example (p : Bool → unitInterval) :
     (prodBernoulli p).real {({true} : Set Bool)} =
       (p true : ℝ) * (1 - (p false : ℝ)) := by
   simp [prodBernoulli_real_singleton]
 
+open Classical in
 example (f : Set Bool → ℝ) :
     ∫ ω, f ω ∂prodBernoulli (fun b : Bool => if b then 1 else 0) = f {true} := by
   rw [integral_prodBernoulli]

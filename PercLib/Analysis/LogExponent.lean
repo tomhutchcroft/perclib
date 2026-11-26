@@ -1,4 +1,9 @@
 /-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Logarithmic exponents of eventually positive real functions: asymptotic equivalence to
 `c x^α` implies `Θ(x^α)`, which implies logarithmic exponent `α`, and neither converse
 holds. New proofs against pinned mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679.
@@ -9,6 +14,23 @@ module
 
 public import Mathlib.Analysis.Asymptotics.AsymptoticEquivalent
 public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+
+/-!
+# Logarithmic exponents
+
+Asymptotic equivalence to `c x^α` implies `Θ(x^α)`, which implies logarithmic exponent `α`; neither
+converse holds.
+
+## Main results
+
+* `isTheta_rpow_of_isEquivalent`
+* `tendsto_log_div_log_of_isTheta_rpow`
+* `tendsto_log_div_log_of_isEquivalent`
+* `tendsto_log_div_log_rpow_mul_log_rpow_mul_log_log_rpow`
+* `isTheta_rpow_mul_log_rpow_mul_log_log_rpow_iff`
+* `isTheta_two_add_sin_mul_rpow`
+* `not_isEquivalent_two_add_sin_mul_rpow`
+-/
 
 @[expose] public section
 
@@ -219,7 +241,7 @@ theorem not_isEquivalent_two_add_sin_mul_rpow (α : ℝ) {c : ℝ} (hc : 0 < c) 
   field_simp
   ring
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
 /-- `2 x^3` is asymptotically equivalent to `2 x^3`, hence `Θ(x^3)` with logarithmic
 exponent `3`. -/

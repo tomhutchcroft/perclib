@@ -1,0 +1,85 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "critical-random-graph-clusters",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 175
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Binomial exploration sandwich",
+      "locator": "17 March 2017 author manuscript, Section 13.1, printed pp.154\u2013158 / PDF indices165\u2013169; (13.1.15); Exercises 13.2\u201313.3.",
+      "relationship": "Written proof, with the joint scaling limit separate",
+      "status": "pending",
+      "note": "Critical-window statements quantify n sufficiently large and keep the constants uniform in the tail parameter."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Uniform near-critical binomial progeny tails",
+      "locator": "17 March 2017 author manuscript, Section 13.1, printed pp.154\u2013158 / PDF indices165\u2013169; (13.1.16)\u2013(13.1.18); Exercise 13.4.",
+      "relationship": "Written proof, with the joint scaling limit separate",
+      "status": "pending",
+      "note": "Critical-window statements quantify n sufficiently large and keep the constants uniform in the tail parameter."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical root-cluster tails and susceptibility",
+      "locator": "17 March 2017 author manuscript, Section 13.1, printed pp.154\u2013158 / PDF indices165\u2013169; Proposition 13.3; Lemma 13.4; Exercise 13.5.",
+      "relationship": "Written proof, with the joint scaling limit separate",
+      "status": "pending",
+      "note": "Critical-window statements quantify n sufficiently large and keep the constants uniform in the tail parameter."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Largest critical component",
+      "locator": "17 March 2017 author manuscript, Section 13.1, printed pp.154\u2013158 / PDF indices165\u2013169; Theorem 13.1; (13.1.24)\u2013(13.1.29).",
+      "relationship": "Written proof, with the joint scaling limit separate",
+      "status": "pending",
+      "note": "Critical-window statements quantify n sufficiently large and keep the constants uniform in the tail parameter."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 1,
+      "tag": "L3AK",
+      "proof_uses": [
+        "RL1L",
+        "BFM4"
+      ],
+      "reason": "Uniform near-critical binomial progeny tails under the stated model and parameter hypotheses."
+    },
+    {
+      "order": 2,
+      "tag": "Y0FX",
+      "proof_uses": [
+        "0K60",
+        "L3AK",
+        "UKY4"
+      ],
+      "reason": "Critical root-cluster tails and susceptibility under the stated model and parameter hypotheses."
+    },
+    {
+      "order": 3,
+      "tag": "38XP",
+      "proof_uses": [
+        "Y0FX",
+        "25Z4"
+      ],
+      "reason": "Largest critical component under the stated model and parameter hypotheses."
+    },
+    {
+      "order": 4,
+      "tag": "0K60",
+      "proof_uses": [],
+      "reason": "A queue exploration coupled with fresh Bernoulli rows dominates and is dominated by binomial Galton-Watson queues; no other wiki assertion is invoked."
+    }
+  ]
+}

@@ -1,24 +1,28 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 214, Q-43, item 3). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
 public import PercLib.Models.Hierarchical
 public import PercLib.Percolation.Bond.ConvolutionBound
+public import PercLib.Models.HierarchicalCutoff
 
 /-!
 # The two-point function on the hierarchical lattice at small intensity
 
 On `ℕ →₀ (Fin d → ZMod L)` with the radial kernel `J s(x, y) = C r^{h(y - x)}`, `r ≤ 1`, where
 `h(z) = z.support.sup Nat.succ` is the level, the ultrametric inequality for `h` gives the
-convolution bound `∑_z J(x, z) J(z, y) ≤ 2 M J(x, y)` for `x ≠ y`, where
-`M = ∑_{z ≠ 0} C r^{h(z)}`. With the convolution bound of `ConvolutionBound.lean`,
-`τ_β(x, y) ≤ β J(x, y) (1 - 2βM)⁻¹ (1 - βM)⁻¹`: at small `β` the two-point function decays like
-the kernel. The ultrametric inequality is proved inline here (the general geometry is Q-40).
-This is a subcritical bound and says nothing at criticality.
+convolution bound `∑_z J(x, z) J(z, y) ≤ 2 M J(x, y)` for `x ≠ y`, where `M = ∑_{z ≠ 0} C r^{h(z)}`.
+With the convolution bound of `ConvolutionBound.lean`,
+`τ_β(x, y) ≤ β J(x, y) (1 - 2βM)⁻¹ (1 - βM)⁻¹`: at small `β` the two-point function decays like the
+kernel. The ultrametric inequality is proved inline here (the general geometry is in
+`PercLib/Models/HierarchicalGeometry.lean`). This is a subcritical bound and says nothing at
+criticality.
 -/
 
 @[expose] public section
@@ -27,7 +31,6 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal NNReal
-open Classical
 open PercLib.Percolation.Bond
 
 namespace PercLib.Models
@@ -141,10 +144,69 @@ example (x y : ℕ →₀ (Fin 1 → ZMod 2)) (hxy : x ≠ y) (β : ℝ≥0) :
           ((1 - 2 * (β : ℝ≥0∞) * ∑' z : ℕ →₀ (Fin 1 → ZMod 2),
               (if z = 0 then 0 else ((1 * (1 / 4) ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)))⁻¹ *
             (1 - (β : ℝ≥0∞) * ∑' z : ℕ →₀ (Fin 1 → ZMod 2),
-              (if z = 0 then 0 else ((1 * (1 / 4) ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)))⁻¹) := by
+              (if z = 0 then 0 else ((1 * (1 / 4) ^ (z.support.sup Nat.succ) : ℝ≥0) :
+                  ℝ≥0∞)))⁻¹) := by
   obtain ⟨J, hJ⟩ := exists_hierarchical_kernel (d := 1) (L := 2) 1 (1 / 4)
   refine ⟨J, by rw [hJ]; positivity, tau_intensity_le_hierarchical J 1 (1 / 4) hJ
     (NNReal.coe_le_coe.1 (by norm_num)) β hxy⟩
+
+/-- **Two-point bound, kernel prescribed off the diagonal only**, with the geometric series
+`H(t) = ∑_n t^n`: `τ_β(x,y) ≤ β J(x,y) H(2βM) H(βM)` for `x ≠ y`. -/
+theorem tau_intensity_le_hierarchical_of_ne (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0)
+    (C r : ℝ≥0)
+    (hJ : ∀ x y, x ≠ y → J s(x, y) = C * r ^ ((y - x).support.sup Nat.succ)) (hr : r ≤ 1)
+    (β : ℝ≥0) {x y : (ℕ →₀ (Fin d → ZMod L))} (hxy : x ≠ y) :
+    tau (intensityProfile J β) x y ≤
+      (β : ℝ≥0∞) * J s(x, y) * (∑' n : ℕ, (2 * (β : ℝ≥0∞) * (∑' z : ℕ →₀ (Fin d → ZMod L),
+          (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)))) ^ n) *
+        (∑' n : ℕ, ((β : ℝ≥0∞) * (∑' z : ℕ →₀ (Fin d → ZMod L),
+          (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)))) ^ n) := by
+  obtain ⟨J', hJ'⟩ := exists_hierarchical_kernel (d := d) (L := L) C r
+  have hJJ' : ∀ x y, x ≠ y → J s(x, y) = J' s(x, y) := fun x y h => by rw [hJ x y h, hJ' x y]
+  rw [ENNReal.tsum_geometric, ENNReal.tsum_geometric, mul_assoc,
+    tau_eq_of_offDiagonal _ _ (intensityProfile_eq_of_offDiagonal hJJ' β) x y, hJJ' x y hxy]
+  exact tau_intensity_le_hierarchical J' C r hJ' hr β hxy
+
+/-- **Two-point bound, finite form**: when `M < ∞` and `2βM < 1`,
+`τ_β(x,y) ≤ β J(x,y)/((1-2βM)(1-βM))`. -/
+theorem tau_intensity_toReal_le_hierarchical_of_ne (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0)
+    (C r : ℝ≥0)
+    (hJ : ∀ x y, x ≠ y → J s(x, y) = C * r ^ ((y - x).support.sup Nat.succ)) (hr : r ≤ 1)
+    (β : ℝ≥0) {x y : (ℕ →₀ (Fin d → ZMod L))} (hxy : x ≠ y)
+    (hM : (∑' z : ℕ →₀ (Fin d → ZMod L),
+          (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))) < ⊤)
+    (h2 : 2 * (β : ℝ≥0∞) * (∑' z : ℕ →₀ (Fin d → ZMod L),
+          (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))) < 1) :
+    (tau (intensityProfile J β) x y).toReal ≤
+      (β : ℝ) * (J s(x, y) : ℝ) /
+        ((1 - 2 * (β : ℝ) * (∑' z : ℕ →₀ (Fin d → ZMod L),
+            (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))).toReal) *
+          (1 - (β : ℝ) * (∑' z : ℕ →₀ (Fin d → ZMod L),
+            (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))).toReal)) := by
+  obtain ⟨J', hJ'⟩ := exists_hierarchical_kernel (d := d) (L := L) C r
+  have hJJ' : ∀ x y, x ≠ y → J s(x, y) = J' s(x, y) := fun x y h => by rw [hJ x y h, hJ' x y]
+  set M := (∑' z : ℕ →₀ (Fin d → ZMod L),
+          (if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))) with hMdef
+  have hmain : tau (intensityProfile J β) x y ≤
+      (β : ℝ≥0∞) * J s(x, y) * ((1 - 2 * (β : ℝ≥0∞) * M)⁻¹ * (1 - (β : ℝ≥0∞) * M)⁻¹) := by
+    rw [tau_eq_of_offDiagonal _ _ (intensityProfile_eq_of_offDiagonal hJJ' β) x y, hJJ' x y hxy]
+    exact tau_intensity_le_hierarchical J' C r hJ' hr β hxy
+  have h1 : (β : ℝ≥0∞) * M < 1 :=
+    lt_of_le_of_lt (by rw [mul_assoc]; exact le_mul_of_one_le_left zero_le one_le_two) h2
+  have hfin : (β : ℝ≥0∞) * J s(x, y) * ((1 - 2 * (β : ℝ≥0∞) * M)⁻¹ *
+      (1 - (β : ℝ≥0∞) * M)⁻¹) ≠ ⊤ := by
+    refine ENNReal.mul_ne_top (ENNReal.mul_ne_top ENNReal.coe_ne_top ENNReal.coe_ne_top)
+      (ENNReal.mul_ne_top ?_ ?_)
+    · exact ENNReal.inv_ne_top.2 (tsub_pos_of_lt h2).ne'
+    · exact ENNReal.inv_ne_top.2 (tsub_pos_of_lt h1).ne'
+  refine (ENNReal.toReal_mono hfin hmain).trans_eq ?_
+  have hM' : M ≠ ⊤ := hM.ne
+  rw [ENNReal.toReal_mul, ENNReal.toReal_mul, ENNReal.toReal_mul, ENNReal.toReal_inv,
+    ENNReal.toReal_inv, ENNReal.toReal_sub_of_le h2.le ENNReal.one_ne_top,
+    ENNReal.toReal_sub_of_le h1.le ENNReal.one_ne_top, ENNReal.toReal_mul, ENNReal.toReal_mul,
+    ENNReal.toReal_mul]
+  simp only [ENNReal.toReal_one, ENNReal.coe_toReal, ENNReal.toReal_ofNat]
+  rw [div_eq_mul_inv, mul_inv]
 
 end PercLib.Models
 

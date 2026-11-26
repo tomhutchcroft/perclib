@@ -1,16 +1,20 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-201 (issue 629): proof of Lemma I.4.12, the two-cluster gap inequality, of T. Hutchcroft,
-*Critical long-range percolation I*, arXiv:2508.18807v1, the target `TwoClusterGap` of
-`PercLib/Percolation/Bond/ClusterCorrelation/Defs.lean`, for every profile.
-The argument follows pull request 488: repository `yujinhkim/lrp`, branch `critical-lrp-1`,
-commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
-`PercLib/CriticalLRP/Correlation/TwoClusterGap.lean` (`twoCluster_gap_le`); licence Apache-2.0
-as declared in that file header and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`
-(not independently verified). Contributor: yujinhkim. The source's hypotheses `hTG` (tree
-graph) and `hBK` are discharged by `treeGraphInequality` and `countable_profile_bk` of this
-library; the proof is rewritten on the D-2 interface.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Proof of Lemma I.4.12, the two-cluster gap inequality, of T. Hutchcroft, *Critical long-range
+percolation I*, arXiv:2508.18807v1, the target `TwoClusterGap` of
+`PercLib/Percolation/Bond/ClusterCorrelation/Defs.lean`, for every profile. The argument follows the
+repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
+`PercLib/CriticalLRP/Correlation/TwoClusterGap.lean` (`twoCluster_gap_le`); licence Apache-2.0 as
+declared in that file header and `third_party/critical-lrp/NOTICE.md`; upstream
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not
+independently verified). Contributor: yujinhkim. The source's hypotheses `hTG` (tree graph) and
+`hBK` are discharged by `treeGraphInequality` and `countable_profile_bk` of this library; the proof
+is rewritten on the bond interface.
 -/
 module
 
@@ -90,7 +94,7 @@ theorem twoClusterGap [Countable V] : TwoClusterGap V := by
         mem_disjointOccurrence_of_trail w' hw'.isTrail hbw⟩)
     · simp only [not_exists, not_and] at hb
       refine Or.inl ⟨⟨?_, ?_⟩, ?_⟩
-      · show x ∈ cluster (restoreMap o p) o
+      · change x ∈ cluster (restoreMap o p) o
         rw [cluster_restoreMap]; exact hx
       · refine mem_conn_of_walk_edges w' fun e he => ?_
         have hnt : ¬∃ v ∈ e, v ∈ cluster p.1 o := by
@@ -122,7 +126,7 @@ theorem twoClusterGap [Countable V] : TwoClusterGap V := by
         refine tsum_congr fun a => tsum_congr fun b => ?_
         ring
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- The zero profile on `ℕ` with `o, x, y, z` distinct: both sides vanish, and the theorem
 applies. -/

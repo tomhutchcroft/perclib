@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 600 (Q-172, F-1 leaf R7 and a T-6 consequence), written on 2026-11-16
-by PROVER-G: truncated means of the cluster intersection from universal tightness. From the
-tightness theorems of this library and pinned mathlib's Markov inequality and exponential
-bounds. No upstream code is copied, no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: truncated means of the cluster intersection from universal
+tightness. From the tightness theorems of this library and pinned mathlib's Markov inequality and
+exponential bounds. No upstream code is copied, no definition is added and no Input is introduced.
 -/
 module
 
@@ -217,7 +220,8 @@ theorem lintegral_clusterIntersection_min_ge [Countable V] (q : Sym2 V → unitI
 
 /-! ### Item 4: R1, averaged form -/
 
-/-- **R1, averaged.** `M² / (4e) ≤ ∑_{v ∈ Λ} ∫⁻ X_v` (the `p = 1` case of LQ6Y). -/
+/-- **R1, averaged.** `M² / (4e) ≤ ∑_{v ∈ Λ} ∫⁻ X_v` (the `p = 1` case of the lower rooted moments).
+-/
 theorem le_sum_lintegral_clusterIntersection [Countable V] (q : Sym2 V → unitInterval)
     {Λ : Finset V} (hΛ : Λ.Nonempty) :
     ENNReal.ofReal ((tightnessScale q Λ : ℝ) ^ 2 / (4 * Real.exp 1)) ≤
@@ -261,7 +265,7 @@ theorem le_card_mul_lintegral_clusterIntersection_of_transitive [Countable V]
   rw [← nsmul_eq_mul, ← Finset.sum_const, ← Finset.sum_congr rfl hv]
   exact le_sum_lintegral_clusterIntersection q hΛ
 
-/-! ### Non-vacuity (D-5): `Λ = {v}`, `M = 2`, `X_v = 1` -/
+/-! ### Non-vacuity: `Λ = {v}`, `M = 2`, `X_v = 1` -/
 
 /-- With `Λ = {v}`, the cluster intersection is one, the scale is two, and item 2 reads
 `1/2 ≤ 1`. -/

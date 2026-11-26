@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 165 (Q-24), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied.
 -/
 module
 
@@ -32,7 +33,6 @@ This file adds no definition.
 
 open MeasureTheory ProbabilityTheory Set PercLib.Probability
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -95,6 +95,7 @@ theorem prod_le_law_preconnected (q : Sym2 V → unitInterval) (T : Finset (Sym2
   rw [← prodBernoulli_subset]
   exact measure_mono fun ω hω => hconn.mono (SimpleGraph.fromEdgeSet_mono hω)
 
+open Classical in
 /-- On a finite vertex type, the open graph is preconnected exactly when one vertex is
 joined to all others. -/
 theorem setOf_preconnected_eq_biInter [Fintype V] (x : V) :
@@ -111,6 +112,7 @@ theorem setOf_preconnected_eq_biInter [Fintype V] (x : V) :
       · exact h z hz
     exact (hx a).symm.trans (hx b)
 
+open Classical in
 /-- **Harris lower bound.** On a finite vertex type, `P(preconnected) ≥ ∏_{y ≠ x} τ(x, y)`. -/
 theorem prod_tau_le_law_preconnected [Fintype V] (q : Sym2 V → unitInterval) (x : V) :
     (∏ y ∈ Finset.univ.erase x, tau q x y) ≤ law q {ω | (openGraph ω).Preconnected} := by
@@ -126,6 +128,7 @@ theorem setOf_isolated_eq (x : V) :
   simp only [mem_ofPred_eq, mem_iInter, openGraph_adj_iff, not_and]
   exact ⟨fun h y hy hxy => h y hxy (Ne.symm hy), fun h y hxy hne => h y (Ne.symm hne) hxy⟩
 
+open Classical in
 /-- **Probability of an isolated vertex.** On a finite vertex type,
 `P(x isolated) = ∏_{y ≠ x} (1 - q(s(x, y)))`. -/
 theorem law_isolated [Fintype V] (q : Sym2 V → unitInterval) (x : V) :
@@ -200,6 +203,7 @@ example : (unitInterval.toNNReal (⟨1 / 2, by norm_num, by norm_num⟩ : unitIn
       exact fun a b => (hr a).symm.trans (hr b))
   rwa [Finset.prod_pair (by decide)] at h
 
+open Classical in
 /-- On `Bool`, the vertex `false` is isolated with probability `1 - q(s(false, true))`, and
 this bounds the probability that the open graph is preconnected. -/
 example (q : Sym2 Bool → unitInterval) :

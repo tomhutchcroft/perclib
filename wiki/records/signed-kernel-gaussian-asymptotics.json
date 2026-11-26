@@ -1,0 +1,101 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "signed-kernel-gaussian-asymptotics",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 173
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Weighted signed heat estimate",
+      "locator": "Author-hosted published PDF. Sections 2.2 and 2.4, Lemmas 2.1 and 2.3, (2.10)–(2.20) and (2.41)–(2.52), printed pp.544–545 and 549–552 / PDF indices14–15 and 19–22.",
+      "relationship": "Written analytic proof with model-specific pointwise inputs separate",
+      "status": "pending",
+      "note": "The kernel may be signed; absolute moments, coordinate symmetries, Fourier gap and pointwise decay remain explicit."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Uniform Gaussian approximation",
+      "locator": "Author-hosted published PDF. Section 2.3, Lemma 2.2; Section 2.6 quantitative improvement, printed pp.545–548 and 555 / PDF indices15–18 and 25.",
+      "relationship": "Written analytic proof with model-specific pointwise inputs separate",
+      "status": "pending",
+      "note": "The kernel may be signed; absolute moments, coordinate symmetries, Fourier gap and pointwise decay remain explicit."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 2,
+      "label": "Spatial signed Green asymptotic",
+      "locator": "Author-hosted published PDF. Theorem 1.4 and Sections 2.1–2.4, 2.6, printed pp.537, 542–552 and 555 / PDF indices7,12–22,25.",
+      "relationship": "Written analytic proof with model-specific pointwise inputs separate",
+      "status": "pending",
+      "note": "The kernel may be signed; absolute moments, coordinate symmetries, Fourier gap and pointwise decay remain explicit."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 3,
+      "label": "Conditional spatial lace conclusion",
+      "locator": "Author-hosted published PDF. Corollary 1.6 and effective-kernel formula; compare book (11.2.10)–(11.2.16).",
+      "relationship": "Written analytic proof with model-specific pointwise inputs separate",
+      "status": "pending",
+      "note": "The kernel may be signed; absolute moments, coordinate symmetries, Fourier gap and pointwise decay remain explicit."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 4,
+      "label": "Balanced heat cutoff",
+      "locator": "Theorem 1.4 and Sections 2.1-2.6, especially the short-time/large-time split and higher-moment estimate; compare Sections 3.4-3.5 for the percolation input",
+      "relationship": "Independent refinement of the existing written analytic argument, not an identification with every source estimate",
+      "status": "pending",
+      "note": "The balanced cutoff gives remainder exponent 2 alpha/(d+alpha). The percolation closure uses sixth-norm connector smallness and d>14; its hypotheses are not numerically verified at d=15. No source correction or formal-status promotion."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "YNLW",
+      "proof_uses": [],
+      "reason": "Weighted signed heat estimate under the stated analytic hypotheses."
+    },
+    {
+      "order": 1,
+      "tag": "KSC4",
+      "proof_uses": [],
+      "reason": "Uniform Gaussian approximation under the stated analytic hypotheses."
+    },
+    {
+      "order": 2,
+      "tag": "OT9N",
+      "proof_uses": [
+        "YNLW",
+        "KSC4",
+        "ZPZZ"
+      ],
+      "reason": "Spatial signed Green asymptotic under the stated analytic hypotheses."
+    },
+    {
+      "order": 3,
+      "tag": "KB4O",
+      "proof_uses": [
+        "OT9N",
+        "I8BE"
+      ],
+      "reason": "Conditional spatial lace conclusion under the stated analytic hypotheses."
+    },
+    {
+      "order": 4,
+      "tag": "7QGG",
+      "proof_uses": [
+        "YNLW",
+        "KSC4",
+        "OT9N"
+      ],
+      "reason": "Balance the short-time bound T times |x|^(-d) with the integrated Gaussian error; the cutoff |x|^(2d/(d+alpha)) gives exponent 2 alpha/(d+alpha) under the existing hypotheses."
+    }
+  ]
+}

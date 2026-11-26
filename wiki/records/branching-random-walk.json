@@ -1,0 +1,346 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "branching-random-walk",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 6
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 38,
+      "label": "Branching random walk and Green diagrams",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-train10-models-longrange-fouriersymbol",
+      "order": 0,
+      "label": "Three regimes of the lattice Fourier symbol",
+      "locator": "Explicit public theorem start lines: 50, 57, 64, 74, 81, 89, 115, 159, 170, 179, 192, 210, 227, 238, 251, 259, 272, 444, 451, 463, 533, 598, 624, 647, 661, 683, 696, 712, 734, 741, 759, 852, 868, 950, 1018",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    },
+    {
+      "source": "bass-levin-2002",
+      "order": 0,
+      "label": "Transition estimate",
+      "locator": "Theorem 1.1, equations (1.1)\u2013(1.4), author PDF p. 2",
+      "relationship": "Explicitly cited input",
+      "status": "pending",
+      "note": "48GR retains the row normalization and the diagonal exception at time one."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 0,
+      "label": "Marginal transition and percolation inputs",
+      "locator": "arXiv:1808.06789v3, (1.13)\u2013(1.14), \u00a71.2.3 and Theorem 1.4, (1.36)",
+      "relationship": "Explicitly cited inputs and written deductions",
+      "status": "pending",
+      "note": "The first display of 6ZYT is cited; G12U is the fixed-L form of (1.13)\u2013(1.14) and is also proved directly from the local bound of V7FQ. V7FQ proves the exact symbol and local limit; CEVT proves all spatial potential equivalents, including critical equality, using G12U for early times. Percolation consequences are then deduced from the cited equivalent."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 1,
+      "label": "Compound-zeta normalization",
+      "locator": "\u00a71.2.1, equations (1.15)\u2013(1.17), PDF/printed p. 5",
+      "relationship": "Provisional source diagnosis and local repair",
+      "status": "pending",
+      "note": "DTYB proves the mass defect and zero-origin normalization repair. No journal or visual PDF check, no theorem counterexample or full repaired-kernel verification."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 2,
+      "label": "All-lattice normalization and cube support",
+      "locator": "Section 1.2.1, (1.16), p.5; earlier arXiv:1204.1180v4 Appendix A (A.2); FIXER's resolution",
+      "relationship": "Written proof with explicit source inputs and provisional correction",
+      "status": "pending",
+      "note": "Normalizes the all-lattice law and mixture, proves cube irreducibility and aperiodicity, and separates the marginal analytic obligations from the alpha-not-two provenance."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 3,
+      "label": "Exact marginal killing asymptotics",
+      "locator": "Further deduction for the clipped law already mapped at equation (1.14)",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "The leading symbol gives logarithmic diagram coefficients or critical deficits. The proved O(|k|^2) symbol error gives the next logarithmic correction and the two-dimensional finite part. No transition estimate, near-critical percolation expansion or source fault is inferred."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 4,
+      "label": "Spatial killing profiles and surviving critical fractions",
+      "locator": "Further deductions for the clipped law already mapped at equation (1.14), using the transition input (1.13)",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Local limits and separate early/late time bounds give the compact-parameter spatial profile. A uniform logarithmic time cutoff determines how much of each finite marginal critical potential survives killing. The transition bound remains cited; no near-critical percolation theorem or new source fault is inferred."
+    },
+    {
+      "source": "chen-sakai-marginal-2019",
+      "order": 5,
+      "label": "Exact critical percolation convolution amplitudes",
+      "locator": "Further deductions from the critical two-point equivalent already mapped at Theorem 1.4, equation (1.36), for the clipped law (1.14)",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "A signed-kernel perturbation criterion is verified by the walk potential equivalents. It transfers the critical two-point amplitude through every finite convolution power, including the dimension-six triangle. No new source fault, near-critical percolation result or reverse-BK repair is inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "1POM",
+      "proof_uses": [
+        "VJCW"
+      ],
+      "reason": "Fourier inversion of discounted convolution powers and monotone convergence reduce finiteness to the symbol estimate."
+    },
+    {
+      "order": 1,
+      "tag": "KEPD",
+      "proof_uses": [
+        "VJCW",
+        "1POM"
+      ],
+      "reason": "Split the discounted radial integral at its small-frequency scale, retaining the logarithm at alpha=2."
+    },
+    {
+      "order": 2,
+      "tag": "T79N",
+      "proof_uses": [
+        "1POM"
+      ],
+      "reason": "Termwise comparison transfers the finite Green diagrams only under explicit pointwise domination."
+    },
+    {
+      "order": 3,
+      "tag": "02EB",
+      "proof_uses": [
+        "94E7"
+      ],
+      "reason": "The Green asymptotic is proved directly by finite-support Fourier and tilting estimates. The first-moment occupation identity gives the stated critical branching-random-walk interpretation; percolation transfer is not inferred."
+    },
+    {
+      "order": 4,
+      "tag": "FZKO",
+      "proof_uses": [
+        "C69U"
+      ],
+      "reason": "Path splitting gives submultiplicativity, the block decomposition proves the connective-constant limit, and the root test plus its infimum formula locate susceptibility divergence."
+    },
+    {
+      "order": 5,
+      "tag": "C2IS",
+      "proof_uses": [
+        "C69U",
+        "FZKO"
+      ],
+      "reason": "High-dimensional coefficient, mean-square and functional limits are explicitly cited lace-expansion inputs. Splitting the two generating series proves their stated Abelian consequences."
+    },
+    {
+      "order": 6,
+      "tag": "IDP2",
+      "proof_uses": [
+        "BSI3",
+        "02EB",
+        "T79N",
+        "E9BP",
+        "2ZI0"
+      ],
+      "reason": "The cited critical spatial theorem and the proved walk equivalent give two-sided global comparison after adjusting finitely many sites. Nonnegative convolution comparison and the discounted Fourier argument give every diagram threshold. The existing triangle theorem supplies the stated mean-field bounds."
+    },
+    {
+      "order": 7,
+      "tag": "UQEK",
+      "proof_uses": [
+        "48GR"
+      ],
+      "reason": "Markov composition and Tonelli give the binomial time weights; summing transition bounds proves the spatial order and each strict dimensional threshold. Strong Markov gives hitting probabilities."
+    },
+    {
+      "order": 8,
+      "tag": "NMTU",
+      "proof_uses": [
+        "48GR",
+        "UQEK",
+        "7C2W",
+        "94E7"
+      ],
+      "reason": "The stable local limit controls intermediate times; the cited bound controls early and late times. Gaussian inversion of the fractional resolvent gives the constant; holding normalization is checked exactly."
+    },
+    {
+      "order": 9,
+      "tag": "V7FQ",
+      "proof_uses": [
+        "7C2W"
+      ],
+      "reason": "Truncated covariance fixes the logarithmic symbol constant. The Fourier L1 argument uses a growing inner region and a separate intermediate-frequency bound."
+    },
+    {
+      "order": 10,
+      "tag": "CEVT",
+      "proof_uses": [
+        "G12U",
+        "V7FQ",
+        "UQEK"
+      ],
+      "reason": "Markov time composition gives every potential. The local limit controls intermediate times; early times use the cited off-diagonal bound. At equality the leading contribution is from n\u2265|x|\u00b2."
+    },
+    {
+      "order": 11,
+      "tag": "6ZYT",
+      "proof_uses": [
+        "CEVT",
+        "T79N",
+        "2ZI0"
+      ],
+      "reason": "The cited critical percolation equivalent gives global two-sided Green comparison after finite-set adjustment. Ordered nonnegative convolution transfers the spatial orders and critical triangle finiteness."
+    },
+    {
+      "order": 12,
+      "tag": "TIOJ",
+      "proof_uses": [
+        "DTYB"
+      ],
+      "reason": "Normalizes the all-lattice law and mixture, proves cube irreducibility and aperiodicity, and separates the marginal analytic obligations from the alpha-not-two provenance."
+    },
+    {
+      "order": 13,
+      "tag": "SPSG",
+      "proof_uses": [
+        "02EB",
+        "C5GY",
+        "IY26",
+        "94E7"
+      ],
+      "reason": "The general covariance change of variables, localized Fourier remainder bound and directional fourth Gaussian derivative yield the Green correction. The occupation identity supplies only the expected branching-walk interpretation."
+    },
+    {
+      "order": 14,
+      "tag": "W810",
+      "proof_uses": [
+        "SPSG"
+      ],
+      "reason": "Exact uniform-coordinate moments determine the angular term and its sign; removing the holding atom uses the exact Green normalization identity."
+    },
+    {
+      "order": 15,
+      "tag": "S4WN",
+      "proof_uses": [],
+      "reason": "Fourier inversion and a radial cutoff give the leading coefficients. Monotone comparison of the resolvent deficit transfers the radial calculation to an asymptotically isotropic symbol without a holding assumption."
+    },
+    {
+      "order": 16,
+      "tag": "Q7D7",
+      "proof_uses": [
+        "S4WN",
+        "V7FQ"
+      ],
+      "reason": "The uniform symbol error bounds the difference of resolvent deficits. Expanding the logarithmic cutoff gives the next term, and an integrable subtraction gives the two-dimensional finite part."
+    },
+    {
+      "order": 17,
+      "tag": "C9HG",
+      "proof_uses": [
+        "CEVT",
+        "V7FQ",
+        "G12U"
+      ],
+      "reason": "Markov time composition gives the discounted potential. The uniform local limit controls intermediate times, the cited transition estimate controls early times, and the discounted local-limit bound controls late times."
+    },
+    {
+      "order": 18,
+      "tag": "4XHU",
+      "proof_uses": [
+        "CEVT",
+        "V7FQ",
+        "G12U",
+        "C9HG"
+      ],
+      "reason": "The critical local limit is uniform for all times beyond the square of the separation. Replacing geometric discounting by a time cutoff has a uniformly lower-order error; integration gives the surviving fraction. C9HG gives the refined compact-profile ratio."
+    },
+    {
+      "order": 19,
+      "tag": "B3YC",
+      "proof_uses": [
+        "CEVT"
+      ],
+      "reason": "A telescoping sum reduces relative errors to a uniformly small multiple of the full potential plus finitely many lower-order translates. CEVT verifies that these translates are negligible for the clipped marginal law."
+    },
+    {
+      "order": 20,
+      "tag": "5DQV",
+      "proof_uses": [
+        "B3YC",
+        "CEVT",
+        "6ZYT"
+      ],
+      "reason": "The cited critical percolation equivalent gives the limiting ratio to the walk Green function. The transfer criterion raises that ratio to the convolution order, and CEVT supplies the exact spatial coefficients."
+    },
+    {
+      "order": 21,
+      "tag": "CYYG",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 22,
+      "tag": "94E7",
+      "proof_uses": [],
+      "reason": "A conditional-expectation recursion, induction and Tonelli give the formulas; no other wiki assertion is invoked."
+    },
+    {
+      "order": 23,
+      "tag": "4F49",
+      "proof_uses": [
+        "94E7"
+      ],
+      "reason": "Independence and monotone convergence factor the expectation, and the occupation identity (94E7) evaluates each factor."
+    },
+    {
+      "order": 24,
+      "tag": "J1E9",
+      "proof_uses": [
+        "94E7"
+      ],
+      "reason": "The genealogical classification of ordered pairs evaluates each class by the first-moment identity (94E7) summed over positive generations."
+    },
+    {
+      "order": 25,
+      "tag": "E9BP",
+      "proof_uses": [],
+      "reason": "The proof is a Fourier computation of the damped Green function convolutions with monotone convergence; no other wiki assertion is invoked."
+    },
+    {
+      "order": 26,
+      "tag": "C69U",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 27,
+      "tag": "7C2W",
+      "proof_uses": [],
+      "reason": "The proof is a characteristic-function expansion, an aperiodicity argument and Fourier inversion; no other wiki assertion is invoked."
+    },
+    {
+      "order": 28,
+      "tag": "DTYB",
+      "proof_uses": [],
+      "reason": "The proof computes the masses of the convolution powers with Tonelli; no other wiki assertion is invoked."
+    },
+    {
+      "order": 29,
+      "tag": "G12U",
+      "proof_uses": [
+        "V7FQ"
+      ],
+      "reason": "The proof splits paths by one step longer than |x|/K, uses a Fuk-Nagaev bound for truncated steps, and takes the local bound sup_y D_L^{*k}(y) <= C(k log k)^{-d/2} from V7FQ."
+    }
+  ]
+}

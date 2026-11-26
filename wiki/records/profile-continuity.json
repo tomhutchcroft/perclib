@@ -1,0 +1,133 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "profile-continuity",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 12
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-finite-cylinders",
+      "order": 0,
+      "label": "Finite cylinders",
+      "locator": "Named statement start lines in the pinned source: 32, 38, 56, 60",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "ZNMQ supplies the arbitrary-index all-open formula, its singleton and mixed open/closed forms. The target proposition is a packaging of the same all-open statement."
+    },
+    {
+      "source": "perclib-finite-expectations",
+      "order": 0,
+      "label": "Finite product expectations",
+      "locator": "Named statement start lines in the pinned source: 37, 59, 68, 78, 96",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "ZNMQ supplies full finite configuration masses, the real weighted expectation, restriction pushforward and cylinder expectation. Its empty and deterministic two-coordinate examples retain the source witnesses."
+    },
+    {
+      "source": "perclib-finite-continuity",
+      "order": 0,
+      "label": "Finite profile continuity",
+      "locator": "Named statement start lines in the pinned source: 23, 31, 48, 60, 69, 76, 91, 96, 102",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "ZNMQ supplies event sums and finite restriction; RA0Z supplies continuity and pointwise-limit consequences, including finite-domain connectivity and endpoint profiles. The source uses arbitrary filters, covered by topological continuity rather than only sequential continuity. RGN6 and ARYU are separate expository extensions, not claims about this module."
+    },
+    {
+      "source": "perclib-monotone-coupling",
+      "order": 0,
+      "label": "Ordered Bernoulli couplings",
+      "locator": "Named statement start lines in the pinned source: 22, 62, 104, 115, 124",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "6B9V supplies the three-state coordinate construction, countable product coupling, increasing-event comparison, extended nonnegative integral comparison and the countable bond specialization. Countability is retained for the joint order event; equality and extreme profiles are included."
+    },
+    {
+      "source": "perclib-product-law",
+      "order": 0,
+      "label": "Canonical Bernoulli configuration law",
+      "locator": "Named statement start lines in the pinned source: 41, 47, 59, 66, 75",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "The introductory law construction explains the canonical product definition, weighted two-point coordinate measures, measurable identification of binary functions and open sets, and homogeneous sampling from a fixed subset. The probability-measure instance is discussed but is not counted among explicit definitions/theorems. These identities hold for arbitrary coordinate sets. The original product-model definition is linked, not duplicated or edited. The source retains its upstream attribution; no Lean source is copied."
+    },
+    {
+      "source": "perclib-profile-total-variation",
+      "order": 0,
+      "label": "Summable profile perturbations",
+      "locator": "Named public theorem start lines: 40, 47, 115, 128, 146, 180, 185",
+      "relationship": "Source-inspected event inequalities with additional deductions identified",
+      "status": "pending",
+      "note": "W90W gives both ordered-profile inequalities, comparison through the coordinatewise minimum, the full absolute-difference estimate when the discrepancy is finite, and countable bond connection/infinite-cluster applications. The cap by one, bounded-observable estimate and off-diagonal refinement are deductions. No continuity in the weaker product topology or across a homogeneous critical parameter is inferred."
+    },
+    {
+      "source": "perclib-susceptibility-continuity",
+      "order": 0,
+      "label": "Left continuity and vanishing boundary flux",
+      "locator": "Named public declaration start lines: 46, 54, 66, 73, 90, 159, 176, 189",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "Left continuity allows infinite susceptibility and needs no summable-row assumption. Vanishing boundary flux needs finite susceptibility at one root and a finite uniform probability-row bound, but no transitivity. The three-way RDF0 equivalence is not exported here."
+    },
+    {
+      "source": "perclib-profile-regularity",
+      "order": 0,
+      "label": "Order and lower semicontinuity of connection probabilities",
+      "locator": "Named public theorem start lines: 44, 49, 56, 63, 80, 102, 120, 132, 147, 156",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "6B9V and ARYU give monotonicity and lower semicontinuity; RA0Z gives finite-coordinate continuity. The extension explains continuous-within lower intervals on general topological preorders, not only sequential left limits on the real line. No full continuity or critical continuity is inferred."
+    },
+    {
+      "source": "perclib-theta-semicontinuity",
+      "order": 0,
+      "label": "Upper semicontinuity on a locally finite host",
+      "locator": "Named public theorem start lines: 39, 57, 72, 82, 103, 167",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "Y5HD gives the finite-boundary escape proof and right continuity along monotone continuous families. One fixed locally finite support graph is essential; its degrees need not be uniformly bounded. Diagonal probabilities are unrestricted. The ambient vertex set is countable for the probabilistic conclusion."
+    },
+    {
+      "source": "hutchcroft-book",
+      "order": 0,
+      "label": "Continuity in the percolation profile",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "W90W",
+      "proof_uses": [
+        "RGN6",
+        "6B9V",
+        "LNKT"
+      ],
+      "reason": "Extends the finite-block discrepancy coupling to countably many coordinates; the source uses ordered couplings through the minimum, and diagonal erasure refines the bond sum."
+    },
+    {
+      "order": 1,
+      "tag": "Y5HD",
+      "proof_uses": [
+        "RA0Z",
+        "6B9V",
+        "ARYU"
+      ],
+      "reason": "Finite incident host edges make escape a cylinder; continuity from above gives an infimum, and ordered comparison supplies the one-sided bound."
+    },
+    {
+      "order": 2,
+      "tag": "0OQL",
+      "proof_uses": [
+        "6B9V"
+      ],
+      "reason": "Finite-cluster atom probabilities are continuous by the finite boundary sum. Their sum gives upper semicontinuity of the infinite-cluster probability; ordered coupling gives right continuity."
+    }
+  ]
+}

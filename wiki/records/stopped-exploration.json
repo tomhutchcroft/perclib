@@ -1,0 +1,282 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "stopped-exploration",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 12
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 15,
+      "label": "Stopped cluster exploration",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 5,
+      "label": "Power-law susceptibility transfer",
+      "locator": "Theorem 1.3 and the conclusion of Section 4",
+      "relationship": "Susceptibility-to-tail implication",
+      "status": "pending",
+      "note": "X8T6 keeps the susceptibility power and logarithmic factor explicit; decay requires gamma < 2. No new source or compiled correspondence is certified."
+    },
+    {
+      "source": "hutchcroft-powerlaw-2021",
+      "order": 3,
+      "label": "Improved two-ghost inequality and endpoint environments",
+      "locator": "arXiv:2008.11197v2, Section 3: Lemmas 3.4–3.5, Proposition 3.2, Theorem 3.1",
+      "relationship": "Proof including constants and endpoint convention",
+      "status": "pending",
+      "note": "The exponential-scale variance decomposition recovers constant 20. Zero and one environment probabilities contribute zero martingale increment; predictable variance is at most incident weight, and the decreasing damping function preserves the estimate. Mass transport and h = 3/n give 40, 200 and 40000. The finite orbit-row hypothesis and at least one finite cluster remain explicit. No compiled correspondence is claimed."
+    },
+    {
+      "source": "hutchcroft-powerlaw-2021",
+      "order": 5,
+      "label": "Incident-weight normalization",
+      "locator": "Theorem 1.5 (1.7), arXiv v2 and publisher HTML; cited Corollary 3.2 of arXiv:2007.15625v1",
+      "relationship": "Source comparison and normalization correction",
+      "status": "pending",
+      "note": "Expanding the J-weighted random-root-edge expectation introduces the intensity row L. The printed unnormalized bound fails on the nearest-neighbour integer line with edge intensity 100. Unit-row normalization or the factor L repairs the translation. The earlier corollary remains an external theorem; no compiled correspondence is asserted."
+    },
+    {
+      "source": "perclib-martingale-maximal",
+      "order": 0,
+      "label": "Finite-horizon maximal inequality and variance compensator",
+      "locator": "Explicit public theorem/lemma start lines: 41, 52, 160",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 3 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Polynomial endpoint-tail transfer",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.5, off-critical susceptibility input",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Generalizes the ghost-derivative integration to every tail exponent between zero and one; susceptibility finiteness is a conclusion."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 1,
+      "label": "Second moment and the intensity derivative",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Proof of Lemma III.3.4, intensity contribution",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Derives the needed inequality by summing nonnegative tail derivatives, with the linear error retained."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 38,
+      "label": "Real caps and the modified cutoff path",
+      "locator": "arXiv:2508.18809v1 Lemma III.2.2 and (III.2.5); equations (III.3.26)–(III.3.27)",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "Integer-cap interpolation gives a real-cap score bound with a harmless factor sqrt(2). Integrated finite-edge passage separates the cutoff and intensity rates while the cap stays fixed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "X8T6",
+      "proof_uses": [
+        "JL1S"
+      ],
+      "reason": "Use separation n^(-1/2) for the finite tail and a fixed two-sided intensity separation before passing to the infinite-cluster event."
+    },
+    {
+      "order": 1,
+      "tag": "VG4R",
+      "proof_uses": [
+        "HXNR"
+      ],
+      "reason": "Exponential variance intervals and geometric sums give the source constant twenty."
+    },
+    {
+      "order": 2,
+      "tag": "BYEO",
+      "proof_uses": [
+        "VG4R",
+        "KDN9",
+        "M9TT",
+        "G3HT",
+        "75N0"
+      ],
+      "reason": "The endpoint-safe increment lowers predictable variance; monotone damping preserves the fluctuation bound, then vertex transport, edge marks and finite-orbit optimization give the source constants."
+    },
+    {
+      "order": 3,
+      "tag": "I328",
+      "proof_uses": [
+        "JM30"
+      ],
+      "reason": "Generalizes the ghost-derivative integration to every tail exponent between zero and one; susceptibility finiteness is a conclusion."
+    },
+    {
+      "order": 4,
+      "tag": "VW2E",
+      "proof_uses": [
+        "JM30",
+        "NMYK",
+        "Y84V"
+      ],
+      "reason": "Derives the needed inequality by summing nonnegative tail derivatives, with the linear error retained."
+    },
+    {
+      "order": 5,
+      "tag": "89T0",
+      "proof_uses": [
+        "UTUF",
+        "D7A5",
+        "DR1W",
+        "C0OR"
+      ],
+      "reason": "Integer-cap interpolation gives a real-cap score bound with a harmless factor sqrt(2). Integrated finite-edge passage separates the cutoff and intensity rates while the cap stays fixed."
+    },
+    {
+      "order": 6,
+      "tag": "28UY",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 7,
+      "tag": "PWBU",
+      "proof_uses": [
+        "28UY"
+      ],
+      "reason": "The proof uses the inclusion D_t in K_o and the fairness of the priority exploration established with its definition (28UY), and writes the event as a countable union of finite-prefix cylinders."
+    },
+    {
+      "order": 8,
+      "tag": "DCRV",
+      "proof_uses": [
+        "28UY",
+        "PWBU"
+      ],
+      "reason": "The proof bounds queried weight by the discovered set (each query is incident to it, 28UY) and substitutes |D_infinity|=min(|K_o|,n) from PWBU, then applies Tonelli."
+    },
+    {
+      "order": 9,
+      "tag": "JL1S",
+      "proof_uses": [
+        "PWBU",
+        "DCRV",
+        "D66F"
+      ],
+      "reason": "The proof applies the weighted entropy comparison for Borel-computing trees (D66F) to the stopped tree, which computes the event by PWBU and has revealment cost bounded by DCRV."
+    },
+    {
+      "order": 10,
+      "tag": "QS3L",
+      "proof_uses": [
+        "JL1S"
+      ],
+      "reason": "The proof applies the cluster-tail comparison (JL1S) with beta_1=b-epsilon and beta_2=b or b+epsilon."
+    },
+    {
+      "order": 11,
+      "tag": "1EJP",
+      "proof_uses": [
+        "JM30"
+      ],
+      "reason": "The proof inserts the truncated-mean bound into the cluster-tail differential inequality (JM30) and integrates with an integrating factor."
+    },
+    {
+      "order": 12,
+      "tag": "UTUF",
+      "proof_uses": [
+        "PWBU",
+        "GSLG",
+        "DCRV"
+      ],
+      "reason": "The proof writes the derivative as the covariance with the exploration score of the stopped tree (PWBU), uses the conditional Bernoulli law of each queried edge (GSLG) and the weighted revealment bound (DCRV), then exhausts the edges."
+    },
+    {
+      "order": 13,
+      "tag": "4GNM",
+      "proof_uses": [
+        "Y84V",
+        "UTUF"
+      ],
+      "reason": "The proof takes the upper bound from the tree-graph moment bound (Y84V) and squares the derivative bound of UTUF."
+    },
+    {
+      "order": 14,
+      "tag": "0O38",
+      "proof_uses": [
+        "JM30"
+      ],
+      "reason": "The proof inserts the susceptibility bound into the cluster-tail differential inequality (JM30) and integrates from beta to b."
+    },
+    {
+      "order": 15,
+      "tag": "LZCK",
+      "proof_uses": [
+        "JL1S"
+      ],
+      "reason": "The proof applies the entropy comparison (JL1S) between b-epsilon and b at n of order epsilon^{-2}."
+    },
+    {
+      "order": 16,
+      "tag": "Z9K8",
+      "proof_uses": [
+        "JM30",
+        "Y84V"
+      ],
+      "reason": "The proof sums the tail derivative inequality (JM30) over n and uses finiteness of the second moment from the tree-graph bound (Y84V)."
+    },
+    {
+      "order": 17,
+      "tag": "HXNR",
+      "proof_uses": [],
+      "reason": "The proof stops before the variance crosses lambda and applies Doob's maximal inequality; it invokes no other wiki assertion."
+    },
+    {
+      "order": 18,
+      "tag": "4GBV",
+      "proof_uses": [
+        "HXNR"
+      ],
+      "reason": "The proof splits into dyadic variance blocks and applies Cauchy-Schwarz with the truncated maximal bound (HXNR)."
+    },
+    {
+      "order": 19,
+      "tag": "KDN9",
+      "proof_uses": [
+        "4GBV"
+      ],
+      "reason": "The proof builds the exploration martingale, checks its conditional law and variance directly, and applies the damped martingale maximum bound (4GBV)."
+    },
+    {
+      "order": 20,
+      "tag": "G3HT",
+      "proof_uses": [],
+      "reason": "The proof chooses orbit-supported test weights and uses Cauchy-Schwarz; the mention of KDN9 only checks admissibility of the weights."
+    },
+    {
+      "order": 21,
+      "tag": "M9TT",
+      "proof_uses": [
+        "KDN9"
+      ],
+      "reason": "The proof uses a switching identity and the assumed mass-transport principle, then averages over the marks and applies KDN9."
+    },
+    {
+      "order": 22,
+      "tag": "75N0",
+      "proof_uses": [
+        "M9TT",
+        "G3HT"
+      ],
+      "reason": "The proof bounds the green-pair probability from below, applies the two-cluster transport bound (M9TT), and gets the square sum from G3HT."
+    }
+  ]
+}

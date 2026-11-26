@@ -1,0 +1,98 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-derivative-estimates",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 145
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Reverse flow and inverse maps",
+      "locator": "Rohde–Schramm (2005), Lemma 3.1, Theorem 3.2 and (3.3)–(3.11), pp.889–892; Corollary 3.5, pp.894–895; Theorem 5.2, pp.900–901. The separate comparison repair concerns the proof of Lemma 3.3, p.893, before (3.15). Compared with arXiv:math/0106036v4 Sections 3 and 5.",
+      "relationship": "Written reverse-flow, moment, tail and fixed-time regularity proofs",
+      "status": "pending",
+      "note": "Fixed-interval Brownian reversal identifies the reverse map with the centered inverse map. This is an identity in law at each fixed time, not a process identity in the time parameter."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Height clock and derivative comparison",
+      "locator": "Rohde–Schramm (2005), Lemma 3.1, Theorem 3.2 and (3.3)–(3.11), pp.889–892; Corollary 3.5, pp.894–895; Theorem 5.2, pp.900–901. The separate comparison repair concerns the proof of Lemma 3.3, p.893, before (3.15). Compared with arXiv:math/0106036v4 Sections 3 and 5.",
+      "relationship": "Written reverse-flow, moment, tail and fixed-time regularity proofs",
+      "status": "pending",
+      "note": "The ratio diffusion is globally nonexplosive in height time, so every finite target height is reached in finite physical time in the chosen direction. Integrating the exact log-derivative formula gives the two-sided comparison needed to repair the source lower-bound proof."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Exact weighted derivative moments",
+      "locator": "Rohde–Schramm (2005), Lemma 3.1, Theorem 3.2 and (3.3)–(3.11), pp.889–892; Corollary 3.5, pp.894–895; Theorem 5.2, pp.900–901. The separate comparison repair concerns the proof of Lemma 3.3, p.893, before (3.15). Compared with arXiv:math/0106036v4 Sections 3 and 5.",
+      "relationship": "Written reverse-flow, moment, tail and fixed-time regularity proofs",
+      "status": "pending",
+      "note": "The height-clock martingale has uniformly bounded stochastic coefficient on finite clock intervals. This proves the weighted moment identity for every real b and either flow direction, at any target height."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Fixed-time derivative tails",
+      "locator": "Rohde–Schramm (2005), Lemma 3.1, Theorem 3.2 and (3.3)–(3.11), pp.889–892; Corollary 3.5, pp.894–895; Theorem 5.2, pp.900–901. The separate comparison repair concerns the proof of Lemma 3.3, p.893, before (3.15). Compared with arXiv:math/0106036v4 Sections 3 and 5.",
+      "relationship": "Written reverse-flow, moment, tail and fixed-time regularity proofs",
+      "status": "pending",
+      "note": "Bounded height-clock stopping and Schwarz–Pick give an explicit power bound. It has the source powers and removes its logarithmic loss when a=lambda; the source upper bound remains valid."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 4,
+      "label": "Fixed-time Holder continuity",
+      "locator": "Rohde–Schramm (2005), Lemma 3.1, Theorem 3.2 and (3.3)–(3.11), pp.889–892; Corollary 3.5, pp.894–895; Theorem 5.2, pp.900–901. The separate comparison repair concerns the proof of Lemma 3.3, p.893, before (3.15). Compared with arXiv:math/0106036v4 Sections 3 and 5.",
+      "relationship": "Written reverse-flow, moment, tail and fixed-time regularity proofs",
+      "status": "pending",
+      "note": "Dyadic Borel–Cantelli, Koebe distortion and integration yield local Holder extension to the boundary for each fixed deterministic time. The choice b=kappa^(-1/2) gives positive exponents except at kappa4 and the source limiting exponents at zero and infinity. No joint-time or trace-generation conclusion is inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "HHBC",
+      "proof_uses": [],
+      "reason": "Fixed-interval Brownian reversal identifies the reverse map with the centered inverse map. This is an identity in law at each fixed time, not a process identity in the time parameter."
+    },
+    {
+      "order": 1,
+      "tag": "O0VQ",
+      "proof_uses": [],
+      "reason": "The ratio diffusion is globally nonexplosive in height time, so every finite target height is reached in finite physical time in the chosen direction. Integrating the exact log-derivative formula gives the two-sided comparison needed to repair the source lower-bound proof."
+    },
+    {
+      "order": 2,
+      "tag": "AXSH",
+      "proof_uses": [
+        "O0VQ"
+      ],
+      "reason": "The height-clock martingale has uniformly bounded stochastic coefficient on finite clock intervals. This proves the weighted moment identity for every real b and either flow direction, at any target height."
+    },
+    {
+      "order": 3,
+      "tag": "M7AF",
+      "proof_uses": [
+        "HHBC",
+        "O0VQ",
+        "AXSH"
+      ],
+      "reason": "Bounded height-clock stopping and Schwarz–Pick give an explicit power bound. It has the source powers and removes its logarithmic loss when a=lambda; the source upper bound remains valid."
+    },
+    {
+      "order": 4,
+      "tag": "OLNV",
+      "proof_uses": [
+        "M7AF"
+      ],
+      "reason": "Dyadic Borel–Cantelli, Koebe distortion and integration yield local Holder extension to the boundary for each fixed deterministic time. The choice b=kappa^(-1/2) gives positive exponents except at kappa4 and the source limiting exponents at zero and infinity. No joint-time or trace-generation conclusion is inferred."
+    }
+  ]
+}

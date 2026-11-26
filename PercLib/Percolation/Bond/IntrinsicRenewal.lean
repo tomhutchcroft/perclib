@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 445 (Q-111, part 2), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -25,8 +26,8 @@ balls. Then for every `r`:
 (The upper bound `b_r ≤ ∑_{j ≤ r} D^j` is `lintegral_encard_ball_le_of_transitive`.)
 
 Route (wiki, R5XZ): under transitivity every radius-`k` ball has mean `b_k`
-(`lintegral_encard_ball_eq_of_transitive`), so the renewal inequality of Q-220 reads
-`b_{m+n} ≤ b_m + a_m b_n`. If `a_m < 1` for some `m ≥ 1`, iteration bounds every `b_r` by
+(`lintegral_encard_ball_eq_of_transitive`), so the renewal inequality of `BallExploration.lean`
+reads `b_{m+n} ≤ b_m + a_m b_n`. If `a_m < 1` for some `m ≥ 1`, iteration bounds every `b_r` by
 `b_m / (1 - a_m) < ⊤`, and `χ_o = sup_r b_r` would be finite. Hence `a_m ≥ 1`; and
 `b_{r+1} = b_r + a_{r+1}`.
 -/
@@ -37,7 +38,6 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -179,15 +179,15 @@ theorem mul_inv_one_sub_eq {a b : ℝ≥0∞} (ha : a < 1) :
   calc b + a * (b * (1 - a)⁻¹) = b * (1 + a * (1 - a)⁻¹) := by ring
     _ = b * (1 - a)⁻¹ := by rw [key]
 
-/-- **R5XZ, spheres.** Under transitivity, `D < ⊤` and `χ_o = ⊤`,
+/-- **Spheres.** Under transitivity, `D < ⊤` and `χ_o = ⊤`,
 `1 ≤ E|S_ω(o, r)|` for every `r`. -/
 theorem one_le_lintegral_encard_sphere [Countable V] (q : Sym2 V → unitInterval)
     (hq : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, q (Sym2.map σ e) = q e) (o : V)
-    (hD : (∑' v, if v = o then 0 else (unitInterval.toNNReal (q s(o,v)) : ℝ≥0∞)) < ⊤)
+    (hD : rowSum (fun e => unitInterval.toENNReal (q e)) o < ⊤)
     (hchi : chi q o = ⊤) (r : ℕ) :
     1 ≤ ∫⁻ ω, (({y | (openGraph ω).edist o y = r} : Set V).encard : ℝ≥0∞) ∂law q := by
-  set D := ∑' v, if v = o then 0 else (unitInterval.toNNReal (q s(o,v)) : ℝ≥0∞) with hDdef
-  have hrow : ∀ v, (∑' w, if w = v then 0 else (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ D :=
+  set D := rowSum (fun e => unitInterval.toENNReal (q e)) o with hDdef
+  have hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ D :=
     fun v => (rowSum_eq_of_transitive_profile q hq o v).le
   set b : ℕ → ℝ≥0∞ := fun k =>
     ∫⁻ ω, (({y | (openGraph ω).edist o y ≤ k} : Set V).encard : ℝ≥0∞) ∂law q with hb
@@ -234,10 +234,10 @@ theorem one_le_lintegral_encard_sphere [Countable V] (q : Sym2 V → unitInterva
   rw [hchi] at this
   exact absurd (lt_of_le_of_lt this hCfin) (lt_irrefl _)
 
-/-- **R5XZ, balls.** Under the same hypotheses, `r + 1 ≤ E|B_ω(o, r)|` for every `r`. -/
+/-- **Balls.** Under the same hypotheses, `r + 1 ≤ E|B_ω(o, r)|` for every `r`. -/
 theorem succ_le_lintegral_encard_ball [Countable V] (q : Sym2 V → unitInterval)
     (hq : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, q (Sym2.map σ e) = q e) (o : V)
-    (hD : (∑' v, if v = o then 0 else (unitInterval.toNNReal (q s(o,v)) : ℝ≥0∞)) < ⊤)
+    (hD : rowSum (fun e => unitInterval.toENNReal (q e)) o < ⊤)
     (hchi : chi q o = ⊤) (r : ℕ) :
     ((r + 1 : ℕ) : ℝ≥0∞) ≤
       ∫⁻ ω, (({y | (openGraph ω).edist o y ≤ r} : Set V).encard : ℝ≥0∞) ∂law q := by
@@ -249,7 +249,7 @@ theorem succ_le_lintegral_encard_ball [Countable V] (q : Sym2 V → unitInterval
     push_cast at h1 ih ⊢
     exact add_le_add ih h1
 
-/-! ### Non-vacuity witness (D-5) -/
+/-! ### Non-vacuity witness -/
 
 /-- The all-open nearest-neighbour line: transitive, `D = 2`, `χ = ⊤`; so every sphere has
 mean at least `1` and every ball of radius `r` mean at least `r + 1`. -/
@@ -266,9 +266,8 @@ example (r : ℕ) :
     refine ⟨Equiv.addRight (y - x), by simp, fun e => ?_⟩
     induction e using Sym2.ind with
     | h a b => simp [q, Sym2.map_mk]
-  have hD : (∑' v, if v = (0 : ℤ) then 0 else
-      (unitInterval.toNNReal (q s(0,v)) : ℝ≥0∞)) < ⊤ := by
-    rw [tsum_eq_sum (s := {1, -1}) fun v hv => by
+  have hD : rowSum (fun e => unitInterval.toENNReal (q e)) 0 < ⊤ := by
+    rw [rowSum_toENNReal, tsum_eq_sum (s := {1, -1}) fun v hv => by
       simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hv
       have : ¬ |v - 0| = 1 := by
         rw [sub_zero]; intro h
@@ -285,7 +284,7 @@ example (r : ℕ) :
     have h1 : (unitInterval.toNNReal (1 : unitInterval) : ℝ≥0∞) = 1 := by
       rw [ENNReal.coe_eq_one]; rfl
     rw [h1, tsub_self, ENNReal.div_zero (by norm_num)]
-  exact ⟨one_le_lintegral_encard_sphere q hq 0 (by convert hD) hchi r,
-    succ_le_lintegral_encard_ball q hq 0 (by convert hD) hchi r⟩
+  exact ⟨one_le_lintegral_encard_sphere q hq 0 hD hchi r,
+    succ_le_lintegral_encard_ball q hq 0 hD hchi r⟩
 
 end PercLib.Percolation.Bond

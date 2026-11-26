@@ -1,11 +1,16 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New doubling-kernel convolution estimate using the triangle inequality and
 nonnegative series. No upstream proof is copied; summability is an explicit
 hypothesis, not an assertion about power-law convergence at exponent zero.
 -/
 module
 
+public import PercLib.Meta.Tag
 public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 public import Mathlib.Analysis.PSeries
@@ -17,14 +22,29 @@ public import Mathlib.Tactic.GCongr
 public import Mathlib.Tactic.Positivity
 public import Mathlib.Tactic.NormNum
 
+/-!
+# Convolution of doubling kernels
+
+A doubling kernel on a group has convolution bounded by twice its doubling constant times its mass;
+the origin-deleted power kernel is doubling, which gives the power-law convolution bound on normed
+groups and on `ℤ^d`.
+
+## Main results
+
+* `tsum_mul_le_of_doubling`
+* `powerKernel_doubling`
+* `tsum_powerKernel_mul_le`
+* `tsum_lattice_powerKernel_mul_le`
+-/
+
 @[expose] public section
 noncomputable section
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 namespace PercLib.Models
 
 /-- A doubling kernel has convolution bounded by twice its doubling constant times
 its mass. No symmetry of the kernel or of the gauge is needed. -/
-theorem tsum_mul_le_of_doubling {G : Type*} [AddCommGroup G] (ρ : G → ℝ≥0)
+@[tag "4Q21"] theorem tsum_mul_le_of_doubling {G : Type*} [AddCommGroup G] (ρ : G → ℝ≥0)
     (htri : ∀ u v, ρ (u + v) ≤ ρ u + ρ v)
     (k : G → ℝ≥0∞) (hk0 : k 0 = 0) {D M : ℝ≥0∞}
     (hD : ∀ u w, u ≠ 0 → w ≠ 0 → ρ w ≤ 2 * ρ u → k u ≤ D * k w)
@@ -39,7 +59,7 @@ theorem tsum_mul_le_of_doubling {G : Type*} [AddCommGroup G] (ρ : G → ℝ≥0
     · subst z; simp [hk0]
     have htriangle : ρ (y-x) ≤ ρ (z-x) + ρ (y-z) := by
       convert htri (z-x) (y-z) using 1
-      abel
+      abel_nf
     by_cases h : ρ (y-x) ≤ 2 * ρ (z-x)
     · calc
         _ ≤ (D * k (y-x)) * k (y-z) := by gcongr; exact hD _ _ (sub_ne_zero.mpr hz) hw h
@@ -74,6 +94,7 @@ theorem nnnorm_rpow_neg_le_of_le_twice {G : Type*} [NormedAddCommGroup G]
     add_neg_cancel, NNReal.rpow_zero, one_mul] at hb
   exact hb
 
+open Classical in
 /-- The origin-deleted power kernel satisfies doubling, including exponent zero. -/
 theorem powerKernel_doubling {G : Type*} [NormedAddCommGroup G]
     {s : ℝ} (hs : 0 ≤ s) {u w : G} (hu : u ≠ 0) (hw : w ≠ 0)
@@ -87,8 +108,9 @@ theorem powerKernel_doubling {G : Type*} [NormedAddCommGroup G]
     ENNReal.coe_le_coe]
   exact nnnorm_rpow_neg_le_of_le_twice hs hw h
 
+open Classical in
 /-- Power-law convolution on any normed abelian group, under its explicit mass bound. -/
-theorem tsum_powerKernel_mul_le {G : Type*} [NormedAddCommGroup G]
+@[tag "ZXLF"] theorem tsum_powerKernel_mul_le {G : Type*} [NormedAddCommGroup G]
     {s : ℝ} (hs : 0 ≤ s) {M : ℝ≥0∞}
     (hM : ∑' z : G, (if z = 0 then 0 else (‖z‖₊ ^ (-s) : ℝ≥0∞)) ≤ M)
     {x y : G} (hxy : x ≠ y) :
@@ -104,7 +126,7 @@ theorem tsum_powerKernel_mul_le {G : Type*} [NormedAddCommGroup G]
 Summability is deliberately a hypothesis, so α=0 and d=0 remain sound. -/
 theorem tsum_lattice_powerKernel_mul_le (d : ℕ) {α : ℝ} (hα : 0 ≤ α) {M : ℝ≥0∞}
     (hM : ∑' z : Fin d → ℤ,
-      (if z = 0 then 0 else (‖z‖₊ ^ (-(d+α)) : ℝ≥0∞)) ≤ M)
+      (if z = 0 then 0 else (‖z‖₊ ^ (-(d + α)) : ℝ≥0∞)) ≤ M)
     {x y : Fin d → ℤ} (hxy : x ≠ y) :
     ∑' z, (if z-x = 0 then 0 else (‖z-x‖₊ ^ (-(d+α)) : ℝ≥0∞)) *
       (if y-z = 0 then 0 else (‖y-z‖₊ ^ (-(d+α)) : ℝ≥0∞)) ≤
@@ -127,6 +149,7 @@ example {G : Type*} [NormedAddCommGroup G] {x y : G} (_hxy : x ≠ y) :
     ∑' _z : G, (0:ℝ≥0∞) * 0 ≤ 2 * 0 * 0 * 0 := by simp
 
 -- The power-law doubling hypothesis is genuinely realized at d=1, α=1.
+open Classical in
 example {u w : Fin 1 → ℤ} (hu : u ≠ 0) (hw : w ≠ 0) (h : ‖w‖₊ ≤ 2 * ‖u‖₊) :
     (if u = 0 then 0 else (‖u‖₊ ^ (-2:ℝ) : ℝ≥0∞)) ≤
       (4:ℝ≥0∞) * (if w = 0 then 0 else (‖w‖₊ ^ (-2:ℝ) : ℝ≥0∞)) := by

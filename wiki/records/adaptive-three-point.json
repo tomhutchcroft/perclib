@@ -1,0 +1,761 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "adaptive-three-point",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 17
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 0,
+      "label": "Predictable hybrid law",
+      "locator": "arXiv:2408.08457v1, §2; Lemma 3.1",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "An invertible coordinate-pair swap preserves each product weight."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 1,
+      "label": "Adaptive Harris inequality",
+      "locator": "arXiv:2408.08457v1, Theorem 3.2",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "A deepest-node removal reduces the difference to a product of two monotone increments."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 2,
+      "label": "Adaptive BK inequality",
+      "locator": "arXiv:2408.08457v1, Definition 4.2 and Theorem 4.3",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "Four witness indicators give the conditional comparison without moving an edge between certificates."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 3,
+      "label": "Stopped-leaf Cauchy–Schwarz",
+      "locator": "arXiv:2408.08457v1, Theorem 5.2 and Corollary 5.3",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "Independent continuations give an exact leaf sum; adaptive Harris gives the continued-tree version."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 4,
+      "label": "Stopped DFS witnesses",
+      "locator": "arXiv:2408.08457v1, §6.2, proof of Theorem 6.2",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "Completed branches exclude first entry through them; the ordered attachment points give mixed witnesses."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 5,
+      "label": "Finite three-point theorem",
+      "locator": "arXiv:2408.08457v1, Theorem 1.1; Theorem 6.2, (13)–(14)",
+      "relationship": "Proof with explicit coordinate and stopping conventions",
+      "status": "pending",
+      "note": "Leafwise lower bounds and mixed-witness upper bounds give the factor eight and union estimate."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 6,
+      "label": "All-but-one DFS witnesses",
+      "locator": "arXiv:2508.18808v1 HTML, Theorem II.3.1 proof, paragraph before (II.3.5)",
+      "relationship": "Complete proof using the adaptive inequalities",
+      "status": "pending",
+      "note": "A split of the discovery tree at an attachment point gives nonempty marked parts, including endpoint and equal-attachment cases."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 7,
+      "label": "Higher-order product inequality",
+      "locator": "arXiv:2508.18808v1 HTML, Theorem II.3.1 and its proof, (II.3.4)–(II.3.5) and final display",
+      "relationship": "Complete proof using the adaptive inequalities",
+      "status": "pending",
+      "note": "Mixed BK and leafwise Cauchy–Schwarz give the stronger coefficient printed at the end of the proof; countable exhaustion is included."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 8,
+      "label": "Sharpened four-point matching bound",
+      "locator": "arXiv:2508.18808v1 HTML, Remark II.3.3 and (II.3.1)",
+      "relationship": "Complete proof using the adaptive inequalities",
+      "status": "pending",
+      "note": "The smaller higher-order prefactor gives 186624 after applying the three-point bound twice."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 9,
+      "label": "Three cluster-resampling orders",
+      "locator": "arXiv:2408.08457v1, Lemma 7.1 and Algorithms 3–5; printed pp.11–12/PDF indices10–11",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Whole-cluster boundaries identify the differences between the shared sets. First entrance into either target cluster gives the path inclusion; complementary independent hybrids give the lower bound."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 10,
+      "label": "Asymmetric partition inequality",
+      "locator": "arXiv:2408.08457v1, Lemma 1.2, equation (2); section 7.1 proof and (17), printed pp.2,11–12",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Intersection events, the lower E3 bound and upper E1/E2 bounds give the intended asymmetric inequality. Zero denominators and countable partition convergence are explicit."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 11,
+      "label": "Quantitative rare-partition implications",
+      "locator": "arXiv:2408.08457v1, Theorem 1.3 and sections 7.2–7.3, printed pp.12–13/PDF indices11–12",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The product t s squared is at most four times the larger specified split probability. The one-split implication follows separately from the three-point product theorem."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 12,
+      "label": "Cubic bound on extreme partition probabilities",
+      "locator": "arXiv:2408.08457v1, Section 7.3, cubic polynomial and numerical bound, printed p.13/PDF index12",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Harmonic means and two explicit monotonicity calculations justify the symmetric relaxation. The bound is not asserted attainable by a percolation model."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 13,
+      "label": "General adaptive sampling comparison",
+      "locator": "arXiv:2408.08457v1, Main Lemma 8.1, (18)–(19), printed pp.13–14",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Induction on unassigned coordinates averages the section inequality over independent remaining laws; predictable choices and independent seeds are explicit."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 14,
+      "label": "Capacity laws and finite-family BK",
+      "locator": "arXiv:2408.08457v1, Theorems 8.2–8.4, (20), printed pp.14–15",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The exact admissible range is capacity-positive probability at most p and capacity-two probability at most p squared. The printed binomial law fails a one-coordinate test; the maximal corrected law proves the finite-family comparison."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 15,
+      "label": "Coloured configurations and adaptive parity laws",
+      "locator": "arXiv:2408.08457v1, Theorems 8.5–8.6, (21)–(23), printed pp.15–16",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Normalized even-parity and full-triple laws give equality for all two-configuration sections and the triple upper comparison for increasing events."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 16,
+      "label": "Triple mixture comparison",
+      "locator": "arXiv:2408.08457v1, Theorem 8.7, (24); scope of Remark 8.8, printed pp.16–17",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The four one-coordinate section masses prove the comparison. A two-coordinate example distinguishes product mixtures from mixtures of whole configurations."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 17,
+      "label": "Common-face exploration and residual path count",
+      "locator": "arXiv:2408.08457v1, sections 6.1 and 9.1–9.2; Algorithm 2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Recursive rotation order, outermost-path uncrossing, queried dead excursions and replay of every leaf completion; corner and spoke conventions handle repeated face boundaries and edge-disjointness."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 18,
+      "label": "Planar three-point inequality and finite-family refinement",
+      "locator": "arXiv:2408.08457v1, Theorem 6.1; (15)–(16); Remark 6.3",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Finite-family adaptive comparison gives the denominator 1+max pair probability. Exact triangle example makes the stopped Cauchy–Schwarz bound strict. Countable extension states its common-face exhaustion hypothesis."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 19,
+      "label": "Common-face path-count inequalities",
+      "locator": "arXiv:2408.08457v1, Theorems 1.5 and 9.1; (26)–(30)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The k revealed paths are split into n-m and n-l paths, with n-k unshared paths in each completion. Zero cases and finite-witness limits are explicit."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 20,
+      "label": "Corrected decay consequence with pair distances",
+      "locator": "arXiv:2408.08457v1, Corollary 6.5, printed p.10",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The product bound is preserved; negative exponents need pair separation for a diameter-only estimate. An exact infinite-line counterexample disproves the printed universal claim."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 21,
+      "label": "Poisson parameters and the scope of proposed path comparisons",
+      "locator": "arXiv:2408.08457v1, section 10, Conjectures 10.1–10.2; introduction Conjecture 1.4",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Poisson-tail inversion includes zero and infinity, and the binomial route limit is proved with correct path success probabilities. Source conjectures are recorded historically, without a present-status claim."
+    },
+    {
+      "source": "gladkov-pak-mazes-2024",
+      "order": 22,
+      "label": "Fair two-exit DFS and the pivot involution",
+      "locator": "arXiv:2408.00978v1, Main theorem; tree and general-maze proofs; Notes on the proof",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "No-cross-edge property and degree-three saturation justify preservation of the full DFS tree. Conditional branching orders are independent fair bits."
+    },
+    {
+      "source": "gladkov-pak-mazes-2024",
+      "order": 23,
+      "label": "Several leaf targets",
+      "locator": "arXiv:2408.00978v1, Exercise 5",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Conditional first-target probability is two to minus its reduced-tree branching depth. Three-exit bounds are sharp, and finite dyadic probabilities exclude one third."
+    },
+    {
+      "source": "gladkov-pak-mazes-2024",
+      "order": 24,
+      "label": "First exploration direction of an edge",
+      "locator": "arXiv:2408.00978v1, Exercise 6",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Replacing a nonbridge by two pendant targets reduces its first direction to two-exit fairness; bridges have a forced direction."
+    },
+    {
+      "source": "gladkov-pak-mazes-2024",
+      "order": 25,
+      "label": "Connectivity-preserving degree reduction and balanced bond search",
+      "locator": "arXiv:2408.00978v1, Exercise 7; main theorem",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Fixed deterministically open tree gadgets create leaf terminals and maximum degree three before any bond is revealed. Fairness holds for every all-connected configuration."
+    },
+    {
+      "source": "gladkov-pak-mazes-2024",
+      "order": 26,
+      "label": "Balanced three-point bound",
+      "locator": "arXiv:2408.00978v1, Application to Gladkov arXiv:2408.08457v1, Remark 6.4",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Cauchy–Schwarz includes the seed in the transcript. Finite-family adaptive BK retains the intersection subtraction, with zero cases and a countable finite-witness limit."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 27,
+      "label": "Balanced exploration refinement",
+      "locator": "arXiv:2408.08457v1, Remark 6.4, printed p.10",
+      "relationship": "Written proof using the cited maze theorem and a fixed degree reduction",
+      "status": "pending",
+      "note": "TWYR proves the displayed bound and retains an additional finite-family subtraction; the balanced transcript is supplied by04ZU, with degree and terminal hypotheses checked."
+    },
+    {
+      "source": "richards-higher-correlation-2004",
+      "order": 28,
+      "label": "Conditional three-function identity",
+      "locator": "Theorem1.1; section2, equations(2.5)–(2.13), electronic-reprint pp.7–9",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Exact conditioning identity; the omitted covariance sum is negative for two fair bits and OR indicators. Local one-bit positivity survives; general theorem not disproved."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 29,
+      "label": "The cone of positive Boolean cumulations",
+      "locator": "Section2.1, Lemmas7–11",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Möbius inversion, restriction/difference closure and product closure; increasing OR indicator is outside the cone."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 30,
+      "label": "Positive formal coordinate elimination",
+      "locator": "Theorem1 and section2.2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Direct multivariate formal-series proof; nonnegative coefficients and local finiteness, including Bernoulli parameters0 and1."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 31,
+      "label": "Polarization and constant-argument recursion",
+      "locator": "Proposition12 and Theorem6",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Partition coefficients obtained by formal logarithm/exponential; insertion into blocks gives multiplier n-2."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 32,
+      "label": "Positive higher correlations for cumulations",
+      "locator": "Theorem2; section3",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Every n under a product law; nonnegative Boolean coefficients remain a genuine hypothesis."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 33,
+      "label": "Failure of coefficientwise monotonicity after elimination",
+      "locator": "Example13",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The degree-five difference is -1/4; this refutes only intermediate monotonicity closure, not the conjectured final positivity."
+    },
+    {
+      "source": "lieb-sahi-higher-correlation-2022",
+      "order": 34,
+      "label": "Three-function correlation on two independent chains",
+      "locator": "Section2, Theorems2.1 and2.9; Lemmas2.2–2.8",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Finite-grid minimizer perturbation, product covariance proof, indicator approximation, layer cake and quantile transfer. Bounded nonnegative functions and common monotonicity direction; not arbitrary n or many bond coordinates."
+    },
+    {
+      "source": "lieb-sahi-higher-correlation-2022",
+      "order": 35,
+      "label": "Insertion recursion and nested-event formula",
+      "locator": "Section3.2, Proposition3.3 and Lemma3.2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Cycle insertion proves the recurrence on any probability space; nested events give a1 times the product of j-1-aj."
+    },
+    {
+      "source": "lieb-sahi-higher-correlation-2022",
+      "order": 36,
+      "label": "Higher correlations for rectangles",
+      "locator": "Section3.3, Theorem3.5 and Corollary3.6",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Induction in dimension and order, grouping partitions by the block containing a varied coordinate; bounded functions with anchored rectangular level sets follow by layer cake."
+    },
+    {
+      "source": "lieb-sahi-higher-correlation-2022",
+      "order": 37,
+      "label": "All orders on the square",
+      "locator": "Section3.4, Theorems3.7 and3.11–3.13",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "The simultaneous induction keeps a nonpositive correlation with an arbitrary set disjoint from one decreasing set; grid minimizers then flatten. Includes bounded-function and finite-chain passages."
+    },
+    {
+      "source": "lieb-sahi-higher-correlation-2022",
+      "order": 38,
+      "label": "Correlation and formal-series equivalence",
+      "locator": "Appendix, LemmaA.1 and PropositionsA.2–A.3, TheoremA.4",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Formal diagonal expansion and finite coefficient sums; distinct-prime specialization isolates each mixed correlation. The function class explicitly contains zero, permitting unused degrees."
+    },
+    {
+      "source": "sahi-higher-correlation-2008",
+      "order": 39,
+      "label": "Two-bit FKG higher correlations and formal positivity",
+      "locator": "Appendix, Proposition15 and Lemma16, pp.222–226",
+      "relationship": "Alternative written proof with explicit scope",
+      "status": "pending",
+      "note": "Monotone conditional-quantile sampling from two independent uniforms, including zero and one marginals, transfers L3SC to any two-bit FKG law; I7RH gives formal positivity. This is an alternative proof using the later square theorem."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 40,
+      "label": "Supercritical separated-mark limit",
+      "locator": "Section6.3, paragraph preceding Corollary6.5",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Written proof for translation-invariant independent bonds on Z^d with at most one infinite cluster, fixed k>=2; no rate claimed and ratio requires theta>0."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 41,
+      "label": "Relative coupling error for rare point connections",
+      "locator": "Proposition10, equations(3.12)–(3.17)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Elementary probability proposition proved. The percolation coupling and uniform conditional one-arm comparisons remain external inputs."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 42,
+      "label": "Density factorization and its constant",
+      "locator": "Proposition4.1, equations(19)–(23)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Algebra and gamma identities proved from explicit density hypotheses. Surviving-boundary index correction provisional; source SLE proof remains cited."
+    },
+    {
+      "source": "conijn-factorization-2015",
+      "order": 43,
+      "label": "Discrete triangular-site boundary/bulk factorization",
+      "locator": "Theorem1, equation(1.1); section3.2",
+      "relationship": "Cited theorem with explicit scope",
+      "status": "pending",
+      "note": "Cited theorem, not a wiki proof: two fixed real marks, one fixed point strictly in the upper half-plane, critical triangular-site law. No all-boundary, square-bond or uniform degenerating-geometry extension."
+    },
+    {
+      "source": "ang-cai-sun-wu-cle-2024",
+      "order": 44,
+      "label": "Full-plane triangular-site three-point constant",
+      "locator": "Theorem1.1, equations(1.2),(1.5); Proposition1.2",
+      "relationship": "Cited theorem with explicit scope",
+      "status": "pending",
+      "note": "Cited theorem, not a wiki proof. Specialized imaginary-DOZZ expression and sqrt(2) open-colour factor checked; fixed distinct macroscopic marks. No square-bond extension."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "26TT",
+      "proof_uses": [
+        "Q3MP"
+      ],
+      "reason": "A deepest-node removal reduces the difference to a product of two monotone increments."
+    },
+    {
+      "order": 1,
+      "tag": "7LLO",
+      "proof_uses": [
+        "Q3MP"
+      ],
+      "reason": "Four witness indicators give the conditional comparison without moving an edge between certificates."
+    },
+    {
+      "order": 2,
+      "tag": "LNMI",
+      "proof_uses": [
+        "26TT"
+      ],
+      "reason": "Independent continuations give an exact leaf sum; adaptive Harris gives the continued-tree version."
+    },
+    {
+      "order": 3,
+      "tag": "VN5Z",
+      "proof_uses": [
+        "7LLO"
+      ],
+      "reason": "Completed branches exclude first entry through them; the ordered attachment points give mixed witnesses."
+    },
+    {
+      "order": 4,
+      "tag": "C7UK",
+      "proof_uses": [
+        "7LLO",
+        "LNMI",
+        "VN5Z"
+      ],
+      "reason": "Leafwise lower bounds and mixed-witness upper bounds give the factor eight and union estimate."
+    },
+    {
+      "order": 5,
+      "tag": "9KP0",
+      "proof_uses": [
+        "VN5Z"
+      ],
+      "reason": "A split of the discovery tree at an attachment point gives nonempty marked parts, including endpoint and equal-attachment cases."
+    },
+    {
+      "order": 6,
+      "tag": "5BQO",
+      "proof_uses": [
+        "LNMI",
+        "7LLO",
+        "9KP0"
+      ],
+      "reason": "Mixed BK and leafwise Cauchy–Schwarz give the stronger coefficient printed at the end of the proof; countable exhaustion is included."
+    },
+    {
+      "order": 7,
+      "tag": "MTVN",
+      "proof_uses": [
+        "5BQO",
+        "C7UK"
+      ],
+      "reason": "The smaller higher-order prefactor gives 186624 after applying the three-point bound twice."
+    },
+    {
+      "order": 8,
+      "tag": "HKLH",
+      "proof_uses": [
+        "Q3MP"
+      ],
+      "reason": "Whole-cluster boundaries identify the differences between the shared sets. First entrance into either target cluster gives the path inclusion; complementary independent hybrids give the lower bound."
+    },
+    {
+      "order": 9,
+      "tag": "VPUL",
+      "proof_uses": [
+        "HKLH",
+        "LNMI"
+      ],
+      "reason": "Intersection events, the lower E3 bound and upper E1/E2 bounds give the intended asymmetric inequality. Zero denominators and countable partition convergence are explicit."
+    },
+    {
+      "order": 10,
+      "tag": "QY7X",
+      "proof_uses": [
+        "VPUL",
+        "C7UK",
+        "87RB"
+      ],
+      "reason": "The product t s squared is at most four times the larger specified split probability. The one-split implication follows separately from the three-point product theorem."
+    },
+    {
+      "order": 11,
+      "tag": "5EMI",
+      "proof_uses": [
+        "VPUL"
+      ],
+      "reason": "Harmonic means and two explicit monotonicity calculations justify the symmetric relaxation. The bound is not asserted attainable by a percolation model."
+    },
+    {
+      "order": 12,
+      "tag": "9GXY",
+      "proof_uses": [],
+      "reason": "Induction on unassigned coordinates averages the section inequality over independent remaining laws; predictable choices and independent seeds are explicit."
+    },
+    {
+      "order": 13,
+      "tag": "3CE7",
+      "proof_uses": [
+        "9GXY"
+      ],
+      "reason": "The exact admissible range is capacity-positive probability at most p and capacity-two probability at most p squared. The printed binomial law fails a one-coordinate test; the maximal corrected law proves the finite-family comparison."
+    },
+    {
+      "order": 14,
+      "tag": "F2TD",
+      "proof_uses": [
+        "9GXY"
+      ],
+      "reason": "Normalized even-parity and full-triple laws give equality for all two-configuration sections and the triple upper comparison for increasing events."
+    },
+    {
+      "order": 15,
+      "tag": "JOJ1",
+      "proof_uses": [
+        "9GXY"
+      ],
+      "reason": "The four one-coordinate section masses prove the comparison. A two-coordinate example distinguishes product mixtures from mixtures of whole configurations."
+    },
+    {
+      "order": 16,
+      "tag": "KPT4",
+      "proof_uses": [
+        "VN5Z"
+      ],
+      "reason": "Recursive rotation order, outermost-path uncrossing, queried dead excursions and replay of every leaf completion; corner and spoke conventions handle repeated face boundaries and edge-disjointness."
+    },
+    {
+      "order": 17,
+      "tag": "8XA9",
+      "proof_uses": [
+        "KPT4",
+        "LNMI",
+        "3CE7"
+      ],
+      "reason": "Finite-family adaptive comparison gives the denominator 1+max pair probability. Exact triangle example makes the stopped Cauchy–Schwarz bound strict. Countable extension states its common-face exhaustion hypothesis."
+    },
+    {
+      "order": 18,
+      "tag": "YQEG",
+      "proof_uses": [
+        "KPT4",
+        "LNMI",
+        "7LLO"
+      ],
+      "reason": "The k revealed paths are split into n-m and n-l paths, with n-k unshared paths in each completion. Zero cases and finite-witness limits are explicit."
+    },
+    {
+      "order": 19,
+      "tag": "9ZC5",
+      "proof_uses": [
+        "87RB",
+        "8XA9"
+      ],
+      "reason": "The product bound is preserved; negative exponents need pair separation for a diameter-only estimate. An exact infinite-line counterexample disproves the printed universal claim."
+    },
+    {
+      "order": 20,
+      "tag": "TIKW",
+      "proof_uses": [],
+      "reason": "Poisson-tail inversion includes zero and infinity, and the binomial route limit is proved with correct path success probabilities. Source conjectures are recorded historically, without a present-status claim."
+    },
+    {
+      "order": 21,
+      "tag": "KRU2",
+      "proof_uses": [],
+      "reason": "No-cross-edge property and degree-three saturation justify preservation of the full DFS tree. Conditional branching orders are independent fair bits."
+    },
+    {
+      "order": 22,
+      "tag": "1QSK",
+      "proof_uses": [
+        "KRU2"
+      ],
+      "reason": "Conditional first-target probability is two to minus its reduced-tree branching depth. Three-exit bounds are sharp, and finite dyadic probabilities exclude one third."
+    },
+    {
+      "order": 23,
+      "tag": "88CG",
+      "proof_uses": [
+        "KRU2"
+      ],
+      "reason": "Replacing a nonbridge by two pendant targets reduces its first direction to two-exit fairness; bridges have a forced direction."
+    },
+    {
+      "order": 24,
+      "tag": "04ZU",
+      "proof_uses": [
+        "KRU2"
+      ],
+      "reason": "Fixed deterministically open tree gadgets create leaf terminals and maximum degree three before any bond is revealed. Fairness holds for every all-connected configuration."
+    },
+    {
+      "order": 25,
+      "tag": "TWYR",
+      "proof_uses": [
+        "04ZU",
+        "VN5Z",
+        "LNMI",
+        "3CE7"
+      ],
+      "reason": "Cauchy–Schwarz includes the seed in the transcript. Finite-family adaptive BK retains the intersection subtraction, with zero cases and a countable finite-witness limit."
+    },
+    {
+      "order": 26,
+      "tag": "ICQP",
+      "proof_uses": [],
+      "reason": "Exact conditioning identity; the omitted covariance sum is negative for two fair bits and OR indicators. Local one-bit positivity survives; general theorem not disproved."
+    },
+    {
+      "order": 27,
+      "tag": "CUE4",
+      "proof_uses": [],
+      "reason": "Möbius inversion, restriction/difference closure and product closure; increasing OR indicator is outside the cone."
+    },
+    {
+      "order": 28,
+      "tag": "ZY1X",
+      "proof_uses": [
+        "CUE4"
+      ],
+      "reason": "Direct multivariate formal-series proof; nonnegative coefficients and local finiteness, including Bernoulli parameters0 and1."
+    },
+    {
+      "order": 29,
+      "tag": "7ZU5",
+      "proof_uses": [],
+      "reason": "Partition coefficients obtained by formal logarithm/exponential; insertion into blocks gives multiplier n-2."
+    },
+    {
+      "order": 30,
+      "tag": "BXP2",
+      "proof_uses": [
+        "ZY1X",
+        "7ZU5"
+      ],
+      "reason": "Every n under a product law; nonnegative Boolean coefficients remain a genuine hypothesis."
+    },
+    {
+      "order": 31,
+      "tag": "XYDY",
+      "proof_uses": [],
+      "reason": "The degree-five difference is -1/4; this refutes only intermediate monotonicity closure, not the conjectured final positivity."
+    },
+    {
+      "order": 32,
+      "tag": "LGXD",
+      "proof_uses": [],
+      "reason": "Finite-grid minimizer perturbation, product covariance proof, indicator approximation, layer cake and quantile transfer. Bounded nonnegative functions and common monotonicity direction; not arbitrary n or many bond coordinates."
+    },
+    {
+      "order": 33,
+      "tag": "AFJX",
+      "proof_uses": [],
+      "reason": "Cycle insertion proves the recurrence on any probability space; nested events give a1 times the product of j-1-aj."
+    },
+    {
+      "order": 34,
+      "tag": "OC4P",
+      "proof_uses": [
+        "AFJX"
+      ],
+      "reason": "Induction in dimension and order, grouping partitions by the block containing a varied coordinate; bounded functions with anchored rectangular level sets follow by layer cake."
+    },
+    {
+      "order": 35,
+      "tag": "L3SC",
+      "proof_uses": [
+        "AFJX",
+        "LGXD"
+      ],
+      "reason": "The simultaneous induction keeps a nonpositive correlation with an arbitrary set disjoint from one decreasing set; grid minimizers then flatten. Includes bounded-function and finite-chain passages."
+    },
+    {
+      "order": 36,
+      "tag": "I7RH",
+      "proof_uses": [
+        "7ZU5"
+      ],
+      "reason": "Formal diagonal expansion and finite coefficient sums; distinct-prime specialization isolates each mixed correlation. The function class explicitly contains zero, permitting unused degrees."
+    },
+    {
+      "order": 37,
+      "tag": "NG3I",
+      "proof_uses": [
+        "L3SC",
+        "I7RH"
+      ],
+      "reason": "Monotone conditional-quantile sampling from two independent uniforms, including zero and one marginals, transfers L3SC to any two-bit FKG law; I7RH gives formal positivity. This is an alternative proof using the later square theorem."
+    },
+    {
+      "order": 38,
+      "tag": "6BFG",
+      "proof_uses": [
+        "DK14"
+      ],
+      "reason": "Written proof for translation-invariant independent bonds on Z^d with at most one infinite cluster, fixed k>=2; no rate claimed and ratio requires theta>0."
+    },
+    {
+      "order": 39,
+      "tag": "KJWA",
+      "proof_uses": [],
+      "reason": "Elementary probability proposition proved. The percolation coupling and uniform conditional one-arm comparisons remain external inputs."
+    },
+    {
+      "order": 40,
+      "tag": "XCYH",
+      "proof_uses": [],
+      "reason": "Algebra and gamma identities proved from explicit density hypotheses. Surviving-boundary index correction provisional; source SLE proof remains cited."
+    },
+    {
+      "order": 41,
+      "tag": "Q3MP",
+      "proof_uses": [],
+      "reason": "The proof is a direct bijection argument (tree completion and coordinate swaps preserving product weights) and invokes no other wiki assertion."
+    },
+    {
+      "order": 42,
+      "tag": "JM5A",
+      "proof_uses": [
+        "IP6C",
+        "XCYH",
+        "7GOV"
+      ],
+      "reason": "Proof from cited results: Conijn's Theorem 3 (from Beliaev–Izyurov) and the existence of the fixed-radius continuum limits give the hypotheses of the point-completion transfer; RSW and the distance comparison give positivity of the limits; the positive square root gives the limit."
+    }
+  ]
+}

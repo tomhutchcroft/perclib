@@ -1,19 +1,20 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-Ported for package Q-152 (issue 519) from pull request 488: source repository
-`yujinhkim/lrp`, branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`,
-files `PercLib/CriticalLRP/LevyAnalysis/Radial.lean` (blob `bde47c1551`),
-`PercLib/CriticalLRP/LevyAnalysis/Rpow.lean` (blob `bc4e3f889a`) and
-`PercLib/CriticalLRP/LevyAnalysis/Homogeneous.lean` (blob `2858fcb2a7`), contributed by
-`yujinhkim`; licence Apache-2.0 as declared in that commit's file headers and
-`third_party/critical-lrp/NOTICE.md`. Upstream origin
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`
-(not independently verified). Formalization derived from T. Hutchcroft, "Critical long-range
-percolation I: High effective dimension", arXiv:2508.18807v1, Section I.5.2.
-Changes: the three files are merged into one, focused imports, no disabled linters or
-`autoImplicit`, namespace `PercLib.Analysis`, and the helper `measurable_rpow_const'` replaced
-by mathlib's `Measurable.pow_const`.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Ported from the source repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files `PercLib/CriticalLRP/LevyAnalysis/Radial.lean`
+(blob `bde47c1551`), `PercLib/CriticalLRP/LevyAnalysis/Rpow.lean` (blob `bc4e3f889a`) and
+`PercLib/CriticalLRP/LevyAnalysis/Homogeneous.lean` (blob `2858fcb2a7`), contributed by `yujinhkim`;
+licence Apache-2.0 as declared in that commit's file headers and
+`third_party/critical-lrp/NOTICE.md`. Upstream origin `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not independently verified). Formalization derived from
+T. Hutchcroft, "Critical long-range percolation I: High effective dimension", arXiv:2508.18807v1,
+Section I.5.2. Changes: the three files are merged into one, focused imports, no disabled linters or
+`autoImplicit`, namespace `PercLib.Analysis`, and the helper `measurable_rpow_const'` replaced by
+mathlib's `Measurable.pow_const`.
 -/
 module
 
@@ -22,6 +23,7 @@ public import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 public import Mathlib.MeasureTheory.Integral.Prod
 public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
+public import PercLib.Meta.Tag
 
 /-!
 # Radial (homogeneous) integration on a finite-dimensional real normed space
@@ -175,6 +177,7 @@ For `P` nonnegative, measurable and homogeneous of degree `k` (`P (c • x) = c 
 
 This is the "polar coordinates free" radial computation underlying the moments of the Lévy
 measure `Π₁` of (I.5.16) and the Green function (Riesz kernel) bounds. -/
+@[tag "MWLQ"]
 theorem lintegral_ball_hom_rpow (μ : Measure E) [μ.IsAddHaarMeasure] [Nontrivial E]
     {P : E → ℝ} (hP : ∀ x, 0 ≤ P x) (hPm : Measurable P) {k s : ℝ}
     (hhom : ∀ (c : ℝ), 0 < c → ∀ x, P (c • x) = c ^ k * P x)
@@ -191,7 +194,8 @@ theorem lintegral_ball_hom_rpow (μ : Measure E) [μ.IsAddHaarMeasure] [Nontrivi
   have hsing : μ ({(0 : E)} : Set E) = 0 := by
     have h := Measure.addHaar_smul μ (r := (0 : ℝ)) (s := (Set.univ : Set E))
     rw [zero_smul_set (Set.univ_nonempty (α := E)),
-      zero_pow (Nat.pos_iff_ne_zero.mp (Module.finrank_pos (R := ℝ) (M := E))), abs_zero, ENNReal.ofReal_zero, zero_mul] at h
+      zero_pow (Nat.pos_iff_ne_zero.mp (Module.finrank_pos (R := ℝ) (M := E))), abs_zero,
+          ENNReal.ofReal_zero, zero_mul] at h
     exact h
   have haeμ : ∀ᵐ x ∂μ, x ≠ (0 : E) := by
     rw [MeasureTheory.ae_iff]
@@ -328,7 +332,8 @@ theorem lintegral_ball_hom_rpow (μ : Measure E) [μ.IsAddHaarMeasure] [Nontrivi
   have hm2 : Measurable (fun a : ℝ =>
       ENNReal.ofReal (s * a ^ (k + (finrank ℝ E : ℝ) - s - 1))) := by
     simpa only [Pi.mul_apply] using
-      (measurable_const.mul (measurable_id'.pow_const (k + (finrank ℝ E : ℝ) - s - 1))).ennreal_ofReal
+      (measurable_const.mul (measurable_id'.pow_const
+          (k + (finrank ℝ E : ℝ) - s - 1))).ennreal_ofReal
   have hm3 : Measurable (fun a : ℝ =>
       ENNReal.ofReal (a ^ (k + (finrank ℝ E : ℝ) - s - 1))) :=
     (measurable_id'.pow_const _).ennreal_ofReal
@@ -366,9 +371,9 @@ theorem lintegral_ball_hom_rpow (μ : Measure E) [μ.IsAddHaarMeasure] [Nontrivi
     ← ENNReal.ofReal_mul hs.le, ← add_mul,
     ← ENNReal.ofReal_add (by positivity) hb, hreal]
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5: `E = ℝ`, `P = 1` (`k = 0`), `s = 1/2`: the hypotheses hold, and
+/-- Non-vacuity: `E = ℝ`, `P = 1` (`k = 0`), `s = 1/2`: the hypotheses hold, and
 `∫⁻_{(-R, R)} |x|^{-1/2} = 2 R^{1/2} · vol(ball 0 1)`. -/
 example {R : ℝ} (hR : 0 < R) :
     ∫⁻ x in ball (0 : ℝ) R, ENNReal.ofReal ((fun _ : ℝ => (1 : ℝ)) x * ‖x‖ ^ (-(1 / 2 : ℝ)))

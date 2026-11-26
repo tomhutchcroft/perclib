@@ -1,0 +1,133 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hypercube-mixing",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 179
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Continuous-time uniform threshold",
+      "locator": "17 March 2017 author manuscript, Section 13.4, printed pp.168\u2013178 / PDF indices179\u2013189; Exercise 13.10; (13.4.21)\u2013(13.4.23).",
+      "relationship": "Written argument with explicit constants and remaining inputs",
+      "status": "pending",
+      "note": "The Fourier estimate is proved by the scalar recurrence; the full hypercube percolation theorem is not claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Walk-count recurrence and Fourier estimates",
+      "locator": "17 March 2017 author manuscript, Section 13.4, printed pp.168\u2013178 / PDF indices179\u2013189; (13.4.27), with a separate scalar proof.",
+      "relationship": "Written argument with explicit constants and remaining inputs",
+      "status": "pending",
+      "note": "The Fourier estimate is proved by the scalar recurrence; the full hypercube percolation theorem is not claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Two-time non-backtracking mixing",
+      "locator": "17 March 2017 author manuscript, Section 13.4, printed pp.168\u2013178 / PDF indices179\u2013189; Theorem 13.18 and Exercise 13.11.",
+      "relationship": "Written argument with explicit constants and remaining inputs",
+      "status": "pending",
+      "note": "The Fourier estimate is proved by the scalar recurrence; the full hypercube percolation theorem is not claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Uniform long-path estimate",
+      "locator": "17 March 2017 author manuscript, Section 13.4, printed pp.168\u2013178 / PDF indices179\u2013189; Lemma 13.15, with the explicit threshold T+1.",
+      "relationship": "Written argument with explicit constants and remaining inputs",
+      "status": "pending",
+      "note": "The Fourier estimate is proved by the scalar recurrence; the full hypercube percolation theorem is not claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Finite triangle criterion",
+      "locator": "17 March 2017 author manuscript, Section 13.4, printed pp.168\u2013178 / PDF indices179\u2013189; Theorem 13.13(a); (13.4.13)\u2013(13.4.16).",
+      "relationship": "Written argument with explicit constants and remaining inputs",
+      "status": "pending",
+      "note": "The Fourier estimate is proved by the scalar recurrence; the full hypercube percolation theorem is not claimed."
+    },
+    {
+      "source": "fitzner-hofstad-nbw",
+      "order": 5,
+      "label": "Hypercube mixing and the norm issue",
+      "locator": "arXiv:1212.6390v1, (3.12)\u2013(3.15), Theorem 3.5 and Section 3.3; compared with the 14 January 2012 author PDF, Section 3.3",
+      "relationship": "Independent proof of the mixing consequence, with a provisional source diagnosis",
+      "status": "pending",
+      "note": "The sharper coefficient-one bound and the general torus estimates are not certified by this repair."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 6,
+      "label": "Walk recurrence and uniform connections",
+      "locator": "JEMS 19 (2017), Sections 3.4\u20133.5, Lemmas 3.11\u20133.14, printed pp.747\u2013750",
+      "relationship": "Passage-level comparison, keeping walk-time and long-path conventions explicit",
+      "status": "pending",
+      "note": "The proof here uses increasing BK at a strict T+1 threshold. Exact-distance estimates and the rest of the paper remain separate."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 7,
+      "label": "Hypercube short-loop input",
+      "locator": "17 March 2017 author manuscript, Theorem 13.13, assumption (3), and its application in Section 13.4",
+      "relationship": "Direct Fourier-moment proof at polynomial time scales",
+      "status": "pending",
+      "note": "Both walk inputs are proved; the critical-parameter location is still a separate percolation input."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 1,
+      "tag": "1PM2",
+      "proof_uses": [
+        "0MK8"
+      ],
+      "reason": "Walk-count recurrence and Fourier estimates under the displayed assumptions."
+    },
+    {
+      "order": 2,
+      "tag": "GIF2",
+      "proof_uses": [
+        "1PM2"
+      ],
+      "reason": "Two-time non-backtracking mixing under the displayed assumptions."
+    },
+    {
+      "order": 3,
+      "tag": "HJAT",
+      "proof_uses": [
+        "JRCI"
+      ],
+      "reason": "Uniform long-path estimate under the displayed assumptions."
+    },
+    {
+      "order": 4,
+      "tag": "PROF",
+      "proof_uses": [
+        "HJAT"
+      ],
+      "reason": "Finite triangle criterion under the displayed assumptions."
+    },
+    {
+      "order": 5,
+      "tag": "V1UF",
+      "proof_uses": [
+        "1PM2"
+      ],
+      "reason": "The root estimate controls typical Fourier characters; a sign-moment bound and an exponential tail control their average."
+    },
+    {
+      "order": 6,
+      "tag": "2PEX",
+      "proof_uses": [],
+      "reason": "Independent Poisson coordinate clocks give the kernel and the threshold is solved explicitly; no other wiki assertion is invoked."
+    }
+  ]
+}

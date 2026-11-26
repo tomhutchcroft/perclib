@@ -1,0 +1,108 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "triangle-susceptibility",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 158
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "The global reciprocal and the finite maximum",
+      "locator": "17 March 2017 author manuscript, Chapter 4, (4.2.2)–(4.2.18), Lemmas 4.3–4.4 and Exercise 4.2, printed pp.42–45, PDF indices53–56.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "Finite-product pivotality is taken with its bond deleted. Finite polynomial maxima are locally Lipschitz, with explicit one-sided derivatives. Reciprocal bounds pass pointwise through finite-volume exhaustion."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Susceptibility under a small neighbouring triangle",
+      "locator": "17 March 2017 author manuscript, Chapter 4, Theorem 4.2 and (4.2.19)–(4.2.25), printed pp.45–46, PDF indices56–57.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "The proved intensity derivative inequality is converted to bond probability, retaining its factor 1/(1-p), and integrated. Neighbouring open triangles must be uniformly smaller than one; bare diagonal finiteness is not substituted."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical nonpercolation and one-sided exponent bounds",
+      "locator": "17 March 2017 author manuscript, Chapter 4, Section 4.1 and Corollary 4.5, printed pp.41 and47, PDF indices52 and58.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "The finite triangle contains a bubble; uniqueness and Harris bound each connection below by theta squared. The three exponent inequalities follow independently from established susceptibility, density and field lower bounds."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Finite-triangle conclusions through the corrected boundary argument",
+      "locator": "Independent deduction using the corrected quantitative triangle inequality; compare Chapter 4 of the 17 March 2017 Heydenreich–van der Hofstad manuscript and Nguyen (1987), Sections 2–3",
+      "relationship": "Written alternative proof of the finite-triangle implication, with model-dependent constants",
+      "status": "pending",
+      "note": "The corrected squared positive-part inequality supplies the susceptibility upper bound without small off-diagonal triangles. Endpoint entropy comparison supplies the critical tail, and the score and size-biased arguments give the moment cutoff. The classical endpoint-separation proof remains separate; no source erratum or formal status is changed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8ZGG",
+      "proof_uses": [
+        "JQLC"
+      ],
+      "reason": "Finite-product pivotality is taken with its bond deleted. Finite polynomial maxima are locally Lipschitz, with explicit one-sided derivatives. Reciprocal bounds pass pointwise through finite-volume exhaustion."
+    },
+    {
+      "order": 1,
+      "tag": "0Y4K",
+      "proof_uses": [
+        "4960",
+        "MXGM",
+        "JQLC",
+        "8ZGG",
+        "NUJY"
+      ],
+      "reason": "The proved intensity derivative inequality is converted to bond probability, retaining its factor 1/(1-p), and integrated. Neighbouring open triangles must be uniformly smaller than one; bare diagonal finiteness is not substituted."
+    },
+    {
+      "order": 2,
+      "tag": "5W46",
+      "proof_uses": [
+        "Y6SG",
+        "8ZGG",
+        "JQLC",
+        "ZDVK",
+        "G192"
+      ],
+      "reason": "The finite triangle contains a bubble; uniqueness and Harris bound each connection below by theta squared. The three exponent inequalities follow independently from established susceptibility, density and field lower bounds."
+    },
+    {
+      "order": 3,
+      "tag": "ADWR",
+      "proof_uses": [
+        "4KBG",
+        "5LNL",
+        "MXGM",
+        "6PGV",
+        "UPMK",
+        "3C2F",
+        "QS3L"
+      ],
+      "reason": "The corrected quadratic boundary inequality, right-open finite susceptibility and reciprocal integration give the finite-triangle endpoint estimate. Existing entropy and tail-field arguments supply the critical laws without smallness."
+    },
+    {
+      "order": 4,
+      "tag": "I23O",
+      "proof_uses": [
+        "ADWR",
+        "NUJY",
+        "JQLC",
+        "8ZGG"
+      ],
+      "reason": "Normalized lattice weights identify the susceptibility endpoint with the probability critical point. The exact probability-to-intensity conversion and sharpness give all classical mean-field orders."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "lieb-sahi-higher-correlation-2022",
+  "entries": [
+    {
+      "id": "nested-display-corrections",
+      "title": "Nested-event displays use the wrong interval and reversed probability endpoints",
+      "status": "provisional",
+      "locator": "arXiv:2107.09838v2, proof of Lemma3.2 following Proposition3.3 (printed p.8), and Proposition3.9 (printed p.10). Versioned HTML and extracted PDF text compared17 November2026; no visual-PDF or journal comparison.",
+      "claim": "For ai<=an the interval-product chain displays the larger interval [0,an] as the intersection, then identifies it with fi. Proposition3.9 assumes 1<=alpha1<=...<=alphan<=0.",
+      "problem": "The intersection is [0,ai], and the displayed endpoint chain has no solutions. For example, ai=1/4 and an=3/4 give a product indicator of [0,1/4], not [0,3/4]. The intended ordered strip probabilities lie between zero and one.",
+      "correction": "Use fi fn=indicator[0,ai]=fi and 0<=alpha1<=...<=alphan<=1. AFJX proves the resulting nested-event product formula directly. L3SC uses this formula at the constant-grid minimizer. These local display corrections preserve the main all-order square and rectangle conclusions.",
+      "tags": [
+        "AFJX",
+        "L3SC"
+      ],
+      "issues": [],
+      "leanImpact": "State interval intersection with the minimum endpoint and give the nested probability parameters a nonempty ordered range in[0,1]. Do not formalize the reversed endpoint chain as a vacuous theorem. The written replacement is independently derived; no compiled association or source confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the nested intersection and the direction of the endpoint chain.",
+        "scale": "notation",
+        "impact": "Local display corrections; the all-order square and rectangle conclusions are unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2107.09838v2",
+    "checkedUrl": "https://arxiv.org/abs/2107.09838v2",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": [
+      {
+        "version": "Published article, DOI 10.1063/5.0065285",
+        "url": "https://doi.org/10.1063/5.0065285",
+        "status": "pending",
+        "findings": "The journal identity does not establish that the reported Lemma 3.2 domain issue persists in its text. That comparison is not recorded."
+      }
+    ]
+  }
+}

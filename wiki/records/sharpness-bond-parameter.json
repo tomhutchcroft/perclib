@@ -1,0 +1,110 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sharpness-bond-parameter",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 156
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Contraction at every radius",
+      "locator": "17 March 2017 author manuscript, Section 3.2, (3.2.5)\u2013(3.2.9), Exercise 3.1, printed pp.28\u201329.",
+      "relationship": "Written proof with explicit hypotheses and remaining inputs",
+      "status": "pending",
+      "note": "The internal cluster event retains its closed boundary; independent coordinate blocks give the recurrence. A smaller explicit rate covers all radii, and a rational example refutes the stronger stated rate."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Probability-parameter sharpness",
+      "locator": "17 March 2017 author manuscript, Section 3.2, Lemma 3.3 and (3.2.22), printed pp.29\u201331.",
+      "relationship": "Written proof with explicit hypotheses and remaining inputs",
+      "status": "pending",
+      "note": "Finite Russo differentiation counts every boundary edge once and integrates the sharper density inequality. The critical shell argument retains outward edge multiplicities."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Inverse function at positive field",
+      "locator": "17 March 2017 author manuscript, Sections 3.4\u20133.5, (3.4.1), Proposition 3.6 and Exercise 3.5, printed pp.32\u201333.",
+      "relationship": "Written proof with explicit hypotheses and remaining inputs",
+      "status": "pending",
+      "note": "The positive-field range begins at the infinite-cluster probability. Integrating the scalar inequality from that endpoint proves the square-root and finite-mean bounds, conditionally on the displayed differential inequality."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Integration over a parameter rectangle",
+      "locator": "17 March 2017 author manuscript, Section 3.6, (3.6.1)\u2013(3.6.6), printed pp.33\u201334.",
+      "relationship": "Written proof with explicit hypotheses and remaining inputs",
+      "status": "pending",
+      "note": "Local Lipschitz regularity permits integration of the assumed almost-everywhere second differential inequality. A field power lower bound yields the density estimate; G192 supplies the percolation inequalities with local Lipschitz regularity."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Finite-volume justification of the Aizenman\u2013Barsky inequalities",
+      "locator": "17 March 2017 author manuscript, Section 3.7, (3.7.1)\u2013(3.7.21), printed pp.34\u201337.",
+      "relationship": "Written proof with explicit hypotheses and remaining inputs",
+      "status": "pending",
+      "note": "Finite tori give the two inequalities by closed pivotality and last pivotality in the product space including mark edges. Uniform positive-field convergence passes the combined scalar inequality pointwise and the separate parameter inequalities distributionally, hence almost everywhere."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "TVM9",
+      "proof_uses": [
+        "R3I9"
+      ],
+      "reason": "The internal cluster event retains its closed boundary; independent coordinate blocks give the recurrence. A smaller explicit rate covers all radii, and a rational example refutes the stronger stated rate."
+    },
+    {
+      "order": 1,
+      "tag": "JQLC",
+      "proof_uses": [
+        "L0TE",
+        "RDF0",
+        "HATE",
+        "TVM9"
+      ],
+      "reason": "Finite Russo differentiation counts every boundary edge once and integrates the sharper density inequality. The critical shell argument retains outward edge multiplicities."
+    },
+    {
+      "order": 2,
+      "tag": "ZDVK",
+      "proof_uses": [
+        "VF24",
+        "J2TE",
+        "8B62"
+      ],
+      "reason": "The positive-field range begins at the infinite-cluster probability. Integrating the scalar inequality from that endpoint proves the square-root and finite-mean bounds, conditionally on the displayed differential inequality."
+    },
+    {
+      "order": 3,
+      "tag": "7HP2",
+      "proof_uses": [
+        "ZDVK",
+        "F7SW",
+        "VF24"
+      ],
+      "reason": "Local Lipschitz regularity permits integration of the assumed almost-everywhere second differential inequality. A field power lower bound yields the density estimate; G192 supplies the percolation inequalities with local Lipschitz regularity."
+    },
+    {
+      "order": 4,
+      "tag": "G192",
+      "proof_uses": [
+        "ZDVK",
+        "7HP2",
+        "J2TE",
+        "R3I9"
+      ],
+      "reason": "Finite tori give the two inequalities by closed pivotality and last pivotality in the product space including mark edges. Uniform positive-field convergence passes the combined scalar inequality pointwise and the separate parameter inequalities distributionally, hence almost everywhere."
+    }
+  ]
+}

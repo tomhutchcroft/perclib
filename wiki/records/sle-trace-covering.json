@@ -1,0 +1,101 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-trace-covering",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 142
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Distance to the full trace",
+      "locator": "Rohde–Schramm (2005), discussion of (6.2), Theorem 8.1 and Corollary 8.2, printed pp.903–904 and 912–913; arXiv:math/0106036v4 Sections 6 and 8.1",
+      "relationship": "Written geometric and covering proofs under explicit trace-generation hypotheses",
+      "status": "pending",
+      "note": "For a continuous generating trace, the terminal domain-boundary distance equals distance to the full trace and the real line. A swallowed component cannot be entered by the future trace. Trace existence and hull generation remain explicit inputs."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Uniform small-ball bounds",
+      "locator": "Rohde–Schramm (2005), discussion of (6.2), Theorem 8.1 and Corollary 8.2, printed pp.903–904 and 912–913; arXiv:math/0106036v4 Sections 6 and 8.1",
+      "relationship": "Written geometric and covering proofs under explicit trace-generation hypotheses",
+      "status": "pending",
+      "note": "The radius tail bound and positive hypergeometric moment bound become uniform on compact subsets of H. For kappa at least eight the trace-distance consequence is stated for each fixed point."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Expected trace covering exponent",
+      "locator": "Rohde–Schramm (2005), discussion of (6.2), Theorem 8.1 and Corollary 8.2, printed pp.903–904 and 912–913; arXiv:math/0106036v4 Sections 6 and 8.1",
+      "relationship": "Written geometric and covering proofs under explicit trace-generation hypotheses",
+      "status": "pending",
+      "note": "Separate outer and inner grids prove the covering estimates without a boundary-localization error. The available lower bound at every scale gives a full logarithmic limit, strengthening the source limsup; trace generation remains assumed."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Hausdorff upper bound",
+      "locator": "Rohde–Schramm (2005), discussion of (6.2), Theorem 8.1 and Corollary 8.2, printed pp.903–904 and 912–913; arXiv:math/0106036v4 Sections 6 and 8.1",
+      "relationship": "Written geometric and covering proofs under explicit trace-generation hypotheses",
+      "status": "pending",
+      "note": "Dyadic covers and a summable expected q-cost give zero Hausdorff q-measure above one plus kappa over eight. A countable interior exhaustion and the real-line bound handle the whole trace; no lower dimension bound is inferred."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 4,
+      "label": "Simultaneous hull-boundary dimension below eight",
+      "locator": "arXiv:math/0106036v4, Corollary 5.3, the definition and Theorem 6.4, Lemma 6.5, Exercise 6.7, and Corollary 8.2. Lemma 7.3 is the stronger origin-engulfment assertion, not proved by the nonempty-interior consequence.",
+      "relationship": "Written consequences of the proved trace, dimension and lifetime estimates",
+      "status": "pending",
+      "note": "The deterministic boundary inclusion in the past trace plus the real line transfers the full-trace dimension bound to all times on one event. This includes kappa four and gives zero area without the separate Holder-domain boundary theorem; no optimal hull-boundary exponent is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "G0UQ",
+      "proof_uses": [],
+      "reason": "For a continuous generating trace, the terminal domain-boundary distance equals distance to the full trace and the real line. A swallowed component cannot be entered by the future trace. Trace existence and hull generation remain explicit inputs."
+    },
+    {
+      "order": 1,
+      "tag": "VEZ7",
+      "proof_uses": [
+        "G0UQ",
+        "DC8Q",
+        "K0WT"
+      ],
+      "reason": "The radius tail bound and positive hypergeometric moment bound become uniform on compact subsets of H. For kappa at least eight the trace-distance consequence is stated for each fixed point."
+    },
+    {
+      "order": 2,
+      "tag": "1424",
+      "proof_uses": [
+        "VEZ7"
+      ],
+      "reason": "Separate outer and inner grids prove the covering estimates without a boundary-localization error. The available lower bound at every scale gives a full logarithmic limit, strengthening the source limsup; trace generation remains assumed."
+    },
+    {
+      "order": 3,
+      "tag": "YBRV",
+      "proof_uses": [
+        "1424"
+      ],
+      "reason": "Dyadic covers and a summable expected q-cost give zero Hausdorff q-measure above one plus kappa over eight. A countable interior exhaustion and the real-line bound handle the whole trace; no lower dimension bound is inferred."
+    },
+    {
+      "order": 4,
+      "tag": "NHWR",
+      "proof_uses": [
+        "YBRV",
+        "MN2A"
+      ],
+      "reason": "The deterministic boundary inclusion in the past trace plus the real line transfers the full-trace dimension bound to all times on one event. This includes kappa four and gives zero area without the separate Holder-domain boundary theorem; no optimal hull-boundary exponent is claimed."
+    }
+  ]
+}

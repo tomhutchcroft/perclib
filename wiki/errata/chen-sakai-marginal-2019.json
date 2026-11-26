@@ -1,0 +1,34 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "chen-sakai-marginal-2019",
+  "entries": [
+    {
+      "id": "compound-zeta-normalization",
+      "title": "The origin in the compound-zeta normalization",
+      "status": "provisional",
+      "locator": "arXiv:1808.06789v3, \u00a71.2.1, equations (1.15)\u2013(1.17), PDF/printed p.5. Versioned HTML and PDF text compared; no visual PDF or journal-version check.",
+      "claim": "Equation (1.16) defines the base law at every lattice point while excluding the origin from its normalizing sum.",
+      "problem": "For the displayed cube density and L=1 the base mass is3^d/(3^d\u22121)>1. Its t-fold convolution has that mass to power t, so the polynomially weighted mixture has infinite total mass.",
+      "correction": "FIXER recommends restoring the all-lattice denominator sum_y h(y/L), including y=0, as in the cited earlier arXiv:1204.1180v4 Appendix A (A.2). Require this finite denominator to be positive. TIOJ proves normalization of the base law and its compound mixture for alpha>0, and verifies symmetry, nondegeneracy, irreducibility and aperiodicity for the cube. DTYB retains the infinite-mass counterexample and the separately normalized punctured alternative; these are different laws. The earlier Appendix A assumes alpha not equal to two, so it does not itself certify the marginal analytic hypotheses. The clipped power-law example used in G12U\u20136ZYT is separate; the main theorem is not contradicted.",
+      "tags": [
+        "DTYB",
+        "TIOJ"
+      ],
+      "issues": [],
+      "leanImpact": "Formalize the base normalization, convolution-mass identity and Tonelli mixture identity. Analytic estimates (1.6), (1.9)\u2013(1.13) require separate verification for the chosen law, especially at alpha=2. No compiled declaration, complete repaired-kernel verification or source-author confirmation is supplied. FIXER reports agreement in a DOI-linked accepted manuscript, not the final journal typesetting; no visual-PDF or final-journal audit is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "FIXER restores the all-lattice normalizing denominator; TIOJ verifies the resulting probability laws.",
+        "scale": "statement",
+        "impact": "The example's base law changes. Marginal analytic estimates still need their own proof; the main theorem is not contradicted."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1808.06789v3",
+    "checkedUrl": "https://arxiv.org/html/1808.06789v3",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

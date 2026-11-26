@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-l2-2020",
+  "entries": [
+    {
+      "id": "reverse-bk-cancellation",
+      "title": "The reverse-BK switching cancellation",
+      "status": "provisional",
+      "locator": "arXiv:1904.05804v2, Section 5, proof of Lemma 5.3: the equality of the 01 gain and 10 loss probabilities in the edge interpolation.",
+      "claim": "The proof identifies the 01 gain and 10 loss probabilities, then bounds the remaining both-open gain by a bubble convolution.",
+      "problem": "The exact one-coordinate increment also contains a nonnegative overlap term. X4OE exhibits unequal gain and loss probabilities on a three-vertex star. This is a counterexample to the asserted cancellation, not to the final backbone theorem.",
+      "correction": "The printed proof equates the probability of a 01 gain with that of a 10 loss and then bounds only the both-open gain by a bubble convolution. That equality is false: XWH4 supplies the exact one-coordinate increment, which is the both-open gain plus an additional nonnegative p(1-p) overlap term, and the three-vertex calculation X4OE disproves the stated cancellation step for this ghost interpolation. No corrected bubble-only lemma has been established here. The triangle replacement DTVY/79WX has stronger assumptions and does not certify the published switching argument. Subsequent reductions toward a repair, namely the moment bound 44CZ, the within-cluster increment and finite-volume derivative reduction K9H7/GKBQ/JFE6, and the sufficient derivative criterion TJXV, leave the required estimate and the critical-dimensional target unproved; they are not a correction proved for the published lemma. FIXER's reports also rule out two auxiliary repair routes; these are obstructions to proposed repairs, not claims attributed to the source.",
+      "tags": [
+        "X4OE",
+        "XWH4",
+        "DTVY",
+        "79WX",
+        "44CZ",
+        "K9H7",
+        "GKBQ",
+        "JFE6",
+        "TJXV"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the exact increment XWH4 and the cancellation counterexample X4OE separate from the desired bubble-only theorem. NGRO’s independent-copy separation does not supply the one-configuration comparison. Do not assume that every independent-bond block satisfies the proposed coefficient-one pointwise inequality: FIXER’s complete-graph report refutes that general premise. Existing restricted-graph results and conditional block-gluing arguments are unaffected, but they do not establish the lattice target. The numerical certificate, its recurrences and its truncation bound are not Lean proofs or compiled evidence. DTVY and 79WX still require stronger hypotheses. FIXER owns the unresolved comparison. The new generator theorem GKBQ is finite-volume. Any lattice derivative theorem must justify convergence of the integrated expressions, including the closed within-cluster term. The additive estimate in TJXV is a hypothesis, not a proved percolation input. Do not change the source status or claim the critical-dimensional target from these reductions. In the continuous interpolation route, finite-volume endpoint sums converge separately; monotone convergence of the overlap events must not be assumed. The new mixed-moment estimate does not supply the missing signed cancellation. See the latest linked FIXER record before selecting a formal target.",
+      "resolution": {
+        "status": "open",
+        "summary": "No bubble-only repair is known here. FIXER's overlap and derivative reductions still leave the decisive estimate open.",
+        "scale": "unknown",
+        "impact": "The cancellation step fails. Triangle-based replacements need stronger assumptions and do not settle the critical-dimensional target; the size of a sufficient repair is unknown."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1904.05804v2",
+    "checkedUrl": "https://arxiv.org/abs/1904.05804v2",
+    "method": "The source locator pins Section 5, the proof of Lemma 5.3 and its edge-interpolation cancellation. Subsequent FIXER reports concern proposed repairs, not a comparison with another source edition. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The cancellation report is scoped to this preprint passage. No journal-version comparison is recorded here. The desired bubble-only repair remains open; the auxiliary obstructions and reductions do not refute the final backbone theorem. FIXER retains this work. The report remains provisional.",
+    "comparisons": []
+  }
+}

@@ -1,13 +1,16 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Ported for issue 527 (Q-160) on 2026-11-16 by PROVER-E from pull request 488 of this
-repository, contributed by yujinhkim: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Ported on 2026-11-16 from the work of contributor yujinhkim: source repository `yujinhkim/lrp`,
+branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
 `PercLib/CriticalLRP/BK/LayerCake.lean`; licence Apache-2.0, as declared in that commit's file
 headers and `third_party/critical-lrp/NOTICE.md`. Upstream origin
 `yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not
-independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1, Lemma I.2.1, p. 21 (measure-theoretic core).
+independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range percolation
+I*, arXiv:2508.18807v1, Lemma I.2.1, p. 21 (measure-theoretic core).
 
 Changes from the source: focused imports instead of `import Mathlib`; no `autoImplicit` and no
 disabled linters; the namespace is `PercLib.Probability`; the helper definition
@@ -280,11 +283,11 @@ theorem lintegral_mul_ge_of_meas_lt {μ : Measure Ω} [SFinite μ] {f g : Ω →
     _ ≤ ∫⁻ p : ℝ × ℝ, μ ({ω | p.1 < f ω} ∩ {ω | p.2 < g ω}) ∂(κ.prod κ) :=
         lintegral_mono_ae hle
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- **D-5 witness.** `C = univ` and `f = g = 1` under the point mass on `Unit`: the hypotheses
-of `lintegral_mul_indicator_eq_double` and of `lintegral_mul_indicator_le_of_meas_lt` hold, and
-both sides of the inequality equal `1`. -/
+/-- **Non-vacuity witness.** `C = univ` and `f = g = 1` under the point mass on `Unit`: the
+hypotheses of `lintegral_mul_indicator_eq_double` and of `lintegral_mul_indicator_le_of_meas_lt`
+hold, and both sides of the inequality equal `1`. -/
 theorem lintegral_mul_indicator_le_of_meas_lt_one :
     ∫⁻ ω, ((univ : Set Unit).indicator (fun _ => (1 : ℝ≥0∞))) ω *
         ENNReal.ofReal ((fun _ : Unit => (1 : ℝ)) ω * (fun _ : Unit => (1 : ℝ)) ω)

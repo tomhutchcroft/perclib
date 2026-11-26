@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-130 (issue 464), on the D-2 conventions for row sums, from
-the sup-norm ball counts of `PowerLaw.lean`. The statements follow the wiki tag C4E9
-(size-biased laws). No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond-interface conventions for row sums, from the sup-norm ball counts of
+`PowerLaw.lean`. The statements follow the wiki tag C4E9 (size-biased laws). No source text or code
+is copied.
 -/
 module
 
@@ -23,7 +27,7 @@ On `ℤ^d` write `‖z‖₂ = √(∑ᵢ zᵢ²)` (the norm of `z` in `Euclidea
 * `tsum_added_layer_le` (C4E9): the independent added layer at intensity `β ≥ 0` has
   probability rows `∑'_{v ≠ u} (1 - e^{-β (J - J_r)(u,v)}) ≤ β ·` the same bound.
 
-Row sums are in `ℝ≥0∞`, with the diagonal excluded as in D-2.
+Row sums are in `ℝ≥0∞`, with the diagonal excluded.
 -/
 
 @[expose] public section
@@ -40,7 +44,8 @@ variable {d : ℕ}
 
 /-- The expression `√(∑ᵢ zᵢ²)` is the norm in `EuclideanSpace ℝ (Fin d)`. -/
 theorem euclid_eq_norm (z : Fin d → ℤ) :
-    √(∑ i, ((z i : ℝ)) ^ 2) = ‖(WithLp.toLp 2 (fun i => (z i : ℝ)) : EuclideanSpace ℝ (Fin d))‖ := by
+    √(∑ i, ((z i : ℝ)) ^ 2) = ‖(WithLp.toLp 2 (fun i => (z i : ℝ)) : EuclideanSpace ℝ
+        (Fin d))‖ := by
   rw [EuclideanSpace.norm_eq]
   simp
 
@@ -139,9 +144,10 @@ theorem shell_term_eq {r : ℝ} (hr : 0 < r) (A : ℝ) (k : ℕ) :
   field_simp
   rw [mul_assoc, ← mul_pow, mul_one_div_cancel h2α.ne', one_pow, mul_one]
 
-/-- **C4E9, the row of `J - J_r`.** For `r ≥ 1`,
+/-- **The row of `J - J_r`.** For `r ≥ 1`,
 `∑'_{v ≠ u} (J - J_r)(u,v) ≤ A 3^d (1 + 2^d/(1 - 2^{-α})) r^{-α}`. -/
-theorem tsum_cutoff_sub_le (hα : 0 < α) (hA : 0 ≤ A) (hjA : ∀ t, 1 ≤ t → j t ≤ A * t ^ (-(d : ℝ) - α))
+theorem tsum_cutoff_sub_le (hα : 0 < α) (hA : 0 ≤ A)
+    (hjA : ∀ t, 1 ≤ t → j t ≤ A * t ^ (-(d : ℝ) - α))
     {r : ℝ} (hr : 1 ≤ r) (u : Fin d → ℤ) :
     (∑' v, if v = u then 0 else ENNReal.ofReal (j √(∑ i, (((v - u) i : ℤ) : ℝ) ^ 2) -
         (if √(∑ i, (((v - u) i : ℤ) : ℝ) ^ 2) ≤ r then
@@ -226,9 +232,10 @@ theorem tsum_cutoff_sub_le (hα : 0 < α) (hA : 0 ≤ A) (hjA : ∀ t, 1 ≤ t �
         congr 1
         ring
 
-/-- **C4E9, the added layer.** At intensity `β ≥ 0` the independent added layer
+/-- **The added layer.** At intensity `β ≥ 0` the independent added layer
 `1 - e^{-β (J - J_r)}` has probability rows at most `β A 3^d (1 + 2^d/(1 - 2^{-α})) r^{-α}`. -/
-theorem tsum_added_layer_le (hα : 0 < α) (hA : 0 ≤ A) (hjA : ∀ t, 1 ≤ t → j t ≤ A * t ^ (-(d : ℝ) - α))
+theorem tsum_added_layer_le (hα : 0 < α) (hA : 0 ≤ A)
+    (hjA : ∀ t, 1 ≤ t → j t ≤ A * t ^ (-(d : ℝ) - α))
     {r : ℝ} (hr : 1 ≤ r) {β : ℝ} (hβ : 0 ≤ β) (u : Fin d → ℤ) :
     (∑' v, if v = u then 0 else ENNReal.ofReal (1 - Real.exp (-β *
         (j √(∑ i, (((v - u) i : ℤ) : ℝ) ^ 2) -
@@ -248,9 +255,9 @@ theorem tsum_added_layer_le (hα : 0 < α) (hA : 0 ≤ A) (hjA : ∀ t, 1 ≤ t 
     rw [← ENNReal.ofReal_mul hβ]
     exact ENNReal.ofReal_le_ofReal (hX _)
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5: `j t = t^{-d-α}` with `A = 1`, at `d = 1`, `α = 1`, `r = 1`, satisfies every
+/-- Non-vacuity: `j t = t^{-d-α}` with `A = 1`, at `d = 1`, `α = 1`, `r = 1`, satisfies every
 hypothesis, so both bounds apply. -/
 example (u : Fin 1 → ℤ) :
     (∑' v, if v = u then 0 else ENNReal.ofReal (
@@ -262,7 +269,8 @@ example (u : Fin 1 → ℤ) :
   exact tsum_cutoff_sub_le (d := 1) (j := fun t => t ^ (-((1 : ℕ) : ℝ) - 1)) (α := 1) (A := 1)
     one_pos zero_le_one (fun t _ => by simp) le_rfl u
 
-/-- D-5 for `cutoff_bounds`: `j t = t^{-2}` is nonnegative and nonincreasing on `[1, ∞)`. -/
+/-- Non-vacuity witness for `cutoff_bounds`: `j t = t^{-2}` is nonnegative and nonincreasing on
+`[1, ∞)`. -/
 example {u v : Fin 1 → ℤ} (huv : u ≠ v) :
     0 ≤ (if √(∑ i, (((v - u) i : ℤ) : ℝ) ^ 2) ≤ 1 then
           √(∑ i, (((v - u) i : ℤ) : ℝ) ^ 2) ^ (-(2 : ℝ)) - (1 : ℝ) ^ (-(2 : ℝ)) else 0) :=

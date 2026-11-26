@@ -1,4 +1,9 @@
 /-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Exact hierarchical geometry. New proofs using the existing finite-support lattice
 and mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679's finite cardinalities and sums.
 No new notion of level, ball, or percolation law is introduced.
@@ -9,9 +14,29 @@ public import PercLib.Models.Hierarchical
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.Data.Set.Card
 
+/-!
+# Geometry of the hierarchical lattice
+
+Levels, balls and shells of the hierarchical lattice: the level is an ultrametric, balls are cosets
+of subgroups and are nested or disjoint, ball and shell cardinalities are exact, and radial
+geometric and power-law kernels are summed exactly.
+
+## Main results
+
+* `level_sub_le_max`
+* `level_balls_eq_or_disjoint`
+* `level_balls_subset_or_disjoint_of_le`
+* `card_ball`
+* `card_shell_succ`
+* `tsum_radial_eq`
+* `tsum_geometricRadial_eq`
+* `tsum_geometricRadial_lt_top_iff`
+* `tsum_powerLaw_lt_top_iff`
+-/
+
 @[expose] public section
 noncomputable section
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Models
 
@@ -70,7 +95,8 @@ theorem exists_addSubgroup_level_ball (n : ℕ) :
   refine ⟨{ carrier := {z | z.support.sup Nat.succ ≤ n}
             zero_mem' := by simp
             add_mem' := fun hx hy => (level_add_le_max _ _).trans (max_le hx hy)
-            neg_mem' := fun hx => by simpa only [Set.mem_ofPred_eq, Finsupp.support_neg] using hx }, fun _ => Iff.rfl⟩
+            neg_mem' := fun hx => by simpa only [Set.mem_ofPred_eq, Finsupp.support_neg] using hx },
+                fun _ => Iff.rfl⟩
 
 /-- A translated level ball is a coset of its origin ball. -/
 theorem level_ball_eq_translate (x : ℕ →₀ A) (n : ℕ) :
@@ -78,7 +104,7 @@ theorem level_ball_eq_translate (x : ℕ →₀ A) (n : ℕ) :
       (fun z => x + z) '' {z | z.support.sup Nat.succ ≤ n} := by
   ext y
   constructor
-  · intro h; exact ⟨y - x, h, by abel⟩
+  · intro h; exact ⟨y - x, h, by abel_nf⟩
   · rintro ⟨z, hz, rfl⟩; simpa using hz
 
 /-- Intersecting balls of the same level coincide. -/
@@ -129,7 +155,8 @@ theorem level_ball_restrict_bijective (n : ℕ) :
     simp [z, i.isLt]
 
 /-- A level ball has finitely many vectors whenever the coefficient group is finite. -/
-theorem finite_level_ball [Finite A] (n : ℕ) : {z : ℕ →₀ A | z.support.sup Nat.succ ≤ n}.Finite := by
+theorem finite_level_ball [Finite A] (n : ℕ) : {z : ℕ →₀ A | z.support.sup Nat.succ ≤
+    n}.Finite := by
   have : Finite {z : ℕ →₀ A // z.support.sup Nat.succ ≤ n} :=
     Finite.of_injective _ (level_ball_restrict_bijective (A := A) n).1
   exact Set.finite_coe_iff.mp this
@@ -148,7 +175,8 @@ theorem level_ball_succ_eq_iUnion (n : ℕ) :
       rintro rfl
       simpa using (Finsupp.mem_support_iff.mp hi)
     have hzi : z i ≠ 0 := by
-      simpa [Finsupp.sub_apply, Finsupp.single_apply, Ne.symm hne] using Finsupp.mem_support_iff.mp hi
+      simpa [Finsupp.sub_apply, Finsupp.single_apply, Ne.symm hne] using
+          Finsupp.mem_support_iff.mp hi
     have hil := (level_le_iff_support z _).mp hz i (Finsupp.mem_support_iff.mpr hzi)
     omega
   · rintro ⟨a, ha⟩
@@ -178,6 +206,27 @@ theorem pairwise_disjoint_level_ball_succ (n : ℕ) :
     have := (level_le_iff_support _ _).mp hc n hm
     omega
   exact hab ((hv a ha).symm.trans (hv b hb))
+
+/-- Blocks of levels `m ≤ n` are nested or disjoint. -/
+theorem level_balls_subset_or_disjoint_of_le (x y : ℕ →₀ A) {m n : ℕ} (hmn : m ≤ n) :
+    {z | (z - x).support.sup Nat.succ ≤ m} ⊆ {z | (z - y).support.sup Nat.succ ≤ n} ∨
+      {z | (z - y).support.sup Nat.succ ≤ n} ⊆ {z | (z - x).support.sup Nat.succ ≤ m} ∨
+      Disjoint {z | (z - x).support.sup Nat.succ ≤ m} {z | (z - y).support.sup Nat.succ ≤ n} := by
+  have hsub : {z : ℕ →₀ A | (z - x).support.sup Nat.succ ≤ m} ⊆
+      {z | (z - x).support.sup Nat.succ ≤ n} := fun z hz => le_trans hz hmn
+  rcases level_balls_eq_or_disjoint x y n with h | h
+  · exact Or.inl (h ▸ hsub)
+  · exact Or.inr (Or.inr (h.mono_left hsub))
+
+/-- The level-one ball is infinite when the coefficient group is infinite. -/
+theorem infinite_level_ball_one [Infinite A] :
+    {z : ℕ →₀ A | z.support.sup Nat.succ ≤ 1}.Infinite := by
+  let e := Equiv.ofBijective _ (level_ball_restrict_bijective (A := A) 1)
+  have : Infinite (Fin 1 → A) :=
+    Infinite.of_injective (fun a : A => fun _ : Fin 1 => a) fun a b h => congrFun h 0
+  have : Infinite {z : ℕ →₀ A // z.support.sup Nat.succ ≤ 1} :=
+    Infinite.of_injective e.symm e.symm.injective
+  exact Set.infinite_coe_iff.1 this
 
 end Geometry
 
@@ -222,7 +271,8 @@ theorem tsum_radial_eq [NeZero L] (f : ℕ → ℝ≥0∞) :
     (∑' z : ℕ →₀ (Fin d → ZMod L), f (z.support.sup Nat.succ)) =
       f 0 + ∑' n : ℕ, (((L ^ d) ^ (n + 1) - (L ^ d) ^ n : ℕ) : ℝ≥0∞) * f (n + 1) := by
   have hfib : (∑' z : ℕ →₀ (Fin d → ZMod L), f (z.support.sup Nat.succ)) =
-      ∑' n : ℕ, (Nat.card {z : ℕ →₀ (Fin d → ZMod L) // z.support.sup Nat.succ = n} : ℝ≥0∞) * f n := by
+      ∑' n : ℕ, (Nat.card {z : ℕ →₀ (Fin d → ZMod L) // z.support.sup Nat.succ = n} : ℝ≥0∞) *
+          f n := by
     rw [← ENNReal.tsum_fiberwise (fun z : ℕ →₀ (Fin d → ZMod L) => f (z.support.sup Nat.succ))
       (fun z => z.support.sup Nat.succ)]
     apply tsum_congr
@@ -259,7 +309,8 @@ theorem tsum_geometricRadial_eq [NeZero L] (r : ℝ≥0∞) :
       ring
     _ = _ := by rw [ENNReal.tsum_mul_left, ENNReal.tsum_geometric]
 
-/-- A nondegenerate hierarchical geometric kernel is summable exactly below its geometric ratio threshold. -/
+/-- A nondegenerate hierarchical geometric kernel is summable exactly below its geometric ratio
+threshold. -/
 theorem tsum_geometricRadial_lt_top_iff (hL : 2 ≤ L) (hd : 1 ≤ d) (r : ℝ≥0)
     (hr : 0 < r) :
     (∑' z : ℕ →₀ (Fin d → ZMod L), if z = 0 then 0 else (r : ℝ≥0∞) ^ (z.support.sup Nat.succ)) < ⊤ ↔
@@ -314,6 +365,79 @@ theorem tsum_powerLaw_lt_top_iff (hL : 2 ≤ L) (hd : 1 ≤ d) (α : ℝ) :
   constructor
   · rintro (⟨_, h⟩ | ⟨h, _⟩) <;> linarith
   · intro h; exact Or.inl ⟨hLone, by linarith⟩
+
+/-- The radial kernel `C r^ℓ` away from the origin has mass `C (N-1) r/(1-Nr)` (in `ℝ≥0∞`,
+with no hypothesis on `N r`). -/
+theorem tsum_geometricRadial_mul_eq [NeZero L] (C r : ℝ≥0) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L),
+        if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)) =
+      (C : ℝ≥0∞) * ((L ^ d - 1 : ℕ) : ℝ≥0∞) * r / (1 - (L : ℝ≥0∞) ^ d * r) := by
+  have h := tsum_geometricRadial_eq (d := d) (L := L) (r : ℝ≥0∞)
+  calc (∑' z : ℕ →₀ (Fin d → ZMod L),
+        if z = 0 then 0 else ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞))
+      = ∑' z : ℕ →₀ (Fin d → ZMod L),
+        (C : ℝ≥0∞) * (if z = 0 then 0 else (r : ℝ≥0∞) ^ (z.support.sup Nat.succ)) := by
+        refine tsum_congr fun z => ?_
+        split_ifs <;> simp
+    _ = _ := by rw [ENNReal.tsum_mul_left, h, div_eq_mul_inv]; ring
+
+/-- The full radial kernel `C r^ℓ` has mass at most `C/(1-Nr)`. -/
+theorem tsum_radial_mul_le [NeZero L] (C r : ℝ≥0) :
+    ∑' z : ℕ →₀ (Fin d → ZMod L), ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞) ≤
+      (C : ℝ≥0∞) / (1 - (L : ℝ≥0∞) ^ d * r) := by
+  calc ∑' z : ℕ →₀ (Fin d → ZMod L), ((C * r ^ (z.support.sup Nat.succ) : ℝ≥0) : ℝ≥0∞)
+      = (C : ℝ≥0∞) * ∑' z : ℕ →₀ (Fin d → ZMod L),
+          (fun n : ℕ => (r : ℝ≥0∞) ^ n) (z.support.sup Nat.succ) := by
+        rw [← ENNReal.tsum_mul_left]
+        refine tsum_congr fun z => ?_
+        simp
+    _ ≤ (C : ℝ≥0∞) * ∑' n, (((L ^ d) ^ n : ℕ) : ℝ≥0∞) * (r : ℝ≥0∞) ^ n := by
+        gcongr
+        exact tsum_radial_le _
+    _ = (C : ℝ≥0∞) / (1 - (L : ℝ≥0∞) ^ d * r) := by
+        rw [div_eq_mul_inv, ← ENNReal.tsum_geometric]
+        congr 1
+        refine tsum_congr fun n => ?_
+        push_cast
+        ring
+
+/-- The origin-deleted radial sum as a geometric series: `S(r) = (N-1) r ∑_n (Nr)^n`. -/
+theorem tsum_geometricRadial_eq_mul_tsum [NeZero L] (r : ℝ≥0∞) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L), if z = 0 then 0 else r ^ (z.support.sup Nat.succ)) =
+      ((L ^ d - 1 : ℕ) : ℝ≥0∞) * r * ∑' n : ℕ, ((L : ℝ≥0∞) ^ d * r) ^ n := by
+  rw [tsum_geometricRadial_eq, ENNReal.tsum_geometric]
+
+/-- `S(r) = 0` when `N = 1` or `r = 0`. -/
+theorem tsum_geometricRadial_eq_zero [NeZero L] {r : ℝ≥0∞} (h : L ^ d = 1 ∨ r = 0) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L), if z = 0 then 0 else r ^ (z.support.sup Nat.succ)) = 0 := by
+  rw [tsum_geometricRadial_eq]
+  rcases h with h | h
+  · simp [h]
+  · simp [h]
+
+/-- `S(r) = (N-1)r/(1-Nr)` when `N r < 1`. -/
+theorem tsum_geometricRadial_eq_div [NeZero L] (r : ℝ≥0∞) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L), if z = 0 then 0 else r ^ (z.support.sup Nat.succ)) =
+      ((L ^ d - 1 : ℕ) : ℝ≥0∞) * r / (1 - (L : ℝ≥0∞) ^ d * r) := by
+  rw [tsum_geometricRadial_eq, div_eq_mul_inv]
+
+/-- `S(r) = ∞` when `N > 1`, `r > 0` and `N r ≥ 1`. -/
+theorem tsum_geometricRadial_eq_top [NeZero L] (hN : 1 < L ^ d) {r : ℝ≥0∞} (hr0 : 0 < r)
+    (h : 1 ≤ (L : ℝ≥0∞) ^ d * r) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L), if z = 0 then 0 else r ^ (z.support.sup Nat.succ)) = ⊤ := by
+  have hN1 : ((L ^ d - 1 : ℕ) : ℝ≥0∞) ≠ 0 := by exact_mod_cast (Nat.sub_pos_of_lt hN).ne'
+  rw [tsum_geometricRadial_eq, tsub_eq_zero_of_le h, ENNReal.inv_zero, ENNReal.mul_top]
+  exact mul_ne_zero hN1 hr0.ne'
+
+/-- `S(∞) = ∞` when `N > 1`. -/
+theorem tsum_geometricRadial_top [NeZero L] (hN : 1 < L ^ d) :
+    (∑' z : ℕ →₀ (Fin d → ZMod L),
+      if z = 0 then 0 else (⊤ : ℝ≥0∞) ^ (z.support.sup Nat.succ)) = ⊤ := by
+  have hN1 : ((L ^ d - 1 : ℕ) : ℝ≥0∞) ≠ 0 := by exact_mod_cast (Nat.sub_pos_of_lt hN).ne'
+  rw [tsum_geometricRadial_eq, ENNReal.mul_top hN1]
+  have hpos : (L : ℝ≥0∞) ^ d ≠ 0 := pow_ne_zero _ (by exact_mod_cast NeZero.ne L)
+  rw [ENNReal.mul_top hpos]
+  simp
 
 -- The nondegenerate base example: four binary one-dimensional coefficients below level four.
 example : Nat.card {z : ℕ →₀ (Fin 1 → ZMod 2) // z.support.sup Nat.succ ≤ 4} = 16 := by

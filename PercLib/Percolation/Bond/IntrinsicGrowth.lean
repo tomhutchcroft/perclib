@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 445 (Q-111, part 1), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied.
 -/
 module
 
@@ -19,9 +20,9 @@ most `D`, then `E|B_ω(o,r)| ≤ ∑_{j ≤ r} D^j` (`lintegral_encard_ball_le_o
 at intrinsic distance at most `r` is the end of an open simple path of length at most `r`
 (`edist_le_subset_iUnion_path`), and the weights of such paths are summed by `walkSum`.
 
-`lintegral_encard_ball_le_of_transitive` is the form of issue 445: for a transitive profile
+`lintegral_encard_ball_le_of_transitive` is the transitive form: for a transitive profile
 the bound holds with `D = ∑'_{v ≠ o} q s(o,v)`. It needs neither `D < ⊤` nor `χ = ⊤`.
-The lower bounds of issue 445 are part 2. This file adds no definition.
+The lower bounds are in `IntrinsicRenewal.lean`. This file adds no definition.
 -/
 
 @[expose] public section
@@ -30,12 +31,12 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
 variable {V : Type*}
 
+open Classical in
 /-- A vertex at intrinsic distance at most `r` is the end of an open simple path of length at
 most `r`. -/
 theorem edist_le_subset_iUnion_path (o y : V) (r : ℕ) :
@@ -58,6 +59,7 @@ theorem edist_le_subset_iUnion_path (o y : V) (r : ℕ) :
   exact (show e ∈ ω \ Sym2.diagSet by
     simpa [openGraph, SimpleGraph.edgeSet_fromEdgeSet] using he').1
 
+open Classical in
 /-- The ball probability is at most the weight of the simple paths of length at most `r`. -/
 theorem law_edist_le_le_tsum_paths [Countable V] (q : Sym2 V → unitInterval) (o y : V)
     (r : ℕ) :
@@ -75,12 +77,12 @@ theorem law_edist_le_le_tsum_paths [Countable V] (q : Sym2 V → unitInterval) (
         measure_iUnion_le _
     _ = _ := by simp only [law, prodBernoulli_subset]
 
-/-- **R5XZ, upper bound.** If every off-diagonal row sum of `q` is at most `D`, then
+open Classical in
+/-- **Upper bound.** If every off-diagonal row sum of `q` is at most `D`, then
 `E|B_ω(o,r)| ≤ ∑_{j ≤ r} D^j`. -/
 theorem lintegral_encard_ball_le_of_rowSum [Countable V] (q : Sym2 V → unitInterval)
     (D : ℝ≥0∞)
-    (hrow : ∀ v, (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ D) (o : V) (r : ℕ) :
+    (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ D) (o : V) (r : ℕ) :
     ∫⁻ ω, (({y | (openGraph ω).edist o y ≤ r} : Set V).encard : ℝ≥0∞) ∂law q ≤
       ∑ j ∈ Finset.range (r + 1), D ^ j := by
   set a := offDiagonal (fun v w : V => (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞))
@@ -130,30 +132,32 @@ theorem lintegral_encard_ball_le_of_rowSum [Countable V] (q : Sym2 V → unitInt
     _ ≤ ∑ j ∈ Finset.range (r + 1), D ^ j :=
         Finset.sum_le_sum fun n _ => walkSum_masked_le_pow _ D hrow n o
 
+open Classical in
 /-- Under transitivity of `q` every off-diagonal row sum equals the one at `o`. -/
 theorem rowSum_eq_of_transitive_profile (q : Sym2 V → unitInterval)
     (hq : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, q (Sym2.map σ e) = q e) (o v : V) :
-    (∑' w, if w = v then 0 else (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) =
-      ∑' w, if w = o then 0 else (unitInterval.toNNReal (q s(o,w)) : ℝ≥0∞) := by
+    rowSum (fun e => unitInterval.toENNReal (q e)) v =
+      rowSum (fun e => unitInterval.toENNReal (q e)) o := by
   obtain ⟨σ, rfl, hσ⟩ := hq o v
-  rw [← σ.tsum_eq]
+  rw [rowSum_toENNReal, rowSum_toENNReal, ← σ.tsum_eq]
   refine tsum_congr fun w => ?_
   simp only [σ.injective.eq_iff]
   congr 3
   rw [← hσ s(o, w), Sym2.map_mk]
 
-/-- **R5XZ, upper bound (issue 445 form).** For a transitive profile with
+/-- **Upper bound, transitive form.** For a transitive profile with
 `D = ∑'_{v ≠ o} q s(o,v)`, `E|B_ω(o,r)| ≤ ∑_{j ≤ r} D^j`. -/
 theorem lintegral_encard_ball_le_of_transitive [Countable V] (q : Sym2 V → unitInterval)
     (hq : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, q (Sym2.map σ e) = q e) (o : V) (r : ℕ) :
     ∫⁻ ω, (({y | (openGraph ω).edist o y ≤ r} : Set V).encard : ℝ≥0∞) ∂law q ≤
       ∑ j ∈ Finset.range (r + 1),
-        (∑' v, if v = o then 0 else (unitInterval.toNNReal (q s(o,v)) : ℝ≥0∞)) ^ j :=
+        rowSum (fun e => unitInterval.toENNReal (q e)) o ^ j :=
   lintegral_encard_ball_le_of_rowSum q _
     (fun v => (rowSum_eq_of_transitive_profile q hq o v).le) o r
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
+open Classical in
 /-- The nearest-neighbour profile on `ℤ` (open probability `1` on `s(a, a+1)`) is
 transitive, so the bound applies with `D = 2`. -/
 example (r : ℕ) := lintegral_encard_ball_le_of_transitive

@@ -1,14 +1,16 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 233 (Q-50), written on 2026-11-15 by PROVER-E. No upstream proof is
-copied: the bound is derived from the merged monotone coupling
-`PercLib.Probability.exists_prodBernoulli_monotone_coupling`, through the profile
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied: the bound is derived from the merged
+monotone coupling `PercLib.Probability.exists_prodBernoulli_monotone_coupling`, through the profile
 `min q q'`.
 -/
 module
 
+public import Mathlib.MeasureTheory.Integral.Layercake
 public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
 public import PercLib.Percolation.Bond.Basic
 public import PercLib.Probability.Coupling.Monotone
@@ -150,7 +152,8 @@ theorem abs_prodBernoulli_real_sub_le [Countable ι] (q q' : ι → unitInterval
       (∑' i, ENNReal.ofReal |(q i : ℝ) - q' i|).toReal := by
   have h1 := prodBernoulli_le_add_tsum_dist q q' hA
   have h2 := prodBernoulli_le_add_tsum_dist q' q hA
-  have hsym : (∑' i, ENNReal.ofReal |(q' i : ℝ) - q i|) = ∑' i, ENNReal.ofReal |(q i : ℝ) - q' i| := by
+  have hsym : (∑' i, ENNReal.ofReal |(q' i : ℝ) - q i|) = ∑' i,
+      ENNReal.ofReal |(q i : ℝ) - q' i| := by
     simp_rw [abs_sub_comm]
   rw [hsym] at h2
   have r1 := ENNReal.toReal_mono (ENNReal.add_ne_top.2 ⟨measure_ne_top _ _, hfin⟩) h1
@@ -159,6 +162,98 @@ theorem abs_prodBernoulli_real_sub_le [Countable ι] (q q' : ι → unitInterval
   simp only [measureReal_def]
   rw [abs_le]
   constructor <;> linarith
+
+/-! ### From events to bounded observables -/
+
+/-- **Event bounds control bounded observables.** If two probability measures differ by at most
+`c` on every measurable event, then for a measurable `f` with values in `[m, M]`,
+`|∫ f dμ - ∫ f dν| ≤ (M - m) c`. The proof is the layer-cake formula. -/
+theorem abs_integral_sub_integral_le_of_abs_measureReal_sub_le {Ω : Type*} [MeasurableSpace Ω]
+    {μ ν : Measure Ω} [IsProbabilityMeasure μ] [IsProbabilityMeasure ν] {c : ℝ}
+    (hc : ∀ A, MeasurableSet A → |μ.real A - ν.real A| ≤ c) {f : Ω → ℝ} (hf : Measurable f)
+    {m M : ℝ} (hm : ∀ ω, m ≤ f ω) (hM : ∀ ω, f ω ≤ M) :
+    |∫ ω, f ω ∂μ - ∫ ω, f ω ∂ν| ≤ (M - m) * c := by
+  obtain ⟨ω₀⟩ := nonempty_of_isProbabilityMeasure μ
+  have hL : 0 ≤ M - m := sub_nonneg.2 ((hm ω₀).trans (hM ω₀))
+  set g : Ω → ℝ := fun ω => f ω - m
+  have hg : Measurable g := hf.sub_const m
+  have hgint : ∀ ρ : Measure Ω, IsProbabilityMeasure ρ → Integrable g ρ := fun ρ _ =>
+    Integrable.of_bound hg.aestronglyMeasurable (M - m) (Filter.Eventually.of_forall fun ω => by
+      rw [Real.norm_eq_abs, abs_le]
+      constructor <;> linarith [hm ω, hM ω])
+  have hint : ∀ ρ : Measure Ω, IsProbabilityMeasure ρ →
+      ∫ ω, f ω ∂ρ = (∫ t in Ioc 0 (M - m), ρ.real {ω | t < g ω}) + m := by
+    intro ρ _
+    have h1 : ∫ ω, f ω ∂ρ = ∫ ω, g ω ∂ρ + m := by
+      have hfint : Integrable f ρ := Integrable.of_bound hf.aestronglyMeasurable (|m| + |M|)
+        (Filter.Eventually.of_forall fun ω => by
+          rw [Real.norm_eq_abs, abs_le]
+          constructor <;> linarith [hm ω, hM ω, neg_abs_le m, le_abs_self M, abs_nonneg m,
+            abs_nonneg M])
+      rw [integral_sub hfint (integrable_const m)]
+      simp
+    rw [h1, Integrable.integral_eq_integral_meas_lt (hgint ρ inferInstance)
+      (Filter.Eventually.of_forall fun ω => sub_nonneg.2 (hm ω))]
+    congr 1
+    refine setIntegral_eq_of_subset_of_forall_sdiff_eq_zero measurableSet_Ioi Ioc_subset_Ioi_self
+      fun t ht => ?_
+    have htL : M - m < t := by
+      rcases ht with ⟨ht0, ht1⟩
+      simp only [mem_Ioc, not_and, not_le] at ht1
+      exact ht1 ht0
+    have : {ω | t < g ω} = ∅ := by
+      ext ω
+      simp only [mem_ofPred_eq, mem_empty_iff_false, iff_false, not_lt, g]
+      linarith [hM ω]
+    simp [this]
+  have hanti : ∀ ρ : Measure Ω, IsProbabilityMeasure ρ →
+      IntegrableOn (fun t => ρ.real {ω | t < g ω}) (Ioc 0 (M - m)) := by
+    intro ρ _
+    have hA : Antitone fun t => ρ.real {ω | t < g ω} := fun s t hst =>
+      measureReal_mono fun ω (hω : t < g ω) => lt_of_le_of_lt hst hω
+    exact ((hA.antitoneOn _).integrableOn_isCompact isCompact_Icc).mono_set Ioc_subset_Icc_self
+  rw [hint μ inferInstance, hint ν inferInstance]
+  convert_to |∫ t in Ioc 0 (M - m), (μ.real {ω | t < g ω} - ν.real {ω | t < g ω})| ≤ _ using 2
+  · rw [integral_sub (hanti μ inferInstance) (hanti ν inferInstance)]
+    ring
+  rw [← Real.norm_eq_abs]
+  refine (norm_setIntegral_le_of_norm_le_const (C := c) measure_Ioc_lt_top
+    fun t _ => ?_).trans_eq ?_
+  · rw [Real.norm_eq_abs]
+    exact hc _ (measurableSet_lt measurable_const hg)
+  · rw [Real.volume_real_Ioc_of_le hL, sub_zero, mul_comm]
+
+/-- Two probability measures differ by at most `1` on every event. -/
+theorem abs_measureReal_sub_le_one {Ω : Type*} [MeasurableSpace Ω] (μ ν : Measure Ω)
+    [IsProbabilityMeasure μ] [IsProbabilityMeasure ν] (A : Set Ω) :
+    |μ.real A - ν.real A| ≤ 1 := by
+  rw [abs_le]
+  constructor <;> linarith [measureReal_nonneg (μ := μ) (s := A),
+    measureReal_nonneg (μ := ν) (s := A), measureReal_le_one (μ := μ) (s := A),
+    measureReal_le_one (μ := ν) (s := A)]
+
+/-- **Capped total-variation bound.** For every measurable event on a countable index type,
+`|P_q(A) - P_{q'}(A)| ≤ min {1, ∑' i, |q i - q' i|}`; the sum may be infinite. -/
+theorem abs_prodBernoulli_real_sub_le_min [Countable ι] (q q' : ι → unitInterval)
+    {A : Set (Set ι)} (hA : MeasurableSet A) :
+    |(prodBernoulli q).real A - (prodBernoulli q').real A| ≤
+      (min 1 (∑' i, ENNReal.ofReal |(q i : ℝ) - q' i|)).toReal := by
+  by_cases hfin : ∑' i, ENNReal.ofReal |(q i : ℝ) - q' i| = ∞
+  · rw [hfin, min_eq_left le_top, ENNReal.toReal_one]
+    exact abs_measureReal_sub_le_one _ _ A
+  · rw [ENNReal.toReal_min ENNReal.one_ne_top hfin, ENNReal.toReal_one]
+    exact le_min (abs_measureReal_sub_le_one _ _ A) (abs_prodBernoulli_real_sub_le q q' hA hfin)
+
+/-- **Bounded observables under a profile perturbation.** For a bounded measurable `f` on
+configurations of a countable index type, `|E_q f - E_{q'} f| ≤ osc(f) · min {1, ∑' |q i - q' i|}`
+with `osc(f) = sup f - inf f`. -/
+theorem abs_integral_prodBernoulli_sub_le [Countable ι] (q q' : ι → unitInterval)
+    {f : Set ι → ℝ} (hf : Measurable f) (hfa : BddAbove (range f)) (hfb : BddBelow (range f)) :
+    |∫ ω, f ω ∂prodBernoulli q - ∫ ω, f ω ∂prodBernoulli q'| ≤
+      ((⨆ ω, f ω) - ⨅ ω, f ω) * (min 1 (∑' i, ENNReal.ofReal |(q i : ℝ) - q' i|)).toReal :=
+  abs_integral_sub_integral_le_of_abs_measureReal_sub_le
+    (fun _ hA => abs_prodBernoulli_real_sub_le_min q q' hA) hf (fun ω => ciInf_le hfb ω)
+    (fun ω => le_ciSup hfa ω)
 
 /-! ### Non-vacuity -/
 

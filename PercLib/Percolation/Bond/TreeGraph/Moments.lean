@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-103 (issue 437, roadmap T-6), on the D-2 interface.
-Source motivation: M. Aizenman and C. M. Newman, J. Stat. Phys. 36 (1984), the moment
-bounds from the tree-graph inequalities, and the wiki statement Y84V.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface. Source motivation: M. Aizenman and C. M. Newman, J.
+Stat. Phys. 36 (1984), the moment bounds from the tree-graph inequalities, and the wiki statement
+Y84V. No source text or code is copied.
 -/
 module
 
@@ -27,10 +30,10 @@ With `M ≥ χ(x)` for every `x` and `m ≥ 1`,
   `t_m = (2m-3)‼`, proved through Catalan numbers.
 * `lintegral_encard_pow_le`: the bound, by strong induction on `m`.
 
-**Strengthening, stated explicitly.** The issue assumes `M = ⨆ x, χ(x) < ⊤`. The bound is
+**Strengthening, stated explicitly.** The usual statement assumes `M = ⨆ x, χ(x) < ⊤`. The bound is
 proved for every `M` with `χ(x) ≤ M` for all `x`, finite or not (in `ℝ≥0∞` it is trivial
-when `M = ⊤` and `m ≥ 2`), and `lintegral_encard_pow_le_iSup` is the issue's form with the
-finiteness hypothesis omitted.
+when `M = ⊤` and `m ≥ 2`), and `lintegral_encard_pow_le_iSup` is the form with `M = ⨆ x, χ(x)` and
+the finiteness hypothesis omitted.
 -/
 
 @[expose] public section
@@ -321,7 +324,7 @@ theorem lintegral_encard_pow_le_branch [Countable V] (q : Sym2 V → unitInterva
 
 /-! ### All moments (Y84V) -/
 
-/-- **All cluster moments under a uniform susceptibility bound** (Y84V). If `χ(x) ≤ M` for
+/-- **All cluster moments under a uniform susceptibility bound**. If `χ(x) ≤ M` for
 every `x`, then for every `m ≥ 1` and every `o`,
 `E|K_o|^m ≤ (2m-3)‼ · χ(o) · M^(2m-2)` (with `(2·1-3)‼ = 0‼ = 1` in `ℕ`). -/
 theorem lintegral_encard_pow_le [Countable V] (q : Sym2 V → unitInterval) {M : ℝ≥0∞}
@@ -381,14 +384,14 @@ theorem lintegral_encard_pow_le [Countable V] (q : Sym2 V → unitInterval) {M :
   rw [hcast]
   ring
 
-/-- Y84V in the issue's form, with `M = ⨆ x, χ(x)`; finiteness of `M` is not needed. -/
+/-- The cluster moment bound with `M = ⨆ x, χ(x)`; finiteness of `M` is not needed. -/
 theorem lintegral_encard_pow_le_iSup [Countable V] (q : Sym2 V → unitInterval) (m : ℕ)
     (hm : 1 ≤ m) (o : V) :
     ∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ m ∂law q ≤
       (((2 * m - 3)‼ : ℕ) : ℝ≥0∞) * chi q o * (⨆ x, chi q x) ^ (2 * m - 2) :=
   lintegral_encard_pow_le q (fun x => le_iSup (fun x => chi q x) x) m hm o
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- At `m = 1` the bound is the identity `E|K_o| = χ(o)`. -/
 example [Countable V] (q : Sym2 V → unitInterval) (o : V) :

@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 450 (Q-116, part 1), written on 2026-11-16 by PROVER-F against pinned
-mathlib. No upstream proof is copied. The statements are the standard Abelian theorems for
-power series (e.g. Feller, *An Introduction to Probability Theory*, vol. II, XIII.5).
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16 against pinned mathlib. No upstream proof is copied. The
+statements are the standard Abelian theorems for power series (e.g. Feller, *An Introduction to
+Probability Theory*, vol. II, XIII.5).
 -/
 module
 
@@ -320,7 +322,7 @@ theorem tsum_exp_isEquivalent_log_of_isEquivalent {c : ℝ} (hc : 0 < c) {b : �
   exact (tsum_exp_isEquivalent_of_isEquivalent hd hbd (fun t ht => (hD t ht).summable)
     hdiv).trans hequiv
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- Item (i) for `bₙ = n^{a-1}` exactly (`c = 1`). -/
 example {a : ℝ} (ha : 0 < a) :

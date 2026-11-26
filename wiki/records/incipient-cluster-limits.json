@@ -1,0 +1,144 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "incipient-cluster-limits",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 174
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Susceptibility-biased two-point upper bound",
+      "locator": "17 March 2017 author manuscript. Theorem 12.2 upper-bound proof, (12.2.5)–(12.2.9), printed p.149 / PDF index160.",
+      "relationship": "Written deductions with full model-specific IIC construction separate",
+      "status": "pending",
+      "note": "All convergence is first on finite-bond cylinder events; full connection events are reached by continuity from below."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Distant-point two-point upper bound",
+      "locator": "17 March 2017 author manuscript. Exercise 12.1, printed p.149 / PDF index160.",
+      "relationship": "Written deductions with full model-specific IIC construction separate",
+      "status": "pending",
+      "note": "All convergence is first on finite-bond cylinder events; full connection events are reached by continuity from below."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Intrinsic-ball moment bounds in the conditioning limits",
+      "locator": "Independent short-path extension of the Chapter 12 tree-graph argument; combines the existing multipoint BK proof and short-path thinning theorem",
+      "relationship": "Additional written deductions, not attributed as new claims of the cited chapter",
+      "status": "pending",
+      "note": "A breadth-first tree retains the short witnesses while adding one unrestricted leaf. The resulting moments pass to cylinder limits because fixed-radius lattice intrinsic balls are bounded cylinder functions. Distant-point limits need the explicit ratio hypothesis. Finite triangle gives radius-squared exponential upper tails, not matching lower volume or an IIC identification."
+    },
+    {
+      "source": "kozma-nachmias-alexander-orbach-2009",
+      "order": 3,
+      "label": "Stopped boundaries, intrinsic volume and resistance in incipient limits",
+      "locator": "arXiv:0806.1442v2, Section 2, Lemmas 2.3, 2.5 and 2.6; printed pp.12–14 / PDF indices11–13",
+      "relationship": "Written reconstruction of the exploration and cutset arguments, with an explicit susceptibility-biased extension",
+      "status": "pending",
+      "note": "The source uses distant-point conditioning and spatial two-point bounds. KGPE separately proves the susceptibility-biased boundary comparison; existing finite-triangle tail, thinning and uniform subgraph arms then supply RG3Z/3FTE/POD2. The source random-walk input, full IIC identification and reverse-BK discussion are not used."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "N20X",
+      "proof_uses": [
+        "L82Q",
+        "IDIL"
+      ],
+      "reason": "Susceptibility-biased two-point upper bound under the stated convergence and spatial hypotheses."
+    },
+    {
+      "order": 1,
+      "tag": "G86R",
+      "proof_uses": [
+        "L82Q",
+        "IDIL"
+      ],
+      "reason": "Distant-point two-point upper bound under the stated convergence and spatial hypotheses."
+    },
+    {
+      "order": 2,
+      "tag": "0HRJ",
+      "proof_uses": [
+        "AFH6",
+        "SO5J",
+        "HP3X",
+        "6L9Z"
+      ],
+      "reason": "A breadth-first tree of the short paths and one attached unrestricted path give a trivalent diagram with exactly one unrestricted factor; leaf summation cancels the susceptibility bias."
+    },
+    {
+      "order": 3,
+      "tag": "KIGU",
+      "proof_uses": [
+        "0HRJ",
+        "E22E"
+      ],
+      "reason": "Fixed-radius intrinsic-ball moments are bounded lattice cylinder functions. For distant-point conditioning the short factors restrict every remaining diagram position to a finite deterministic ball, permitting the ratio limit."
+    },
+    {
+      "order": 4,
+      "tag": "Z78U",
+      "proof_uses": [
+        "KIGU",
+        "PI11",
+        "ADWR",
+        "I23O",
+        "E22E",
+        "FWHO"
+      ],
+      "reason": "Finite-triangle susceptibility and thinning give an explicit linear critical ball mean; the double-factorial moment bound yields an exponential tail and dyadic Borel–Cantelli upper volume control. FWHO supplies the distant-point ratio only where its hypotheses hold."
+    },
+    {
+      "order": 5,
+      "tag": "KGPE",
+      "proof_uses": [
+        "E22E",
+        "KIGU"
+      ],
+      "reason": "A bounded intrinsic exploration leaves independent exterior bonds. The finite explored mass vanishes after division by diverging susceptibility; distant-point conditioning instead uses a finite-position ratio bound."
+    },
+    {
+      "order": 6,
+      "tag": "RG3Z",
+      "proof_uses": [
+        "KGPE",
+        "E22E",
+        "ADWR",
+        "KEO7",
+        "Z78U"
+      ],
+      "reason": "The first small positive sphere in the outer half of an intrinsic ball bounds limiting mass by its size times the critical arm probability. Dyadic Borel–Cantelli and the existing upper tail give volume exponent two."
+    },
+    {
+      "order": 7,
+      "tag": "3FTE",
+      "proof_uses": [
+        "KGPE",
+        "KIGU",
+        "Z78U"
+      ],
+      "reason": "Average limiting sphere means over radii r to 2r, then split at a sphere-size threshold and optimize the boundary-density comparison."
+    },
+    {
+      "order": 8,
+      "tag": "POD2",
+      "proof_uses": [
+        "RG3Z",
+        "3FTE",
+        "KEO7",
+        "Z78U"
+      ],
+      "reason": "Uniform subgraph arms bound the expected total number of extendible crossing bonds. Disjoint cutset energy bounds give the critical resistance tail; the history comparison transfers it to each admissible limit."
+    }
+  ]
+}

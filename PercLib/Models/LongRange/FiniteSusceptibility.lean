@@ -1,10 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 598 (Q-170, roadmap T-5), written on 2026-11-16 by PROVER-G: finite
-susceptibility below the threshold for summable translation-invariant kernels on countable
-additive groups and on `ℤ^d`, from the transitive sharpness theorem of
-`Percolation/Bond/Sharpness.lean`. No upstream code is copied, no definition is added and no
-Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: finite susceptibility below the threshold for summable
+translation-invariant kernels on countable additive groups and on `ℤ^d`, from the transitive
+sharpness theorem of `Percolation/Bond/Sharpness.lean`. No upstream code is copied, no definition is
+added and no Input is introduced.
 -/
 module
 
@@ -12,7 +15,7 @@ public import PercLib.Percolation.Bond.Sharpness
 public import PercLib.Models.Hierarchical
 public import PercLib.Models.LongRange.PowerLaw
 
-/-! # T-5: finite susceptibility below the threshold on `ℤ^d`
+/-! # Finite susceptibility below the threshold on `ℤ^d`
 
 Let `G` be a countable additive group, `k : G → ℝ≥0` with `∑' z, k z < ⊤`, and `J` a pair
 intensity with `J s(x,y) = k (y - x)` (such a `J` exists exactly when `k` is even,
@@ -22,7 +25,7 @@ intensity with `J s(x,y) = k (y - x)` (such a `J` exists exactly when `k` is eve
   translations are automorphisms of `J`, and the rows of `J` are summable.
 * `chi_lt_top_of_lt_globalCriticalIntensity_of_translationInvariant` and
   `rootCriticalIntensity_eq_globalCriticalIntensity_of_translationInvariant` (item 2).
-* `chi_lt_top_of_lt_globalCriticalIntensity_int` (item 3, the roadmap form of T-5):
+* `chi_lt_top_of_lt_globalCriticalIntensity_int` (item 3):
   the same on `ℤ^d = Fin d → ℤ`.
 * `chi_lt_top_of_lt_globalCriticalIntensity_powerLaw` and
   `chi_lt_top_of_lt_globalCriticalIntensity_hierarchical` (item 4): the power law
@@ -34,7 +37,6 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal NNReal
-open Classical
 open PercLib.Percolation.Bond
 
 namespace PercLib.Models
@@ -46,7 +48,7 @@ variable {G : Type*} [AddGroup G]
 /-- **Item 1, transitivity.** Translations are automorphisms of a translation-invariant
 pair intensity: `σ = Equiv.addRight (y - x)` maps `x` to `y`. -/
 theorem transitive_of_translationInvariant (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = k (y - x)) :
+    (hJ : ∀ x y, J s(x, y) = k (y - x)) :
     ∀ x y : G, ∃ σ : G ≃ G, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e := by
   intro x y
   refine ⟨Equiv.addRight (-x + y), by simp, fun e => ?_⟩
@@ -57,7 +59,7 @@ theorem transitive_of_translationInvariant (J : Sym2 G → ℝ≥0) (k : G → �
 
 /-- **Item 1, summable rows.** A kernel of finite total mass gives summable real rows. -/
 theorem summable_rows_of_translationInvariant (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = k (y - x)) (hk : ∑' z, (k z : ℝ≥0∞) < ⊤) (u : G) :
+    (hJ : ∀ x y, J s(x, y) = k (y - x)) (hk : ∑' z, (k z : ℝ≥0∞) < ⊤) (u : G) :
     Summable fun v => (J s(u, v) : ℝ) := by
   have hs : Summable k := ENNReal.tsum_coe_ne_top_iff_summable.1 hk.ne
   simp_rw [hJ]
@@ -66,15 +68,15 @@ theorem summable_rows_of_translationInvariant (J : Sym2 G → ℝ≥0) (k : G �
 /-- **Item 2, threshold.** Every root threshold of a summable translation-invariant pair
 intensity equals the global threshold. -/
 theorem rootCriticalIntensity_eq_globalCriticalIntensity_of_translationInvariant [Countable G]
-    (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0) (hJ : ∀ x y, J s(x,y) = k (y - x)) (x : G) :
+    (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0) (hJ : ∀ x y, J s(x, y) = k (y - x)) (x : G) :
     rootCriticalIntensity J x = globalCriticalIntensity J :=
   rootCriticalIntensity_eq_globalCriticalIntensity_of_transitive J
     (transitive_of_translationInvariant J k hJ) x
 
-/-- **Item 2, T-5 on countable groups.** For a summable translation-invariant pair intensity,
-the susceptibility is finite at every vertex at every intensity below the threshold. -/
+/-- **Item 2, finite susceptibility on countable groups.** For a summable translation-invariant pair
+intensity, the susceptibility is finite at every vertex at every intensity below the threshold. -/
 theorem chi_lt_top_of_lt_globalCriticalIntensity_of_translationInvariant [Countable G]
-    (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0) (hJ : ∀ x y, J s(x,y) = k (y - x))
+    (J : Sym2 G → ℝ≥0) (k : G → ℝ≥0) (hJ : ∀ x y, J s(x, y) = k (y - x))
     (hk : ∑' z, (k z : ℝ≥0∞) < ⊤) {β : ℝ≥0} (hβ : (β : ℝ≥0∞) < globalCriticalIntensity J)
     (x : G) : chi (intensityProfile J β) x < ⊤ := by
   rw [← rootCriticalIntensity_eq_globalCriticalIntensity_of_translationInvariant J k hJ x] at hβ
@@ -83,11 +85,11 @@ theorem chi_lt_top_of_lt_globalCriticalIntensity_of_translationInvariant [Counta
 
 end Group
 
-/-- **T-5 (roadmap form, item 3).** On `ℤ^d`, for a summable translation-invariant pair
+/-- **Finite susceptibility on `ℤ^d` (item 3).** On `ℤ^d`, for a summable translation-invariant pair
 intensity `J s(x,y) = k (y - x)`, the susceptibility is finite at every vertex at every
 intensity below the threshold, and the root and global thresholds agree. -/
 theorem chi_lt_top_of_lt_globalCriticalIntensity_int {d : ℕ}
-    (J : Sym2 (Fin d → ℤ) → ℝ≥0) (k : (Fin d → ℤ) → ℝ≥0) (hJ : ∀ x y, J s(x,y) = k (y - x))
+    (J : Sym2 (Fin d → ℤ) → ℝ≥0) (k : (Fin d → ℤ) → ℝ≥0) (hJ : ∀ x y, J s(x, y) = k (y - x))
     (hk : ∑' z, (k z : ℝ≥0∞) < ⊤) :
     (∀ β : ℝ≥0, (β : ℝ≥0∞) < globalCriticalIntensity J →
       ∀ x, chi (intensityProfile J β) x < ⊤) ∧
@@ -100,7 +102,7 @@ theorem chi_lt_top_of_lt_globalCriticalIntensity_int {d : ℕ}
 threshold, and the threshold is at least the inverse of the total mass of the kernel. -/
 theorem chi_lt_top_of_lt_globalCriticalIntensity_powerLaw {d : ℕ} (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) (J : Sym2 (Fin d → ℤ) → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = Real.toNNReal
+    (hJ : ∀ x y, J s(x, y) = Real.toNNReal
       (if y - x = 0 then 0 else ‖y - x‖ ^ (-((d : ℝ) + α)))) :
     (∀ β : ℝ≥0, (β : ℝ≥0∞) < globalCriticalIntensity J →
       ∀ x, chi (intensityProfile J β) x < ⊤) ∧
@@ -118,7 +120,7 @@ theorem chi_lt_top_of_lt_globalCriticalIntensity_powerLaw {d : ℕ} (hd : 1 ≤ 
 `2 L^d r ≤ 1`, the susceptibility is finite at every vertex below the threshold. -/
 theorem chi_lt_top_of_lt_globalCriticalIntensity_hierarchical {d L : ℕ} [NeZero L]
     (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0) (C r : ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = C * r ^ ((y - x).support.sup Nat.succ))
+    (hJ : ∀ x y, J s(x, y) = C * r ^ ((y - x).support.sup Nat.succ))
     (hr : (L : ℝ≥0) ^ d * r * 2 ≤ 1) {β : ℝ≥0} (hβ : (β : ℝ≥0∞) < globalCriticalIntensity J)
     (x : ℕ →₀ (Fin d → ZMod L)) : chi (intensityProfile J β) x < ⊤ :=
   chi_lt_top_of_lt_globalCriticalIntensity_of_translationInvariant J
@@ -127,7 +129,7 @@ theorem chi_lt_top_of_lt_globalCriticalIntensity_hierarchical {d L : ℕ} [NeZer
 
 end PercLib.Models
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 section Witnesses
 
 open PercLib.Models

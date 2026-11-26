@@ -1,0 +1,108 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "lace-coefficient-diagrams",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 161
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Disjoint path witnesses",
+      "locator": "17 March 2017 author manuscript, (7.2.21), (7.2.23), (7.3.2)\u2013(7.3.9), Exercise 7.3.",
+      "relationship": "Written diagram proof with explicit convergence hypotheses",
+      "status": "pending",
+      "note": "The last pivotal bridge leaves two terminal paths meeting the marked set. Attaching the extra connection to their union gives the two intermediate cases, including empty segments and coincident vertices."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Geometric coefficient mass bounds",
+      "locator": "17 March 2017 author manuscript, Lemmas 7.1\u20137.2; (7.2.13), (7.2.26)\u2013(7.2.30); (7.4.2)\u2013(7.4.10), Exercise 7.4; Proposition 7.4, (7.5.3) and Section 7.5.1.",
+      "relationship": "Written diagram proof with explicit convergence hypotheses",
+      "status": "pending",
+      "note": "BK is applied within each independent configuration after the path decomposition. A transition on pairs has mass at most twice the product of the two triangle quantities; no division by a connection probability is needed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "The first weighted coefficients",
+      "locator": "17 March 2017 author manuscript, Lemma 7.1, (7.2.8); Lemma 7.2, (7.2.14); Lemma 7.3; (7.2.31)\u2013(7.2.37), Exercise 7.2.",
+      "relationship": "Written diagram proof with explicit convergence hypotheses",
+      "status": "pending",
+      "note": "Cosine splitting and an explicit change of variables give the unrefined first-order estimate. The sharper (7.2.15) and higher-order (7.5.4) are not claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Convergence through criticality",
+      "locator": "17 March 2017 author manuscript, Section 6.3 limiting discussion and Section 7.1, supplied here under explicit small critical-diagram hypotheses.",
+      "relationship": "Written diagram proof with explicit convergence hypotheses",
+      "status": "pending",
+      "note": "Finite critical clusters stabilize under the uniform coupling. Critical witness diagrams dominate each fixed-order sum; a uniform geometric tail then gives convergence in the summable norm without asserting monotonicity of the cutting events."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "A conditional small weighted triangle",
+      "locator": "17 March 2017 author manuscript, Sections 7.1 and 7.6 in conjunction with the random-walk bounds of Section 5.4.",
+      "relationship": "Written diagram proof with explicit convergence hypotheses",
+      "status": "pending",
+      "note": "The first-step bound replaces a possibly signed Fourier factor by a spatial bound with squared step factors. A bounded infrared constant and bounded critical edge mass imply a weighted triangle of order inverse dimension. The bootstrap premises remain explicit."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "NCYU",
+      "proof_uses": [
+        "F69T",
+        "G192"
+      ],
+      "reason": "The last pivotal bridge leaves two terminal paths meeting the marked set. Attaching the extra connection to their union gives the two intermediate cases, including empty segments and coincident vertices."
+    },
+    {
+      "order": 1,
+      "tag": "SJIL",
+      "proof_uses": [
+        "NCYU",
+        "ANZF"
+      ],
+      "reason": "BK is applied within each independent configuration after the path decomposition. A transition on pairs has mass at most twice the product of the two triangle quantities; no division by a connection probability is needed."
+    },
+    {
+      "order": 2,
+      "tag": "NJT0",
+      "proof_uses": [
+        "SJIL"
+      ],
+      "reason": "Cosine splitting and an explicit change of variables give the unrefined first-order estimate. The sharper (7.2.15) and higher-order (7.5.4) are not claimed."
+    },
+    {
+      "order": 3,
+      "tag": "3W22",
+      "proof_uses": [
+        "SJIL",
+        "Z84R",
+        "I3PK",
+        "5W46",
+        "JQLC"
+      ],
+      "reason": "Finite critical clusters stabilize under the uniform coupling. Critical witness diagrams dominate each fixed-order sum; a uniform geometric tail then gives convergence in the summable norm without asserting monotonicity of the cutting events."
+    },
+    {
+      "order": 4,
+      "tag": "AA7H",
+      "proof_uses": [
+        "RD3X",
+        "ANZF",
+        "3W22"
+      ],
+      "reason": "The first-step bound replaces a possibly signed Fourier factor by a spatial bound with squared step factors. A bounded infrared constant and bounded critical edge mass imply a weighted triangle of order inverse dimension. The bootstrap premises remain explicit."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "krivelevich-lubetzky-sudakov-expanders",
+  "entries": [
+    {
+      "id": "edge-union-explanation",
+      "title": "The edge event needs at least one large endpoint cluster",
+      "status": "provisional",
+      "locator": "22-page author PDF associated with arXiv:1803.11553, Section 2.1, explanatory sentence immediately after (2.4), printed p.6 / PDF index5. Extracted text checked against the displayed definition and later edge probability. Visual PDF and publisher-version comparison were unavailable.",
+      "claim": "The prose explains the open-edge event after (2.4) as requiring both endpoint clusters, computed after deleting that edge, to be large.",
+      "problem": "The displayed event is a union of the two endpoint conditions. For cutoff R=2, take an open path x-y-z with all other edges closed. After deleting xy, the y-cluster has size two and the x-cluster has size one. The displayed event holds, while the prose conjunction fails. This configuration also occurs as a percolation configuration in a regular host containing the path.",
+      "correction": "Read the explanation as: xy is open and at least one of the two endpoint clusters in the graph with xy deleted has size at least R. Keep the displayed union. For the infinite-tree edge-density calculation, the analogous condition has probability p(1-r_p^2), as proved in VSGH; requiring both infinite branches would instead give p(1-r_p)^2.",
+      "tags": [
+        "VSGH"
+      ],
+      "issues": [],
+      "leanImpact": "Use a union of the two deletion-cluster events when defining the edge event for giant membership. The conjunction describes a different event and cannot replace it. This is a prose/source-interface correction only: no Lean files, compiled statements or existing evidence were changed, and no compiled correspondence or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace the prose requirement of both large endpoint clusters by at least one; retain the displayed union.",
+        "scale": "notation",
+        "impact": "One conjunction in explanatory prose changes. The displayed definition, edge-density formula and main theorem are unchanged; no new hypothesis or substantive proof argument is required."
+      }
+    },
+    {
+      "id": "red-first-round-parameter",
+      "title": "The red first round has a smaller percolation parameter",
+      "status": "provisional",
+      "locator": "arXiv:1803.11553v2 (8 January 2020, 22 pages), Section 2.2 \"The 2-core of the giant component\", lower expectation for the eligible blue-edge set following Corollary 2.10, printed p.13 / PDF index12; compare the definitions of p′ and q′ at the start of Section 2.1 (printed p.6) and the independent colour split with blue probability ε̂ := 3d√ε, (2.27) on printed p.11. Extracted arXiv v2 text checked on 21 November 2026; the earlier reading of this passage used the 22-page author PDF, whose pagination and passage agree with v2, but the two files were not compared line by line. Visual PDF and publisher version were not compared.",
+      "claim": "The lower expectation for blue first-round edges with two large red endpoint clusters, E|Û| ≥ (1/2)dp′(1−q′)²ε̂n, uses the descendant survival probability at the uncoloured first-round parameter p′ = p−ε (written p0 below).",
+      "problem": "Each other edge is both red and first-round open with probability p_r=(1-ε̂)p0. Conditional on the distinguished edge being blue, the endpoint tests still have this reduced parameter. On a tree their large-cutoff survival factor is (1-r_(p_r))^2, strictly smaller than (1-r_(p0))^2 above criticality. For d=3 and p0=3/4, r_(p0)=1/9 while r_(p_r)=((1-p_r)/p_r)^2>1/9 for every 0<ε̂<1/3. For sufficiently large fixed cutoffs this contradicts the claimed lower factor, including when ε̂ is made arbitrarily small to satisfy the colouring restriction.",
+      "correction": "Use p_r=(1-ε̂)p0 throughout the red-cluster estimate. The eligible blue-edge expectation has limiting density ε̂ p0 d s_L(p_r)^2/2, bounded below by ε̂ p0 d(1-r_(p_r))^2/2. Treating ε̂ as a free parameter rather than 3d√ε, first choose ε̂ small and p0 close to the target p so p_r is supercritical and this coefficient is close to its target, then choose the sprinkling tolerance and concentration error small relative to ε̂, and finally the fixed cutoff. TGLZ supplies the complete argument.",
+      "tags": [
+        "TGLZ",
+        "2K74"
+      ],
+      "issues": [],
+      "leanImpact": "A formal colour-and-bond coupling must use the product of red retention and first-round bond probability when invoking branching estimates. Keep colour sampling independent of the full uncoloured configuration for the later binomial comparison. No Lean statement or compiled evidence is changed; these prose proofs do not supply a compiled correspondence.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace the branch survival factor by the one at p_r=(1-ε̂)p0 and choose the auxiliary parameters in the stated order.",
+        "scale": "local",
+        "impact": "An intermediate expectation and its parameter/error bookkeeping change. The completed proof keeps the same fixed-parameter 2-core theorem, graph hypotheses and limiting densities; it does not retain the erroneous lower expectation or claim a bound uniform near criticality."
+      }
+    },
+    {
+      "id": "thinning-deletion-probability-direction",
+      "title": "Erasing a bounded number of incident edges gives a lower probability bound",
+      "status": "provisional",
+      "locator": "22-page author PDF associated with arXiv:1803.11553, Section 4, proof of Theorem 4.1, sentence immediately before the displayed comparison P(B)>=P(A)(1-rho)^(delta d n); printed p.19 / PDF index18. Extracted text checked; the screenshot tool supplied no inspectable image, and the publisher version was not compared.",
+      "claim": "After bounding the number of open edges touching the chosen deletion set by delta d n, the prose gives an upper bound (1-rho)^(delta d n) for the probability that thinning erases all those edges.",
+      "problem": "If j edges must be erased, that conditional probability is exactly (1-rho)^j. Because 0<1-rho<1 and j<=delta d n, the displayed power is a lower bound. On a configuration with exactly one open edge, take S to contain one endpoint. Its erasure probability is 1-rho, strictly larger than (1-rho)^(delta d n) whenever delta d n>1. Such a configuration has positive probability on every finite regular high-girth host at the source parameter p<1, for the source choice of rho as well. Thus the discrepancy is in the direction of the conditional bound, not in the graph hypotheses.",
+      "correction": "Replace the prose upper bound by a lower bound. Select a witnessing S after fixing the original configuration, then independently thin; conditionally, all edges touching S disappear with probability at least (1-rho)^(d|S|). Integrating yields the subsequent displayed source inequality. Lemma 58KB states and proves the finite comparison, with the isolated-vertex condition t>=1 explicit.",
+      "tags": [
+        "58KB",
+        "P3AV"
+      ],
+      "issues": [],
+      "leanImpact": "The conditional thinning proof needs the antitone dependence of a power in (0,1) on the number of required erasures. A configuration-dependent deletion set is fixed before sampling the independent retention variables. No Lean declaration, compiled statement or evidence is changed or claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Change the erasure-probability sentence from an upper bound to a lower bound; retain the next displayed comparison.",
+        "scale": "notation",
+        "impact": "Only the direction stated in one prose bound changes. The following displayed inequality, the separator theorem and its hypotheses remain unchanged. The wiki gives the full finite coupling proof, including configuration-dependent selection."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "22-page author PDF associated with arXiv:1803.11553",
+    "checkedUrl": "https://www.cs.tau.ac.il/~krivelev/expperc.pdf",
+    "method": "The recorded checks use extracted text of the author-hosted PDF. Its live URL is not a version pin; the 22-page pagination and exact locators identify the passages read. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The three reports concern this author PDF: the expectation after (2.4), the blue-edge expectation after Corollary 2.10, and the conditional-erasure sentence in the proof of Theorem 4.1. The red-first-round report was re-read in arXiv:1803.11553v2 (see comparisons); no publisher comparison is recorded. All remain provisional; the displayed conclusions and repair assessments are unchanged.",
+    "comparisons": [
+      {
+        "version": "arXiv:1803.11553v2 (8 January 2020; the latest arXiv version, v1 and v2 only)",
+        "url": "https://arxiv.org/abs/1803.11553v2",
+        "status": "compared",
+        "findings": "Extracted text of the arXiv v2 PDF (22 pages) was read on 21 November 2026. The red-first-round passage after Corollary 2.10 on printed p.13 prints (1/2)dp′(1−q′)²ε̂n ≤ E|Û| with ε̂ := 3d√ε from (2.27), as that entry describes. The other two passages were only located, not re-read: the sentence after (2.4) is on printed p.6 and the display P(B) ≥ P(A)(1−ρ)^(δdn) in the proof of Theorem 4.1 on printed p.19, matching the recorded author-PDF pagination. The author PDF itself could not be fetched, so it was not compared with v2."
+      }
+    ]
+  }
+}

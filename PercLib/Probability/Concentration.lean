@@ -1,15 +1,17 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 169, Q-26). An application of mathlib's Hoeffding inequality;
-no upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. An application of mathlib's Hoeffding inequality; no upstream proof is copied.
 -/
 module
 
 public import PercLib.Probability.ProdBernoulliIndependence
 public import PercLib.Probability.Cylinder
 public import PercLib.Probability.ProductExpectation
+public import PercLib.Probability.FiniteEnergy.Insertion
 public import PercLib.Percolation.Bond.Basic
 public import Mathlib.Probability.Moments.SubGaussian
 
@@ -101,7 +103,8 @@ theorem prodBernoulli_real_sum_sub_ge_le (p : ι → unitInterval) (F : Finset �
     (prodBernoulli p).real {ω | t ≤ ((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ)} ≤
       Real.exp (-2 * t ^ 2 / F.card) := by
   classical
-  have h := HasSubgaussianMGF.measure_sum_ge_le_of_iIndepFun (iIndepFun_centred_indicator p) (s := F)
+  have h := HasSubgaussianMGF.measure_sum_ge_le_of_iIndepFun (iIndepFun_centred_indicator p)
+      (s := F)
     (fun i _ => hasSubgaussianMGF_centred_indicator p i) ht
   rw [sum_subgaussian_const] at h
   have hset : {ω : Set ι | t ≤ ((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ)} =
@@ -173,6 +176,108 @@ theorem prodBernoulli_real_ncard_inter_finset_eq (p : ι → unitInterval) (F : 
     ← map_measureReal_apply (by fun_prop) (measurableSet_singleton k),
     map_ncard_setBernoulli_real_singleton Set.finite_univ]
   simp [Set.ncard_univ, Nat.card_eq_fintype_card]
+
+/-! ### The inhomogeneous law of the count -/
+
+/-- **Inhomogeneous law.** The number of open coordinates in `F` equals `k` with probability
+the sum, over the `k`-subsets `a` of `F`, of the probability that exactly the coordinates of `a`
+are open. -/
+theorem prodBernoulli_real_ncard_inter_finset_eq_sum [DecidableEq ι] (p : ι → unitInterval)
+    (F : Finset ι) (k : ℕ) :
+    (prodBernoulli p).real {ω | (ω ∩ (F : Set ι)).ncard = k} =
+      ∑ a ∈ F.powersetCard k, (∏ i ∈ a, (p i : ℝ)) * ∏ i ∈ F \ a, (1 - (p i : ℝ)) := by
+  classical
+  have hset : {ω : Set ι | (ω ∩ (F : Set ι)).ncard = k} =
+      ⋃ a ∈ F.powersetCard k, {ω | ω ∩ (F : Set ι) = (a : Set ι)} := by
+    ext ω
+    simp only [mem_ofPred_eq, mem_iUnion, Finset.mem_powersetCard, exists_prop]
+    constructor
+    · intro h
+      refine ⟨F.filter (· ∈ ω), ⟨Finset.filter_subset _ _, ?_⟩, ?_⟩
+      · rw [← h, ← Set.ncard_coe_finset]
+        congr 1
+        ext i; simp [and_comm]
+      · ext i; simp [and_comm]
+    · rintro ⟨a, ⟨_, hk⟩, h⟩
+      rw [h, Set.ncard_coe_finset, hk]
+  rw [hset, measureReal_biUnion_finset]
+  · exact Finset.sum_congr rfl fun a ha =>
+      prodBernoulli_real_inter_finset_eq p F a (Finset.mem_powersetCard.1 ha).1
+  · intro a _ b _ hab
+    refine Set.disjoint_left.2 fun ω h1 h2 => hab ?_
+    exact_mod_cast (h1.symm.trans h2 : (a : Set ι) = b)
+  · exact fun a _ => measurableSet_setOf_inter_eq F a
+
+/-- More than `|F|` coordinates of `F` are never open. -/
+theorem prodBernoulli_real_ncard_inter_finset_eq_zero_of_card_lt (p : ι → unitInterval)
+    (F : Finset ι) {k : ℕ} (hk : F.card < k) :
+    (prodBernoulli p).real {ω | (ω ∩ (F : Set ι)).ncard = k} = 0 := by
+  classical
+  rw [prodBernoulli_real_ncard_inter_finset_eq_sum, Finset.powersetCard_eq_empty.2 hk,
+    Finset.sum_empty]
+
+/-! ### Exponential moments and the two-sided bound -/
+
+/-- The centred count of open coordinates in `F` is `|F|/4`-sub-Gaussian. -/
+theorem hasSubgaussianMGF_ncard_inter_finset_sub_sum (p : ι → unitInterval) (F : Finset ι) :
+    HasSubgaussianMGF (fun ω : Set ι => ((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ))
+      (F.card / 4) (prodBernoulli p) := by
+  classical
+  have hc : (∑ _i ∈ F, (‖(1 : ℝ) - 0‖₊ / 2) ^ 2 : ℝ≥0) = F.card / 4 := by
+    simp only [sub_zero, nnnorm_one, Finset.sum_const, nsmul_eq_mul]
+    ring
+  rw [← hc]
+  refine (HasSubgaussianMGF.sum_of_iIndepFun (iIndepFun_centred_indicator p) (s := F)
+    fun i _ => hasSubgaussianMGF_centred_indicator p i).congr (ae_of_all _ fun ω => ?_)
+  simp only [ncard_inter_finset_eq_sum_ite, Finset.sum_sub_distrib]
+
+/-- **Centred exponential moment.** For every real `t`,
+`E exp(t (N_F - μ_F)) ≤ exp(|F| t² / 8)`. -/
+theorem integral_exp_mul_ncard_inter_finset_sub_sum_le (p : ι → unitInterval) (F : Finset ι)
+    (t : ℝ) :
+    ∫ ω, Real.exp (t * (((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ))) ∂prodBernoulli p ≤
+      Real.exp (F.card * t ^ 2 / 8) := by
+  refine ((hasSubgaussianMGF_ncard_inter_finset_sub_sum p F).mgf_le t).trans_eq ?_
+  congr 1
+  simp only [NNReal.coe_div, NNReal.coe_natCast, NNReal.coe_ofNat]
+  ring
+
+/-- **Hoeffding, two-sided.** `P(|N_F - μ_F| ≥ t) ≤ min {1, 2 exp(-2t²/|F|)}` for `t ≥ 0`;
+for empty `F` the right side is `1`. -/
+theorem prodBernoulli_real_abs_sub_ge_le (p : ι → unitInterval) (F : Finset ι)
+    {t : ℝ} (ht : 0 ≤ t) :
+    (prodBernoulli p).real
+        {ω | t ≤ |((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ)|} ≤
+      min 1 (2 * Real.exp (-2 * t ^ 2 / F.card)) := by
+  refine le_min measureReal_le_one ?_
+  have hsub : {ω : Set ι | t ≤ |((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ)|} ⊆
+      {ω | t ≤ ((ω ∩ (F : Set ι)).ncard : ℝ) - ∑ i ∈ F, (p i : ℝ)} ∪
+        {ω | t ≤ ∑ i ∈ F, (p i : ℝ) - ((ω ∩ (F : Set ι)).ncard : ℝ)} := by
+    intro ω hω
+    simp only [mem_ofPred_eq, mem_union] at hω ⊢
+    rcases le_abs'.1 hω with h | h
+    · exact Or.inr (by linarith)
+    · exact Or.inl h
+  calc _ ≤ _ := measureReal_mono hsub
+    _ ≤ _ := measureReal_union_le _ _
+    _ ≤ Real.exp (-2 * t ^ 2 / F.card) + Real.exp (-2 * t ^ 2 / F.card) :=
+      add_le_add (prodBernoulli_real_sum_sub_ge_le p F ht)
+        (prodBernoulli_real_sub_sum_ge_le p F ht)
+    _ = _ := by ring
+
+/-- **Empty set, upper tail.** With no coordinates the centred count is `0`. -/
+theorem prodBernoulli_real_sum_sub_ge_empty (p : ι → unitInterval) (t : ℝ) :
+    (prodBernoulli p).real
+        {ω | t ≤ ((ω ∩ ((∅ : Finset ι) : Set ι)).ncard : ℝ) - ∑ i ∈ ∅, (p i : ℝ)} =
+      if t ≤ 0 then 1 else 0 := by
+  split_ifs with h <;> simp [h]
+
+/-- **Empty set, lower tail.** With no coordinates the centred count is `0`. -/
+theorem prodBernoulli_real_sub_sum_ge_empty (p : ι → unitInterval) (t : ℝ) :
+    (prodBernoulli p).real
+        {ω | t ≤ ∑ i ∈ ∅, (p i : ℝ) - ((ω ∩ ((∅ : Finset ι) : Set ι)).ncard : ℝ)} =
+      if t ≤ 0 then 1 else 0 := by
+  split_ifs with h <;> simp [h]
 
 /-! ### Non-vacuity -/
 

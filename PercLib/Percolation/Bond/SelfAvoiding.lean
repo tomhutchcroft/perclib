@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New self-avoiding-path estimates using pinned mathlib walks and PercLib Bernoulli
 cylinders. No upstream proof copied. Probability products are used only for paths.
 -/
@@ -11,10 +15,26 @@ public import Mathlib.Combinatorics.SimpleGraph.Walk.Counting
 public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 public import Mathlib.Analysis.SpecificLimits.Basic
 
+/-!
+# Self-avoiding paths in bounded-degree graphs
+
+Counting simple paths in a host graph of maximum degree `Δ`: an infinite cluster contains open
+simple paths of every length, so no vertex percolates when `(Δ - 1) p < 1`.
+
+## Main results
+
+* `finite_card_paths_length`
+* `exists_path_length_of_cluster_infinite`
+* `law_exists_path_length_le`
+* `law_cluster_infinite_eq_zero_of_degree_le`
+* `ae_all_clusters_finite_of_degree_le`
+* `law_lattice_cluster_infinite_eq_zero_of_degree_bound`
+-/
+
 @[expose] public section
 noncomputable section
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 variable {V : Type*}
@@ -154,6 +174,7 @@ theorem exists_path_length_of_cluster_infinite (G : SimpleGraph V) [G.LocallyFin
     exact ⟨p.mapLe hhost, by simpa using (Nat.le_of_lt (Nat.lt_of_not_ge h))⟩
   exact ⟨p.getVert n, ⟨p.take n, hp.take n⟩, by simp [hn]⟩
 
+open Classical in
 /-- Union bound for open simple paths of positive length in a bounded-degree host. -/
 theorem law_exists_path_length_le (G : SimpleGraph V) [G.LocallyFinite]
     {Δ : ℕ} (hΔ : ∀ v, G.degree v ≤ Δ) (q : Sym2 V → unitInterval) (p : unitInterval)
@@ -212,6 +233,7 @@ theorem ae_openGraph_le_of_zero_off_diagonal [Countable V] (G : SimpleGraph V)
   have hxy' := (openGraph_adj_iff ω x y).mp hxy
   exact hω s(x,y) hxy'.1 (by simpa using hxy'.2)
 
+open Classical in
 /-- The self-avoiding-walk criterion, with natural subtraction to include degree zero
 and one uniformly. -/
 theorem law_cluster_infinite_eq_zero_of_degree_le_ennreal [Countable V]
@@ -219,7 +241,7 @@ theorem law_cluster_infinite_eq_zero_of_degree_le_ennreal [Countable V]
     (q : Sym2 V → unitInterval) (p : unitInterval)
     (hoff : ∀ e, ¬ e.IsDiag → e ∉ G.edgeSet → q e = 0)
     (hle : ∀ e ∈ G.edgeSet, q e ≤ p)
-    (hp : ((Δ-1 : ℕ) : ℝ≥0∞) * unitInterval.toNNReal p < 1) (x : V) :
+    (hp : ((Δ - 1 : ℕ) : ℝ≥0∞) * unitInterval.toNNReal p < 1) (x : V) :
     law q {ω | (cluster ω x).Infinite} = 0 := by
   apply ENNReal.eq_zero_of_le_mul_pow (ε := (Δ : ℝ≥0) * unitInterval.toNNReal p) hp
   intro n
@@ -248,7 +270,7 @@ theorem law_cluster_infinite_eq_zero_of_degree_le [Countable V]
     (q : Sym2 V → unitInterval) (p : unitInterval)
     (hoff : ∀ e, ¬ e.IsDiag → e ∉ G.edgeSet → q e = 0)
     (hle : ∀ e ∈ G.edgeSet, q e ≤ p)
-    (hp : ((Δ : ℝ)-1) * (p : ℝ) < 1) (x : V) :
+    (hp : ((Δ : ℝ) - 1) * (p : ℝ) < 1) (x : V) :
     law q {ω | (cluster ω x).Infinite} = 0 := by
   apply law_cluster_infinite_eq_zero_of_degree_le_ennreal G hΔ q p hoff hle _ x
   by_cases hΔ0 : Δ = 0
@@ -265,7 +287,7 @@ theorem ae_all_clusters_finite_of_degree_le [Countable V]
     (q : Sym2 V → unitInterval) (p : unitInterval)
     (hoff : ∀ e, ¬ e.IsDiag → e ∉ G.edgeSet → q e = 0)
     (hle : ∀ e ∈ G.edgeSet, q e ≤ p)
-    (hp : ((Δ : ℝ)-1) * (p : ℝ) < 1) :
+    (hp : ((Δ : ℝ) - 1) * (p : ℝ) < 1) :
     ∀ᵐ ω ∂law q, ∀ x, (cluster ω x).Finite := by
   apply ae_all_iff.mpr
   intro x
@@ -274,14 +296,14 @@ theorem ae_all_clusters_finite_of_degree_le [Countable V]
     law_cluster_infinite_eq_zero_of_degree_le G hΔ q p hoff hle hp x
 
 /-- Nearest-neighbour lattice corollary. The degree estimate is an explicit input,
-as permitted by Q-23; this does not assert a separate degree-counting theorem. -/
+and this does not assert a separate degree-counting theorem. -/
 theorem law_lattice_cluster_infinite_eq_zero_of_degree_bound (d : ℕ) (hd : 1 ≤ d)
     [(PercLib.Models.Site.zdGraph d).LocallyFinite]
-    (hdegree : ∀ v, (PercLib.Models.Site.zdGraph d).degree v ≤ 2*d)
+    (hdegree : ∀ v, (PercLib.Models.Site.zdGraph d).degree v ≤ 2 * d)
     (q : Sym2 (PercLib.Models.Site.LatticeSite d) → unitInterval) (p : unitInterval)
     (hoff : ∀ e, ¬ e.IsDiag → e ∉ (PercLib.Models.Site.zdGraph d).edgeSet → q e = 0)
     (hle : ∀ e ∈ (PercLib.Models.Site.zdGraph d).edgeSet, q e ≤ p)
-    (hp : (p : ℝ) < 1 / (2*(d : ℝ)-1)) (x : PercLib.Models.Site.LatticeSite d) :
+    (hp : (p : ℝ) < 1 / (2 * (d : ℝ) - 1)) (x : PercLib.Models.Site.LatticeSite d) :
     law q {ω | (cluster ω x).Infinite} = 0 := by
   apply law_cluster_infinite_eq_zero_of_degree_le (PercLib.Models.Site.zdGraph d)
     hdegree q p hoff hle _ x

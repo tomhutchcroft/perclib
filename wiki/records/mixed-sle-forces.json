@@ -1,0 +1,68 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "mixed-sle-forces",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 141
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Mixed half-plane target changes",
+      "locator": "arXiv:math/0505368v3, Definition 2, Theorem 3, and Section 4 Definition 5 and following assertion; journal pp.661–665",
+      "relationship": "Written mixed-force coordinate proofs and explicit destination admissibility",
+      "status": "pending",
+      "note": "The real part of the fractional-linear force identity transports arbitrary interior and boundary marks. The remaining Itô drift is exactly the old-target force; the destination starting point is required to be finite."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Mixed strip forces",
+      "locator": "arXiv:math/0505368v3, Definition 2, Theorem 3, and Section 4 Definition 5 and following assertion; journal pp.661–665",
+      "relationship": "Written mixed-force coordinate proofs and explicit destination admissibility",
+      "status": "pending",
+      "note": "The reflected strip force is the real part of coth. Exponentiation gives the mixed chordal drift and mark equations, including both endpoints, under the balance condition."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "Strip endpoints in either destination",
+      "locator": "arXiv:math/0505368v3, Definition 2, Theorem 3, and Section 4 Definition 5 and following assertion; journal pp.661–665",
+      "relationship": "Written mixed-force coordinate proofs and explicit destination admissibility",
+      "status": "pending",
+      "note": "Equal added weights at the strip ends cancel in the original driver and restore the balance. Composition gives arbitrary-weight half-plane and disk laws, retaining the destination target stop."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "C1GN",
+      "proof_uses": [
+        "C6T0"
+      ],
+      "reason": "The real part of the fractional-linear force identity transports arbitrary interior and boundary marks. The remaining Itô drift is exactly the old-target force; the destination starting point is required to be finite."
+    },
+    {
+      "order": 1,
+      "tag": "P3E9",
+      "proof_uses": [
+        "1AUW"
+      ],
+      "reason": "The reflected strip force is the real part of coth. Exponentiation gives the mixed chordal drift and mark equations, including both endpoints, under the balance condition."
+    },
+    {
+      "order": 2,
+      "tag": "8GVO",
+      "proof_uses": [
+        "C1GN",
+        "P3E9",
+        "5KL5"
+      ],
+      "reason": "Equal added weights at the strip ends cancel in the original driver and restore the balance. Composition gives arbitrary-weight half-plane and disk laws, retaining the destination target stop."
+    }
+  ]
+}

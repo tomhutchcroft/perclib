@@ -1,0 +1,53 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hara-nearest-neighbour-2008",
+  "entries": [
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "convolution-decomposition-sign",
+      "title": "The add-and-subtract identity has the middle difference reversed",
+      "locator": "Author-hosted published PDF of Annals of Probability 36 (2008), (B.18), printed p.590 / PDF index60; the subsequent absolute estimate is (B.20), p.591 / PDF index61. Extracted text checked on 17 November 2026; visual-page verification unavailable.",
+      "claim": "The first-region convolution sum is decomposed into a constant leading term, a difference of leading powers, and the remainder from the shifted leading term.",
+      "problem": "The middle difference in (B.18) is written with the unshifted leading term first. Adding the three displayed summands then leaves twice that term and subtracts the shifted leading term twice, rather than recovering the original summand.",
+      "correction": "Use A(|x-y|^(-a)-|x|^(-a)) for the middle term. NIAD writes the resulting exact identity and completes the three-region proof. The absolute estimate in (B.20) is unchanged by this sign reversal.",
+      "tags": [
+        "NIAD"
+      ],
+      "leanImpact": "Check the exact additive decomposition before applying absolute-value bounds. State the final leading-term result with an additive little-oh error so it also covers zero signed total mass. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Reverse the middle difference in the exact decomposition; the subsequent bounds are unchanged.",
+        "scale": "notation",
+        "impact": "This is a sign correction in an intermediate identity. The proof estimates and the leading convolution asymptotic retain their stated content."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "gaussian-truncation-prefactor",
+      "title": "The truncated Gaussian integral loses a dimension factor",
+      "locator": "Author-hosted published PDF, (2.23)–(2.26), printed p.546 / PDF index16. Extracted text checked on 17 November 2026; visual-page verification unavailable.",
+      "claim": "The full Gaussian time integral is split into its spatial leading term and a short-time remainder, then the latter is bounded by maximizing the Gaussian density over time.",
+      "problem": "The density in the short-time term of (2.23) drops the factor d^(d/2) from the preceding density. The same omission propagates to the displayed bound in (2.25)–(2.26).",
+      "correction": "Retain (d/(2*pi*K1*t))^(d/2) in the truncated integral. Its maximum over positive t at a nonzero x is (d/(2*pi*e))^(d/2)|x|^(-d). Thus truncation at T=epsilon|x|^2 gives at most (d/(2*pi*e))^(d/2)epsilon|x|^(2-d).",
+      "tags": [
+        "OT9N"
+      ],
+      "leanImpact": "Keep the Gaussian normalization in the exact integral identity and use the corrected dimension-dependent constant before integrating. No change to the asymptotic statement or new compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore d^(d/2) in the truncated Gaussian density and increase the explicit short-time bound accordingly.",
+        "scale": "local",
+        "impact": "A local constant correction in the proof. The leading amplitude, spatial exponent and stated remainder order are unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "Published article: Annals of Probability 36(2) (2008), 530–593",
+    "checkedUrl": "https://www2.math.kyushu-u.ac.jp/~hara/papers/AOP_36_530.pdf",
+    "method": "The author-hosted published PDF was read in extracted text. The recorded author-list identification and journal pagination distinguish this from an unversioned preprint. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The two reports concern published passages: (B.18)–(B.20), pp.590–591, and (2.23)–(2.26), p.546. This is a targeted text audit, not full-paper verification. Both reports remain provisional; written repairs and Lean evidence are separate.",
+    "comparisons": []
+  }
+}

@@ -1,13 +1,13 @@
 /-
 Adapted from NearCritical/Russo.lean by Tom Hutchcroft and collaborators.
 Source: https://github.com/tomhutchcroft/near-critical-diffusivity/blob/c820fea91a7482c1755de0ec94ecb9f59ccfcacc/NearCritical/Russo.lean
-Reuse authorized by Tom Hutchcroft under DECISIONS R-3. The native source has no
-repository-wide licence inferred from its vendored dependencies.
+Reuse authorized by Tom Hutchcroft (permission recorded in `docs/DECISIONS.md`). The native
+source has no repository-wide licence inferred from its vendored dependencies.
 
 Modified for PercLib on 2026-11-14: individual real coordinate profiles and derivatives;
 division-free pairing of forced-open/forced-closed differences; p and beta specializations.
 This is finite polynomial calculus, not a new probability law. The probability integral
-bridge is the separate ProductExpectation package. Endpoint derivatives are derivatives
+bridge is the separate ProductExpectation module. Endpoint derivatives are derivatives
 of the real polynomial extension, not a globally interval-valued family.
 -/
 module
@@ -19,28 +19,48 @@ public import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 public import Mathlib.Tactic.Ring
 public import Mathlib.Tactic.Linarith
 
+/-!
+# The finite Russo formula
+
+Finite-profile expectations as polynomials in the coordinate probabilities, the inhomogeneous,
+homogeneous and intensity forms of Russo's identity, the pivotal form for increasing events, and its
+transport to the canonical product law.
+
+## Main results
+
+* `expectation_hasDerivAt`
+* `expectation_homogeneous_hasDerivAt`
+* `expectation_intensity_hasDerivAt`
+* `event_hasDerivAt`
+* `integral_prodBernoulli_eq_expectation`
+* `integral_hasDerivWithinAt`
+* `event_real_hasDerivWithinAt`
+-/
+
 @[expose] public section
 noncomputable section
 namespace PercLib.Probability.FiniteProfile
 open Finset
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 /-- Coordinate weight polynomial, valid for all real profiles. -/
 def weight (q : E → ℝ) (ω : E → Bool) : ℝ :=
   ∏ e, if ω e then q e else 1 - q e
 
+open Classical in
 /-- Finite profile expectation polynomial. On unit-interval profiles its canonical
 probability interpretation is supplied by the ProductExpectation bridge. -/
 def expectation (q : E → ℝ) (f : (E → Bool) → ℝ) : ℝ :=
   ∑ ω, f ω * weight q ω
 
+open Classical in
 def deletedWeight (q : E → ℝ) (e : E) (ω : E → Bool) : ℝ :=
   ∏ j ∈ univ.erase e, if ω j then q j else 1 - q j
 
 def score (q : E → ℝ) (e : E) (ω : E → Bool) : ℝ :=
   deletedWeight q e ω * if ω e then 1 else -1
 
+open Classical in
 /-- Force a coordinate, using one classical choice of decidable equality. -/
 def force (e : E) (b : Bool) (ω : E → Bool) : E → Bool :=
   Function.update ω e b
@@ -49,10 +69,12 @@ def force (e : E) (b : Bool) (ω : E → Bool) : E → Bool :=
 def difference (e : E) (f : (E → Bool) → ℝ) (ω : E → Bool) : ℝ :=
   f (force e true ω) - f (force e false ω)
 
+open Classical in
 def flip (e : E) (ω : E → Bool) : E → Bool :=
   Function.update ω e (!(ω e))
 
 omit [Fintype E] in
+open Classical in
 lemma flip_involutive (e : E) : Function.Involutive (flip e) := by
   intro ω
   ext j
@@ -61,15 +83,18 @@ lemma flip_involutive (e : E) : Function.Involutive (flip e) := by
 def flipEquiv (e : E) : (E → Bool) ≃ (E → Bool) :=
   Function.Involutive.toPerm (flip e) (flip_involutive e)
 
+open Classical in
 lemma sum_flip (e : E) (g : (E → Bool) → ℝ) :
     ∑ ω, g (flip e ω) = ∑ ω, g ω := (flipEquiv e).sum_comp g
 
+open Classical in
 lemma deletedWeight_flip (q : E → ℝ) (e : E) (ω : E → Bool) :
     deletedWeight q e (flip e ω) = deletedWeight q e ω := by
   apply prod_congr rfl
   intro j hj
   simp [flip, Function.update_of_ne (mem_erase.mp hj).1]
 
+open Classical in
 lemma weight_split (q : E → ℝ) (e : E) (ω : E → Bool) :
     weight q ω = (if ω e then q e else 1 - q e) * deletedWeight q e ω :=
   (mul_prod_erase univ (fun j ↦ if ω j then q j else 1 - q j) (mem_univ e)).symm
@@ -85,9 +110,11 @@ lemma difference_force (e : E) (b : Bool) (f : (E → Bool) → ℝ) (ω : E →
   simp [difference, force, Function.update_idem]
 
 omit [Fintype E] in
+open Classical in
 lemma flip_apply_self (e : E) (ω : E → Bool) : flip e ω e = !(ω e) :=
   Function.update_self _ _ _
 
+open Classical in
 lemma paired_difference (q : E → ℝ) (e : E) (f : (E → Bool) → ℝ) (ω : E → Bool) :
     f ω * score q e ω + f (flip e ω) * score q e (flip e ω) =
       difference e f ω * weight q ω +
@@ -110,6 +137,7 @@ lemma paired_difference (q : E → ℝ) (e : E) (f : (E → Bool) → ℝ) (ω :
     rw [hf, ho]
     ring
 
+open Classical in
 /-- Pairing each configuration with its flip removes the tested coordinate's weight.
 Unlike an opening-only formula, this identity has no endpoint division. -/
 lemma score_difference_identity (q : E → ℝ) (e : E) (f : (E → Bool) → ℝ) :
@@ -122,6 +150,7 @@ lemma score_difference_identity (q : E → ℝ) (e : E) (f : (E → Bool) → �
   unfold expectation
   linarith
 
+open Classical in
 lemma weight_hasDerivAt (q : E → ℝ → ℝ) (dq : E → ℝ) (t : ℝ)
     (hq : ∀ e, HasDerivAt (q e) (dq e) t) (ω : E → Bool) :
     HasDerivAt (fun u => weight (fun e => q e u) ω)
@@ -134,6 +163,7 @@ lemma weight_hasDerivAt (q : E → ℝ → ℝ) (dq : E → ℝ) (t : ℝ)
   simpa only [weight, score, deletedWeight, smul_eq_mul, mul_left_comm, mul_assoc] using
     HasDerivAt.fun_finsetProd (fun e (_ : e ∈ (univ : Finset E)) => hf e)
 
+open Classical in
 /-- Finite inhomogeneous Russo identity, for the real polynomial extension. Valid at
 mixed endpoint profiles as well as in the interior; no coordinate is divided out. -/
 theorem expectation_hasDerivAt (q : E → ℝ → ℝ) (dq : E → ℝ) (t : ℝ)
@@ -177,12 +207,12 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open Finset Set
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 /-- A Boolean configuration viewed in the canonical Set representation. -/
 def toSet (ω : E → Bool) : Set E := {e | ω e = true}
 
+open Classical in
 /-- Indicator of an event on canonical configurations. -/
 def eventValue (A : Set (Set E)) (ω : E → Bool) : ℝ := if toSet ω ∈ A then 1 else 0
 
@@ -197,6 +227,7 @@ lemma pivotal_force (A : Set (Set E)) (e : E) (b : Bool) (ω : E → Bool) :
   simp [pivotal, force, Function.update_idem]
 
 omit [Fintype E] in
+open Classical in
 lemma force_false_subset_true (e : E) (ω : E → Bool) :
     toSet (force e false ω) ⊆ toSet (force e true ω) := by
   intro j hj
@@ -205,6 +236,7 @@ lemma force_false_subset_true (e : E) (ω : E → Bool) :
   · simpa [toSet, force, Function.update_of_ne h] using hj
 
 omit [Fintype E] in
+open Classical in
 /-- For increasing events the coordinate increment is exactly the pivotal indicator. -/
 lemma difference_eventValue {A : Set (Set E)} (hA : IsUpperSet A) (e : E) (ω : E → Bool) :
     difference e (eventValue A) ω = if pivotal A e ω then 1 else 0 := by
@@ -213,6 +245,7 @@ lemma difference_eventValue {A : Set (Set E)} (hA : IsUpperSet A) (e : E) (ω : 
     by_cases hc : toSet (force e false ω) ∈ A <;>
     simp_all [difference, eventValue, pivotal]
 
+open Classical in
 /-- Russo for an increasing event, with no q/(1-q) division. The right-hand side is the
 profile polynomial of the state-independent pivotal indicator. -/
 theorem event_hasDerivAt (q : E → ℝ → ℝ) (dq : E → ℝ) (t : ℝ)
@@ -222,6 +255,7 @@ theorem event_hasDerivAt (q : E → ℝ → ℝ) (dq : E → ℝ) (t : ℝ)
   simpa only [expectation, difference_eventValue hA] using
     expectation_hasDerivAt q dq t hq (eventValue A)
 
+open Classical in
 /-- In intensity coordinates the pivotal term includes the exponential factor. -/
 theorem event_intensity_hasDerivAt (J : E → ℝ) (β : ℝ)
     {A : Set (Set E)} (hA : IsUpperSet A) :
@@ -281,10 +315,10 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open MeasureTheory Finset Set
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 omit [Fintype E] in
+open Classical in
 lemma toSet_bijective : Function.Bijective (toSet : (E → Bool) → Set E) := by
   constructor
   · intro a b hab
@@ -295,6 +329,7 @@ lemma toSet_bijective : Function.Bijective (toSet : (E → Bool) → Set E) := b
   · intro s
     exact ⟨fun e => decide (e ∈ s), by ext e; simp [toSet]⟩
 
+open Classical in
 /-- Reindex the canonical finite-profile integral as the Boolean polynomial, without
 introducing a second law. ProductExpectation supplies the measure calculation. -/
 theorem integral_prodBernoulli_eq_expectation (p : E → unitInterval) (f : Set E → ℝ) :
@@ -310,12 +345,14 @@ theorem integral_prodBernoulli_eq_expectation (p : E → unitInterval) (f : Set 
   by_cases h : ω e = true <;> simp [toSet, h]
 
 omit [Fintype E] in
+open Classical in
 lemma toSet_force_true (e : E) (ω : E → Bool) :
     toSet (force e true ω) = insert e (toSet ω) := by
   ext j
   by_cases h : j = e <;> simp [toSet, force, Function.update_apply, h]
 
 omit [Fintype E] in
+open Classical in
 lemma toSet_force_false (e : E) (ω : E → Bool) :
     toSet (force e false ω) = toSet ω \ {e} := by
   ext j
@@ -352,7 +389,6 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open MeasureTheory Finset Set
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 /-- The canonical finite-event Russo formula. Pivotality is tested with the coordinate
@@ -385,7 +421,6 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open MeasureTheory Finset Set
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 /-- Homogeneous canonical event formula on any domain where p is the identity profile. -/
@@ -416,7 +451,6 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open MeasureTheory Set
-open scoped Classical
 
 /-- A one-coordinate canonical event has derivative one throughout the closed parameter
 interval, including both endpoints as within derivatives. -/
@@ -437,15 +471,16 @@ end PercLib.Probability.FiniteProfile
 
 namespace PercLib.Probability.FiniteProfile
 open MeasureTheory Set
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
+open Classical in
 /-- The cube weights sum to one. -/
 theorem sum_weight (q : E → ℝ) : ∑ ω, weight q ω = 1 := by
   unfold weight
   rw [← Fintype.prod_sum (fun e (b : Bool) => if b then q e else 1 - q e)]
   simp
 
+open Classical in
 /-- The cube expectation of an event indicator is its probability. -/
 theorem expectation_event_eq_real (p : E → unitInterval) (A : Set (Set E)) :
     expectation (fun e => (p e : ℝ)) (eventValue A) = (prodBernoulli p).real A := by
@@ -453,6 +488,7 @@ theorem expectation_event_eq_real (p : E → unitInterval) (A : Set (Set E)) :
     integral_prodBernoulli_eq_expectation]
   rfl
 
+open Classical in
 /-- The cube expectation of a pivotality indicator is the probability that `e` is pivotal. -/
 theorem expectation_pivotal_eq_real (p : E → unitInterval) (A : Set (Set E)) (e : E) :
     expectation (fun j => (p j : ℝ)) (fun ω => if pivotal A e ω then 1 else 0) =

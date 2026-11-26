@@ -1,0 +1,135 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "binary-tree-percolation",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 3
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 31,
+      "label": "Percolation on the rooted binary tree",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-regular-tree",
+      "order": 0,
+      "label": "Ancestral paths, depth events and the union bound",
+      "locator": "Named theorem start lines: 46, 57, 72, 95, 103, 123, 137, 216",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "GGH2 groups the deterministic root-path and finite-level arguments with measurable depth events, the (kp)^n bound and subcritical extinction. The graph-containment formulation follows from the source raw-containment statement after loop erasure; arbitrary diagonal profiles remain allowed. Full connection events and finite ancestral-witness cylinders are distinguished."
+    },
+    {
+      "source": "perclib-tree-recursion",
+      "order": 0,
+      "label": "Subtree recursion and the endpoint-sensitive criterion",
+      "locator": "Named theorem start lines: 115, 122, 128, 153, 167, 172, 183, 193, 204, 328, 341, 357, 366, 388, 412",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "UHVH gives the exact recursion and positive-survival criterion, including k=1,p=1. The word-map, profile-pullback and scalar contracts are explained in the proof. Monotonicity retains s<=t<=1 without requiring s>=0. Susceptibility and critical-arm asymptotics reuse UKY4 and 8WO7 and are explicitly additional deductions. The original binary-specific assertions are preserved."
+    },
+    {
+      "source": "perclib-train5-binary-tree",
+      "order": 0,
+      "label": "Rooted-tree two-point, susceptibility and binary survival laws",
+      "locator": "Named public declaration start lines: 51, 114, 132, 142, 155, 170, 187, 299, 317",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "CQYY is the binary specialization. The source also gives root connection and susceptibility formulas for every finite branching number, including zero, with arbitrary diagonal marginals. The appendix supplies the direct depth sum and positive-fixed-point argument. The extended inverse uses truncated subtraction; no negative susceptibility is inferred above criticality."
+    },
+    {
+      "source": "perclib-train5-binary-arm",
+      "order": 0,
+      "label": "Tree geometry and the critical binary arm",
+      "locator": "Named public declaration start lines: 45, 78, 90, 129, 203, 215, 249",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "NDIC matches the binary case; the two-point source permits every finite branching number and all vertex pairs. The reciprocal argument proves the scalar critical limit without importing general branching asymptotics. The probability arm exports use the canonical half-open tree profile and ancestral cylinders; arbitrary diagonal marginals follow by the graph-event comparison."
+    },
+    {
+      "source": "perclib-train5-binary-catalan",
+      "order": 0,
+      "label": "Binary cluster shapes and the Catalan law",
+      "locator": "Named public declaration start lines: 237, 278, 435, 566",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "9K6O is the exact unconditioned finite-size law for n >= 1, including p=0 and p=1. The inventory preserves explicit finite-cluster events, the raw tree-support hypothesis of the deterministic pattern lemma, and arbitrary diagonal profiles in the probability statements. The binary-tree bijection is explained; Stirling, cutoff and moment asymptotics are additional exposition, not exports."
+    },
+    {
+      "source": "perclib-binary-tree-asymptotics",
+      "order": 0,
+      "label": "Exact critical tree tails and joint asymptotics",
+      "locator": "Explicit public declaration start lines: 46, 74, 88, 105, 133, 145, 161, 184, 191, 199, 225, 240, 253, 265, 333, 354, 368, 443",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eighteen public results prove the exact critical tail, AAZS and the analytic V5OZ limits. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-abelian-sums",
+      "order": 0,
+      "label": "Abelian limits of damped series",
+      "locator": "Explicit public theorem/lemma start lines: 53, 111, 128, 137, 144, 150, 162, 188, 203, 259, 273, 297",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 12 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-binary-tree-moments",
+      "order": 0,
+      "label": "Near-critical binary-tree moment asymptotics",
+      "locator": "Explicit public theorem/lemma start lines: 49, 54, 63, 76, 104, 121, 136, 168, 203, 235",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 10 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "perclib-binary-tree-moment-law",
+      "order": 0,
+      "label": "Identification of the finite-cluster moment series",
+      "locator": "Explicit public theorem/lemma start lines: 40, 56, 63, 98",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 4 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "GGH2",
+      "proof_uses": [
+        "XHFN",
+        "8KVE"
+      ],
+      "reason": "The almost-sure tree support and unique ancestral paths identify depth cylinders; finite levels and the union bound give decay."
+    },
+    {
+      "order": 1,
+      "tag": "UHVH",
+      "proof_uses": [
+        "GGH2",
+        "QH7Q",
+        "YMHY",
+        "LNKT"
+      ],
+      "reason": "Subtree pullback and independent coordinate blocks give the depth recursion; diagonal erasure extends the canonical profile calculation."
+    },
+    {
+      "order": 2,
+      "tag": "CQYY",
+      "proof_uses": [
+        "BFM4",
+        "8TFY",
+        "UKY4"
+      ],
+      "reason": "The root cluster is a Bin(2,p) Galton-Watson process; the proof applies the extinction criterion (BFM4), the least-fixed-point characterisation (8TFY) and the expected total progeny (UKY4)."
+    }
+  ]
+}

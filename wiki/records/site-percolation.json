@@ -1,0 +1,73 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "site-percolation",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 7
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-site-interface",
+      "order": 0,
+      "label": "Site configurations and threshold conventions",
+      "locator": "Named statement start lines in the pinned source: 60, 65, 69, 73, 77, 85, 89, 105, 110, 116, 121, 131, 136, 143, 162, 177, 190, 205, 214, 219, 223, 231, 236",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "8FLS explains open-graph adjacency, open-root reachability, empty closed-root clusters, symmetry and connection endpoints. Fixed-list open-walk events are measurable for arbitrary vertex sets; connection and infinite-cluster measurability use countability, while the witness and finite-set escape identities do not. The nearest-neighbour integer lattice and its capped real-valued threshold appear in 8EIH, including the unit-interval bounds and evaluation at the threshold without a criticality claim. The census counts explicit named definitions and theorems, not abbreviations, instances or anonymous examples. The source retains its upstream attribution; no Lean source is copied into this article."
+    },
+    {
+      "source": "perclib-site-harris",
+      "order": 0,
+      "label": "Site association and profile monotonicity",
+      "locator": "Named statement start lines in the pinned source: 22, 28, 31, 35, 39, 44, 48, 53, 59, 67, 76, 84, 97, 103, 108, 115, 119, 130, 150",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "Deterministic monotonicity, symmetry, transitivity and equality of connected clusters hold without countability. 9R9K supplies self and adjacent connection identities; those cylinder identities also hold for arbitrary vertex sets even though the article uses a countable probability context. AR5B gives Harris and its connection/infinite-cluster consequences. M28D gives countable profile monotonicity, homogeneous monotonicity and the zero/positive sides of the capped lattice threshold. Zero-profile and strict two-vertex examples illustrate the source witnesses. No claim of zero percolation probability at the critical parameter is made."
+    },
+    {
+      "source": "perclib-site-self-avoiding",
+      "order": 0,
+      "label": "Open site paths, the degree criterion and lattice lower bound",
+      "locator": "Named public theorem start lines: 21, 33, 50, 93, 113, 128, 172, 184; private lattice helpers at 141 and 155",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "5U4L gives the finite union/product bound and the source uniform estimate, retaining the extra open vertex and n=0 convention; the sharper root-dependent factor is an additional deduction. 3HEP gives each-root nonpercolation without global countability, with the simultaneous all-root assertion restricted to countable vertices. Natural degree subtraction includes degrees zero and one. MIUX gives the d>=1 lattice bound; theta_s(1)=1 on the line is an additional endpoint deduction, not a source export. The existing Basic/Harris records and all prior statements are preserved."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "5U4L",
+      "proof_uses": [
+        "8WML"
+      ],
+      "reason": "Uses only the deterministic bounded-degree count, with vertex cylinders in place of bond opening probabilities."
+    },
+    {
+      "order": 1,
+      "tag": "3HEP",
+      "proof_uses": [
+        "5U4L"
+      ],
+      "reason": "An infinite cluster gives paths of every finite length, whose probability tends to zero under the strict degree criterion."
+    },
+    {
+      "order": 2,
+      "tag": "MIUX",
+      "proof_uses": [
+        "3HEP",
+        "8EIH"
+      ],
+      "reason": "The degree bound 2d excludes percolation below the reciprocal threshold, and the capped infimum preserves the lower bound."
+    },
+    {
+      "order": 3,
+      "tag": "8FLS",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

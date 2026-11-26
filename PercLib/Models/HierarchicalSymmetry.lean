@@ -1,10 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 599 (Q-171, F-1 leaves G2 and G3), written on 2026-11-16 by PROVER-G:
-translations and ultrametric isometries of the hierarchical lattice preserve radial
-percolation laws. From the hierarchical geometry and transport theorems of this library
-and pinned mathlib's finitely supported functions. No upstream code is copied, no definition
-is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: translations and ultrametric isometries of the hierarchical
+lattice preserve radial percolation laws. From the hierarchical geometry and transport theorems of
+this library and pinned mathlib's finitely supported functions. No upstream code is copied, no
+definition is added and no Input is introduced.
 -/
 module
 
@@ -12,7 +15,7 @@ public import PercLib.Models.HierarchicalGeometry
 public import PercLib.Percolation.Bond.FiniteSetCriterion
 public import PercLib.Percolation.Bond.Susceptibility
 
-/-! # Symmetries of the hierarchical lattice (F-1, G2 and G3)
+/-! # Symmetries of the hierarchical lattice
 
 On `ℕ →₀ A` the level of `z` is `h z = z.support.sup Nat.succ`, and `h (a - b) ≤ k` exactly
 when `a` and `b` agree at every index `≥ k` (`level_sub_le_iff_forall`). A pair intensity is
@@ -34,7 +37,7 @@ radial when `J s(x,y) = f (h (y - x))`.
 noncomputable section
 
 open MeasureTheory Set
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 open PercLib.Percolation.Bond
 
 namespace PercLib.Models
@@ -83,6 +86,7 @@ theorem level_sub_eq_of_forall_iff {a b a' b' : ℕ →₀ A}
   · rw [level_sub_le_iff_forall]
     exact (h _).1 ((level_sub_le_iff_forall _ _ _).1 le_rfl)
 
+open Classical in
 /-- **The ball swap.** If `u` and `v` agree above `m`, there is a level isometry that acts as
 `a ↦ a - u + v` on the level-`m` ball of `u` (the `a` agreeing with `u` at every index `≥ m`)
 and fixes every `a` outside the level-`m` balls of `u` and `v`. -/
@@ -141,13 +145,13 @@ theorem exists_levelIsometry_swap (m : ℕ) (u v : ℕ →₀ A) (huv : ∀ i, m
   let φ : (ℕ →₀ A) ≃ (ℕ →₀ A) :=
     { toFun := F u v, invFun := F v u, left_inv := P4 u v, right_inv := P4 v u }
   refine ⟨φ, fun a b => ?_, fun a ha => ?_, fun a ha hb => ?_⟩
-  · show (F u v a - F u v b).support.sup Nat.succ = _
+  · change (F u v a - F u v b).support.sup Nat.succ = _
     refine level_sub_eq_of_forall_iff fun k => ⟨fun h => ?_, P3 u v huv a b k⟩
     have := P3 v u hvu (F u v a) (F u v b) k h
     rwa [P4, P4] at this
-  · show F u v a = _
+  · change F u v a = _
     simp only [F, ite_eq_left ha]
-  · show F u v a = _
+  · change F u v a = _
     simp only [F, ite_eq_right ha, ite_eq_right hb]
 
 /-- **G3, isometries.** If `h (y - x) = h (y' - x')`, some bijection preserving `h` on every
@@ -171,7 +175,7 @@ theorem exists_levelIsometry (x y x' y' : ℕ →₀ A)
     have hF0 : F 0 = 0 := hFo 0 (fun h => hu.1 (by simpa using (h m le_rfl).symm))
       (fun h => hv.1 (by simpa using (h m le_rfl).symm))
     refine ⟨((Equiv.subRight x).trans F).trans (Equiv.addRight x'), fun a b => ?_, ?_, ?_⟩
-    · show (F (a - x) + x' - (F (b - x) + x')).support.sup Nat.succ = _
+    · change (F (a - x) + x' - (F (b - x) + x')).support.sup Nat.succ = _
       rw [add_sub_add_right_eq_sub, hFiso, sub_sub_sub_cancel_right]
     · simp [hF0]
     · simp [hFu (y - x) fun i _ => rfl]
@@ -186,7 +190,7 @@ variable {A : Type*} [AddCommGroup A]
 
 /-- A level isometry preserves a radial pair intensity. -/
 theorem radial_map_eq_of_levelIsometry (J : Sym2 (ℕ →₀ A) → ℝ≥0) (f : ℕ → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ)) (φ : (ℕ →₀ A) ≃ (ℕ →₀ A))
+    (hJ : ∀ x y, J s(x, y) = f ((y - x).support.sup Nat.succ)) (φ : (ℕ →₀ A) ≃ (ℕ →₀ A))
     (hφ : ∀ a b, (φ a - φ b).support.sup Nat.succ = (a - b).support.sup Nat.succ) :
     ∀ e, J (Sym2.map φ e) = J e := by
   intro e
@@ -201,7 +205,7 @@ theorem level_addRight (g : ℕ →₀ A) (a b : ℕ →₀ A) :
 
 /-- The law of a radial intensity is preserved by every level isometry. -/
 theorem law_map_eq_of_levelIsometry (J : Sym2 (ℕ →₀ A) → ℝ≥0) (f : ℕ → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ)) (φ : (ℕ →₀ A) ≃ (ℕ →₀ A))
+    (hJ : ∀ x y, J s(x, y) = f ((y - x).support.sup Nat.succ)) (φ : (ℕ →₀ A) ≃ (ℕ →₀ A))
     (hφ : ∀ a b, (φ a - φ b).support.sup Nat.succ = (a - b).support.sup Nat.succ) (β : ℝ≥0) :
     (law (intensityProfile J β)).map (fun ω => Sym2.map φ '' ω) = law (intensityProfile J β) :=
   law_intensityProfile_map_eq J φ (radial_map_eq_of_levelIsometry J f hJ φ hφ) β
@@ -211,10 +215,8 @@ bijection mapping `S` onto `T`. -/
 theorem law_localConn_eq_of_image [Countable (ℕ →₀ A)] (J : Sym2 (ℕ →₀ A) → ℝ≥0)
     (φ : (ℕ →₀ A) ≃ (ℕ →₀ A)) (hφ : ∀ e, J (Sym2.map φ e) = J e) (β : ℝ≥0)
     {S T : Set (ℕ →₀ A)} (hST : ∀ v, v ∈ T ↔ φ.symm v ∈ S) (a b : ℕ →₀ A) :
-    law (intensityProfile J β) {ω | ∃ ha : φ a ∈ T, ∃ hb : φ b ∈ T,
-        ((openGraph ω).induce T).Reachable ⟨φ a, ha⟩ ⟨φ b, hb⟩} =
-      law (intensityProfile J β) {ω | ∃ ha : a ∈ S, ∃ hb : b ∈ S,
-        ((openGraph ω).induce S).Reachable ⟨a, ha⟩ ⟨b, hb⟩} := by
+    law (intensityProfile J β) (localConn T (φ a) (φ b)) =
+      law (intensityProfile J β) (localConn S a b) := by
   refine le_antisymm (law_localConn_image_le J φ hφ β (fun v hv => (hST v).1 hv) a b) ?_
   have hφ' : ∀ e, J (Sym2.map φ.symm e) = J e := fun e => by
     rw [← hφ (Sym2.map φ.symm e), Sym2.map_map]
@@ -225,7 +227,7 @@ theorem law_localConn_eq_of_image [Countable (ℕ →₀ A)] (J : Sym2 (ℕ →�
   exact h
 
 variable (J : Sym2 (ℕ →₀ A) → ℝ≥0) (f : ℕ → ℝ≥0)
-  (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ))
+  (hJ : ∀ x y, J s(x, y) = f ((y - x).support.sup Nat.succ))
 include hJ
 
 /-! #### G2: translations -/
@@ -264,14 +266,9 @@ theorem map_encard_cluster_eq_of_radial [Countable A] (β : ℝ≥0) (x : ℕ �
 internal connection in `B(x + g, n)`. -/
 theorem law_localConn_ball_add_right_of_radial [Countable A] (β : ℝ≥0) (g x a b : ℕ →₀ A)
     (n : ℕ) :
-    law (intensityProfile J β) {ω | ∃ ha : a + g ∈ {c | (c - (x + g)).support.sup Nat.succ ≤ n},
-        ∃ hb : b + g ∈ {c | (c - (x + g)).support.sup Nat.succ ≤ n},
-        ((openGraph ω).induce {c | (c - (x + g)).support.sup Nat.succ ≤ n}).Reachable
-          ⟨a + g, ha⟩ ⟨b + g, hb⟩} =
-      law (intensityProfile J β) {ω | ∃ ha : a ∈ {c | (c - x).support.sup Nat.succ ≤ n},
-        ∃ hb : b ∈ {c | (c - x).support.sup Nat.succ ≤ n},
-        ((openGraph ω).induce {c | (c - x).support.sup Nat.succ ≤ n}).Reachable
-          ⟨a, ha⟩ ⟨b, hb⟩} :=
+    law (intensityProfile J β) (localConn {c | (c - (x + g)).support.sup Nat.succ ≤ n}
+      (a + g) (b + g)) =
+      law (intensityProfile J β) (localConn {c | (c - x).support.sup Nat.succ ≤ n} a b) :=
   law_localConn_eq_of_image J (Equiv.addRight g)
     (radial_map_eq_of_levelIsometry J f hJ _ (level_addRight g)) β
     (fun v => by
@@ -293,17 +290,9 @@ around `x` (which contains both) depends only on `h (y - x)`. -/
 theorem law_localConn_ball_eq_of_level_eq [Countable A] (β : ℝ≥0) {x y x' y' : ℕ →₀ A}
     (hxy : (y - x).support.sup Nat.succ = (y' - x').support.sup Nat.succ) :
     law (intensityProfile J β)
-        {ω | ∃ ha : x ∈ {c | (c - x).support.sup Nat.succ ≤ (y - x).support.sup Nat.succ},
-          ∃ hb : y ∈ {c | (c - x).support.sup Nat.succ ≤ (y - x).support.sup Nat.succ},
-          ((openGraph ω).induce
-            {c | (c - x).support.sup Nat.succ ≤ (y - x).support.sup Nat.succ}).Reachable
-            ⟨x, ha⟩ ⟨y, hb⟩} =
+        (localConn {c | (c - x).support.sup Nat.succ ≤ (y - x).support.sup Nat.succ} x y) =
       law (intensityProfile J β)
-        {ω | ∃ ha : x' ∈ {c | (c - x').support.sup Nat.succ ≤ (y' - x').support.sup Nat.succ},
-          ∃ hb : y' ∈ {c | (c - x').support.sup Nat.succ ≤ (y' - x').support.sup Nat.succ},
-          ((openGraph ω).induce
-            {c | (c - x').support.sup Nat.succ ≤ (y' - x').support.sup Nat.succ}).Reachable
-            ⟨x', ha⟩ ⟨y', hb⟩} := by
+        (localConn {c | (c - x').support.sup Nat.succ ≤ (y' - x').support.sup Nat.succ} x' y') := by
   obtain ⟨φ, hφ, hx, hy⟩ := exists_levelIsometry x y x' y' hxy
   have h := law_localConn_eq_of_image J φ (radial_map_eq_of_levelIsometry J f hJ φ hφ) β
     (S := {c | (c - x).support.sup Nat.succ ≤ (y - x).support.sup Nat.succ})
@@ -323,7 +312,7 @@ two-point function `tau q 0 x` is the average of `tau q 0` over the shell of lev
 which has `L^{d(m+1)} - L^{dm}` points. -/
 theorem tau_eq_inv_card_mul_tsum_shell {d L : ℕ} [NeZero L]
     (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0) (f : ℕ → ℝ≥0)
-    (hJ : ∀ x y, J s(x,y) = f ((y - x).support.sup Nat.succ)) (β : ℝ≥0) {m : ℕ}
+    (hJ : ∀ x y, J s(x, y) = f ((y - x).support.sup Nat.succ)) (β : ℝ≥0) {m : ℕ}
     {x : ℕ →₀ (Fin d → ZMod L)} (hx : x.support.sup Nat.succ = m + 1) :
     tau (intensityProfile J β) 0 x =
       (((L ^ d) ^ (m + 1) - (L ^ d) ^ m : ℕ) : ℝ≥0∞)⁻¹ *
@@ -340,12 +329,13 @@ theorem tau_eq_inv_card_mul_tsum_shell {d L : ℕ} [NeZero L]
     have : Nonempty {z : ℕ →₀ (Fin d → ZMod L) // z.support.sup Nat.succ = m + 1} := ⟨⟨x, hx⟩⟩
     simp [Nat.card_pos.ne']
   simp_rw [hconst]
-  rw [ENNReal.tsum_const, ENat.card_eq_coe_natCard, ENat.toENNReal_coe, ← hcard, ← mul_assoc, ENNReal.inv_mul_cancel hpos
+  rw [ENNReal.tsum_const, ENat.card_eq_coe_natCard, ENat.toENNReal_coe, ← hcard, ← mul_assoc,
+      ENNReal.inv_mul_cancel hpos
     (ENNReal.natCast_ne_top _), one_mul]
 
 end PercLib.Models
 
-/-! ### Non-vacuity (D-5): `d = 1`, `L = 2`, `f n = 4^(-n)` -/
+/-! ### Non-vacuity: `d = 1`, `L = 2`, `f n = 4^(-n)` -/
 section Witnesses
 
 open PercLib.Models

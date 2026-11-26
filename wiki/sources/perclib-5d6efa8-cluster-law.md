@@ -1,0 +1,26 @@
+# Finite cluster and exterior-law contracts at 5d6efa8
+
+This inventory covers all **8 named public theorems** in `Percolation/Bond/ClusterLaw.lean` at private `lrp` revision 5d6efa862d99e11fb1f01619be7700b85c1c8f7b, inspected 16 November 2026. Imported declarations, private helpers and anonymous witnesses are excluded. The exposition extends the existing [boundary laws article](../articles/boundary-laws.md), preserving its earlier assertions.
+
+## Source contracts
+
+| Source line | Contract | Exposition |
+| --- | --- | --- |
+| [ClusterLaw.lean L81](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | For finite C containing the root, cluster equality with C is equivalent to internal root connectivity throughout C and a closed boundary; vertex types are arbitrary. | [Argument](../articles/boundary-laws.md#section-finite-cluster-law) |
+| [ClusterLaw.lean L121](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, internal root connectivity throughout the prescribed finite set is measurable. | [Argument](../articles/boundary-laws.md#section-finite-cluster-law) |
+| [ClusterLaw.lean L128](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, the event that every boundary pair of a finite set is closed is measurable. | [Argument](../articles/boundary-laws.md#section-finite-cluster-law) |
+| [ClusterLaw.lean L135](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, equality of the root cluster with a fixed finite set containing the root is measurable. | [Argument](../articles/boundary-laws.md#section-finite-cluster-law) |
+| [ClusterLaw.lean L147](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, the finite-cluster probability factors as internal-connectivity probability times closed-boundary probability. | [Argument](../articles/boundary-laws.md#section-finite-cluster-law) |
+| [ClusterLaw.lean L182](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | For arbitrary vertex types, equality with the prescribed finite cluster is determined by pairs meeting that set. | [Argument](../articles/boundary-laws.md#section-cluster-exterior) |
+| [ClusterLaw.lean L197](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, the finite-cluster event is independent of every measurable event determined by pairs strictly outside the set. | [Argument](../articles/boundary-laws.md#section-cluster-exterior) |
+| [ClusterLaw.lean L214](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/ClusterLaw.lean) | On countable vertices, the finite-cluster event factors with a connection event in the graph induced on the complementary domain. | [Argument](../articles/boundary-laws.md#section-cluster-exterior) |
+
+## Scope and deductions
+
+The root lies in the prescribed finite set. Without that assumption the cluster-equality event is empty. The deterministic decomposition and coordinate-determination statement hold on arbitrary vertex types; all exported measurability and probability contracts assume countability. The internal-connectivity event in fact depends on finitely many coordinates, so the article supplies a direct cylinder measurability argument without ambient countability. The boundary can have infinitely many pairs even though the cluster is finite.
+
+R3I9 groups the decomposition and factorization. Its explicit boundary product is a deduction from QH7Q, not an additional export of this module. Boundary pairs are counted once, with one endpoint inside and one outside. Diagonal coordinates do not appear in the boundary or affect internal connectivity. The empty boundary product is one, and the product is permitted to vanish.
+
+E7R2 gives exterior independence. The conditional-law formulation requires positive probability of the fixed cluster event; the factorization itself also holds when that event is null. Conditioning forces its boundary closed and constrains its interior; only coordinates with both endpoints outside retain their original product law. The exterior connection in the exported corollary is internal to the complementary domain. The article's conditional full-graph version uses closed boundaries to equate it to that restricted connection on the conditioning event; it does not replace its probability by the original full-graph two-point value.
+
+The singleton-cluster source witness is the isolated-root event. No general infinite adaptive-exploration statement is inferred from fixed finite-cluster conditioning. Existing boundary-wiring and first-exit assertions and all errata are unchanged. These are pending source correspondences, not compiled associations or independent review verdicts.

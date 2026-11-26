@@ -1,0 +1,130 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-window-susceptibility",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 191
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 0,
+      "label": "Marked and unmarked cluster moments",
+      "locator": "Section 8, Lemmas 8.1\u20138.2, (8.6)\u2013(8.13), printed pp.32\u201333 / PDF indices31\u201332",
+      "relationship": "Written proof; cluster conditioning and constants supplied here",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. No journal comparison, compiled association or independent audit is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 1,
+      "label": "Marked-volume differential inequality",
+      "locator": "Appendix A.3, (A.49)\u2013(A.58), printed pp.43\u201344 / PDF indices42\u201343",
+      "relationship": "Written proof; cluster conditioning and constants supplied here",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. No journal comparison, compiled association or independent audit is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 2,
+      "label": "Susceptibility transport",
+      "locator": "Section 8, Lemma 8.3 and (8.14)\u2013(8.19), printed p.33 / PDF index32",
+      "relationship": "Written proof; cluster conditioning and constants supplied here",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. No journal comparison, compiled association or independent audit is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 3,
+      "label": "Positive-window susceptibility",
+      "locator": "Section 8, proof of Theorem 1.4(ii), (8.19)\u2013(8.23), printed pp.33\u201334 / PDF indices32\u201333",
+      "relationship": "Written proof; cluster conditioning and constants supplied here",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. No journal comparison, compiled association or independent audit is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 4,
+      "label": "Largest-component moments",
+      "locator": "Derived here from the susceptibility bound, cluster partition identity and existing component-window theorem; no separate source assertion claimed",
+      "relationship": "Written proof; cluster conditioning and constants supplied here",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. No journal comparison, compiled association or independent audit is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "6AEH",
+      "proof_uses": [
+        "L82Q"
+      ],
+      "reason": "Marked and unmarked cluster moments. The proof specifies the finite graph and the range of every parameter."
+    },
+    {
+      "order": 1,
+      "tag": "F8QD",
+      "proof_uses": [
+        "6AEH"
+      ],
+      "reason": "Marked-volume differential inequality. The proof specifies the finite graph and the range of every parameter."
+    },
+    {
+      "order": 2,
+      "tag": "RT85",
+      "proof_uses": [
+        "6AEH",
+        "F8QD",
+        "KQN9",
+        "1T2M"
+      ],
+      "reason": "Susceptibility transport. The proof specifies the finite graph and the range of every parameter."
+    },
+    {
+      "order": 3,
+      "tag": "CAZQ",
+      "proof_uses": [
+        "RT85",
+        "F5Y5"
+      ],
+      "reason": "Positive-window susceptibility. The proof specifies the finite graph and the range of every parameter."
+    },
+    {
+      "order": 4,
+      "tag": "KSAO",
+      "proof_uses": [
+        "CAZQ",
+        "CBIL",
+        "TUD2"
+      ],
+      "reason": "Largest-component moments. The proof specifies the finite graph and the range of every parameter."
+    },
+    {
+      "order": 5,
+      "tag": "YN7V",
+      "proof_uses": [
+        "Y84V"
+      ],
+      "reason": "Successive cluster exposure bounds distinct-cluster products; set partitions and tree-graph moments bound all powers of total squared mass."
+    },
+    {
+      "order": 6,
+      "tag": "81TZ",
+      "proof_uses": [
+        "YN7V"
+      ],
+      "reason": "The block recursion bounds the partition coefficients by a geometric multiple of (2m)!, and the even series gives square-root exponential integrability."
+    },
+    {
+      "order": 7,
+      "tag": "1NYQ",
+      "proof_uses": [
+        "YN7V"
+      ],
+      "reason": "Successive cluster exposure and monotonicity of a superadditive cluster sum bound ordered distinct-cluster products and their multiplicative expansion."
+    }
+  ]
+}

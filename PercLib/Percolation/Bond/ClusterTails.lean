@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New cluster-tail glue using the existing finite-open-path witness API in
 PercLib.Probability.OpenEventHarris and mathlib's finite subsets and measure
 continuity. No upstream proof is copied and no tightness bound is asserted.
@@ -10,10 +14,26 @@ public import PercLib.Probability.OpenEventHarris
 public import Mathlib.MeasureTheory.Measure.Continuity
 public import Mathlib.Data.Set.Finite.Lattice
 
+/-!
+# Cluster-tail events
+
+The event that a cluster meets at least `n` vertices of a finite domain is an increasing, measurable
+union of intersections of connection events, with finite open witnesses, and its probability is the
+limit along finite-edge restrictions.
+
+## Main results
+
+* `cluster_tail_eq_iUnion`
+* `isUpperSet_cluster_tail`
+* `measurableSet_cluster_tail`
+* `exists_finset_of_cluster_tail`
+* `tendsto_cluster_tail_probability`
+-/
+
 @[expose] public section
 
 open MeasureTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond
 

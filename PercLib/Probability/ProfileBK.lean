@@ -1,20 +1,19 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-Corresponds to `finite_bernoulliProfile_bk_of_uniform_lt_one` in
-NearCritical/ProfileBKStrict.lean at tomhutchcroft/near-critical-diffusivity,
-revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc (reuse permission: DECISIONS R-3),
-and removes its restriction that every coordinate be below one, as issue 71 asks.
-Route: low-density BK for profiles bounded by `1/2` (the induction of BKLowDensity.lean
-with a coordinate-dependent parameter), exact OR-refinement of each coordinate into
-`m` copies with its own parameter, and continuity in the profile for coordinates equal
-to one (`q_t = (1 - t) q`). The three refinement lemmas of the first section correspond
-to the same-named lemmas of NearCritical/BKAllParameters.lean at the same revision;
-the homogeneous-only results of that file are not needed and are not ported. The
-upstream source was not readable from the session that
-wrote this file, so the Lean text is new; no upstream code is copied and no upstream
-licence is asserted.
+Authors: PercLib contributors
+-/
+/-
+Corresponds to `finite_bernoulliProfile_bk_of_uniform_lt_one` in NearCritical/ProfileBKStrict.lean
+at tomhutchcroft/near-critical-diffusivity, revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc (reuse
+permission recorded in `docs/DECISIONS.md`), and removes its restriction that every coordinate be
+below one. Route: low-density BK for profiles bounded by `1/2` (the induction of BKLowDensity.lean
+with a coordinate-dependent parameter), exact OR-refinement of each coordinate into `m` copies with
+its own parameter, and continuity in the profile for coordinates equal to one (`q_t = (1 - t) q`).
+The three refinement lemmas of the first section correspond to the same-named lemmas of
+NearCritical/BKAllParameters.lean at the same revision; the homogeneous-only results of that file
+are not needed and are not ported. The upstream source was not readable from the session that wrote
+this file, so the Lean text is new; no upstream code is copied and no upstream licence is asserted.
 -/
 module
 
@@ -35,7 +34,6 @@ coordinates that are surely open or surely closed,
 @[expose] public section
 noncomputable section
 open Set MeasureTheory Filter Topology
-open scoped Classical
 namespace PercLib.Probability
 variable {E : Type*}
 
@@ -87,6 +85,7 @@ theorem preimage_image_fst_disjointOccurrence_subset {m : ℕ} {A B : Set (Set E
 
 /-! ## Profile expectations as finite sums -/
 
+open Classical in
 /-- Probabilities under a finite profile are explicit weighted sums. -/
 theorem measureReal_prodBernoulli_eq_sum [Fintype E] (p : E → unitInterval)
     (C : Set (Set E)) :
@@ -96,6 +95,7 @@ theorem measureReal_prodBernoulli_eq_sum [Fintype E] (p : E → unitInterval)
   rw [← integral_prodBernoulli]
   exact (integral_indicator_one (Set.toFinite C).measurableSet).symm
 
+open Classical in
 /-- The weighted sum of an observable is continuous in a real-valued profile. -/
 theorem continuous_profileSum [Fintype E] (f : Set E → ℝ) :
     Continuous fun r : E → ℝ =>
@@ -111,6 +111,7 @@ theorem continuous_profileSum [Fintype E] (f : Set E → ℝ) :
   · simp only [hi, ite_false]
     exact continuous_const.sub (continuous_apply i)
 
+open Classical in
 /-- Splitting a weighted sum according to the extra coordinate of `Option E`. -/
 theorem profileSum_option [Fintype E] (r : Option E → ℝ) (f : Set (Option E) → ℝ) :
     ∑ ω : Set (Option E), f ω * ∏ i : Option E, (if i ∈ ω then r i else 1 - r i) =
@@ -121,6 +122,7 @@ theorem profileSum_option [Fintype E] (r : Option E → ℝ) (f : Set (Option E)
   rw [sum_sets_option]
   simp [Fintype.prod_option, Finset.mul_sum, mul_left_comm]
 
+open Classical in
 /-- Weighted sums are invariant under a coordinate bijection. -/
 theorem profileSum_image_equiv {F : Type*} [Fintype E] [Fintype F] (e : E ≃ F)
     (r : F → ℝ) (f : Set F → ℝ) :
@@ -134,6 +136,7 @@ theorem profileSum_image_equiv {F : Type*} [Fintype E] [Fintype F] (e : E ≃ F)
   rw [← e.prod_comp (fun i : F => if i ∈ e '' η then r i else 1 - r i)]
   simp
 
+open Classical in
 /-- Weighted sums are monotone in the observable for probability profiles. -/
 theorem profileSum_mono [Fintype E] {r : E → ℝ} (hr0 : ∀ i, 0 ≤ r i) (hr1 : ∀ i, r i ≤ 1)
     {f g : Set E → ℝ} (hfg : ∀ η, f η ≤ g η) :
@@ -150,9 +153,10 @@ theorem profileSum_mono [Fintype E] {r : E → ℝ} (hr0 : ∀ i, 0 ≤ r i) (hr
 
 /-! ## Low-density BK for profiles -/
 
+open Classical in
 /-- The statement of BK for a real profile, written as weighted sums. -/
 theorem profileBK_option [Fintype E] {r : Option E → ℝ} (hr0 : ∀ i, 0 ≤ r i)
-    (hrHalf : ∀ i, r i ≤ 1/2)
+    (hrHalf : ∀ i, r i ≤ 1 / 2)
     (hBK : ∀ A B : Set (Set E), IsUpperSet A → IsUpperSet B →
       ∑ η : Set E, (disjointOccurrence A B).indicator (fun _ => (1 : ℝ)) η *
           ∏ i : E, (if i ∈ η then r (some i) else 1 - r (some i)) ≤
@@ -231,9 +235,10 @@ theorem profileBK_option [Fintype E] {r : Option E → ℝ} (hr0 : ∀ i, 0 ≤ 
   exact hfirst.trans (bk_step_arithmetic (hm _ _ (section_closed_subset_open hA))
     (hm _ _ (section_closed_subset_open hB)))
 
+open Classical in
 /-- Low-density BK for real profiles bounded by `1/2`, as weighted sums. -/
 theorem profileSum_bk_le_half [Fintype E] {r : E → ℝ} (hr0 : ∀ i, 0 ≤ r i)
-    (hrHalf : ∀ i, r i ≤ 1/2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
+    (hrHalf : ∀ i, r i ≤ 1 / 2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
     ∑ ω : Set E, (disjointOccurrence A B).indicator (fun _ => (1 : ℝ)) ω *
         ∏ i : E, (if i ∈ ω then r i else 1 - r i) ≤
       (∑ ω : Set E, A.indicator (fun _ => (1 : ℝ)) ω *
@@ -278,6 +283,7 @@ theorem profileSum_bk_le_half [Fintype E] {r : E → ℝ} (hr0 : ∀ i, 0 ≤ r 
 
 /-! ## Exact refinement of each coordinate -/
 
+open Classical in
 /-- Refining coordinate `e` into `m` copies open with probability `q e` each, and
 declaring `e` open when one copy is, gives the profile `1 - (1 - q e) ^ m`. -/
 theorem profileSum_image_fst [Fintype E] (m : ℕ) {q : E → ℝ} (hq0 : ∀ e, 0 ≤ q e)
@@ -345,9 +351,10 @@ theorem profileSum_image_fst [Fintype E] (m : ℕ) {q : E → ℝ} (hq0 : ∀ e,
     _ = ∑ g : E → Set (Fin m), f (N g) * ∏ e : E, W e (g e) :=
         Finset.sum_fiberwise Finset.univ N _
 
+open Classical in
 /-- BK for every real profile of the form `1 - (1 - q e) ^ m` with `0 ≤ q e ≤ 1/2`. -/
 theorem profileSum_bk_refine [Fintype E] (m : ℕ) {q : E → ℝ} (hq0 : ∀ e, 0 ≤ q e)
-    (hqHalf : ∀ e, q e ≤ 1/2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
+    (hqHalf : ∀ e, q e ≤ 1 / 2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
     ∑ ω : Set E, (disjointOccurrence A B).indicator (fun _ => (1 : ℝ)) ω *
         ∏ e : E, (if e ∈ ω then 1 - (1 - q e) ^ m else 1 - (1 - (1 - q e) ^ m)) ≤
       (∑ ω : Set E, A.indicator (fun _ => (1 : ℝ)) ω *
@@ -377,7 +384,7 @@ theorem profileSum_bk_refine [Fintype E] (m : ℕ) {q : E → ℝ} (hq0 : ∀ e,
 /-- A coordinate parameter below one is the refinement of a parameter at most `1/2`,
 for every number of copies `m ≥ 1` with `(1/2) ^ m ≤ 1 - p`. -/
 theorem refinement_parameter {p : ℝ} (hp0 : 0 ≤ p) (hp1 : p ≤ 1) {m : ℕ} (hm : m ≠ 0)
-    (hbase : (1/2 : ℝ) ^ m ≤ 1 - p) :
+    (hbase : (1 / 2 : ℝ) ^ m ≤ 1 - p) :
     0 ≤ 1 - (1 - p) ^ ((m : ℝ)⁻¹) ∧ 1 - (1 - p) ^ ((m : ℝ)⁻¹) ≤ 1/2 ∧
       1 - (1 - (1 - (1 - p) ^ ((m : ℝ)⁻¹))) ^ m = p := by
   have hm' : (m : ℝ) ≠ 0 := by exact_mod_cast hm
@@ -395,6 +402,7 @@ theorem refinement_parameter {p : ℝ} (hp0 : 0 ≤ p) (hp1 : p ≤ 1) {m : ℕ}
     Real.rpow_one]
   ring
 
+open Classical in
 /-- BK as weighted sums for every real profile with values in `[0, 1)`. -/
 theorem profileSum_bk_of_lt_one [Fintype E] {r : E → ℝ} (hr0 : ∀ e, 0 ≤ r e)
     (hr1 : ∀ e, r e < 1) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
@@ -421,6 +429,7 @@ theorem profileSum_bk_of_lt_one [Fintype E] {r : E → ℝ} (hr0 : ∀ e, 0 ≤ 
 
 /-! ## Arbitrary profiles -/
 
+open Classical in
 /-- BK as weighted sums for every real profile with values in `[0, 1]`. -/
 theorem profileSum_bk [Fintype E] {r : E → ℝ} (hr0 : ∀ e, 0 ≤ r e)
     (hr1 : ∀ e, r e ≤ 1) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
@@ -462,6 +471,7 @@ theorem profileSum_bk [Fintype E] {r : E → ℝ} (hr0 : ∀ e, 0 ≤ r e)
 /-- **Finite BK for arbitrary Bernoulli profiles.** For increasing events on a finite
 index type and any profile, including coordinates equal to zero or one,
 `P(A □ B) ≤ P(A) P(B)`. -/
+@[tag "BNY8"]
 theorem finite_bernoulliProfile_bk [Fintype E] (p : E → unitInterval) (A B : Set (Set E))
     (hA : IsUpperSet A) (hB : IsUpperSet B) :
     (prodBernoulli p).real (disjointOccurrence A B) ≤

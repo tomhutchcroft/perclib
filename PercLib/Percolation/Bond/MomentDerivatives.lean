@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 640 (Q-212, part 1), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -39,7 +40,7 @@ On a finite vertex set, bonds are independent with probability `1 - e^{-λ_t(e)}
 noncomputable section
 
 open MeasureTheory Set
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 
@@ -48,6 +49,7 @@ variable {V : Type*}
 /-! ### Russo's formula with the closed indicator kept -/
 
 open PercLib.Probability PercLib.Probability.FiniteProfile in
+open Classical in
 /-- Closing a coordinate: `(1 - p_e) E[h(ω ∪ {e}) - h(ω \ {e})] = E[1{e ∉ ω}(h(ω ∪ {e}) - h ω)]`. -/
 theorem one_sub_mul_integral_insert_sub {E : Type*} [Fintype E] (p : E → unitInterval)
     (e : E) (h : Set E → ℝ) :
@@ -55,7 +57,8 @@ theorem one_sub_mul_integral_insert_sub {E : Type*} [Fintype E] (p : E → unitI
       ∫ ω, (if e ∈ ω then 0 else h (insert e ω) - h ω) ∂prodBernoulli p := by
   classical
   rw [integral_prodBernoulli_eq_expectation, integral_prodBernoulli_eq_expectation,
-    expectation_split _ e (fun ω => if e ∈ toSet ω then 0 else h (insert e (toSet ω)) - h (toSet ω))]
+    expectation_split _ e (fun ω => if e ∈ toSet ω then 0 else h (insert e (toSet ω)) -
+        h (toSet ω))]
   have h1 : ∀ ω : E → Bool, e ∈ toSet (force e true ω) := fun ω => by
     simp [toSet, force]
   have h0 : ∀ ω : E → Bool, e ∉ toSet (force e false ω) := fun ω => by
@@ -69,6 +72,7 @@ theorem one_sub_mul_integral_insert_sub {E : Type*} [Fintype E] (p : E → unitI
   funext ω
   simp only [toSet_force_false, Set.insert_sdiff_singleton]
 
+open Classical in
 /-- **Russo's formula for intensity families, closed indicator kept.** On a finite vertex
 set, for intensities `λ_u(e) ≥ 0` differentiable at `t` with derivatives `w(e)` and every real
 functional `F`,
@@ -153,6 +157,7 @@ theorem cluster_insert_of_not_mem (ω : Config V) (a b x : V)
 variable [Fintype V] [DecidableEq V]
 
 omit [DecidableEq V] in
+open Classical in
 /-- **Opening one pair** changes `∑_v |K_v|^k` by `(A + B)^{k+1} - A^{k+1} - B^{k+1}` when
 `a ↮ b`, where `A = |K_a|`, `B = |K_b|`, and not at all when `a ↔ b`. -/
 theorem sum_cluster_pow_insert_sub (ω : Config V) (a b : V) (k : ℕ) :
@@ -243,6 +248,7 @@ theorem sum_sum_mk_eq_two_mul {M : Type*} [AddCommMonoid M] (f : Sym2 V → M)
 
 /-! ### The derivative of `E ∑_v |K_v|^k` -/
 
+open Classical in
 /-- The derivative of `E_t ∑_v |K_v|^k` as a sum over ordered pairs:
 `(1/2) ∑_a ∑_b w(a, b) E_t[1{a ↮ b} ((A + B)^{k+1} - A^{k+1} - B^{k+1})]`. -/
 theorem hasDerivAt_integral_sum_cluster_pow (lam : ℝ → Sym2 V → ℝ≥0) (w : Sym2 V → ℝ)
@@ -307,7 +313,8 @@ theorem add_pow_succ_sub_pow_sub_pow (A B : ℝ) (k : ℕ) :
     one_mul, Nat.sub_zero, pow_zero]
   rw [← Finset.Ico_add_one_right_eq_Icc, Finset.sum_Ico_eq_sum_range]
   simp only [Nat.add_sub_cancel]
-  have h : ∀ i ∈ Finset.range k, A ^ (i + 1) * B ^ (k + 1 - (i + 1)) * ((k + 1).choose (i + 1) : ℝ) =
+  have h : ∀ i ∈ Finset.range k, A ^ (i + 1) * B ^ (k + 1 - (i + 1)) *
+      ((k + 1).choose (i + 1) : ℝ) =
       ((k + 1).choose (1 + i) : ℝ) * A ^ (1 + i) * B ^ (k + 1 - (1 + i)) := by
     intro i _
     rw [add_comm 1 i]
@@ -315,7 +322,8 @@ theorem add_pow_succ_sub_pow_sub_pow (A B : ℝ) (k : ℕ) :
   rw [Finset.sum_congr rfl h]
   ring
 
-/-- **C9Y8, exact formula.** Let `V` be finite and the intensities `λ_u` invariant under a
+open Classical in
+/-- **Exact formula.** Let `V` be finite and the intensities `λ_u` invariant under a
 group acting transitively (`∀ x y, ∃ σ, σ x = y` preserving every `λ_u`), with derivatives
 `w` at `t`. Then for every `k ≥ 0`, `m_k(u) = E_u |K_o|^k` satisfies
 `m_k'(t) = (1/2) ∑_{y ≠ o} w(o, y) E_t[1{o ↮ y} ∑_{j=1}^k C(k+1, j) |K_o|^j |K_y|^{k+1-j}]`. -/
@@ -398,7 +406,8 @@ theorem hasDerivAt_moment_of_transitive (lam : ℝ → Sym2 V → ℝ≥0) (w : 
   rw [Finset.sum_congr rfl hcongr]
   field_simp
 
-/-- **C9Y8, sign.** For nondecreasing intensities (`w ≥ 0`) the derivative in
+open Classical in
+/-- **Sign.** For nondecreasing intensities (`w ≥ 0`) the derivative in
 `hasDerivAt_moment_of_transitive` is nonnegative. -/
 theorem moment_derivative_nonneg (w : Sym2 V → ℝ) (hw : ∀ e, 0 ≤ w e)
     (q : Sym2 V → unitInterval) (o : V) (k : ℕ) :
@@ -411,9 +420,10 @@ theorem moment_derivative_nonneg (w : Sym2 V → ℝ) (hw : ∀ e, 0 ≤ w e)
   · exact le_rfl
   · exact Finset.sum_nonneg fun j _ => by positivity
 
-/-! ### Non-vacuity witness (D-5) -/
+/-! ### Non-vacuity witness -/
 
-/-- **D-5 witness.** On `ZMod 2` with `λ_u = u⁺` on every pair (so `λ_u = u` near `t = 1`),
+open Classical in
+/-- **Non-vacuity witness.** On `ZMod 2` with `λ_u = u⁺` on every pair (so `λ_u = u` near `t = 1`),
 the hypotheses of `hasDerivAt_moment_of_transitive` hold, with `w = 1` and the translations
 of `ZMod 2` as the transitive group. -/
 example (k : ℕ) :

@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 147, Q-20). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -155,7 +157,8 @@ end Fekete
 
 /-- With every pair open with probability one, `τ ≡ 1` on `ℤ`, so both hypotheses of
 `tendsto_neg_log_tau_div` hold. -/
-theorem tau_one_eq_one {V : Type*} (x y : V) : tau (fun _ : Sym2 V => (1 : unitInterval)) x y = 1 := by
+theorem tau_one_eq_one {V : Type*} (x y : V) : tau
+    (fun _ : Sym2 V => (1 : unitInterval)) x y = 1 := by
   rcases eq_or_ne x y with rfl | hxy
   · exact tau_self _ x
   · refine le_antisymm (tau_le_one _ _ _) ?_

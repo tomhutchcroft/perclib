@@ -1,0 +1,74 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "higher-lace-moments",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 202
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Polynomial extension of the weighted chain",
+      "locator": "17 March 2017 author manuscript, Chapter 7 weighted diagrams and Exercise 11.4 / (11.2.7)\u2013(11.2.9)",
+      "relationship": "Independent extension of the existing written chain estimates under a spatial hypothesis",
+      "status": "pending",
+      "note": "This supplies all-order weighted summability for beta<d-6; it does not establish the full pointwise coefficient estimate or spatial bootstrap."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Higher-moment input to the Gaussian argument",
+      "locator": "Theorem 1.4, Lemma 2.2 and Corollary 1.6",
+      "relationship": "Conditional verification of the higher absolute moment needed by the existing Gaussian article",
+      "status": "pending",
+      "note": "For d>8, a critical spatial two-point bound and small weighted triangle give a 2+epsilon moment for epsilon<d-8. The pointwise signed-kernel hypothesis and its spatial improvement remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "KFUM",
+      "proof_uses": [
+        "SJIL",
+        "NJT0",
+        "09JN",
+        "RZML"
+      ],
+      "reason": "Replace cosine splitting by the polynomial displacement inequality; all nonnegative chain sums retain their bounds."
+    },
+    {
+      "order": 1,
+      "tag": "1VDI",
+      "proof_uses": [
+        "IDIL"
+      ],
+      "reason": "An exact change of variables reduces the marked core to a weighted triangle; power convolution and shell sums supply finiteness."
+    },
+    {
+      "order": 2,
+      "tag": "JJJN",
+      "proof_uses": [
+        "KFUM",
+        "1VDI",
+        "SJIL",
+        "5W46",
+        "3W22"
+      ],
+      "reason": "Critical diagram domination gives uniform weighted tails and dominated convergence at every order."
+    },
+    {
+      "order": 3,
+      "tag": "JO75",
+      "proof_uses": [
+        "JJJN",
+        "22TW",
+        "3W22"
+      ],
+      "reason": "Absolute higher moments justify the Holder Hessian and Taylor remainder, followed by the existing critical moment identities."
+    }
+  ]
+}

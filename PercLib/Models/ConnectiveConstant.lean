@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 222 (Q-46), written on 2026-11-15 by PROVER-E. No upstream proof is
-copied. Source of the statements: J. M. Hammersley and K. W. Morton (1954); N. Madras and
-G. Slade, *The Self-Avoiding Walk* (1993), §1.2 (locators to be checked).
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied. Source of the statements: J. M.
+Hammersley and K. W. Morton (1954); N. Madras and G. Slade, *The Self-Avoiding Walk* (1993), §1.2
+(locators to be checked).
 -/
 module
 
@@ -240,6 +242,51 @@ theorem exists_tendsto_card_paths_rpow (hd : 1 ≤ d) :
         rw [one_div]
       exact h1.trans (h3.trans h4.le)
     exact ge_of_tendsto' hlim hbound
+
+/-- The only self-avoiding path of length `0` is the trivial one: `c_0 = 1`. -/
+theorem card_paths_length_zero (d : ℕ) :
+    Nat.card {p : Σ y, (zdGraph d).Path 0 y // p.2.1.length = 0} = 1 := by
+  rw [Nat.card_eq_one_iff_unique]
+  refine ⟨⟨?_⟩, ⟨⟨⟨0, SimpleGraph.Path.nil⟩, rfl⟩⟩⟩
+  rintro ⟨⟨y, ⟨w, hw⟩⟩, hl⟩ ⟨⟨y', ⟨w', hw'⟩⟩, hl'⟩
+  cases w with
+  | nil =>
+    cases w' with
+    | nil => rfl
+    | cons _ _ => simp at hl'
+  | cons _ _ => simp at hl
+
+/-- In `ℤ⁰` there is no path of positive length. -/
+theorem card_paths_dim_zero_succ (n : ℕ) :
+    Nat.card {p : Σ y, (zdGraph 0).Path 0 y // p.2.1.length = n + 1} = 0 := by
+  simpa using card_paths_succ_le 0 n
+
+/-- **The connective constant as an infimum.** For `d ≥ 1`, `c(n)^{1/n}` converges to
+`μ = inf_{n ≥ 1} c(n)^{1/n}`, and `1 ≤ μ ≤ 2d - 1`. -/
+theorem exists_tendsto_card_paths_rpow_eq_iInf (hd : 1 ≤ d) :
+    ∃ μ : ℝ, Tendsto (fun n : ℕ => (Nat.card {p : Σ y, (zdGraph d).Path 0 y //
+        p.2.1.length = n} : ℝ) ^ ((n : ℝ)⁻¹)) atTop (𝓝 μ) ∧
+      μ = ⨅ n : {n : ℕ // 1 ≤ n}, (Nat.card {p : Σ y, (zdGraph d).Path 0 y //
+        p.2.1.length = n.1} : ℝ) ^ ((n.1 : ℝ)⁻¹) ∧
+      1 ≤ μ ∧ μ ≤ 2 * d - 1 := by
+  obtain ⟨μ, hlim, hle, h1, h2⟩ := exists_tendsto_card_paths_rpow hd
+  refine ⟨μ, hlim, ?_, h1, h2⟩
+  have hbdd : BddBelow (Set.range fun n : {n : ℕ // 1 ≤ n} =>
+      (Nat.card {p : Σ y, (zdGraph d).Path 0 y // p.2.1.length = n.1} : ℝ) ^
+        ((n.1 : ℝ)⁻¹)) :=
+    ⟨0, by rintro _ ⟨n, rfl⟩; positivity⟩
+  have : Nonempty {n : ℕ // 1 ≤ n} := ⟨⟨1, le_rfl⟩⟩
+  refine le_antisymm (le_ciInf fun n => hle n.1 (by have := n.2; omega)) ?_
+  exact ge_of_tendsto hlim (eventually_atTop.2 ⟨1, fun n hn => ciInf_le hbdd ⟨n, hn⟩⟩)
+
+/-- On `ℤ` the connective constant is `1`. -/
+theorem eq_one_of_tendsto_card_paths_rpow_one {μ : ℝ}
+    (hμ : Tendsto (fun n : ℕ => (Nat.card {p : Σ y, (zdGraph 1).Path 0 y //
+      p.2.1.length = n} : ℝ) ^ ((n : ℝ)⁻¹)) atTop (𝓝 μ)) : μ = 1 := by
+  obtain ⟨μ', hlim, -, h1, h2⟩ := exists_tendsto_card_paths_rpow (d := 1) le_rfl
+  rw [tendsto_nhds_unique hμ hlim]
+  norm_num at h2
+  linarith
 
 /-! ### Non-vacuity -/
 

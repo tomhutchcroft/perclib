@@ -1,0 +1,62 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "two-point-averages",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 153
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Spatial averaging",
+      "locator": "17 March 2017 author manuscript, Exercise 1.1 and (1.2.13)–(1.2.14), printed p.8.",
+      "relationship": "Written implication under explicit hypotheses",
+      "status": "pending",
+      "note": "Shell sums give comparison and logarithmic growth; a Riemann sum away from the origin and a uniform small-ball bound give the exact cube-integral constant."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Fourier averaging",
+      "locator": "17 March 2017 author manuscript, Exercise 1.2 and (1.2.20)–(1.2.22), printed p.9.",
+      "relationship": "Written implication under explicit hypotheses",
+      "status": "pending",
+      "note": "Periodized Gaussian integration estimates smoothed mass. Spatial positivity and dyadic annuli remove the Gaussian, with a growing cutoff in the logarithmic case. The spectral representation is an explicit premise."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Infinite-distance limit",
+      "locator": "17 March 2017 author manuscript, discussion preceding (1.1.7), printed p.5.",
+      "relationship": "Written implication under explicit hypotheses",
+      "status": "pending",
+      "note": "A finite cluster leaves large boxes with probability tending to zero. Under the separate uniqueness premise, mixing factors the remaining joint infinite-cluster probability."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "J9YA",
+      "proof_uses": [],
+      "reason": "Shell sums give comparison and logarithmic growth; a Riemann sum away from the origin and a uniform small-ball bound give the exact cube-integral constant."
+    },
+    {
+      "order": 1,
+      "tag": "44EA",
+      "proof_uses": [],
+      "reason": "Periodized Gaussian integration estimates smoothed mass. Spatial positivity and dyadic annuli remove the Gaussian, with a growing cutoff in the logarithmic case. The spectral representation is an explicit premise."
+    },
+    {
+      "order": 2,
+      "tag": "LO35",
+      "proof_uses": [
+        "WUAF"
+      ],
+      "reason": "A finite cluster leaves large boxes with probability tending to zero. Under the separate uniqueness premise, mixing factors the remaining joint infinite-cluster probability."
+    }
+  ]
+}

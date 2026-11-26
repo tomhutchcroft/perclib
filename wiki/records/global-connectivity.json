@@ -1,0 +1,63 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "global-connectivity",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 34
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-local-finiteness",
+      "order": 0,
+      "label": "Finite neighbour sets and finite intrinsic balls",
+      "locator": "Named theorem start lines: 29, 50, 72, 87, 94",
+      "relationship": "Complete grouped source contracts with graph-metric conventions retained",
+      "status": "pending",
+      "note": "7R5Q covers deterministic bounded-length walk reachability, strict extended-distance balls, the one-root almost-sure finite-neighbour statement, and its simultaneous all-root and all-ball consequences. Countability is used in the probabilistic statements. No uniform row bound or bound below one is assumed. The source proof uses first Borel-Cantelli; the article uses the existing expected-degree identity for the same conclusion. Closed balls at radius zero contain the root, while source open balls at radius zero are empty."
+    },
+    {
+      "source": "perclib-global-connectivity",
+      "order": 0,
+      "label": "Whole-graph events and spanning, Harris and isolation bounds",
+      "locator": "Named theorem start lines: 42, 49, 55, 65, 75, 82, 86, 92, 100, 115, 123, 131, 159",
+      "relationship": "Complete grouped source contracts with empty-vertex and isolation scope",
+      "status": "pending",
+      "note": "POEO distinguishes all-pairs connection from the convention requiring nonempty vertices and gives the measurable global finite/bounded-cluster events. The decreasingness of the latter events is an additional direct consequence. JSS9 retains finite spanning pair sets, finite-vertex Harris products and the countable isolation upper bound with another vertex required. It reuses UNJ6 for the isolation identity/product. The finite spanning hypothesis itself forces finite vertices, explaining the absence of a separate countability assumption. No source error or compiled tag association is asserted."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "7R5Q",
+      "proof_uses": [
+        "8W1Q",
+        "SZLN"
+      ],
+      "reason": "Finite-neighbour induction gives finite-radius balls; finite degree expectation and a countable intersection give simultaneous almost-sure local finiteness."
+    },
+    {
+      "order": 1,
+      "tag": "POEO",
+      "proof_uses": [
+        "T90E",
+        "7QJG",
+        "5SII"
+      ],
+      "reason": "Global events are countable intersections of connection or volume events; adding edges preserves connections and enlarges clusters."
+    },
+    {
+      "order": 2,
+      "tag": "JSS9",
+      "proof_uses": [
+        "POEO",
+        "5PAT",
+        "X5SS",
+        "UNJ6"
+      ],
+      "reason": "A spanning cylinder and Harris give lower bounds. Global connection excludes isolation when another vertex exists, and the isolation product supplies the finite upper bound."
+    }
+  ]
+}

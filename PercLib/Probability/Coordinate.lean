@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 191, Q-31). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -143,6 +145,15 @@ theorem prodBernoulli_eq_smul_add_smul (q : ι → unitInterval) (e : ι) :
     simp
   · rw [← add_mul, hsum, one_mul]
 
+/-- **Affinity along a coordinate path.** The law with `q e` replaced by `t` is the mixture,
+with weights `t` and `1 - t`, of the laws with `q e` replaced by `1` and by `0`. -/
+theorem prodBernoulli_update_eq_smul_add_smul (q : ι → unitInterval) (e : ι)
+    (t : unitInterval) :
+    prodBernoulli (update q e t) = (unitInterval.toNNReal t) • prodBernoulli (update q e 1) +
+      (unitInterval.toNNReal (σ t)) • prodBernoulli (update q e 0) := by
+  have h := prodBernoulli_eq_smul_add_smul (update q e t) e
+  rwa [update_self, update_idem, update_idem] at h
+
 /-- **Affinity.** Every probability is affine in one coordinate. -/
 theorem prodBernoulli_eq_affine (q : ι → unitInterval) (e : ι) (A : Set (Set ι)) :
     (prodBernoulli q).real A =
@@ -211,7 +222,8 @@ variable {V : Type*}
 
 /-- **One-pair Russo for `τ`.** Along `t ↦ q[e ↦ t]`, the two-point function is affine with
 slope the probability that `e` is pivotal for `x ↔ y`. -/
-theorem tau_update_real_eq [Countable V] [DecidableEq V] (q : Sym2 V → unitInterval) (e : Sym2 V) (x y : V)
+theorem tau_update_real_eq [Countable V] [DecidableEq V] (q : Sym2 V → unitInterval) (e : Sym2 V)
+    (x y : V)
     (t : unitInterval) :
     (tau (update q e t) x y).toReal =
       (law q).real {ω | ω \ {e} ∈ conn x y} +

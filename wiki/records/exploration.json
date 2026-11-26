@@ -1,0 +1,30 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "exploration",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 3
+    }
+  ],
+  "sourceOccurrences": [],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "GSLG",
+      "proof_uses": [
+        "5PAT"
+      ],
+      "reason": "A realised history imposes cylinder conditions on the revealed edges, and the finite cylinder formula gives the product law of the unrevealed coordinates."
+    },
+    {
+      "order": 1,
+      "tag": "7WHX",
+      "proof_uses": [
+        "6WC8"
+      ],
+      "reason": "Discovered vertices are joined to the root by open edges, and termination means no open edge leaves the discovered set, so it equals the root cluster of 6WC8."
+    }
+  ]
+}

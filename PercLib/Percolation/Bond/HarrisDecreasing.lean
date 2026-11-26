@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 117 (Q-1), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied.
 -/
 module
 
@@ -14,7 +15,7 @@ public import PercLib.Probability.OpenEventHarris
 /-!
 # Harris for non-connection events and for cluster volumes
 
-Bond corollaries of `PercLib.Probability.HarrisDecreasing` on the D-2 interface: two
+Bond corollaries of `PercLib.Probability.HarrisDecreasing` on the bond interface: two
 non-connection events are positively correlated, a connection and a non-connection event
 are negatively correlated, and the cluster volume of `x` is positively correlated with
 the connection of `u` and `v`. This file adds no definition.

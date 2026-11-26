@@ -1,0 +1,136 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "spatial-convolution-asymptotics",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 171
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Power-law convolution bounds",
+      "locator": "Author-hosted published PDF, Appendix B, Lemma B.1(i), (B.1)\u2013(B.2), printed p.588 / PDF index58.",
+      "relationship": "Written convolution deductions; main spatial theorem remains separate",
+      "status": "pending",
+      "note": "Three spatial regions give the power bounds, with logarithmic endpoints excluded."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Leading coefficient under convolution",
+      "locator": "Author-hosted published PDF, Appendix B, Lemma B.1(iv), (B.7)\u2013(B.24), printed pp.589\u2013592 / PDF indices59\u201362.",
+      "relationship": "Written convolution deductions; main spatial theorem remains separate",
+      "status": "pending",
+      "note": "A signed summable kernel preserves the leading coefficient; the expansion is phrased additively to include zero total mass."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 2,
+      "label": "Quantified remainder",
+      "locator": "Author-hosted published PDF, Appendix B, Lemma B.1(ii), (B.3)\u2013(B.4), printed p.588 / PDF index58.",
+      "relationship": "Written convolution deductions; main spatial theorem remains separate",
+      "status": "pending",
+      "note": "Evenness of the convolving kernel cancels the first-order Taylor term; exponents and endpoints are explicit."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 3,
+      "label": "Cancellation obstructions",
+      "locator": "Author-hosted published PDF, Comparison with the range of Lemma B.1(ii); independently computed finite-support examples.",
+      "relationship": "Written convolution deductions; main spatial theorem remains separate",
+      "status": "pending",
+      "note": "A single translate has a first-order error; the symmetric pair has a second-order error."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 4,
+      "label": "Spatial lace transfer",
+      "locator": "Author-hosted published PDF, Corollary 1.6 and its convolution step, printed pp.537\u2013538 / PDF indices7\u20138; compare the book discussion below.",
+      "relationship": "Written convolution deductions; main spatial theorem remains separate",
+      "status": "pending",
+      "note": "The final convolution retains the 2/d remainder under the stated spatial estimates."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 5,
+      "label": "Corrected book convolution exercise",
+      "locator": "17 March 2017 author manuscript, Exercise 11.6 and (11.2.15)\u2013(11.2.16), printed p.139 / PDF index150.",
+      "relationship": "Written corrected exercise and conditional spatial transfer",
+      "status": "pending",
+      "note": "MZ23 and UDUU give the valid symmetry/exponent ranges; I8BE verifies the range needed for the percolation application."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 6,
+      "label": "Boundary exponents and coordinate symmetry",
+      "locator": "Independent extension of the already mapped Appendix B convolution estimates",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Anisotropic second-moment growth explains the even-kernel logarithm. Coordinate symmetry and harmonicity cancel the quadratic term without requiring a finite full second moment. The stronger power range and explicit obstructions are independent deductions, not new source errors or model-specific spatial estimates."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "IDIL",
+      "proof_uses": [],
+      "reason": "Three spatial regions give the power bounds, with logarithmic endpoints excluded."
+    },
+    {
+      "order": 1,
+      "tag": "NIAD",
+      "proof_uses": [],
+      "reason": "A signed summable kernel preserves the leading coefficient; the expansion is phrased additively to include zero total mass."
+    },
+    {
+      "order": 2,
+      "tag": "MZ23",
+      "proof_uses": [
+        "IDIL"
+      ],
+      "reason": "Evenness of the convolving kernel cancels the first-order Taylor term; exponents and endpoints are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "UDUU",
+      "proof_uses": [],
+      "reason": "A single translate has a first-order error; the symmetric pair has a second-order error."
+    },
+    {
+      "order": 4,
+      "tag": "I8BE",
+      "proof_uses": [
+        "MZ23"
+      ],
+      "reason": "The final convolution retains the 2/d remainder under the stated spatial estimates."
+    },
+    {
+      "order": 5,
+      "tag": "7PTP",
+      "proof_uses": [
+        "IDIL"
+      ],
+      "reason": "The summable-kernel power bound controls h*g, while evenness, a truncated second moment and a spatial tail split give the boundary logarithm."
+    },
+    {
+      "order": 6,
+      "tag": "SNY9",
+      "proof_uses": [
+        "IDIL"
+      ],
+      "reason": "Coordinate symmetry makes each truncated covariance scalar, harmonicity cancels its Hessian contraction, and fourth-order Taylor bounds control the remaining near sum."
+    },
+    {
+      "order": 7,
+      "tag": "1ADM",
+      "proof_uses": [
+        "7PTP"
+      ],
+      "reason": "A nonnegative anisotropic kernel has a logarithmically divergent traceless second moment; an exact nearest-neighbour expansion gives a positive fourth-order coefficient."
+    }
+  ]
+}

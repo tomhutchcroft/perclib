@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New proofs comparing cluster tails, percolation probabilities and susceptibilities at
 two roots joined by a path (wiki infinite-cluster-zero-one, tag C3OO). No upstream
 proof is copied, no definition is added and no Input is introduced.

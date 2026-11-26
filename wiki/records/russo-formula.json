@@ -1,0 +1,161 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "russo-formula",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 1
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 29,
+      "label": "Russo's formula",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-finite-polynomial",
+      "order": 0,
+      "label": "Homogeneous finite expectation polynomial",
+      "locator": "Named statement start lines in the pinned source: 36, 41, 45, 52, 58, 64",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "7WIO restricts to the homogeneous real polynomial, giving its evaluation and differentiability on the entire real line and its probability-law interpretation on the unit interval. Empty blocks, the zero observable and the one-coordinate observable are specializations. The source packages the polynomial and its evaluation separately."
+    },
+    {
+      "source": "perclib-cylinder-russo",
+      "order": 0,
+      "label": "Signed Russo for cylinder events",
+      "locator": "Named statement start lines in the pinned source: 20, 42, 48, 55, 82, 92, 101, 112, 136",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "XU3W covers restriction/forcing identities, signed differentiation on the finite support, vanishing outside it, pivotal conversion for increasing measurable events and intensity specialization. It imposes accumulation of the parameter domain when interpreting the derivative as a unique limit; the formal within-derivative predicate also admits isolated-point cases. No regularity of the ambient profile outside the support is assumed."
+    },
+    {
+      "source": "perclib-finite-russo",
+      "order": 0,
+      "label": "Finite-profile Russo algebra and probability transport",
+      "locator": "Named statement start lines in the pinned source: 30, 35, 38, 41, 45, 49, 52, 61, 139, 159, 167, 184, 187, 191, 218, 226, 300, 328, 361, 392, 402",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "71GK and 7WIO explain forced configurations, increments, finite weights and the expectation polynomial. The proof expansion describes deleted weights, signed coordinate factors and flip pairing without endpoint division. It also explains the binary-to-set bijection and insertion/deletion interpretation. The source algebra holds for all real profiles, intensities and parameters; probability interpretations require a valid profile on the specified domain. WU9R, 4IHK and IENL give increasing-event, homogeneous and intensity applications. Within-domain derivatives are formalized without requiring the base point to be an accumulation point; the article imposes accumulation when interpreting a unique ordinary or one-sided derivative. The census counts explicit definitions and theorems, not the separately declared helper lemmas; their relevant algebra is explained in the proof. Closed-pivotal conversion is an expository consequence, not attributed to this source module."
+    },
+    {
+      "source": "perclib-one-coordinate",
+      "order": 0,
+      "label": "Source contracts and their scope",
+      "locator": "Named public theorem start lines: 35, 45, 55, 61, 81, 100, 126, 150, 164, 170, 180, 193, 217, 229",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "AQDI gives measurable forcing maps, the two endpoint pushforwards and affine measure mixture, arbitrary measurable-event affinity, the pivotal slope and the countable bond application with zero diagonal influence. Measure-level affinity also applies to outer-measure evaluation on arbitrary subsets; preimage probability formulas retain measurability. One-sided derivatives, the unit Lipschitz bound and the infinite-open-set example are expository deductions. No simultaneous infinite-coordinate differentiation is inferred."
+    },
+    {
+      "source": "perclib-pivotal-algebra",
+      "order": 0,
+      "label": "Pivotal and derivative contracts",
+      "locator": "Named public theorem start lines: 32, 37, 42, 48, 53, 58, 64, 75, 80, 91, 109, 124",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "XRSL covers Boolean/open-set identification, state-independent positive pivotality, measurable forcing tests, increasing-event decomposition and its disjointness. General measurable-event probability factorization on arbitrary coordinates is a deduction using FH29; the source algebra itself is deterministic. Diagonal connection pivotality is also explained in 61PY."
+    },
+    {
+      "source": "perclib-integrated-russo",
+      "order": 0,
+      "label": "Pivotal and derivative contracts",
+      "locator": "Named public theorem start lines: 38, 57, 64, 82, 120, 133, 162, 180, 191, 207",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "XRSL covers the algebraic open-coordinate weighted identity, finite open-pivotal factorization/counts and homogeneous derivative for p>0, including p=1 from the left. VYTC covers the oriented integral along globally C1 real profile curves that are valid probability profiles only on the integration interval, homogeneous intervals and unordered profile segments. Positive-pivotal count restricted to the event is an identity even without increasingness; the derivative formulas require increasingness. No infinite pivotal sum is inferred."
+    },
+    {
+      "source": "perclib-finite-volume-russo",
+      "order": 0,
+      "label": "Pivotal and derivative contracts",
+      "locator": "Named public theorem start lines: 42, 50, 55, 67, 73, 84, 91, 108, 115, 145, 161",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "6JBS gives finite internal dependence, increasingness, loop invariance for graph events, intensity derivatives within beta>=0, the off-diagonal derivative bound, monotonicity and the finite susceptibility derivative. The resulting Lipschitz bound is a deduction. Ambient countability and total intensity bounds are not assumed; the state-independent pivotal factor retains its exponential coefficient."
+    },
+    {
+      "source": "perclib-finite-support-russo",
+      "order": 0,
+      "label": "Finite-support restriction and intensity differentiation",
+      "locator": "Named public theorem start lines: 38, 57, 72",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "XU3W and the finite-restriction explanation cover the finite-product reduction, inherited pivotal dependence and increasing-event intensity derivative. Only coordinates in the finite support require the intensity profile. The source allows arbitrary real intensities whenever a valid probability profile satisfying the domain agreement is supplied; IENL uses nonnegative intensities on the nonnegative half-line. The article adds accumulation when interpreting a unique derivative. No countability of the ambient coordinate type is assumed."
+    },
+    {
+      "source": "perclib-russo-associations",
+      "order": 0,
+      "label": "Grouped finite Russo associations",
+      "locator": "Named public theorem start lines: 24, 44, 81, 102, 170",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "71GK, 7WIO, WU9R, 4IHK and IENL preserve the polynomial/probability distinction and all grouped clauses. The source now exports the closed-pivotal conversion and arbitrary-observable insertion formula; the original Russo source record correctly retains those as deductions from that earlier module. Finite probability derivatives use a within-domain predicate, which need not determine a unique slope at an isolated parameter."
+    },
+    {
+      "source": "perclib-train10-models-longrange-infinitevolumerusso",
+      "order": 0,
+      "label": "Infinite-volume differentiation from a touching bound",
+      "locator": "Explicit public theorem start lines: 80, 97, 117, 134, 142, 148, 160, 174, 205, 220, 245, 255, 265, 273, 283, 311, 340, 462, 473, 497, 542, 549, 559, 575, 691, 721, 747, 773, 781, 794, 857, 868, 881, 972, 987, 1091, 1118, 1161, 1234",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 3,
+      "source": "hutchcroft-book",
+      "tag": "IENL",
+      "relationship": "generalization",
+      "edition": "In preparation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "note": "Credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "AQDI",
+      "proof_uses": [
+        "ZNMQ"
+      ],
+      "reason": "The argument uses the existing finite-cylinder or fixed-block product law, preserving measurability and the stated index-set scope."
+    },
+    {
+      "order": 0,
+      "tag": "XRSL",
+      "proof_uses": [
+        "AQDI",
+        "FH29",
+        "4IHK"
+      ],
+      "reason": "Uses the existing forcing, block-independence, finite derivative or graph restriction results with their stated scopes."
+    },
+    {
+      "order": 0,
+      "tag": "VYTC",
+      "proof_uses": [
+        "7WIO",
+        "XRSL"
+      ],
+      "reason": "Uses the existing forcing, block-independence, finite derivative or graph restriction results with their stated scopes."
+    },
+    {
+      "order": 0,
+      "tag": "6JBS",
+      "proof_uses": [
+        "XU3W",
+        "XRSL",
+        "LNKT"
+      ],
+      "reason": "Uses the existing forcing, block-independence, finite derivative or graph restriction results with their stated scopes."
+    }
+  ]
+}

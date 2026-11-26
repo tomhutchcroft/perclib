@@ -1,0 +1,229 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "infrared-diagrams",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 159
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "The simple random-walk triangle threshold",
+      "locator": "17 March 2017 author manuscript, Chapter 4, Exercise 4.1, printed p.42, PDF index53.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "Tonelli and the binomial generating series identify the lazy Green function with twice the ordinary one, transferring the three diagram thresholds without monotone Fourier integrands of mixed sign."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Uniform weighted random-walk moments",
+      "locator": "17 March 2017 author manuscript, Chapter 5, (5.1.10)–(5.1.16), Proposition 5.5 and (5.4.1)–(5.4.5), printed pp.50–51 and55, PDF indices61–62 and66.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "A leave-one-out Jensen argument makes inverse moments nonincreasing in dimension. Pairing opposite walk increments gives the weighted decay; damping is monotone in nonnegative return coefficients at the origin."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "The shifted triangle estimates",
+      "locator": "17 March 2017 author manuscript, Chapter 5, Exercise 5.4 and (5.4.6)–(5.4.8), printed p.56, PDF index67.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "Nonnegative inverse coefficients control the first shift. A cosine-sine decomposition and a second nonnegative coefficient sequence control the two shifts; Fatou supplies the critical endpoint."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Conditional infrared consequences and open polygons",
+      "locator": "17 March 2017 author manuscript, Chapter 5, Corollary 5.2, Lemma 5.3, (5.1.5)–(5.1.20), Exercises 5.2 and5.5, printed pp.49–52 and56, PDF indices60–63 and67.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "Fourier positivity and inversion give the diagrams; Cauchy–Schwarz yields the neighbouring triangle. Criticality is reached through nonnegative spatial sums. The infrared bound itself stays a hypothesis."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Spread-out symbol bounds and the triangle baseline",
+      "locator": "17 March 2017 author manuscript, Chapter 5, Proposition 5.6, (5.4.9)–(5.4.14), Exercises 5.3 and5.6, printed pp.53 and56–57, PDF indices64 and67–68.",
+      "relationship": "Written proof with explicit parameter, endpoint and source scope",
+      "status": "pending",
+      "note": "The one-dimensional Dirichlet kernel gives a quadratic small-frequency bound and a uniform gap outside the small cube. Parseval controls the weighted integral. Subtracting the zero-step and linear terms proves that the full triangle is one plus O(L^(-d))."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 5,
+      "label": "Explicit sixth random-walk norms and conditional connector certificates",
+      "locator": "Independent quantitative extension of the Chapter 5 walk-integral arguments, especially Proposition 5.5 and (5.4.1)-(5.4.5); compare the critical infrared bound used in the spatial application",
+      "relationship": "Finite return-count certificates with an explicit analytic tail, rather than a reproduction of a source numerical threshold",
+      "status": "pending",
+      "note": "The walk bounds are certified by exact rational arithmetic. The percolation infrared amplitude, critical representation, gap, finite-cluster and moment hypotheses remain explicit; no numerical percolation threshold or new source erratum is claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 6,
+      "label": "Spatial logarithmic diagram thresholds",
+      "locator": "Independent spatial extension of the Chapter 4-5 diagram discussion already mapped here",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Two-sided spatial estimates are explicit hypotheses. The calculation includes short-side configurations, borderline double logarithms and finite tails. It determines no model logarithmic exponent and supplies no reverse-BK repair or new erratum."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 7,
+      "label": "Directional correction to the walk Green function",
+      "locator": "Independent spatial extension of the nearest-neighbour walk analysis already mapped here",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "A localized Fourier remainder estimate and homogeneous Gaussian inverses give a two-term Green expansion, uniform in direction and valid also in dimensions three and four. This is a walk result, not a percolation expansion or a new source erratum."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 8,
+      "label": "Killing asymptotics and marginal diagram coefficients",
+      "locator": "Independent extension of the Chapter 4-5 walk-diagram discussion already mapped here",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Quadratic-symbol subtraction identifies the marginal logarithm, its finite part and the holding correction. For nearest-neighbour walk the triangle logarithm determines the six-dimensional bubble approach. No percolation parameter estimate or new source error is inferred."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 9,
+      "label": "Marginal shifted-diagram profiles and critical finite parts",
+      "locator": "Independent extension of the Chapter 5 shifted-integral discussion already mapped here",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Positive squared-difference identities give a uniform bounded frequency-to-mass profile. A separate integrable quadratic comparison identifies the critical frequency finite part; no undamped spatial-series convergence or percolation asymptotic is inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "KCOF",
+      "proof_uses": [
+        "E9BP"
+      ],
+      "reason": "Tonelli and the binomial generating series identify the lazy Green function with twice the ordinary one, transferring the three diagram thresholds without monotone Fourier integrands of mixed sign."
+    },
+    {
+      "order": 1,
+      "tag": "RD3X",
+      "proof_uses": [
+        "KCOF"
+      ],
+      "reason": "A leave-one-out Jensen argument makes inverse moments nonincreasing in dimension. Pairing opposite walk increments gives the weighted decay; damping is monotone in nonnegative return coefficients at the origin."
+    },
+    {
+      "order": 2,
+      "tag": "A9W9",
+      "proof_uses": [
+        "RD3X"
+      ],
+      "reason": "Nonnegative inverse coefficients control the first shift. A cosine-sine decomposition and a second nonnegative coefficient sequence control the two shifts; Fatou supplies the critical endpoint."
+    },
+    {
+      "order": 3,
+      "tag": "ANZF",
+      "proof_uses": [
+        "F77A",
+        "RD3X",
+        "JQLC"
+      ],
+      "reason": "Fourier positivity and inversion give the diagrams; Cauchy–Schwarz yields the neighbouring triangle. Criticality is reached through nonnegative spatial sums. The infrared bound itself stays a hypothesis."
+    },
+    {
+      "order": 4,
+      "tag": "ZRVJ",
+      "proof_uses": [
+        "NUJY",
+        "RD3X"
+      ],
+      "reason": "The one-dimensional Dirichlet kernel gives a quadratic small-frequency bound and a uniform gap outside the small cube. Parseval controls the weighted integral. Subtracting the zero-step and linear terms proves that the full triangle is one plus O(L^(-d))."
+    },
+    {
+      "order": 5,
+      "tag": "LKS9",
+      "proof_uses": [
+        "RD3X"
+      ],
+      "reason": "The coordinate recurrence counts returns exactly. Symmetry and a Gaussian integral bound give an explicit series tail; leave-one-out Jensen applies to both convex integrands."
+    },
+    {
+      "order": 6,
+      "tag": "NI0W",
+      "proof_uses": [
+        "LKS9",
+        "FWHO",
+        "F7N7"
+      ],
+      "reason": "Finite rational sums and the proved tail bound certify three pairs of walk norms. The infrared amplitude bounds the sixth connector norm, with all remaining percolation hypotheses retained."
+    },
+    {
+      "order": 7,
+      "tag": "GZCA",
+      "proof_uses": [],
+      "reason": "A self-contained dyadic lattice-shell argument: exponential ball-mass growth absorbs fixed logarithmic powers, and the triangle sum partitions by its shortest side. No symmetry or Fourier positivity is used."
+    },
+    {
+      "order": 8,
+      "tag": "9ZD3",
+      "proof_uses": [
+        "GZCA"
+      ],
+      "reason": "Substitution of the Gaussian power alpha=2 gives the distinct bubble and triangle thresholds, including logarithmic and double-logarithmic borderline cases."
+    },
+    {
+      "order": 9,
+      "tag": "C5GY",
+      "proof_uses": [],
+      "reason": "A dyadic partition and repeated integration by parts control the local inverse transform; integrable derivatives of the complementary homogeneous symbol justify removing the cutoff off the origin."
+    },
+    {
+      "order": 10,
+      "tag": "IY26",
+      "proof_uses": [
+        "C5GY"
+      ],
+      "reason": "Expansion of the exact nearest-neighbour resolvent, the local Fourier remainder bound and Gaussian inverse transforms identify the angular correction with a uniform spatial error."
+    },
+    {
+      "order": 11,
+      "tag": "WXT8",
+      "proof_uses": [
+        "SPSG"
+      ],
+      "reason": "The generating condition gives the sole quadratic Fourier singularity. A covariance change of variables yields the power coefficient; integrable symbol subtraction and its derivative estimate yield the finite part and marginal remainder."
+    },
+    {
+      "order": 12,
+      "tag": "KC8U",
+      "proof_uses": [
+        "WXT8",
+        "LEJR"
+      ],
+      "reason": "The nearest-neighbour covariance fixes the logarithmic constants. Differentiation of the bubble resolvent and the triangle finite part give the critical bubble expansion; the mass definition supplies the normalization comparison."
+    },
+    {
+      "order": 13,
+      "tag": "7PM4",
+      "proof_uses": [
+        "WXT8"
+      ],
+      "reason": "Positive integral identities isolate the frequency difference, covariance rescaling gives an integrable continuum limit, and a parameter integral evaluates its universal profile. The unshifted finite part fixes the additive constant."
+    },
+    {
+      "order": 14,
+      "tag": "2RVB",
+      "proof_uses": [
+        "WXT8",
+        "7PM4",
+        "KC8U"
+      ],
+      "reason": "A uniformly integrable subtraction at the two distinct singular points transfers the quadratic shifted integral. The parameter integral and marginal radial primitive identify its finite part; KC8U supplies the nearest-neighbour constants."
+    }
+  ]
+}

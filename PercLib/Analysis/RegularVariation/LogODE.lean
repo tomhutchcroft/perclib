@@ -1,18 +1,21 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-161 (issue 528): the logarithmic ODE identities and Lemma I.2.12 of T. Hutchcroft,
-*Critical long-range percolation I*, arXiv:2508.18807v1, §I.2.2, pp. 25-26.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The logarithmic ODE identities and Lemma I.2.12 of T. Hutchcroft, *Critical long-range percolation
+I*, arXiv:2508.18807v1, §I.2.2, pp. 25-26.
 
-Ported from pull request 488 (contributor `yujinhkim`): repository `yujinhkim/lrp`, branch
+Ported from the work of contributor `yujinhkim`: repository `yujinhkim/lrp`, branch
 `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
 `PercLib/CriticalLRP/Analysis/RegularVariation.lean`; licence Apache-2.0 as declared in that
 commit's file headers and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`.
-Modified: the definitions of that file are those of `PercLib/Analysis/RegularVariation/Defs.lean`
-(Q-136, Q-140); `RegularlyVaryingAtTop f a` becomes `RegularlyVarying a f`, which also
-requires measurability on a tail and eventual positivity, both derived here from the existing
-hypotheses (no statement changes); the helper
-`intervalIntegrable_of_integrableOn_uIcc` is mathlib's `IntegrableOn.intervalIntegrable`;
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified:
+the definitions of that file are those of `PercLib/Analysis/RegularVariation/Defs.lean`;
+`RegularlyVaryingAtTop f a` becomes `RegularlyVarying a f`, which also requires measurability on a
+tail and eventual positivity, both derived here from the existing hypotheses (no statement changes);
+the helper `intervalIntegrable_of_integrableOn_uIcc` is mathlib's `IntegrableOn.intervalIntegrable`;
 `import Mathlib`, `autoImplicit` and disabled linters are removed.
 -/
 module
@@ -178,7 +181,7 @@ theorem abs_intervalIntegral_div_le {h : ℝ → ℝ} {δ x y : ℝ}
         intro s hs
         rw [uIcc_of_le hxy] at hs
         have hs0 : 0 < s := lt_of_lt_of_le hx hs.1
-        show |h s / s| = |h s| / s
+        change |h s / s| = |h s| / s
         rw [abs_div, abs_of_pos hs0]
     _ ≤ ∫ s in x..y, δ * (1 / s) := by
         apply intervalIntegral.integral_mono_on hxy hInt2 hInt3
@@ -424,7 +427,7 @@ theorem lemma_I_2_12_rv' {f f' : ℝ → ℝ} {a r₀ : ℝ}
     ring
   exact lemma_I_2_12_rv ha hr₀ hderiv hpos hode hmeas h0
 
-/-! ### Witness (D-5): `f r = r^a`, `h = 0` -/
+/-! ### Witness: `f r = r^a`, `h = 0` -/
 
 example {a : ℝ} (ha : 0 < a) : RegularlyVarying a (fun r : ℝ => r ^ a) :=
   lemma_I_2_12_rv (f' := fun r => a * r ^ (a - 1)) (h := fun _ => 0) (r₀ := 1) ha one_pos

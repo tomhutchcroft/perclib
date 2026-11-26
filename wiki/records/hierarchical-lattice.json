@@ -1,0 +1,97 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hierarchical-lattice",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 8
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 5,
+      "label": "The hierarchical lattice and radial kernels",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-hierarchical-model",
+      "order": 0,
+      "label": "Hierarchical radial model bounds",
+      "locator": "Named statement start lines in the pinned source: 50, 91, 122, 147, 155, 164, 173",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "The seven named theorems concern ball-count upper bounds, radial sums, total mass at most 2C, descent to unordered pairs, and three intensity applications. 9408 and 6KJQ give stronger exact shell formulas; these are not attributed to the source, which proves only upper bounds. B6KD includes its conservative 2C susceptibility and threshold bounds and the d=1, L=2, C=1, r=1/4 witness. The algebraic descent also holds at zero modulus without the nonzero-modulus assumption used for the finite ball counts; the final paragraph explains this separate scope. KL29 is an expository addition."
+    },
+    {
+      "source": "perclib-hierarchical-geometry",
+      "order": 0,
+      "label": "Exact geometry, child blocks and full radial summability",
+      "locator": "Named theorem start lines: 22, 27, 37, 46, 51, 56, 63, 68, 76, 85, 102, 132, 138, 167, 187, 194, 201, 216, 221, 245, 263, 287",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "BW7V extends the support geometry to arbitrary Abelian coefficient groups and proves the disjoint child partition. Existing 9408/6KJQ retain finite counts and radial grouping. YW7B gives the extended geometric identity and full nondegenerate summability equivalence, including divergent ratios. The nonzero-modulus condition for finite counts and positive-dimension/scale conditions for the power equivalence are explicit."
+    },
+    {
+      "source": "perclib-hierarchical-small-two-point",
+      "order": 0,
+      "label": "Extended hierarchical two-point bound",
+      "locator": "Named theorem start lines: 38",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "0K45 retains all finite beta>=0, C>=0 and r<=1, with an extended off-diagonal mass and two geometric factors. Its finite small-intensity specialization is stated separately. Diagonal erasure extends the source canonical radial diagonal to arbitrary marginals. The direct-edge lower comparison is an additional deduction. The original critical two-point article and all its assertions remain unchanged."
+    },
+    {
+      "source": "perclib-hierarchical-cutoff",
+      "order": 0,
+      "label": "Hierarchical cutoff confinement and exact omitted rows",
+      "locator": "Named public declaration start lines: 49, 62, 84, 100, 112, 132, 178, 196, 218, 230, 241, 250, 260",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source gives almost-sure confinement under a zero-outside profile, the exact extended omitted row, and the sharp finite-row specialization. Its radial-kernel hypothesis also fixes diagonal values; diagonal invariance recovers arbitrary loop parameters."
+    },
+    {
+      "source": "perclib-hierarchical-ball-sums",
+      "order": 0,
+      "label": "Conditional hierarchical ball sums",
+      "locator": "Explicit public declaration start lines: 53, 62, 76, 85, 160, 215, 237, 259",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results separate shell summation from the pointwise two-point inputs and distinguish local from full connections. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-train10-models-hierarchicalsymmetry",
+      "order": 0,
+      "label": "Hierarchical level isometries",
+      "locator": "Explicit public theorem start lines: 47, 60, 77, 89, 155, 188, 197, 203, 211, 234, 240, 247, 265, 284, 293, 324",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete source read at dfbc5b4f4e964374431189c682520bff85e008e6; definitions and source attribution are inventoried separately."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "YW7B",
+      "proof_uses": [
+        "9408",
+        "6KJQ"
+      ],
+      "reason": "Exact shell grouping gives the extended geometric identity and its nondegenerate summability criterion."
+    },
+    {
+      "order": 1,
+      "tag": "0K45",
+      "proof_uses": [
+        "BW7V",
+        "9L60",
+        "LNKT"
+      ],
+      "reason": "The support ultrametric gives the convolution inequality; retaining return terms supplies the two geometric factors, and loops can be erased."
+    }
+  ]
+}

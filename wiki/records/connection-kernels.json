@@ -1,0 +1,259 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "connection-kernels",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 7
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 43,
+      "label": "Connection kernels and triangle bounds",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-connection-kernel",
+      "order": 0,
+      "label": "Connection-kernel positivity and triangle bounds",
+      "locator": "Named public declaration start lines: 46, 68, 88, 105, 122, 135, 144, 156, 167, 241, 267, 278, 290, 301, 312, 343",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies the product-law instances of 70KD, UZ7J and C2YT, with finite-family Gram identities and extended triangle bounds. The article allows more general random graphs; open-triangle decay and the second diagram comparison are separate."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 6,
+      "label": "Singleton lower bound and operator estimates",
+      "locator": "arXiv:2106.06400v3; Appendix A, Lemma A.1, Remark A.2 and the bounded-operator discussion, printed pp. 28–29",
+      "relationship": "Detailed prose proof with explicit operator and limiting hypotheses",
+      "status": "pending",
+      "note": "Uniform singleton probability yields an explicit common lower bound; row-and-column boundedness is proved by weighted Cauchy–Schwarz. No boundedness follows from the lower form bound alone. Source-inspected; not a compiled association or reviewed source correspondence."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 7,
+      "label": "Schur products, blocks and Ando comparison",
+      "locator": "arXiv:2106.06400v3; Appendix A, Proposition A.4, Theorems A.5–A.6 and Lemmas A.7–A.8, printed pp. 30–33",
+      "relationship": "Detailed prose proof with explicit operator and limiting hypotheses",
+      "status": "pending",
+      "note": "Gram matrices prove Schur positivity and tensor compression proves its norm bound. Completing the square proves the Schur complement under a uniform lower bound. Gram block factorizations prove the full semidefinite Ando statement without inverses. Source-inspected; not a compiled association or reviewed source correspondence."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 8,
+      "label": "Invariant roots and the faithful trace",
+      "locator": "arXiv:2106.06400v3; Appendix A, Lemma A.9, Proposition A.10 and Lemma A.11, printed pp. 34–35",
+      "relationship": "Detailed prose proof with explicit operator and limiting hypotheses",
+      "status": "pending",
+      "note": "Unitary conjugation preserves the unique positive square root, with norm exponent one half. Absolute convergence precedes signed mass transport. Transitivity proves faithfulness, and cyclicity proves positivity of the trace of a product. Source-inspected; not a compiled association or reviewed source correspondence."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 9,
+      "label": "Endpoint diagram comparison",
+      "locator": "arXiv:2106.06400v3; Proposition 1.8 and final proof in Appendix A, printed p. 35",
+      "relationship": "Detailed prose proof with explicit operator and limiting hypotheses",
+      "status": "pending",
+      "note": "Monotone convergence of the expanded nonnegative diagrams extends IZAO to a common monotone approximation with finite susceptibility. Finite-path coupling and the existing sharpness argument supply the independent-percolation critical specialization, also when the threshold is infinite. Source-inspected; not a compiled association or reviewed source correspondence."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 10,
+      "label": "Euclidean and hierarchical Fourier comparison",
+      "locator": "arXiv:2106.06400v3, Section 2, equations (2.8)–(2.10) and the final hierarchical paragraph, printed pp. 14–15",
+      "relationship": "Fourier proof with the hierarchical compact product dual",
+      "status": "pending",
+      "note": "Finite-set character quadratic forms prove nonnegativity of the summable kernel transform. Character orthogonality gives the diagrams, Hölder gives A <= Delta squared, and convolution Cauchy–Schwarz gives B <= A. Counting measure on the discrete group and normalized Haar measure on the compact dual are distinct. The existing dual-group diagnosis stays provisional."
+    },
+    {
+      "source": "perclib-hadamard-powers",
+      "order": 0,
+      "label": "Finite Hadamard-power comparison",
+      "locator": "Explicit public declaration start lines: 40, 61, 70, 77, 110",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Five explicit source theorems give the eigenbasis expansion and positive semidefinite comparison CS16, without entrywise positivity. The private source is pinned to 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672; no formal-status upgrade is made."
+    },
+    {
+      "source": "perclib-invariant-trace",
+      "order": 0,
+      "label": "Invariant group kernels and trace sums",
+      "locator": "Explicit public declaration start lines: 47, 56, 68, 78, 89, 98, 105, 113, 125, 142",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten explicit source theorems and generated additive versions give reindexing, absolute convergence, invariant products and extended row/column masses. General mass-transport trace positivity is separate. The private source is pinned to 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672; no formal-status upgrade is made."
+    },
+    {
+      "source": "perclib-triangle-decay",
+      "order": 0,
+      "label": "Open-triangle decay",
+      "locator": "Explicit public declaration start lines: 52, 80, 124, 178, 235, 295, 306, 321",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight explicit source theorems give bilinear kernel Cauchy–Schwarz, cofinite decay and uniform separation under the stated product-law and triangle hypotheses. The private source is pinned to 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672; no formal-status upgrade is made."
+    },
+    {
+      "source": "perclib-train10-analysis-discreteconvolution",
+      "order": 0,
+      "label": "Nonnegative group convolution",
+      "locator": "Explicit public theorem start lines: 50, 59, 69, 73, 79, 90, 97, 106, 143, 157, 165, 181, 189, 217, 227",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete source read at dfbc5b4f4e964374431189c682520bff85e008e6; definitions and source attribution are inventoried separately."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Uniform means in translated windows",
+      "locator": "arXiv:2508.18809v1 Theorem III.1.11 proof, uniform translated-window moment estimate; positivity supplies the centring step",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "A finite positive-semidefinite pairing bounds every translated ball sum by a centred radius-4R sum, without finite susceptibility or independence."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "R1HO",
+      "proof_uses": [
+        "70KD"
+      ],
+      "reason": "The article proves this extension from the stated tagged inputs, retaining boundedness, mass transport or monotone approximation where required."
+    },
+    {
+      "order": 1,
+      "tag": "0FTH",
+      "proof_uses": [
+        "TAB8",
+        "530W"
+      ],
+      "reason": "The article proves this extension from the stated tagged inputs, retaining boundedness, mass transport or monotone approximation where required."
+    },
+    {
+      "order": 2,
+      "tag": "AKHL",
+      "proof_uses": [
+        "N0HM",
+        "TAB8",
+        "Z4JP"
+      ],
+      "reason": "The article proves this extension from the stated tagged inputs, retaining boundedness, mass transport or monotone approximation where required."
+    },
+    {
+      "order": 3,
+      "tag": "F77F",
+      "proof_uses": [
+        "AKHL",
+        "Z4JP"
+      ],
+      "reason": "The article proves this extension from the stated tagged inputs, retaining boundedness, mass transport or monotone approximation where required."
+    },
+    {
+      "order": 4,
+      "tag": "QGQ1",
+      "proof_uses": [
+        "IZAO"
+      ],
+      "reason": "The article proves this extension from the stated tagged inputs, retaining boundedness, mass transport or monotone approximation where required."
+    },
+    {
+      "order": 5,
+      "tag": "F77A",
+      "proof_uses": [
+        "70KD"
+      ],
+      "reason": "Connection-kernel positivity gives nonnegative finite character quadratic forms; summability then gives the nonnegative Fourier transform."
+    },
+    {
+      "order": 6,
+      "tag": "MTUQ",
+      "proof_uses": [
+        "70KD",
+        "MRZO"
+      ],
+      "reason": "A finite positive-semidefinite pairing bounds every translated ball sum by a centred radius-4R sum, without finite susceptibility or independence."
+    },
+    {
+      "order": 7,
+      "tag": "70KD",
+      "proof_uses": [],
+      "reason": "Expanding the cluster squares gives the identity pointwise; taking expectations of a finite sum invokes no other wiki assertion."
+    },
+    {
+      "order": 8,
+      "tag": "UZ7J",
+      "proof_uses": [
+        "70KD"
+      ],
+      "reason": "Positivity of the restricted kernel (70KD) makes its cube positive semidefinite, and Cauchy-Schwarz for that matrix with finite exhaustion gives the bound."
+    },
+    {
+      "order": 9,
+      "tag": "96A2",
+      "proof_uses": [
+        "UZ7J",
+        "70KD"
+      ],
+      "reason": "The quadratic bound of UZ7J gives decay of T and T^2, and Cauchy-Schwarz for the positive semidefinite restrictions (70KD) controls the one-sided tail of the triangle."
+    },
+    {
+      "order": 10,
+      "tag": "C2YT",
+      "proof_uses": [
+        "UZ7J"
+      ],
+      "reason": "The preceding cubic bound (UZ7J) makes the entries finite and bounds T^3 by D; rearranging nonnegative sums gives A_o <= D Delta_o."
+    },
+    {
+      "order": 11,
+      "tag": "87W3",
+      "proof_uses": [
+        "70KD",
+        "CS16",
+        "C2YT"
+      ],
+      "reason": "Positivity of T (70KD) and the finite matrix comparison (CS16) under exhaustion make H positive; the invariant trace identity gives A_o-B_o>=0, and the first comparison (C2YT) gives A_o<=Delta_o^2."
+    },
+    {
+      "order": 12,
+      "tag": "N0HM",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 13,
+      "tag": "IZAO",
+      "proof_uses": [
+        "70KD",
+        "CS16",
+        "C2YT"
+      ],
+      "reason": "The proof reuses the boundedness and positivity arguments for T (70KD) and H (CS16), proves the trace identity by mass transport, and uses the first comparison (C2YT) for A<=Delta^2."
+    },
+    {
+      "order": 14,
+      "tag": "TAB8",
+      "proof_uses": [],
+      "reason": "Gram-matrix factorisation, a tensor-product compression and a weighted Cauchy-Schwarz estimate; no other wiki assertion is invoked."
+    },
+    {
+      "order": 15,
+      "tag": "530W",
+      "proof_uses": [],
+      "reason": "Completing the square and an orthogonal change of variables; no other wiki assertion is invoked."
+    },
+    {
+      "order": 16,
+      "tag": "Z4JP",
+      "proof_uses": [],
+      "reason": "Uniqueness of the positive square root and the spectral theorem; no other wiki assertion is invoked."
+    }
+  ]
+}

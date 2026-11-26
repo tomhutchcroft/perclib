@@ -1,0 +1,57 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "mass-transport",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 13
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 19,
+      "label": "Mass transport on countable groups",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-train5-mass-transport",
+      "order": 0,
+      "label": "Train 5 source contracts",
+      "locator": "Named public declaration start lines: 40, 52, 66, 81, 92, 106",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "IHJ3 is the countable specialization of a deterministic identity on arbitrary groups. X5NY gives the arbitrary-measure, measure-preserving-family statement; a group action and the full invariant bond law are special cases. Each explicit multiplicative theorem has a generated additive version. Full configuration-law invariance includes diagonal probabilities. Finite-cluster averaging and invariant-representative applications remain separate expository consequences."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "X5NY",
+      "proof_uses": [
+        "IHJ3"
+      ],
+      "reason": "Integrate the transport to obtain a diagonally invariant kernel, reindex by inversion, and exchange countable nonnegative sums and integrals."
+    },
+    {
+      "order": 1,
+      "tag": "4SZ9",
+      "proof_uses": [
+        "K5ZX"
+      ],
+      "reason": "The proof defines the finite-cluster transport f(omega,x)/|K_x| and applies expected mass transport under an invariant law (K5ZX)."
+    },
+    {
+      "order": 2,
+      "tag": "O0TO",
+      "proof_uses": [
+        "K5ZX"
+      ],
+      "reason": "The proof sends unit mass to the selected vertex of each infinite cluster and applies expected mass transport (K5ZX) to force the event to be null."
+    }
+  ]
+}

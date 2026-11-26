@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 469 (Q-135, part 1), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -16,7 +17,7 @@ public import Mathlib.Probability.Moments.SubGaussian
 public import Mathlib.Analysis.Complex.ExponentialBounds
 
 /-!
-# Hierarchical block-quantile amplification: scales and the connection step (Q-135, part 1)
+# Hierarchical block-quantile amplification: scales and the connection step
 
 The amplification step of 7AER (hierarchical-runaway) chooses a block scale `ℓ` and joins the
 large clusters of good sub-blocks by direct edges. This file proves the deterministic and
@@ -32,7 +33,7 @@ single-edge-family ingredients:
   kernel level `≥ c L^{-(d+α)(n+ℓ)}` fail to be joined with probability at most `1/(2N²)`.
 * `amplified_sq_ge` (**the amplification arithmetic**): `K ≥ N/(2e)` good blocks with clusters
   of size `R - 1 ≥ R/2`, `R² ≥ (A/β) L^{(d+α)n}` and `L^{(d-α)ℓ} ≥ 16e²` give
-  `(K(R-1))² ≥ (A/β) L^{(d+α)(n+ℓ)}`.
+  `(K(R - 1))² ≥ (A/β) L^{(d+α)(n+ℓ)}`.
 
 * `measure_count_le_le`, `exp_neg_two_mul_sq_le` (**many good blocks**): among independent
   events of probability `≥ p`, at most `|s| p - t` occur with probability `≤ exp(-2t²/|s|)`;
@@ -97,7 +98,8 @@ theorem law_all_closed_le {V : Type*} (J : Sym2 V → ℝ≥0) (β : ℝ≥0) (F
     law (intensityProfile J β) {ω | ∀ e ∈ F, e ∉ ω} ≤
       ENNReal.ofReal (Real.exp (-((β : ℝ) * j₀ * F.card))) := by
   -- complement duality and the all-open product
-  have hset : {ω : Config V | ∀ e ∈ F, e ∉ ω} = {ω | ωᶜ ∈ {ω' : Config V | (F : Set (Sym2 V)) ⊆ ω'}} := by
+  have hset : {ω : Config V | ∀ e ∈ F, e ∉ ω} = {ω | ωᶜ ∈
+      {ω' : Config V | (F : Set (Sym2 V)) ⊆ ω'}} := by
     ext ω
     simp only [Set.mem_ofPred_eq, Set.subset_def, Finset.mem_coe, Set.mem_compl_iff]
   have hmeas : MeasurableSet {ω' : Config V | (F : Set (Sym2 V)) ⊆ ω'} := by
@@ -113,7 +115,7 @@ theorem law_all_closed_le {V : Type*} (J : Sym2 V → ℝ≥0) (β : ℝ≥0) (F
     intro e _
     rw [← ENNReal.ofReal_coe_nnreal]
     congr 1
-    show 1 - (1 - Real.exp (-(β : ℝ) * J e)) = _
+    change 1 - (1 - Real.exp (-(β : ℝ) * J e)) = _
     ring
   rw [Finset.prod_congr rfl hfac, ← ENNReal.ofReal_prod_of_nonneg fun e _ => (Real.exp_pos _).le]
   refine ENNReal.ofReal_le_ofReal ?_
@@ -160,7 +162,7 @@ theorem exp_neg_le_inv_two_mul_sq {c β L s a : ℝ} (hc : 0 < c) (hβ : 0 < β)
 /-! ### The amplification arithmetic -/
 
 /-- **Amplification arithmetic.** If `L^{(d-α)ℓ} ≥ 16e²`, `N = L^{dℓ}`, `K ≥ N/(2e)`,
-`R ≥ 2` and `R² ≥ B L^{(d+α)n}`, then `(K(R-1))² ≥ B L^{(d+α)(n+ℓ)}`. -/
+`R ≥ 2` and `R² ≥ B L^{(d+α)n}`, then `(K(R - 1))² ≥ B L^{(d+α)(n+ℓ)}`. -/
 theorem amplified_sq_ge {L d α B R K : ℝ} (hL : 0 < L) {n ℓ : ℕ}
     (hℓ : 16 * Real.exp 1 ^ 2 ≤ L ^ ((d - α) * ℓ))
     (hK : L ^ (d * ℓ) / (2 * Real.exp 1) ≤ K) (hR : 2 ≤ R)
@@ -177,7 +179,8 @@ theorem amplified_sq_ge {L d α B R K : ℝ} (hL : 0 < L) {n ℓ : ℕ}
     have h1 : (L ^ (d * ℓ) / (2 * Real.exp 1)) ^ 2 ≤ K ^ 2 := pow_le_pow_left₀ (by positivity) hK 2
     rw [div_pow, hsplit] at h1
     have hpos : 0 < L ^ ((d + α) * ℓ) := Real.rpow_pos_of_pos hL _
-    calc 4 * L ^ ((d + α) * ℓ) = L ^ ((d + α) * ℓ) * (16 * Real.exp 1 ^ 2) / (2 * Real.exp 1) ^ 2 := by
+    calc 4 * L ^ ((d + α) * ℓ) = L ^ ((d + α) * ℓ) * (16 * Real.exp 1 ^ 2) /
+        (2 * Real.exp 1) ^ 2 := by
           field_simp; ring
       _ ≤ L ^ ((d + α) * ℓ) * L ^ ((d - α) * ℓ) / (2 * Real.exp 1) ^ 2 := by
           gcongr
@@ -259,9 +262,9 @@ theorem exp_neg_two_mul_sq_le {N : ℝ} (hN : 0 < N) :
   rw [this]
   nlinarith [sq_nonneg N]
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
-/-- The issue's example `L = 2`, `d = 3`, `α = 1`: a scale `ℓ` exists. -/
+/-- The example `L = 2`, `d = 3`, `α = 1`: a scale `ℓ` exists. -/
 example : ∃ ℓ : ℕ, 1 ≤ ℓ ∧ Real.exp (-(((2 : ℕ) : ℝ) ^ (3 * ℓ) / (8 * Real.exp 1))) ≤ 1 / 4 ∧
     16 * Real.exp 1 ^ 2 ≤ ((2 : ℕ) : ℝ) ^ ((((3 : ℕ) : ℝ) - 1) * ℓ) :=
   exists_amplification_scale le_rfl one_pos (by norm_num)

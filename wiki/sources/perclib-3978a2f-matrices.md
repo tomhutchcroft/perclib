@@ -1,0 +1,51 @@
+# Matrix and open-triangle contracts at 3978a2f
+
+This inventory records **23 explicit named public theorems in three complete files**, totalling 767 lines, at private lrp merged main 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672. Imports, private helpers, anonymous examples and automatically generated additive declarations are excluded from this explicit source-start census. All three files have been read in full. These are source-inspected contracts, not compiled tag associations or independent correspondence reviews.
+
+The finite Hadamard comparison, group trace identity and product-law decay arguments reconcile with the existing connection-kernel article. They do not formalize every general bounded-operator, mass-transport, Fourier or endpoint theorem newly supplied there.
+
+## Analysis/HadamardPowers
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L40](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/HadamardPowers.lean) | On a finite real index type, a matrix acting diagonally on a symmetric matrix’s orthonormal eigenbasis has the corresponding entry expansion. | [Argument](../articles/connection-kernels.md#section-matrix-comparison) |
+| [L61](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/HadamardPowers.lean) | Every natural power acts on that eigenbasis by the same power of its eigenvalues, including power zero. | [Argument](../articles/connection-kernels.md#section-matrix-comparison) |
+| [L70](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/HadamardPowers.lean) | The entry expansion for each natural power follows; positive eigenvalues are not required for this identity. | [Argument](../articles/connection-kernels.md#section-matrix-comparison) |
+| [L77](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/HadamardPowers.lean) | For any real symmetric matrix, the Hadamard-power difference has the exact paired eigenvector rank-one expansion of CS16. | [Argument](../articles/connection-kernels.md#section-matrix-comparison) |
+| [L110](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Analysis/HadamardPowers.lean) | For a positive semidefinite real matrix, each coefficient in that expansion is nonnegative, so the difference is positive semidefinite; no entrywise sign hypothesis is imposed. | [Argument](../articles/connection-kernels.md#section-matrix-comparison) |
+
+## Probability/InvariantTrace
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L47](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | For a left-invariant kernel on an arbitrary group, the entry from v to the identity equals the entry from the identity to the inverse of v. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L56](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | The two formal real trace tsums agree by inversion reindexing, without a summability hypothesis; this algebraic identity alone does not assert convergence. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L68](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | A square-summable root row and root column make their entrywise product absolutely summable, using twice the absolute product at most the sum of squares. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L78](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | For two invariant real kernels with every row and column square-summable, both trace series converge absolutely and are equal. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L89](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | Kernel multiplication preserves invariance for a multiplicative topological additive commutative monoid, using formal tsums; analytic convergence is a separate issue. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L98](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | Entrywise multiplication preserves invariance for any multiplicative codomain. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L105](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | For an invariant extended nonnegative kernel, every row sum equals the root row sum; no finiteness or symmetry is required. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L113](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | Every column sum also equals the root row sum, by translation and inversion; no symmetry is required. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L125](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | Every row of the n-fold kernel iterate from the identity has mass chi to the n, including n = 0 and infinite chi. | [Argument](../articles/connection-kernels.md#section-group-source) |
+| [L142](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Probability/InvariantTrace.lean) | Every column of that iterate has the same mass chi to the n, with extended nonnegative sums. | [Argument](../articles/connection-kernels.md#section-group-source) |
+
+## Percolation/Bond/TriangleDecay
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L52](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | For extended nonnegative numbers, a square inequality implies the original inequality. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+| [L80](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | On countable vertices, finite-valued nonnegative coefficient families obey the connection-kernel bilinear Cauchy–Schwarz inequality, with extended sums and no finite triangle assumption. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+| [L124](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | A finite diagonal triangle at v makes the connection probability to v tend to zero outside finite sets; this source statement has no countability assumption. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+| [L178](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | On countable vertices, a uniform finite bound on all diagonal triangles gives decay of the quadratic connection sum outside finite sets. The actual export retains the uniform bound. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+| [L235](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | On countable vertices, the same uniform diagonal triangle bound gives decay of the cubic connection sum outside finite sets at every root. | [Argument](../articles/connection-kernels.md#section-localization) |
+| [L295](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | That cofinite limit gives a finite exceptional set for every positive extended threshold, with a strict inequality off the set. | [Argument](../articles/connection-kernels.md#section-localization) |
+| [L306](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | A vertex equivalence preserving the full pair profile preserves the cubic kernel; countability is assumed. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+| [L321](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/TriangleDecay.lean) | If profile-preserving bijections are transitive and also preserve a real-valued function d, one finite root triangle gives uniform decay over pairs with d at least r. No metric axioms or local finiteness are required. | [Argument](../articles/connection-kernels.md#section-decay-source) |
+
+## Scope boundaries
+
+The trace module works on arbitrary groups and carries additive versions via its source attribute. Its unconditional real-tsum identity is a reindexing identity, not an assertion that a divergent series converges. Square-summability supplies the analytic interpretation. It does not state the trace theorem for a general transitive mass-transport action or the positive-product trace inequality.
+
+The decay module uses the independent bond kernel. The article’s random-graph statement is broader. Its final separation function may be any invariant real-valued function; the existing metric statement is a specialization. The quadratic decay export assumes the uniform triangle bound even though one introductory bullet suggests a weaker pairwise condition. This inventory follows the actual theorem signature, without changing a published-source erratum.
+
+The finite matrix source implements the CS16 expansion, including singular matrices and signed entries. The infinite-operator Ando theorem, invariant square roots, the critical-limit theorem and the Fourier comparison are additional prose obligations, not newly extracted declarations. No manifest or correspondence-review status is authored here.

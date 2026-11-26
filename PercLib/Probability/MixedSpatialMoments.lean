@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 463 (Q-129), written on 2026-11-16 by PROVER-E: volume bias bounds absolute
-mixed spatial moments of a random finite set (wiki spatial-cutoff-moments, tag VMEJ). No
-upstream proof is copied, no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: volume bias bounds absolute mixed spatial moments of a random
+finite set (wiki spatial-cutoff-moments, tag VMEJ). No upstream proof is copied, no definition is
+added and no Input is introduced.
 -/
 module
 
@@ -73,7 +77,7 @@ theorem enorm_prod_real {ι : Type*} (s : Finset ι) (g : ι → ℝ) :
     ‖∏ j ∈ s, g j‖ₑ = ∏ j ∈ s, ‖g j‖ₑ := by
   simp only [enorm_eq_nnnorm, nnnorm_prod, ENNReal.ofNNReal_finsetProd]
 
-/-- **VMEJ, pointwise.** For a finite nonempty `K` and products of linear forms of total degree
+/-- **Pointwise.** For a finite nonempty `K` and products of linear forms of total degree
 `p ≥ 1`, `∑_{x ∈ K^n} ∏_i |P_i(x_i)| ≤ p⁻¹ ∑_{ij} |K|^{n-1} ∑_{y ∈ K} |⟨y, u_{ij}⟩|^p`. -/
 theorem sum_piFinset_prod_le (K : Finset E) {n p : ℕ} (deg : Fin n → ℕ)
     (u : (i : Fin n) → Fin (deg i) → E) (hp : ∑ i, deg i = p) (hp1 : 1 ≤ p) :
@@ -109,7 +113,8 @@ theorem sum_piFinset_prod_le (K : Finset E) {n p : ℕ} (deg : Fin n → ℕ)
         rw [Fintype.sum_piFinset_apply (fun y => ‖⟪y, u f.1 f.2⟫‖ₑ ^ p) K f.1,
           Fintype.card_fin, nsmul_eq_mul, Nat.cast_pow]
 
-/-- **Cauchy–Schwarz over `K`.** `|K|^k ∑_{y∈K} g(y) ≤ (|K| |K|^{2k})^{1/2} (∑_{y∈K} g(y)²)^{1/2}`. -/
+/-- **Cauchy–Schwarz over `K`.** `|K|^k ∑_{y∈K} g(y) ≤ (|K| |K|^{2k})^{1/2} (∑_{y∈K} g(y)²)^{1/2}`.
+-/
 theorem pow_mul_sum_le {α : Type*} (K : Finset α) (g : α → ℝ≥0∞) (k : ℕ) :
     (#K : ℝ≥0∞) ^ k * ∑ y ∈ K, g y ≤
       ((#K : ℝ≥0∞) * (#K : ℝ≥0∞) ^ (2 * k)) ^ (1 / 2 : ℝ) *
@@ -153,11 +158,11 @@ theorem lintegral_pow_mul_sum_le (P : Measure Ω) {α : Type*} [MeasurableSpace 
 
 variable [MeasurableSpace E] [OpensMeasurableSpace E]
 
-/-- **VMEJ.** Let `K` be a random finite nonempty subset of `E` under a probability measure `P`,
-measurable in the sense that `ω ↦ ∑_{x ∈ K ω} g x` is measurable for measurable `g`, with
-`χ = E|K| < ∞`. Let `P_i(x) = ∏_{j < deg i} ⟨x, u i j⟩` for `i < n`, of total degree
-`p = ∑ deg i ≥ 1`. Writing `E_Q[h] = E[|K| h]/χ` and the uniform choice of `X ∈ K` as the
-average `|K|⁻¹ ∑_{x∈K}`,
+/-- **Mixed spatial moments.** Let `K` be a random finite nonempty subset of `E` under a probability
+measure `P`, measurable in the sense that `ω ↦ ∑_{x ∈ K ω} g x` is measurable for measurable `g`,
+with `χ = E|K| < ∞`. Let `P_i(x) = ∏_{j < deg i} ⟨x, u i j⟩` for `i < n`, of total degree
+`p = ∑ deg i ≥ 1`. Writing `E_Q[h] = E[|K| h]/χ` and the uniform choice of `X ∈ K` as the average
+`|K|⁻¹ ∑_{x∈K}`,
 `E ∑_{x ∈ K^n} ∏_i |P_i(x_i)| ≤ χ (E_Q |K|^{2n-2})^{1/2} max_{ij} (E_Q |⟨X, u_{ij}⟩|^{2p})^{1/2}`.
 -/
 theorem lintegral_mixedMoment_le (P : Measure Ω) [IsProbabilityMeasure P] (K : Ω → Finset E)
@@ -296,7 +301,7 @@ theorem rpow_half_le_of_le_mul_sq {a c X : ℝ≥0∞} (h : a ≤ c * X ^ 2) :
         ← ENNReal.rpow_mul]
       norm_num
 
-/-- **VMEJ, corollary (fixed error terms).** Under the hypotheses of `lintegral_mixedMoment_le`,
+/-- **Corollary (fixed error terms).** Under the hypotheses of `lintegral_mixedMoment_le`,
 if `E_Q|K|^{2n-2} ≤ (1+ε₁) (4n-5)‼ m^{2n-2}` and
 `E_Q|⟨X,u_{ij}⟩|^{2p} ≤ (1+ε₂) C₀^{2p} (2p)! σ^{2p}` for every factor, then the mixed moment is
 at most `((1+ε₁)(1+ε₂))^{1/2} C^{n+p} n! p! χ m^{n-1} σ^p` with `C = max 4 (2 C₀)`. -/
@@ -407,7 +412,7 @@ theorem tendsto_mixedMoment_error {ι : Type*} {l : Filter ι} {ε₁ ε₂ : ι
     calc (1 : ℝ≥0∞) = 1 * 1 := (one_mul 1).symm
       _ ≤ (1 + ε₁ r) * (1 + ε₂ r) := by gcongr <;> exact le_self_add
 
-/-- **VMEJ, corollary along a parameter.** For a family `K_r` indexed by `r` along a filter `l`,
+/-- **Corollary along a parameter.** For a family `K_r` indexed by `r` along a filter `l`,
 if `E_Q|K_r|^{2n-2} ≤ (1+ε₁(r)) (4n-5)‼ m_r^{2n-2}` and
 `E_Q|⟨X_r,u_{ij}⟩|^{2p} ≤ (1+ε₂(r)) C₀^{2p} (2p)! σ_r^{2p}` with `ε₁, ε₂ → 0`, then there is
 `ε → 0` (explicitly `ε = ((1+ε₁)(1+ε₂))^{1/2} - 1`) with
@@ -452,8 +457,8 @@ theorem singleton_hypotheses (x : E) :
   refine ⟨fun _ => singleton_nonempty x, fun g _ => measurable_const, ?_⟩
   simp
 
-/-- **D-5 witness for VMEJ.** For a deterministic single point the theorem reads
-`∏_i |P_i(x)| ≤ max_{ij} (|⟨x, u_{ij}⟩|^{2p})^{1/2}`. -/
+/-- **Non-vacuity witness for `lintegral_mixedMoment_le`.** For a deterministic single point the
+theorem reads `∏_i |P_i(x)| ≤ max_{ij} (|⟨x, u_{ij}⟩|^{2p})^{1/2}`. -/
 theorem prod_le_of_singleton (x : E) {n p : ℕ} (deg : Fin n → ℕ)
     (u : (i : Fin n) → Fin (deg i) → E) (hp : ∑ i, deg i = p) (hp1 : 1 ≤ p) :
     ∏ i, ‖∏ j, ⟪x, u i j⟫‖ₑ ≤ ⨆ f : (Σ i, Fin (deg i)),

@@ -1,0 +1,84 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-whitney-sums",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 151
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Deterministic localization and Whitney-to-grid comparison",
+      "locator": "arXiv:math/0106036v4, Section 8.2, Whitney definitions (8.1), Theorem 8.3 and proof, Lemma 8.4, and Corollary 8.5 with (8.4). Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written global moment and covering proof by direct Whitney-to-grid comparison",
+      "status": "pending",
+      "note": "The driver bounds the hull and the forward image of every relevant Whitney-square centre. A nearby dyadic grid point has a uniformly positive fraction of the image height and comparable derivative scale. Hyperbolic area bounds assignment multiplicity; the constants are uniform over the driver."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Finite moments in a window controlled by the Brownian maximum",
+      "locator": "arXiv:math/0106036v4, Section 8.2, Whitney definitions (8.1), Theorem 8.3 and proof, Lemma 8.4, and Corollary 8.5 with (8.4). Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written global moment and covering proof by direct Whitney-to-grid comparison",
+      "status": "pending",
+      "note": "At grid level n, the event that the driving maximum is at most n permits a deterministic window and the derivative moment bound. Its complement is bounded by the number of grid points times a Gaussian tail. This handles the correlation between the driver and the inverse map without an independence assumption."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "The full expected Whitney-sum threshold",
+      "locator": "arXiv:math/0106036v4, Section 8.2, Whitney definitions (8.1), Theorem 8.3 and proof, Lemma 8.4, and Corollary 8.5 with (8.4). Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written global moment and covering proof by direct Whitney-to-grid comparison",
+      "status": "pending",
+      "note": "The upper comparison gives finite expectation above the exponent. Removing large derivative scales from the divergent critical localized sum costs only a finite upper moment; each remaining image point lies close to the hull at positive height and can be assigned to a Whitney square with bounded multiplicity. Smaller powers follow from side lengths at most one."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "The expected boundary-covering lower limsup",
+      "locator": "arXiv:math/0106036v4, Section 8.2, Whitney definitions (8.1), Theorem 8.3 and proof, Lemma 8.4, and Corollary 8.5 with (8.4). Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written global moment and covering proof by direct Whitney-to-grid comparison",
+      "status": "pending",
+      "note": "Fine Whitney squares above height twice h lie within a bounded multiple of their side length of the boundary above h. Planar packing compares their number with the covering number. Coarse levels have finite expectation, and divergence of the critical sum rules out every summable logarithmic upper bound."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "IDL1",
+      "proof_uses": [],
+      "reason": "The driver bounds the hull and the forward image of every relevant Whitney-square centre. A nearby dyadic grid point has a uniformly positive fraction of the image height and comparable derivative scale. Hyperbolic area bounds assignment multiplicity; the constants are uniform over the driver."
+    },
+    {
+      "order": 1,
+      "tag": "HQI8",
+      "proof_uses": [
+        "EG6U"
+      ],
+      "reason": "At grid level n, the event that the driving maximum is at most n permits a deterministic window and the derivative moment bound. Its complement is bounded by the number of grid points times a Gaussian tail. This handles the correlation between the driver and the inverse map without an independence assumption."
+    },
+    {
+      "order": 2,
+      "tag": "J0CG",
+      "proof_uses": [
+        "IDL1",
+        "HQI8",
+        "T3F8",
+        "AVHR"
+      ],
+      "reason": "The upper comparison gives finite expectation above the exponent. Removing large derivative scales from the divergent critical localized sum costs only a finite upper moment; each remaining image point lies close to the hull at positive height and can be assigned to a Whitney square with bounded multiplicity. Smaller powers follow from side lengths at most one."
+    },
+    {
+      "order": 3,
+      "tag": "K5PX",
+      "proof_uses": [
+        "J0CG"
+      ],
+      "reason": "Fine Whitney squares above height twice h lie within a bounded multiple of their side length of the boundary above h. Planar packing compares their number with the covering number. Coarse levels have finite expectation, and divergence of the critical sum rules out every summable logarithmic upper bound."
+    }
+  ]
+}

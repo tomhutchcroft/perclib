@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 177 (Q-27), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied.
 -/
 module
 
@@ -20,7 +21,7 @@ public import PercLib.Probability.Coupling.Monotone
 On a finite vertex type, `κ(ω) = Nat.card (openGraph ω).ConnectedComponent` is the number
 of open clusters. This file proves:
 
-* `κ(ω) = ∑_v 1 / |K_v(ω)|`, so `E κ = ∑_v E[1 / |K_v|]`;
+* `κ(ω) = ∑_v 1 / |K_v(ω)|`, so `E κ = ∑_v E[1 / |K_v|]` under any finite measure;
 * `∑_v χ(v) = E ∑_C |C|²`, the sum over the clusters;
 * `κ` is antitone in `ω`, and opening one pair lowers it by at most one;
 * `E_{q'} κ ≤ E_q κ` when `q ≤ q'`.
@@ -61,17 +62,13 @@ theorem card_connectedComponent_eq_sum_inv [Fintype V] (ω : Config V) :
   rw [tsum_fintype, Finset.sum_const, Finset.card_univ, ← Nat.card_eq_fintype_card,
     nsmul_eq_mul, mul_one]
 
-/-- On a finite vertex type every configuration function is integrable. -/
-theorem integrable_of_fintype [Fintype V] (q : Sym2 V → unitInterval) (f : Config V → ℝ) :
-    Integrable f (law q) :=
-  Integrable.of_finite
-
-/-- **Expected number of clusters.** -/
-theorem integral_card_connectedComponent [Fintype V] (q : Sym2 V → unitInterval) :
-    ∫ ω, (Nat.card (openGraph ω).ConnectedComponent : ℝ) ∂law q =
-      ∑ v, ∫ ω, 1 / ((cluster ω v).ncard : ℝ) ∂law q := by
+/-- **Expected number of clusters**, under any finite measure on configurations. -/
+theorem integral_card_connectedComponent [Fintype V] (μ : Measure (Config V))
+    [IsFiniteMeasure μ] :
+    ∫ ω, (Nat.card (openGraph ω).ConnectedComponent : ℝ) ∂μ =
+      ∑ v, ∫ ω, 1 / ((cluster ω v).ncard : ℝ) ∂μ := by
   simp_rw [card_connectedComponent_eq_sum_inv]
-  exact integral_finsetSum _ fun v _ => integrable_of_fintype q _
+  exact integral_finsetSum _ fun v _ => Integrable.of_finite
 
 /-- The cluster volumes add up to the sum of the squared cluster sizes. -/
 theorem sum_encard_cluster_eq [Fintype V] (ω : Config V) :
@@ -188,7 +185,7 @@ theorem integral_card_connectedComponent_anti [Fintype V] {q q' : Sym2 V → uni
       rw [Nat.cast_sub (card_connectedComponent_le ω)]
       ring
     simp_rw [hpt]
-    rw [integral_sub (integrable_const _) (integrable_of_fintype r _), integral_const,
+    rw [integral_sub (integrable_const _) Integrable.of_finite, integral_const,
       probReal_univ, one_smul,
       integral_eq_lintegral_of_nonneg_ae (.of_forall fun ω => Nat.cast_nonneg _)
         (measurable_of_finite _).aestronglyMeasurable]

@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 225, Q-48, items 1 to 3). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -29,12 +31,12 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
 variable {V : Type*}
 
+open Classical in
 /-- Open paths realise connections almost surely as `G`-paths whose edges are open. -/
 theorem ae_exists_path_of_mem_conn [Countable V] (G : SimpleGraph V) (q : Sym2 V → unitInterval)
     (hoff : ∀ e, ¬ e.IsDiag → e ∉ G.edgeSet → q e = 0) (x y : V) :
@@ -51,6 +53,7 @@ theorem ae_exists_path_of_mem_conn [Countable V] (G : SimpleGraph V) (q : Sym2 V
   rw [openGraph, SimpleGraph.edgeSet_fromEdgeSet] at h1
   exact h1.1
 
+open Classical in
 /-- The probability that a `G`-path of length `n + 1` is open is at most `p^{n+1}`. -/
 theorem law_path_open_le (G : SimpleGraph V) (q : Sym2 V → unitInterval) (p : unitInterval)
     (hle : ∀ e ∈ G.edgeSet, q e ≤ p) {x y : V} (r : G.Path x y) {n : ℕ}

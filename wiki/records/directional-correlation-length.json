@@ -1,0 +1,107 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "directional-correlation-length",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 20
+    },
+    {
+      "collection": "methods",
+      "order": 31
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-correlation-length",
+      "order": 0,
+      "label": "Connection distance and its directional limit",
+      "locator": "Named theorem start lines: 40, 44, 49, 59, 63, 79, 97, 105, 129, 158",
+      "relationship": "Complete grouped source-contract exposition with explicit additional applications",
+      "status": "pending",
+      "note": "NZMZ uses the extended convention minus log zero = infinity; 8TZJ gives the symmetric triangle inequality from Harris. K2LV retains countability, an Abelian group, translation invariance of the two-point function and positivity along every positive multiple. The infimum bound itself needs neither invariance nor Harris. Real-log helpers at zero use totalized conventions, not the extended distance. The all-open witness has zero rate. I8WP and 23RT are additional deductions from lattice path counts and a direct long bond respectively, not source exports. Positive small-parameter lattice rate is not extended to the entire subcritical phase."
+    },
+    {
+      "source": "hutchcroft-book",
+      "order": 0,
+      "label": "Directional correlation length",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8TZJ",
+      "proof_uses": [
+        "UPFU"
+      ],
+      "reason": "Positive association and concatenation imply the multiplicative two-point inequality; negative logarithms give the triangle inequality."
+    },
+    {
+      "order": 1,
+      "tag": "K2LV",
+      "proof_uses": [
+        "8TZJ"
+      ],
+      "reason": "Translation invariance converts the triangle inequality into subadditivity along the direction."
+    },
+    {
+      "order": 2,
+      "tag": "I8WP",
+      "proof_uses": [
+        "K2LV",
+        "F3YB",
+        "8QCR",
+        "8WML"
+      ],
+      "reason": "The directional limit, path-count growth and lattice metric turn the tail of the open-path sum into a positive exponential rate."
+    },
+    {
+      "order": 3,
+      "tag": "23RT",
+      "proof_uses": [
+        "B2ZL",
+        "E771"
+      ],
+      "reason": "The direct long bond forces zero exponential rate; summability of the power kernel and the intensity row estimate give finite small-intensity susceptibility."
+    },
+    {
+      "order": 4,
+      "tag": "Y8RX",
+      "proof_uses": [
+        "8TZJ",
+        "K2LV"
+      ],
+      "reason": "Subadditivity, integer homogeneity and Lipschitz extension give a seminorm. A finite rational directional net upgrades directional limits to a uniform error bound."
+    },
+    {
+      "order": 5,
+      "tag": "OFY2",
+      "proof_uses": [
+        "Y8RX",
+        "YVJT",
+        "RDF0"
+      ],
+      "reason": "Finite-range exponential radius decay gives a positive lower bound on the norm. Sharpness supplies finite susceptibility throughout the nearest-neighbour subcritical phase."
+    },
+    {
+      "order": 6,
+      "tag": "5HID",
+      "proof_uses": [
+        "USAC",
+        "Y8RX"
+      ],
+      "reason": "The first-exit inequality gives a convolution with a contracting bounded-support kernel. Finite iteration and support bounds yield spatial exponential decay; directional limits give the length comparison."
+    },
+    {
+      "order": 7,
+      "tag": "NZMZ",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

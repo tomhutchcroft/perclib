@@ -1,0 +1,115 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sharp-supercritical-field",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 195
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 0,
+      "label": "Double marked connections in induced subgraphs",
+      "locator": "Section A.6, (A.76)–(A.79) and (A.83)–(A.89), printed pp.809–811 / PDF indices84–86",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 1,
+      "label": "Sharpened magnetization differential inequality",
+      "locator": "Section A.6, (A.73)–(A.89), printed pp.808–811 / PDF indices83–86",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 2,
+      "label": "Valid field rectangle",
+      "locator": "Section A.4, (A.40)–(A.48), printed pp.804–805 / PDF indices79–80",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 3,
+      "label": "Logarithmic-error field lower bound",
+      "locator": "Section A.4, Lemma A.6, (A.37)–(A.50); new rectangle retains only a logarithmic error",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 4,
+      "label": "Leading root-tail lower bound",
+      "locator": "Section A.4, Proposition A.2 proof, (A.51)–(A.54); leading lower bound with logarithmic error proved here",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 5,
+      "label": "Root-mark event distinction",
+      "locator": "Section A.5, (A.55)–(A.58), printed p.806 / PDF index81",
+      "relationship": "Written finite-graph argument with the retained error and event convention explicit",
+      "status": "pending",
+      "note": "JEMS publisher PDF extracted text; no visual-page check or compiled association. The printed power-law error and the separate lower double-connection route are not certified."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "ZHGE",
+      "proof_uses": [],
+      "reason": "Double marked connections in induced subgraphs. Distinct marks, finite conditioning and parameter ranges are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "BJU4",
+      "proof_uses": [
+        "ZHGE"
+      ],
+      "reason": "Sharpened magnetization differential inequality. Distinct marks, finite conditioning and parameter ranges are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "464C",
+      "proof_uses": [],
+      "reason": "Valid field rectangle. Distinct marks, finite conditioning and parameter ranges are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "7DLQ",
+      "proof_uses": [
+        "BJU4",
+        "464C",
+        "UQ45",
+        "1T2M"
+      ],
+      "reason": "Logarithmic-error field lower bound. Distinct marks, finite conditioning and parameter ranges are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "CI72",
+      "proof_uses": [
+        "7DLQ",
+        "1T2M"
+      ],
+      "reason": "Leading root-tail lower bound. Distinct marks, finite conditioning and parameter ranges are explicit."
+    },
+    {
+      "order": 5,
+      "tag": "E7N9",
+      "proof_uses": [],
+      "reason": "Root-mark event distinction. Distinct marks, finite conditioning and parameter ranges are explicit."
+    }
+  ]
+}

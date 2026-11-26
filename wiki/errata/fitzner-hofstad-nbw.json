@@ -1,0 +1,41 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "fitzner-hofstad-nbw",
+  "entries": [
+    {
+      "id": "operator-norm-spectral-radius",
+      "title": "The directional matrix norm is not its spectral radius",
+      "status": "provisional",
+      "locator": "arXiv:1212.6390v1 (11 December 2012), (3.12)–(3.15), printed p.14 / PDF index13, and Theorem 3.5 proof, printed p.17 / PDF index16; also the 14 January 2012 author PDF, proof following Lemmas 3.6–3.7, printed p.18. Extracted text checked; journal and visual comparison unavailable.",
+      "claim": "The proof identifies the Euclidean operator norm of the directional matrix with the largest eigenvalue modulus.",
+      "problem": "This needs normality. On the hypercube the matrix is (C-I)D, with C all ones and D diagonal with entries +1 or -1. Its Euclidean norm is always m-1, since D is orthogonal. For m=3 and D=diag(-1,1,1), its eigenvalues are -1 and the two roots of r^2-r+2; the spectral radius is sqrt(2), strictly below the norm 2.",
+      "correction": "The scalar path-count recurrence gives separate edge- and middle-frequency estimates, including repeated roots. These prove the required two-time hypercube mixing bound directly. They do not establish the source's sharper coefficient-one Fourier estimate or all torus conclusions.",
+      "tags": [
+        "1PM2",
+        "GIF2"
+      ],
+      "issues": [],
+      "leanImpact": "A formal proof must not replace a nonnormal operator norm by eigenvalue moduli. The scalar recurrence is an alternative route for the hypercube mixing target. The sharper source estimate and general torus statements remain separate proof obligations.",
+      "resolution": {
+        "status": "workaround",
+        "summary": "A direct recurrence proof recovers the hypercube mixing conclusion; the full scope of the original norm-based argument remains unresolved.",
+        "scale": "substantial",
+        "impact": "The proof mechanism is replaced, not a constant or typographical symbol. The mixing conclusion needed here is preserved, but this is not a complete repair of every result using the original estimate."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1212.6390v1 (11 December 2012)",
+    "checkedUrl": "https://arxiv.org/abs/1212.6390v1",
+    "method": "The directional norm step and hypercube proof were compared in extracted text with the earlier dated author PDF. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The single report is observed in both checked manuscripts. It does not establish a defect in the 2013 Journal of Statistical Physics edition, which has not been compared here. The scalar-recurrence workaround does not certify the sharper source bound. The report remains provisional.",
+    "comparisons": [
+      {
+        "version": "Author PDF dated 14 January 2012",
+        "url": "https://rhofstad.win.tue.nl/NBW_fin.pdf",
+        "status": "compared",
+        "findings": "The proof following Lemmas 3.6–3.7, p.18, uses the same norm/spectral-radius step as the December preprint. The January date is retained as printed; this is an earlier manuscript, not a later correction."
+      }
+    ]
+  }
+}

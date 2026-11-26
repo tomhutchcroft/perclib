@@ -1,0 +1,79 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "multiplicative-coalescent",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 21
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 1,
+      "label": "Finite multiplicative coalescent",
+      "locator": "Section 2; initial transition display and equation (2.1)",
+      "relationship": "Written derivation",
+      "status": "pending",
+      "note": "Z960 proves the edge-clock generator and the local holding-rate correction. The correction is provisional pending source-author confirmation; the printed generator is retained."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 2,
+      "label": "Single and mixed moment equations",
+      "locator": "Lemma 2.3; equation (2.4)",
+      "relationship": "Written derivation",
+      "status": "pending",
+      "note": "22H8 gives complete finite derivations, including the general coefficient formula omitted by the source and the two-factor merger correction."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 3,
+      "label": "Finite determination of the size law",
+      "locator": "Discussion after (2.4)",
+      "relationship": "Written derivation",
+      "status": "pending",
+      "note": "W8PB proves finite determination of the size multiset, without a labelled-law or infinite-ODE uniqueness claim."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 30,
+      "label": "Exact norm covariance equations",
+      "locator": "Lemma 6.9",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "C1BP derives both exact equations directly from the merger generator, including centered third and mixed moments and every diagonal term."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 2,
+      "tag": "Z960",
+      "proof_uses": [],
+      "reason": "The finite generator is proved directly from the edge clocks; no other wiki assertion is invoked. The hierarchical terminal law is identified by the layer decomposition on the exact block layers page."
+    },
+    {
+      "order": 3,
+      "tag": "22H8",
+      "proof_uses": [
+        "Z960"
+      ],
+      "reason": "Expand merger increments and subtract the ordered-pair diagonal in the finite generator."
+    },
+    {
+      "order": 28,
+      "tag": "C1BP",
+      "proof_uses": [
+        "22H8"
+      ],
+      "reason": "Apply the merger generator to S2 squared and S2 times S3, as for the moment equations, then subtract derivatives of the mean products."
+    },
+    {
+      "order": 63,
+      "tag": "W8PB",
+      "proof_uses": [],
+      "reason": "A Vandermonde inversion and Lagrange-type indicator polynomials; no other wiki assertion is invoked."
+    }
+  ]
+}

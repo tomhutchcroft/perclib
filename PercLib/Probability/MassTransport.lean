@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-83: the mass-transport principle on groups. New for this project; no upstream proof is
-copied. No new definition: the action, its measure preservation and the diagonal
-invariance of the transport are explicit hypotheses.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The mass-transport principle on groups. New for this project; no upstream proof is copied. No new
+definition: the action, its measure preservation and the diagonal invariance of the transport are
+explicit hypotheses.
 -/
 module
 
@@ -35,7 +39,9 @@ namespace PercLib.Probability
 
 /-- **Mass-transport principle on a group** (IHJ3). If `F (g * x) (g * y) = F x y` for all
 `g x y`, then `∑' x, F 1 x = ∑' x, F x 1`. -/
-@[to_additive tsum_mass_transport_add /-- **Mass-transport principle on an additive group** (IHJ3). If
+@[tag "IHJ3",
+    to_additive tsum_mass_transport_add
+    /-- **Mass-transport principle on an additive group** (IHJ3). If
 `F (g + x) (g + y) = F x y` for all `g x y`, then `∑' x, F 0 x = ∑' x, F x 0`. -/]
 theorem tsum_mass_transport {Γ : Type*} [Group Γ] (F : Γ → Γ → ℝ≥0∞)
     (hF : ∀ g x y, F (g * x) (g * y) = F x y) :
@@ -45,9 +51,10 @@ theorem tsum_mass_transport {Γ : Type*} [Group Γ] (F : Γ → Γ → ℝ≥0�
   simp_rw [h]
   exact ((Equiv.inv Γ).tsum_eq (fun x => F 1 x)).symm
 
-/-- **Mass-transport principle for an invariant random transport** (K5ZX), with the action
+/-- **Mass-transport principle for an invariant random transport**, with the action
 given as a family of measure-preserving maps `act g`. No group-action axioms are needed. -/
-@[to_additive lintegral_mass_transport_add /-- **Mass-transport principle for an invariant random transport** (K5ZX),
+@[tag "X5NY", to_additive lintegral_mass_transport_add
+    /-- **Mass-transport principle for an invariant random transport** (K5ZX),
 additive version. -/]
 theorem lintegral_mass_transport {Γ Ω : Type*} [Group Γ] [Countable Γ] [MeasurableSpace Ω]
     {μ : Measure Ω} (act : Γ → Ω → Ω) (hact : ∀ g, MeasurePreserving (act g) μ μ)
@@ -62,7 +69,7 @@ theorem lintegral_mass_transport {Γ Ω : Type*} [Group Γ] [Countable Γ] [Meas
   simp only [hinv]
 
 /-- K5ZX for a measure-preserving `MulAction`. -/
-@[to_additive /-- K5ZX for a measure-preserving `AddAction`. -/]
+@[tag "K5ZX", to_additive /-- K5ZX for a measure-preserving `AddAction`. -/]
 theorem lintegral_mass_transport_smul {Γ Ω : Type*} [Group Γ] [Countable Γ]
     [MeasurableSpace Ω] [MulAction Γ Ω] {μ : Measure Ω}
     (hact : ∀ g : Γ, MeasurePreserving (fun ω : Ω => g • ω) μ μ)
@@ -101,7 +108,8 @@ theorem measurePreserving_image_sym2Map_mul_left {Γ : Type*} [Group Γ]
 
 /-- **Mass-transport principle for bond percolation** on a countable group with a
 left-invariant profile. -/
-@[to_additive law_mass_transport_add /-- **Mass-transport principle for bond percolation** on a countable additive
+@[to_additive law_mass_transport_add
+    /-- **Mass-transport principle for bond percolation** on a countable additive
 group with a translation-invariant profile. -/]
 theorem law_mass_transport {Γ : Type*} [Group Γ] [Countable Γ]
     (q : Sym2 Γ → unitInterval) (hq : ∀ g x y : Γ, q s(g * x, g * y) = q s(x, y))
@@ -111,7 +119,7 @@ theorem law_mass_transport {Γ : Type*} [Group Γ] [Countable Γ]
   lintegral_mass_transport (fun g ω => Sym2.map (g * ·) '' ω)
     (measurePreserving_image_sym2Map_mul_left q hq) t ht hinv
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
 /-- On `ℤ`, the transport `F x y = 1` if `y = x + 1` (else `0`) sends mass `1` out of `0`
 and `0` receives mass `1`. -/

@@ -1,0 +1,1003 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "cutoff-hydrodynamics",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 13
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 4,
+      "label": "Cutoff hydrodynamics and moment growth",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-good-scales",
+      "order": 0,
+      "label": "Good scales and rooted moment control",
+      "locator": "Explicit public declaration start lines: 44, 70, 81, 135, 156, 249, 258, 284",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results prove the finite-measure moment estimate and good-scale persistence without continuity of the quantile. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-window-hyperscaling",
+      "order": 0,
+      "label": "Window partition identities and hyperscaling",
+      "locator": "Explicit public declaration start lines: 47, 61, 76, 86, 103, 113, 125, 138, 179, 202, 214, 240, 265, 359, 376, 426, 474, 486, 500, 518, 545, 594, 599, 605, 620",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-five public results give partition moments, quantile bounds and the conditional hyperscaling inequalities. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 65,
+      "label": "Exact cutoff moment equations",
+      "locator": "arXiv:2508.18808v1 §II.4.2, (II.4.17)–(II.4.19), PDF p. 38",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Derives the volume identities and coefficient three by translation and mass transport under explicit finite-susceptibility and local envelope hypotheses."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 66,
+      "label": "Weak localization and hydrodynamic errors",
+      "locator": "arXiv:2508.18808v1 §§II.4.2–II.4.3, (II.4.21)–(II.4.28), PDF pp. 38–42",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Derives both error bounds and the moment ratio from localized moments and rooted damping, then applies the existing all-scale argument. Susceptibility bounds and universal damping remain inputs."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 68,
+      "label": "Susceptibility and rooted window moments",
+      "locator": "arXiv:2508.18808v1 §II.4, Corollary II.4.12, PDF p. 42",
+      "relationship": "Proof with explicit source inputs",
+      "status": "pending",
+      "note": "Recenter at half scale for the lower window moment and use the full-law quantile for the upper moment. The universal damping argument is available elsewhere in the wiki; localization of full cutoff moments is order-specific."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Positive-density moment alternative",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, dyadic counting after Lemma III.3.5, Lemma III.3.11 and (III.3.7)–(III.3.12)",
+      "relationship": "Conditional proof with model inputs explicit",
+      "status": "pending",
+      "note": "Conditional proof with uniform constants: simultaneous doubling, monotone comparison radius and separate whole-interval moment alternatives. Reverse doubling and the capped-moment integral remain premises."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 1,
+      "label": "Susceptibility upper bounds on good intervals",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, proof of Lemma III.3.4",
+      "relationship": "Conditional proof with model inputs explicit",
+      "status": "pending",
+      "note": "Integrates the reciprocal only after handling the small-susceptibility case and absorbing linear terms above a threshold. Includes the alpha factor in the modified-intensity chain rule."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 2,
+      "label": "Reciprocal comparison and exclusion of third-moment intervals",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Corollary III.3.12 and display after (III.3.13); PDF pp. 33–34",
+      "relationship": "Conditional proof with corrected calculus display",
+      "status": "pending",
+      "note": "Uses the squared susceptibility in the reciprocal derivative and integrates in intensity at fixed cutoff. Uniform constants and the lambda=0 case are explicit; the source diagnosis remains provisional."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 3,
+      "label": "Model good-scale susceptibility",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.4",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Assembles the model estimates with the sharp critical window and finite Gladkov theorem still explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 4,
+      "label": "Polynomial cutoff moments",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.5",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Quantitative subcritical domination for the actual radial soft cutoff; all moments have a common polynomial envelope."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 5,
+      "label": "Capped derivative and window error",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.6",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "The sharp critical spatial-window estimate and finite Gladkov theorem remain inputs."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 6,
+      "label": "Modified susceptibility lower bound",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.8 and (III.3.5)",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Normalizes the norm volume, differentiates the entire one-parameter kernel and integrates the reciprocal to infinity."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 7,
+      "label": "Reverse doubling and capped integral",
+      "locator": "arXiv:2508.18809v1 HTML §III.3.1, Lemma III.3.9 and Corollary III.3.10",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Uniform in lambda at sufficiently large radii, restricted to d >= 3 alpha; keeps the sharp critical window hypothesis."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 69,
+      "label": "Modified hydrodynamic condition",
+      "locator": "arXiv:2508.18809v1, §III.3 opening definitions",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "Quantiles use the inclusive observation ball; failure persists when the intensity-decrement parameter decreases."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 70,
+      "label": "Mixed moment and quantile estimate",
+      "locator": "arXiv:2508.18809v1, (III.3.14)",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "Fourth-moment tree bound, rooted damping and the sharp spatial window estimate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 71,
+      "label": "Intensity derivative transport",
+      "locator": "arXiv:2508.18809v1, Lemma III.3.15",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "Control the increment row, transport two distinct clusters and split the cutoff kernel."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 72,
+      "label": "Simultaneous quantile and susceptibility scales",
+      "locator": "arXiv:2508.18809v1, Lemma III.3.14",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "A band-crossing contradiction avoids any continuity or last-attainment premise for the quantile."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 73,
+      "label": "All-scale derivative lower bound",
+      "locator": "arXiv:2508.18809v1, Lemma III.3.16",
+      "relationship": "Proof with explicit cutoff and conditional-law conventions",
+      "status": "pending",
+      "note": "Retain the linear ghost-derivative error before transporting the normalized lower bound to each earlier radius."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 74,
+      "label": "Polynomial parameter loss at all radii",
+      "locator": "arXiv:2508.18809v1 HTML, Lemma III.3.17",
+      "relationship": "Proof with explicit quantifiers and corrected local calculation",
+      "status": "pending",
+      "note": "Count the four dyadic overlaps for all four monotone functions; endpoint moment estimates bound the gaps between good scales."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 75,
+      "label": "Critical capped mean at every radius",
+      "locator": "arXiv:2508.18809v1 HTML, Lemma III.3.18",
+      "relationship": "Proof with explicit quantifiers and corrected local calculation",
+      "status": "pending",
+      "note": "Fix a single small positive parameter after obtaining the logarithmic cap bound, then integrate the truncated reciprocal in intensity."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 76,
+      "label": "Fictitious all-scale moment orders",
+      "locator": "arXiv:2508.18809v1 HTML, Proposition III.3.13 proof",
+      "relationship": "Proof with explicit quantifiers and corrected local calculation",
+      "status": "pending",
+      "note": "The critical cap creates an interval alternative at every radius; transport upgrades the derivative coefficient. A common large-radius threshold is retained for its positive lower bound."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 77,
+      "label": "Abundance of vertices in large cutoff clusters",
+      "locator": "arXiv:2508.18809v1 Equation (III.4.4) and its proof",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "Conditional exterior independence bounds covariances by two-point functions. The cutoff tail lower bound on n <= a r^(2 alpha) suffices; the statement retains a sufficiently large initial radius."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 78,
+      "label": "A locally large distinct-cluster contribution",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.4",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "At critical intensity, a large intersection quantile and a uniformly bounded cover give a positive-probability event with many distinct large-cluster partners. Root averaging yields the r^(3 alpha) lower bound."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 79,
+      "label": "Uniform forbidden-set error bound",
+      "locator": "arXiv:2508.18809v1 Lemmas III.4.2–III.4.3 and the truncation estimates preceding (III.4.9) and (III.4.10)",
+      "relationship": "Conditional proof with explicit source repairs",
+      "status": "pending",
+      "note": "Finite nonmonotone Reimer remains an explicit premise. The error is o(r^alpha) uniformly over forbidden sets and downward-closed classes, under a fixed bound on normalized susceptibility; the unnormalized error need not vanish."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 80,
+      "label": "Gluing deficit with finite normalized lower limit",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.1(1), proof of Case 1 and (III.4.5)–(III.4.9)",
+      "relationship": "Conditional proof with explicit source repairs",
+      "status": "pending",
+      "note": "A finite lattice-centred cover mixes the squared-volume-biased center law so that the averaged radius-r cap controls the rooted radius-2r window. A differential band argument and a root-counting contradiction give a strict gap on an unbounded bounded-susceptibility set, uniformly over every deterministic forbidden set."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 81,
+      "label": "Gluing deficit with divergent normalized susceptibility",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.1(2), proof of Case 2 and (III.4.10)",
+      "relationship": "Conditional proof with explicit source repairs",
+      "status": "pending",
+      "note": "For every sufficiently small fixed positive lambda, uniform cubic moments and reciprocal transport give a parameter-independent logarithmic derivative surplus. This proves the strict gluing deficit using only the averaged cap, with finite Reimer explicit and no good-scale density claim."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 82,
+      "label": "Exact coefficient of the missing intensity row",
+      "locator": "arXiv:2508.18809v1 Equation (III.4.1) and its use before the scale selection in Lemma III.4.5",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "Tonelli converts the omitted soft-cutoff row to the integral of the derivative times the lattice-point count. The modification adds beta_c lambda M r^(-alpha); intensity rows and probability rows remain distinct."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 83,
+      "label": "Uniform one-cluster decay over selected small-volume scales",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.5, scale selection, (III.4.12)–(III.4.13) and the subsequent recurrence",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "The sequence has parameter-dependent separation and scaled spatial-tail budgets. The normalized recurrence is uniform over all deleted domains, bounded root shifts and skipped scales; a final conditional extension reaches any later radius. A generating-function bound gives exponential decay when almost all selected scales are small."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 84,
+      "label": "Common good scales for two distinct clusters",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.5, both alternatives and the concluding two-cluster conditioning argument",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "Condition on the first root cluster at the finitely many selected times and the terminal time. Its exterior process remains product; the root-good subset is fixed under the conditioning, so the uniform deleted-domain bound applies to the other root. Finite nonmonotone Reimer remains a premise through the gluing theorem."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 85,
+      "label": "Quantitative recentering by cluster-partition counting",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.6, recentering estimate (III.4.14)–(III.4.16) and final partition calculation",
+      "relationship": "Explicit proof and conditional source theorem",
+      "status": "pending",
+      "note": "For every invariant finite-mean cluster partition and every deterministic centre law, direct counting yields E[X V4; local B8 volume<=m] <= m |B6|/|B2| chi. This quantitative proof avoids random-ordering and radius substitutions."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 86,
+      "label": "Many common rooted-good scales",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.6, both alternatives and the opening scale-count reduction",
+      "relationship": "Explicit proof and conditional source theorem",
+      "status": "pending",
+      "note": "The mismatch contribution is at most C eta/delta times chi(R)^2. The count reduction retains the (1-delta)N bad-scale threshold. The sequence can be chosen with separation 64; arbitrary terminal radii and both parameter alternatives are retained."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 87,
+      "label": "Modified critical-dimensional hydrodynamics",
+      "locator": "arXiv:2508.18809v1 Proposition III.3.1, proved after Lemma III.4.6; (III.4.17)–(III.4.18)",
+      "relationship": "Explicit proof and conditional source theorem",
+      "status": "pending",
+      "note": "Conditional on finite nonmonotone Reimer, the modified hydrodynamic condition follows by merger-rate damping on windows [32s,64s], finite-box exhaustion and the endpoint-inclusive cubic moment estimate. The ordinary lambda=0 hydrodynamic transfer remains separate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 88,
+      "label": "Local second-moment transport",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.7, both differential inequalities and the mixed merger term",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "Finite-box Russo, BK and an explicit translated mixed term give an integral inequality. Gronwall applies to the supremum without differentiating it."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 89,
+      "label": "Sharp susceptibility from modified hydrodynamics",
+      "locator": "arXiv:2508.18809v1 Theorem III.1.11 proof, modified susceptibility upper bound and reciprocal transfer",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "A forbidden downward crossing first bounds the modified susceptibility ratio using an unbounded set of good scales. Reciprocal integration and then lambda tending to zero give the critical asymptotic."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 90,
+      "label": "Ordinary critical hydrodynamics",
+      "locator": "arXiv:2508.18809v1 Theorem III.1.11 proof, moment transport and final quantile comparison",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "Modified window moments are o(r^(3 alpha)); intensity transport has a bounded exponential cost. Partition counting then gives M_0=o(r^(2 alpha)). Finite nonmonotone Reimer remains explicit when the modified condition is supplied by L3TC."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 91,
+      "label": "Critical regular variation of the second moment",
+      "locator": "arXiv:2508.18807v1 / arXiv:2508.18809v1 Part I Proposition I.4.15, critical hydrodynamic case; slow variation used in Part III §III.5.1",
+      "relationship": "Critical volume-moment proof supplying the spatial mixed-moment input",
+      "status": "pending",
+      "note": "The retained-factor sixth-moment bound and rooted window damping give e2 <= C sqrt(M_r)/r^alpha, hence a vanishing critical error. Logarithmic derivative integration gives regular variation and a tail ratio bound for V; no higher-moment localization is assumed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 92,
+      "label": "Critical volume upper hierarchy and mixed-moment input",
+      "locator": "arXiv:2508.18807v1 / arXiv:2508.18809v1 Part I Proposition I.4.20, upper induction (I.4.19); Part III equations (III.5.1)–(III.5.2)",
+      "relationship": "Critical volume-moment proof supplying the spatial mixed-moment input",
+      "status": "pending",
+      "note": "Normalize the upper hierarchy by m2^(p-1) chi^(2-p). The positive gap (p-2) alpha gives the double-factorial limsup by induction, discharging the critical volume premise of the mixed spatial and rapid-tail bounds without assuming full higher-order asymptotics."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 0,
+      "label": "Critical second-moment regular variation",
+      "locator": "arXiv:2508.18807v1 Proposition I.4.15, critical hydrodynamic case; HTML lines 1071–1119",
+      "relationship": "Proof used by the critical Part III assembly",
+      "status": "pending",
+      "note": "The retained-factor sixth-moment bound and rooted window damping give e2 <= C sqrt(M_r)/r^alpha, hence a vanishing critical error. Logarithmic derivative integration gives regular variation and a tail ratio bound for V; no higher-moment localization is assumed."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 1,
+      "label": "Upper half of the higher-moment induction",
+      "locator": "arXiv:2508.18807v1 Proposition I.4.20, equation (I.4.19), upper induction; HTML lines 1274–1299",
+      "relationship": "Proof used by the critical Part III assembly",
+      "status": "pending",
+      "note": "Normalize the upper hierarchy by m2^(p-1) chi^(2-p). The positive gap (p-2) alpha gives the double-factorial limsup by induction, discharging the critical volume premise of the mixed spatial and rapid-tail bounds without assuming full higher-order asymptotics."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 2,
+      "label": "Critical higher volume-moment equivalents",
+      "locator": "arXiv:2508.18807v1 Proposition I.4.20, critical Case 2 and (I.4.21)",
+      "relationship": "Written critical-dimension proof; source correspondence pending review",
+      "status": "pending",
+      "note": "The existing upper hierarchy controls the common-cluster deficit at every order by Cauchy–Schwarz and rooted damping. A stable ratio equation yields the equivalents; size bias gives the squared-normal limit and uniform truncated-mass negligibility."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 93,
+      "label": "One-sided logarithmic order and vanishing vertex factor",
+      "locator": "arXiv:2508.18809v1 Remark III.6.5 and (III.6.10), PDF pp. 78–81",
+      "relationship": "Written critical-dimension proof; source correspondence pending review",
+      "status": "pending",
+      "note": "The exact deficit cancellation and fourth-moment upper bound yield a differential upper bound for V^(-2), hence an inverse-square-root-log lower bound with explicit nonoptimal coefficient. With alpha<2, fixed-ball localization and rooted damping imply V tends to zero. The following application of OP8F identifies the missing deficit-gap input, not a proved equivalent."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 94,
+      "label": "Critical upper spatial deficit moments and tightness",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.9 and its proof, §III.6.2",
+      "relationship": "Written critical-dimension proof with a tightness consequence; source correspondence pending review",
+      "status": "pending",
+      "note": "Harris and exterior comparison bound each nonnegative deficit by a common-cluster weighted moment. Three or four marked vertices give the respective fifth and seventh susceptibility powers; rapid tails yield tightness and convergence of polynomial integrals along weak subsequences. Limit identification remains separate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 95,
+      "label": "Exact two-root deficit derivatives",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.10 and its proof, §III.6.2",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "The signed opening generator separates growth by a third cluster from a root-cluster merger. Reflection exchanges roots. Bounded jumps and all finite-cutoff moments dominate the full generator on compact radius intervals and justify the finite-box limit. The rate remains multiplicative, including flat kernel portions; neither critical dimension nor hydrodynamics is needed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 96,
+      "label": "Critical unweighted merging-term equivalents",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.12, specialization to P=1",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Mass transport identifies the total merging term with a distinct-root product of volume powers. The common-cluster deficit is at most m_(k+4), a vanishing fraction of the product because V tends to zero. This gives coefficients one and three for the two unweighted terms without assuming any spatial equivalent."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 97,
+      "label": "Critical spatially weighted merging equivalents",
+      "locator": "Lemma III.6.12",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Mass transport and the marked BK-Harris comparison give a relative O(V^2) error. Two- and three-marked single-cluster marginals have densities kappa^2 and kappa^2+2kappa^3; convolution with the uniform norm ball gives the fourth/fifth convolution formulas. Signed polynomials use additive errors."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 98,
+      "label": "Conditional identification of the two deficit moment hierarchies",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.13 and proof of Theorem III.6.6, equations III.6.30–III.6.33",
+      "relationship": "Written conditional proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Two explicit locally absolutely continuous deficit equations are additional hypotheses. Labelled factor subsets retain multiplicities. Positive ODE gaps alpha+p and 2alpha+p give unique signed moment limits; chain resolvent identities identify kappa^3 and kappa^3+2kappa^4. The merger forcing terms match J2QW and the later source proof; III6.13 itself prints different terms."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 99,
+      "label": "Conditional deficit weak limits and logarithmic amplitude",
+      "locator": "arXiv:2508.18809v1 Theorem III.6.6 and proof of Proposition III.6.2",
+      "relationship": "Written conditional proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Polynomial limits plus tightness and exponential moment determinacy identify finite-measure weak limits. The equal origin atoms cancel exactly in the deficit gap. The positive constant 2*integral_B kappa^4 gives the logarithmic amplitude via OP8F. The deficit ODEs remain explicit unproved percolation inputs."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 100,
+      "label": "Exact transported triple interaction and tuple loss",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.11 left side and the change of root leading to III.6.34–III.6.35",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Translation sends old p2 to the new root-cluster exponent and old p1 to the second exponent. Independent-copy loss represents every positive third-cluster power by ordered target tuples. Absolute summability is proved for integrated polynomial coefficients; no pointwise sum of centered random variables is assumed. Full triple-interaction factorization is not claimed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 101,
+      "label": "Final critical single-cut decoupling for all powers",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.11 final proof, the two displayed factorization estimates; HTML lines 2714–2722",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Tuple-loss expansion and two original geodesic hits give diagram sums m_(i+2)R_jR_(m-1) and m_(i+1)R_(j+1)R_(m-1). Spatial weights use marked path moments. A smaller marginal correction restores the source restricted factor. Signed polynomial tests and zero exponents are included. Interception remains an independent unresolved input."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "GG8B",
+      "proof_uses": [
+        "1K61"
+      ],
+      "reason": "Derives the volume identities and coefficient three by translation and mass transport under explicit finite-susceptibility and local envelope hypotheses."
+    },
+    {
+      "order": 1,
+      "tag": "A3G0",
+      "proof_uses": [
+        "GG8B",
+        "1AC7",
+        "BZDZ",
+        "LQ6Y",
+        "NS0Q"
+      ],
+      "reason": "Derives both error bounds and the moment ratio from localized moments and rooted damping, then applies the existing all-scale argument. Susceptibility bounds and universal damping remain inputs."
+    },
+    {
+      "order": 2,
+      "tag": "AS7A",
+      "proof_uses": [
+        "LQ6Y",
+        "BZDZ",
+        "C5Q9"
+      ],
+      "reason": "Recenter at half scale for the lower window moment and use the full-law quantile for the upper moment. The universal damping argument is available elsewhere in the wiki; localization of full cutoff moments is order-specific."
+    },
+    {
+      "order": 3,
+      "tag": "X57A",
+      "proof_uses": [
+        "6L9Z"
+      ],
+      "reason": "Conditional proof with uniform constants: simultaneous doubling, monotone comparison radius and separate whole-interval moment alternatives. Reverse doubling and the capped-moment integral remain premises."
+    },
+    {
+      "order": 4,
+      "tag": "1BO9",
+      "proof_uses": [
+        "X57A"
+      ],
+      "reason": "Integrates the reciprocal only after handling the small-susceptibility case and absorbing linear terms above a threshold. Includes the alpha factor in the modified-intensity chain rule."
+    },
+    {
+      "order": 5,
+      "tag": "AGX4",
+      "proof_uses": [
+        "1BO9",
+        "NMYK"
+      ],
+      "reason": "Reciprocal transport uses the intensity upper derivative; the preceding third-moment alternative supplies a lambda-independent upper bound only under its stated model inputs."
+    },
+    {
+      "order": 6,
+      "tag": "X8F6",
+      "proof_uses": [
+        "X57A",
+        "1BO9",
+        "DR1W",
+        "9WYX",
+        "N3OC",
+        "VW2E"
+      ],
+      "reason": "Assembles the model estimates with the sharp critical window and finite Gladkov theorem still explicit."
+    },
+    {
+      "order": 7,
+      "tag": "DR1W",
+      "proof_uses": [
+        "KXV3",
+        "I328",
+        "Y84V"
+      ],
+      "reason": "Quantitative subcritical domination for the actual radial soft cutoff; all moments have a common polynomial envelope."
+    },
+    {
+      "order": 8,
+      "tag": "KPBJ",
+      "proof_uses": [
+        "DR1W",
+        "GG8B",
+        "BIXQ"
+      ],
+      "reason": "The sharp critical spatial-window estimate and finite Gladkov theorem remain inputs."
+    },
+    {
+      "order": 9,
+      "tag": "C0OR",
+      "proof_uses": [
+        "DR1W",
+        "GG8B",
+        "5LNL"
+      ],
+      "reason": "Normalizes the norm volume, differentiates the entire one-parameter kernel and integrates the reciprocal to infinity."
+    },
+    {
+      "order": 10,
+      "tag": "N3OC",
+      "proof_uses": [
+        "KPBJ",
+        "C0OR",
+        "XU1Y"
+      ],
+      "reason": "Uniform in lambda at sufficiently large radii, restricted to d >= 3 alpha; keeps the sharp critical window hypothesis."
+    },
+    {
+      "order": 11,
+      "tag": "CXTO",
+      "proof_uses": [
+        "C0OR",
+        "UWLQ"
+      ],
+      "reason": "Quantiles use the inclusive observation ball; failure persists when the intensity-decrement parameter decreases."
+    },
+    {
+      "order": 12,
+      "tag": "7QDN",
+      "proof_uses": [
+        "Y84V",
+        "12NL",
+        "BZDZ",
+        "MRZO",
+        "DR1W"
+      ],
+      "reason": "Fourth-moment tree bound, rooted damping and the sharp spatial window estimate."
+    },
+    {
+      "order": 13,
+      "tag": "1AQ4",
+      "proof_uses": [
+        "5FCO",
+        "C0OR",
+        "4800",
+        "NMYK"
+      ],
+      "reason": "Control the increment row, transport two distinct clusters and split the cutoff kernel."
+    },
+    {
+      "order": 14,
+      "tag": "0HMO",
+      "proof_uses": [
+        "CXTO",
+        "7QDN",
+        "C0OR",
+        "GG8B"
+      ],
+      "reason": "A band-crossing contradiction avoids any continuity or last-attainment premise for the quantile."
+    },
+    {
+      "order": 15,
+      "tag": "SQGG",
+      "proof_uses": [
+        "0HMO",
+        "LQ6Y",
+        "VW2E",
+        "1AQ4",
+        "X8F6"
+      ],
+      "reason": "Retain the linear ghost-derivative error before transporting the normalized lower bound to each earlier radius."
+    },
+    {
+      "order": 16,
+      "tag": "X9SE",
+      "proof_uses": [
+        "SQGG",
+        "UTUF",
+        "X57A",
+        "X8F6",
+        "C0OR",
+        "Y84V",
+        "N3OC"
+      ],
+      "reason": "Count the four dyadic overlaps for all four monotone functions; endpoint moment estimates bound the gaps between good scales."
+    },
+    {
+      "order": 17,
+      "tag": "0NU2",
+      "proof_uses": [
+        "X9SE",
+        "N3OC",
+        "D7A5",
+        "DR1W"
+      ],
+      "reason": "Fix a single small positive parameter after obtaining the logarithmic cap bound, then integrate the truncated reciprocal in intensity."
+    },
+    {
+      "order": 18,
+      "tag": "BTM3",
+      "proof_uses": [
+        "0NU2",
+        "1BO9",
+        "9WYX",
+        "VW2E",
+        "1AQ4",
+        "LQ6Y",
+        "UTUF",
+        "C0OR"
+      ],
+      "reason": "The critical cap creates an interval alternative at every radius; transport upgrades the derivative coefficient. A common large-radius threshold is retained for its positive lower bound."
+    },
+    {
+      "order": 19,
+      "tag": "69N5",
+      "proof_uses": [
+        "40HT",
+        "MRZO",
+        "DR1W"
+      ],
+      "reason": "Conditional exterior independence bounds covariances by two-point functions. The cutoff tail lower bound on n <= a r^(2 alpha) suffices; the statement retains a sufficiently large initial radius."
+    },
+    {
+      "order": 20,
+      "tag": "20LA",
+      "proof_uses": [
+        "69N5",
+        "40HT",
+        "UVQ6",
+        "12NL"
+      ],
+      "reason": "At critical intensity, a large intersection quantile and a uniformly bounded cover give a positive-probability event with many distinct large-cluster partners. Root averaging yields the r^(3 alpha) lower bound."
+    },
+    {
+      "order": 21,
+      "tag": "JY26",
+      "proof_uses": [
+        "XFCJ",
+        "X86B",
+        "Q7O9",
+        "Y84V"
+      ],
+      "reason": "Finite nonmonotone Reimer remains an explicit premise. The error is o(r^alpha) uniformly over forbidden sets and downward-closed classes, under a fixed bound on normalized susceptibility; the unnormalized error need not vanish."
+    },
+    {
+      "order": 22,
+      "tag": "9CER",
+      "proof_uses": [
+        "JY26",
+        "C0OR",
+        "GG8B",
+        "7QDN",
+        "20LA",
+        "CXTO"
+      ],
+      "reason": "A finite lattice-centred cover mixes the squared-volume-biased center law so that the averaged radius-r cap controls the rooted radius-2r window. A differential band argument and a root-counting contradiction give a strict gap on an unbounded bounded-susceptibility set, uniformly over every deterministic forbidden set."
+    },
+    {
+      "order": 23,
+      "tag": "F42K",
+      "proof_uses": [
+        "JY26",
+        "9CER",
+        "AGX4",
+        "BTM3",
+        "XHJ4",
+        "VW2E",
+        "NMYK",
+        "IK5Y",
+        "C0OR"
+      ],
+      "reason": "For every sufficiently small fixed positive lambda, uniform cubic moments and reciprocal transport give a parameter-independent logarithmic derivative surplus. This proves the strict gluing deficit using only the averaged cap, with finite Reimer explicit and no good-scale density claim."
+    },
+    {
+      "order": 24,
+      "tag": "NE2Q",
+      "proof_uses": [
+        "C0OR"
+      ],
+      "reason": "Tonelli converts the omitted soft-cutoff row to the integral of the derivative times the lattice-point count. The modification adds beta_c lambda M r^(-alpha); intensity rows and probability rows remain distinct."
+    },
+    {
+      "order": 25,
+      "tag": "2YIE",
+      "proof_uses": [
+        "WKM2",
+        "NE2Q",
+        "9CER",
+        "F42K",
+        "C0OR",
+        "DR1W"
+      ],
+      "reason": "The sequence has parameter-dependent separation and scaled spatial-tail budgets. The normalized recurrence is uniform over all deleted domains, bounded root shifts and skipped scales; a final conditional extension reaches any later radius. A generating-function bound gives exponential decay when almost all selected scales are small."
+    },
+    {
+      "order": 26,
+      "tag": "QXP9",
+      "proof_uses": [
+        "2YIE",
+        "WKM2"
+      ],
+      "reason": "Condition on the first root cluster at the finitely many selected times and the terminal time. Its exterior process remains product; the root-good subset is fixed under the conditioning, so the uniform deleted-domain bound applies to the other root. Finite nonmonotone Reimer remains a premise through the gluing theorem."
+    },
+    {
+      "order": 27,
+      "tag": "43QA",
+      "proof_uses": [],
+      "reason": "For every invariant finite-mean cluster partition and every deterministic centre law, direct counting yields E[X V4; local B8 volume<=m] <= m |B6|/|B2| chi. This quantitative proof avoids random-ordering and radius substitutions."
+    },
+    {
+      "order": 28,
+      "tag": "LHT3",
+      "proof_uses": [
+        "43QA",
+        "WKM2",
+        "NE2Q",
+        "QXP9",
+        "2YIE",
+        "C0OR"
+      ],
+      "reason": "The mismatch contribution is at most C eta/delta times chi(R)^2. The count reduction retains the (1-delta)N bad-scale threshold. The sequence can be chosen with separation 64; arbitrary terminal radii and both parameter alternatives are retained."
+    },
+    {
+      "order": 29,
+      "tag": "L3TC",
+      "proof_uses": [
+        "LHT3",
+        "7IVI",
+        "C0OR",
+        "DR1W",
+        "1AQ4",
+        "XHJ4",
+        "VW2E",
+        "JRCI"
+      ],
+      "reason": "Conditional on finite nonmonotone Reimer, the modified hydrodynamic condition follows by merger-rate damping on windows [32s,64s], finite-box exhaustion and the endpoint-inclusive cubic moment estimate. The ordinary lambda=0 hydrodynamic transfer remains separate."
+    },
+    {
+      "order": 30,
+      "tag": "9JTA",
+      "proof_uses": [
+        "DR1W",
+        "JRCI"
+      ],
+      "reason": "Finite-box Russo, BK and an explicit translated mixed term give an integral inequality. Gronwall applies to the supremum without differentiating it."
+    },
+    {
+      "order": 31,
+      "tag": "5CV7",
+      "proof_uses": [
+        "C0OR",
+        "7QDN",
+        "X8F6",
+        "AGX4"
+      ],
+      "reason": "A forbidden downward crossing first bounds the modified susceptibility ratio using an unbounded set of good scales. Reciprocal integration and then lambda tending to zero give the critical asymptotic."
+    },
+    {
+      "order": 32,
+      "tag": "BCKB",
+      "proof_uses": [
+        "5CV7",
+        "9JTA",
+        "MTUQ",
+        "12NL",
+        "BZDZ",
+        "LQ6Y",
+        "L3TC"
+      ],
+      "reason": "Modified window moments are o(r^(3 alpha)); intensity transport has a bounded exponential cost. Partition counting then gives M_0=o(r^(2 alpha)). Finite nonmonotone Reimer remains explicit when the modified condition is supplied by L3TC."
+    },
+    {
+      "order": 33,
+      "tag": "121D",
+      "proof_uses": [
+        "65MV",
+        "GG8B",
+        "1AC7",
+        "12NL",
+        "BZDZ",
+        "MRZO",
+        "7QDN",
+        "BCKB"
+      ],
+      "reason": "The retained-factor sixth-moment bound and rooted window damping give e2 <= C sqrt(M_r)/r^alpha, hence a vanishing critical error. Logarithmic derivative integration gives regular variation and a tail ratio bound for V; no higher-moment localization is assumed."
+    },
+    {
+      "order": 34,
+      "tag": "RM79",
+      "proof_uses": [
+        "121D",
+        "GG8B",
+        "1AC7",
+        "5O1G",
+        "AR3F",
+        "3M2Y",
+        "DR1W"
+      ],
+      "reason": "Normalize the upper hierarchy by m2^(p-1) chi^(2-p). The positive gap (p-2) alpha gives the double-factorial limsup by induction, discharging the critical volume premise of the mixed spatial and rapid-tail bounds without assuming full higher-order asymptotics."
+    },
+    {
+      "order": 35,
+      "tag": "326J",
+      "proof_uses": [
+        "121D",
+        "RM79",
+        "GG8B",
+        "1AC7",
+        "5O1G",
+        "0N85",
+        "DR1W"
+      ],
+      "reason": "The existing upper hierarchy controls the common-cluster deficit at every order by Cauchy–Schwarz and rooted damping. A stable ratio equation yields the equivalents; size bias gives the squared-normal limit and uniform truncated-mass negligibility."
+    },
+    {
+      "order": 36,
+      "tag": "5J3U",
+      "proof_uses": [
+        "121D",
+        "RM79",
+        "3M2Y",
+        "1AC7"
+      ],
+      "reason": "The exact deficit cancellation and fourth-moment upper bound yield a differential upper bound for V^(-2), hence an inverse-square-root-log lower bound with explicit nonoptimal coefficient. With alpha<2, fixed-ball localization and rooted damping imply V tends to zero. The following application of OP8F identifies the missing deficit-gap input, not a proved equivalent."
+    },
+    {
+      "order": 37,
+      "tag": "GL6S",
+      "proof_uses": [
+        "1AC7",
+        "AR3F",
+        "3M2Y",
+        "RM79"
+      ],
+      "reason": "Harris and exterior comparison bound each nonnegative deficit by a common-cluster weighted moment. Three or four marked vertices give the respective fifth and seventh susceptibility powers; rapid tails yield tightness and convergence of polynomial integrals along weak subsequences. Limit identification remains separate."
+    },
+    {
+      "order": 38,
+      "tag": "B5NA",
+      "proof_uses": [
+        "DR1W",
+        "GG8B"
+      ],
+      "reason": "The signed opening generator separates growth by a third cluster from a root-cluster merger. Reflection exchanges roots. Bounded jumps and all finite-cutoff moments dominate the full generator on compact radius intervals and justify the finite-box limit. The rate remains multiplicative, including flat kernel portions; neither critical dimension nor hydrodynamics is needed."
+    },
+    {
+      "order": 39,
+      "tag": "HV5B",
+      "proof_uses": [
+        "B5NA",
+        "1AC7",
+        "326J",
+        "5J3U"
+      ],
+      "reason": "Mass transport identifies the total merging term with a distinct-root product of volume powers. The common-cluster deficit is at most m_(k+4), a vanishing fraction of the product because V tends to zero. This gives coefficients one and three for the two unweighted terms without assuming any spatial equivalent."
+    },
+    {
+      "order": 40,
+      "tag": "J2QW",
+      "proof_uses": [
+        "B5NA",
+        "HV5B",
+        "AL0I",
+        "YHNS",
+        "AR3F",
+        "RM79",
+        "5J3U"
+      ],
+      "reason": "Mass transport and the marked BK-Harris comparison give a relative O(V^2) error. Two- and three-marked single-cluster marginals have densities kappa^2 and kappa^2+2kappa^3; convolution with the uniform norm ball gives the fourth/fifth convolution formulas. Signed polynomials use additive errors."
+    },
+    {
+      "order": 41,
+      "tag": "ENWJ",
+      "proof_uses": [
+        "7GBI",
+        "GL6S",
+        "121D",
+        "2KB9",
+        "IX97",
+        "AL0I",
+        "J2QW"
+      ],
+      "reason": "Two explicit locally absolutely continuous deficit equations are additional hypotheses. Labelled factor subsets retain multiplicities. Positive ODE gaps alpha+p and 2alpha+p give unique signed moment limits; chain resolvent identities identify kappa^3 and kappa^3+2kappa^4. The merger forcing terms match J2QW and the later source proof; III6.13 itself prints different terms."
+    },
+    {
+      "order": 42,
+      "tag": "RDLW",
+      "proof_uses": [
+        "ENWJ",
+        "GL6S",
+        "IX97",
+        "121D",
+        "OP8F"
+      ],
+      "reason": "Polynomial limits plus tightness and exponential moment determinacy identify finite-measure weak limits. The equal origin atoms cancel exactly in the deficit gap. The positive constant 2*integral_B kappa^4 gives the logarithmic amplitude via OP8F. The deficit ODEs remain explicit unproved percolation inputs."
+    },
+    {
+      "order": 43,
+      "tag": "JG0C",
+      "proof_uses": [
+        "DR5Q",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "Translation sends old p2 to the new root-cluster exponent and old p1 to the second exponent. Independent-copy loss represents every positive third-cluster power by ordered target tuples. Absolute summability is proved for integrated polynomial coefficients; no pointwise sum of centered random variables is assumed. Full triple-interaction factorization is not claimed."
+    },
+    {
+      "order": 44,
+      "tag": "ZYSL",
+      "proof_uses": [
+        "7GBI",
+        "DR5Q",
+        "JG0C",
+        "PGVH",
+        "AR3F",
+        "RM79",
+        "5J3U"
+      ],
+      "reason": "Tuple-loss expansion and two original geodesic hits give diagram sums m_(i+2)R_jR_(m-1) and m_(i+1)R_(j+1)R_(m-1). Spatial weights use marked path moments. A smaller marginal correction restores the source restricted factor. Signed polynomial tests and zero exponents are included. Interception remains an independent unresolved input."
+    },
+    {
+      "order": 45,
+      "tag": "UWLQ",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 46,
+      "tag": "UUQO",
+      "proof_uses": [],
+      "reason": "Independence of the distinct cross-edge coordinates gives the exact product formula; no other wiki assertion is invoked."
+    },
+    {
+      "order": 47,
+      "tag": "XB1X",
+      "proof_uses": [],
+      "reason": "The proof integrates the two scalar moment equations and compares growth exponents; no other wiki assertion is invoked."
+    },
+    {
+      "order": 48,
+      "tag": "NS0Q",
+      "proof_uses": [
+        "XB1X",
+        "YEVN"
+      ],
+      "reason": "The contradiction theorem XB1X gives good scales at all heights and the last-good-scale theorem (YEVN), applied to m_2, turns them into a uniform lower bound."
+    }
+  ]
+}

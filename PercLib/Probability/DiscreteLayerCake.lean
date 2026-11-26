@@ -1,13 +1,16 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Ported for issue 524 (Q-157) on 2026-11-16 by PROVER-E from pull request 488 of this
-repository, contributed by yujinhkim: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Ported on 2026-11-16 from the work of contributor yujinhkim: source repository `yujinhkim/lrp`,
+branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
 `PercLib/CriticalLRP/Tightness/DiscreteLayerCake.lean`; licence Apache-2.0, as declared in that
 commit's file headers and `third_party/critical-lrp/NOTICE.md`. Upstream origin
 `yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not
-independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1, proof of Corollary I.2.5.
+independently verified). Source of the mathematics: T. Hutchcroft, *Critical long-range percolation
+I*, arXiv:2508.18807v1, proof of Corollary I.2.5.
 
 Changes from the source: focused imports instead of `import Mathlib`; no `autoImplicit` and no
 disabled linters; the namespace is `PercLib.Probability`; the helper definition `ind s` and its
@@ -166,9 +169,11 @@ theorem lintegral_eq_tsum_meas_ge {μ : Measure Ω} {X : Ω → ℝ≥0∞}
       simp only [Set.indicator_apply]
       by_cases h : ((j : ℝ≥0∞) + 1) ≤ X ω <;> simp [h]
     calc ∫⁻ ω, min (X ω) (n : ℝ≥0∞) ∂μ
-        = ∫⁻ ω, ∑ j ∈ Finset.range n, {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator (fun _ => (1 : ℝ≥0∞)) ω ∂μ :=
+        = ∫⁻ ω, ∑ j ∈ Finset.range n, {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator
+            (fun _ => (1 : ℝ≥0∞)) ω ∂μ :=
           lintegral_congr hpt
-      _ = ∑ j ∈ Finset.range n, ∫⁻ ω, {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator (fun _ => (1 : ℝ≥0∞)) ω ∂μ := by
+      _ = ∑ j ∈ Finset.range n, ∫⁻ ω, {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator
+          (fun _ => (1 : ℝ≥0∞)) ω ∂μ := by
           rw [lintegral_finsetSum]
           exact fun j _ => measurable_const.indicator (hmeas j)
       _ = ∑ j ∈ Finset.range n, μ {ω | ((j : ℝ≥0∞) + 1) ≤ X ω} := by
@@ -207,7 +212,8 @@ theorem lintegral_pow_eq_tsum_meas_ge {μ : Measure Ω} {X : Ω → ℝ≥0∞}
       by_cases h : ((j : ℝ≥0∞) + 1) ≤ X ω <;> simp [h]
     calc ∫⁻ ω, min (X ω) (n : ℝ≥0∞) ^ k ∂μ
         = ∫⁻ ω, ∑ j ∈ Finset.range n, ((((j : ℝ≥0∞) + 1) ^ k - (j : ℝ≥0∞) ^ k) *
-            {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator (fun _ => (1 : ℝ≥0∞)) ω) ∂μ := lintegral_congr hpt
+            {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator (fun _ => (1 : ℝ≥0∞)) ω) ∂μ :=
+                lintegral_congr hpt
       _ = ∑ j ∈ Finset.range n, ∫⁻ ω, ((((j : ℝ≥0∞) + 1) ^ k - (j : ℝ≥0∞) ^ k) *
             {ω | ((j : ℝ≥0∞) + 1) ≤ X ω}.indicator (fun _ => (1 : ℝ≥0∞)) ω) ∂μ := by
           rw [lintegral_finsetSum]
@@ -226,9 +232,9 @@ theorem lintegral_pow_eq_tsum_meas_ge {μ : Measure Ω} {X : Ω → ℝ≥0∞}
 
 end Main
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- **D-5 witness.** For `X ≡ 3` under a point mass both sides of the first identity are `3`
+/-- **Non-vacuity witness.** For `X ≡ 3` under a point mass both sides of the first identity are `3`
 and, at `k = 2`, both sides of the second are `9`. -/
 theorem discreteLayerCake_three :
     (∫⁻ _ω, (3 : ℝ≥0∞) ∂(Measure.dirac ())) =

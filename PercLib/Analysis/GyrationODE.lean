@@ -1,13 +1,16 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-Ported for package Q-150 (issue 517) from pull request 488: source repository
-`yujinhkim/lrp`, branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`,
-file `PercLib/CriticalLRP/Analysis/GyrationODE.lean` (blob `7a435308ba`), contributed by
-`yujinhkim`; licence Apache-2.0 as declared in that commit's file headers and
-`third_party/critical-lrp/NOTICE.md`. Upstream origin `yujinhkim/Critical-Long-range-percolation`
-at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not independently verified).
-Changes: focused imports, no disabled linters or `autoImplicit`, namespace `PercLib.Analysis`.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Ported from the source repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+`d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file `PercLib/CriticalLRP/Analysis/GyrationODE.lean`
+(blob `7a435308ba`), contributed by `yujinhkim`; licence Apache-2.0 as declared in that commit's
+file headers and `third_party/critical-lrp/NOTICE.md`. Upstream origin
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf` (not
+independently verified). Changes: focused imports, no disabled linters or `autoImplicit`, namespace
+`PercLib.Analysis`.
 -/
 module
 
@@ -277,9 +280,9 @@ theorem tendsto_div_rpow_log {F : ℝ → ℝ} {c Q : ℝ}
   rw [hsplit, hmain]
   field_simp
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5, `α = 1`, `c = Q = 1`: the explicit solution
+/-- Non-vacuity, `α = 1`, `c = Q = 1`: the explicit solution
 `F r = r^{2α} (1 + cQ (r^{2-α} - 1)/(2-α)) = r³` solves the ODE, so `F r / r³ → 1`. -/
 example : Tendsto (fun r : ℝ => r ^ 3 / r ^ (2 + 1 : ℝ)) atTop (𝓝 (1 * 1 / (2 - 1))) := by
   refine tendsto_div_rpow_of_lt (F := fun r : ℝ => r ^ 3) (by norm_num) fun r hr => ?_
@@ -289,7 +292,7 @@ example : Tendsto (fun r : ℝ => r ^ 3 / r ^ (2 + 1 : ℝ)) atTop (𝓝 (1 * 1 
   field_simp
   ring
 
-/-- D-5, `α = 2`, `c = Q = 1`: `F r = r⁴ (1 + log r)` solves the ODE, so
+/-- Non-vacuity, `α = 2`, `c = Q = 1`: `F r = r⁴ (1 + log r)` solves the ODE, so
 `F r / (r⁴ log r) → 1`. -/
 example : Tendsto (fun r : ℝ => r ^ 4 * (1 + Real.log r) / (r ^ (4 : ℝ) * Real.log r)) atTop
     (𝓝 (1 * 1)) := by

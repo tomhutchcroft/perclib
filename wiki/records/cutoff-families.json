@@ -1,0 +1,64 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "cutoff-families",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 3
+    },
+    {
+      "collection": "critical-theory",
+      "order": 4
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 27,
+      "label": "Cutoff families for long-range kernels",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-1",
+      "order": 0,
+      "label": "Cutoff models and moment flow",
+      "locator": "Cutoff construction and cluster-moment analysis",
+      "relationship": "Definition and method correspondence",
+      "status": "pending",
+      "note": "Kernel normalisations and the distinction between cutoff and full laws are part of the mathematical statement."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 0,
+      "label": "Localisation hypotheses",
+      "locator": "Correlation-length and weak cutoff-localisation conditions",
+      "relationship": "Hypothesis correspondence",
+      "status": "pending",
+      "note": "CL, wCL, and the hydrodynamic condition remain distinct propositions with explicit model assumptions."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "Marginal cutoff flow",
+      "locator": "Critical-dimensional moment analysis",
+      "relationship": "Application",
+      "status": "pending",
+      "note": "Exact logarithmic statements require the source’s dimension range, normalisation, and error estimates."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "4OFD",
+      "proof_uses": [
+        "6YYS",
+        "WU9R"
+      ],
+      "reason": "The edge-probability derivative of 6YYS is substituted as the profile derivative in the finite-profile Russo formula for increasing events."
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "product-symmetries",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 1
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-diagonal",
+      "order": 0,
+      "label": "Loop-erased law and insensitive observables",
+      "locator": "Named statement start lines in the pinned source: 22, 29, 37, 57, 70, 79, 93, 102, 111",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "LNKT covers deterministic graph invariance, measurable loop erasure, its zero-diagonal pushforward law, and equal laws for measurable diagonal-insensitive observables or events when profiles agree off the diagonal. These statements hold for arbitrary vertex sets. EYCQ covers countable-vertex two-point probabilities, the full extended cluster-volume law and susceptibility, including infinite values. The two-vertex opposite-diagonal example and infinite complete-graph example illustrate the source witnesses. No conditioning on all loops being closed is used."
+    },
+    {
+      "source": "perclib-diagonal",
+      "order": 1,
+      "label": "Connections, volume laws and susceptibility",
+      "locator": "Countable-vertex connection, full cluster-volume law and susceptibility consequences",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "EYCQ retains the countability condition and extended-valued susceptibility; it does not assert equality of the full configuration laws."
+    },
+    {
+      "source": "perclib-reindexing",
+      "order": 0,
+      "label": "Transport under coordinate bijections",
+      "locator": "Named statement start lines in the pinned source: 20, 26, 48, 54, 61, 71, 84",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "6RZ8 supplies measurable reindexing, transported law and event probabilities; VEUZ supplies profile-preserving invariance; 6VY0 supplies the induced unordered-pair transport and invariance, including diagonal coordinates. Arbitrary coordinate sets and endpoint profiles are retained. Real and extended probability forms agree since these are probability measures."
+    },
+    {
+      "source": "perclib-host-support",
+      "order": 0,
+      "label": "Configuration and graph containment",
+      "locator": "Named statement start lines in the pinned source: 31, 45, 52, 56",
+      "relationship": "Source-inspected exposition with explicit converse extensions",
+      "status": "pending",
+      "note": "H48I retains the source’s countability and all-pair support hypothesis for full configuration containment. The weaker graph-only condition and converse implications are identified as additional expository consequences, not claimed as exported source statements."
+    },
+    {
+      "source": "perclib-product-characterization",
+      "order": 0,
+      "label": "Product-law characterization by all-open events",
+      "locator": "Named theorem start lines: 33, 40, 46",
+      "relationship": "Complete grouped source contracts with existing complement identity reused",
+      "status": "pending",
+      "note": "NGWR identifies product laws from all finite all-open probabilities, not merely their one-coordinate marginals. YMHY treats injective sampling and restriction to a subset, including the general common-state-space product theorem. 6J1Y treats deterministic marginal changes, outer-measure comparisons and the countable host consequence. KDNA treats independent intersections and unions; the complement steps reuse CW1V. The finite-layer extension and failure examples are additional exposition. No formal status or correspondence verdict is authored."
+    },
+    {
+      "source": "perclib-superposition",
+      "order": 1,
+      "label": "Restriction, thinning and superposition",
+      "locator": "Named theorem start lines: 43, 61, 73, 89, 108, 118, 125, 152",
+      "relationship": "Complete grouped source contracts with existing complement identity reused",
+      "status": "pending",
+      "note": "NGWR identifies product laws from all finite all-open probabilities, not merely their one-coordinate marginals. YMHY treats injective sampling and restriction to a subset, including the general common-state-space product theorem. 6J1Y treats deterministic marginal changes, outer-measure comparisons and the countable host consequence. KDNA treats independent intersections and unions; the complement steps reuse CW1V. The finite-layer extension and failure examples are additional exposition. No formal status or correspondence verdict is authored."
+    },
+    {
+      "source": "perclib-deterministic-modification",
+      "order": 2,
+      "label": "Deterministic opening, closing and host masking",
+      "locator": "Named theorem start lines: 21, 42, 62, 70, 76, 82, 90, 127, 133",
+      "relationship": "Complete grouped source contracts with existing complement identity reused",
+      "status": "pending",
+      "note": "NGWR identifies product laws from all finite all-open probabilities, not merely their one-coordinate marginals. YMHY treats injective sampling and restriction to a subset, including the general common-state-space product theorem. 6J1Y treats deterministic marginal changes, outer-measure comparisons and the countable host consequence. KDNA treats independent intersections and unions; the complement steps reuse CW1V. The finite-layer extension and failure examples are additional exposition. No formal status or correspondence verdict is authored."
+    },
+    {
+      "source": "perclib-injective-pullback",
+      "order": 3,
+      "label": "Injective coordinate pullback",
+      "locator": "Named theorem start lines: 31, 69, 85",
+      "relationship": "Complete grouped source contracts with existing complement identity reused",
+      "status": "pending",
+      "note": "NGWR identifies product laws from all finite all-open probabilities, not merely their one-coordinate marginals. YMHY treats injective sampling and restriction to a subset, including the general common-state-space product theorem. 6J1Y treats deterministic marginal changes, outer-measure comparisons and the countable host consequence. KDNA treats independent intersections and unions; the complement steps reuse CW1V. The finite-layer extension and failure examples are additional exposition. No formal status or correspondence verdict is authored."
+    },
+    {
+      "source": "perclib-bond-transport",
+      "order": 4,
+      "label": "Deterministic cluster transport and arbitrary-measure change of variables",
+      "locator": "Named theorem start lines: 40, 52, 57, 64, 71, 77, 82, 89, 96, 103, 108, 114, 122, 138, 145, 157, 164, 177, 183, 189, 203, 209, 216",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "ZE95 groups the exact graph, connection, cluster, volume, infinitude and escape identities with their law consequences. It retains the outer-measure and lower-integral statements on arbitrary vertex sets. Measurable configuration transport reuses 6VY0, and actual profile invariance is distinguished from graph symmetry."
+    },
+    {
+      "source": "perclib-bond-embedding",
+      "order": 5,
+      "label": "Injective pullback and off-diagonal domination",
+      "locator": "Named theorem start lines: 41, 47, 70, 79, 87, 105, 118, 135",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "1H8U preserves Countable V only, arbitrary W, off-diagonal domination and extended expectations. Pullback law identification reuses YMHY. Paths may leave the image in the larger graph, so the comparison is an inequality; countability supplies measurability on the source, not on an arbitrary target."
+    },
+    {
+      "source": "perclib-disjoint-union",
+      "order": 6,
+      "label": "Closed parts, independent restrictions and full-cluster laws",
+      "locator": "Named theorem start lines: 42, 69, 74, 86, 94, 102, 108, 114, 169, 198, 212, 224, 238, 252, 267",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "7CR8 is the deterministic closed-part equality; WD2J gives countable-vertex disjoint-union observables under zero cross probabilities. The general internal-restriction independence formula reuses RDX7 and needs neither zero cross probabilities nor countable ambient vertices. The symmetric second-side susceptibility/two-point formulas are extra deductions, and empty parts and diagonal coordinates are retained."
+    },
+    {
+      "source": "perclib-symmetry-associations",
+      "order": 0,
+      "label": "Diagonal and block-independence associations",
+      "locator": "Named public declaration start lines: 24, 44",
+      "relationship": "Source-inspected association with explicit scope distinctions",
+      "status": "pending",
+      "note": "LNKT applies to measurable diagonal-insensitive observables on arbitrary vertex types. EYCQ specializes to countable-vertex connection and extended-volume laws, including infinite susceptibility and all measurable nonnegative volume functions. Compiled evidence and independent fingerprint-bound review remain separate."
+    },
+    {
+      "source": "perclib-product-associations",
+      "order": 0,
+      "label": "Relabelling, transcripts and cylinder associations",
+      "locator": "Named public theorem start lines: 19, 33, 44, 62, 79, 97",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "6RZ8 and VEUZ retain measurable bijections and law transport. EE11 and 56TE distinguish factorization from positive-probability conditional division. The helper restricts to arbitrary coordinate subsets; 5PAT reuses the frozen product-model assertion without editing it."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "NGWR",
+      "proof_uses": [
+        "5PAT"
+      ],
+      "reason": "Finite all-open cylinders form a generating pi-system; uniqueness identifies the probability measure."
+    },
+    {
+      "order": 1,
+      "tag": "YMHY",
+      "proof_uses": [
+        "NGWR"
+      ],
+      "reason": "Injectivity makes the input coordinates of a finite output cylinder distinct, preserving its product probability."
+    },
+    {
+      "order": 2,
+      "tag": "6J1Y",
+      "proof_uses": [
+        "NGWR"
+      ],
+      "reason": "Each output coordinate is its original value or a deterministic constant; set inclusions give the increasing-event comparison."
+    },
+    {
+      "order": 3,
+      "tag": "KDNA",
+      "proof_uses": [
+        "NGWR",
+        "CW1V"
+      ],
+      "reason": "Independence factors all-open probabilities for intersections; complement duality and De Morgan give the union law."
+    },
+    {
+      "order": 4,
+      "tag": "ZE95",
+      "proof_uses": [
+        "6VY0"
+      ],
+      "reason": "A vertex bijection induces a measurable equivalence of configurations and an isomorphism of open graphs."
+    },
+    {
+      "order": 5,
+      "tag": "1H8U",
+      "proof_uses": [
+        "YMHY",
+        "EYCQ"
+      ],
+      "reason": "Injective pullback identifies the law; diagonal erasure and monotone coupling give the comparison."
+    },
+    {
+      "order": 6,
+      "tag": "WD2J",
+      "proof_uses": [
+        "7CR8",
+        "YMHY",
+        "RDX7"
+      ],
+      "reason": "A countable union excludes all cross bonds almost surely; closed-part identities and independence of the two restrictions give the component laws."
+    },
+    {
+      "order": 7,
+      "tag": "H48I",
+      "proof_uses": [],
+      "reason": "The proof uses coordinate marginals and countable unions of null events; it invokes no other wiki assertion."
+    }
+  ]
+}

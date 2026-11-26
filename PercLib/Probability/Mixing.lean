@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 124, Q-8). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -41,6 +43,7 @@ variable {ι : Type*}
 
 /-- Every measurable event is approximated in measure by an event depending on finitely many
 coordinates. -/
+@[tag "DK14"]
 theorem exists_finset_measure_symmDiff_lt (μ : Measure (Set ι)) [IsFiniteMeasure μ]
     {A : Set (Set ι)} (hA : MeasurableSet A) {ε : ℝ≥0∞} (hε : 0 < ε) :
     ∃ (F : Finset ι) (S : Set (F → Prop)), MeasurableSet S ∧
@@ -103,6 +106,7 @@ theorem inter_symmDiff_inter_subset' (A A' C C' : Set (Set ι)) :
   tauto
 
 /-- **Mixing.** Relabellings that preserve the law and separate finite sets are mixing. -/
+@[tag "MJD2"]
 theorem prodBernoulli_tendsto_inter_preimage (p : ι → unitInterval) (e : ℕ → ι ≃ ι)
     (hpres : ∀ n, MeasurePreserving (fun ω : Set ι => e n '' ω)
       (prodBernoulli p) (prodBernoulli p))
@@ -235,6 +239,18 @@ theorem prodBernoulli_ae_eq_const_of_invariant (p : ι → unitInterval) (e : �
   have hu := measure_iUnion_null hzero
   rw [← this, measure_univ] at hu
   exact one_ne_zero hu
+
+/-- **Ergodicity for observables, probability form.** A measurable `ℕ∞`-valued observable
+invariant under every relabelling takes some value with probability one. -/
+theorem prodBernoulli_exists_measure_eq_one_of_invariant (p : ι → unitInterval)
+    (e : ℕ → ι ≃ ι)
+    (hpres : ∀ n, MeasurePreserving (fun ω : Set ι => e n '' ω)
+      (prodBernoulli p) (prodBernoulli p))
+    (hsep : ∀ F G : Finset ι, ∀ᶠ n in atTop, ∀ i ∈ F, e n i ∉ G)
+    {f : Set ι → ℕ∞} (hf : Measurable f) (hinv : ∀ n ω, f (e n '' ω) = f ω) :
+    ∃ c : ℕ∞, prodBernoulli p {ω | f ω = c} = 1 := by
+  obtain ⟨c, hc⟩ := prodBernoulli_ae_eq_const_of_invariant p e hpres hsep hf hinv
+  exact ⟨c, (prob_compl_eq_zero_iff (hf (measurableSet_singleton c))).1 (ae_iff.1 hc)⟩
 
 /-! ### A criterion for separation -/
 

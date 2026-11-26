@@ -1,4 +1,9 @@
 /-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Exact nearest-neighbour bond percolation on the integer line. New specialization of
 PercLib's forest path formula and pinned mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679.
 The canonical law on unordered pairs is retained, with arbitrary diagonal marginals.
@@ -9,11 +14,29 @@ public import PercLib.Percolation.Bond.Forest
 public import PercLib.Percolation.Bond.Intensity
 public import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
+/-!
+# Nearest-neighbour percolation on the integer line
+
+Exact two-point function and susceptibility of nearest-neighbour bond percolation on `ℤ`, absence of
+infinite clusters below `p = 1`, and infinite critical intensities.
+
+## Main results
+
+* `tau_eq_pow`
+* `chi_eq`
+* `chi_lt_top`
+* `law_exists_infinite_eq_zero`
+* `law_cluster_infinite_eq_one`
+* `rootCriticalIntensity_eq_top`
+* `globalCriticalIntensity_eq_top`
+* `chi_intensity_eq`
+-/
+
 @[expose] public section
 noncomputable section
 
 open MeasureTheory PercLib.Probability PercLib.Percolation.Bond
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Models.Line
 
@@ -208,6 +231,47 @@ theorem globalCriticalIntensity_eq_top (J : Sym2 ℤ → ℝ≥0)
   apply le_sInf
   rintro b ⟨β, rfl, hpos⟩
   exact (hpos.ne' (law_exists_infinite_intensity_eq_zero J hJ β)).elim
+
+/-- At `p = 1` some cluster is infinite almost surely. -/
+theorem law_exists_infinite_eq_one (q : Sym2 ℤ → unitInterval)
+    (hq : ∀ a b, a ≠ b → q s(a, b) = if |b - a| = 1 then 1 else 0) :
+    law q {ω | ∃ a, (cluster ω a).Infinite} = 1 := by
+  refine le_antisymm prob_le_one ?_
+  rw [← law_cluster_infinite_eq_one q hq 0]
+  exact measure_mono fun ω h => ⟨0, h⟩
+
+/-- The susceptibility of the unit nearest-neighbour kernel at intensity `β` is `2e^β - 1`
+(the diagonal is arbitrary). -/
+theorem chi_intensity_eq (J : Sym2 ℤ → ℝ≥0)
+    (hJ : ∀ a b, a ≠ b → J s(a, b) = if |b - a| = 1 then 1 else 0) (β : ℝ≥0) (a : ℤ) :
+    chi (intensityProfile J β) a = ENNReal.ofReal (2 * Real.exp β - 1) := by
+  let p : unitInterval := intensityProfile (fun _ : Sym2 ℤ => 1) β s(0, 1)
+  have hq : ∀ a b, a ≠ b → intensityProfile J β s(a, b) = if |b - a| = 1 then p else 0 := by
+    intro a b hab
+    apply Subtype.ext
+    change 1 - Real.exp (-(β : ℝ) * (J s(a, b) : ℝ)) = _
+    rw [hJ a b hab]
+    split_ifs with h
+    · rfl
+    · simp
+  rw [chi_eq p _ hq a]
+  set x := Real.exp (-(β : ℝ)) with hx
+  have hx0 : 0 < x := Real.exp_pos _
+  have hx1 : x ≤ 1 := Real.exp_le_one_iff.2 (neg_nonpos.2 β.coe_nonneg)
+  have hp : (unitInterval.toNNReal p : ℝ≥0∞) = ENNReal.ofReal (1 - x) := by
+    rw [← ENNReal.ofReal_coe_nnreal]
+    congr 1
+    change 1 - Real.exp (-(β : ℝ) * ((1 : ℝ≥0) : ℝ)) = 1 - x
+    simp [hx]
+  rw [hp, ← ENNReal.ofReal_one, ← ENNReal.ofReal_add zero_le_one (by linarith),
+    ← ENNReal.ofReal_sub _ (by linarith : (0 : ℝ) ≤ 1 - x),
+    ← ENNReal.ofReal_div_of_pos (by linarith)]
+  congr 1
+  have hex : Real.exp (β : ℝ) = 1 / x := by rw [hx, Real.exp_neg, one_div, inv_inv]
+  have hx0' : x ≠ 0 := hx0.ne'
+  rw [hex]
+  field_simp [hx0']
+  ring
 
 -- Every parameter and every diagonal profile inhabit the model assumptions.
 example (p : unitInterval) (d : ℤ → unitInterval) :

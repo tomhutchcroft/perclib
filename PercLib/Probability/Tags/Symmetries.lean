@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Association wrappers for existing diagonal, standard-Borel and block-independence
 results on the canonical configuration space. No probability law is redefined.
 -/
@@ -10,15 +14,30 @@ public import PercLib.Percolation.Bond.Diagonal.Probability
 public import PercLib.Probability.Defs
 public import PercLib.Probability.Tags.ProductModel
 
+/-!
+# Symmetries of the configuration space: correspondence
+
+Wiki correspondence for loop erasure, diagonal insensitivity, the standard Borel structure and block
+independence.
+
+## Main results
+
+* `loop_erasure_transport`
+* `diagonal_insensitive_cluster_laws`
+* `countable_configuration_standardBorel`
+* `disjoint_block_independence`
+-/
+
 @[expose] public section
 
 open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Probability
 
 open PercLib.Percolation.Bond
 
+open Classical in
 /-- Loop erasure is measurable, transports the law, and preserves the laws of all
 measurable insensitive observables and the probabilities of insensitive events. -/
 @[tag "LNKT"] theorem loop_erasure_transport {V α : Type*} [MeasurableSpace α]

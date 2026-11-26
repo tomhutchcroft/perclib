@@ -1,15 +1,19 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-165 (issue 532): logarithmic integrability under power rescaling (Lemma I.4.19 of
-T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, p. 47) and the regular
-variation of exponential integrating weights.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Logarithmic integrability under power rescaling (Lemma I.4.19 of T. Hutchcroft, *Critical long-range
+percolation I*, arXiv:2508.18807v1, p. 47) and the regular variation of exponential integrating
+weights.
 
-Ported from pull request 488 (contributor `yujinhkim`): repository `yujinhkim/lrp`, branch
+Ported from the work of contributor `yujinhkim`: repository `yujinhkim/lrp`, branch
 `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
-`PercLib/CriticalLRP/Analysis/LogScaling.lean`; licence Apache-2.0 as declared in that commit's
-file headers and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`.
-Modified: `RegularlyVaryingAtTop f a` becomes `RegularlyVarying a f` of
+`PercLib/CriticalLRP/Analysis/LogScaling.lean`; licence Apache-2.0 as declared in that commit's file
+headers and `third_party/critical-lrp/NOTICE.md`; upstream
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified:
+`RegularlyVaryingAtTop f a` becomes `RegularlyVarying a f` of
 `PercLib/Analysis/RegularVariation/Defs.lean`, which also asks for measurability on a tail and
 eventual positivity, both derived here (no statement changes); `import Mathlib`, `autoImplicit`,
 disabled linters and `#print` lines are removed.
@@ -269,7 +273,7 @@ theorem regularlyVarying_exp_integral_of_tendsto_zero
     ring
   have hpow : (l : ℝ) ^ a = Real.exp (a * Real.log l) := by
     rw [Real.rpow_def_of_pos hl]
-    ring
+    ring_nf
   calc (l : ℝ) ^ a * Real.exp (-(a * ∫ s in x..l * x, δ s / s))
       = Real.exp (a * Real.log l) * Real.exp (-(a * ∫ s in x..l * x, δ s / s)) := by
         rw [hpow]
@@ -280,7 +284,7 @@ theorem regularlyVarying_exp_integral_of_tendsto_zero
     _ = Real.exp (∫ s in r₀..l * x, (1 - δ s) * a / s) /
           Real.exp (∫ s in r₀..x, (1 - δ s) * a / s) := hratio.symm
 
-/-! ### Witness (D-5) -/
+/-! ### Witness -/
 
 example : LogarithmicallyIntegrable (fun r : ℝ => (fun _ : ℝ => (0 : ℝ)) (2 * r ^ (3 : ℝ))) :=
   logarithmicallyIntegrable_comp_rpow_const_mul _ isLogErrorFunction_zero.1 (c := 3) (C := 2)

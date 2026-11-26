@@ -1,12 +1,13 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-Endpoint theorems of issues 432 (Q-98, 5LNL) and 433 (Q-99, MXGM), restored on 2026-11-16 by
-PROVER-F. The proofs were written by PROVER-G (`chi_intensity_sSup_eq_top`, removed from PR
-500 in commit bf0b5ba) and PROVER-E (`exists_chi_gt_of_chi_eq_top`,
-`one_div_le_chi_of_chi_eq_top`, removed from PR 494 in commit 77f2eef) in this repository and
-are restored unchanged; they were cut only for want of a D-5 witness, now supplied by
+Authors: PercLib contributors
+-/
+/-
+Endpoint theorems for the susceptibility, restored on 2026-11-16. The proofs were written earlier in
+this repository (`chi_intensity_sSup_eq_top`, removed in commit bf0b5ba;
+`exists_chi_gt_of_chi_eq_top` and `one_div_le_chi_of_chi_eq_top`, removed in commit 77f2eef) and are
+restored unchanged; they were cut only for want of a non-vacuity witness, now supplied by
 `PercLib/Models/FreeGroupTree.lean`. No upstream proof is copied.
 -/
 module
@@ -17,13 +18,15 @@ public import PercLib.Percolation.Bond.SusceptibilityDerivative
 /-!
 # Endpoints of finite susceptibility
 
-* `chi_intensity_sSup_eq_top` (5LNL, issue 432): for a transitive intensity with finite row
+* `chi_intensity_sSup_eq_top`: for a transitive intensity with finite row
   sum `L`, if `b_χ = sSup {β | χ_β < ⊤}` is finite then `χ_{b_χ} = ⊤`.
-* `one_div_le_chi_of_chi_eq_top` (MXGM blow-up, issue 433): for a transitive kernel with
+* `one_div_le_chi_of_chi_eq_top` (blow-up): for a transitive kernel with
   off-diagonal row sum `0 < R < ∞`, if `χ` is finite on `(a,b)`, `0 ≤ a`, and `χ(b) = ∞`,
   then `χ(β) ≥ 1/(R (b - β))` for `a < β < b`.
+* `tendsto_chi_intensity_nhdsLT_sSup`: for a transitive intensity with `0 < L < ∞`, if `b_χ`
+  is finite then `χ_β → ∞` as `β ↑ b_χ`.
 
-The D-5 witnesses are in `PercLib/Models/FreeGroupTree.lean`. This file adds no definition.
+The non-vacuity witnesses are in `PercLib/Models/FreeGroupTree.lean`. This file adds no definition.
 -/
 
 @[expose] public section
@@ -31,17 +34,16 @@ The D-5 witnesses are in `PercLib/Models/FreeGroupTree.lean`. This file adds no 
 noncomputable section
 
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal
-open Classical
+open scoped ENNReal NNReal Topology
 
 namespace PercLib.Percolation.Bond
 
 variable {V : Type*}
 
-/-- **5LNL, right-openness.** If `b_χ = sSup {β | χ_β < ⊤}` is finite, then `χ_{b_χ} = ⊤`. -/
+/-- **Right-openness.** If `b_χ = sSup {β | χ_β < ⊤}` is finite, then `χ_{b_χ} = ⊤`. -/
 theorem chi_intensity_sSup_eq_top [Countable V] {J : Sym2 V → ℝ≥0} {o : V}
     (hJ : ∀ x, ∃ φ : V ≃ V, φ o = x ∧ ∀ e, J (Sym2.map φ e) = J e)
-    (hL : (∑' y, if y = o then 0 else (J s(o, y) : ℝ≥0∞)) < ⊤)
+    (hL : rowSum (fun e => (J e : ℝ≥0∞)) o < ⊤)
     (hb : sSup ((fun β : ℝ≥0 => (β : ℝ≥0∞)) '' {β | chi (intensityProfile J β) o < ⊤}) < ⊤) :
     chi (intensityProfile J
       (sSup ((fun β : ℝ≥0 => (β : ℝ≥0∞)) '' {β | chi (intensityProfile J β) o < ⊤})).toNNReal)
@@ -101,17 +103,17 @@ theorem exists_chi_gt_of_chi_eq_top [Countable V] (o : V) {a b : ℝ} (ha : 0 �
   exact ENNReal.toReal_mono (hfin t ⟨hs.trans hts.1, hts.2⟩) (finiteChi_le_chi _ (S n) o')
 
 include hJ in
-/-- **MXGM, blow-up.** For a transitive kernel with off-diagonal row sum `0 < R < ∞`, if
+/-- **Blow-up.** For a transitive kernel with off-diagonal row sum `0 < R < ∞`, if
 `χ(β) = chi q_β o` is finite on `(a,b)`, `0 ≤ a`, and `χ(b) = ∞`, then
 `χ(β) ≥ 1/(R (b - β))` for `a < β < b`. -/
 theorem one_div_le_chi_of_chi_eq_top (o : V)
-    (hR : ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞)) ≠ ⊤)
-    (hR0 : 0 < ∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))) {a b : ℝ} (ha : 0 ≤ a)
+    (hR : rowSum (fun e => (J e : ℝ≥0∞)) o ≠ ⊤)
+    (hR0 : 0 < rowSum (fun e => (J e : ℝ≥0∞)) o) {a b : ℝ} (ha : 0 ≤ a)
     (hfin : ∀ β ∈ Ioo a b, chi (intensityProfile J β.toNNReal) o ≠ ⊤)
     (hb : chi (intensityProfile J b.toNNReal) o = ⊤) {β : ℝ} (hβ : β ∈ Ioo a b) :
-    1 / ((∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal * (b - β)) ≤
+    1 / ((rowSum (fun e => (J e : ℝ≥0∞)) o).toReal * (b - β)) ≤
       (chi (intensityProfile J β.toNNReal) o).toReal := by
-  set R := (∑' v, (if v = o then 0 else (J s(o, v) : ℝ≥0∞))).toReal
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal
   set χ : ℝ → ℝ := fun u => (chi (intensityProfile J u.toNNReal) o).toReal
   have hRpos : 0 < R := ENNReal.toReal_pos hR0.ne' hR
   have hχ1 : 1 ≤ χ β := by
@@ -133,6 +135,76 @@ theorem one_div_le_chi_of_chi_eq_top (o : V)
 
 
 end MXGM
+
+/-- **Transitivity about one root gives transitivity between all pairs:** compose
+`φ_y ∘ φ_x⁻¹`. -/
+theorem forall_exists_equiv_apply_eq_of_root {J : Sym2 V → ℝ≥0} {o : V}
+    (hJ : ∀ x, ∃ φ : V ≃ V, φ o = x ∧ ∀ e, J (Sym2.map φ e) = J e) :
+    ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e := by
+  intro x y
+  obtain ⟨φ, rfl, hφ⟩ := hJ x
+  obtain ⟨ψ, rfl, hψ⟩ := hJ y
+  refine ⟨φ.symm.trans ψ, by simp, fun e => ?_⟩
+  rw [Equiv.coe_trans, ← Sym2.map_map, hψ, map_symm_preserves hφ]
+
+/-- **Divergence at the endpoint.** For a transitive intensity with off-diagonal row sum
+`0 < L < ⊤`, if `b_χ = sSup {β | χ_β < ⊤}` is finite then `χ_β → ⊤` as `β ↑ b_χ`. -/
+theorem tendsto_chi_intensity_nhdsLT_sSup [Countable V] {J : Sym2 V → ℝ≥0} {o : V}
+    (hJ : ∀ x, ∃ φ : V ≃ V, φ o = x ∧ ∀ e, J (Sym2.map φ e) = J e)
+    (hR0 : 0 < rowSum (fun e => (J e : ℝ≥0∞)) o)
+    (hL : rowSum (fun e => (J e : ℝ≥0∞)) o < ⊤)
+    (hb : sSup ((fun β : ℝ≥0 => (β : ℝ≥0∞)) '' {β | chi (intensityProfile J β) o < ⊤}) < ⊤) :
+    Filter.Tendsto (fun β : ℝ≥0 => chi (intensityProfile J β) o)
+      (𝓝[<] (sSup ((fun β : ℝ≥0 => (β : ℝ≥0∞)) ''
+        {β | chi (intensityProfile J β) o < ⊤})).toNNReal) (𝓝 ⊤) := by
+  set b := sSup ((fun β : ℝ≥0 => (β : ℝ≥0∞)) '' {β | chi (intensityProfile J β) o < ⊤})
+    with hbdef
+  have hJ2 := forall_exists_equiv_apply_eq_of_root hJ
+  have hfin : ∀ β ∈ Ioo (0 : ℝ) b.toReal, chi (intensityProfile J β.toNNReal) o ≠ ⊤ := by
+    intro β hβ
+    have hlt : ((β.toNNReal : ℝ≥0) : ℝ≥0∞) < b :=
+      (ENNReal.ofReal_lt_iff_lt_toReal hβ.1.le hb.ne).2 hβ.2
+    obtain ⟨_, ⟨γ, hγ, rfl⟩, hγlt⟩ := lt_sSup_iff.1 hlt
+    exact ne_top_of_le_ne_top hγ.ne
+      (chi_mono (fun e => intensityProfile_mono J (ENNReal.coe_le_coe.1 hγlt.le) e) o)
+  have hbtop : chi (intensityProfile J b.toReal.toNNReal) o = ⊤ := by
+    change chi (intensityProfile J ((b.toNNReal : ℝ)).toNNReal) o = ⊤
+    rw [Real.toNNReal_coe]
+    exact chi_intensity_sSup_eq_top hJ hL hb
+  have hbpos : 0 < b.toReal := by
+    refine ENNReal.toReal_pos (lt_of_lt_of_le ?_ (inv_le_chiCriticalIntensity hJ hL)).ne' hb.ne
+    exact ENNReal.inv_pos.2 hL.ne
+  set R := (rowSum (fun e => (J e : ℝ≥0∞)) o).toReal with hRdef
+  have hRpos : 0 < R := ENNReal.toReal_pos hR0.ne' hL.ne
+  rw [ENNReal.tendsto_nhds_top_iff_nnreal]
+  intro M
+  set δ : ℝ := 1 / (R * ((M : ℝ) + 1)) with hδ
+  have hδpos : 0 < δ := div_pos one_pos (mul_pos hRpos (by positivity))
+  have hc : max (b.toReal - δ) 0 < ((b.toNNReal : ℝ≥0) : ℝ) :=
+    max_lt (by change b.toReal - δ < b.toReal; linarith) hbpos
+  have hev : ∀ᶠ β : ℝ≥0 in nhds b.toNNReal, max (b.toReal - δ) 0 < (β : ℝ) :=
+    NNReal.continuous_coe.continuousAt.eventually (lt_mem_nhds hc)
+  filter_upwards [hev.filter_mono nhdsWithin_le_nhds, self_mem_nhdsWithin] with β hβc hβb
+  have hβ0 : 0 < (β : ℝ) := (le_max_right _ _).trans_lt hβc
+  have hβδ : b.toReal - δ < (β : ℝ) := (le_max_left _ _).trans_lt hβc
+  have hβlt : (β : ℝ) < b.toReal := by
+    change (β : ℝ) < (b.toNNReal : ℝ)
+    exact_mod_cast hβb
+  have hmem : (β : ℝ) ∈ Ioo (0 : ℝ) b.toReal := ⟨hβ0, hβlt⟩
+  have key := one_div_le_chi_of_chi_eq_top J hJ2 o hL.ne hR0 le_rfl hfin hbtop hmem
+  rw [Real.toNNReal_coe] at key
+  have hfinβ := hfin β hmem
+  rw [Real.toNNReal_coe] at hfinβ
+  rw [← ENNReal.toReal_lt_toReal ENNReal.coe_ne_top hfinβ, ENNReal.coe_toReal]
+  refine lt_of_lt_of_le ?_ key
+  have hd : 0 < b.toReal - β := sub_pos.2 hβlt
+  have hRd : 0 < R * (b.toReal - β) := mul_pos hRpos hd
+  have h1 : R * (b.toReal - β) < R * δ := mul_lt_mul_of_pos_left (by linarith) hRpos
+  have h2 : R * δ = 1 / ((M : ℝ) + 1) := by
+    rw [hδ]; field_simp
+  have h3 : (M : ℝ) + 1 < 1 / (R * (b.toReal - β)) :=
+    (lt_one_div (by positivity) hRd).2 (h2 ▸ h1)
+  linarith
 
 end PercLib.Percolation.Bond
 

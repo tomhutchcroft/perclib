@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-106 (issue 440), on the D-2 interface.
-Source motivation: T. Hutchcroft, "Power-law bounds for critical long-range percolation below
-the upper-critical dimension", arXiv:2008.11197v2, §4, and the wiki statement C9N6.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface. Source motivation: T. Hutchcroft, "Power-law bounds for
+critical long-range percolation below the upper-critical dimension", arXiv:2008.11197v2, §4, and the
+wiki statement C9N6. No source text or code is copied.
 -/
 module
 
@@ -60,6 +63,7 @@ theorem nat_mul_le_tsum {p : ℕ → ℝ} (hanti : ∀ m n : ℕ, 1 ≤ m → m 
     _ ≤ ∑' k, p k := hsum.sum_le_tsum _ fun k _ => hp0 k
 
 /-- **Amplitude contraction** (the analytic core of C9N6). -/
+@[tag "C9N6"]
 theorem amplitude_contraction {d α C₀ θ D B : ℝ} {r₀ : ℕ} (hd : 0 < d) (hα : 0 < α)
     (hαd : α < d) (hC₀ : 0 < C₀) (hr₀ : 1 ≤ r₀) (hθ : θ = (d - α) / (2 * d + α))
     (hD : D = C₀ * (((r₀ : ℝ) + 1) ^ (α / 2) + 1)) (hB : B = max 1 (D ^ ((1 + θ) / (2 * θ))))
@@ -247,7 +251,7 @@ theorem lowerSemicontinuous_law_le_encard [Countable V] (o : V) (n : ℕ) :
   simp only [Set.mem_ofPred_eq]
   rw [h]
 
-/-- **Endpoint passage** (C9N6). Let `q β → q b` coordinatewise as `β ↑ b`, `b > 0`. If
+/-- **Endpoint passage**. Let `q β → q b` coordinatewise as `β ↑ b`, `b > 0`. If
 `χ(q β)(o) < ⊤` and the hypothesis of `amplitude_contraction` holds for
 `p_β(n) = P_{q β}(n ≤ |K_o|)` with the same constants, for every `β ∈ (0, b)`, then
 `P_{q b}(n ≤ |K_o|) ≤ B n^(-θ)` for every `n ≥ 1`. -/
@@ -302,7 +306,7 @@ theorem law_le_encard_le_of_endpoint [Countable V] {d α C₀ θ D B : ℝ} {r�
   obtain ⟨β, h1, h2⟩ := (hev.and hmem).exists
   exact absurd (hbelow β h2 n hn) (not_le.2 h1)
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- With `d = 2`, `α = 1`, `C₀ = 1`, `r₀ = 1` (so `θ = 1/5`), the hypothesis of
 `amplitude_contraction` holds for every `p` with `0 ≤ p 1 ≤ 1` and `p n = 0` for `n ≥ 2`. -/

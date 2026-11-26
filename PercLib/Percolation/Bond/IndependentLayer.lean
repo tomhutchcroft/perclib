@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 432 (Q-98, part 3), written on 2026-11-16 by PROVER-G. No upstream proof
-is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied.
 -/
 module
 
@@ -43,7 +44,6 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability
 open scoped ENNReal unitInterval
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -53,7 +53,8 @@ variable {V : Type*}
 theorem exists_symm_eq_exp {h : ℝ} (hh : 0 ≤ h) : ∃ p : I, ((σ p : I) : ℝ) = Real.exp (-h) :=
   ⟨σ ⟨Real.exp (-h), (Real.exp_pos _).le, Real.exp_le_one_iff.2 (by linarith)⟩, by simp⟩
 
-/-- **Lower bound of BEJT.** Adding a layer only increases the ghost transform. -/
+/-- **Two-layer ghost comparison, lower bound.** Adding a layer only increases the ghost transform.
+-/
 theorem lintegral_ghost_le_union [Countable V] (q₀ s : Sym2 V → I) (o : V) {h : ℝ}
     (hh : 0 < h) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
@@ -66,24 +67,26 @@ theorem lintegral_ghost_le_union [Countable V] (q₀ s : Sym2 V → I) (o : V) {
   exact measure_mono fun η hη => hη.mono (inter_subset_inter_left _
     (cluster_mono subset_union_left o))
 
+open Classical in
 /-- The off-diagonal row sum over the vertices outside a set containing `u` is at most the
 full off-diagonal row sum. -/
 theorem tsum_ite_not_mem_le (s : Sym2 V → I) (C : Finset V) {u : V} (hu : u ∈ C) :
     ∑' v, (if v ∉ C then (unitInterval.toNNReal (s s(u, v)) : ℝ≥0∞) else 0) ≤
-      ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞) := by
+      rowSum (fun e => unitInterval.toENNReal (s e)) u := by
+  rw [rowSum_toENNReal]
   refine ENNReal.tsum_le_tsum fun v => ?_
   by_cases hv : v ∈ C
   · simp [hv]
   · have : v ≠ u := fun h => hv (h ▸ hu)
     simp [hv, this]
 
-/-- **Upper bound of BEJT, with explicit bounds.** If the `q₀`-cluster of `o` is finite
-almost surely, every off-diagonal row sum of `s` is at most `δ` and every ghost transform
-`G_v(h)` of the union law is at most `G`, then
-`G_o(h) ≤ E[1 - e^{-hX}] + δ · E[X e^{-hX}] · G`. -/
-theorem lintegral_ghost_union_le [Countable V] (q₀ s : Sym2 V → I) (o : V) {h : ℝ}
-    (hh : 0 < h) (hfin : ∀ᵐ ω ∂(law q₀), (cluster ω o).Finite) {δ G : ℝ≥0∞}
-    (hδ : ∀ u, (∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) ≤ δ)
+/-- **Two-layer ghost comparison, upper bound, with explicit bounds.** If every off-diagonal row
+sum of `s` is at most `δ` and every ghost transform `G_v(h)` of the union law is at most `G`, then
+`G_o(h) ≤ E[1 - e^{-hX}] + δ · E[X e^{-hX}] · G`. The `q₀`-cluster of `o` may be infinite with
+positive probability: on that event it contains a mark almost surely. -/
+theorem lintegral_ghost_union_le_of_rowSum_le [Countable V] (q₀ s : Sym2 V → I) (o : V) {h : ℝ}
+    (hh : 0 < h) {δ G : ℝ≥0∞}
+    (hδ : ∀ u, rowSum (fun e => unitInterval.toENNReal (s e)) u ≤ δ)
     (hG : ∀ v, ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω v).encard : ℝ≥0∞) : EReal))))
         ∂(law fun e => σ (σ (q₀ e) * σ (s e))) ≤ G) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
@@ -167,24 +170,62 @@ theorem lintegral_ghost_union_le [Countable V] (q₀ s : Sym2 V → I) (o : V) {
           exact Finset.sum_congr rfl fun u hu => by simp [hu]
       _ = (C.card : ℝ≥0∞) * δ := by rw [Finset.sum_const, nsmul_eq_mul]
   -- the infinite part
-  have hinf : Pr Einf = 0 := by
-    change Pr ((fun η : Set ((Sym2 V ⊕ Sym2 V) ⊕ V) => (Sum.inl ⁻¹' (Sum.inl ⁻¹' η) : Config V))
-      ⁻¹' {ω | (cluster ω o).Infinite}) = 0
-    rw [← Measure.map_apply measurable_three_first (measurableSet_cluster_infinite o), hPr,
-      prodBernoulli_three_map_first]
-    exact ae_iff.1 hfin
+  have hinf : Pr (E1 ∪ Einf) = Pr E1 := by
+    -- the marks hit an infinite first-layer cluster almost surely
+    set Linf : Config V → Set V := fun ω => {w | w ∈ cluster ω o ∧ (cluster ω o).Infinite}
+      with hLinf
+    have hLm : ∀ w, MeasurableSet {ω | w ∈ Linf ω} := fun w =>
+      (measurableSet_conn o w).inter (measurableSet_cluster_infinite o)
+    have hA := prodBernoulli_sum_inter_nonempty (Sum.elim q₀ s) measurable_preimage_inl
+      (L := Linf) hLm hh hp (p := p)
+    rw [prodBernoulli_map_preimage_inl] at hA
+    have hint : ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((Linf ω).encard : ℝ≥0∞) : EReal))))
+        ∂(prodBernoulli q₀) = law q₀ {ω | (cluster ω o).Infinite} := by
+      rw [← lintegral_indicator_one (measurableSet_cluster_infinite o), law]
+      refine lintegral_congr fun ω => ?_
+      by_cases hω : (cluster ω o).Infinite
+      · have hL : Linf ω = cluster ω o := by ext w; simp [hLinf, hω]
+        rw [hL, hω.encard_eq, PercLib.Analysis.exp_neg_mul_top hh]
+        simp [hω]
+      · have hL : Linf ω = ∅ := by ext w; simp [hLinf, hω]
+        simp [hL, hω]
+    have hEinf : Pr Einf = law q₀ {ω | (cluster ω o).Infinite} := by
+      change Pr ((fun η : Set ((Sym2 V ⊕ Sym2 V) ⊕ V) => (Sum.inl ⁻¹' (Sum.inl ⁻¹' η) : Config V))
+        ⁻¹' {ω | (cluster ω o).Infinite}) = _
+      rw [← Measure.map_apply measurable_three_first (measurableSet_cluster_infinite o), hPr,
+        prodBernoulli_three_map_first]
+    have hAsub : {η : Set ((Sym2 V ⊕ Sym2 V) ⊕ V) |
+        (Linf (Sum.inl ⁻¹' (Sum.inl ⁻¹' η)) ∩ Sum.inr ⁻¹' η).Nonempty} ⊆ Einf ∩ E1 := by
+      rintro η ⟨y, ⟨hy, hyi⟩, hym⟩
+      exact ⟨hyi, y, hy, hym⟩
+    have hE1m : MeasurableSet E1 :=
+      (measurableSet_prod_inter_nonempty (K := fun ω : Config V => cluster ω o)
+        (fun w => measurableSet_conn o w)).preimage
+        (measurable_three_first.prodMk measurable_preimage_inr)
+    have hdiff : Pr (Einf \ E1) = 0 := by
+      have hsplit := measure_inter_add_sdiff Einf hE1m (μ := Pr)
+      have hle : Pr Einf ≤ Pr (Einf ∩ E1) := by
+        rw [hEinf, ← hint, ← hA, hPr]
+        exact measure_mono hAsub
+      refine le_antisymm ?_ zero_le
+      refine (ENNReal.add_le_add_iff_left (measure_ne_top Pr (Einf ∩ E1))).1 ?_
+      rw [hsplit, add_zero]
+      exact hle
+    refine le_antisymm ?_ (measure_mono subset_union_left)
+    rw [← union_sdiff_self]
+    exact (measure_union_le _ _).trans (by rw [hdiff, add_zero])
   -- assembling
   rw [← prodBernoulli_three_union_cluster q₀ s o hh hp,
     ← prodBernoulli_three_first_cluster q₀ s o hh hp]
   calc _ ≤ Pr (E1 ∪ Einf ∪ ⋃ C, ⋃ u, ⋃ v, T C u v) := measure_mono hsub
-    _ ≤ Pr E1 + Pr Einf + ∑' C, ∑' u, ∑' v, Pr (T C u v) := by
-        refine (measure_union_le _ _).trans (add_le_add (measure_union_le _ _) ?_)
+    _ ≤ Pr (E1 ∪ Einf) + ∑' C, ∑' u, ∑' v, Pr (T C u v) := by
+        refine (measure_union_le _ _).trans (add_le_add le_rfl ?_)
         exact (measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun C =>
           (measure_iUnion_le _).trans (ENNReal.tsum_le_tsum fun u => measure_iUnion_le _))
     _ ≤ Pr E1 + ∑' C : Finset V, law q₀ {ω | cluster ω o = C} *
           (((C : Set V).encard : ℝ≥0∞) *
             EReal.exp (-((h : EReal) * (((C : Set V).encard : ℝ≥0∞) : EReal)))) * (δ * G) := by
-        rw [hinf, add_zero]
+        rw [hinf]
         gcongr with C
         calc ∑' u, ∑' v, Pr (T C u v)
             ≤ ∑' u, ∑' v, law q₀ {ω | cluster ω o = C} *
@@ -213,9 +254,26 @@ theorem lintegral_ghost_union_le [Countable V] (q₀ s : Sym2 V → I) (o : V) {
           (fun T => (T : ℝ≥0∞) * EReal.exp (-((h : EReal) * ((T : ℝ≥0∞) : EReal))))) _).trans_eq ?_)
         ring
 
+/-- **Two-layer ghost comparison, upper bound, with explicit bounds**, in the form with an
+almost surely finite `q₀`-cluster; the finiteness is not needed
+(`lintegral_ghost_union_le_of_rowSum_le`). -/
+theorem lintegral_ghost_union_le [Countable V] (q₀ s : Sym2 V → I) (o : V) {h : ℝ}
+    (hh : 0 < h) (_hfin : ∀ᵐ ω ∂(law q₀), (cluster ω o).Finite) {δ G : ℝ≥0∞}
+    (hδ : ∀ u, rowSum (fun e => unitInterval.toENNReal (s e)) u ≤ δ)
+    (hG : ∀ v, ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω v).encard : ℝ≥0∞) : EReal))))
+        ∂(law fun e => σ (σ (q₀ e) * σ (s e))) ≤ G) :
+    ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
+        ∂(law fun e => σ (σ (q₀ e) * σ (s e))) ≤
+      ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
+          ∂(law q₀) +
+        δ * (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) *
+          EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))) ∂(law q₀)) * G :=
+  lintegral_ghost_union_le_of_rowSum_le q₀ s o hh hδ hG
+
 /-- **BEJT.** If the `q₀`-cluster `X` of `o` is finite almost surely, then
 `E[1 - e^{-hX}] ≤ G_o(h) ≤ E[1 - e^{-hX}] + δ · E[X e^{-hX}] · G*(h)`, where
 `δ = ⨆ u, ∑'_{v ≠ u} s(u, v)` and `G*(h) = ⨆ v, G_v(h)`. -/
+@[tag "BEJT"]
 theorem lintegral_ghost_le_layer [Countable V] (q₀ s : Sym2 V → I) (o : V) {h : ℝ}
     (hh : 0 < h) (hfin : ∀ᵐ ω ∂(law q₀), (cluster ω o).Finite) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
@@ -226,14 +284,14 @@ theorem lintegral_ghost_le_layer [Countable V] (q₀ s : Sym2 V → I) (o : V) {
         ∂(law fun e => σ (σ (q₀ e) * σ (s e))) ≤
       ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))))
           ∂(law q₀) +
-        (⨆ u, ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) *
+        (⨆ u, rowSum (fun e => unitInterval.toENNReal (s e)) u) *
           (∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) *
             EReal.exp (-((h : EReal) * (((cluster ω o).encard : ℝ≥0∞) : EReal))) ∂(law q₀)) *
           ⨆ v, ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω v).encard : ℝ≥0∞) : EReal))))
             ∂(law fun e => σ (σ (q₀ e) * σ (s e))) :=
   ⟨lintegral_ghost_le_union q₀ s o hh,
     lintegral_ghost_union_le q₀ s o hh hfin (fun u => le_iSup (fun u =>
-      ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) u)
+      rowSum (fun e => unitInterval.toENNReal (s e)) u) u)
       (fun v => le_iSup (fun v => ∫⁻ ω,
         (1 - EReal.exp (-((h : EReal) * (((cluster ω v).encard : ℝ≥0∞) : EReal))))
           ∂(law fun e => σ (σ (q₀ e) * σ (s e)))) v)⟩
@@ -305,6 +363,7 @@ theorem tendsto_mul_exp_neg_div (m : ℕ) :
 /-! ### MLLO -/
 
 /-- A finite susceptibility makes the cluster finite almost surely. -/
+@[tag "INZI"]
 theorem ae_cluster_finite_of_chi_lt_top [Countable V] {q : Sym2 V → I} {v : V}
     (h : chi q v < ⊤) : ∀ᵐ ω ∂(law q), (cluster ω v).Finite := by
   have hmeas : Measurable (fun ω : Config V => ((cluster ω v).encard : ℝ≥0∞)) :=
@@ -312,10 +371,10 @@ theorem ae_cluster_finite_of_chi_lt_top [Countable V] {q : Sym2 V → I} {v : V}
   filter_upwards [ae_lt_top hmeas h.ne] with ω hω
   exact Set.encard_lt_top_iff.mp (ENat.toENNReal_lt_top.mp hω)
 
-/-- **MLLO, ghost form.** Under the hypotheses of `chi_union_le_of_bounds`, every ghost
+/-- **Ghost form.** Under the hypotheses of `chi_union_le_of_bounds`, every ghost
 transform of the union law satisfies `G_v(h) ≤ h χ_{q₀}(v) / (1 - δM)`. -/
 theorem lintegral_ghost_union_le_mul [Countable V] (q₀ s : Sym2 V → I) {δ M : ℝ≥0∞}
-    (hδ : ∀ u, (∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) ≤ δ)
+    (hδ : ∀ u, rowSum (fun e => unitInterval.toENNReal (s e)) u ≤ δ)
     (hchi : ∀ v, chi q₀ v ≤ M) (hM : M < ⊤) (hδM : δ * M < 1) {h : ℝ} (hh : 0 < h) (v : V) :
     ∫⁻ ω, (1 - EReal.exp (-((h : EReal) * (((cluster ω v).encard : ℝ≥0∞) : EReal))))
         ∂(law fun e => σ (σ (q₀ e) * σ (s e))) ≤
@@ -363,10 +422,11 @@ theorem lintegral_ghost_union_le_mul [Countable V] (q₀ s : Sym2 V → I) {δ M
         simp only [div_eq_mul_inv, one_mul]
         ring
 
-/-- **MLLO.** Let `δ` bound the off-diagonal row sums of `s`, `M` bound `χ_{q₀}`, `M < ⊤` and
-`δM < 1`. Then `χ_r(v) ≤ χ_{q₀}(v) / (1 - δM)` for the union law `r`. -/
+/-- **Susceptibility of a union with an independent layer.** Let `δ` bound the off-diagonal row sums
+of `s`, `M` bound `χ_{q₀}`, `M < ⊤` and `δM < 1`. Then `χ_r(v) ≤ χ_{q₀}(v) / (1 - δM)` for the union
+law `r`. -/
 theorem chi_union_le_of_bounds [Countable V] (q₀ s : Sym2 V → I) {δ M : ℝ≥0∞}
-    (hδ : ∀ u, (∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) ≤ δ)
+    (hδ : ∀ u, rowSum (fun e => unitInterval.toENNReal (s e)) u ≤ δ)
     (hchi : ∀ v, chi q₀ v ≤ M) (hM : M < ⊤) (hδM : δ * M < 1) (v : V) :
     chi (fun e => σ (σ (q₀ e) * σ (s e))) v ≤ chi q₀ v / (1 - δ * M) := by
   set r : Sym2 V → I := fun e => σ (σ (q₀ e) * σ (s e)) with hr
@@ -434,26 +494,27 @@ theorem chi_union_le_of_bounds [Countable V] (q₀ s : Sym2 V → I) {δ M : ℝ
 
 /-- **MLLO.** If `M = ⨆ v, χ_{q₀}(v) < ⊤` and `δ M < 1`, where
 `δ = ⨆ u, ∑'_{v ≠ u} s(u, v)`, then `χ_r(v) ≤ χ_{q₀}(v) / (1 - δM)` for every `v`. -/
+@[tag "MLLO"]
 theorem chi_union_le [Countable V] (q₀ s : Sym2 V → I) (hM : ⨆ v, chi q₀ v < ⊤)
-    (hδM : (⨆ u, ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) *
+    (hδM : (⨆ u, rowSum (fun e => unitInterval.toENNReal (s e)) u) *
       (⨆ v, chi q₀ v) < 1) (v : V) :
     chi (fun e => σ (σ (q₀ e) * σ (s e))) v ≤ chi q₀ v /
-      (1 - (⨆ u, ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) *
+      (1 - (⨆ u, rowSum (fun e => unitInterval.toENNReal (s e)) u) *
         (⨆ v, chi q₀ v)) :=
   chi_union_le_of_bounds q₀ s (fun u => le_iSup (fun u =>
-    ∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) u)
+    rowSum (fun e => unitInterval.toENNReal (s e)) u) u)
     (fun v => le_iSup (fun v => chi q₀ v) v) hM hδM v
 
 /-! ### Non-vacuity -/
 
 /-- With `s = 0` the off-diagonal row sums vanish, so `δ = 0`. -/
 example (V : Type*) :
-    (⨆ u : V, ∑' w, if w = u then 0 else
-      (unitInterval.toNNReal ((fun _ => 0 : Sym2 V → I) s(u, w)) : ℝ≥0∞)) = 0 := by
+    (⨆ u : V, rowSum (fun e => unitInterval.toENNReal ((fun _ => 0 : Sym2 V → I) e)) u) =
+      0 := by
   simp
 
-/-- `s = 0`, `q₀ = 0` on `ℕ`: the hypotheses of BEJT and MLLO hold (`X = 1`, `M = 1`,
-`δ = 0`), and MLLO gives `χ_r ≤ χ_{q₀}`. -/
+/-- `s = 0`, `q₀ = 0` on `ℕ`: the hypotheses of `lintegral_ghost_le_layer` and
+`chi_union_le_of_bounds` hold (`X = 1`, `M = 1`, `δ = 0`), and the latter gives `χ_r ≤ χ_{q₀}`. -/
 example :
     ∀ᵐ ω ∂(law (fun _ : Sym2 ℕ => (0 : I))), (cluster ω 0).Finite := by
   refine ae_cluster_finite_of_chi_lt_top ?_
@@ -468,22 +529,22 @@ example : chi (fun e => σ (σ ((fun _ : Sym2 ℕ => (0 : I)) e) * σ ((fun _ =>
     (fun u => by simp) (fun v => (hchi v).le) ENNReal.one_lt_top (by simp) 0
   exact this
 
-/-- On a finite vertex type every cluster is finite, so BEJT applies to the one-edge example
-below. -/
+/-- On a finite vertex type every cluster is finite, so `lintegral_ghost_le_layer` applies to the
+one-edge example below. -/
 example : ∀ᵐ ω ∂(law (fun _ : Sym2 Bool => (0 : I))), (cluster ω false).Finite :=
   ae_of_all _ fun _ => Set.toFinite _
 
 /-- One blue edge: on `Bool`, `q₀ = 0` and `s ≡ 1/2` (the only non-loop pair is
 `s(false, true)`). Every off-diagonal row sum of `s` is `1/2`, `χ_{q₀} = 1`, so
-`δ M = 1/2 < 1` and MLLO gives `χ_r ≤ 2`; the true value is `3/2`. -/
+`δ M = 1/2 < 1` and `chi_union_le_of_bounds` gives `χ_r ≤ 2`; the true value is `3/2`. -/
 example : chi (fun e => σ (σ ((fun _ : Sym2 Bool => (0 : I)) e) *
       σ ((fun _ => (⟨1 / 2, by norm_num, by norm_num⟩ : I)) e))) false ≤ 2 := by
   have hchi : ∀ v, chi (fun _ : Sym2 Bool => (0 : I)) v = 1 :=
     chi_eq_one_of_offDiagonal_zero _ fun _ _ _ => rfl
-  have hrow : ∀ u : Bool, (∑' w, if w = u then 0 else (unitInterval.toNNReal
-      ((fun _ => (⟨1 / 2, by norm_num, by norm_num⟩ : I)) s(u, w)) : ℝ≥0∞)) ≤ 2⁻¹ := by
+  have hrow : ∀ u : Bool, rowSum (fun e => unitInterval.toENNReal
+      ((fun _ => (⟨1 / 2, by norm_num, by norm_num⟩ : I)) e)) u ≤ 2⁻¹ := by
     intro u
-    rw [tsum_fintype, Fintype.sum_bool]
+    rw [rowSum_toENNReal, tsum_fintype, Fintype.sum_bool]
     have : ((unitInterval.toNNReal (⟨1 / 2, by norm_num, by norm_num⟩ : I) : NNReal) :
         ℝ≥0∞) = 2⁻¹ := by
       rw [← ENNReal.ofReal_coe_nnreal, unitInterval.coe_toNNReal]

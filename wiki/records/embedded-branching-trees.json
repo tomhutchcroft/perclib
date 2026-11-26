@@ -1,0 +1,97 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "embedded-branching-trees",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 155
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Occupation and second-moment length",
+      "locator": "17 March 2017 author manuscript, (2.2.2)–(2.2.14), (2.2.17)–(2.2.19), printed pp.22–25.",
+      "relationship": "Written proof with explicit model and asymptotic scope",
+      "status": "pending",
+      "note": "Corrected extinction conditioning leaves spatial steps independent; generation zero is counted separately. Geometric sums give the second-moment length and the existing finite-range Green theorem gives critical spatial decay in d>=3."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Coordinate exponential length",
+      "locator": "17 March 2017 author manuscript, (2.2.16) and the discussion following (2.2.19), printed pp.24–25.",
+      "relationship": "Written proof with explicit model and asymptotic scope",
+      "status": "pending",
+      "note": "An exponential tilt makes the killed Green kernel into a positive-drift walk. Strong Markov gives a uniform upper bound, and one multinomial term gives a polynomial lower bound for the tilted occupation."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical spatial radius",
+      "locator": "17 March 2017 author manuscript, (2.2.15) and the final sentence of Theorem 2.2 proof, printed pp.24–25.",
+      "relationship": "Written proof with explicit model and asymptotic scope",
+      "status": "pending",
+      "note": "A generation second moment gives the lower bound. A bounded inverse-square comparison function dominates the projected branching hitting recursion, giving the upper bound. This proves comparison and logarithmic exponent, not an exact radius amplitude."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Axis prefactor and near-critical spatial profile",
+      "locator": "Independent extension of the occupation and axis-length discussion already mapped at (2.2.11)-(2.2.19), printed pp.23-25",
+      "relationship": "Further written analysis; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "The exact transverse integral gives the fixed-subcritical prefactor. A uniform localized Fourier comparison gives the massive continuum profile at bounded mass times distance; the exceptional root only changes the occupation factor."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8KZO",
+      "proof_uses": [
+        "0JTK",
+        "94E7",
+        "02EB"
+      ],
+      "reason": "Corrected extinction conditioning leaves spatial steps independent; generation zero is counted separately. Geometric sums give the second-moment length and the existing finite-range Green theorem gives critical spatial decay in d>=3."
+    },
+    {
+      "order": 1,
+      "tag": "TX3U",
+      "proof_uses": [
+        "8KZO",
+        "0JTK"
+      ],
+      "reason": "An exponential tilt makes the killed Green kernel into a positive-drift walk. Strong Markov gives a uniform upper bound, and one multinomial term gives a polynomial lower bound for the tilted occupation."
+    },
+    {
+      "order": 2,
+      "tag": "MC4U",
+      "proof_uses": [
+        "94E7",
+        "BLNL"
+      ],
+      "reason": "A generation second moment gives the lower bound. A bounded inverse-square comparison function dominates the projected branching hitting recursion, giving the upper bound. This proves comparison and logarithmic exponent, not an exact radius amplitude."
+    },
+    {
+      "order": 3,
+      "tag": "S78W",
+      "proof_uses": [
+        "TX3U",
+        "8KZO"
+      ],
+      "reason": "The Poisson-kernel identity and a transverse Gaussian expansion refine the exact axis rate; the occupation identity retains the exceptional-root normalization."
+    },
+    {
+      "order": 4,
+      "tag": "LEJR",
+      "proof_uses": [
+        "C5GY",
+        "8KZO"
+      ],
+      "reason": "Uniform derivative bounds for the massive symbol difference give an absolute spatial remainder. The Gaussian resolvent determines the profile; the occupation identity supplies the Abel limit and the branching interpretation."
+    }
+  ]
+}

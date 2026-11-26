@@ -1,17 +1,20 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-146 (issue 513), item 1: the spatial moment of the cluster, `E[∑_{x ∈ K_o} w(x - o)]`, used
-in §I.4.1 and §I.5.1 of T. Hutchcroft, *Critical long-range percolation I*,
-arXiv:2508.18807v1, and in the wiki article `spatial-cutoff-moments` (as
-`S = ∑_x ℓ(x)² τ(0, x)`), on the D-2 interface.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The spatial moment of the cluster, `E[∑_{x ∈ K_o} w(x - o)]`, used in §I.4.1 and §I.5.1 of T.
+Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, and in the wiki article
+`spatial-cutoff-moments` (as `S = ∑_x ℓ(x)² τ(0, x)`), on the bond interface.
 
-The notion corresponds to `spatialMoment` in pull request 488 (repository `yujinhkim/lrp`,
+The notion corresponds to `spatialMoment` in the source formalisation (repository `yujinhkim/lrp`,
 branch `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
-`PercLib/CriticalLRP/VolumeMoments/SpatialMoments.lean`; licence Apache-2.0 as declared in
-that file's header; upstream `yujinhkim/Critical-Long-range-percolation` at
-`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`), which is stated on a finite model with real
-values; here it is a lower integral under `law q` with an `ℝ≥0∞`-valued weight. No code is
-copied; the API and witness are new.
+`PercLib/CriticalLRP/VolumeMoments/SpatialMoments.lean`; licence Apache-2.0 as declared in that
+file's header; upstream `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`), which is stated on a finite model with real values;
+here it is a lower integral under `law q` with an `ℝ≥0∞`-valued weight. No code is copied; the API
+and witness are new.
 -/
 module
 
@@ -70,7 +73,7 @@ theorem spatialMoment_eq_tsum [Countable V] (q : Sym2 V → unitInterval) (o : V
   · simp_rw [hind x]
     exact (measurable_const.indicator (measurableSet_conn o x)).aemeasurable
 
-/-! ### Witness (D-5) -/
+/-! ### Witness -/
 
 /-- With every pair closed (`q = 0`) the cluster is `{o}`, and the spatial moment is `w 0`. -/
 theorem spatialMoment_zero [Countable V] (o : V) (w : V → ℝ≥0∞) :

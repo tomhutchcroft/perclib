@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 214, Q-43, items 1 and 2). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -29,7 +31,6 @@ noncomputable section
 
 open MeasureTheory Set Finset
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -72,6 +73,7 @@ theorem tsum_sum_range_pow_mul_pow (K m : ℝ≥0∞) :
   simp_rw [hC]
   rw [ENNReal.tsum_mul_right, ENNReal.tsum_geometric, ENNReal.tsum_geometric]
 
+open Classical in
 /-- **Walk sums (deterministic).** For any family `F n x y` obeying the first-step recursion of
 `n`-step walk weights from `x` to `y`, with diagonal values at most `m^n`, the convolution
 condition gives `F (n+1) x y ≤ c_{n+1} a x y` for `x ≠ y`. -/
@@ -113,6 +115,7 @@ theorem le_sum_range_mul_of_convolution (a : V → V → ℝ≥0∞) (m K : ℝ�
 
 /-! ### Walk weights with a prescribed endpoint -/
 
+open Classical in
 /-- First-step recursion for walk weights from `x` ending at `y`. -/
 theorem tsum_walkWeight_end_succ (a : V → V → ℝ≥0∞) (n : ℕ) (x y : V) :
     (∑' p : Fin (n + 1) → V,
@@ -120,7 +123,8 @@ theorem tsum_walkWeight_end_succ (a : V → V → ℝ≥0∞) (n : ℕ) (x y : V
       ∑' z, a x z * ∑' p : Fin n → V,
         if (List.ofFn p).getLastD z = y then walkWeight a z p else 0 := by
   rw [← (Fin.consEquiv (fun _ : Fin (n + 1) => V)).tsum_eq]
-  change (∑' p : V × (Fin n → V), if (List.ofFn (Fin.cons p.1 p.2 : Fin (n + 1) → V)).getLastD x = y then walkWeight a x (Fin.cons p.1 p.2) else 0) = _
+  change (∑' p : V × (Fin n → V), if (List.ofFn (Fin.cons p.1 p.2 : Fin (n + 1) → V)).getLastD x =
+      y then walkWeight a x (Fin.cons p.1 p.2) else 0) = _
   rw [ENNReal.tsum_prod']
   congr 1
   funext z
@@ -130,6 +134,7 @@ theorem tsum_walkWeight_end_succ (a : V → V → ℝ≥0∞) (n : ℕ) (x y : V
   rw [List.ofFn_succ, Fin.cons_zero, List.getLastD_cons, walkWeight_cons, mul_ite, mul_zero]
   simp only [Fin.cons_succ]
 
+open Classical in
 theorem tsum_walkWeight_end_zero (a : V → V → ℝ≥0∞) (z y : V) :
     (∑' p : Fin 0 → V,
       if (List.ofFn p).getLastD z = y then walkWeight a z p else 0) =
@@ -137,6 +142,7 @@ theorem tsum_walkWeight_end_zero (a : V → V → ℝ≥0∞) (z y : V) :
   rw [tsum_fintype, Fintype.sum_unique]
   simp
 
+open Classical in
 theorem tsum_walkWeight_end_le_walkSum (a : V → V → ℝ≥0∞) (n : ℕ) (x y : V) :
     (∑' p : Fin n → V,
       if (List.ofFn p).getLastD x = y then walkWeight a x p else 0) ≤
@@ -149,6 +155,7 @@ theorem tsum_walkWeight_end_le_walkSum (a : V → V → ℝ≥0∞) (n : ℕ) (x
 
 /-! ### Paths and walk weights -/
 
+open Classical in
 /-- Simple paths from `x` to `y` inject into vertex sequences ending at `y`, so the path sum is
 at most the sum of walk weights with endpoint `y`. -/
 theorem tsum_path_weight_le (b : V → V → ℝ≥0∞) (x y : V) :
@@ -242,10 +249,12 @@ theorem tau_le_of_convolution [Countable V] (q : Sym2 V → unitInterval) (a : V
 
 /-! ### Non-vacuity -/
 
-/-- On two vertices, any profile at most `1/2` is dominated by the off-diagonal kernel `1/2`; the convolution condition holds with
+/-- On two vertices, any profile at most `1/2` is dominated by the off-diagonal kernel `1/2`; the
+convolution condition holds with
 `K = 0` (as for any kernel supported on a perfect matching) and the row sums are `1/2`. -/
 example (q : Sym2 Bool → unitInterval) (hq : ∀ e, (unitInterval.toNNReal (q e) : ℝ≥0∞) ≤ 1 / 2) :
-    tau q false true ≤ (fun _ _ : Bool => (1 / 2 : ℝ≥0∞)) false true * ((1 - 0)⁻¹ * (1 - 1 / 2)⁻¹) := by
+    tau q false true ≤ (fun _ _ : Bool => (1 / 2 : ℝ≥0∞)) false true *
+        ((1 - 0)⁻¹ * (1 - 1 / 2)⁻¹) := by
   refine tau_le_of_convolution _ (fun _ _ : Bool => (1 / 2 : ℝ≥0∞)) (1 / 2) 0
     (fun v w _ => ?_) (fun v => ?_) (fun x y hxy => ?_) (by decide)
   · exact hq _

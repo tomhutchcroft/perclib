@@ -1,0 +1,49 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "ghost-exploration",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 17
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 19,
+      "label": "Exploring the green clusters",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "XZ7B",
+      "proof_uses": [],
+      "reason": "Termination, the discovered-set characterisation and the revealment inclusion are deterministic arguments followed by a union bound; no other wiki assertion is invoked."
+    },
+    {
+      "order": 1,
+      "tag": "6X74",
+      "proof_uses": [],
+      "reason": "Conditioning on the bond configuration gives E[1_{B_o}|bonds]=1-e^{-hT}; no other wiki assertion is invoked."
+    },
+    {
+      "order": 2,
+      "tag": "JM30",
+      "proof_uses": [
+        "29WG",
+        "XZ7B",
+        "6X74",
+        "DUYN",
+        "7WIO",
+        "DCRV"
+      ],
+      "reason": "In finite volume the OSSS covariance inequality (29WG) with the ghost tree's revealment (XZ7B) and covariance identity (6X74) is combined with the covariance Russo formula (DUYN); the uniform upper derivative bound uses finite Russo (7WIO) and the stopped exploration cost (DCRV) before exhaustion."
+    }
+  ]
+}

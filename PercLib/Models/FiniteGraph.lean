@@ -1,8 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-New proofs for P-7 (issue 41), written on 2026-11-14, from pinned mathlib's finite sums
-and simple-graph degrees and the P-5 theorems. No upstream code is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14, from pinned mathlib's finite sums and simple-graph degrees and
+the row-sum theorems of `PercLib.Percolation.Bond.RowSum`. No upstream code is copied.
 -/
 module
 
@@ -29,23 +32,23 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal NNReal
-open Classical
 open PercLib.Percolation.Bond
 
 namespace PercLib.Models
 
+open Classical in
 /-- **Finite graph.** A profile that is at most `p` on the edges of a simple graph of
 maximum degree at most `Δ`, and zero on its other off-diagonal pairs, has susceptibility
 at most `(1 - Δ p)⁻¹` when `Δ p < 1`. -/
 theorem chi_le_of_degree_le {V : Type*} [Fintype V] (G : SimpleGraph V)
     [DecidableRel G.Adj] (q : Sym2 V → unitInterval) (p : unitInterval)
-    (hon : ∀ v w, G.Adj v w → q s(v,w) ≤ p)
-    (hoff : ∀ v w, v ≠ w → ¬ G.Adj v w → q s(v,w) = 0)
+    (hon : ∀ v w, G.Adj v w → q s(v, w) ≤ p)
+    (hoff : ∀ v w, v ≠ w → ¬ G.Adj v w → q s(v, w) = 0)
     (Δ : ℕ) (hdeg : ∀ v, G.degree v ≤ Δ)
     (hp : (Δ : ℝ≥0∞) * (unitInterval.toNNReal p : ℝ≥0∞) < 1) (x : V) :
     chi q x ≤ (1 - (Δ : ℝ≥0∞) * (unitInterval.toNNReal p : ℝ≥0∞))⁻¹ := by
   refine chi_le_inv_one_sub_of_rowSum q _ (fun v => ?_) hp x
-  rw [tsum_fintype]
+  rw [rowSum_toENNReal, tsum_fintype]
   calc _ ≤ ∑ w, if w ∈ G.neighborFinset v then (unitInterval.toNNReal p : ℝ≥0∞) else 0 := by
         refine Finset.sum_le_sum fun w _ => ?_
         by_cases hw : w = v
@@ -67,11 +70,11 @@ theorem chi_le_of_degree_le {V : Type*} [Fintype V] (G : SimpleGraph V)
 /-- **Complete graph.** On `Fin n`, a profile equal to `p` on every pair of distinct
 vertices has off-diagonal row `(n - 1) p` at every vertex. The diagonal is arbitrary. -/
 theorem chi_completeGraph_le (n : ℕ) (q : Sym2 (Fin n) → unitInterval) (p : unitInterval)
-    (hq : ∀ v w, v ≠ w → q s(v,w) = p)
+    (hq : ∀ v w, v ≠ w → q s(v, w) = p)
     (hp : ((n - 1 : ℕ) : ℝ≥0∞) * (unitInterval.toNNReal p : ℝ≥0∞) < 1) (x : Fin n) :
     chi q x ≤ (1 - ((n - 1 : ℕ) : ℝ≥0∞) * (unitInterval.toNNReal p : ℝ≥0∞))⁻¹ := by
   refine chi_le_inv_one_sub_of_rowSum q _ (fun v => le_of_eq ?_) hp x
-  rw [tsum_fintype, ← Finset.add_sum_erase _ _ (Finset.mem_univ v),
+  rw [rowSum_toENNReal, tsum_fintype, ← Finset.add_sum_erase _ _ (Finset.mem_univ v),
     Finset.sum_congr rfl (g := fun _ => (unitInterval.toNNReal p : ℝ≥0∞))]
   · rw [ite_eq_left rfl, zero_add, Finset.sum_const, Finset.card_erase_of_mem (Finset.mem_univ v),
       Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]

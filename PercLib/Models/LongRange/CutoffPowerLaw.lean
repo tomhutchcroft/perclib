@@ -1,10 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-193 (issue 621): proofs of the targets PVA8, MQNP, LF50 and 6YYS of the wiki article
-`cutoff-families` (Definitions I.1.3 and I.1.5 of T. Hutchcroft, *Critical long-range
-percolation I*, arXiv:2508.18807v1), stated in `PercLib/Models/LongRange/Defs.lean`.
-New proofs from pinned mathlib's `integral_rpow`, `Real.hasDerivAt_rpow_const` and
-`tendsto_rpow_neg_atTop`. No upstream code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Proofs of the targets PVA8, MQNP, LF50 and 6YYS of the wiki article `cutoff-families` (Definitions
+I.1.3 and I.1.5 of T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1), stated
+in `PercLib/Models/LongRange/Defs.lean`. New proofs from pinned mathlib's `integral_rpow`,
+`Real.hasDerivAt_rpow_const` and `tendsto_rpow_neg_atTop`. No upstream code is copied.
 -/
 module
 
@@ -37,21 +40,24 @@ open PercLib.Percolation.Bond
 
 namespace PercLib.Models.LongRange
 
+open PercLib.Analysis
+
 variable {d : ℕ} {N : Seminorm ℝ (Fin d → ℝ)} {K : ℝ → ℝ}
 
 /-! ### General profiles -/
 
 /-- Inside the cut-off, for a decreasing profile, `J_r(x, y) = K (N(x - y)) - K r`. -/
-theorem coe_cutoffKernel_of_le (hN : ∀ v, N v = 0 → v = 0) (hKa : AntitoneOn K (Ioi 0))
+theorem coe_cutoffKernel_of_le {N : ModelNorm (Fin d → ℝ)} (hKa : AntitoneOn K (Ioi 0))
     {r : ℝ} {x y : Fin d → ℤ}
     (hxy : x ≠ y) (h : N (Int.cast ∘ (x - y)) ≤ r) :
     (cutoffKernel N K r s(x, y) : ℝ) = K (N (Int.cast ∘ (x - y))) - K r := by
-  have hs := norm_sub_pos hN hxy
-  rw [cutoffKernel_def, radialKernel_of_ne hxy, cutoffProfile_of_le h,
+  have hs := N.intCast_comp_sub_pos hxy
+  rw [cutoffKernel_def, radialKernel_of_ne hxy, ModelNorm.coe_toSeminorm, cutoffProfile_of_le h,
     Real.coe_toNNReal _ (sub_nonneg.2 (hKa hs (hs.trans_le h) h))]
 
 /-- Outside the cut-off, `J_r(x, y) = 0`. -/
-theorem cutoffKernel_of_lt {r : ℝ} {x y : Fin d → ℤ} (hxy : x ≠ y) (h : r < N (Int.cast ∘ (x - y))) :
+theorem cutoffKernel_of_lt {r : ℝ} {x y : Fin d → ℤ} (hxy : x ≠ y)
+    (h : r < N (Int.cast ∘ (x - y))) :
     cutoffKernel N K r s(x, y) = 0 := by
   rw [cutoffKernel_def, radialKernel_of_ne hxy, cutoffProfile_of_lt h, Real.toNNReal_zero]
 
@@ -78,13 +84,13 @@ theorem tendsto_cutoffKernel (hK : Tendsto K atTop (𝓝 0))
 
 /-- **The derivative in the scale off the corner.** If `K` is decreasing on `(0, ∞)` and has
 derivative `-k` at `r ≠ N(x - y)`, then `d/dr J_r(x, y) = 1{N(x - y) < r} k`. -/
-theorem hasDerivAt_cutoffKernel (hN : ∀ v, N v = 0 → v = 0) (hKa : AntitoneOn K (Ioi 0))
+theorem hasDerivAt_cutoffKernel {N : ModelNorm (Fin d → ℝ)} (hKa : AntitoneOn K (Ioi 0))
     {k r : ℝ}
     (hK : 0 < r → HasDerivAt K (-k) r) {x y : Fin d → ℤ} (hxy : x ≠ y)
     (hr : r ≠ N (Int.cast ∘ (x - y))) :
     HasDerivAt (fun r => (cutoffKernel N K r s(x, y) : ℝ))
       (if N (Int.cast ∘ (x - y)) < r then k else 0) r := by
-  have hs := norm_sub_pos hN hxy
+  have hs := N.intCast_comp_sub_pos hxy
   rcases lt_or_gt_of_ne hr with hlt | hgt
   · simp only [not_lt.2 hlt.le, ite_false]
     refine (hasDerivAt_const r (0 : ℝ)).congr_of_eventuallyEq ?_
@@ -96,7 +102,7 @@ theorem hasDerivAt_cutoffKernel (hN : ∀ v, N v = 0 → v = 0) (hKa : AntitoneO
     rw [neg_neg] at h
     refine h.congr_of_eventuallyEq ?_
     filter_upwards [Ioi_mem_nhds hgt] with r' hr'
-    exact coe_cutoffKernel_of_le hN hKa hxy hr'.le
+    exact coe_cutoffKernel_of_le hKa hxy hr'.le
 
 /-- **Chain rule for edge probabilities.** If `r ↦ J_r(e)` has derivative `D` at `r`, then
 `r ↦ 1 - e^{-β J_r(e)}` has derivative `β e^{-β J_r(e)} D`. -/
@@ -120,16 +126,17 @@ theorem hasDerivAt_powerLawProfile_inv {a t : ℝ} (ha : 0 < a) (ht : 0 < t) :
   exact h
 
 /-- **PVA8.** -/
+@[tag "PVA8"]
 theorem cutoffPowerLawFormula : CutoffPowerLawFormula := by
-  intro d α N r x y hN hα hr hxy
+  intro d α N r x y hα hr hxy
   set a : ℝ := d + α
   have ha : 0 < a := by positivity
-  have hs := norm_sub_pos hN hxy
+  have hs := N.intCast_comp_sub_pos hxy
   have hKa := antitoneOn_powerLawProfile (c := 1 / a) (by positivity) ha.le
   have hval : (cutoffKernel N (powerLawProfile (1 / a) a) r s(x, y) : ℝ) =
       max (N (Int.cast ∘ (x - y)) ^ (-a) - r ^ (-a)) 0 / a := by
     by_cases h : N (Int.cast ∘ (x - y)) ≤ r
-    · rw [coe_cutoffKernel_of_le hN hKa hxy h, max_eq_left (sub_nonneg.2
+    · rw [coe_cutoffKernel_of_le hKa hxy h, max_eq_left (sub_nonneg.2
         (Real.rpow_le_rpow_of_nonpos hs h (by linarith)))]
       simp only [powerLawProfile]
       ring
@@ -149,46 +156,49 @@ theorem cutoffPowerLawFormula : CutoffPowerLawFormula := by
       (by linarith))), zero_div]
 
 /-- **MQNP.** -/
+@[tag "MQNP"]
 theorem cutoffPowerLawMonotone : CutoffPowerLawMonotone := by
-  intro d α N β e hN hα
+  intro d α N β e hα
   have ha : (0 : ℝ) < d + α := by positivity
   have hKa := antitoneOn_powerLawProfile (c := 1 / (d + α)) (by positivity) ha.le
-  refine ⟨monotone_cutoffKernel hN hKa e, tendsto_cutoffKernel ?_ e, fun r r' h => ?_⟩
+  refine ⟨monotone_cutoffKernel hKa e, tendsto_cutoffKernel ?_ e, fun r r' h => ?_⟩
   · have := (tendsto_rpow_neg_atTop ha).const_mul (1 / ((d : ℝ) + α))
     rw [mul_zero] at this
     exact this
-  · exact intensityProfile_le_of_le (fun e => monotone_cutoffKernel hN hKa e h) β e
+  · exact intensityProfile_le_of_le (fun e => monotone_cutoffKernel hKa e h) β e
 
 /-- **LF50.** -/
+@[tag "LF50"]
 theorem cutoffPowerLawDeficit : CutoffPowerLawDeficit := by
-  intro d α N r x y hN hα hxy h
+  intro d α N r x y hα hxy h
   have ha : (0 : ℝ) < d + α := by positivity
-  have hs := norm_sub_pos hN hxy
+  have hs := N.intCast_comp_sub_pos hxy
   have hKa := antitoneOn_powerLawProfile (c := 1 / (d + α)) (by positivity) ha.le
-  rw [coe_cutoffKernel_of_le hN hKa hxy h, coe_radialKernel_of_ne hxy
+  rw [coe_cutoffKernel_of_le hKa hxy h, coe_radialKernel_of_ne hxy
     (powerLawProfile_pos (by positivity) hs).le]
-  simp only [powerLawProfile]
+  simp only [powerLawProfile, ModelNorm.coe_toSeminorm]
   ring
 
 /-- **6YYS.** -/
+@[tag "6YYS"]
 theorem cutoffPowerLawDerivative : CutoffPowerLawDerivative := by
-  intro d α N β r x y hN hα hxy hr
+  intro d α N β r x y hα hxy hr
   have ha : (0 : ℝ) < d + α := by positivity
   have hKa := antitoneOn_powerLawProfile (c := 1 / (d + α)) (by positivity) ha.le
-  have hJ := hasDerivAt_cutoffKernel hN hKa (k := r ^ (-((d : ℝ) + α) - 1))
+  have hJ := hasDerivAt_cutoffKernel hKa (k := r ^ (-((d : ℝ) + α) - 1))
     (fun h0 => hasDerivAt_powerLawProfile_inv ha h0) hxy hr
   exact ⟨hJ, hasDerivAt_intensityProfile_of_hasDerivAt _ β _ hJ⟩
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
-/-- PVA8 at `d = 1`, `α = 1`, the sup norm, `r = 2` and `N(x - y) = 1`: the value is
-`(1 - 2^{-2})/2`. -/
+/-- The cut-off power-law formula at `d = 1`, `α = 1`, the sup norm, `r = 2` and `N(x - y) = 1`: the
+value is `(1 - 2^{-2})/2`. -/
 example : (cutoffKernel (normSeminorm ℝ (Fin 1 → ℝ)) (powerLawProfile (1 / ((1 : ℕ) + 1))
     ((1 : ℕ) + 1)) 2 s(fun _ => 1, 0) : ℝ) = (1 - 2 ^ (-(2 : ℝ))) / 2 := by
-  have h := (cutoffPowerLawFormula 1 1 (normSeminorm ℝ (Fin 1 → ℝ)) 2 (fun _ => 1) 0
-    normSeminorm_eq_zero one_pos
-    two_pos (fun h => by simpa using congrFun h 0)).2
-  rw [h, normSeminorm_intCast, sub_zero]
+  have h := (cutoffPowerLawFormula 1 1 (ModelNorm.ofNorm (Fin 1 → ℝ)) 2 (fun _ => 1) 0
+    one_pos two_pos (fun h => by simpa using congrFun h 0)).2
+  rw [ModelNorm.toSeminorm_ofNorm, ModelNorm.coe_ofNorm] at h
+  rw [h, norm_intCast_comp, sub_zero]
   have hn : ‖(fun _ => (1 : ℤ) : Fin 1 → ℤ)‖ = 1 := by
     simp [Pi.norm_def]
   rw [hn, Real.one_rpow, max_eq_left (by
@@ -201,18 +211,19 @@ example : (cutoffKernel (normSeminorm ℝ (Fin 1 → ℝ)) (powerLawProfile (1 /
 example (β : ℝ≥0) (e : Sym2 (Fin 1 → ℤ)) :
     Monotone (fun r => cutoffKernel (normSeminorm ℝ (Fin 1 → ℝ))
       (powerLawProfile (1 / ((1 : ℕ) + 1)) ((1 : ℕ) + 1)) r e) :=
-  (cutoffPowerLawMonotone 1 1 _ β e normSeminorm_eq_zero one_pos).1
+  (cutoffPowerLawMonotone 1 1 (ModelNorm.ofNorm (Fin 1 → ℝ)) β e one_pos).1
 
 example : (radialKernel (normSeminorm ℝ (Fin 1 → ℝ))
       (powerLawProfile (1 / ((1 : ℕ) + 1)) ((1 : ℕ) + 1)) s(fun _ => 1, 0) : ℝ) -
     cutoffKernel (normSeminorm ℝ (Fin 1 → ℝ))
       (powerLawProfile (1 / ((1 : ℕ) + 1)) ((1 : ℕ) + 1)) 2 s(fun _ => 1, 0) =
     2 ^ (-(((1 : ℕ) : ℝ) + 1)) / (((1 : ℕ) : ℝ) + 1) :=
-  cutoffPowerLawDeficit 1 1 _ 2 (fun _ => 1) 0 normSeminorm_eq_zero one_pos (fun h => by simpa using congrFun h 0)
-    (by simp [normSeminorm_intCast, Pi.norm_def])
+  cutoffPowerLawDeficit 1 1 (ModelNorm.ofNorm (Fin 1 → ℝ)) 2 (fun _ => 1) 0 one_pos
+      (fun h => by simpa using congrFun h 0)
+    (by simp [Pi.norm_def])
 
-example (β : ℝ≥0) := cutoffPowerLawDerivative 1 1 (normSeminorm ℝ (Fin 1 → ℝ)) β 2
-  (fun _ => 1) 0 normSeminorm_eq_zero one_pos (fun h => by simpa using congrFun h 0)
-  (by simp [normSeminorm_intCast, Pi.norm_def])
+example (β : ℝ≥0) := cutoffPowerLawDerivative 1 1 (ModelNorm.ofNorm (Fin 1 → ℝ)) β 2
+  (fun _ => 1) 0 one_pos (fun h => by simpa using congrFun h 0)
+  (by simp [Pi.norm_def])
 
 end PercLib.Models.LongRange

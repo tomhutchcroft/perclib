@@ -1,9 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-New proofs for issue 457 (Q-123), written on 2026-11-16 by PROVER-G, against pinned mathlib.
-No upstream proof is copied. The combinatorial identity is `lemma_I_4_23` of
-`PercLib.Combinatorics.DoubleFactorialConvolution`.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16, against pinned mathlib. No upstream proof is copied. The
+combinatorial identity is `lemma_I_4_23` of `PercLib.Combinatorics.DoubleFactorialConvolution`.
 -/
 module
 
@@ -13,6 +15,7 @@ public import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 public import Mathlib.Analysis.Asymptotics.AsymptoticEquivalent
+public import PercLib.Meta.Tag
 
 /-!
 # Double-factorial asymptotics from a closed power-law moment hierarchy (5O1G)
@@ -321,6 +324,7 @@ and let `m₁, …, m_P > 0` on `[r₀, ∞)` be absolutely continuous on every 
 `m₁ ~ B r^α`, `m₂ ~ C r^{3α}`, `a ~ (α/B) r^{−α−1}`, and for `3 ≤ p ≤ P` there are `ε_p → 0`
 with `m_p' = (1 + ε_p) a ∑_{ℓ=0}^{p−1} C(p,ℓ) m_{ℓ+1} m_{p−ℓ}` a.e. on `[r₀, ∞)`. Then
 `m_p ~ (2p−3)‼ (m₂/m₁)^{p−1} m₁` for every `1 ≤ p ≤ P` (with `(−1)‼ = 1`). -/
+@[tag "5O1G"]
 theorem isEquivalent_moment_hierarchy {P : ℕ} {r₀ α B C : ℝ} (hr₀ : 0 < r₀) (hα : 0 < α)
     (hB : 0 < B) (hC : 0 < C) {m : ℕ → ℝ → ℝ} {a : ℝ → ℝ} {ε : ℕ → ℝ → ℝ}
     (hm_pos : ∀ p, 1 ≤ p → p ≤ P → ∀ r, r₀ ≤ r → 0 < m p r)
@@ -399,7 +403,8 @@ theorem isEquivalent_moment_hierarchy {P : ℕ} {r₀ α B C : ℝ} (hr₀ : 0 <
           have hℓ' := Finset.mem_range.1 hℓ
           exact (tendsto_const_nhds.mul (ih (ℓ + 1 + 1) (by omega) (by omega) (by omega))).mul
             (ih (k + 3 - (ℓ + 1)) (by omega) (by omega) (by omega))
-        have h := (((tendsto_const_nhds (x := (1 : ℝ))).add (hε (k + 3) (by omega) hP)).mul hA).mul hsum
+        have h := (((tendsto_const_nhds (x := (1 : ℝ))).add (hε (k + 3) (by omega) hP)).mul
+            hA).mul hsum
         refine h.congr' ?_
         filter_upwards [eventually_gt_atTop 0] with r hr
         simp only [Finset.mul_sum, Finset.sum_div]
@@ -571,7 +576,7 @@ theorem tendsto_div_rpow_mul_of_ae_deriv {S u g Λ : ℝ → ℝ} {r₀ R_L q β
       rw [sub_zero] at h
       exact h.congr' (Eventually.of_forall fun r => by ring))
     (hg.congr' (Eventually.of_forall fun r => by
-      show _ = g r / Λ r / r ^ (β - 1)
+      change _ = g r / Λ r / r ^ (β - 1)
       rw [div_div, mul_comm]))
   exact key.congr' (Eventually.of_forall fun r => by simp only; ring)
 
@@ -606,7 +611,7 @@ theorem moment_hierarchy_constant (k : ℕ) {α B C : ℝ} (hα : α ≠ 0) (hB 
   field_simp
   norm_num
 
-/-- **Moment hierarchy with a slowly varying correction (OBTO).** As
+/-- **Moment hierarchy with a slowly varying correction.** As
 `isEquivalent_moment_hierarchy`, but with `m₂ ~ C r^{3α} L(r)`, where `L > 0` is `C¹` on
 `[R_L, ∞)` and `r L'(r)/L(r) → 0`. Then for every `1 ≤ p ≤ P`,
 `m_p ~ (2p−3)‼ C^{p−1} B^{2−p} r^{(2p−1)α} L(r)^{p−1}`. -/
@@ -771,7 +776,7 @@ theorem isEquivalent_moment_hierarchy_slowlyVarying {P : ℕ} {r₀ α B C R_L :
   field_simp
   exact (div_self hr).symm
 
-/-! ### D-5 witness: the exact solution -/
+/-! ### Non-vacuity witness: the exact solution -/
 
 /-- The power-law moments `m_p(r) = (2p−3)‼ r^{(2p−1)α}` solve the hierarchy exactly with
 `B = C = 1`, `ε_p ≡ 0` and `a(r) = α r^{−α−1}`; here is the derivative identity. -/
@@ -819,7 +824,7 @@ theorem hasDerivAt_moment_hierarchy_witness {α r : ℝ} (hr : 0 < r) {p : ℕ} 
     Real.rpow_add hr]
   ring
 
-/-- D-5 witness for `isEquivalent_moment_hierarchy`: every hypothesis holds for the exact
+/-- Non-vacuity witness for `isEquivalent_moment_hierarchy`: every hypothesis holds for the exact
 solution `m_p(r) = (2p−3)‼ r^{(2p−1)α}`, `B = C = 1`, `ε_p ≡ 0`, `a(r) = α r^{−α−1}`,
 `r₀ = 1`, for every `P` and every `α > 0`. -/
 example (P : ℕ) {α : ℝ} (hα : 0 < α) : ∀ p, 1 ≤ p → p ≤ P →
@@ -856,7 +861,7 @@ example (P : ℕ) {α : ℝ} (hα : 0 < α) : ∀ p, 1 ≤ p → p ≤ P →
     refine Eventually.of_forall fun r hr => ?_
     exact hasDerivAt_moment_hierarchy_witness (one_pos.trans_le hr) (by omega)
 
-/-- D-5 witness for `isEquivalent_moment_hierarchy_slowlyVarying`: the exact solution with
+/-- Non-vacuity witness for `isEquivalent_moment_hierarchy_slowlyVarying`: the exact solution with
 `L ≡ 1` (`R_L = 0`), `B = C = 1`, `ε_p ≡ 0`, `a(r) = α r^{−α−1}`, `r₀ = 1`, for every `P` and
 every `α > 0`. -/
 example (P : ℕ) {α : ℝ} (hα : 0 < α) : ∀ p, 1 ≤ p → p ≤ P →

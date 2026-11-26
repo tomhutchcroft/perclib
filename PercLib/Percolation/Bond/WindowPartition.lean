@@ -1,7 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-82 (issue 389, supports T-6), on the D-2 interface,
-using mathlib's `Finset.sum_comp`. No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface, using mathlib's `Finset.sum_comp`. No source text or
+code is copied.
 -/
 module
 
@@ -28,12 +32,13 @@ Items 1 and 2 hold for every `Λ`, including the empty set, and every configurat
 noncomputable section
 
 open MeasureTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond
 
 variable {V : Type*}
 
+open Classical in
 /-- `|K(x) ∩ Λ|` as the cardinality of a filter of `Λ`. -/
 theorem clusterIntersection_eq_card_filter (Λ : Finset V) (ω : Config V) (x : V) :
     clusterIntersection Λ ω x = (Λ.filter (· ∈ cluster ω x)).card := by
@@ -42,6 +47,7 @@ theorem clusterIntersection_eq_card_filter (Λ : Finset V) (ω : Config V) (x : 
   ext y
   simp [and_comm]
 
+open Classical in
 /-- Two points of `Λ` have the same trace exactly when they are in the same cluster. -/
 theorem filter_cluster_eq_iff (Λ : Finset V) (ω : Config V) {x a : V} (ha : a ∈ Λ) :
     Λ.filter (· ∈ cluster ω a) = Λ.filter (· ∈ cluster ω x) ↔ a ∈ cluster ω x := by
@@ -55,7 +61,8 @@ theorem filter_cluster_eq_iff (Λ : Finset V) (ω : Config V) {x a : V} (ha : a 
       (cluster_eq_iff_conn ω a x).2 ((mem_cluster_iff ω x a).1 h).symm
     rw [hc]
 
-/-- **Window partition** (wiki tag RU6O), item 1:
+open Classical in
+/-- **Window partition**, item 1:
 `∑_{x ∈ Λ} |K(x) ∩ Λ| = ∑_{D ∈ 𝒞_Λ} |D|²`. -/
 theorem sum_clusterIntersection_eq_sum_sq (Λ : Finset V) (ω : Config V) :
     ∑ x ∈ Λ, clusterIntersection Λ ω x =
@@ -77,6 +84,7 @@ theorem sum_clusterIntersection_le (Λ : Finset V) (ω : Config V) :
           Finset.le_sup (f := fun v => (cluster ω v ∩ (Λ : Set V)).ncard) hx
     _ = maxClusterIntersection Λ ω * Λ.card := by rw [Finset.sum_const, smul_eq_mul, mul_comm]
 
+open Classical in
 /-- Item 2, lower bound: `M_Λ² ≤ ∑_{x ∈ Λ} |K(x) ∩ Λ|`. -/
 theorem sq_maxClusterIntersection_le_sum (Λ : Finset V) (ω : Config V) :
     maxClusterIntersection Λ ω ^ 2 ≤ ∑ x ∈ Λ, clusterIntersection Λ ω x := by
@@ -107,7 +115,8 @@ theorem measurable_clusterIntersection [Countable V] (Λ : Finset V) (x : V) :
   rw [h]
   exact (measurableSet_cluster_tail x Λ n).diff (measurableSet_cluster_tail x Λ (n + 1))
 
-/-- **Window partition** (wiki tag RU6O), item 3: on a countable vertex type, for every
+open Classical in
+/-- **Window partition**, item 3: on a countable vertex type, for every
 profile, `∑_{x ∈ Λ} E|K(x) ∩ Λ| = E ∑_{D ∈ 𝒞_Λ} |D|²`. -/
 theorem sum_lintegral_clusterIntersection_eq [Countable V] (q : Sym2 V → unitInterval)
     (Λ : Finset V) :
@@ -119,8 +128,9 @@ theorem sum_lintegral_clusterIntersection_eq [Countable V] (q : Sym2 V → unitI
   refine lintegral_congr fun ω => ?_
   rw [← sum_clusterIntersection_eq_sum_sq, Nat.cast_sum]
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
+open Classical in
 /-- A singleton window: the sum is one. -/
 example (ω : Config Unit) :
     ∑ x ∈ ({()} : Finset Unit), clusterIntersection {()} ω x = 1 ∧
@@ -129,6 +139,7 @@ example (ω : Config Unit) :
   rw [Finset.sum_singleton, clusterIntersection_eq_card_filter]
   simp [mem_cluster_self]
 
+open Classical in
 /-- The empty configuration on a two-vertex window: two singleton traces, each of size one,
 so both sides of item 1 equal two and `M_Λ = 1`. -/
 example : ∑ x ∈ (Finset.univ : Finset Bool), clusterIntersection Finset.univ ∅ x = 2 ∧

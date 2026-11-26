@@ -1,0 +1,53 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "connectivity",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 0
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "grimmett",
+      "order": 1,
+      "label": "Connections and basic techniques",
+      "locator": "Chapter 2 · Some Basic Techniques",
+      "relationship": "Subject correspondence",
+      "status": "pending",
+      "note": "The shared event API will support the source’s model-specific arguments."
+    },
+    {
+      "source": "perclib-bond-interface",
+      "order": 1,
+      "label": "Finite paths and measurable events",
+      "locator": "Source lines 172–237",
+      "relationship": "Source-inspected exposition",
+      "status": "pending",
+      "note": "7QJG supplies countable-path measurability. Infinite clusters are characterized by escape from every finite set; the Harris article spells out this representation. Deterministic representations do not require countability, while the measurability argument does."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "T90E",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 1,
+      "tag": "OG96",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 2,
+      "tag": "HQ6X",
+      "proof_uses": [
+        "OG96"
+      ],
+      "reason": "Unfolding the two objects of OG96, a path inside the region is a path in the host, so the restricted cluster lies in the full-cluster intersection."
+    }
+  ]
+}

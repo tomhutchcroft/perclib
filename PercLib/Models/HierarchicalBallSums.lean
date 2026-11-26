@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-110 (issue 444), on the D-2 interface and the
-hierarchical geometry of `PercLib.Models.HierarchicalGeometry`. The statements follow the
-wiki tags V4QQ and YWTU (hierarchical two-point function), in conditional form. No source
-text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the hierarchical geometry of
+`PercLib.Models.HierarchicalGeometry`. The statements follow the wiki tags V4QQ and YWTU
+(hierarchical two-point function), in conditional form. No source text or code is copied.
 -/
 module
 
@@ -41,7 +44,6 @@ noncomputable section
 
 open MeasureTheory PercLib.Probability PercLib.Percolation.Bond
 open scoped ENNReal NNReal
-open Classical
 
 namespace PercLib.Models
 
@@ -231,7 +233,7 @@ theorem lintegral_encard_cluster_inter_ball [NeZero L]
   rw [lintegral_indicator_const (measurableSet_conn x y), one_mul]
   simp only [hy', ↓reduceIte, tau]
 
-/-- **V4QQ / YWTU, conditional on two-sided bounds for `τ`.** If
+/-- **Ball sums, conditional on two-sided bounds for `τ`.** If
 `a L^{-h(y-x)(d-α)} ≤ τ(x,y) ≤ A L^{-h(y-x)(d-α)}` for `x ≠ y`, then for every `n ≥ 1`,
 `(a/2) L^{αn} ≤ E|K_x ∩ B(x,n)| ≤ (1 + A L^α / (L^α - 1)) L^{αn}`. -/
 theorem lintegral_encard_cluster_inter_ball_bounds (hL : 2 ≤ L) (hd : 1 ≤ d) {α : ℝ}
@@ -251,11 +253,11 @@ theorem lintegral_encard_cluster_inter_ball_bounds (hL : 2 ≤ L) (hd : 1 ≤ d)
   exact ⟨le_tsum_levelBall hL hd ha (tau q) hlow x hn,
     tsum_levelBall_le hL hα hA (tau q) (fun x => (tau_self q x).le) hup x n⟩
 
-/-- **V4QQ / YWTU, conditional on two-sided bounds for the connection probability inside the
-smallest common ball.** Write `P(x,y)` for the probability that `x` and `y` are joined by an
-open path inside `B(x, h(y-x))`. If `a L^{-h(y-x)(d-α)} ≤ P(x,y) ≤ A L^{-h(y-x)(d-α)}` for
-`x ≠ y`, then for every `n ≥ 1` the expected number `∑_{y ∈ B(x,n)} P(x,y)` lies between
-`(a/2) L^{αn}` and `(1 + A L^α / (L^α - 1)) L^{αn}`, and `(a/2) L^{αn} ≤ E|K_x ∩ B(x,n)|`. -/
+/-- **Ball sums, conditional on two-sided bounds for the connection probability inside the smallest
+common ball.** Write `P(x,y)` for the probability that `x` and `y` are joined by an open path inside
+`B(x, h(y-x))`. If `a L^{-h(y-x)(d-α)} ≤ P(x,y) ≤ A L^{-h(y-x)(d-α)}` for `x ≠ y`, then for every
+`n ≥ 1` the expected number `∑_{y ∈ B(x,n)} P(x,y)` lies between `(a/2) L^{αn}` and
+`(1 + A L^α / (L^α - 1)) L^{αn}`, and `(a/2) L^{αn} ≤ E|K_x ∩ B(x,n)|`. -/
 theorem localConn_ball_bounds (hL : 2 ≤ L) (hd : 1 ≤ d) {α : ℝ}
     (hα : 0 < α) {a A : ℝ} (ha : 0 ≤ a) (hA : 0 ≤ A)
     (q : Sym2 (ℕ →₀ (Fin d → ZMod L)) → unitInterval)
@@ -295,9 +297,9 @@ theorem localConn_ball_bounds (hL : 2 ≤ L) (hd : 1 ≤ d) {α : ℝ}
     · exact hPτ x y
     · exact le_rfl)
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5: `f x y = L^{-h(y-x)(d-α)}` satisfies both bounds with `a = A = 1` and `f x x = 1`
+/-- Non-vacuity: `f x y = L^{-h(y-x)(d-α)}` satisfies both bounds with `a = A = 1` and `f x x = 1`
 (here `L = 2`, `d = 1`, `α = 1/2`), so item 1 applies. -/
 example (x : ℕ →₀ (Fin 1 → ZMod 2)) (n : ℕ) (hn : 1 ≤ n) :
     ENNReal.ofReal (1 / 2 * (2 : ℝ) ^ ((1 / 2 : ℝ) * n)) ≤

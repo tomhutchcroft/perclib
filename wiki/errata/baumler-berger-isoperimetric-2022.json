@@ -1,0 +1,42 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "baumler-berger-isoperimetric-2022",
+  "entries": [
+    {
+      "id": "logarithmic-initial-scale",
+      "title": "The logarithmic boundary profile must stay positive at the initial scale",
+      "status": "provisional",
+      "locator": "arXiv:2204.12410v2, Lemma 2.5 and equations (12)–(13), printed p.8 / PDF index7, extracted lines648–681; equation (18), printed p.10 / PDF index9, lines942–969. Versioned HTML and extracted PDF text agree. No journal-formula or visual-PDF comparison.",
+      "claim": "The lemma includes every positive integer radius n and uses f(n,1)=log(n)/n in its boundary-functional upper bound.",
+      "problem": "At n=1 this factor is zero. For d>=2, J(z)=||z||_infinity^(-d-1) and beta>0, the boundary functional of Lambda_1 is positive: its term with inside endpoint0 and outside endpoint2e_1 is q_beta(2e_1)>0. The internal root connection has probability one. Thus the displayed upper bound cannot hold at that radius.",
+      "correction": "Use f_1(n)=log(en)/n for all n>=1, as in31X5 andVVB0, or retain log(n)/n and require n>=2. PTM2 proves the underlying crossing-profile bound, and the harmonic-sum comparison then holds at every admitted radius. The exponent conclusions are unchanged.",
+      "tags": [
+        "PTM2",
+        "31X5",
+        "VVB0"
+      ],
+      "issues": [],
+      "leanImpact": "Specify n>=1, prove summability and the displacement crossing count before interchanging sums, and use a positive logarithmic profile before taking a reciprocal. Critical flux requires a finite critical intensity. This is a written local repair, with no compiled association or author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace log(n) by log(en), or start the estimate at n=2.",
+        "scale": "local",
+        "impact": "Only the initial scale changes; the exponent conclusions are retained."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2204.12410v2",
+    "checkedUrl": "https://arxiv.org/abs/2204.12410v2",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": [
+      {
+        "version": "Published article: Annales de l’Institut Henri Poincaré 60 (2024), 721–730",
+        "url": "https://doi.org/10.1214/22-AIHP1342",
+        "status": "pending",
+        "findings": "The catalog identifies the publication, but no comparison of the reported Lemma 2.5 passage with that edition is recorded."
+      }
+    ]
+  }
+}

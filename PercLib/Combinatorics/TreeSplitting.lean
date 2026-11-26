@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-66 (issue 373, roadmap T-6), using mathlib's
-`SimpleGraph.fromEdgeSet`, walks and finite sets. Source motivation: T. Hutchcroft,
-arXiv:2008.11197v2, §2.1, the tree-splitting step in the proof of Theorem 2.3.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, using mathlib's `SimpleGraph.fromEdgeSet`, walks and finite sets. Source motivation: T.
+Hutchcroft, arXiv:2008.11197v2, §2.1, the tree-splitting step in the proof of Theorem 2.3. No source
+text or code is copied.
 -/
 module
 
@@ -15,6 +18,7 @@ public import Mathlib.Tactic.Positivity
 public import Mathlib.Tactic.NormNum
 public import Mathlib.Tactic.Ring
 public import Mathlib.Tactic.FinCases
+public import PercLib.Meta.Tag
 
 /-! # Splitting a marked finite connected edge set into connected pieces
 
@@ -27,7 +31,7 @@ edge of `E`, `k ≥ 1` and `N = |A| ≥ 3^k`, then `E` is partitioned into at le
 `3^(k-1) + 1` nonempty connected pieces, each with at least `3^(-k) N` and strictly fewer
 than `3^(1-k) N` marked vertices, whose endpoints cover every endpoint of `E`.
 
-**Generalisation, stated explicitly.** The issue asks for a finite tree. Acyclicity is not
+**Generalisation, stated explicitly.** The source step uses a finite tree. Acyclicity is not
 used, so the statement is proved for every finite connected loopless edge set; the tree
 case is `exists_connected_split_of_isTree`, for a tree on a finite vertex type.
 
@@ -42,7 +46,6 @@ reachable from `x`; each part is split recursively with one *open* piece of weig
 noncomputable section
 
 open SimpleGraph Finset
-open scoped Classical
 
 namespace PercLib
 
@@ -104,6 +107,7 @@ theorem reachable_of_closed {F S : Set (Sym2 V)} {a u v : V}
       (fromEdgeSet_adj _).2 ⟨hS _ h1.1 b (Sym2.mem_mk_left b d) hu, h1.2⟩
     exact ih (hu.trans hadj.reachable) (hu'.trans hadj'.reachable)
 
+open Classical in
 /-- The edges of `F` with an endpoint reachable from `a` form a set in which every one of
 their endpoints is reachable from `a`. -/
 theorem reachable_filter_reachable (F : Finset (Sym2 V)) (a : V) {v : V}
@@ -128,6 +132,7 @@ theorem exists_mem_of_reachable_ne {S : Set (Sym2 V)} {a v : V}
   | nil => exact absurd rfl hne
   | cons h _ => exact ⟨_, ((fromEdgeSet_adj _).1 h).1, Sym2.mem_mk_left _ _⟩
 
+open Classical in
 /-- The union of two connected edge sets with a common endpoint is connected. -/
 theorem connected_union {P Q : Finset (Sym2 V)}
     (hP : ∀ u v, (∃ e ∈ P, u ∈ e) → (∃ e ∈ P, v ∈ e) →
@@ -168,6 +173,7 @@ theorem exists_common_vertex {E O : Finset (Sym2 V)} {C : Finset (Finset (Sym2 V
 
 /-! ### Bookkeeping for partitions of an edge set -/
 
+open Classical in
 private theorem part_close {E U : Finset (Sym2 V)} {C : Finset (Finset (Sym2 V))}
     (h : (∀ P ∈ C, P ⊆ E) ∧ U ⊆ E ∧ (∀ e ∈ E, e ∈ U ∨ ∃ P ∈ C, e ∈ P) ∧
       (∀ P ∈ C, Disjoint P U) ∧ (C : Set (Finset (Sym2 V))).PairwiseDisjoint id) :
@@ -188,6 +194,7 @@ private theorem part_close {E U : Finset (Sym2 V)} {C : Finset (Finset (Sym2 V))
   · rw [Finset.coe_insert]
     exact h5.insert fun P hP _ => (h4 P hP).symm
 
+open Classical in
 private theorem part_union {E₁ E₂ O₁ O₂ : Finset (Sym2 V)} {C₁ C₂ : Finset (Finset (Sym2 V))}
     (hE : Disjoint E₁ E₂)
     (h₁ : (∀ P ∈ C₁, P ⊆ E₁) ∧ O₁ ⊆ E₁ ∧ (∀ e ∈ E₁, e ∈ O₁ ∨ ∃ P ∈ C₁, e ∈ P) ∧
@@ -223,6 +230,7 @@ private theorem part_union {E₁ E₂ O₁ O₂ : Finset (Sym2 V)} {C₁ C₂ : 
     refine a5.union b5 fun P hP Q hQ _ => ?_
     exact Finset.disjoint_of_subset_left (a1 P hP) (Finset.disjoint_of_subset_right (b1 Q hQ) hE)
 
+open Classical in
 private theorem part_insert {E O : Finset (Sym2 V)} {C : Finset (Finset (Sym2 V))}
     {f : Sym2 V} (hf : f ∉ E)
     (h : (∀ P ∈ C, P ⊆ E) ∧ O ⊆ E ∧ (∀ e ∈ E, e ∈ O ∨ ∃ P ∈ C, e ∈ P) ∧
@@ -244,6 +252,7 @@ private theorem part_insert {E O : Finset (Sym2 V)} {C : Finset (Finset (Sym2 V)
 
 /-! ### The greedy split -/
 
+open Classical in
 /-- Close an open piece once its weight reaches `w`. -/
 private theorem close_or_open (W : Finset (Sym2 V) → ℕ) (w : ℝ) {E U : Finset (Sym2 V)}
     {C : Finset (Finset (Sym2 V))} (x : V)
@@ -274,6 +283,7 @@ private theorem close_or_open (W : Finset (Sym2 V) → ℕ) (w : ℝ) {E U : Fin
     · exact ⟨hne, hcn, not_lt.1 hlt, hW⟩
     · exact hC P hP'
 
+open Classical in
 /-- The recursive step: a partition into closed pieces of weight in `[w, 2w)` (or at most
 two) and one open piece of weight below `w` containing the root `x`. -/
 private theorem greedy_split (W : Finset (Sym2 V) → ℕ)
@@ -464,7 +474,8 @@ private theorem greedy_split (W : Finset (Sym2 V) → ℕ)
 
 /-! ### The splitting theorem -/
 
-/-- **Splitting a marked connected edge set** (Q-66, input to the BK step of T-6). Let `E`
+open Classical in
+/-- **Splitting a marked connected edge set** (input to the BK step of universal tightness). Let `E`
 be a finite loopless edge set whose graph is connected on the endpoints of `E` (a finite
 tree is a special case), `A` a set of `N = |A|` marked endpoints, `k ≥ 1` and
 `N ≥ 3^k`. Then `E` is partitioned into `m ≥ 3^(k-1) + 1` nonempty connected pieces,
@@ -656,9 +667,11 @@ theorem exists_connected_split (E : Finset (Sym2 V)) (hdiag : ∀ e ∈ E, ¬ e.
     obtain ⟨P, hP, heP⟩ := hD2 e he
     exact ⟨P, hP, e, heP, hve⟩
 
+open Classical in
 /-- **The tree case.** A finite tree with `N ≥ 3^k` marked vertices, `k ≥ 1`: its edge set
 is partitioned into at least `3^(k-1) + 1` nonempty connected pieces, each with at least
 `N / 3^k` and fewer than `3 N / 3^k` marked endpoints, covering every vertex. -/
+@[tag "DMI0"]
 theorem exists_connected_split_of_isTree [Fintype V] {T : SimpleGraph V}
     (hT : T.IsTree) (A : Finset V) (k : ℕ) (hk : 1 ≤ k) (hN : 3 ^ k ≤ A.card) :
     ∃ C : Finset (Finset (Sym2 V)),
@@ -697,7 +710,7 @@ theorem exists_connected_split_of_isTree [Fintype V] {T : SimpleGraph V}
     obtain ⟨P, hP, heP⟩ := h3 e he
     exact ⟨P, hP, e, heP, hve⟩
 
-/-! ### Non-vacuity (D-5): a path on three vertices, all marked, `k = 1` -/
+/-! ### Non-vacuity: a path on three vertices, all marked, `k = 1` -/
 
 /-- The path `0 - 1 - 2` on `Fin 3` with every vertex marked satisfies the hypotheses with
 `k = 1`, `N = 3`, and the conclusion provides at least two pieces. -/
@@ -734,5 +747,262 @@ example : ∃ C : Finset (Finset (Sym2 (Fin 3))), 2 ≤ C.card ∧
   obtain ⟨C, hC, hsub, _, _, hP, _⟩ := exists_connected_split {s(0, 1), s(1, 2)}
     hdiag hconn Finset.univ hA 1 le_rfl (by simp)
   exact ⟨C, by simpa using hC, fun P hP' => ⟨(hP P hP').1, hsub P hP'⟩⟩
+
+/-! ### Arbitrary trees and connected graphs: pieces that may be infinite -/
+
+/-- A walk in any graph whose edges all lie in `F` joins its endpoints in the graph of `F`. -/
+theorem reachable_fromEdgeSet_of_edges_subset {G : SimpleGraph V} {F : Set (Sym2 V)} {u v : V}
+    (p : G.Walk u v) (hp : ∀ e ∈ p.edges, e ∈ F) : (fromEdgeSet F).Reachable u v :=
+  ⟨p.transfer (fromEdgeSet F) fun e he => by
+    rw [edgeSet_fromEdgeSet]
+    exact ⟨hp e he, G.not_isDiag_of_mem_edgeSet (p.edges_subset_edgeSet he)⟩⟩
+
+open Classical in
+/-- In a tree, two endpoints of a set `F` of tree edges that are joined in the graph of `F`
+cannot also be joined after deleting `F`, unless they are equal. -/
+theorem eq_of_reachable_deleteEdges_of_isTree {T : SimpleGraph V} (hT : T.IsTree)
+    {F : Set (Sym2 V)} (hFT : F ⊆ T.edgeSet) {u v : V} (hF : (fromEdgeSet F).Reachable u v)
+    (hD : (T.deleteEdges F).Reachable u v) : u = v := by
+  by_contra huv
+  obtain ⟨q⟩ := hD
+  obtain ⟨r⟩ := hF
+  have hq : ∀ e ∈ q.bypass.edges, e ∈ T.edgeSet ∧ e ∉ F := fun e he => by
+    have := q.bypass.edges_subset_edgeSet he
+    rwa [edgeSet_deleteEdges] at this
+  have hr : ∀ e ∈ r.bypass.edges, e ∈ F := fun e he => by
+    have := r.bypass.edges_subset_edgeSet he
+    rw [edgeSet_fromEdgeSet] at this
+    exact this.1
+  set q' := q.bypass.transfer T fun e he => (hq e he).1
+  set r' := r.bypass.transfer T fun e he => hFT (hr e he)
+  have heq := (hT.isAcyclic.subsingleton_path u v).elim ⟨q', q.bypass_isPath.transfer _⟩
+    ⟨r', r.bypass_isPath.transfer _⟩
+  have hedges : q'.edges = r'.edges := congrArg (fun p : T.Path u v => p.1.edges) heq
+  rw [Walk.edges_transfer, Walk.edges_transfer] at hedges
+  obtain ⟨e, he⟩ := List.exists_mem_of_ne_nil q.bypass.edges fun h =>
+    huv (Walk.edges_eq_nil.1 h).eq
+  exact (hq e he).2 (hr e (hedges ▸ he))
+
+/-- If `a` is an endpoint of `F`, every vertex joined to `a` is joined, after deleting `F`, to
+some endpoint of `F`. -/
+theorem exists_reachable_deleteEdges {G : SimpleGraph V} (F : Set (Sym2 V)) {v a : V}
+    (p : G.Walk v a) (ha : ∃ e ∈ F, a ∈ e) :
+    ∃ c, (∃ e ∈ F, c ∈ e) ∧ (G.deleteEdges F).Reachable v c := by
+  induction p with
+  | nil => exact ⟨_, ha, Reachable.rfl⟩
+  | @cons x y z hxy p ih =>
+    by_cases hx : ∃ e ∈ F, x ∈ e
+    · exact ⟨x, hx, Reachable.rfl⟩
+    · obtain ⟨c, hc, hyc⟩ := ih ha
+      have hadj : (G.deleteEdges F).Adj x y :=
+        (deleteEdges_adj).2 ⟨hxy, fun h => hx ⟨_, h, Sym2.mem_mk_left x y⟩⟩
+      exact ⟨c, hc, hadj.reachable.trans hyc⟩
+
+/-- The two ends of a walk between distinct vertices are endpoints of its edges. -/
+theorem exists_mem_edges_of_ne {G : SimpleGraph V} {u v : V} (p : G.Walk u v) (huv : u ≠ v) :
+    (∃ e ∈ p.edges, u ∈ e) ∧ ∃ e ∈ p.edges, v ∈ e := by
+  have hstart : ∀ {x y : V} (q : G.Walk x y), x ≠ y → ∃ e ∈ q.edges, x ∈ e := by
+    intro x y q hxy
+    cases q with
+    | nil => exact absurd rfl hxy
+    | cons h q => exact ⟨_, List.mem_cons_self .., Sym2.mem_mk_left _ _⟩
+  refine ⟨hstart p huv, ?_⟩
+  obtain ⟨e, he, hve⟩ := hstart p.reverse huv.symm
+  rw [Walk.edges_reverse, List.mem_reverse] at he
+  exact ⟨e, he, hve⟩
+
+open Classical in
+/-- **Splitting a marked tree, possibly infinite.** Let `T` be a tree on any vertex type, `A` a
+finite set of `N = |A|` marked vertices, `k ≥ 1` and `N ≥ 3^k`. Then the edge set of `T` is
+partitioned into finitely many, at least `3^(k-1) + 1`, nonempty connected pieces (sets of edges,
+possibly infinite), each with at least `N / 3^k` and fewer than `3 N / 3^k` marked vertices
+among the endpoints of its edges, whose endpoints cover every vertex.
+
+The proof splits the finite core spanned by walks from one mark to the others
+(`exists_connected_split`) and attaches each remaining edge to a piece at the unique core vertex
+it reaches without using core edges. -/
+theorem exists_connected_set_split_of_isTree {T : SimpleGraph V} (hT : T.IsTree)
+    (A : Finset V) (k : ℕ) (hk : 1 ≤ k) (hN : 3 ^ k ≤ A.card) :
+    ∃ C : Finset (Set (Sym2 V)),
+      3 ^ (k - 1) + 1 ≤ C.card ∧
+      (∀ P ∈ C, P ⊆ T.edgeSet) ∧ (∀ e ∈ T.edgeSet, ∃ P ∈ C, e ∈ P) ∧
+      (C : Set (Set (Sym2 V))).PairwiseDisjoint id ∧
+      (∀ P ∈ C, P.Nonempty ∧
+        (∀ u v, (∃ e ∈ P, u ∈ e) → (∃ e ∈ P, v ∈ e) → (fromEdgeSet P).Reachable u v) ∧
+        (A.card : ℝ) / 3 ^ k ≤ ((A.filter fun a => ∃ e ∈ P, a ∈ e).card : ℝ) ∧
+        ((A.filter fun a => ∃ e ∈ P, a ∈ e).card : ℝ) < 3 * (A.card : ℝ) / 3 ^ k) ∧
+      (∀ v, ∃ P ∈ C, ∃ e ∈ P, v ∈ e) := by
+  have h3 : 3 ≤ A.card := le_trans (by
+    calc 3 = 3 ^ 1 := by norm_num
+      _ ≤ 3 ^ k := Nat.pow_le_pow_right (by norm_num) hk) hN
+  obtain ⟨a, ha⟩ : A.Nonempty := Finset.card_pos.1 (by omega)
+  obtain ⟨b₀, hb₀, hb₀a⟩ : ∃ b ∈ A, b ≠ a := Finset.exists_mem_ne (by omega) a
+  -- the finite core: the edges of chosen walks from `a` to every mark
+  let w : ∀ b, T.Walk a b := fun b => (hT.connected.preconnected a b).some
+  set E₀ : Finset (Sym2 V) := A.biUnion fun b => (w b).edges.toFinset with hE₀
+  have hE₀T : ∀ e ∈ E₀, e ∈ T.edgeSet := by
+    intro e he
+    obtain ⟨b, -, hb⟩ := Finset.mem_biUnion.1 he
+    exact (w b).edges_subset_edgeSet (List.mem_toFinset.1 hb)
+  have hreach : ∀ u, (∃ e ∈ E₀, u ∈ e) → (fromEdgeSet (E₀ : Set (Sym2 V))).Reachable a u := by
+    rintro u ⟨e, he, hue⟩
+    obtain ⟨b, hbA, hb⟩ := Finset.mem_biUnion.1 he
+    have hus : u ∈ (w b).support := Walk.mem_support_of_mem_edges (List.mem_toFinset.1 hb) hue
+    refine reachable_fromEdgeSet_of_edges_subset ((w b).takeUntil u hus) fun e' he' => ?_
+    exact Finset.mem_coe.2 (Finset.mem_biUnion.2
+      ⟨b, hbA, List.mem_toFinset.2 ((w b).edges_takeUntil_subset_edges hus he')⟩)
+  have hconn : ∀ u v, (∃ e ∈ E₀, u ∈ e) → (∃ e ∈ E₀, v ∈ e) →
+      (fromEdgeSet (E₀ : Set (Sym2 V))).Reachable u v :=
+    fun u v hu hv => (hreach u hu).symm.trans (hreach v hv)
+  have hwE₀ : ∀ b ∈ A, ∀ e ∈ (w b).edges, e ∈ E₀ := fun b hb e he =>
+    Finset.mem_biUnion.2 ⟨b, hb, List.mem_toFinset.2 he⟩
+  have hA : ∀ x ∈ A, ∃ e ∈ E₀, x ∈ e := by
+    intro x hx
+    by_cases hxa : x = a
+    · subst hxa
+      obtain ⟨e, he, hxe⟩ := (exists_mem_edges_of_ne (w b₀) hb₀a.symm).1
+      exact ⟨e, hwE₀ b₀ hb₀ e he, hxe⟩
+    · obtain ⟨e, he, hxe⟩ := (exists_mem_edges_of_ne (w x) (Ne.symm hxa)).2
+      exact ⟨e, hwE₀ x hx e he, hxe⟩
+  obtain ⟨C₀, hcard, hsub, hcov, hdisj, hprop, hvert⟩ := exists_connected_split E₀
+    (fun e he => T.not_isDiag_of_mem_edgeSet (hE₀T e he)) hconn A hA k hk hN
+  -- roots: the unique core vertex reached without core edges
+  set H := T.deleteEdges (E₀ : Set (Sym2 V)) with hH
+  have hHE : ∀ e ∈ H.edgeSet, e ∈ T.edgeSet ∧ e ∉ E₀ := fun e he => by
+    rw [hH, edgeSet_deleteEdges] at he
+    exact ⟨he.1, he.2⟩
+  have hcore : ∀ c d, (∃ e ∈ E₀, c ∈ e) → (∃ e ∈ E₀, d ∈ e) → H.Reachable c d → c = d :=
+    fun c d hc hd h => eq_of_reachable_deleteEdges_of_isTree hT
+      (fun e he => hE₀T e (Finset.mem_coe.1 he)) (hconn c d hc hd) h
+  have hroot : ∀ v, ∃ c, (∃ e ∈ E₀, c ∈ e) ∧ H.Reachable v c := fun v =>
+    exists_reachable_deleteEdges (E₀ : Set (Sym2 V))
+      (hT.connected.preconnected v a).some (by simpa using hA a ha)
+  choose ρ hρS hρR using hroot
+  have hρeq : ∀ v v', H.Reachable v v' → ρ v = ρ v' := fun v v' h =>
+    hcore _ _ (hρS v) (hρS v') ((hρR v).symm.trans (h.trans (hρR v')))
+  have hρcore : ∀ c, (∃ e ∈ E₀, c ∈ e) → ρ c = c := fun c hc =>
+    hcore _ _ (hρS c) hc (hρR c).symm
+  choose! π hπC hπe using hvert
+  -- the enlarged pieces
+  let add : Finset (Sym2 V) → Set (Sym2 V) := fun P =>
+    {e | e ∈ H.edgeSet ∧ ∀ u ∈ e, π (ρ u) = P}
+  let f : Finset (Sym2 V) → Set (Sym2 V) := fun P => (P : Set (Sym2 V)) ∪ add P
+  have hadd : ∀ x y, H.Adj x y → s(x, y) ∈ add (π (ρ x)) := by
+    intro x y hxy
+    refine ⟨hxy, fun u hu => ?_⟩
+    rcases Sym2.mem_iff.1 hu with rfl | rfl
+    · rfl
+    · exact congrArg π (hρeq _ _ hxy.reachable).symm
+  have hPE₀ : ∀ P ∈ C₀, ∀ e ∈ f P, e ∈ E₀ → e ∈ P := by
+    rintro P - e (he | he) heE
+    · exact he
+    · exact absurd heE (hHE e he.1).2
+  have hinj : Set.InjOn f C₀ := by
+    intro P hP Q hQ hPQ
+    ext e
+    constructor
+    · intro he
+      exact hPE₀ Q hQ e (hPQ ▸ Or.inl he) (hsub P hP he)
+    · intro he
+      exact hPE₀ P hP e (hPQ.symm ▸ Or.inl he) (hsub Q hQ he)
+  refine ⟨C₀.image f, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rwa [Finset.card_image_of_injOn hinj]
+  · intro X hX
+    obtain ⟨P, hP, rfl⟩ := Finset.mem_image.1 hX
+    rintro e (he | he)
+    · exact hE₀T e (hsub P hP he)
+    · exact (hHE e he.1).1
+  · intro e he
+    by_cases heE : e ∈ E₀
+    · obtain ⟨P, hP, heP⟩ := hcov e heE
+      exact ⟨f P, Finset.mem_image_of_mem f hP, Or.inl heP⟩
+    · induction e using Sym2.ind with
+      | _ x y =>
+        have hxy : H.Adj x y := (deleteEdges_adj).2 ⟨he, heE⟩
+        exact ⟨f (π (ρ x)), Finset.mem_image_of_mem f (hπC _ (hρS x)), Or.inr (hadd x y hxy)⟩
+  · intro X hX Y hY hXY
+    obtain ⟨P, hP, rfl⟩ := Finset.mem_image.1 (Finset.mem_coe.1 hX)
+    obtain ⟨Q, hQ, rfl⟩ := Finset.mem_image.1 (Finset.mem_coe.1 hY)
+    have hPQ : P ≠ Q := fun h => hXY (h ▸ rfl)
+    have hPQd : Disjoint P Q := hdisj hP hQ hPQ
+    refine Set.disjoint_left.2 fun e heP heQ => ?_
+    rcases heP with heP | heP <;> rcases heQ with heQ | heQ
+    · exact Finset.disjoint_left.1 hPQd heP heQ
+    · exact (hHE e heQ.1).2 (hsub P hP heP)
+    · exact (hHE e heP.1).2 (hsub Q hQ heQ)
+    · induction e using Sym2.ind with
+      | _ x y =>
+        exact hPQ ((heP.2 x (Sym2.mem_mk_left x y)).symm.trans (heQ.2 x (Sym2.mem_mk_left x y)))
+  · intro X hX
+    obtain ⟨P, hP, rfl⟩ := Finset.mem_image.1 hX
+    obtain ⟨hne, hPc, hlo, hhi⟩ := hprop P hP
+    have hmarks : (A.filter fun x => ∃ e ∈ f P, x ∈ e) = A.filter fun x => ∃ e ∈ P, x ∈ e := by
+      ext x
+      simp only [Finset.mem_filter]
+      refine ⟨fun ⟨hx, e, he, hxe⟩ => ⟨hx, ?_⟩, fun ⟨hx, e, he, hxe⟩ => ⟨hx, e, Or.inl he, hxe⟩⟩
+      rcases he with he | he
+      · exact ⟨e, he, hxe⟩
+      · have hπx : π x = P := by rw [← hρcore x (hA x hx)]; exact he.2 x hxe
+        exact hπx ▸ hπe x (hA x hx)
+    have hmono : fromEdgeSet (P : Set (Sym2 V)) ≤ fromEdgeSet (f P) :=
+      fromEdgeSet_mono Set.subset_union_left
+    -- every endpoint of the enlarged piece is joined to an endpoint of `P`
+    have hto : ∀ x, (∃ e ∈ f P, x ∈ e) →
+        ∃ z, (∃ e ∈ P, z ∈ e) ∧ (fromEdgeSet (f P)).Reachable x z := by
+      rintro x ⟨e, he | he, hxe⟩
+      · exact ⟨x, ⟨e, he, hxe⟩, Reachable.rfl⟩
+      · have hπx : π (ρ x) = P := he.2 x hxe
+        obtain ⟨p⟩ := hρR x
+        refine ⟨ρ x, hπx ▸ hπe _ (hρS x), reachable_fromEdgeSet_of_edges_subset p ?_⟩
+        intro e' he'
+        refine Or.inr ⟨p.edges_subset_edgeSet he', fun u hu => ?_⟩
+        have hus : u ∈ p.support := Walk.mem_support_of_mem_edges he' hu
+        rw [← hπx, hρeq x u ⟨p.takeUntil u hus⟩]
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · obtain ⟨e, he⟩ := hne
+      exact ⟨e, Or.inl he⟩
+    · intro u v hu hv
+      obtain ⟨zu, hzu, hu'⟩ := hto u hu
+      obtain ⟨zv, hzv, hv'⟩ := hto v hv
+      exact hu'.trans (((hPc zu zv hzu hzv).mono hmono).trans hv'.symm)
+    · rw [hmarks]; exact hlo
+    · rw [hmarks]; exact hhi
+  · intro v
+    by_cases hv : ∃ e ∈ E₀, v ∈ e
+    · obtain ⟨e, he, hve⟩ := hπe v hv
+      exact ⟨f (π v), Finset.mem_image_of_mem f (hπC v hv), e, Or.inl he, hve⟩
+    · have hvρ : v ≠ ρ v := fun h => hv (h ▸ hρS v)
+      obtain ⟨p⟩ := hρR v
+      have hvy : H.Adj v p.snd := p.adj_snd (Walk.not_nil_of_ne hvρ)
+      exact ⟨f (π (ρ v)), Finset.mem_image_of_mem f (hπC _ (hρS v)), s(v, p.snd),
+        Or.inr (hadd v p.snd hvy), Sym2.mem_mk_left v p.snd⟩
+
+open Classical in
+/-- **Marked splitting of a connected graph with vertex coverage.** Let `G` be a connected
+graph on any vertex type, `A` a finite set of `N = |A|` marked vertices, `k ≥ 1` and
+`N ≥ 3^k`. There are finitely many, at least `3^(k-1) + 1`, pairwise disjoint nonempty sets of
+edges of `G` (possibly infinite), each connected on its endpoints and with at least `N / 3^k`
+and fewer than `3 N / 3^k` marked endpoints, whose endpoints cover every vertex; if `G` is a
+tree they cover every edge. The pieces are those of `exists_connected_set_split_of_isTree` for
+a spanning tree. -/
+theorem exists_connected_set_split_of_connected {G : SimpleGraph V} (hG : G.Connected)
+    (A : Finset V) (k : ℕ) (hk : 1 ≤ k) (hN : 3 ^ k ≤ A.card) :
+    ∃ C : Finset (Set (Sym2 V)),
+      3 ^ (k - 1) + 1 ≤ C.card ∧
+      (∀ P ∈ C, P ⊆ G.edgeSet) ∧
+      (C : Set (Set (Sym2 V))).PairwiseDisjoint id ∧
+      (∀ P ∈ C, P.Nonempty ∧
+        (∀ u v, (∃ e ∈ P, u ∈ e) → (∃ e ∈ P, v ∈ e) → (fromEdgeSet P).Reachable u v) ∧
+        (A.card : ℝ) / 3 ^ k ≤ ((A.filter fun a => ∃ e ∈ P, a ∈ e).card : ℝ) ∧
+        ((A.filter fun a => ∃ e ∈ P, a ∈ e).card : ℝ) < 3 * (A.card : ℝ) / 3 ^ k) ∧
+      (∀ v, ∃ P ∈ C, ∃ e ∈ P, v ∈ e) ∧
+      (G.IsTree → ∀ e ∈ G.edgeSet, ∃ P ∈ C, e ∈ P) := by
+  by_cases hGT : G.IsTree
+  · obtain ⟨C, h1, h2, h3, h4, h5, h6⟩ := exists_connected_set_split_of_isTree hGT A k hk hN
+    exact ⟨C, h1, h2, h4, h5, h6, fun _ => h3⟩
+  · obtain ⟨T, hTG, hT⟩ := hG.exists_isTree_le
+    obtain ⟨C, h1, h2, -, h4, h5, h6⟩ := exists_connected_set_split_of_isTree hT A k hk hN
+    exact ⟨C, h1, fun P hP => (h2 P hP).trans (edgeSet_mono hTG), h4, h5, h6,
+      fun h => absurd h hGT⟩
 
 end PercLib

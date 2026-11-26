@@ -1,0 +1,121 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "fractional-fourier-weights",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 207
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Fractional coordinate weights and convolution identities",
+      "locator": "Lemma 4.2 and (4.16)\u2013(4.17), printed pp.569\u2013570; Section 4.3, (4.39)\u2013(4.53), printed pp.574\u2013577",
+      "relationship": "Independent symmetric-difference Lp construction in place of the source's directional pointwise fractional-transform estimates",
+      "status": "pending",
+      "note": "The strict weight and power-counting conditions are explicit. Non-even input-moment endpoints and the sharper middle-diagram estimates are not identified with the source."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Exact non-even input-moment endpoint",
+      "locator": "Section 4.1.4, (4.23)\u2013(4.29), printed pp.571\u2013573",
+      "relationship": "The highest-derivative separation is retained; an integrated-difference Lp argument supplies the exact input-moment endpoint",
+      "status": "pending",
+      "note": "The endpoint uses only the stated real K-moment. Strict dimensional power counting is retained; no directional pointwise correspondence or numerical dimension claim."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 2,
+      "label": "Weighted middle diagram from direct Lp estimates",
+      "locator": "(1.17), (4.8), (4.14), (4.20), printed pp.534 and 568-570",
+      "relationship": "Independent Young and Holder estimate for the unweighted core, with heat regularization identifying the spatial sum",
+      "status": "pending",
+      "note": "For d>=7 and the stated real K-moment/gap hypotheses, the middle diagram is finite for 0<=beta<=K and beta<d-2. This is an additional estimate, not a source erratum or a directional pointwise correspondence."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 3,
+      "label": "Directional fractional density estimate",
+      "locator": "Lemma 4.2, (4.16)-(4.17), printed pp.569-570; compare Section 4.3",
+      "relationship": "The symmetric-difference formula gives a pointwise majorant that implies the source directional bound under the explicit integer-input moment condition",
+      "status": "pending",
+      "note": "The weight s is positive and noninteger, ceil(s)<=K, and s+2<d. This pointwise assertion is distinct from the exact noninteger-moment Lp endpoint ENZ7."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "AOKO",
+      "proof_uses": [],
+      "reason": "Norm integrability of symmetric differences permits interchange with an inverse Fourier coefficient; scaling the cosine integral gives the absolute fractional multiplier."
+    },
+    {
+      "order": 1,
+      "tag": "65QV",
+      "proof_uses": [
+        "AOKO",
+        "2ZOB",
+        "1165"
+      ],
+      "reason": "Rescaled quotient regularity and a split around the shifted singularities give the translation gain needed by the fractional multiplier."
+    },
+    {
+      "order": 2,
+      "tag": "ODMM",
+      "proof_uses": [
+        "65QV",
+        "BNKQ"
+      ],
+      "reason": "Holder makes the density product integrable; positive Fejer coefficients and monotone convergence identify the real-weighted spatial convolution."
+    },
+    {
+      "order": 3,
+      "tag": "2SC4",
+      "proof_uses": [],
+      "reason": "Absolute convergence and Tonelli bound the integrated Fourier modulus by the exact weighted coefficient sum."
+    },
+    {
+      "order": 4,
+      "tag": "ENZ7",
+      "proof_uses": [
+        "2SC4",
+        "AOKO",
+        "2ZOB",
+        "1165",
+        "65QV",
+        "ODMM"
+      ],
+      "reason": "Isolate the highest derivatives, integrate their moduli using the exact moment, and apply the coefficient-interchange calculation under directly established norm integrability."
+    },
+    {
+      "order": 5,
+      "tag": "U7QM",
+      "proof_uses": [],
+      "reason": "Young and Holder reduce the two-frequency core to a torus power convolution; dimension seven permits an arbitrarily small power loss."
+    },
+    {
+      "order": 6,
+      "tag": "5PWM",
+      "proof_uses": [
+        "U7QM",
+        "65QV",
+        "ENZ7"
+      ],
+      "reason": "The weighted density pairs with the middle core in dual Lp spaces; positive heat smoothing preserves the infrared majorant and identifies the full nonnegative spatial sum."
+    },
+    {
+      "order": 7,
+      "tag": "MAT0",
+      "proof_uses": [
+        "2ZOB",
+        "AOKO",
+        "65QV"
+      ],
+      "reason": "Split the symmetric-difference integral at the frequency distance; local derivatives control short shifts and a one-dimensional integral controls longer shifts. Fubini identifies the representative and the anisotropic majorant gives the Lp range."
+    }
+  ]
+}

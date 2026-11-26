@@ -1,18 +1,22 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-166 (issue 533): Potter bounds and uniform ratios for solutions of the logarithmic ODE
-`f' = a (1 - h) f / t`, and Karamata's theorem (Lemma I.2.10 of T. Hutchcroft, *Critical
-long-range percolation I*, arXiv:2508.18807v1, p. 26) for that class.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Potter bounds and uniform ratios for solutions of the logarithmic ODE `f' = a (1 - h) f / t`, and
+Karamata's theorem (Lemma I.2.10 of T. Hutchcroft, *Critical long-range percolation I*,
+arXiv:2508.18807v1, p. 26) for that class.
 
-Ported from pull request 488 (contributor `yujinhkim`): repository `yujinhkim/lrp`, branch
+Ported from the work of contributor `yujinhkim`: repository `yujinhkim/lrp`, branch
 `critical-lrp-1`, commit `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, file
-`PercLib/CriticalLRP/Analysis/PotterODE.lean`; licence Apache-2.0 as declared in that commit's
-file headers and `third_party/critical-lrp/NOTICE.md`; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`.
-Modified: the source's `HasPotterBounds f a` is written out (so `hasPotterBounds_of_ode` is
-`potterBounds_of_ode`); in `lemma_I_2_10_of_differentiable` the regular variation of the
-measurable extension `F` is obtained directly from `lemma_I_2_12_rv` (the statement is
-unchanged); `import Mathlib`, `autoImplicit`, disabled linters and `#print` lines are removed.
+`PercLib/CriticalLRP/Analysis/PotterODE.lean`; licence Apache-2.0 as declared in that commit's file
+headers and `third_party/critical-lrp/NOTICE.md`; upstream
+`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified:
+the source's `HasPotterBounds f a` is written out (so `hasPotterBounds_of_ode` is
+`potterBounds_of_ode`); in `lemma_I_2_10_of_differentiable` the regular variation of the measurable
+extension `F` is obtained directly from `lemma_I_2_12_rv` (the statement is unchanged); `import
+Mathlib`, `autoImplicit`, disabled linters and `#print` lines are removed.
 -/
 module
 
@@ -431,7 +435,7 @@ theorem tendsto_uniformly_ratio_of_ode {f f' h : ℝ → ℝ} {a : ℝ} (ha : 0 
         have hcomm : v ^ a * (2 * (a * δ * M)) = 2 * (a * δ * M) * v ^ a := by ring
         rw [hcomm]; exact hδ2
 
-/-! ### Witness (D-5): `f r = r^a`, `h = 0` -/
+/-! ### Witness: `f r = r^a`, `h = 0` -/
 
 example {a : ℝ} (ha : 0 < a) :
     Tendsto (fun r => (∫ s in (1 : ℝ)..r, s ^ a) / (r * r ^ a)) atTop (𝓝 (1 / (a + 1))) :=

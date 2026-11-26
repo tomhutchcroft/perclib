@@ -1,0 +1,206 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "gladkov-decision-trees-2024",
+  "entries": [
+    {
+      "id": "adaptive-bk-bit-states",
+      "title": "The BK comparison names contradictory states of the queried edge",
+      "status": "provisional",
+      "locator": "arXiv:2408.08457v1, proof of Theorem 4.3, paragraph after (6); PDF printed p. 6. Versioned HTML and PDF text compared 16 November 2026.",
+      "claim": "In the configuration lost when one shared coordinate is made independent, the proof first makes that coordinate open in the first configuration, then calls it closed there and open in the second.",
+      "problem": "The same coordinate cannot have both first-configuration states. A lost configuration must have first bit one and second bit zero: this is the only pair where the hybrid loses an open coordinate when sharing is removed.",
+      "correction": "Use the bit pair (1,0) for a lost configuration. More directly, 7LLO compares all four bit pairs using witness-existence indicators. The difference is a sum of two nonnegative terms; no edge is transferred between certificates for different events.",
+      "tags": [
+        "7LLO"
+      ],
+      "issues": [],
+      "leanImpact": "A formal adaptive BK comparison must retain the two independent coordinate copies and the restriction that only shared coordinates require disjoint witnesses. The four-case proof supplies an explicit induction step. The theorem is preserved; no new compiled association is claimed. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the lost bit pair (1,0), or compare the four bit pairs directly.",
+        "scale": "local",
+        "impact": "A local adaptive-BK comparison is replaced; the conclusion is unchanged."
+      }
+    },
+    {
+      "id": "stopped-correlation-direction",
+      "title": "The stopped-search correlation bounds have the wrong direction",
+      "status": "provisional",
+      "locator": "arXiv:2408.08457v1, Corollary 5.3, (11) and (12); PDF printed p. 7. Versioned HTML and PDF text compared 16 November 2026.",
+      "claim": "Both displayed joint probabilities are bounded above by the square of the event probability divided by the probability that the three marked vertices are not all connected.",
+      "problem": "The cited Cauchy–Schwarz argument gives a lower bound. On the path a-b-c with both edge probabilities one half, explore the full cluster of a and independently resample unqueried edges. For either event in the corollary, its probability is one quarter, the denominator is three quarters, and the joint probability is one eighth, strictly larger than one twelfth.",
+      "correction": "Replace both upper-bound signs by lower-bound signs. LNMI proves the leaf-sum bound and its monotone adaptive-continuation version; its example verifies strictness. Zero denominators are treated separately, with both event probabilities zero.",
+      "tags": [
+        "LNMI",
+        "26TT"
+      ],
+      "issues": [],
+      "leanImpact": "The conditional second moment bounds the square of the first moment from below after division by the leaf-event probability. Preserve that direction when using stopped-search couplings; do not introduce a false upper bound as a theorem premise. The general three-point proof uses the lower bound correctly. No new compiled association is claimed. Provisional pending Tom confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Reverse the two stopped-correlation inequalities to lower bounds.",
+        "scale": "statement",
+        "impact": "The printed upper bounds are false; the corrected inequalities are proved, with zero denominators treated separately."
+      }
+    },
+    {
+      "id": "separation-events-and-directions",
+      "title": "Use separation intersections and the correct directions in the three-resampling proof",
+      "status": "provisional",
+      "locator": "arXiv:2408.08457v1, Lemma 1.2/(2), section 7.1 after Lemma 7.1, and the rewrite of (17) in section 7.2; printed pp.2,11–12, PDF text lines56–68 and695–742; HTML473–500. Versioned HTML and extracted PDF compared 17 November 2026; no visual-PDF or journal comparison.",
+      "claim": "The first resampling event is bounded above by s-r_a squared. The next two joint probabilities are replaced by their Cauchy–Schwarz lower expressions with equality signs, and the text calls the resulting event bounds lower bounds. Lemma1.2 and (17) use unions of pairwise nonconnection events, while the subsequent partition identities require intersections.",
+      "problem": "On the path a-b-c with both edges having probability one half, the first resampling event has probability1/8 while s-r_a squared=0, contradicting the printed upper bound. The needed bound is from below. For complete K4 with all edge probabilities one half, the joint all-separated probability in scheme1 is13/512, strictly larger than its Cauchy–Schwarz value1/40. A union of the two nonconnection events is the complement of all-connected, whereas separation of one mark from both others is their intersection. The literal union formulation does not yield the asymmetric partition rewrite.",
+      "correction": "HKLH proves the event inclusion and the lower E3 bound using the complementary hybrid, which preserves the original a-cluster and is independent of H3. VPUL uses r_a=s+z, r_b=s+y, r_c=s+x, defined by intersections, and keeps E1<=s-s squared/r_c and E2<=s-s squared/r_b. The chain gives s+r_a squared>=s squared/r_b+s squared/r_c, with zero-denominator conventions and a countable limit. QY7X retains Theorem1.3 with delta=epsilon cubed/4 and proves the one-split implication. 5EMI supplies the optimization behind the stated0.356 bound. The literal union inequality is weaker than the corrected asymmetric form; no falsehood of that weaker statement is asserted.",
+      "tags": [
+        "HKLH",
+        "VPUL",
+        "QY7X",
+        "5EMI"
+      ],
+      "issues": [],
+      "leanImpact": "Represent the five partition events and each whole-cluster exploration explicitly. Preserve every queried boundary edge, distinguish a shared hybrid from its independent complementary hybrid, and keep lower and upper bounds in their correct order. Use intersections for the intended r-values, define zero quotients when s=0, and justify convergence of the finite marked partition. These are written proofs and exact finite checks, not compiled associations or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use intersection events, the complementary hybrid, and the correct lower bound in the separation argument.",
+        "scale": "substantial",
+        "impact": "The event decomposition and inequality chain need reconstruction; the stated quantitative theorem survives."
+      }
+    },
+    {
+      "id": "sampling-comparison-sign",
+      "title": "The general sampling comparison reverses its one-coordinate laws",
+      "locator": "arXiv:2408.08457v1, proof of Main Lemma8.1 after(18), printed pp.13–14/PDF indices12–13, extracted lines834–877; HTML537–551. Versioned HTML and extracted PDF compared 17 November2026; no visual-PDF or journal comparison.",
+      "claim": "A node of law2 is replaced by law1, but the printed difference old-minus-new is law1(section) minus law2(section) and is claimed nonnegative. The displayed expression also treats the remaining configuration as fixed without averaging it.",
+      "problem": "Condition(18) gives the opposite sign to that printed difference. Even on one coordinate, law1=delta0, law2=delta1 and event{1}, the actual old-minus-new probability is1 and the printed difference is-1. The future coordinates have a product law; different generated paths need not agree pointwise.",
+      "correction": "9GXY proves the unchanged conclusion by induction on the number of unassigned coordinates. Condition on the next generated value, bound each continuation by its product-law section, then integrate the section comparison over the other coordinates. In a deepest-node proof the difference is the expectation of law2(section)-law1(section), multiplied by the node probability.",
+      "tags": [
+        "9GXY"
+      ],
+      "leanImpact": "State section domination for every off-coordinate assignment. Keep fresh conditional laws, predictable decisions and the expectation over future coordinates; a pathwise equality is not required. Written proof only; no compiled association or source confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Induct on unassigned coordinates using the product-law sections.",
+        "scale": "local",
+        "impact": "Repairs the sign and continuation comparison without changing the sampling theorem."
+      }
+    },
+    {
+      "id": "capacity-law",
+      "title": "The capacity distribution in Theorems8.2 and8.4 violates their comparison",
+      "locator": "arXiv:2408.08457v1, Theorem8.2 and the {1,2} case of its proof, plus Theorem8.4, printed pp.14–15/PDF indices13–14, extracted lines891–967; HTML554–606. Versioned HTML and extracted PDF compared 17 November2026; no visual-PDF or journal comparison.",
+      "claim": "Capacities0,1,2 have probabilities(1-p)^2,2p(1-p),p^2, and every increasing two-witness event is bounded above by its independently labelled version. The proof identifies the probability of capacities{1,2} as p.",
+      "problem": "That probability is actually2p-p^2. On one coordinate, take A to require an open coordinate and B to be the whole space. The unlabelled event has probability2p-p^2, while the labelled event has probabilityp. At p=1/2 the claimed inequality reads3/4<=1/2. The finite-family statement inherits this counterexample when the family has one member.",
+      "correction": "3CE7 proves the finite-family adaptive comparison precisely when the positive-capacity probability a is at most p and the double-capacity probability b is at most p^2, with0<=b<=a. Both restrictions are necessary by one-coordinate tests and sufficient by the four threshold cases. The maximal law is(1-p,p(1-p),p^2); this changes the source law and agrees with its proof calculation. Setting b=0 proves the classical finite-family BK comparison in Theorem8.3.",
+      "tags": [
+        "3CE7",
+        "9GXY"
+      ],
+      "leanImpact": "Distinguish unlabelled capacities from labelled bit pairs. Check normalization and the two tail probabilities before proving coordinate domination. The corrected law is a replacement theorem, not a certificate for the printed law. Written proof only; no compiled association or source confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Replace the capacity distribution by the maximal admissible law (1-p, p(1-p), p²).",
+        "scale": "statement",
+        "impact": "The source law must change; the theorem with the printed law is false. The classical BK consequence survives."
+      }
+    },
+    {
+      "id": "parity-law-normalization",
+      "title": "Normalize the parity laws and intersect with the four-state support",
+      "locator": "arXiv:2408.08457v1, setup and proof of Theorem8.6, printed p.16/PDF index15, extracted lines982–1024; HTML615–653. Versioned HTML and extracted PDF compared 17 November2026; no visual-PDF or journal comparison.",
+      "claim": "The setup interchanges the weights1/8 and1/4 for the four-state even-parity and eight-state full laws and names the second support for the first law. The proof writes the restricted section as X1=X2 intersect Omega2.",
+      "problem": "The intended four-state law with weight1/8 has total mass1/2, while the full eight-state law with weight1/4 has total mass2. Intersecting a section of the full support with that same full support does not restrict it to even parity.",
+      "correction": "F2TD uses mass1/4 on each of000,011,101,110 and mass1/8 on each of the eight triples, with X_eta=X_pi intersect{000,011,101,110}. These are the values used by the source case calculations. Pair marginals coincide; requiring three ones is the only strictly ordered nonempty increasing product section. The finite coloured and adaptive theorem conclusions are preserved.",
+      "tags": [
+        "F2TD",
+        "9GXY"
+      ],
+      "leanImpact": "Encode normalized probability measures on their correct finite supports. Verify every pair marginal and each product section explicitly before the adaptive comparison. Written proof only; no compiled association or source confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Normalize the even-parity and full-cube laws and restrict sections to the even-parity support.",
+        "scale": "local",
+        "impact": "The finite case calculations then prove the same coloured and adaptive conclusions."
+      }
+    },
+    {
+      "id": "planar-search-and-correlation",
+      "title": "The planar proof needs a stopped lower bound and a recursive open-edge search",
+      "locator": "arXiv:2408.08457v1, Algorithm 2; section 6.1, (15) and the sentence before (16); printed pp.8–9, extracted PDF lines467–521; HTML310–356. Versioned HTML and extracted PDF compared 17 November 2026; no visual-PDF or journal comparison.",
+      "claim": "Equation (15) identifies the joint all-connected probability with t squared divided by the a-c connection probability. The reversed-attachment sentence names bc and ac. The displayed DFS pseudocode pushes an unvisited endpoint without testing whether the queried edge is open and does not record the edge as queried.",
+      "problem": "The stopped leaf sum supplies a lower bound, not generally equality. On the fair triangle, query ac first: t=1/2, tau_ac=5/8, and the joint probability is13/32, strictly greater than2/5. In the reversed attachment order the second witness joins a to b, as the final displayed union correctly states. Literal traversal of closed edges would not explore an open cluster, and pushing all neighbours without recursive completion does not specify the stack path used in the proof.",
+      "correction": "KPT4 and VN5Z specify recursive open-edge DFS, including marking every queried edge, immediate descent through an open edge, and complete backtracking. In (15) use J>=t squared/tau_ac, and in the reversed order use the pair bc,ab. 8XA9 proves the factor-two theorem and the finite-family refinement; YQEG uses the same exploration for disjoint path counts.",
+      "tags": [
+        "KPT4",
+        "8XA9",
+        "YQEG",
+        "VN5Z",
+        "LNMI"
+      ],
+      "leanImpact": "A formal search must distinguish edge queries, open discoveries and recursive stack frames. Use a leafwise inequality rather than a false exact identity. Planar path families may share vertices, and each leaf completion must retain the asserted residual edge connectivity. Written proof only; no compiled association or source confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Specify recursive open-edge DFS and repair the stopped inequality and reversed witness pair.",
+        "scale": "substantial",
+        "impact": "The exploration and correlation argument need a precise replacement; the factor-two theorem is retained."
+      }
+    },
+    {
+      "id": "diameter-decay",
+      "title": "A negative two-point exponent does not give the stated three-point diameter bound",
+      "locator": "arXiv:2408.08457v1, Corollary 6.5, printed p.10/PDF index9, extracted lines643–655; section 6.3. Versioned HTML and extracted PDF compared 17 November 2026; no visual-PDF or journal comparison.",
+      "claim": "A uniform two-point bound C times distance to the power alpha on an infinite vertex-transitive graph implies a three-point bound (2C) to the power3/2 times the maximum pair distance to the power3alpha/2.",
+      "problem": "For negative alpha, one short pair distance cannot be replaced by the largest distance in an upper bound. On nearest-neighbour Z at p=1/2, all positive integer distances obey 2^(-r)<(6/5)r^(-2), since max r squared/2^r=9/8. For the marks0,1,4 the triple probability is1/16, larger than (12/5)^(3/2)/64; the strict comparison follows from1728/125<16. This meets the printed transitivity and infinitude hypotheses.",
+      "correction": "9ZC5 keeps the product of all three pair distances. For alpha<0, assuming every pair distance is at least eta times the diameter yields the bound (2C)^(3/2) eta^alpha D^(3alpha/2). Without that hypothesis, a valid estimate retains the smallest distance s as (2C)^(3/2) 2^(-alpha/2) D^alpha s^(alpha/2). The printed diameter conclusion does follow for alpha>=0. The underlying factor-eight product theorem is unchanged.",
+      "tags": [
+        "9ZC5",
+        "87RB"
+      ],
+      "leanImpact": "Track the sign of the exponent when replacing distances, and retain either all pair distances or an explicit separation hypothesis. Do not formalize the negative-exponent diameter claim with only transitivity. No statement about critical exponent equalities follows from this upper bound alone. Written proof only; no compiled association or source confirmation.",
+      "status": "provisional",
+      "issues": [],
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the product of pair distances, or impose quantitative separation of all marks.",
+        "scale": "statement",
+        "impact": "For a negative decay exponent, the unrestricted diameter-only statement is false; the underlying product theorem is unchanged."
+      }
+    },
+    {
+      "id": "boundary-scaling-scope",
+      "title": "The cited boundary constant has a different rigorous model and geometry",
+      "status": "provisional",
+      "locator": "arXiv:2408.08457v1, section6.3, paragraph citing SZK09/BI12 and the displayed gamma constant; HTML lines401–405. Compared with BI12 arXiv:1011.5822v3 Introduction/section4 and Conijn arXiv:1502.04387v3 Theorem1 on17 November2026.",
+      "claim": "The boundary constant is attributed to a scaling limit for bond percolation in the upper half-plane with all three marks on the real boundary.",
+      "problem": "Beliaev–Izyurov explicitly use the scaling limit of critical triangular-lattice site percolation. Their factorization retains two boundary marks and one mark strictly inside the half-plane. Conijn proves the discrete-site version with the same geometry. The SZK paper supplies CFT/numerical evidence, not the stated rigorous bond theorem. These sources do not establish the claimed model/geometry. This diagnosis is a citation-scope error, not a counterexample to an all-boundary universality prediction.",
+      "correction": "Use JM5A for the proved discrete triangular-site theorem, with two fixed real marks and one fixed interior mark. Its squared ratio tends to K_F and the unsquared ratio to sqrt(K_F). XCYH evaluates the constant. Keep 8XA9 as a separate common-face bond theorem; its application is not justified by transferring the site limit. R9NU separately records the later full-plane triangular-site theorem.",
+      "tags": [
+        "JM5A",
+        "XCYH",
+        "R9NU"
+      ],
+      "issues": [],
+      "leanImpact": "Retain site versus bond configuration types, domain/boundary conditions, marked-point locations and the order of limits in any future interface. Do not import a square-bond or three-boundary-point scaling assertion from these citations. Written scope audit only; no compiled association or source confirmation.",
+      "resolution": {
+        "status": "workaround",
+        "summary": "Use the proved triangular-site theorem with two boundary marks and one interior mark.",
+        "scale": "statement",
+        "impact": "This does not establish the claimed square-bond, all-boundary scaling limit; a model and geometry change is required for the cited theorem."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2408.08457v1",
+    "checkedUrl": "https://arxiv.org/abs/2408.08457v1",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The nine entries concern this preprint. The boundary-exponent entry also compares Beliaev–Izyurov and Conijn; those are distinct cited papers, not later versions of this source. No later-edition comparison is recorded. All reports remain provisional; repairs and formal status are separate.",
+    "comparisons": []
+  }
+}

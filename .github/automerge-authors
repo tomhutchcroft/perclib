@@ -1,0 +1,5 @@
+# GitHub logins whose proof-only pull requests merge automatically on green CI
+# (.github/workflows/automerge.yml). One login per line; `#` starts a comment.
+# Tom Hutchcroft adds collaborators. The list is read from the default branch only,
+# so a pull request cannot add its own author (and any change here needs review).
+tomhutchcroft

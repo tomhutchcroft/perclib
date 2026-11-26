@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-112 (issue 446), from pinned mathlib's spectral theorem
-for Hermitian matrices and the positive semidefinite cone. The statement follows the wiki
-tag CS16 (connection kernels). No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, from pinned mathlib's spectral theorem for Hermitian matrices and the positive
+semidefinite cone. The statement follows the wiki tag CS16 (connection kernels). No source text or
+code is copied.
 -/
 module
 
@@ -10,6 +14,7 @@ public import Mathlib.Analysis.Matrix.Spectrum
 public import Mathlib.Analysis.Matrix.PosDef
 public import Mathlib.LinearAlgebra.Matrix.Hadamard
 public import Mathlib.Algebra.Order.Star.Real
+public import PercLib.Meta.Tag
 
 /-!
 # Entrywise products of powers of a positive semidefinite matrix
@@ -72,7 +77,7 @@ theorem pow_apply_eq_sum {S : Matrix n n ℝ} (hS : S.IsHermitian) (m : ℕ) (i 
       (hS.eigenvectorUnitary : Matrix n n ℝ) j k :=
   apply_eq_sum_of_mulVec_eigenvectorBasis hS _ (pow_mulVec_eigenvectorBasis hS m) i j
 
-/-- **CS16, identity.** For a real symmetric `S`, with `w_{kl} = u_k ⊙ u_l`,
+/-- **Identity.** For a real symmetric `S`, with `w_{kl} = u_k ⊙ u_l`,
 `S ⊙ S³ - S² ⊙ S² = ½ ∑_{k,l} λ_k λ_l (λ_k - λ_l)² w_{kl} w_{kl}ᵀ`. -/
 theorem hadamard_pow_sub_eq {S : Matrix n n ℝ} (hS : S.IsHermitian) :
     S ⊙ (S ^ 3) - (S ^ 2) ⊙ (S ^ 2) = (1 / 2 : ℝ) • ∑ k, ∑ l,
@@ -107,6 +112,7 @@ theorem hadamard_pow_sub_eq {S : Matrix n n ℝ} (hS : S.IsHermitian) :
 
 /-- **CS16.** For a real positive semidefinite `S`, `S ⊙ S³ - S² ⊙ S²` is positive
 semidefinite: `S² ⊙ S² ≤ S ⊙ S³` in the Loewner order. -/
+@[tag "CS16"]
 theorem posSemidef_hadamard_pow_sub {S : Matrix n n ℝ} (hS : S.PosSemidef) :
     (S ⊙ (S ^ 3) - (S ^ 2) ⊙ (S ^ 2)).PosSemidef := by
   rw [hadamard_pow_sub_eq hS.isHermitian]
@@ -120,7 +126,7 @@ theorem posSemidef_hadamard_pow_sub {S : Matrix n n ℝ} (hS : S.PosSemidef) :
     have hl := hS.eigenvalues_nonneg l
     positivity
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- `S = 1`: both sides are the identity, and the difference is zero. -/
 example : ((1 : Matrix (Fin 2) (Fin 2) ℝ) ⊙ (1 ^ 3) - (1 ^ 2) ⊙ (1 ^ 2)) = 0 ∧

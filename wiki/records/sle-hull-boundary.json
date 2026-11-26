@@ -1,0 +1,108 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-hull-boundary",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 149
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Fixed-time moments restricted to positive image height",
+      "locator": "arXiv:math/0106036v4, Section 8.2: Theorem 8.3, Lemma 8.4, Corollary 8.5, Theorem 8.6 and Corollary 8.7; also the boundary-area input in Corollary 5.3 and Section 7. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written upper-bound proof using localized grids and explicit classical conformal inputs",
+      "status": "pending",
+      "note": "Bounded stopping in the height-clock martingale retains the image-height weight, giving the fixed-time upper moment above any positive height."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Localized dyadic grid summability",
+      "locator": "arXiv:math/0106036v4, Section 8.2: Theorem 8.3, Lemma 8.4, Corollary 8.5, Theorem 8.6 and Corollary 8.7; also the boundary-area input in Corollary 5.3 and Section 7. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written upper-bound proof using localized grids and explicit classical conformal inputs",
+      "status": "pending",
+      "note": "The interval between one half and two over kappa gives a strict positive summability exponent and moments arbitrarily close above the boundary exponent. Bounded horizontal windows suffice; no global Whitney-sum claim is made."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "A deterministic radial covering criterion",
+      "locator": "arXiv:math/0106036v4, Section 8.2: Theorem 8.3, Lemma 8.4, Corollary 8.5, Theorem 8.6 and Corollary 8.7; also the boundary-area input in Corollary 5.3 and Section 7. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written upper-bound proof using localized grids and explicit classical conformal inputs",
+      "status": "pending",
+      "note": "A radial image exits a small boundary disk. Hölder continuity bounds the logarithmic time interval, and Koebe distortion produces a nearby grid point of derivative scale at least epsilon over log one over epsilon. A separated-set packing argument bounds the covering number."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Fixed-time boundary covering, dimension and zero area",
+      "locator": "arXiv:math/0106036v4, Section 8.2: Theorem 8.3, Lemma 8.4, Corollary 8.5, Theorem 8.6 and Corollary 8.7; also the boundary-area input in Corollary 5.3 and Section 7. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written upper-bound proof using localized grids and explicit classical conformal inputs",
+      "status": "pending",
+      "note": "Countably many localized sums and local Hölder continuity prove the bound away from kappa four. At four, trace covering, Markov and Borel–Cantelli fill the endpoint. The theorem is at each fixed time, includes kappa eight without trace existence, and proves only upper bounds."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 4,
+      "label": "Space filling and transience above eight",
+      "locator": "arXiv:math/0106036v4, Section 8.2: Theorem 8.3, Lemma 8.4, Corollary 8.5, Theorem 8.6 and Corollary 8.7; also the boundary-area input in Corollary 5.3 and Section 7. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written upper-bound proof using localized grids and explicit classical conformal inputs",
+      "status": "pending",
+      "note": "The trace-generation theorem and the fixed-time zero-area result discharge both inputs of the existing engulfment and space-filling arguments above eight. At eight the separate trace theorem remains an input."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "EG6U",
+      "proof_uses": [
+        "HHBC",
+        "O0VQ",
+        "AXSH"
+      ],
+      "reason": "Bounded stopping in the height-clock martingale retains the image-height weight, giving the fixed-time upper moment above any positive height."
+    },
+    {
+      "order": 1,
+      "tag": "AVHR",
+      "proof_uses": [
+        "EG6U"
+      ],
+      "reason": "The interval between one half and two over kappa gives a strict positive summability exponent and moments arbitrarily close above the boundary exponent. Bounded horizontal windows suffice; no global Whitney-sum claim is made."
+    },
+    {
+      "order": 2,
+      "tag": "2SVA",
+      "proof_uses": [],
+      "reason": "A radial image exits a small boundary disk. Hölder continuity bounds the logarithmic time interval, and Koebe distortion produces a nearby grid point of derivative scale at least epsilon over log one over epsilon. A separated-set packing argument bounds the covering number."
+    },
+    {
+      "order": 3,
+      "tag": "K8Y5",
+      "proof_uses": [
+        "AVHR",
+        "2SVA",
+        "OLNV",
+        "MN2A",
+        "CKFH",
+        "1424"
+      ],
+      "reason": "Countably many localized sums and local Hölder continuity prove the bound away from kappa four. At four, trace covering, Markov and Borel–Cantelli fill the endpoint. The theorem is at each fixed time, includes kappa eight without trace existence, and proves only upper bounds."
+    },
+    {
+      "order": 4,
+      "tag": "BQ8X",
+      "proof_uses": [
+        "K8Y5",
+        "MN2A",
+        "ZS6G",
+        "R2A0"
+      ],
+      "reason": "The trace-generation theorem and the fixed-time zero-area result discharge both inputs of the existing engulfment and space-filling arguments above eight. At eight the separate trace theorem remains an input."
+    }
+  ]
+}

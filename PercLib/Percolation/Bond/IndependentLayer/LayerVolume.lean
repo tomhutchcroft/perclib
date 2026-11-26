@@ -1,12 +1,14 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 641 (Q-213, item 3), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
+public import PercLib.Meta.Tag
 public import PercLib.Percolation.Bond.IndependentLayer.AddedVolume
 
 /-!
@@ -32,7 +34,6 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability
 open scoped ENNReal unitInterval
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -45,6 +46,7 @@ theorem encard_eq_tsum_indicator_one (A : Set V) :
     (A.encard : ℝ≥0∞) = ∑' y, A.indicator (fun _ => (1 : ℝ≥0∞)) y := by
   rw [← ENNReal.tsum_set_one, tsum_subtype A (fun _ => (1 : ℝ≥0∞))]
 
+open Classical in
 /-- **Exploration bound for the volume.** `|K_o(ω₁ ∪ ω₂)|` is at most `|C|` plus the volumes
 of the clusters off `C = K_o(ω₁)` of the vertices `v ∉ C` joined to some `u ∈ C` by a pair of
 `ω₂`. -/
@@ -159,7 +161,9 @@ theorem prodBernoulli_two_explore_eq [Countable V] (o : V) (C : Finset V) (ho : 
     rcases i with e | e <;> simp [P1, P3] at hi h3
   have hdis4 : Disjoint (P1 ∪ P3) P4 := by
     refine Set.disjoint_left.2 fun i hi h4 => ?_
-    rcases i with e | e <;> simp [P1, P3, P4, hM, hout] at hi h4
+    rcases i with e | e <;> simp only [hM, union_singleton, mem_insert_iff, reduceCtorEq, mem_image,
+        mem_ofPred_eq, Sum.inl.injEq, exists_eq_right, false_or, hout, SetLike.mem_coe, mem_union,
+        and_false, exists_false, or_false, P1, P3, P4, Sum.inr.injEq] at hi h4
     · obtain ⟨x, hx, hxC⟩ := hi
       exact h4 x hx hxC
     · subst hi
@@ -177,14 +181,16 @@ end Two
 
 /-! ### F4RR -/
 
+open Classical in
 /-- **F4RR.** Let `ω ~ law q₀` and `ξ ~ law s` be independent, `C = K_o(ω)` and
 `K⁺ = K_o(ω ∪ ξ)`. If every off-diagonal row sum of `s` is at most `ε` and every
 susceptibility of the union law is at most `χ₊`, then for every measurable functional
 `f ≥ 0` of the original cluster, `E[|K⁺| f(C)] ≤ (1 + ε χ₊) E[|C| f(C)]` (extended values
 allowed). -/
+@[tag "F4RR"]
 theorem lintegral_encard_union_mul_le [Countable V] (q₀ s : Sym2 V → I) (o : V)
     {ε χ : ℝ≥0∞}
-    (hε : ∀ u, (∑' w, if w = u then 0 else (unitInterval.toNNReal (s s(u, w)) : ℝ≥0∞)) ≤ ε)
+    (hε : ∀ u, rowSum (fun e => unitInterval.toENNReal (s e)) u ≤ ε)
     (hχ : ∀ v, chi (fun e => σ (σ (q₀ e) * σ (s e))) v ≤ χ)
     (f : Set V → ℝ≥0∞) (hf : Measurable fun ω : Config V => f (cluster ω o)) :
     ∫⁻ x, ((cluster (x.1 ∪ x.2) o).encard : ℝ≥0∞) * f (cluster x.1 o)
@@ -410,9 +416,9 @@ theorem lintegral_encard_union_mul_le [Countable V] (q₀ s : Sym2 V → I) (o :
         exact tsum_law_cluster_eq_finset_mul_le_set q₀ o (fun T => (T.encard : ℝ≥0∞) * f T)
     _ = _ := by ring
 
-/-! ### Non-vacuity witness (D-5) -/
+/-! ### Non-vacuity witness -/
 
-/-- **D-5 witness.** On `Bool` with no first layer (`q₀ = 0`) and a fully open second layer,
+/-- **Non-vacuity witness.** On `Bool` with no first layer (`q₀ = 0`) and a fully open second layer,
 the hypotheses of `lintegral_encard_union_mul_le` hold with `ε = 1` (one pair per row) and
 `χ₊ = 2` (two vertices), for every `f`. -/
 example (f : Set Bool → ℝ≥0∞) :
@@ -422,11 +428,11 @@ example (f : Set Bool → ℝ≥0∞) :
         ∂(law (fun _ : Sym2 Bool => (0 : I))) := by
   refine lintegral_encard_union_mul_le _ _ false ?_ ?_ f (measurable_of_countable _)
   · intro u
-    rw [tsum_fintype]
+    rw [rowSum_toENNReal, tsum_fintype]
     cases u <;> simp [Fintype.univ_bool]
   · intro v
     refine le_trans (lintegral_mono (g := fun _ => (2 : ℝ≥0∞)) fun ω => ?_) (by simp)
-    show ((cluster ω v).encard : ℝ≥0∞) ≤ 2
+    change ((cluster ω v).encard : ℝ≥0∞) ≤ 2
     have h : (cluster ω v).encard ≤ (Set.univ : Set Bool).encard :=
       Set.encard_le_encard (Set.subset_univ _)
     rw [Set.encard_univ, ENat.card_eq_coe_fintype_card, Fintype.card_bool] at h

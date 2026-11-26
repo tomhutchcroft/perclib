@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 640 (Q-212, item 3), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -31,7 +32,7 @@ On a finite vertex set:
 noncomputable section
 
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 
@@ -82,10 +83,10 @@ theorem law_not_conn_le_le_le (q : Sym2 V → unitInterval) (o y : V) (a b : ℕ
       have hu1 := (Set.mk_mem_sym2_iff.1 he1.2).1
       have hu2 := (Set.mk_mem_sym2_iff.1 he2.2).1
       exact hc (conn_trans hu1 (by rw [conn_symm]; exact hu2))
-  · show a ≤ _
+  · change a ≤ _
     rw [cluster_inter_sym2_cluster]
     exact ha
-  · show b ≤ _
+  · change b ≤ _
     rw [cluster_inter_sym2_cluster]
     exact hb
 
@@ -106,6 +107,7 @@ theorem eq_sum_increments {f : ℕ → ℝ} (hf0 : f 0 = 0) {n N : ℕ} (hn : n 
     Finset.sum_range_sub (f := f), hf0, sub_zero]
 
 omit [DecidableEq V] in
+open Classical in
 /-- **BK for functionals of disjoint clusters.** For nondecreasing `f, g : ℕ → ℝ` with
 `f 0 = g 0 = 0`, `E[1{o ↮ y} f(|K_o|) g(|K_y|)] ≤ E f(|K_o|) E g(|K_y|)`. -/
 theorem integral_not_conn_mul_le (q : Sym2 V → unitInterval) (o y : V) {f g : ℕ → ℝ}
@@ -131,7 +133,8 @@ theorem integral_not_conn_mul_le (q : Sym2 V → unitInterval) (o y : V) {f g : 
     intro ω
     by_cases hc : ω ∈ conn o y
     · simp [hc]
-    · rw [ite_eq_right_of_eq_false _ _ (eq_false hc), eq_sum_increments hf0 (hle ω o), eq_sum_increments hg0 (hle ω y),
+    · rw [ite_eq_right_of_eq_false _ _ (eq_false hc), eq_sum_increments hf0 (hle ω o),
+        eq_sum_increments hg0 (hle ω y),
         Finset.sum_mul_sum]
       refine Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun b _ => ?_
       by_cases ha : a < (cluster ω o).ncard <;> by_cases hb : b < (cluster ω y).ncard <;>
@@ -185,7 +188,8 @@ theorem integral_ncard_pow_eq_of_transitive (J : Sym2 V → ℝ≥0)
   funext ω
   rw [← hσx, cluster_image, Set.ncard_image_of_injective _ σ.injective]
 
-/-- **C9Y8, bound.** For a transitive family with `w ≥ 0`, the derivative
+open Classical in
+/-- **Bound.** For a transitive family with `w ≥ 0`, the derivative
 `m_k'(t)` of `hasDerivAt_moment_of_transitive` satisfies
 `m_k'(t) ≤ (a(t)/2) ∑_{j=1}^k C(k+1, j) m_j(t) m_{k+1-j}(t)`, where
 `a(t) = ∑_{y ≠ o} w(o, y)` and `m_j(t) = E_t|K_o|^j`. -/
@@ -244,9 +248,10 @@ theorem moment_derivative_le_of_transitive (lam : ℝ → Sym2 V → ℝ≥0) (w
         exact mul_le_mul_of_nonneg_left (hy y) (hw _)
     _ = _ := by rw [mul_assoc (1 / 2 : ℝ), Finset.sum_mul]
 
-/-! ### Non-vacuity witness (D-5) -/
+/-! ### Non-vacuity witness -/
 
-/-- **D-5 witness.** On `ZMod 2` with `λ_u = u⁺` and `w = 1`, the hypotheses of
+open Classical in
+/-- **Non-vacuity witness.** On `ZMod 2` with `λ_u = u⁺` and `w = 1`, the hypotheses of
 `moment_derivative_le_of_transitive` hold, for every `k`. -/
 example (k : ℕ) :
     (1 / 2) * ∑ y ∈ Finset.univ.erase (0 : ZMod 2), (fun _ : Sym2 (ZMod 2) => (1 : ℝ)) s(0, y) *

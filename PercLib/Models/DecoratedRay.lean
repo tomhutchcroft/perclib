@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-74 (issue 381), on the D-2 interface and the intensity
-family `intensityProfile`. The construction (a ray with pendant paths of length `2^k` and
-intensity `k^2`) follows the wiki article on the infinite-cluster zero-one law (tag SA9P).
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the intensity family `intensityProfile`. The
+construction (a ray with pendant paths of length `2^k` and intensity `k^2`) follows the wiki article
+on the infinite-cluster zero-one law (tag SA9P). No source text or code is copied.
 -/
 module
 
@@ -56,7 +59,11 @@ theorem J_facts (J : Sym2 (ℕ × ℕ) → ℝ≥0)
       ∃ a b : ℕ, 1 ≤ a ∧ b + 1 ≤ 2 ^ a ∧ e = s((a, b), (a, b + 1))) := by
   refine ⟨fun i => ?_, fun a b ha hb => ?_, fun a b h => ?_, fun e he => ?_⟩
   · rw [hJ]; simp; omega
-  · rw [hJ]; simp [ha, hb]; intros; omega
+  · rw [hJ]
+    simp only [Nat.add_eq_zero_iff, one_ne_zero, and_false, Nat.left_eq_add, and_self,
+      ↓reduceIte, ha, hb, zero_add, add_zero, true_and, add_eq_left, ite_eq_right_iff, ne_eq,
+      OfNat.ofNat_ne_zero, not_false_eq_true, pow_eq_zero_iff, Nat.cast_eq_zero, and_imp]
+    intros; omega
   · rw [hJ]; simp; omega
   · revert he
     refine Sym2.ind (fun u v => ?_) e
@@ -188,7 +195,7 @@ theorem tau_root_eq (J : Sym2 (ℕ × ℕ) → ℝ≥0)
   refine measure_congr ?_
   filter_upwards [ae_subset_J_pos J β] with ω hω
   refine propext ?_
-  show (openGraph ω).Reachable (0, 0) (k, j) ↔ _ ⊆ ω
+  change (openGraph ω).Reachable (0, 0) (k, j) ↔ _ ⊆ ω
   rw [reachable_root_iff J hJ4 hω]
   simp only [Finset.coe_union, Finset.coe_image, Finset.coe_range, Set.union_subset_iff,
     Set.image_subset_iff]
@@ -272,7 +279,7 @@ theorem ae_forall_cluster_finite (J : Sym2 (ℕ × ℕ) → ℝ≥0)
     refine cluster_subset_of_closed (S := {v : ℕ × ℕ | v.1 ≤ N ∧ v.2 ≤ 2 ^ v.1}) ?_ ?_ |>.trans ?_
     · rintro ⟨a, b⟩ ⟨ha, hb⟩ ⟨c, d⟩ huv
       dsimp only at ha hb
-      show c ≤ N ∧ d ≤ 2 ^ c
+      change c ≤ N ∧ d ≤ 2 ^ c
       rcases hstep _ _ huv with ⟨h1, h2, h3 | h3⟩ | ⟨h1, h2, ⟨h3, h4⟩ | ⟨h3, h4⟩⟩
       · dsimp only at h1 h2 h3
         subst h1 h2 h3
@@ -419,7 +426,7 @@ private theorem prod_eq_of_le (J : Sym2 (ℕ × ℕ) → ℝ≥0)
     · have := congrArg Prod.snd h; simp at this
     · have := congrArg Prod.snd h; simp at this
 
-/-- **The susceptibility threshold** (wiki tag SA9P): `χ_β(o) < ∞ ↔ β < log 2`. -/
+/-- **The susceptibility threshold**: `χ_β(o) < ∞ ↔ β < log 2`. -/
 theorem chi_lt_top_iff (J : Sym2 (ℕ × ℕ) → ℝ≥0)
     (hJ1 : ∀ i : ℕ, J s((i, 0), (i + 1, 0)) = 1)
     (hJ2 : ∀ a b : ℕ, 1 ≤ a → b + 1 ≤ 2 ^ a → J s((a, b), (a, b + 1)) = (a : ℝ≥0) ^ 2)
@@ -598,7 +605,7 @@ theorem chi_zero (J : Sym2 (ℕ × ℕ) → ℝ≥0)
 
 /-! ### The intensity exists -/
 
-/-- The intensity of the decorated ray exists (non-vacuity of `hJ`, D-5). -/
+/-- The intensity of the decorated ray exists (non-vacuity of `hJ`). -/
 theorem exists_J : ∃ J : Sym2 (ℕ × ℕ) → ℝ≥0, ∀ u v : ℕ × ℕ, J s(u, v) =
       (if u.2 = 0 ∧ v.2 = 0 ∧ v.1 = u.1 + 1 then 1 else 0) +
       (if v.1 = u.1 ∧ 1 ≤ u.1 ∧ v.2 = u.2 + 1 ∧ v.2 ≤ 2 ^ u.1 then (u.1 : ℝ≥0) ^ 2 else 0) +
@@ -613,7 +620,7 @@ theorem exists_J : ∃ J : Sym2 (ℕ × ℕ) → ℝ≥0, ∀ u v : ℕ × ℕ, 
   simp only [Sym2.lift_mk, hf]
   ring
 
-/-- At `β = 0` the model has `χ(o) = 1` (D-5). -/
+/-- At `β = 0` the model has `χ(o) = 1`. -/
 example : ∃ J : Sym2 (ℕ × ℕ) → ℝ≥0, chi (intensityProfile J 0) (0, 0) = 1 ∧
     ∀ β : ℝ≥0, chi (intensityProfile J β) (0, 0) < ⊤ ↔ (β : ℝ) < Real.log 2 := by
   obtain ⟨J, hJ⟩ := exists_J
@@ -622,7 +629,7 @@ example : ∃ J : Sym2 (ℕ × ℕ) → ℝ≥0, chi (intensityProfile J 0) (0, 
 
 /-! ### The existential statement -/
 
-/-- **A degree-3 example** (wiki tag SA9P): there is a connected countable host graph of
+/-- **A degree-3 example**: there is a connected countable host graph of
 maximum degree at most three, with finite nonnegative intensities supported on its edges,
 such that at every finite intensity every cluster is almost surely finite (so the root and
 global critical intensities are `⊤`), while the susceptibility of the root is finite exactly
@@ -708,5 +715,16 @@ theorem exists_decoratedRay :
       exact ⟨by simp, Or.inl (Or.inl ⟨rfl, rfl, rfl⟩)⟩
     · rw [SimpleGraph.mem_edgeSet, hadj]
       exact ⟨by simp, Or.inl (Or.inr ⟨rfl, rfl⟩)⟩
+
+/-- If the root susceptibility is finite exactly for `β < a` (with `a ≥ 0`), the infimum of the
+parameters with infinite root susceptibility is `a`. -/
+theorem sInf_setOf_chi_eq_top_eq {V : Type*} (J : Sym2 V → ℝ≥0) (o : V) {a : ℝ} (ha : 0 ≤ a)
+    (h : ∀ β : ℝ≥0, chi (intensityProfile J β) o < ⊤ ↔ (β : ℝ) < a) :
+    ((sInf {β : ℝ≥0 | chi (intensityProfile J β) o = ⊤} : ℝ≥0) : ℝ) = a := by
+  have hset : {β : ℝ≥0 | chi (intensityProfile J β) o = ⊤} = Set.Ici (Real.toNNReal a) := by
+    ext β
+    simp only [Set.mem_ofPred_eq, Set.mem_Ici, Real.toNNReal_le_iff_le_coe]
+    rw [← not_lt, ← h, lt_top_iff_ne_top, not_not]
+  rw [hset, csInf_Ici, Real.coe_toNNReal _ ha]
 
 end PercLib.Models.DecoratedRay

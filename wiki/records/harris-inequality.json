@@ -1,0 +1,219 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "harris-inequality",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 0
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 28,
+      "label": "The Harris inequality",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "grimmett",
+      "order": 4,
+      "label": "Positive association",
+      "locator": "Second edition (1999), §2.2, Theorem (2.4), pp. 34–36",
+      "relationship": "Standard product-measure inequality",
+      "status": "pending",
+      "note": "Locator recorded in the formalization source header; source-edition correspondence has not been independently certified by this article."
+    },
+    {
+      "source": "perclib-open-event-harris",
+      "order": 0,
+      "label": "Finite witnesses and Harris applications",
+      "locator": "Named statement start lines in the pinned source: 49, 72, 77, 87, 93, 99, 113, 121, 138, 143, 148, 171, 178, 183, 189, 198, 206, 211, 217, 223, 231, 240",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "22S9 covers finite intersections. H4OA and 5CN6 cover upper-set and finite-witness arguments; the connection and escape discussion retains arbitrary vertex subsets. X5SS applies to pairs of connection, escape and infinite-cluster events, including a mixed connection/infinite-cluster pair. UPFU is the three-point lower bound. Cluster growth and path witnesses supply the graph monotonicity steps. The larger Harris module and its general ordered-coordinate integration helpers are not included in this module census."
+    },
+    {
+      "source": "perclib-harris-decreasing",
+      "order": 0,
+      "label": "Complement duality and decreasing, mixed and function forms",
+      "locator": "Named theorem start lines: 46, 52, 69, 75, 83, 90, 100, 108, 127, 147, 163, 174, 180, 202, 213, 224, 244, 248, 253, 263, 274, 285, 348, 359",
+      "relationship": "Complete grouped source contracts with the canonical increasing-event theorem reused",
+      "status": "pending",
+      "note": "CW1V complements the profile and configuration. F4CV gives decreasing and mixed event inequalities, including their real-probability forms. KM1K covers the s-finite layer-cake identities and the two superlevel-to-integral comparisons. E9HR gives the three extended nonnegative function forms; T6WJ gives the three bounded real forms. Arbitrary coordinate types, explicit measurability, zero/infinite conventions and the separate signed integrability requirements are retained. No proof status or reviewed correspondence is authored."
+    },
+    {
+      "source": "mathlib-four-functions",
+      "order": 0,
+      "label": "Four-functions Boolean-lattice specialization",
+      "locator": "Pinned mathlib FourFunctions.lean: lines 346–350; the one-coordinate inequality and Boolean induction occur earlier in the same file.",
+      "relationship": "Specialization with a complete expository proof",
+      "status": "pending",
+      "note": "EZJ7 states the full-space finite Boolean version for nonnegative finite real functions, without monotonicity or strict positivity. It does not claim coverage of the more general finite distributive-lattice theorem or arbitrary subfamilies."
+    },
+    {
+      "source": "perclib-fkg",
+      "order": 0,
+      "label": "Finite-measure FKG and Holley contracts",
+      "locator": "Named public theorem start lines: 36, 47, 57, 75, 102, 133, 142, 151",
+      "relationship": "Source-inspected statement correspondence with additional deductions identified",
+      "status": "pending",
+      "note": "TKDC gives the lattice-condition function and event inequalities; KB49 gives Holley comparison, with its observable form and signed-function extension supplied by the displayed four-functions proof. The source itself exports nonnegative function FKG and increasing-event Holley. Product lattice equality and ordered-profile Holley retain zero/one parameters. The real-mass conversion helper at line 47 permits arbitrary index types under a finite-measure assumption; the association and comparison exports require a finite configuration space."
+    },
+    {
+      "source": "perclib-bond-harris-decreasing",
+      "order": 0,
+      "label": "Bond non-connection and volume association",
+      "locator": "Named public theorem start lines: 33, 37, 43, 51, 57",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "The bond examples apply F4CV and E9HR with countable graph-event measurability. Infinite susceptibility is allowed; no covariance subtraction or conditioning on a null event is used."
+    },
+    {
+      "source": "perclib-bond-harris-local",
+      "order": 0,
+      "label": "Harris inside domains and escape transfer",
+      "locator": "Named public theorem start lines: 32, 43, 51, 60, 72, 87",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "EWMP gives the internal and full escape transfers. Internal positive association and finite-family inequalities reuse X5SS and 22S9. The source retains ambient countability as well as countability of the induced domain; no disjointness of paths or domains is assumed."
+    },
+    {
+      "source": "perclib-harris-associations",
+      "order": 0,
+      "label": "The connection and escape association",
+      "locator": "Named public theorem start lines: 23",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "UPFU retains all grouped clauses, including escape measurability and the infinite-cluster characterization. Source attributes alone do not establish fingerprint-bound correspondence review."
+    },
+    {
+      "source": "perclib-layer-cake-product",
+      "order": 0,
+      "label": "Product layer cake restricted to an event",
+      "locator": "Explicit public declaration start lines: 54, 63, 97, 187, 191, 196, 211, 247, 288",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Nine public results integrate level-set comparisons for nonnegative real observables under S-finite measures; the underlying model inequalities remain assumptions. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-cluster-correlation-interface",
+      "order": 0,
+      "label": "Cluster-correlation interface",
+      "locator": "Explicit public theorem start lines: 89, 94, 111, 116, 121, 148",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Six elementary contracts and five definitions specify restoration and the general correlation targets. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 64,
+      "label": "Two-cluster correlation gap",
+      "locator": "arXiv:2508.18808v1 §II.4.1, (II.4.8)–(II.4.10), PDF p. 36; restated from Part I, Lemma I.2.1",
+      "relationship": "Proof with stated scope and remaining inputs",
+      "status": "pending",
+      "note": "Proof by conditioning on the finite root cluster. The almost-sure finiteness restriction is explicit and does not certify the unrestricted source interface."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 5,
+      "source": "hutchcroft-book",
+      "tag": "X5SS",
+      "relationship": "generalization",
+      "edition": "In preparation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "note": "Credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "CW1V",
+      "proof_uses": [
+        "5PAT"
+      ],
+      "reason": "Complementing each coordinate complements its parameter; finite cylinders determine the product law."
+    },
+    {
+      "order": 1,
+      "tag": "F4CV",
+      "proof_uses": [
+        "CW1V",
+        "X5SS"
+      ],
+      "reason": "Complement duality proves the decreasing case; applying Harris to an increasing event and the complement of a decreasing event proves the mixed case."
+    },
+    {
+      "order": 2,
+      "tag": "KM1K",
+      "proof_uses": [],
+      "reason": "Pointwise level-set representations and Tonelli give the identities for s-finite measures."
+    },
+    {
+      "order": 3,
+      "tag": "E9HR",
+      "proof_uses": [
+        "KM1K",
+        "X5SS",
+        "F4CV"
+      ],
+      "reason": "The appropriate Harris event inequality holds at every pair of superlevels, and integration gives the function inequality."
+    },
+    {
+      "order": 4,
+      "tag": "T6WJ",
+      "proof_uses": [
+        "E9HR"
+      ],
+      "reason": "A finite constant shifts bounded real functions to nonnegative ones, after which all expansion and cancellation is finite."
+    },
+    {
+      "order": 0,
+      "tag": "TKDC",
+      "proof_uses": [
+        "EZJ7"
+      ],
+      "reason": "Apply four functions to the mass-weighted observables and use probability normalization."
+    },
+    {
+      "order": 0,
+      "tag": "KB49",
+      "proof_uses": [
+        "EZJ7"
+      ],
+      "reason": "Apply four functions to the two probability masses and an increasing observable; normalization cancels the mass sums."
+    },
+    {
+      "order": 5,
+      "tag": "EWMP",
+      "proof_uses": [
+        "X5SS",
+        "7BMQ"
+      ],
+      "reason": "Internal connection and escape are measurable increasing events; Harris and path concatenation transfer the escape probability."
+    },
+    {
+      "order": 6,
+      "tag": "1AC7",
+      "proof_uses": [
+        "E9HR"
+      ],
+      "reason": "Proof by conditioning on the finite root cluster. The almost-sure finiteness restriction is explicit and does not certify the unrestricted source interface."
+    },
+    {
+      "order": 7,
+      "tag": "H4OA",
+      "proof_uses": [],
+      "reason": "A definition; the remark that connection events are increasing is immediate."
+    },
+    {
+      "order": 8,
+      "tag": "EZJ7",
+      "proof_uses": [],
+      "reason": "A one-coordinate inequality followed by induction on |E|; no other wiki assertion is invoked."
+    }
+  ]
+}

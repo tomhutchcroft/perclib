@@ -1,0 +1,69 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "forest-connections",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 6
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-forest-interface",
+      "order": 0,
+      "label": "Support, forest paths and ray specialization",
+      "locator": "Named statement start lines in the pinned source: 23, 35, 41, 50, 68, 79, 86, 96, 116, 140, 152, 182, 193, 202",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "XHFN and its proof cover positive-coordinate support; 8KVE covers unique paths, disconnected components and extended susceptibility. The deterministic path equivalence is explicitly valid without countability. TGL4 and the path description cover ray support, ordered/unordered endpoint distances and the geometric endpoint sum, including zero/one parameters and arbitrary diagonals."
+    },
+    {
+      "source": "perclib-line",
+      "order": 0,
+      "label": "Integer-line probabilities and intensity endpoints",
+      "locator": "Named theorem start lines: 21, 38, 51, 89, 97, 113, 121, 133, 141, 150, 161, 169, 175, 192, 204",
+      "relationship": "Source-inspected exposition with explicit additional deductions",
+      "status": "pending",
+      "note": "BP7B groups the source path, support, exact two-point and susceptibility, and zero/one percolation statements. FH1B gives unit-rate infinite critical intensities. The finite-size distribution, explicit exponential susceptibility and positive-rate rescaling are additional deductions. Existing XHFN, 8KVE and TGL4 are reused, and MTYL remains the distinct normalized-line erratum."
+    },
+    {
+      "source": "perclib-forest-branching",
+      "order": 0,
+      "label": "Finite-forest degree and branching identities",
+      "locator": "Named public theorem start lines: 20, 30, 46, 57, 70, 88, 98, 113",
+      "relationship": "Source-inspected exposition with a stronger stated corollary",
+      "status": "pending",
+      "note": "4K33 proves the signed degree identity and branch-versus-leaf bounds, including the empty forest and isolated vertices. The correction by twice the number of non-singleton components is an additional consequence of the source identity. A finite-tree leaf-containing set must have at least two vertices. The source proves no encounter-point construction or probabilistic uniqueness theorem."
+    },
+    {
+      "source": "perclib-boundary-forest-associations",
+      "order": 0,
+      "label": "Boundary, forest and walk assertion wrappers",
+      "locator": "Explicit public theorem/lemma start lines: 27, 43, 77, 94, 102, 132, 151, 172, 215, 247, 278, 392, 406",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 13 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "BP7B",
+      "proof_uses": [
+        "XHFN",
+        "8KVE",
+        "R3I9"
+      ],
+      "reason": "Unique paths give connection probabilities; summing over the two directions gives susceptibility. The finite-size law uses prescribed-cluster factorization."
+    },
+    {
+      "order": 1,
+      "tag": "FH1B",
+      "proof_uses": [
+        "BP7B"
+      ],
+      "reason": "Every finite unit-rate intensity produces a bond probability strictly below one, so neither percolating parameter set has a finite member."
+    }
+  ]
+}

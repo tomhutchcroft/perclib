@@ -1,4 +1,9 @@
 /-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Two-point (Bernoulli) divergence inequalities for the exponential intensity family. New
 proofs against pinned mathlib 56a005855ea17e0b0958f73ec801ae140b0a1679, using mathlib's
 `InformationTheory.klFun`; no upstream proof is copied. The Bernoulli divergence
@@ -9,6 +14,28 @@ module
 public import Mathlib.InformationTheory.KullbackLeibler.KLFun
 public import Mathlib.Analysis.Convex.SpecificFunctions.Basic
 public import Mathlib.Analysis.Calculus.Deriv.MeanValue
+public import Mathlib.InformationTheory.KullbackLeibler.DataProcessing
+public import Mathlib.Probability.Distributions.Bernoulli
+
+/-!
+# Bernoulli divergence for the exponential intensity family
+
+Quadratic bounds for `klFun` and comparison of the divergence between two Bernoulli laws with
+parameters `1 - e^{-βJ}` with the Poisson divergence.
+
+## Main results
+
+* `two_mul_min_mul_klFun_le`
+* `sq_sub_one_le_two_mul_max_mul_klFun`
+* `bernoulliDivergence_exp_le`
+* `mul_poissonDivergence_le`
+* `bernoulliDivergence_exp_le_of_nonneg`
+* `sq_sub_le_two_mul_max_mul_bernoulliDivergence`
+* `klDiv_bernoulliMeasure_eq_ofReal`, `klDiv_bernoulliMeasure_eq_top`
+* `klDiv_bernoulliMeasure_le_klDiv`
+* `ofReal_sq_sub_le_two_mul_max_mul_klDiv_bernoulliMeasure`
+* `sq_measureReal_sub_le_two_mul_max_mul_toReal_klDiv`
+-/
 
 @[expose] public section
 
@@ -192,7 +219,7 @@ theorem bernoulli_exp_div_le_poisson {x y : ℝ} (hx : 0 < x) (hy : 0 < y) :
   have hsum : A * (y - x) + exp (-x) * (y - x) = y - x := by rw [hAdef]; ring
   nlinarith [hGx, hsum]
 
-/-- **KHB7, first inequality.** For `J, β₁, β₂ > 0`,
+/-- **First inequality.** For `J, β₁, β₂ > 0`,
 `d(1 − e^{−β₁J} ‖ 1 − e^{−β₂J}) ≤ J (β₁ log(β₁/β₂) − β₁ + β₂)`. -/
 theorem bernoulliDivergence_exp_le {J β₁ β₂ : ℝ} (hJ : 0 < J) (h₁ : 0 < β₁) (h₂ : 0 < β₂) :
     (1 - exp (-(β₁ * J))) * log ((1 - exp (-(β₁ * J))) / (1 - exp (-(β₂ * J)))) +
@@ -203,7 +230,7 @@ theorem bernoulliDivergence_exp_le {J β₁ β₂ : ℝ} (hJ : 0 < J) (h₁ : 0 
   rw [mul_div_mul_right _ _ hJ.ne']
   ring
 
-/-- **KHB7, second inequality.** For `J ≥ 0` and `β₁, β₂ > 0`,
+/-- **Second inequality.** For `J ≥ 0` and `β₁, β₂ > 0`,
 `J (β₁ log(β₁/β₂) − β₁ + β₂) ≤ J (β₁ − β₂)² / (2 min{β₁, β₂})`. -/
 theorem mul_poissonDivergence_le {J β₁ β₂ : ℝ} (hJ : 0 ≤ J) (h₁ : 0 < β₁) (h₂ : 0 < β₂) :
     J * (β₁ * log (β₁ / β₂) - β₁ + β₂) ≤ J * (β₁ - β₂) ^ 2 / (2 * min β₁ β₂) := by
@@ -221,7 +248,7 @@ theorem mul_poissonDivergence_le {J β₁ β₂ : ℝ} (hJ : 0 ≤ J) (h₁ : 0 
   have := mul_le_mul_of_nonneg_left hk (sq_nonneg β₂)
   nlinarith [this]
 
-/-- **KHB7, the case `J = 0`.** Both parameters vanish, and the explicit expression for
+/-- **The case `J = 0`.** Both parameters vanish, and the explicit expression for
 the divergence is `0` (with Lean's conventions `log 0 = 0` and `0 / 0 = 0`). -/
 theorem bernoulliDivergence_exp_zero (β₁ β₂ : ℝ) :
     (1 - exp (-(β₁ * 0))) * log ((1 - exp (-(β₁ * 0))) / (1 - exp (-(β₂ * 0)))) +
@@ -229,9 +256,22 @@ theorem bernoulliDivergence_exp_zero (β₁ β₂ : ℝ) :
           log ((1 - (1 - exp (-(β₁ * 0)))) / (1 - (1 - exp (-(β₂ * 0))))) = 0 := by
   simp
 
+/-- The divergence bound of `bernoulliDivergence_exp_le` for every `J ≥ 0`; at `J = 0` both
+sides vanish. -/
+theorem bernoulliDivergence_exp_le_of_nonneg {J β₁ β₂ : ℝ} (hJ : 0 ≤ J) (h₁ : 0 < β₁)
+    (h₂ : 0 < β₂) :
+    (1 - exp (-(β₁ * J))) * log ((1 - exp (-(β₁ * J))) / (1 - exp (-(β₂ * J)))) +
+        (1 - (1 - exp (-(β₁ * J)))) *
+          log ((1 - (1 - exp (-(β₁ * J)))) / (1 - (1 - exp (-(β₂ * J))))) ≤
+      J * (β₁ * log (β₁ / β₂) - β₁ + β₂) := by
+  rcases hJ.eq_or_lt with h0 | hpos
+  · subst h0
+    rw [bernoulliDivergence_exp_zero, zero_mul]
+  · exact bernoulliDivergence_exp_le hpos h₁ h₂
+
 /-! ### 58HC, two-point form -/
 
-/-- **58HC, two-point form.** For `a, b ∈ (0,1)`: `(a − b)² ≤ 2 max{a,b} · d(a‖b)`. -/
+/-- **Two-point form.** For `a, b ∈ (0,1)`: `(a − b)² ≤ 2 max{a,b} · d(a‖b)`. -/
 theorem sq_sub_le_two_mul_max_mul_bernoulliDivergence {a b : ℝ} (ha : 0 < a) (ha1 : a < 1)
     (hb : 0 < b) (hb1 : b < 1) :
     (a - b) ^ 2 ≤ 2 * max a b * (a * log (a / b) + (1 - a) * log ((1 - a) / (1 - b))) := by
@@ -252,9 +292,9 @@ theorem sq_sub_le_two_mul_max_mul_bernoulliDivergence {a b : ℝ} (ha : 0 < a) (
   have hm : 0 ≤ b * max (a / b) 1 := by positivity
   nlinarith [mul_nonneg (mul_nonneg zero_le_two hm) h2]
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
-/-- `β₁ = β₂`: both sides of KHB7 vanish. -/
+/-- `β₁ = β₂`: both sides of `bernoulliDivergence_exp_le` vanish. -/
 example (J β : ℝ) :
     (1 - exp (-(β * J))) * log ((1 - exp (-(β * J))) / (1 - exp (-(β * J)))) +
         (1 - (1 - exp (-(β * J)))) *
@@ -278,10 +318,154 @@ example :
   ⟨bernoulliDivergence_exp_le one_pos two_pos one_pos,
     mul_poissonDivergence_le zero_le_one two_pos one_pos⟩
 
-/-- 58HC at `a = 1/2, b = 1/4`. -/
+/-- `sq_sub_le_two_mul_max_mul_bernoulliDivergence` at `a = 1/2, b = 1/4`. -/
 example : ((1 / 2 : ℝ) - 1 / 4) ^ 2 ≤ 2 * max (1 / 2) (1 / 4) *
     (1 / 2 * log ((1 / 2) / (1 / 4)) + (1 - 1 / 2) * log ((1 - 1 / 2) / (1 - 1 / 4))) :=
   sq_sub_le_two_mul_max_mul_bernoulliDivergence (by norm_num) (by norm_num) (by norm_num)
     (by norm_num)
+
+/-! ### Event-level comparison
+
+The Bernoulli divergence `d(p‖q)` with its endpoint conventions is represented as mathlib's
+`klDiv` of the Bernoulli laws `Ber(x, y, p)`, `Ber(x, y, q)` (values in `ℝ≥0∞`); for
+`0 < q < 1` it agrees with the explicit formula (`klDiv_bernoulliMeasure_eq_ofReal`). -/
+
+section EventComparison
+
+open MeasureTheory ProbabilityTheory unitInterval
+open scoped ENNReal NNReal
+
+variable {X : Type*} [MeasurableSpace X] [MeasurableSingletonClass X]
+
+/-- For `0 < q < 1` the Kullback-Leibler divergence of two Bernoulli laws is the explicit
+Bernoulli divergence `d(p‖q) = p log(p/q) + (1 − p) log((1 − p)/(1 − q))` (with `0 log 0 = 0`). -/
+theorem klDiv_bernoulliMeasure_eq_ofReal {x y : X} (hxy : x ≠ y) (p q : I) (hq0 : 0 < (q : ℝ))
+    (hq1 : (q : ℝ) < 1) :
+    klDiv Ber(x, y, p) Ber(x, y, q) =
+      ENNReal.ofReal (p * log (p / q) + (1 - p) * log ((1 - p) / (1 - q))) := by
+  classical
+  set f : X → ℝ≥0∞ := fun z => if z = x then ENNReal.ofReal (p / q)
+      else ENNReal.ofReal ((1 - p) / (1 - q)) with hf
+  have hfm : Measurable f := by
+    refine Measurable.ite (measurableSet_singleton x) measurable_const measurable_const
+  have hq1' : 0 < 1 - (q : ℝ) := sub_pos.2 hq1
+  have hp0 : 0 ≤ (p : ℝ) := p.2.1
+  have hp1 : 0 ≤ 1 - (p : ℝ) := sub_nonneg.2 p.2.2
+  have hc : ∀ r : I, ((unitInterval.toNNReal r : ℝ≥0) : ℝ≥0∞) = ENNReal.ofReal r := fun r => by
+    rw [← ENNReal.ofReal_coe_nnreal, unitInterval.coe_toNNReal]
+  have key : ∀ (r : I) (t : ℝ),
+      unitInterval.toNNReal r • ENNReal.ofReal t = ENNReal.ofReal (r * t) :=
+    fun r t => by rw [ENNReal.smul_def, smul_eq_mul, hc, ← ENNReal.ofReal_mul r.2.1]
+  have k1 : (q : ℝ) * (p / q) = p := mul_div_cancel₀ _ hq0.ne'
+  have k2 : (1 - (q : ℝ)) * ((1 - p) / (1 - q)) = 1 - p := mul_div_cancel₀ _ hq1'.ne'
+  have hW : Ber(x, y, q).withDensity f = Ber(x, y, p) := by
+    ext s hs
+    rw [withDensity_apply _ hs, bernoulliMeasure_def, bernoulliMeasure_def]
+    by_cases hx : x ∈ s <;> by_cases hy : y ∈ s <;>
+      simp [Measure.restrict_add, setLIntegral_dirac, hs, hx, hy, hf, hxy.symm, key, k1, k2, hc]
+  have hac : Ber(x, y, p) ≪ Ber(x, y, q) := hW ▸ withDensity_absolutelyContinuous _ _
+  rw [klDiv_eq_lintegral_klFun_of_ac hac]
+  have hrn : Ber(x, y, p).rnDeriv Ber(x, y, q) =ᵐ[Ber(x, y, q)] f := by
+    rw [← hW]; exact Measure.rnDeriv_withDensity _ hfm
+  have hcg : (fun z => ENNReal.ofReal (klFun (Ber(x, y, p).rnDeriv Ber(x, y, q) z).toReal))
+      =ᵐ[Ber(x, y, q)] fun z => ENNReal.ofReal (klFun (f z).toReal) := by
+    filter_upwards [hrn] with z hz
+    rw [hz]
+  rw [lintegral_congr_ae hcg]
+  rw [bernoulliMeasure_def]
+  simp only [lintegral_add_measure, lintegral_smul_measure, lintegral_dirac, hf, ite_true,
+    hxy.symm, ite_false, key, coe_symm_eq]
+  rw [ENNReal.toReal_ofReal (div_nonneg hp0 hq0.le), ENNReal.toReal_ofReal (div_nonneg hp1 hq1'.le),
+    ← ENNReal.ofReal_add (mul_nonneg hq0.le (klFun_nonneg (div_nonneg hp0 hq0.le)))
+      (mul_nonneg hq1'.le (klFun_nonneg (div_nonneg hp1 hq1'.le)))]
+  congr 1
+  rw [klFun_apply, klFun_apply]
+  field_simp
+  ring
+
+/-- For `q ∈ {0, 1}` and `p ≠ q` the divergence of the Bernoulli laws is infinite. -/
+theorem klDiv_bernoulliMeasure_eq_top {x y : X} (hxy : x ≠ y) {p q : I} (hq : q = 0 ∨ q = 1)
+    (hpq : p ≠ q) : klDiv Ber(x, y, p) Ber(x, y, q) = ∞ := by
+  refine klDiv_of_not_ac fun hac => hpq ?_
+  rcases hq with rfl | rfl
+  · have h := hac (s := {x}) (by rw [bernoulliMeasure_zero]; simp [hxy.symm])
+    rw [bernoulliMeasure_apply_of_mem_of_notMem _ (measurableSet_singleton x) rfl
+      (by simpa using hxy.symm)] at h
+    have := congrArg NNReal.toReal (ENNReal.coe_eq_zero.1 h)
+    exact Subtype.ext (by simpa using this)
+  · have h := hac (s := {y}) (by rw [bernoulliMeasure_one]; simp [hxy])
+    rw [bernoulliMeasure_apply_of_notMem_of_mem _ (measurableSet_singleton y) (by simpa using hxy)
+      rfl] at h
+    have := congrArg NNReal.toReal (ENNReal.coe_eq_zero.1 h)
+    simp only [unitInterval.coe_toNNReal, coe_symm_eq, NNReal.coe_zero] at this
+    exact Subtype.ext (show (p : ℝ) = 1 by linarith)
+
+/-- The two-point form `(a − b)² ≤ 2 max{a,b} d(a‖b)` for `a ∈ [0,1]` and `b ∈ (0,1)`. -/
+theorem sq_sub_le_two_mul_max_mul_bernoulliDivergence_of_mem_Icc {a b : ℝ} (ha : 0 ≤ a)
+    (ha1 : a ≤ 1) (hb : 0 < b) (hb1 : b < 1) :
+    (a - b) ^ 2 ≤ 2 * max a b * (a * log (a / b) + (1 - a) * log ((1 - a) / (1 - b))) := by
+  rcases ha.eq_or_lt with rfl | ha0
+  · have h := log_le_sub_one_of_pos (sub_pos.2 hb1)
+    have e : log (1 / (1 - b)) = -log (1 - b) := by rw [one_div, log_inv]
+    simp only [zero_sub, zero_mul, zero_add, sub_zero, max_eq_right hb.le, one_mul, e]
+    nlinarith
+  rcases ha1.eq_or_lt with rfl | ha1'
+  · have h := log_le_sub_one_of_pos hb
+    have e : log (1 / b) = -log b := by rw [one_div, log_inv]
+    simp only [sub_self, zero_mul, add_zero, max_eq_left hb1.le, one_mul, e]
+    nlinarith
+  exact sq_sub_le_two_mul_max_mul_bernoulliDivergence ha0 ha1' hb hb1
+
+/-- `(p − q)² ≤ 2 max{p,q} d(p‖q)` for all `p, q ∈ [0,1]`, with `d(p‖q)` the divergence of the
+Bernoulli laws in `ℝ≥0∞` (infinite when `q ∈ {0,1}` and `p ≠ q`; `0 · ∞ = 0`). -/
+theorem ofReal_sq_sub_le_two_mul_max_mul_klDiv_bernoulliMeasure {x y : X} (hxy : x ≠ y)
+    (p q : I) :
+    ENNReal.ofReal (((p : ℝ) - q) ^ 2) ≤
+      2 * ENNReal.ofReal (max (p : ℝ) q) * klDiv Ber(x, y, p) Ber(x, y, q) := by
+  by_cases hq : q = 0 ∨ q = 1
+  · by_cases hpq : p = q
+    · subst hpq
+      simp
+    · have hm : 0 < max (p : ℝ) q := by
+        rcases hq with rfl | rfl
+        · exact lt_max_of_lt_left (lt_of_le_of_ne p.2.1 fun h => hpq (Subtype.ext h.symm))
+        · exact lt_max_of_lt_right one_pos
+      rw [klDiv_bernoulliMeasure_eq_top hxy hq hpq,
+        ENNReal.mul_top (mul_ne_zero two_ne_zero (ENNReal.ofReal_pos.2 hm).ne')]
+      exact le_top
+  · rw [not_or] at hq
+    have hq0 : 0 < (q : ℝ) := lt_of_le_of_ne q.2.1 fun h => hq.1 (Subtype.ext h.symm)
+    have hq1 : (q : ℝ) < 1 := lt_of_le_of_ne q.2.2 fun h => hq.2 (Subtype.ext h)
+    rw [klDiv_bernoulliMeasure_eq_ofReal hxy p q hq0 hq1, ← ENNReal.ofReal_ofNat 2,
+      ← ENNReal.ofReal_mul zero_le_two,
+      ← ENNReal.ofReal_mul (mul_nonneg zero_le_two (le_max_of_le_left p.2.1))]
+    exact ENNReal.ofReal_le_ofReal
+      (sq_sub_le_two_mul_max_mul_bernoulliDivergence_of_mem_Icc p.2.1 p.2.2 hq0 hq1)
+
+/-- **Data processing for an event.** The divergence of the laws of the indicator of `A`
+is at most the divergence of the laws: `d(μ A‖ν A) ≤ D(μ‖ν)`. -/
+theorem klDiv_bernoulliMeasure_le_klDiv {Ω : Type*} [MeasurableSpace Ω] (μ ν : Measure Ω)
+    [IsProbabilityMeasure μ] [IsProbabilityMeasure ν] {A : Set Ω} (hA : MeasurableSet A) :
+    klDiv Ber((1 : ℝ), 0, ⟨μ.real A, by simp⟩) Ber((1 : ℝ), 0, ⟨ν.real A, by simp⟩) ≤
+      klDiv μ ν := by
+  rw [← (hasLaw_indicator_one_bernoulliMeasure (M := ℝ) (P := μ) hA.nullMeasurableSet).map_eq,
+    ← (hasLaw_indicator_one_bernoulliMeasure (M := ℝ) (P := ν) hA.nullMeasurableSet).map_eq]
+  exact klDiv_map_le μ ν (measurable_one.indicator hA)
+
+/-- `|μ A − ν A|² ≤ 2 max{μ A, ν A} D(μ‖ν)` when the divergence is finite. -/
+theorem sq_measureReal_sub_le_two_mul_max_mul_toReal_klDiv {Ω : Type*} [MeasurableSpace Ω]
+    (μ ν : Measure Ω) [IsProbabilityMeasure μ] [IsProbabilityMeasure ν] {A : Set Ω}
+    (hA : MeasurableSet A) (hD : klDiv μ ν ≠ ∞) :
+    (μ.real A - ν.real A) ^ 2 ≤ 2 * max (μ.real A) (ν.real A) * (klDiv μ ν).toReal := by
+  have h := (ofReal_sq_sub_le_two_mul_max_mul_klDiv_bernoulliMeasure (one_ne_zero (α := ℝ))
+    ⟨μ.real A, by simp⟩ ⟨ν.real A, by simp⟩).trans
+    (mul_le_mul_of_nonneg_left (klDiv_bernoulliMeasure_le_klDiv μ ν hA) zero_le)
+  rw [ENNReal.ofReal_le_iff_le_toReal
+      (ENNReal.mul_ne_top (ENNReal.mul_ne_top (by simp) ENNReal.ofReal_ne_top) hD),
+    ENNReal.toReal_mul, ENNReal.toReal_mul,
+    ENNReal.toReal_ofReal (le_max_of_le_left measureReal_nonneg)] at h
+  simpa using h
+
+end EventComparison
 
 end PercLib.Probability

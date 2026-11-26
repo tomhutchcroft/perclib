@@ -1,0 +1,161 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-pointwise-2024",
+  "entries": [
+    {
+      "id": "translated-centre-count",
+      "title": "Count the translated boundary intervals and retain the averaging domain",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, proof of Lemma2.2, printed pp.7–8/PDF indices6–7, extracted lines421–486; HTML168–180. Versioned HTML and extracted PDF text compared; no visual-PDF or journal comparison.",
+      "claim": "After choosing centres in Lambda_(k-3), the proof claims that a crossing forces a centre coordinate between the two endpoint coordinates, then averages over Lambda_(k-2) and drops the displayed beta factor. Its preceding exact inequality also replaces the opening probability by beta times the regularized power without its kernel constant.",
+      "problem": "The separating coordinate belongs to a translated boundary interval, not necessarily between the endpoint coordinates: at k=3, centre0 and half-side2, endpoints2 and3 cross although0 lies between neither. Enlarging the centre set loses the common inner-box containment. The beta factor and regularization/kernel constants must be retained under the stated uniformity convention.",
+      "correction": "0VB3 counts the difference of the two centre intervals in each coordinate, bounds its length by the endpoint separation and averages only over B_(R/8), with half-sideR/4. This gives the explicit factor4d times min(1,||u-v||/R). First use the actual opening probability q_beta; only then bound it by beta C 2^(d+alpha)<u-v>^(-d-alpha). The statement holds for every target outside B_(R/2), without the proof opening restriction ||x||<=R. The source lemma conclusion is retained.",
+      "tags": [
+        "0VB3"
+      ],
+      "issues": [],
+      "leanImpact": "Prove the finite interval-difference count and box containments; distinguish centre, side length and endpoints. Keep the intensity parameter and kernel constants before BK/Tonelli. Written repair only; no confirmed source correction or compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Count translated boundary intervals inside the original centre set and retain intensity and kernel constants.",
+        "scale": "local",
+        "impact": "Repairs the geometric averaging and uniformity bookkeeping; the source conclusion survives."
+      }
+    },
+    {
+      "id": "far-shell-and-induction-ranges",
+      "title": "Retain the kernel exponent in the far shells and start the induction at positive scales",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, proof of Proposition2.1, equation(2.4) and adjacent short-sum/induction displays, printed pp.9–10/PDF indices8–9, extracted lines565–644; HTML212–231. Versioned HTML and extracted PDF text agree.",
+      "claim": "The last line of(2.4) changes the kernel exponent d+alpha to d-alpha while also retaining a separate spatial-average factor2^(alpha(k+l)). The final recurrence includes epsilon=0 and k=0, and the short shell estimate sums to a ceiling even when epsilon2^k<1.",
+      "problem": "The displayed far series then has decay exponent d-2alpha; it can diverge and in general has the wrong power of2^k. Zero epsilon makes a negative power undefined, k=0 calls for a negative-index scale, and the ceiling sum includes a nonzero term when the original short-displacement set is empty.",
+      "correction": "PIZX retains (2^lR)^(-d-alpha) until multiplying by the shifted spatial average O((2^lR)^alpha). The remaining series is sum_l2^(-dl), giving R^(-d+alpha). Use k>=3, a finite base a_2, and one fixed0<epsilon<=1/16 chosen so the short-edge coefficient is at most1/2. Sum only integer radii l<epsilon R; when epsilon R<=1 the short term is empty. This proves the original pointwise upper-bound conclusion via TGF9.",
+      "tags": [
+        "PIZX",
+        "TGF9"
+      ],
+      "issues": [],
+      "leanImpact": "Keep shell weights and average masses as separate factors before simplification. State the short-distance sum with its true integer range; choose a positive contraction parameter and supply the finite induction base. No source-author confirmation or compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the far-shell kernel exponent and choose a positive fixed contraction parameter with explicit base scales.",
+        "scale": "local",
+        "impact": "Repairs the shell summation and induction ranges; the pointwise upper bound is retained."
+      }
+    },
+    {
+      "id": "half-susceptibility-hypotheses",
+      "title": "The susceptibility–length comparison needs a lower kernel hypothesis",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, Corollary 2.5 versus Proposition 2.3, printed p.10/PDF index9, extracted lines649–714; HTML235–255. Versioned HTML and extracted PDF compared; no visual-PDF or journal comparison.",
+      "claim": "Corollary 2.5 assumes only a symmetric summable translation-invariant kernel bounded above by C times distance^(-d-alpha), with 0<alpha<min(1,d), and asserts susceptibility comparable to the alpha power of the half-susceptibility radius uniformly below the critical point.",
+      "problem": "The nearest-neighbour kernel on Z obeys that upper envelope for every fixed 0<alpha<1. With p=1-exp(-beta), its critical intensity is infinite, chi=(1+p)/(1-p), and xi is the least integer n>=1 with p^(n+1)<=(1+p)/4. As beta tends to infinity, xi~log(2)/(1-p), so chi/xi^alpha diverges. The upper-only hypotheses do not give the asserted uniform comparison.",
+      "correction": "6G4B retains the two-sided power-law envelope of Proposition 2.3. MRZO gives the upper spatial average and hence chi<=C xi^alpha. AXYA, the stronger internal form of Lemma 2.4, gives the reverse bound below xi, using finite beta_c. It also proves m_beta(n) comparable to min(n,xi)^alpha, with beta=0 and xi=1 handled by the root.",
+      "tags": [
+        "AXYA",
+        "6G4B"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the lower envelope, finite critical intensity, sharpness and averaged upper theorem as explicit dependencies. Distinguish internal from unrestricted box means, construct the integer minimum and handle its initial scale. Do not infer a lower internal mean from an unrestricted one. Written repair only; confirmation and compiled associations pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the two-sided power-law envelope and finite critical intensity used by the proof.",
+        "scale": "statement",
+        "impact": "The upper-envelope-only claim is false; the susceptibility-radius comparison holds under the corrected hypotheses."
+      }
+    },
+    {
+      "id": "two-box-endpoints-and-separation",
+      "title": "Specify the long-edge path endpoints and preserve the short crossing lengths",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, proof of Proposition 2.3 headed Theorem 1.5, equation (2.6) and following two-box displays, printed pp.11–12/PDF indices10–11, extracted lines822–951; HTML290–310. Versioned HTML and extracted PDF compared.",
+      "claim": "The long-edge event is described as the origin being connected to an edge, although the BK bound uses a continuation to x. A later centre quantifier places w near the origin rather than x. The averaged display enlarges the first crossing restriction to |x|/4, then asserts this is at most |u-v|/4 from |u-v|>=7|x|/8.",
+      "problem": "The first event description does not imply the terminal connection required by the product bound. The second centre must surround x. The geometric inference reverses the needed comparison: for u=2s, v=x-2s and x=32s in one dimension, |x|/4=8s exceeds |u-v|/4=7s. Thus the displayed relaxation does not justify the stated convolution lemma domain.",
+      "correction": "CQK2 defines the long-edge event using a simple path from 0 to x, takes independent centres in B_s and x+B_s, and keeps both crossing lengths below |x|/16. Then |u-v|>=7|x|/8, each crossing is below |u-v|/4, and |a-b|>=3|x|/4>=xi. SFR0 applies, yielding the contraction H<=C(1+r^(2alpha))+C r^(-2alpha)H. Finite-range truncation and YUHF/TGF9 make H finite before subtraction; finite-path monotone convergence removes truncation.",
+      "tags": [
+        "SFR0",
+        "CQK2"
+      ],
+      "issues": [],
+      "leanImpact": "Formalize paths with specified endpoints, order the two distinct crossing edges, use BK for five disjoint witnesses, and average independent centre choices. Preserve the exact short-edge constraints until checking the convolution domain. Only rearrange a finite amplitude. The upper theorem is retained; no lower-bound or compiled claim.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use terminal connecting paths, the correct second centre and shorter crossing edges.",
+        "scale": "local",
+        "impact": "Repairs the two-box geometry and justifies finite truncation before contraction; the upper bound survives."
+      }
+    },
+    {
+      "id": "joining-pairs-and-internal-means",
+      "title": "Count all joining-bond pairs and use the confined cluster mean",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, proof of Proposition 2.8, printed pp.14–15/PDF indices13–14, extracted lines1123–1245; HTML357–375. Versioned HTML and extracted PDF compared.",
+      "claim": "The second cluster is described as the origin cluster in the box around x. The factorial second moment of the joining-edge count is bounded by a product of binomial coefficients in the two cluster sizes, then identified with the product of their second moments. The first-moment lower bound cites Lemma 2.4, whose displayed premise concerns unrestricted connections.",
+      "problem": "The second cluster must be rooted at x. The binomial product omits distinct joining edges sharing an endpoint: when the cluster sizes are 1 and 2, that product is zero but the two joining bonds can both open. It is also not equal to the product of squared cluster sizes. An unrestricted box-mean lower bound does not imply an internal one. Finally floor(min(|x|,xi)/4) can be zero at a small half-mass radius.",
+      "correction": "TQ77 uses the two independent clusters rooted at 0 and x inside disjoint boxes. Given sizes U,V, all pairs of distinct joining edges are bounded by (UV)^2/2; their opening probabilities give E binom(Z,2)<=C |x|^(-2d-2alpha) E[U^2 V^2]. AXYA/6G4B supply the needed internal mean. Pair counting and MRZO bound the full-window maximum quantile, while 12NL/BZDZ give E U^2<=C M E U. A direct bond covers min(|x|,xi)<8 before an integer radius is introduced. Cauchy–Schwarz gives the original confined lower bound.",
+      "tags": [
+        "AXYA",
+        "6G4B",
+        "TQ77"
+      ],
+      "issues": [],
+      "leanImpact": "Separate the two root labels, induced clusters and cross-box bond coordinates. Include shared-endpoint bond pairs in factorial moments. Use a proved internal mean and quantile comparison, not an unrestricted mean substituted for it. Handle radius zero separately. Provisional written repair; no compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Count all distinct joining-edge pairs, use internal cluster means and treat tiny radii by a direct bond.",
+        "scale": "local",
+        "impact": "Several local estimates change; the confined lower-bound conclusion is retained."
+      }
+    },
+    {
+      "id": "triangle-shell-factors-and-range",
+      "title": "Retain both susceptibility squares and sum the triangle by its largest side",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, section 2.3 proof through (2.7), printed p.13/PDF index12, extracted lines956–1065; HTML314–334. Versioned HTML and extracted PDF compared.",
+      "claim": "In the first inner-convolution display, the far-field product is first given a susceptibility-square factor and then a fourth-power factor. The near-field radial sum is bounded by |x|^(-d+2alpha) across the announced general range 0<alpha<=d. The logarithmic case in (2.7) is written without an initial-scale constant.",
+      "problem": "Two far-field connection bounds contribute chi^4, not chi^2. The near radial sum has terms r^(-d-1+2alpha): its proposed endpoint bound requires 2alpha<d; equality gives a logarithm and larger 2alpha gives dependence on the upper cutoff. At xi=1, log xi is zero whereas the triangle contains its diagonal term one. These defects do not refute the final three-regime estimate.",
+      "correction": "RCTO groups triangles by their largest dyadic side R, bounds the two long factors and sums the remaining side. A shell contributes at most C R^(3alpha-d) below xi and C xi^(5alpha) R^(-d-2alpha) above it. Summation yields the same bounded/logarithmic/power regimes with 1+log xi, and proves a finite critical triangle for d>3alpha. The proof needs no 2alpha<d intermediate restriction. Converting to a logarithm of distance to criticality still requires the separately cited polynomial susceptibility theorem.",
+      "tags": [
+        "RCTO"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the two far-field prefactors separate, treat the diagonal, and check the sign of every radial exponent before summing. Largest-side relabelling uses translation invariance and symmetry. Do not infer a parameter-distance bound or mean-field exponents without their additional inputs. Confirmation and compiled associations remain pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Sum triangles by their largest dyadic side.",
+        "scale": "substantial",
+        "impact": "Replaces the defective shell argument and avoids its extra range restriction; the three regimes survive with 1+log(xi)."
+      }
+    },
+    {
+      "id": "remark-critical-limit",
+      "title": "Remark 2.7 uses the finite critical limit and a corrected differential premise",
+      "status": "provisional",
+      "locator": "arXiv:2404.07276v1, Remark 2.7, printed p.14/PDF index13, extracted lines1066–1094; theorem statement in versioned HTML lines68–83 also checked. No journal or visual-PDF comparison.",
+      "claim": "The susceptibility power bound is followed by the limit beta tending to infinity. The preceding differential display invokes the stronger numerator chi times (chi minus the triangle), and the final sentence discusses convergence of the other exponents.",
+      "problem": "The argument takes place below a finite beta_c, so the limit must be beta increasing to beta_c. The stronger numerator is the separate provisional triangle-paper issue already recorded; it is not a valid general differential premise. Exponent conclusions require their existence and do not establish monotonicity in alpha.",
+      "correction": "YYSP retains the same susceptibility power using 4KBG with the row-normalization factor 1/M and GQJY. The triangle is bounded by C chi^q for q=3-d/alpha<1/2, hence is eventually at most chi/2, and the corrected square suffices. The limit is beta increasing to beta_c. LKWW obtains explicit tail/density and exponent bounds when alpha<4d/11, a neighbourhood sufficient for convergence as alpha decreases to d/3. A3S7 separately completes Theorem1.1, including the logarithm conversion and both tail bounds, without the false stronger premise.",
+      "tags": [
+        "GQJY",
+        "A3S7",
+        "YYSP",
+        "LKWW"
+      ],
+      "issues": [],
+      "leanImpact": "Preserve local absolute continuity, finite critical intensity, susceptibility divergence and the derivative chain rule under lambda=M beta. Integrate the corrected square on a terminal interval; do not certify the stronger numerator. Keep existence of each exponent separate from inequalities for probabilities and moments. Written proof only; no compiled association or source confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Take the limit at the finite critical intensity and use the corrected squared-deficit inequality.",
+        "scale": "local",
+        "impact": "The susceptibility and stated exponent consequences survive with their explicit assumptions; no monotonicity in alpha is inferred."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2404.07276v1",
+    "checkedUrl": "https://arxiv.org/abs/2404.07276v1",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

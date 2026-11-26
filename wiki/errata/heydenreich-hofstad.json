@@ -1,0 +1,723 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "heydenreich-hofstad",
+  "entries": [
+    {
+      "id": "extinction-conditioning",
+      "title": "The extinction-conditioned bond parameter needs a denominator",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Section 2.1, (2.1.20)–(2.1.22), printed p.20, PDF index31. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The conditional bond parameter is given as p times the forward extinction probability q, and used in the finite-cluster mean.",
+      "problem": "This is a joint probability, not the required conditional probability. If n=r-1 and w=1-p+pq, the conditioning event for one potential branch has probability w. For r=3 and p=3/4, q=1/9 and the correct conditional parameter is 1/4, whereas pq=1/12. The forward finite-cluster mean is 2/9, not the resulting 2/15.",
+      "correction": "0JTK proves p*=pq/(1-p+pq)=p w^(n-1), with n p*=f'(q)<1. The forward finite-cluster mean is q/(1-n p*). The root extinction probability is w^r, and its finite-cluster mean is w^r(1+r p*/(1-n p*)). The proof also gives the correct near-critical amplitudes.",
+      "tags": [
+        "0JTK"
+      ],
+      "issues": [],
+      "leanImpact": "A conditional offspring law must divide by the probability of branch extinction and distinguish r root trials from n forward trials. The corrected law supplies the subcritical reduction for all finite-cluster moments. No compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Normalize by the probability that the whole potential branch fails, then recompute the finite-cluster means.",
+        "scale": "local",
+        "impact": "A local conditioning repair changes the displayed parameter and susceptibility formulas, including amplitudes. The duality principle and the critical exponents survive."
+      }
+    },
+    {
+      "id": "forest-hitting-target",
+      "title": "The many-ancestor formula must use the target k minus m",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Exercise 2.4, (2.1.26), printed p.21, PDF index32. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The hitting identity for a queue started with m individuals retains the offspring-sum target k-1.",
+      "problem": "At time k the queue has size m+sum(X_i-1), so it can be zero only when the offspring sum is k-m. With zero offspring, m=k=2, the first empty time is two with probability one but the displayed right side is zero.",
+      "correction": "UPOZ proves P(T^(m)=k)=(m/k)P(sum of k offspring counts=k-m) for k>=m, without a finite-mean assumption. The one-ancestor identity is unchanged.",
+      "tags": [
+        "UPOZ",
+        "RL1L"
+      ],
+      "issues": [],
+      "leanImpact": "The exploration invariant includes all m initial ancestors. The target in a forest hitting theorem must be k-m; the existing one-ancestor statement does not change. No compiled association or author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace k-1 by k-m; a formal coefficient calculation proves the corrected forest identity.",
+        "scale": "notation",
+        "impact": "A one-symbol target correction repairs the many-ancestor display. Its specialization to one ancestor and the subsequent binomial progeny formula are unchanged."
+      }
+    },
+    {
+      "id": "local-to-tail-constant",
+      "title": "Summing the critical local mass doubles its coefficient",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, (2.1.28)–(2.1.29), printed p.21, PDF index32. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "A local mass coefficient 2 C_delta is followed by a tail coefficient C_delta.",
+      "problem": "The sum of k^(-3/2) over k>=N is asymptotic to 2 N^(-1/2). Keeping the displayed local coefficient would therefore give the tail coefficient 4 C_delta.",
+      "correction": "Either replace the local coefficient by C_delta/2 or the tail coefficient by 4 C_delta. LS6G and 1KBO compute the actual constants directly: the forward local coefficient is 1/sqrt(2 pi sigma^2), its tail coefficient is twice that, and the regular-tree root coefficients carry the additional factor r/(r-1).",
+      "tags": [
+        "LS6G",
+        "1KBO"
+      ],
+      "issues": [],
+      "leanImpact": "Keep distinct names for local and tail constants, and retain the integral-comparison factor two. Forward and root laws have different amplitudes. No change to the exponent, compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Make the local and tail coefficients consistent; the exact cluster laws determine both.",
+        "scale": "notation",
+        "impact": "A constant-normalization correction leaves the power law and exponent delta=2 unchanged."
+      }
+    },
+    {
+      "id": "survival-error-rate",
+      "title": "Critical binomial survival has a logarithmic relative correction",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Exercise 2.5(b), printed p.21, PDF index32. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The leading critical survival equivalent is stated with relative error O(1/m) at generation m.",
+      "problem": "For n=r-1>=2, the recurrence has a nonzero cubic contribution after reciprocation. X9U3 proves relative correction -(n+1)/(3(n-1)) times (log m)/m, plus O(1/m). In particular for n=2 it is -(log m)/m, which cannot be bounded by a constant times 1/m.",
+      "correction": "Replace the requested relative O(1/m) by O((log m)/m), or retain the sharper expansion proved in X9U3. Its proof sums reciprocal increments twice, first to an O(log m) bound and then to the explicit logarithmic coefficient with bounded remainder.",
+      "tags": [
+        "X9U3",
+        "8WO7"
+      ],
+      "issues": [],
+      "leanImpact": "The leading finite-variance survival theorem remains valid. A quantitative refinement for binomial offspring must expose the logarithmic term or use the weaker error bound; it cannot silently strengthen an asymptotic equivalent. No compiled association or author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Include the nonzero logarithmic correction, or weaken the relative error to O((log m)/m).",
+        "scale": "statement",
+        "impact": "The exercise's quantitative conclusion changes. Its leading constant and intrinsic one-arm exponent remain unchanged; the corrected expansion has a complete written proof."
+      }
+    },
+    {
+      "id": "generation-zero-occupation",
+      "title": "The branching-walk Green formula must count the initial particle once",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, (2.2.7) and (2.2.10), printed p.23, PDF index34. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The generation sum uses the regular-tree count r(r-1)^(j-1) also at j=0, giving r/(r-1) times the entire walk Green function.",
+      "problem": "Generation zero has one particle. In particular p=0 gives occupation one at the origin, whereas the displayed formula gives r/(r-1). The homogeneous branching-walk convention mentioned in the section also differs from a regular-tree root with r potential children.",
+      "correction": "For a regular root and n=r-1, 8KZO proves G=delta_0+(r/n)(C_(np)-delta_0) below and at criticality. A homogeneous Binomial(n,p) branching walk instead has G=C_(np). Above criticality, the regular-root finite-cluster field uses the corrected conditional parameter p* and is multiplied by the root extinction probability q_0.",
+      "tags": [
+        "8KZO",
+        "94E7"
+      ],
+      "issues": [],
+      "leanImpact": "Split generation zero from positive generations and declare the initial offspring law explicitly. Finite-cluster occupation also retains the extinction probability. The regular-root correction is supported only at the origin, so its off-origin spatial and Fourier singularity exponents survive. No compiled association or author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Separate the initial particle from later generations and distinguish homogeneous from regular-root offspring.",
+        "scale": "local",
+        "impact": "For the regular-root convention, subtract delta_0/(r-1) from the displayed Green expression. This repairs the origin value and total mass without changing its off-origin decay or critical exponents."
+      }
+    },
+    {
+      "id": "internal-cluster-coordinate-support",
+      "title": "A specified internal cluster also reads its closed boundary",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Explanation after (3.2.6), Exercise 3.1, printed p.29, PDF index40. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The event specifying the internal root cluster C is said to depend only on edges with both endpoints in C.",
+      "problem": "For S={0,e_1} and C={0}, the event requires the edge from 0 to e_1 to be closed, even though there are no edges inside C.",
+      "correction": "TVM9 includes all edges internal to S with at least one endpoint in C. These coordinates are disjoint from the chosen C-to-outside-S edge and from the remaining connection off C; the factorization is valid.",
+      "tags": [
+        "TVM9",
+        "R3I9"
+      ],
+      "issues": [],
+      "leanImpact": "A measurable coordinate-support lemma must include the closed C-to-S-minus-C boundary. The prescribed-cluster factorization supplies this support. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Enlarge the first coordinate block to include the closed internal boundary.",
+        "scale": "local",
+        "impact": "Only the independence justification changes. The factorization, recurrence and exponential-decay conclusion are unchanged."
+      }
+    },
+    {
+      "id": "all-radius-exponential-rate",
+      "title": "The rate obtained at multiples of L needs adjustment for all radii",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Sentence after (3.2.9), printed p.29, PDF index40. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The multiple-of-L recurrence is said to prove the unit-prefactor estimate at every positive radius with c=log(1/phi)/L.",
+      "problem": "For d=2, p=1/100, S=Lambda_20 and L=21, a path count gives 0<phi<= (656/291)(3/100)^20 < [1-(99/100)^4]^21. Thus exp(-c)=phi^(1/21) is strictly smaller than the actual radius-one arm probability.",
+      "correction": "TVM9 proves a_N<=phi^floor(N/L). Combining this with the radius-one probability gives an explicit smaller positive rate c=min(-log phi,-log[1-(1-p)^(2d)])/(2L), valid for every N>=1.",
+      "tags": [
+        "TVM9"
+      ],
+      "issues": [],
+      "leanImpact": "Retain the floor when passing from a subsequence of radii to all radii, or explicitly shrink the exponent before removing the prefactor. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the floor bound and a smaller rate covering the finite initial range.",
+        "scale": "statement",
+        "impact": "The specific claimed rate changes; the theorem asserting existence of some positive exponential rate remains valid. A finite explicit counterexample and complete repaired bound are supplied."
+      }
+    },
+    {
+      "id": "probability-derivative-endpoints",
+      "title": "The divided escape derivative formula is an interior-parameter statement",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Lemma 3.3, (3.2.10), printed p.29, PDF index40. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The lemma quantifies over p in [0,1] while its right-hand side divides by p(1-p).",
+      "problem": "That real quotient is undefined at both endpoints. Finite event probabilities themselves are polynomials and do not have this singularity.",
+      "correction": "Use 0<p<1 for the divided formula. JQLC proves the finite-product identity there; after multiplying by p(1-p), the inequality extends to p=0 and p=1 by continuity.",
+      "tags": [
+        "JQLC",
+        "HATE"
+      ],
+      "issues": [],
+      "leanImpact": "A probability-parameter derivative theorem must distinguish the interior quotient from the endpoint-safe multiplied inequality. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restrict the divided display to the open interval, or clear its denominator.",
+        "scale": "statement",
+        "impact": "A minor change to the stated parameter domain or displayed form is required. The integration argument and resulting sharpness theorem are unchanged."
+      }
+    },
+    {
+      "id": "box-boundary-multiplicity",
+      "title": "The critical shell estimate must retain outward edge multiplicities",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Equation (3.2.22), printed p.31, PDF index42. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The unweighted boundary-vertex sum is bounded below by phi_p(Lambda_N)/p.",
+      "problem": "The latter equals the vertex sum weighted by the number of edges leaving the box at each vertex. In dimension at least two and p>0, corners have multiplicity at least two and positive internal connection probability, making the printed comparison go in the wrong direction.",
+      "correction": "JQLC uses b_N(x)<=d for N>=1 to obtain the lower bound phi_p(Lambda_N)/(dp) for the unweighted sum. The factor 2d works also for N=0. Each critical shell therefore contributes at least 1/(dp_c), and summing still diverges.",
+      "tags": [
+        "JQLC",
+        "RDF0"
+      ],
+      "issues": [],
+      "leanImpact": "Keep edge-indexed boundary flux separate from vertex-indexed shell mass. The degree bound converts between them. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Insert the outward-degree factor before summing the disjoint shells.",
+        "scale": "local",
+        "impact": "A dimension-dependent constant repairs the estimate. Critical susceptibility still diverges; neither its divergence nor any critical nonpercolation claim is changed."
+      }
+    },
+    {
+      "id": "magnetization-infinite-mass",
+      "title": "The finite-size magnetization series omits infinite clusters",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Equation (3.4.1) and the monotonicity discussion, printed p.32, PDF index43. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The sum over finite cluster sizes is identified with the full ghost-connection probability for all p, and strict field monotonicity is stated without excluding p=1.",
+      "problem": "For p=1 the finite-size sum is zero, but the ghost probability is one at every positive field. More generally the missing term is theta(p). At p=1 the positive-field function is constant, not strictly increasing.",
+      "correction": "Add theta(p) to the finite-size series for gamma>0. Its right limit at zero is theta(p), while the literal empty-mark value at zero is zero. For p<1 the positive singleton probability ensures a strictly positive field derivative; handle p=1 separately.",
+      "tags": [
+        "VF24",
+        "8B62",
+        "J2TE",
+        "ZDVK"
+      ],
+      "issues": [],
+      "leanImpact": "The finite and infinite cluster contributions must be separated before differentiating. Existing ghost-transform statements retain the infinite-volume term; the Bernoulli field change of variables is explicit in the new article. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the infinite-cluster term and distinguish the zero-field value, right limit and p=1 endpoint.",
+        "scale": "local",
+        "impact": "This repairs the observable and its endpoint interpretation in the percolating regime. Finite-cluster derivative formulas remain unchanged, and the lower-bound arguments survive with the corrected inverse domain."
+      }
+    },
+    {
+      "id": "magnetization-inverse-endpoint",
+      "title": "The inverse magnetization starts at theta(p), not always at zero",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Proposition 3.6 proof, (3.5.3)–(3.5.5), printed p.33, PDF index44. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The positive-field magnetization is inverted on the whole unit interval and the inverse differential inequality is integrated from zero.",
+      "problem": "If theta(p)>0, the image of positive fields is (theta(p),1), so the inverse does not exist on (0,theta(p)]. The proposition does not assume critical nonpercolation or theta(p)=0.",
+      "correction": "ZDVK integrates first from s_0>theta and then sends s_0 down to theta. The limiting inverse ratio is zero when theta>0 and 1/chi^f when theta=0, including an infinite mean. The original square-root bound and the finite-mean bound in Exercise 3.5 follow.",
+      "tags": [
+        "ZDVK",
+        "8B62"
+      ],
+      "issues": [],
+      "leanImpact": "An inverse-function integration theorem must expose its actual image interval and prove its lower-endpoint limit without assuming the absence of infinite clusters. No new compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Integrate from the positive-field right limit and compute the boundary ratio in both cases.",
+        "scale": "local",
+        "impact": "The proof needs a local endpoint repair, not a new percolation hypothesis. Both stated lower bounds are preserved, and the corrected calculus gives a stronger bound when theta is positive."
+      }
+    },
+    {
+      "id": "walk-integral-zero-coefficient",
+      "title": "The walk Fourier integral is the convolution at zero",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, (5.4.2)–(5.4.3), printed p.55, PDF index66. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The Fourier integral in the damped weighted-walk bound is represented by a sum of the spatial convolution over all vertices.",
+      "problem": "Fourier inversion gives the convolution at zero. The total mass is (1-lambda)^(-n) for lambda<1 and n>=1, and infinite at lambda=1; it cannot be bounded by the finite return-diagram estimate. The coefficient at zero instead has a nonnegative return-probability expansion.",
+      "correction": "RD3X evaluates (D^(2l)*C_lambda^n)(0), expands it in return probabilities and proves monotonicity in lambda by its nonnegative coefficients. The limit at one is justified separately on the positive and negative parts of the walk transform.",
+      "tags": [
+        "RD3X"
+      ],
+      "issues": [],
+      "leanImpact": "A Fourier inversion lemma must return a specified spatial coefficient, not the total mass. Damping comparison is justified through nonnegative walk coefficients even though the Fourier symbol changes sign. No compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace the spatial sum by evaluation at zero and use the nonnegative return expansion.",
+        "scale": "local",
+        "impact": "A local Fourier-inversion correction repairs the proof of uniformity in the damping parameter. The stated weighted bound and dimension dependence remain valid."
+      }
+    },
+    {
+      "id": "spreadout-triangle-baseline",
+      "title": "The full spread-out walk triangle approaches one, not zero",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, paragraph following Proposition 5.6, printed p.56, PDF index67. Extracted text checked on 17 November 2026; no visual-page or published-edition verification.",
+      "claim": "The proposition is applied with l=0 to conclude that the full spread-out random-walk triangle is arbitrarily small.",
+      "problem": "The proposition assumes l>=1. The full triangle includes the zero-step contribution one, so it cannot tend to zero. Weighted diagrams with a positive even power of the step transform have a different baseline.",
+      "correction": "ZRVJ proves the weighted O(L^(-d)) estimate for l>=1. Expanding (1-t)^(-3)=1+3t+t^2(6-8t+3t^2)/(1-t)^3 and using D_L(0)=(2L+1)^(-d) proves that the full triangle equals 1+O(L^(-d)) for d>6. Its nontrivial part tends to zero.",
+      "tags": [
+        "ZRVJ"
+      ],
+      "issues": [],
+      "leanImpact": "Separate a full diagram containing the trivial term from its remainder. Do not instantiate the weighted theorem at l=0. The corrected bound supplies smallness of the remainder relevant to the perturbative argument; no lace-expansion theorem, compiled association or author confirmation is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Subtract the zero-step baseline; prove that the full triangle is one plus O(L^(-d)).",
+        "scale": "statement",
+        "impact": "The quantity claimed to tend to zero changes: it is the nontrivial part of the triangle. This does not change the critical-dimension threshold or the intended small-remainder input, and a complete elementary repair is supplied."
+      }
+    },
+    {
+      "id": "reciprocal-fourier-sign",
+      "title": "The reciprocal Fourier estimate needs absolute values or positive reciprocals",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, Lemma 8.2, (8.2.19)–(8.2.20), printed p.94, PDF index105; proof on printed p.95, PDF index106. Extracted text checked on 17 November 2026; visual-page retrieval and published-edition verification unavailable.",
+      "claim": "Evenness of the summable kernel is presented as sufficient for a second-difference upper bound whose reciprocal factors are used without absolute values.",
+      "problem": "Those reciprocals can be negative even when every denominator is nonzero. On Z, a(0)=2 and a(1)=a(-1)=1/4 give a-hat(q)=2+(1/2)cos(q). At k=l=pi/2, the left side is 2/3 but the displayed right side is -4/3.",
+      "correction": "84XD retains absolute values of every reciprocal factor and proves the estimate with the same constant eight by an exact reciprocal identity and weighted Cauchy–Schwarz. Alternatively, require the three reciprocals to be positive. TTS1 proves the unchanged positive random-walk specialization.",
+      "tags": [
+        "84XD",
+        "TTS1"
+      ],
+      "issues": [],
+      "leanImpact": "A formal statement should assume a real even summable kernel and nonzero denominators, and use absolute reciprocal factors. The version without those absolute values needs positivity at the three frequencies. Consumers must establish this sign condition for their effective kernel; the lambda<1 random-walk kernel does so directly. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "A complete corrected bound is proved: take absolute values of the reciprocal factors, or add their positivity as a hypothesis.",
+        "scale": "statement",
+        "impact": "The general lemma gains a missing sign qualification. Its constant eight and its intended positive random-walk conclusion are unchanged; downstream uses require a sign check, not a new probabilistic argument. No change of critical dimension or threshold is asserted."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "h-diagram-prefactor",
+      "title": "The Fourier form of H must retain both connector masses",
+      "locator": "17 March 2017 author manuscript, Lemma 8.7, (8.3.32)–(8.3.35), printed p.100 / PDF index111, compared with (7.5.1). Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The displayed Fourier identity replaces the two connector factors by transforms of the normalized step law without retaining their edge masses.",
+      "problem": "Each connector contains tilde-tau = j D*tau with j=2dp. Their product contributes j squared. Omitting it makes the identity inconsistent with the spatial definition and loses its factor in the subsequent upper bound.",
+      "correction": "L1Y7 derives the identity directly from the spatial sum with prefactor j squared. Under f(p) at most K, this contributes at most K squared; the proof gives H(k) at most 300 K to the tenth K(0,3) squared K(1,3) g(k)/d, uniformly over the external vertices.",
+      "tags": [
+        "L1Y7"
+      ],
+      "leanImpact": "Keep the scalar j on each connector when translating the spatial diagram into a Fourier integral. The eventual constant may depend on K, so the O_K(1/d) conclusion and its downstream smallness remain valid. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore j squared and absorb it into the K-dependent constant; a full proof covers every frequency shift.",
+        "scale": "local",
+        "impact": "Two normalization factors and the displayed K-power are repaired. The dimension threshold, parameter range, order 1/d and bootstrap conclusion are unchanged."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "bootstrap-algebra-identities",
+      "title": "Two identities in the bootstrap improvement require local algebra repairs",
+      "locator": "17 March 2017 author manuscript, (8.4.7), printed p.103 / PDF index114, and (8.4.22), printed p.106 / PDF index117. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The first displayed identity solves the susceptibility relation with a plus sign. The later first-difference formula expands the product j D-hat times (1+Pi-hat).",
+      "problem": "From lambda=j+m/(1+m), solving for j gives lambda-m/(1+m). For a-hat=j D-hat(1+Pi-hat), its increment also needs the constant one and a consistent shifted factor; the displayed expansion omits these product terms.",
+      "correction": "W2WX uses j=lambda-m/(1+m), preserving the upper bound by absolute values. With subscripts 0 and sigma denoting l and l+sigma k, the exact increment is j[(D_sigma-D_0)(1+Pi_0)+D_sigma(Pi_sigma-Pi_0)]. 12ZK proves the needed mixed-increment estimate directly from absolute kernel norms and then proves the exact second-difference quotient identity.",
+      "tags": [
+        "W2WX",
+        "12ZK"
+      ],
+      "leanImpact": "State and check the scalar and finite-difference identities before applying inequalities. The absolute coefficient norm and frequency bound already supply the corrected estimates; no stronger percolation hypothesis or compiled association is introduced.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the sign and product expansion; complete proofs retain the intended improving estimates.",
+        "scale": "local",
+        "impact": "These are local algebra corrections, not changes to the theorem or its hypotheses. The bootstrap still closes with an absolute constant divided by dimension; no change to the critical dimension or parameter regime is asserted."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "triangle-coefficient-scope",
+      "title": "The polynomial triangle coefficient needs its small-triangle qualification",
+      "locator": "17 March 2017 author manuscript, Lemma 9.1, (9.1.6), and proof (9.4.18)–(9.4.21), printed pp.109 and116–117 / PDF indices120 and127–128. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The coefficient is displayed with (1-eta) squared minus eta, where eta is the maximal nontrivial triangle. The lemma does not explicitly state eta at most one; the later high-dimensional application does satisfy that restriction.",
+      "problem": "The proof multiplies lower bounds involving 1-eta, which requires controlling its sign. Read as an unrestricted formula for finite eta, the coefficient is false. On the nearest-neighbour line at p=9/10, summing triangle vertices in [-2,2] gives eta at least 6p squared +12p to the fourth +4p to the sixth +2p to the eighth, greater than 15. The unqualified coefficient is then greater than 235. At gamma=1/2, M=119/121 and M_gamma=116/1331, making its proposed right side greater than 9 while M is less than one.",
+      "correction": "OB0K uses the square of the positive part of 1-eta, or equivalently retains the original coefficient only under eta at most one. Its full cutting-bond proof establishes the corrected inequality. C2V4 verifies eta=O(1/d), so the intended high-dimensional use is unchanged.",
+      "tags": [
+        "OB0K",
+        "C2V4"
+      ],
+      "leanImpact": "Encode the small-triangle hypothesis before multiplying the lower bounds, or use the positive-part coefficient. The unrestricted statement must not be imported from the displayed polynomial alone. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Add eta at most one or replace the square by the square of its positive part; the corrected inequality is proved.",
+        "scale": "statement",
+        "impact": "The general lemma needs an explicit domain qualification. The existing high-dimensional application already meets it, so its differential inequality, constants in the limit and mean-field conclusions are preserved."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "critical-tail-constant",
+      "title": "The final substitution does not give the stated lower-tail constant",
+      "locator": "17 March 2017 author manuscript, proof of Theorem 9.2 after (9.2.11), printed p.111 / PDF index122. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "After choosing gamma=1/(60 squared n), the calculation announces a lower-tail constant of 1/6.",
+      "problem": "The remaining factor is (1/6) times the square root of gamma, which is 1/(360 square root n). The factor 1/60 from the field choice is missing in the announced constant. This diagnoses the calculation, not a counterexample to a possibly stronger tail estimate.",
+      "correction": "Use 1/360 in that calculation. ZK0V gives a complete two-field argument and the slightly larger admissible constant 1/(36e square root 12) from the same magnetization inputs.",
+      "tags": [
+        "ZK0V",
+        "74SS"
+      ],
+      "leanImpact": "Track the field substitution in the scalar inequality before choosing a numerical tail constant. The existence of a positive lower constant and the bounded-ratio exponent are unchanged; no compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the factor 1/60; 1/360 is a valid lower constant, with a complete derivation supplied.",
+        "scale": "local",
+        "impact": "Only the claimed numerical lower constant from this calculation changes. The n to the minus one-half rate, uniformity in large dimension and exponent two remain intact."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "density-dimension-scale",
+      "title": "Uniform density constants require the dimension-rescaled distance from criticality",
+      "locator": "17 March 2017 author manuscript, Theorem 9.5, (9.3.1), compared with (9.3.9)–(9.3.10), printed pp.112–114 / PDF indices123–125. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The theorem quantifies constants before all sufficiently large dimensions in a linear comparison with p-p_c, while its proof uses epsilon=2d(p-p_c).",
+      "problem": "The proof gives an upper constant proportional to 2d. A dimension-independent upper constant for the unscaled difference is impossible: at p=2p_c, sharpness gives theta(p) at least 1/2, whereas p-p_c=p_c tends to zero as dimension grows.",
+      "correction": "Either fix d before choosing the density constants, or use the dimension-uniform comparison with min{2d(p-p_c),1}. 74SS proves the latter over the entire interval p_c at most p at most one, with absolute constants.",
+      "tags": [
+        "JR88",
+        "74SS"
+      ],
+      "leanImpact": "Make dimension dependence explicit in theorem quantifiers. Uniform constants apply to the rescaled distance, clipped for parameters far from criticality; fixed-dimension exponent one follows. No compiled association or sharp asymptotic amplitude is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the factor 2d, or allow the linear constants to depend on dimension; the uniform rescaled theorem is proved.",
+        "scale": "statement",
+        "impact": "The uniformity and normalization of the statement change. The density exponent at each fixed dimension and the extrapolation method are unchanged; a stronger dimension-uniform claim in the original parameter is not retained."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "nonbacktracking-critical-summation",
+      "title": "Critical non-backtracking Fourier convergence needs an Abel convention",
+      "locator": "17 March 2017 author manuscript, Lemma 10.3 after (10.2.8) and (10.2.9), printed p.126 / PDF index137. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The critical transform is described as convergent at every nonzero frequency, without specifying radial summation.",
+      "problem": "At k=(pi,...,pi), bipartite parity gives z_c to the n times b_n-hat(k) = [2d/(2d-1)] times (-1) to the n for n at least one. The ordinary length-series terms do not tend to zero, although the rational resolvent has a finite radial limit there.",
+      "correction": "NB44 identifies the critical expression as an Abel limit at that frequency. For d at least two the ordinary series converges away from zero and the bipartite frequency. For d greater than two the radial expression is an integrable density for the critical spatial Green function.",
+      "tags": [
+        "NB44",
+        "IRTD"
+      ],
+      "leanImpact": "Distinguish convergence of the length series, radial limits of transforms, and Fourier inversion of an integrable density. Do not deduce ordinary summability at the bipartite frequency from the rational expression. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Specify Abel convergence at the bipartite frequency; the critical formula and its spatial inverse are proved in their valid domains.",
+        "scale": "statement",
+        "impact": "The convergence mode is qualified; the intended critical resolvent value is unchanged. The correction does not change the high-dimensional walk comparison or establish the numerical percolation threshold."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "nonbacktracking-deleted-set-support",
+      "title": "The deleted-set identity must use the actual set and the pivotal support",
+      "locator": "17 March 2017 author manuscript, (10.3.8), Exercise 10.2 and the following sentence, printed p.129 / PDF index140. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "An identity for a general set A containing u is written with an indicator involving a particular random deleted-bond cluster. The following sentence treats exclusion of v from that cluster as automatic.",
+      "problem": "A deterministic restricted connection probability cannot generally equal an expression multiplied by an unrelated random cluster indicator. Closing one bond does not prevent its endpoints from remaining connected by another path. Exclusion of v is valid on the pivotal event, not from the cluster definition alone.",
+      "correction": "WSKG proves the inclusion–exclusion identity for the actual set A and endpoints outside it, with no unrelated indicator. When A is a deleted-bond cluster, the cutting event supplies the endpoint exclusion; any subsequent factorization must retain its conditional coordinate support.",
+      "tags": [
+        "WSKG"
+      ],
+      "leanImpact": "Pass the deleted set and endpoint membership explicitly. Keep the support supplied by pivotality separate from deterministic set identities and from independence of a second configuration. No coefficient construction or compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the deterministic set-difference identity and impose endpoint exclusion on the pivotal support.",
+        "scale": "local",
+        "impact": "The local identity and its support are corrected. The intended cutting-bond use has the needed support, but it must be retained through later conditioning; this repair alone does not construct the full non-backtracking expansion."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "nonbacktracking-matrix-algebra",
+      "title": "The directional matrix reduction loses shifts, signs and connector factors",
+      "locator": "17 March 2017 author manuscript, (10.3.13)–(10.3.21), especially (10.3.17), (10.3.19)–(10.3.20), and Exercise 10.4, printed pp.130–131 / PDF indices141–142. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The component and matrix equations are presented as equivalent, and substitution is said to give the displayed scalar correction Phi.",
+      "problem": "With the Fourier convention fixed by (10.3.12), the negative spatial shift in (10.3.3) produces a positive Fourier phase. Exact substitution also puts a minus sign before the vector correction, retains mu in the scalar feedback term, and uses mu rather than p in the same matrix inverse. The displayed intermediate formulas do not consistently retain these features.",
+      "correction": "V49E derives the reduction from explicitly stated compatible equations: A=E(k)+mu J+P, Phi=xi-mu r-transpose A-inverse zeta, and t=(1+Phi)/(1-mu r-transpose A-inverse 1), when both denominators are valid. It supplies a sufficient Neumann criterion for matrix invertibility while leaving scalar nonvanishing separate.",
+      "tags": [
+        "V49E",
+        "IRTD"
+      ],
+      "leanImpact": "Use complex directional vectors, a fixed Fourier convention and ordinary transpose. Verify shifts before assembling the matrix, retain one connector parameter throughout, and separate matrix invertibility from scalar denominator nonvanishing. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Exact matrix elimination supplies the corrected phases, negative correction and connector factors.",
+        "scale": "local",
+        "impact": "The algebraic reduction is repaired without changing its perturbative structure. This does not verify the omitted probabilistic coefficient construction, Mathematica notebooks or published dimension-specific bounds."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "second-moment-square",
+      "title": "The differentiated identity is for the squared second-moment length",
+      "locator": "17 March 2017 author manuscript, Exercise 11.1, (11.1.6)–(11.1.7), printed p.136 / PDF index147. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The Fourier definition uses the squared second-moment length, but the next differentiated identity displays the length without its square.",
+      "problem": "Dividing the spatial second moment by susceptibility gives xi_2 squared. Differentiating the lace quotient preserves that power; it cannot give xi_2 itself.",
+      "correction": "CM3M proves xi_2 squared = j chi + (1+j chi) s_p / b_0, with b_0=1+Pi-hat(0) and s_p the signed spatial second moment. Absolute moments and nonzero b_0 are explicit.",
+      "tags": [
+        "CM3M"
+      ],
+      "leanImpact": "Keep the definition of squared length separate from its square root, and use absolute moment hypotheses before differentiating a signed Fourier series. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the square on the length; the exact differentiated quotient identity is proved.",
+        "scale": "notation",
+        "impact": "A missing power in the intermediate display is repaired. The intended exponent and subsequent near-critical argument are unchanged."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "correlation-length-nearcritical-scope",
+      "title": "The positive correlation-length lower bound needs a near-critical interval",
+      "locator": "17 March 2017 author manuscript, Theorem 11.1 and (11.1.1), printed p.135 / PDF index146; compare Exercise 11.1 on printed p.136 / PDF index147. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "Positive constants bound the second-moment correlation length above and below by (p_c-p) to the minus one-half for every subcritical p.",
+      "problem": "At p=0 the cluster is a singleton, so xi_2(0)=0, whereas a positive multiple of p_c to the minus one-half is nonzero. Even if zero were excluded, continuity as p decreases to zero prevents that uniform positive lower bound on the whole interval.",
+      "correction": "Restrict the comparison to a neighbourhood of p_c, as the accompanying exercise already does. 93RC proves it on p_c/2 <= p < p_c in sufficiently large nearest-neighbour dimensions, with xi_2 squared comparable to 1/[d(p_c-p)].",
+      "tags": [
+        "93RC",
+        "CM3M"
+      ],
+      "leanImpact": "Quantify a near-critical parameter interval in the comparison theorem. Keep dimension-uniform constants distinct from fixed-dimension exponent notation. No new numerical dimension threshold or compiled association is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restrict the estimate to a near-critical interval; a complete proof is given in sufficiently large dimension.",
+        "scale": "statement",
+        "impact": "The parameter range is corrected, while the intended critical exponent is unchanged. The supplied proof does not independently establish the source numerical threshold d>=11."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "mass-susceptibility-reciprocal",
+      "title": "The squared inverse correlation length belongs with reciprocal susceptibility",
+      "locator": "17 March 2017 author manuscript, (11.1.5) and its explanation, printed p.136 / PDF index147. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "Susceptibility is placed between constant multiples of m_p squared divided by d, where m_p is the inverse exponential correlation length.",
+      "problem": "The displayed relation reverses the expected divergence: susceptibility grows when the mass tends to zero. Summing the tilted lace equation instead compares inverse susceptibility with squared mass divided by d.",
+      "correction": "Replace susceptibility in the squared-mass comparison by reciprocal susceptibility. The completed tilted Fourier bootstrap proves all endpoint coefficient inputs at the true mass in sufficiently large dimension. For 0<pc-p<=1/(64d squared), it gives m squared/(8d)<=1/chi<=2m squared/d, and hence d/(2m squared)<=chi<=8d/(m squared). The numerical d>=11 threshold and the manuscript constants are not established here.",
+      "tags": [
+        "1BG0",
+        "JQOQ",
+        "XZX4",
+        "1MCZ",
+        "OUHY"
+      ],
+      "leanImpact": "There is now a complete written route through mass identification, all-order tilted coefficient bounds, endpoint convergence and the reciprocal identity in sufficiently large dimension. These remain separate formalisation steps. The numerical dimension threshold is still a separate target. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "The reciprocal correction has a complete written proof in sufficiently large dimension, including the previously missing tilted coefficient estimates.",
+        "scale": "local",
+        "impact": "The source display needs a local reciprocal correction, with the intended exponent unchanged. Establishing its coefficient inputs required a substantial tilted-bootstrap argument, now supplied in the classical sufficiently-high-dimensional regime. The numerical d>=11 threshold, spread-out extension and source constants remain separate; this is not author confirmation."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "intrinsic-annulus-radius",
+      "title": "An occupied intrinsic annulus forces its inner radius, not its outer radius",
+      "locator": "17 March 2017 author manuscript, lower-bound proof after (11.3.6), printed p.142 / PDF index153. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The event that B(lambda n) minus B(n) is nonempty is bounded above by the probability of reaching intrinsic distance at least lambda n.",
+      "problem": "A cluster may end at any distance strictly between n and lambda n. A vertex in the annulus therefore forces an arm to n, but need not force an arm to lambda n.",
+      "correction": "9TXI uses the valid inclusion into the arm event at radius n, and obtains a constant times 1/n directly for every n. RP0G supplies the needed second-moment bound. W73R applies the result without the invalid outer-radius inclusion.",
+      "tags": [
+        "9TXI",
+        "RP0G",
+        "W73R"
+      ],
+      "leanImpact": "Keep the two annulus radii distinct in event inclusions and use integer outer dilation. Shortest paths give all intermediate intrinsic levels. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the inner-radius arm event in the second-moment argument; the full lower-bound proof is supplied.",
+        "scale": "local",
+        "impact": "The event inclusion and bookkeeping of constants change. The reciprocal-radius exponent and the intended theorem are unchanged."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "dimension-obstruction-power",
+      "title": "The dimension obstruction uses n to the 2-d, not its reciprocal",
+      "locator": "17 March 2017 author manuscript, the sentence before (11.4.3) and (11.4.3), printed p.145 / PDF index156. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "The mean-field spatial lower bound is printed with the power n to the negative of (2-d).",
+      "problem": "Mean-field spatial decay is n to the 2-d. Its reciprocal has the opposite behavior and does not give the asserted dimension comparison.",
+      "correction": "2RZH compares c n to the 2-d with C squared n to the minus four, so n to the 6-d stays bounded and d is at least six. Disjoint boxes separated by 3n make the independent bond-coordinate sets explicit.",
+      "tags": [
+        "2RZH"
+      ],
+      "leanImpact": "Track the signed exponent through multiplication by n to the fourth. Independence is justified from disjoint finite bond sets rather than from unrestricted connection events. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the decaying power n^(2-d); the independent-arm proof then gives d>=6.",
+        "scale": "notation",
+        "impact": "An exponent sign is repaired. The intended dimension obstruction and its hypotheses remain unchanged."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "convolution-remainder-scope",
+      "title": "The convolution remainder needs an exponent range or cancellation hypothesis",
+      "locator": "17 March 2017 author manuscript, Exercise 11.6 and (11.2.16), printed p.139 / PDF index150. Extracted text checked on 17 November 2026; visual-page and published-edition checks unavailable.",
+      "claim": "A power-law Green asymptotic with remainder exponent alpha is asserted to retain that exponent after convolution with a kernel decaying as |x|^(-d-alpha), for arbitrary alpha>0 and without symmetry.",
+      "problem": "Convolution with a single shifted point mass creates a nonzero first-order spatial error, contradicting the assertion when alpha>1. Even a symmetric pair of shifts creates a second-order error and prevents an unrestricted assertion for alpha>2.",
+      "correction": "MZ23 proves the remainder for 0<alpha<1 without symmetry, and for 0<alpha<2 when the convolving kernel is even. UDUU computes both obstructions. I8BE checks that alpha=2/d and the stronger coefficient decay in the intended high-dimensional application meet the corrected hypotheses.",
+      "tags": [
+        "MZ23",
+        "UDUU",
+        "I8BE"
+      ],
+      "leanImpact": "Expose the remainder exponent and the cancellation hypothesis; do not silently bound truncated first or second moments at logarithmic endpoints. Distinguish a general convolution lemma from its admissible application. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restrict the remainder exponent, or add evenness in the larger valid range; a complete proof covers the intended application.",
+        "scale": "statement",
+        "impact": "The general exercise needs a hypothesis correction. Its application to the spatial percolation asymptotic still works and retains the 2/d remainder, conditional on the separate Green and coefficient estimates."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "iic-noncylinder-limit",
+      "title": "Cylinder convergence does not justify the displayed full connection-event limit",
+      "locator": "17 March 2017 author manuscript, proof of Theorem 12.2, (12.2.6) and the approximation paragraph immediately below it, printed p.149 / PDF index160.",
+      "claim": "The susceptibility-biased IIC cylinder limit is applied to the event that the origin is connected to a fixed vertex, with a proposed justification by increasing finite-box approximations.",
+      "problem": "Connectivity is an increasing union of cylinders. Convergence on each cylinder does not alone allow the limit in the percolation parameter to be interchanged with the increasing-box limit, so the displayed equality needs an additional justification. This is a gap in that passage, not a counterexample to the equality for the actual IIC.",
+      "correction": "Apply the uniform tree-graph upper bound to each finite-box connection event, pass to the parameter limit there, and only then use continuity from below under the limiting measure. N20X proves the desired upper bound with this order of limits and without the unneeded full-event equality.",
+      "tags": [
+        "N20X"
+      ],
+      "leanImpact": "Represent finite-box connectivity as a cylinder and pass its estimate through the cylinder convergence hypothesis. Use monotone continuity of the limiting probability for the union. Do not promote a cylinder limit to convergence on arbitrary measurable events. No compiled association is added.",
+      "resolution": {
+        "status": "found",
+        "summary": "The upper-bound proof is complete after taking the cylinder limit before the increasing-box limit.",
+        "scale": "local",
+        "impact": "A local limit-order repair preserves the IIC two-point upper bound. The stronger full connection-event equality is not needed and is not established by this repair."
+      }
+    },
+    {
+      "id": "finite-tree-arm-origin",
+      "title": "The displayed three-arm event starts its last arm at the wrong vertex",
+      "locator": "17 March 2017 author manuscript, Section 13.3, (13.3.14) compared with (13.3.15), printed p.164 / PDF index175; extracted text inspected, visual comparison unavailable.",
+      "claim": "The displayed event decomposition uses disjoint arms from the root to a branch vertex, from that vertex to the first target, and from the root to the second target.",
+      "problem": "The last arm must start at the branch vertex. Otherwise the root-to-branch segment may need to be used twice, and a connected triple need not admit the displayed disjoint witnesses. The next probability formula already uses the correct three common-branch factors.",
+      "correction": "Replace the third connection in (13.3.14) by the branch-vertex-to-second-target connection. L82Q proves the corrected event splitting and the resulting tree-graph bound, allowing empty arms when endpoints coincide.",
+      "tags": [
+        "L82Q",
+        "Y84V"
+      ],
+      "leanImpact": "Use three edge-disjoint connection witnesses based at the common branch vertex, as in the existing tree-graph theorem. The moment statement and its compiled associations are not changed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Changing the initial vertex of the third arm makes the event identity agree with the following probability bound.",
+        "scale": "notation",
+        "impact": "One displayed endpoint is corrected. The second-moment estimate, higher tree-graph bounds and exponential-tail conclusion retain their statements."
+      },
+      "status": "provisional",
+      "issues": []
+    },
+    {
+      "id": "finite-weighted-mgf-domain",
+      "title": "The weighted exponential bound needs its convergence domain",
+      "locator": "17 March 2017 author manuscript, Section 13.3, (13.3.18)–(13.3.20), printed pp.164–165 / PDF indices175–176; extracted text inspected, visual comparison unavailable.",
+      "claim": "The weighted moment-series estimate is introduced for every nonnegative exponential parameter and the subsequent optimization is written over that whole half-line.",
+      "problem": "Its displayed reciprocal square root is finite and real only below the reciprocal of twice the squared susceptibility. The power-series estimate cannot be used as the stated finite upper bound beyond that interval.",
+      "correction": "Restrict the weighted bound and the optimization to 0 <= t < 1/(2 chi^2). Existing 0BQB supplies that interval. The optimizing value for a threshold k >= chi^2 lies in the interval, so the advertised exponential tail follows with its constant unchanged.",
+      "tags": [
+        "0BQB",
+        "4A0G"
+      ],
+      "leanImpact": "Carry the strict positivity of 1-2*t*chi^2 into the series bound and optimization. Prove the optimizer lies in this domain before substituting it. No new compiled association is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restrict the exponential parameter to its valid interval and check the optimizer there.",
+        "scale": "statement",
+        "impact": "The domain of the intermediate estimate is corrected. The final tail bound and its stated threshold range remain unchanged."
+      },
+      "status": "provisional",
+      "issues": []
+    },
+    {
+      "id": "hypercube-parity-mode",
+      "title": "The all-ones Fourier mode does not decay",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, after (13.4.27), printed p.176 / PDF index187. Extracted text checked; visual and published-edition comparison unavailable.",
+      "claim": "The accompanying explanation treats every nonzero hypercube character as having step-transform modulus strictly below one.",
+      "problem": "The all-ones character has step transform -1 and length-n transform (-1)^n. It is a second exceptional frequency.",
+      "correction": "Exclude both the zero and all-ones characters from the decaying sum. Averaging consecutive times cancels the latter exactly; the new mixing proof does this before estimating the remaining modes.",
+      "tags": [
+        "GIF2"
+      ],
+      "issues": [],
+      "leanImpact": "Track the parity eigenvector explicitly before applying a strict contraction estimate. The two-time mixing conclusion is unchanged; no compiled association is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "Remove the parity mode by the prescribed two-time average.",
+        "scale": "local",
+        "impact": "One exceptional mode must be separated in the Fourier proof. The intended mixing-time upper bound is preserved."
+      }
+    },
+    {
+      "id": "finite-triangle-uniform-upper-bound",
+      "title": "Below the finite critical parameter only an upper bound tends to one",
+      "status": "provisional",
+      "locator": "17 March 2017 author manuscript, sentence after (13.4.15), printed p.172 / PDF index183. Extracted text checked; visual and published-edition comparison unavailable.",
+      "claim": "The proof states that the path weight [p(m-1)] to the sum of the three lengths equals 1+o(1) throughout p <= pc.",
+      "problem": "At p=0 and any positive total length the weight is zero. The critical-parameter assumption gives a uniform upper bound, not that equality.",
+      "correction": "Use [p(m-1)]^s <= max(1,[pc(m-1)]^(3T)) = 1+o(1) for 0 <= s <= 3T. The zero-length term has weight one. The explicit triangle estimate avoids the erroneous equality.",
+      "tags": [
+        "PROF"
+      ],
+      "issues": [],
+      "leanImpact": "Use a one-sided estimate uniformly in the subcritical parameter, with the empty path separate at p=0. No change to the finite-triangle conclusion or new compiled association.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace the uniform asymptotic equality by the upper inequality actually needed.",
+        "scale": "local",
+        "impact": "The intermediate claim is weakened to a valid upper bound. The final finite-triangle estimate retains its content."
+      }
+    },
+    {
+      "id": "finite-window-parameter-normalization",
+      "title": "The finite susceptibility bounds require degree-normalized additive displacement",
+      "status": "provisional",
+      "locator": "17March2017 author manuscript, Section13.3, Exercise13.6,(13.3.11), printed p.163 / PDF index174. Extracted text checked; visual rendering and published-edition comparison unavailable. Compared with arXiv:math/0401069v1,Section4.1,(4.1)–(4.2), printed p.19 / PDF index18.",
+      "claim": "After defining p=p_c(1−epsilon), the denominators use H^−1+epsilon and H^−1+(1−a0)epsilon.",
+      "problem": "The Russo derivative is normalized by the degree m. On the four-cycle at p_c=1/100, H=102020197/10^8 and the triangle condition holds with a0=1/10, but at p=0 the displayed upper bound is 1/(H^−1+9/10)<1=chi(0). Choosing lambda=H/4^(1/3) meets the source definition of p_c.",
+      "correction": "Use epsilon=m(p_c−p), as in the original finite-graph paper. If retaining p=p_c(1−epsilon), insert mp_c before epsilon in both denominators. The article proves the finite susceptibility differential inequalities and their integration.",
+      "tags": [
+        "F5Y5",
+        "QPI1"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the bond probability, additive displacement and relative displacement as distinct quantities. The corrected formula includes the graph degree and p_c; no compiled association or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore m(p_c−p), or multiply the relative displacement by mp_c, in both reciprocal denominators.",
+        "scale": "statement",
+        "impact": "This corrects the quantitative statement and its parameter convention. It does not change the N^−1/3 window exponent or the N^2/3 component scale."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "Author manuscript dated 17 March 2017",
+    "checkedUrl": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+    "method": "The recorded chapter readings and entry locators use extracted manuscript text, with manuscript pagination. The author-hosted URL is not an immutable version archive; the date identifies the text used. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "All 34 reports are scoped to that manuscript. The Springer book edition has not been reconciled at these passages; matching a book title or year is not evidence that a discrepancy persists in the published text. All reports remain provisional; repairs and formal status are separate.",
+    "comparisons": []
+  }
+}

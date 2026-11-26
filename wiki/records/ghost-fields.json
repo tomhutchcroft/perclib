@@ -1,0 +1,54 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "ghost-fields",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 8
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 32,
+      "label": "Ghost fields and magnetization",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-train10-probability-ghosttransform",
+      "order": 0,
+      "label": "Ghost transforms and zero-field endpoints",
+      "locator": "Explicit public theorem start lines: 48, 54, 95, 112, 128, 148, 155, 171, 184, 208, 224, 312, 317, 324, 338, 349, 369, 383, 394, 560, 573, 658",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "J2TE",
+      "proof_uses": [],
+      "reason": "Dominated differentiation of the finite-cluster terms; no other wiki assertion is invoked."
+    },
+    {
+      "order": 1,
+      "tag": "4QV6",
+      "proof_uses": [],
+      "reason": "The recursion comes from independence of the root mark and the two child subtrees, and the critical root is solved explicitly; no other wiki assertion is invoked."
+    },
+    {
+      "order": 2,
+      "tag": "F7SW",
+      "proof_uses": [
+        "BEJT",
+        "J2TE"
+      ],
+      "reason": "A red-blue sprinkling coupling with the last-exit argument (BEJT) bounds the increment, and the positive-field derivative formula (J2TE) identifies the averaged bound with partial_h M."
+    }
+  ]
+}

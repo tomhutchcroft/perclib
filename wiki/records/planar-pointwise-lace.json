@@ -1,0 +1,141 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "planar-pointwise-lace",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 206
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Alternative long-segment reduction and qualitative spatial asymptotic",
+      "locator": "Section 3.5 and Lemma 1.7, printed pp.562–564; Theorems 1.1 and 1.4",
+      "relationship": "Independent planar Fourier proof of the two-long-edge bound; combined with the moment and signed-kernel articles, closes the qualitative large-dimension theorem",
+      "status": "pending",
+      "note": "The dimension threshold remains unspecified. The explicit d>=60 condition covers only moment arithmetic, not the Fourier bootstrap or connector smallness threshold. No numerical source range or new Lean verification is asserted."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Real-order planar moment gain and conditional spatial closure",
+      "locator": "Section 3.4, (3.11)-(3.15), printed pp.560-562; compare Section 4.1.4 and Theorem 1.4",
+      "relationship": "Independent planar Fourier continuation using the exact absolute-moment endpoint; preserves the earlier even-order argument",
+      "status": "pending",
+      "note": "The moment range is s<2(d-6)/3. The d>30 condition closes only the analytic arithmetic; the critical Fourier and connector smallness hypotheses are retained, with no numerical d=31 percolation claim."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 2,
+      "label": "Ordered planar Fourier bounds and conditional dimension-nineteen closure",
+      "locator": "Sections 3.4-3.5, Figures 4-5 and (3.11)-(3.16), printed pp.560-564; compare Theorem 1.4",
+      "relationship": "Independent refinement of the explicit SJIL strip, using ordered face integration and a three-bridge count rather than the source spatial peeling",
+      "status": "pending",
+      "note": "The condition d>18 closes the analytic arithmetic under the stated critical Fourier and ninth-norm smallness assumptions. It does not verify those assumptions numerically at d=19 or promote formal status."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 3,
+      "label": "Sixth-norm spatial closure under explicit critical hypotheses",
+      "locator": "Theorem 1.4 and Sections 2.1-2.6, especially the short-time/large-time split and higher-moment estimate; compare Sections 3.4-3.5 for the percolation input",
+      "relationship": "Independent refinement of the existing written analytic argument, not an identification with every source estimate",
+      "status": "pending",
+      "note": "The balanced cutoff gives remainder exponent 2 alpha/(d+alpha). The percolation closure uses sixth-norm connector smallness and d>14; its hypotheses are not numerically verified at d=15. No source correction or formal-status promotion."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "LS5S",
+      "proof_uses": [
+        "VPUS",
+        "SJIL"
+      ],
+      "reason": "The strip cut argument excludes dangling components; the dual Fourier integral has at most ten factors left on the new face after two boundary-edge deletions."
+    },
+    {
+      "order": 1,
+      "tag": "8F9A",
+      "proof_uses": [
+        "LS5S",
+        "SJIL"
+      ],
+      "reason": "Extract one long edge from each outer route and retain at least N-2 small connector factors in the remaining diagram."
+    },
+    {
+      "order": 2,
+      "tag": "KF2I",
+      "proof_uses": [
+        "8F9A",
+        "KOTM",
+        "GIN9",
+        "F7N7",
+        "1165",
+        "OT9N",
+        "MZ23"
+      ],
+      "reason": "Choose a reachable even moment at fixed dimension, obtain a pointwise coefficient exponent above d+2, then apply the signed Gaussian theorem and convolution transfer."
+    },
+    {
+      "order": 3,
+      "tag": "QKEC",
+      "proof_uses": [
+        "6N01",
+        "8F9A",
+        "OT9N",
+        "MZ23"
+      ],
+      "reason": "For d>30 a real K lies between (d+2)/4 and (d-6)/3; the resulting spatial power gives the coefficient tail and fourth moment needed for the signed Gaussian and convolution theorems."
+    },
+    {
+      "order": 4,
+      "tag": "RCF3",
+      "proof_uses": [
+        "LS5S",
+        "VPUS",
+        "SJIL",
+        "8F9A"
+      ],
+      "reason": "At most two outer edges and one shared edge survive the erased faces, so there are at most three bridges. Lq for q>=6 suffices, and q=9 gives the long-edge coefficient bound."
+    },
+    {
+      "order": 5,
+      "tag": "CP1T",
+      "proof_uses": [
+        "5T90",
+        "RCF3",
+        "OT9N",
+        "MZ23",
+        "F7N7",
+        "GIN9"
+      ],
+      "reason": "For d>18 choose (d+2)/4<K<7d/18-2; moment gain and the long-edge bound give the coefficient tail required for the signed Gaussian expansion. Ninth-norm connector smallness remains explicit."
+    },
+    {
+      "order": 6,
+      "tag": "634L",
+      "proof_uses": [
+        "RCF3",
+        "8F9A"
+      ],
+      "reason": "Apply the two-root bound at its sixth-norm endpoint, retain the exact remaining-edge counts, and handle orders zero and one separately."
+    },
+    {
+      "order": 7,
+      "tag": "FWHO",
+      "proof_uses": [
+        "B0RG",
+        "SL9H",
+        "634L",
+        "7QGG",
+        "MZ23",
+        "F7N7",
+        "GIN9"
+      ],
+      "reason": "For d>14 choose (d+2)/2<a<d-6. Moment gain supplies the initial spatial bound; sixth norms double the coefficient exponent past d+2. The signed Green theorem gives the improved remainder, and a second pointwise gain gives moments and continuity below d-4."
+    }
+  ]
+}

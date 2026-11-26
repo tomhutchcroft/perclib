@@ -1,0 +1,49 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-trace-generation",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 147
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Continuous radial limits generate the hulls",
+      "locator": "arXiv:math/0106036v4, Section 4, Theorem 4.1 and its proof, and Section 5, Theorem 5.1 with the kappa-eight update. Classical references are identified by Section 4.",
+      "relationship": "Written proof with an avoiding arc and explicit classical inputs",
+      "status": "pending",
+      "note": "A first-contact argument on a compact avoiding arc uses lower semicontinuity of the lifetime, accessible-arc mapping, backward continuation away from the pole and Lindelof. Peano, Torhorst and Caratheodory then give full boundary extension; these classical theorems are named inputs."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "The ordinary SLE trace away from eight",
+      "locator": "arXiv:math/0106036v4, Section 4, Theorem 4.1 and its proof, and Section 5, Theorem 5.1 with the kappa-eight update. Classical references are identified by Section 4.",
+      "relationship": "Written proof with an avoiding arc and explicit classical inputs",
+      "status": "pending",
+      "note": "The joint radial event supplies the deterministic hypotheses for every time pathwise. Kappa zero is the explicit vertical slit; the kappa-eight extension, simplicity and boundary dimension remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "N2VO",
+      "proof_uses": [],
+      "reason": "A first-contact argument on a compact avoiding arc uses lower semicontinuity of the lifetime, accessible-arc mapping, backward continuation away from the pole and Lindelof. Peano, Torhorst and Caratheodory then give full boundary extension; these classical theorems are named inputs."
+    },
+    {
+      "order": 1,
+      "tag": "MN2A",
+      "proof_uses": [
+        "N2VO",
+        "N7TT",
+        "MV6M"
+      ],
+      "reason": "The joint radial event supplies the deterministic hypotheses for every time pathwise. Kappa zero is the explicit vertical slit; the kappa-eight extension, simplicity and boundary dimension remain separate."
+    }
+  ]
+}

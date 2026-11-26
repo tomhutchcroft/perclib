@@ -1,0 +1,126 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-powerlaw-2021",
+  "entries": [
+    {
+      "id": "amplification-zero-iterate",
+      "title": "The amplification exponent starts at one",
+      "status": "provisional",
+      "locator": "arXiv:2008.11197v2, Section 2.1, Theorem 2.3, equations (2.8)–(2.9).",
+      "claim": "Both amplification inequalities are stated for integers k ≥ 0.",
+      "problem": "For one bond of probability $1/2$, its two endpoints as the observation set and $\\lambda=2$, the $k=0$ inequalities require $1/2\\leq(1/2)^{4/3}$. They therefore fail at the stated endpoint.",
+      "correction": "Require integer $k\\geq1$. Tag 12NL states and proves both corrected amplification inequalities for full-cluster intersections, including roots outside the observation set. The maximum and rooted tail bounds retain the constants $1/9$ and $27$. FIXER supplies an independent marked-tree proof; no formal proof status is inferred.",
+      "tags": [
+        "12NL",
+        "4724",
+        "21D4"
+      ],
+      "issues": [],
+      "leanImpact": "Require integer k at least one in the source-specific amplification statement. Preserve full-cluster intersections with the observation set, allow paths outside it and a root outside it, and do not replace them by induced clusters. The corrected amplification in 12NL supplies the route to the maximum and rooted-tail targets 4724 and 21D4; their constants are unchanged. At merged private lrp revision 22d8485da86b12aa41d1985b07939d2e6e612e26, PercLib/Percolation/Bond/Tightness/BKStep.lean implements the k >= 1 amplification property and applies the imported numerical implication to universal tightness. This is source implementation progress, not author confirmation or a fingerprint-bound correspondence review. Its numerical dependency, PercLib/Percolation/Bond/Tightness/FromBK.lean at caed44fe69ae18235ca1b7adc3b8a072bf05b7ea, has now been read in full: the powers-of-three argument avoids k = 0 and retains the strict lower tail and constants 1/9 and 27.",
+      "resolution": {
+        "status": "found",
+        "summary": "Start the amplification inequalities at integer k>=1.",
+        "scale": "statement",
+        "impact": "The k=0 endpoint is false; the downstream tail bounds retain their constants."
+      }
+    },
+    {
+      "id": "recursive-retaining-threshold",
+      "title": "The recursive partition threshold",
+      "status": "provisional",
+      "locator": "arXiv:2008.11197v2, Section 2.1: Lemma 2.4 statement (printed p.15); proof of Lemma 2.4, recursive construction of the good partitions π_{i+1} (printed p.17); proof of Theorem 2.3, passage before (2.11) (printed p.18). Extracted v2 PDF text checked 21 November 2026.",
+      "claim": "The recursion defines π_{i+1} by retaining the pieces W of π_i with $|V(W)\\cap A|<3^{k-1}|A|$ and splitting each piece with $|V(W)\\cap A|\\ge 3^{-k+1}|A|$. The printed retaining threshold $3^{k-1}|A|$, a sign slip for $3^{-k+1}|A|$, is inconsistent with the final marked-mass interval $3^{-k}\\le|A\\cap V_i|/|A|<3^{-k+1}$ (below, N=|A|).",
+      "problem": "To end with marked counts in $[3^{-k}N,3^{1-k}N)$, pieces reaching the upper endpoint must still be split. A repaired recursion must also keep item 2 of Lemma 2.4 (every vertex is incident to some piece), which the proof of Theorem 2.3 uses before (2.11) to place the root u, not required to lie in Λ, in some V_i. The printed recursion keeps it because every π_i is a partition of all edges of the spanning tree; this point records a constraint on the repair, not a further error.",
+      "correction": "Retain a piece precisely when its marked count is below $3^{1-k}N$; split larger pieces into connected nonempty edge sets. DMI0 proves a partition covering every vertex with at least $3^{k-1}+1$ pieces, each in the required interval. The edge sets, rather than their endpoint sets, are disjoint; 12NL applies BK to these witnesses.",
+      "tags": [
+        "DMI0",
+        "12NL"
+      ],
+      "issues": [],
+      "leanImpact": "The partition helper for DMI0 must retain vertex coverage, including an unmarked prescribed root, while making the edge witnesses disjoint. These are the properties required to invoke BK in 12NL. The repair is to the recursive proof threshold; it does not change the final marked-mass interval. At merged private lrp revision 22d8485da86b12aa41d1985b07939d2e6e612e26, PercLib/Percolation/Bond/Tightness/BKStep.lean uses the imported connected-piece partition with root endpoint coverage, then selects one rooted witness and the remaining maximum witnesses. The consumer and its TreeSplitting dependency have now both been read in full. The latter, at caed44fe69ae18235ca1b7adc3b8a072bf05b7ea, gives an alternative greedy proof for every finite connected loopless edge set, with all edges and endpoints covered and the strict upper marked-mass bound retained. This does not change the provisional diagnosis or confirm the paper correction.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep splitting at the upper threshold and preserve vertex coverage.",
+        "scale": "local",
+        "impact": "Repairs the marked-tree partition used by BK; the amplification argument survives."
+      }
+    },
+    {
+      "id": "bootstrap-amplitude-power",
+      "title": "The squared two-cluster bound retains the square of the amplitude",
+      "status": "provisional",
+      "locator": "arXiv:2008.11197v2, Theorem 3.1 (3.1); proof of Lemma 4.1, first display and (4.1), (4.4)–(4.5); proof of Theorem 1.2, (4.7) and subsequent displays. The same displays were checked in the publisher HTML, Section 4, DOI 10.1007/s00440-021-01043-7 (16 November 2026).",
+      "claim": "The application of the squared two-cluster estimate uses A rather than A squared, followed by a square root of A after Cauchy–Schwarz.",
+      "problem": "Theorem 3.1 gives an $A^2$ factor. Its direct application therefore has $C A^2 n^{-1-2\\theta}$ on the right, and weighted Cauchy–Schwarz gives a factor $A$, not $A^{1/2}$. The constants in this argument must be independent of the proposed amplitude A.",
+      "correction": "Retain $A^2$ in the squared estimate and $A$ after Cauchy–Schwarz. Since $A\\geq1$ and $0<\\theta<1/2$, one still has $A\\leq A^{2/(1+\\theta)}$. The balanced scale then gives $f(n)^2\\leq C A^{2/(1+\\theta)}n^{-2\\theta}$ and hence the unchanged contraction $f(n)\\leq C^{1/2}A^{1/(1+\\theta)}n^{-\\theta}$. The final lattice and weight-threshold conclusions are unchanged. The discrepancy was also observed in the publisher HTML at the same equation labels. This is a provisional source diagnosis; no author confirmation or complete edition comparison is claimed.",
+      "tags": [
+        "75N0",
+        "XHZD",
+        "KXV3",
+        "58BJ"
+      ],
+      "issues": [],
+      "leanImpact": "Any formal bootstrap interface must retain the amplitude squared in the squared root-edge estimate, and the linear amplitude after Cauchy–Schwarz. The new wiki proofs use these powers with a weaker explicit two-ghost constant. No compiled association, formal implementation of the bootstrap, independent correspondence review or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the squared amplitude before Cauchy–Schwarz and the linear amplitude afterwards.",
+        "scale": "local",
+        "impact": "The intermediate powers change; the same bootstrap contraction and final conclusions follow."
+      }
+    },
+    {
+      "id": "threshold-bootstrap-epsilon-power",
+      "title": "The threshold-set bootstrap must retain the counting exponent",
+      "status": "provisional",
+      "locator": "arXiv:2008.11197v2, proof of Theorem 1.2, the unnumbered squared-tail display after (4.8), printed p. 31. The same displays were checked in the publisher HTML, Section 4, DOI 10.1007/s00440-021-01043-7 (16 November 2026).",
+      "claim": "The squared-tail display replaces the factor epsilon to the power minus (1 minus a)/2 from (4.7) by epsilon to the power minus 1/2 before the scale is chosen.",
+      "problem": "With the printed power $\\varepsilon^{-1/2}$, substituting $\\varepsilon\\asymp n^{-(1-2\\theta)/(1-a)}$ does not give the next displayed power $n^{-2\\theta}$. The gain from the lower bound on the size of the threshold set has been lost.",
+      "correction": "Retain $\\varepsilon^{-(1-a)/2}$ from (4.7), together with the corrected linear amplitude A. Take $\\varepsilon=\\min\\{1,\\varepsilon_0\\}n^{-(1-2\\theta)/(1-a)}$. The identity $a(1-2\\theta)=(1-a)(1+\\theta)$ for $\\theta=(2a-1)/(a+1)$ balances both terms at $n^{-2\\theta}$. The conclusion of Theorem 1.2 is unchanged. The same intermediate display was checked in the publisher HTML. The diagnosis remains provisional; no author confirmation or complete edition comparison is claimed.",
+      "tags": [
+        "58BJ"
+      ],
+      "issues": [],
+      "leanImpact": "The finite threshold-set bound must preserve its cardinality gain through the exponent arithmetic. A formal proof should derive the two exponents before choosing epsilon, with explicit 1/2 < a < 1 and 0 < theta < 1/2 assumptions. No compiled implementation or reviewed correspondence is inferred from the wiki argument.",
+      "resolution": {
+        "status": "found",
+        "summary": "Retain the threshold exponent (1-a)/2 and rebalance the cutoff.",
+        "scale": "local",
+        "impact": "Repairs the intermediate power; the weight-threshold theorem is unchanged."
+      }
+    },
+    {
+      "id": "incident-weight-normalization",
+      "title": "The incident-weight two-ghost sum needs the intensity row",
+      "status": "provisional",
+      "locator": "arXiv:2008.11197v2 and publisher HTML, Section 1.2, Theorem 1.5, equation (1.7). Compare arXiv:2007.15625v1, Section 2.1 (root-edge law), printed p. 13, and Corollary 3.2, printed p. 21.",
+      "claim": "The unnormalized root-edge sum is bounded by 42 divided by the square root of lambda, with no unit-row hypothesis.",
+      "problem": "Write $L=\\sum_{e\\ni o}J(e)$. The cited corollary averages over a root edge chosen with probability $J(e)/L$, so replacing that expectation by a sum introduces the factor L. On the nearest-neighbour graph on the integers, take every intensity equal to 100, beta equal to log(2)/100 and lambda equal to 200. All clusters are finite intervals, every cluster has incident weight at least 200, and the two root-edge terms sum to 10. The printed right side is $42/\\sqrt{200}<10$.",
+      "correction": "Require L = 1, or replace the right side by $42L/\\sqrt\\lambda$. This is the exact translation of the cited Corollary 3.2 under its independently sampled root-edge law. Scaling J by 1/L and beta by L preserves the bonds and replaces the incident-weight threshold by lambda/L. Proposition 1.4 normalizes total kernel mass to one, making its incident row at most one, so its conclusion is unchanged. BWH0 supplies an independent bootstrap route with a weaker constant. The earlier corollary is treated as an external theorem; its full proof is not reproduced here.",
+      "tags": [
+        "BWH0"
+      ],
+      "issues": [],
+      "leanImpact": "Any interface for the incident-weight form must distinguish a J-weighted root-edge expectation from an unnormalized sum. Carry the finite positive intensity row L explicitly, or require its normalization to one; rescale beta and lambda together. Do not substitute the cluster-volume event for the incident-weight event. No compiled association or formal proof of this quoted theorem is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Include the incident row mass L, or impose L=1.",
+        "scale": "statement",
+        "impact": "The unnormalized estimate is false; the normalized application and its conclusion are unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2008.11197v2",
+    "checkedUrl": "https://arxiv.org/abs/2008.11197v2",
+    "method": "The preprint reading map and individual locators are supplemented by targeted publisher-HTML comparisons. These do not certify journal-PDF pagination. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The five reports do not all have the same version evidence: the amplitude, epsilon-power and incident-weight discrepancies were also observed in publisher HTML. The zero-iterate and recursive-threshold reports remain preprint-scoped. All reports remain provisional; the source conclusions and recorded repairs are separate from edition comparison.",
+    "comparisons": [
+      {
+        "version": "Published article, DOI 10.1007/s00440-021-01043-7",
+        "url": "https://link.springer.com/article/10.1007/s00440-021-01043-7",
+        "status": "compared",
+        "findings": "The publisher HTML retains the reported dropped amplitude power in the Lemma 4.1 proof, the epsilon exponent after (4.8), and the missing incident intensity row in Theorem 1.5 (1.7). The later check of Lemma 2.4 confirms its statement and vertex-coverage clauses, but does not record a journal comparison of the recursive-threshold error. Neither older entry is certified as a journal discrepancy."
+      }
+    ]
+  }
+}

@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 192 (Q-32), written on 2026-11-15 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied.
 -/
 module
 
@@ -80,7 +81,7 @@ theorem zdGraph_adj_iff_l1 (x y : Fin d → ℤ) :
     have := hrest j (mem_erase.2 ⟨hji, mem_univ j⟩)
     omega
 
-/-- **Adjacency in `ℤ^d`** (`ℓ¹` form with absolute values, as in the issue). -/
+/-- **Adjacency in `ℤ^d`** (`ℓ¹` form with absolute values). -/
 theorem zdGraph_adj_iff (x y : Fin d → ℤ) :
     (zdGraph d).Adj x y ↔ ∑ i, |y i - x i| = 1 := by
   rw [zdGraph_adj_iff_l1]

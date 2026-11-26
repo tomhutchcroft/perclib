@@ -1,0 +1,125 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sharp-upper-field",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 196
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 0,
+      "label": "Root-mark or double-connection Bonferroni bound",
+      "locator": "Section A.5, Lemma A.7 and (A.57)–(A.70), printed pp.806–808 / PDF indices81–83; replacement event and root-deleted pair construction",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 1,
+      "label": "Corrected last-pivotal cutting inequality",
+      "locator": "Section A.5, (A.55)–(A.56), printed p.806 / PDF index81; new proof includes the root-mark deletion term",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 2,
+      "label": "Sharp finite square-root field bound",
+      "locator": "Section A.1, (A.8), and Section A.2, upper-field integration; explicit new small-error coefficient",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 3,
+      "label": "Exact inverse-field transport",
+      "locator": "Section A.3, extrapolation to the supercritical field; exact additive-parameter transport proved here",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 4,
+      "label": "Sharp supercritical upper field bound",
+      "locator": "Sections A.2–A.3 and Proposition A.1; strong triangle hypothesis and Q^(-1/4) upper error explicit",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 5,
+      "label": "Matching leading root-tail constant",
+      "locator": "Proposition A.2 and Section A.4, (A.51)–(A.54); combined with the previously repaired logarithmic-error lower bound",
+      "relationship": "Corrected written proof with the new event, finite coefficients and retained error explicit",
+      "status": "pending",
+      "note": "Publisher PDF extracted text, not a visual-page comparison. This replacement does not assert the literal printed coefficient or the stronger published remainder. No compiled association."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "23RW",
+      "proof_uses": [
+        "CHWM"
+      ],
+      "reason": "Root-mark or double-connection Bonferroni bound. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "RX78",
+      "proof_uses": [
+        "23RW",
+        "60X1",
+        "G9X2"
+      ],
+      "reason": "Corrected last-pivotal cutting inequality. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "14T6",
+      "proof_uses": [
+        "RX78",
+        "R2Y7"
+      ],
+      "reason": "Sharp finite square-root field bound. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "HGND",
+      "proof_uses": [
+        "1T2M"
+      ],
+      "reason": "Exact inverse-field transport. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "6SGU",
+      "proof_uses": [
+        "14T6",
+        "HGND",
+        "F5Y5",
+        "KQN9",
+        "1T2M"
+      ],
+      "reason": "Sharp supercritical upper field bound. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    },
+    {
+      "order": 5,
+      "tag": "Q6CS",
+      "proof_uses": [
+        "6SGU",
+        "CI72"
+      ],
+      "reason": "Matching leading root-tail constant. Coordinate independence, the signed deletion loss and field ranges are explicit."
+    }
+  ]
+}

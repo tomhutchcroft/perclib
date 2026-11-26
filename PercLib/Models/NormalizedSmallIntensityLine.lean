@@ -1,8 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-109 (issue 443), on the D-2 interface and the intensity
-family `intensityProfile`. The statements follow the wiki tag MTYL. No source text or code
-is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface and the intensity family `intensityProfile`. The
+statements follow the wiki tag MTYL. No source text or code is copied.
 -/
 module
 
@@ -33,7 +36,6 @@ noncomputable section
 
 open MeasureTheory PercLib.Probability PercLib.Percolation.Bond Filter Topology
 open scoped ENNReal NNReal
-open Classical
 
 namespace PercLib.Models.NormalizedSmallIntensity
 
@@ -111,7 +113,8 @@ theorem tsum_triangle_pow_natAbs (P : ℝ≥0∞) :
     congr 1
   simp_rw [hpos, hneg]
   rw [tsum_eq_zero_add' ENNReal.summable]
-  have hS : ∑' n : ℕ, (n : ℝ≥0∞) * (P ^ 2) ^ n = ∑' n : ℕ, ((n + 1 : ℕ) : ℝ≥0∞) * (P ^ 2) ^ (n + 1) := by
+  have hS : ∑' n : ℕ, (n : ℝ≥0∞) * (P ^ 2) ^ n = ∑' n : ℕ,
+      ((n + 1 : ℕ) : ℝ≥0∞) * (P ^ 2) ^ (n + 1) := by
     rw [tsum_eq_zero_add' ENNReal.summable]
     simp
   have hsplit : ∑' n : ℕ, (P ^ 2) ^ (n + 1) * (((n + 1 : ℕ) : ℝ≥0∞) + c) =
@@ -157,13 +160,14 @@ theorem tsum_triangle_ofReal_pow {x : ℝ} (hx0 : 0 ≤ x) (hx1 : x < 1) :
   field_simp
   ring
 
-/-- The real inequality behind MTYL's last item, for `0 < β < 1/48`. -/
+/-- The real inequality behind the last item, for `0 < β < 1/48`. -/
 theorem exp_half_lt_of_small {β : ℝ} (hβ : 0 < β) (hβ' : β < 1 / 48) :
     Real.exp (β / 2) <
       (2 * Real.exp (β / 2) - 1) * ((2 * Real.exp (β / 2) - 1) -
           (1 + 6 * (1 - Real.exp (-(β / 2))) ^ 2 / (1 - (1 - Real.exp (-(β / 2))) ^ 2) ^ 2)) /
         (3 * β ^ 2 *
-          (1 + 6 * (1 - Real.exp (-(β / 2))) ^ 2 / (1 - (1 - Real.exp (-(β / 2))) ^ 2) ^ 2) ^ 2) := by
+          (1 + 6 * (1 - Real.exp (-(β / 2))) ^ 2 / (1 - (1 - Real.exp (-(β / 2))) ^ 2) ^ 2) ^
+              2) := by
   set x := 1 - Real.exp (-(β / 2)) with hx
   set D := 1 + 6 * x ^ 2 / (1 - x ^ 2) ^ 2 with hD
   set E := Real.exp (β / 2)
@@ -228,20 +232,20 @@ theorem line_toNNReal_profile (β : ℝ≥0) :
   push_cast
   ring
 
-/-- **MTYL, two-point function.** `τ(a,b) = p^{|b-a|}` with `p = 1 - e^{-β/2}`. -/
+/-- **Two-point function.** `τ(a,b) = p^{|b-a|}` with `p = 1 - e^{-β/2}`. -/
 theorem line_tau_eq (β : ℝ≥0) (a b : ℤ) :
     tau (intensityProfile J β) a b =
       ENNReal.ofReal (1 - Real.exp (-((β : ℝ) / 2))) ^ (b - a).natAbs := by
   rw [PercLib.Models.Line.tau_eq_pow _ _ (line_profile_eq J hJ β), line_toNNReal_profile J hJ]
 
-/-- **MTYL, susceptibility.** `χ = (1 + p)/(1 - p)`. -/
+/-- **Susceptibility.** `χ = (1 + p)/(1 - p)`. -/
 theorem line_chi_eq_div (β : ℝ≥0) (a : ℤ) :
     chi (intensityProfile J β) a =
       (1 + ENNReal.ofReal (1 - Real.exp (-((β : ℝ) / 2)))) /
         (1 - ENNReal.ofReal (1 - Real.exp (-((β : ℝ) / 2)))) := by
   rw [PercLib.Models.Line.chi_eq _ _ (line_profile_eq J hJ β), line_toNNReal_profile J hJ]
 
-/-- **MTYL, susceptibility.** `χ = 2 e^{β/2} - 1`. -/
+/-- **Susceptibility.** `χ = 2 e^{β/2} - 1`. -/
 theorem line_chi_eq (β : ℝ≥0) (a : ℤ) :
     chi (intensityProfile J β) a = ENNReal.ofReal (2 * Real.exp ((β : ℝ) / 2) - 1) := by
   have he := Real.exp_pos (-((β : ℝ) / 2))
@@ -255,7 +259,7 @@ theorem line_chi_eq (β : ℝ≥0) (a : ℤ) :
   field_simp
   ring
 
-/-- **MTYL, derivative.** `d/dβ χ = e^{β/2}` at every `β > 0`. -/
+/-- **Derivative.** `d/dβ χ = e^{β/2}` at every `β > 0`. -/
 theorem line_hasDerivAt_chi {β : ℝ} (hβ : 0 < β) (a : ℤ) :
     HasDerivAt (fun b : ℝ => (chi (intensityProfile J b.toNNReal) a).toReal)
       (Real.exp (β / 2)) β := by
@@ -270,7 +274,7 @@ theorem line_hasDerivAt_chi {β : ℝ} (hβ : 0 < β) (a : ℤ) :
   have := Real.add_one_le_exp (b / 2)
   linarith
 
-/-- **MTYL, triangle.** `Δ = 1 + 6 p² / (1 - p²)²` with `p = 1 - e^{-β/2}`. -/
+/-- **Triangle.** `Δ = 1 + 6 p² / (1 - p²)²` with `p = 1 - e^{-β/2}`. -/
 theorem line_triangle_eq (β : ℝ≥0) :
     ∑' u, ∑' v, tau (intensityProfile J β) 0 u * tau (intensityProfile J β) u v *
         tau (intensityProfile J β) v 0 =
@@ -282,7 +286,7 @@ theorem line_triangle_eq (β : ℝ≥0) :
     have := β.coe_nonneg; linarith)
   exact tsum_triangle_ofReal_pow (by linarith) (by linarith)
 
-/-- **MTYL, last item.** For every `0 < β < 1/48`, `χ' < χ (χ - Δ) / (3 β² Δ²)`, where
+/-- **Last item.** For every `0 < β < 1/48`, `χ' < χ (χ - Δ) / (3 β² Δ²)`, where
 `χ` and `Δ` are the (finite) susceptibility and closed triangle at the root `0`, as real
 numbers, and `χ'` is the derivative of `β ↦ χ` at `β`. -/
 theorem line_deriv_chi_lt {β : ℝ} (hβ : 0 < β) (hβ' : β < 1 / 48) :
@@ -303,7 +307,7 @@ theorem line_deriv_chi_lt {β : ℝ} (hβ : 0 < β) (hβ' : β < 1 / 48) :
   · have := Real.add_one_le_exp (β / 2)
     linarith
 
-/-- **MTYL, last item, eventual form.** For all sufficiently small `β > 0`,
+/-- **Last item, eventual form.** For all sufficiently small `β > 0`,
 `χ' < χ (χ - Δ) / (3 β² Δ²)`. -/
 theorem line_eventually_deriv_chi_lt :
     ∀ᶠ β in 𝓝[>] (0 : ℝ),
@@ -321,10 +325,11 @@ theorem line_eventually_deriv_chi_lt :
   exact line_deriv_chi_lt J hJ hβ hβ'
 
 omit hJ in
-/-- D-5: the nearest-neighbour kernel `1/2` exists, so every statement above applies; for
+/-- Non-vacuity: the nearest-neighbour kernel `1/2` exists, so every statement above applies; for
 instance at `β = 1/100`. -/
 example : ∃ J : Sym2 ℤ → ℝ≥0, (∀ a b, J s(a, b) = if |b - a| = 1 then 1 / 2 else 0) ∧
-    chi (intensityProfile J (1 / 100)) 0 = ENNReal.ofReal (2 * Real.exp (((1 / 100 : ℝ≥0) : ℝ) / 2) - 1) ∧
+    chi (intensityProfile J (1 / 100)) 0 = ENNReal.ofReal
+        (2 * Real.exp (((1 / 100 : ℝ≥0) : ℝ) / 2) - 1) ∧
     deriv (fun b : ℝ => (chi (intensityProfile J b.toNNReal) 0).toReal) (1 / 100) <
       (chi (intensityProfile J (1 / 100 : ℝ).toNNReal) 0).toReal *
         ((chi (intensityProfile J (1 / 100 : ℝ).toNNReal) 0).toReal -

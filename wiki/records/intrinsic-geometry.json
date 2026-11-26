@@ -1,0 +1,507 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "intrinsic-geometry",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 18
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 12,
+      "label": "Intrinsic balls and cluster-volume tails",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-intrinsic-balls",
+      "order": 0,
+      "label": "Intrinsic balls and thinning comparison",
+      "locator": "Named public declaration start lines: 45, 77, 98, 106, 115, 124, 155, 197, 237, 255, 304, 375, 397",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies PI11 and J1V5, including arbitrary-measure radius-volume bounds and extended constants. It does not prove an intrinsic one-arm estimate from a ball-volume estimate."
+    },
+    {
+      "source": "perclib-intrinsic-growth",
+      "order": 0,
+      "label": "Intrinsic ball upper bounds",
+      "locator": "Explicit public declaration start lines: 41, 62, 80, 134, 147",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Five results prove the path-counting upper portion of R5XZ. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 0,
+      "label": "All chemical-distance moments from BK",
+      "locator": "arXiv:2508.18809v1 Lemma III.2.4(1), (III.2.8), PDF pp. 20–21; (III.6.39), PDF p. 99",
+      "relationship": "Proof with explicit countable-model and parameter hypotheses",
+      "status": "pending",
+      "note": "Counts weakly ordered marks on a geodesic; repeated vertices give empty disjoint witnesses. Finite susceptibility and transitivity are explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 1,
+      "label": "Open-pivotal rate and countable differentiation",
+      "locator": "arXiv:2508.18809v1 Lemma III.2.4(3), PDF p. 20",
+      "relationship": "Proof with explicit countable-model and parameter hypotheses",
+      "status": "pending",
+      "note": "Proves the countable oriented pivotal identity by finite-volume domination, then continuity on a finite-susceptibility interval. Distinguishes pivotal count from chemical distance."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 2,
+      "label": "Long chemical paths force a large susceptibility derivative",
+      "locator": "arXiv:2508.18809v1 Lemma III.2.5 and (III.2.9)–(III.2.10), PDF pp. 21–23",
+      "relationship": "Proof with explicit countable-model and parameter hypotheses",
+      "status": "pending",
+      "note": "Full proof with the constant 64. Specifies unqueried frontier-to-exterior edges, countable conditioning, no double counting of pivotals, and the integer radius. No reverse-BK input."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 3,
+      "label": "Negligible intrinsic-distance moments",
+      "locator": "arXiv:2508.18809v1 Proof of Lemma III.6.18, through (III.6.39), PDF p. 99",
+      "relationship": "Proof with explicit countable-model and parameter hypotheses",
+      "status": "pending",
+      "note": "Uniform contrapositive and marked-law interpolation. Second-moment suppression and the score inequality remain explicit inputs to the application; no spatial diagram conclusion."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 4,
+      "label": "Consistent equivariant geodesics",
+      "locator": "arXiv:2508.18809v1 Choice of geodesics before Lemma III.4.2",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "Root-relative lexicographic displacement order gives measurable geodesics preserved whenever a subgraph retains the chosen path. Equivariance alone is not used as a substitute for this property."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 5,
+      "label": "Restricted-cluster comparison with hereditary constraints",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.2 and (III.4.2)–(III.4.3)",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "The exterior-resampling proof retains finite susceptibility and second moment, downward-closed vertex classes, and a path choice consistent under restriction. The squared-volume-biased center is normalized explicitly."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 6,
+      "label": "A lattice counterexample to the arbitrary-class claim",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.2, arbitrary finite-subset class; (III.4.3) for arbitrary F",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "On a normalized power-law lattice cutoff at r=3 and small positive intensity, take the forbidden set outside the observation box and require the entire box as the root cluster. The left side is zero while the root path makes the right side positive for every proposed center law."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 7,
+      "label": "Geodesic truncation from finite nonmonotone Reimer",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.3",
+      "relationship": "Explicit proof scope and provisional repair",
+      "status": "pending",
+      "note": "Finite-product Reimer is an explicit literature premise. Signed closed-edge/prefix certificates and an open suffix give the finite estimate; eventual stabilization of finite clusters supplies the countable passage. The finite Reimer theorem is not proved here."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 8,
+      "label": "Conditional growth from a finite cluster history",
+      "locator": "arXiv:2508.18809v1 Lemma III.4.5, conditional comparison (III.4.13) and terminal-scale passage",
+      "relationship": "Explicit proof with conditional source assembly",
+      "status": "pending",
+      "note": "Independent exterior clocks and exponential boundary memorylessness give a last-exit bound with a decreasing volume test. It holds uniformly on every deterministic deleted domain and needs no increasing-event BK application to an upper cap."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 9,
+      "label": "Suppressed-merger likelihood identity",
+      "locator": "arXiv:2508.18809v1 Proof of Proposition III.3.1, suppressed root components and (III.4.18)",
+      "relationship": "Explicit proof and conditional source theorem",
+      "status": "pending",
+      "note": "On a finite graph, comparison of allowed partition-history likelihoods gives the exact exponential of the integrated root-merger rate. Disjoint open-tree witnesses give the product-moment bound. No independence of adaptively selected joining attempts is assumed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 10,
+      "label": "First-connection compensator",
+      "locator": "arXiv:2508.18809v1 §III.5.1, first-connection differentiation preceding (III.5.5)",
+      "relationship": "Proof of the first-connection machinery with explicit remaining inputs",
+      "status": "pending",
+      "note": "A finite partition-history calculation counts the first root merger once with its exact crossing-edge rate; arbitrary nonnegative time/component payoffs are permitted."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 11,
+      "label": "Weighted growth after a first connection",
+      "locator": "arXiv:2508.18809v1 §III.5.1, stopped revealment argument for (III.5.7)",
+      "relationship": "Proof of the first-connection machinery with explicit remaining inputs",
+      "status": "pending",
+      "note": "Internal-clock disintegration proves the product exterior and memoryless boundary residuals at the stopping time. The conditioning is the stopped root history, not the entire graph history."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 12,
+      "label": "Critical weighted geodesic negligibility",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.18 and (III.6.39)",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Critical d=3 alpha, alpha<2. The finite-cutoff intensity neighborhood upgrades the integrated score estimate to beta_c; second-moment suppression supplies negligible distance moments. Inclusive path cardinality and target-weighted Cauchy–Schwarz give the spatial estimate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 13,
+      "label": "Critical double-hit geodesic diagram",
+      "locator": "arXiv:2508.18809v1 Proof of Lemma III.6.15, independent-cluster diagram",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "All four spatial weights reduce by explicit translation sums to mixed cluster moments and negligible path moments. The independent-cluster double-hit event is bounded by a union over intersection vertices. Coupling-law and cut-event reductions are separate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 14,
+      "label": "Divergence of the printed interception diagram",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.6.17, HTML lines 2700–2704; PDF printed p. 101",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "For p=q=0, fix c=0, b=a=x and y=x-v. Each translation contributes chi*m2*tau(v)>0, so the displayed unrestricted sum diverges. This diagnoses a proof step, not the claimed interception theorem."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 15,
+      "label": "Critical interception diagram with the shared path mark retained",
+      "locator": "arXiv:2508.18809v1 proof of Lemma III.6.17, HTML lines 2700–2704; PDF printed p. 101",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Keep c on the x-to-b selected path and b on the y-to-a selected path. Fifth mixed moments and weighted geodesic negligibility control every placement of the spatial weight. The coupled cut-event reduction is not claimed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 16,
+      "label": "Critical coupled redundancy estimate",
+      "locator": "arXiv:2508.18809v1 Lemma III.6.15",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Both deletion cuts force the selected original third-copy geodesic to meet the two independent clusters. Restricted-cluster inclusion and all nonnegative spatial weights reduce to SE64. No law for a geodesic chosen after deletion is asserted."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 17,
+      "label": "Cluster powers in the critical redundancy diagram",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, extension of the III.6.15 proof to the powers in III.6.11",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Cauchy–Schwarz under target counting retains V^t in the third-cluster-weighted path moments. The four spatial-weight sums use moment orders i+1 and j+2, including zero root exponents. Coupled same-target redundancy follows; different target coordinates in a tuple are not conflated."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 18,
+      "label": "Critical redundancy for all target-tuple powers",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, redundancy contribution for general powers in Lemma III.6.11",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Split the two tuple cuts according to whether they remove the same coordinate. Different coordinates give two original geodesics, whose total path-count product is bounded by the third-cluster-weighted moments in DVHL. This proves redundancy for every target-tuple power at the correct vertex-factor scale; weighted joint cuts, interception and final decoupling remain separate."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 19,
+      "label": "Marked single-path critical moments",
+      "locator": "arXiv:2508.18809v1 Section III.6.3, geodesic estimates for the final III.6.11 decoupling",
+      "relationship": "Written proof; source correspondence pending review",
+      "status": "pending",
+      "note": "Target-counting Cauchy–Schwarz controls spatial marks on a path, its target, or an additional cluster vertex. All fixed cluster powers retain V^k. The k0 case uses no negative power; original paths only."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 20,
+      "label": "Surviving-path interception witnesses",
+      "locator": "Lemma III.6.17, p.101; FIXER's resolution",
+      "relationship": "Written proof with explicit source inputs and provisional correction",
+      "status": "pending",
+      "note": "Finite simple-path inclusion with empty endpoint witnesses; the geodesic is chosen only in the second configuration."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 21,
+      "label": "Quantitative marked interception diagram",
+      "locator": "Lemma III.6.17, p.101; FIXER's resolution",
+      "relationship": "Written proof with explicit source inputs and provisional correction",
+      "status": "pending",
+      "note": "Translation covariance and counted-target Cauchy–Schwarz give r^(p+q) V^3 chi^11 sqrt(epsilon), with every moment hypothesis explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 22,
+      "label": "Repaired source interception estimate",
+      "locator": "Lemma III.6.17, p.101; (III.6.39), p.99; Part I Lemma I.5.27, p.84",
+      "relationship": "Written proof with explicit source inputs and provisional correction",
+      "status": "pending",
+      "note": "Applies the preceding bound using named earlier source moment and chemical-distance results. Prose repair; no final logarithmic asymptotic or Lean compilation is assumed."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 23,
+      "label": "Weighted path moments with a decreasing test and exponential truncation",
+      "locator": "Relation to the existing exposition of Lemma III.2.4(1) and Lemma III.4.3",
+      "relationship": "Further deduction from the written arguments; not a source-statement identification",
+      "status": "pending",
+      "note": "Repeated path marks, full closed-edge certificates and layer-cake integration give weighted moments for decreasing tests. The moment series improves the averaged-path error exponentially above min(chi, |B|). No new source passage, correction or Lean verification is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "NMYK",
+      "proof_uses": [
+        "SBMG",
+        "MXGM"
+      ],
+      "reason": "Proves the countable oriented pivotal identity by finite-volume domination, then continuity on a finite-susceptibility interval. Distinguishes pivotal count from chemical distance."
+    },
+    {
+      "order": 1,
+      "tag": "OCMG",
+      "proof_uses": [
+        "SBMG",
+        "NMYK",
+        "6L9Z"
+      ],
+      "reason": "Full proof with the constant 64. Specifies unqueried frontier-to-exterior edges, countable conditioning, no double counting of pivotals, and the integer radius. No reverse-BK input."
+    },
+    {
+      "order": 2,
+      "tag": "T9LZ",
+      "proof_uses": [
+        "SBMG",
+        "OCMG"
+      ],
+      "reason": "Uniform contrapositive and marked-law interpolation. Second-moment suppression and the score inequality remain explicit inputs to the application; no spatial diagram conclusion."
+    },
+    {
+      "order": 3,
+      "tag": "BN7Z",
+      "proof_uses": [],
+      "reason": "Root-relative lexicographic displacement order gives measurable geodesics preserved whenever a subgraph retains the chosen path. Equivariance alone is not used as a substitute for this property."
+    },
+    {
+      "order": 4,
+      "tag": "XFCJ",
+      "proof_uses": [
+        "BN7Z"
+      ],
+      "reason": "The exterior-resampling proof retains finite susceptibility and second moment, downward-closed vertex classes, and a path choice consistent under restriction. The squared-volume-biased center is normalized explicitly."
+    },
+    {
+      "order": 5,
+      "tag": "OTH1",
+      "proof_uses": [
+        "53Z9",
+        "Y84V"
+      ],
+      "reason": "On a normalized power-law lattice cutoff at r=3 and small positive intensity, take the forbidden set outside the observation box and require the entire box as the root cluster. The left side is zero while the root path makes the right side positive for every proposed center law."
+    },
+    {
+      "order": 6,
+      "tag": "X86B",
+      "proof_uses": [
+        "BN7Z"
+      ],
+      "reason": "Finite-product Reimer is an explicit literature premise. Signed closed-edge/prefix certificates and an open suffix give the finite estimate; eventual stabilization of finite clusters supplies the countable passage. The finite Reimer theorem is not proved here."
+    },
+    {
+      "order": 7,
+      "tag": "WKM2",
+      "proof_uses": [
+        "DR1W"
+      ],
+      "reason": "Independent exterior clocks and exponential boundary memorylessness give a last-exit bound with a decreasing volume test. It holds uniformly on every deterministic deleted domain and needs no increasing-event BK application to an upper cap."
+    },
+    {
+      "order": 8,
+      "tag": "7IVI",
+      "proof_uses": [
+        "BNY8"
+      ],
+      "reason": "On a finite graph, comparison of allowed partition-history likelihoods gives the exact exponential of the integrated root-merger rate. Disjoint open-tree witnesses give the product-moment bound. No independence of adaptively selected joining attempts is assumed."
+    },
+    {
+      "order": 9,
+      "tag": "88ZH",
+      "proof_uses": [
+        "7IVI"
+      ],
+      "reason": "A finite partition-history calculation counts the first root merger once with its exact crossing-edge rate; arbitrary nonnegative time/component payoffs are permitted."
+    },
+    {
+      "order": 10,
+      "tag": "DTOX",
+      "proof_uses": [
+        "88ZH",
+        "WKM2"
+      ],
+      "reason": "Internal-clock disintegration proves the product exterior and memoryless boundary residuals at the stopping time. The conditioning is the stopped root history, not the entire graph history."
+    },
+    {
+      "order": 11,
+      "tag": "V7V5",
+      "proof_uses": [
+        "BN7Z",
+        "DR1W",
+        "NMYK",
+        "UTUF",
+        "T9LZ",
+        "5J3U",
+        "YU52"
+      ],
+      "reason": "Critical d=3 alpha, alpha<2. The finite-cutoff intensity neighborhood upgrades the integrated score estimate to beta_c; second-moment suppression supplies negligible distance moments. Inclusive path cardinality and target-weighted Cauchy–Schwarz give the spatial estimate."
+    },
+    {
+      "order": 12,
+      "tag": "SE64",
+      "proof_uses": [
+        "V7V5",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "All four spatial weights reduce by explicit translation sums to mixed cluster moments and negligible path moments. The independent-cluster double-hit event is bounded by a union over intersection vertices. Coupling-law and cut-event reductions are separate."
+    },
+    {
+      "order": 13,
+      "tag": "ZGVN",
+      "proof_uses": [],
+      "reason": "For p=q=0, fix c=0, b=a=x and y=x-v. Each translation contributes chi*m2*tau(v)>0, so the displayed unrestricted sum diverges. This diagnoses a proof step, not the claimed interception theorem."
+    },
+    {
+      "order": 14,
+      "tag": "IEOH",
+      "proof_uses": [
+        "V7V5",
+        "SE64",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "Keep c on the x-to-b selected path and b on the y-to-a selected path. Fifth mixed moments and weighted geodesic negligibility control every placement of the spatial weight. The coupled cut-event reduction is not claimed."
+    },
+    {
+      "order": 15,
+      "tag": "KF1W",
+      "proof_uses": [
+        "DR5Q",
+        "SE64"
+      ],
+      "reason": "Both deletion cuts force the selected original third-copy geodesic to meet the two independent clusters. Restricted-cluster inclusion and all nonnegative spatial weights reduce to SE64. No law for a geodesic chosen after deletion is asserted."
+    },
+    {
+      "order": 16,
+      "tag": "DVHL",
+      "proof_uses": [
+        "7GBI",
+        "V7V5",
+        "RM79",
+        "AR3F",
+        "SE64",
+        "DR5Q"
+      ],
+      "reason": "Cauchy–Schwarz under target counting retains V^t in the third-cluster-weighted path moments. The four spatial-weight sums use moment orders i+1 and j+2, including zero root exponents. Coupled same-target redundancy follows; different target coordinates in a tuple are not conflated."
+    },
+    {
+      "order": 17,
+      "tag": "6IJQ",
+      "proof_uses": [
+        "7GBI",
+        "DVHL",
+        "DR5Q",
+        "JG0C"
+      ],
+      "reason": "Split the two tuple cuts according to whether they remove the same coordinate. Different coordinates give two original geodesics, whose total path-count product is bounded by the third-cluster-weighted moments in DVHL. This proves redundancy for every target-tuple power at the correct vertex-factor scale; weighted joint cuts, interception and final decoupling remain separate."
+    },
+    {
+      "order": 18,
+      "tag": "PGVH",
+      "proof_uses": [
+        "7GBI",
+        "BN7Z",
+        "V7V5",
+        "AR3F",
+        "RM79"
+      ],
+      "reason": "Target-counting Cauchy–Schwarz controls spatial marks on a path, its target, or an additional cluster vertex. All fixed cluster powers retain V^k. The k0 case uses no negative power; original paths only."
+    },
+    {
+      "order": 19,
+      "tag": "LK8Z",
+      "proof_uses": [],
+      "reason": "Finite simple-path inclusion with empty endpoint witnesses; the geodesic is chosen only in the second configuration."
+    },
+    {
+      "order": 20,
+      "tag": "O10I",
+      "proof_uses": [
+        "LK8Z",
+        "BN7Z"
+      ],
+      "reason": "Translation covariance and counted-target Cauchy–Schwarz give r^(p+q) V^3 chi^11 sqrt(epsilon), with every moment hypothesis explicit."
+    },
+    {
+      "order": 21,
+      "tag": "R6CI",
+      "proof_uses": [
+        "O10I"
+      ],
+      "reason": "Applies the preceding bound using named earlier source moment and chemical-distance results. Prose repair; no final logarithmic asymptotic or Lean compilation is assumed."
+    },
+    {
+      "order": 22,
+      "tag": "9KEP",
+      "proof_uses": [
+        "UFCR",
+        "7GDN",
+        "593F"
+      ],
+      "reason": "Weakly ordered marks on a simple path give disjoint segment witnesses. All closed edges stay with the decreasing first event; row bounds and layer-cake integration give every weighted moment and the exponential series."
+    },
+    {
+      "order": 23,
+      "tag": "FV16",
+      "proof_uses": [
+        "9KEP",
+        "X86B"
+      ],
+      "reason": "The averaged vertex weight is at most one and has total mass |B|, so its restricted two-point row is at most min(chi, |B|). Discard the arbitrary cluster class only from the long-path error."
+    },
+    {
+      "order": 24,
+      "tag": "8W1Q",
+      "proof_uses": [],
+      "reason": "A definition; the remarks on monotonicity of balls and spheres are direct examples."
+    },
+    {
+      "order": 25,
+      "tag": "R5XZ",
+      "proof_uses": [],
+      "reason": "A path-weight union bound, a renewal inequality from the conditional product law outside explored layers, and monotone convergence; no other wiki assertion is invoked."
+    },
+    {
+      "order": 26,
+      "tag": "KEO7",
+      "proof_uses": [
+        "Y84V",
+        "SNB3"
+      ],
+      "reason": "A stopped layer exploration gives the arm recursion; finiteness of the normalised constant uses tree-graph moments (Y84V) and the exponential volume tail (SNB3), and the endpoint is reached by coupling."
+    },
+    {
+      "order": 27,
+      "tag": "SBMG",
+      "proof_uses": [
+        "AUUG"
+      ],
+      "reason": "Splitting a geodesic into q+1 edge-disjoint connections and applying the iterated BK product bound (AUUG), with finite-edge approximation, gives the chain sum chi^{q+1}."
+    }
+  ]
+}

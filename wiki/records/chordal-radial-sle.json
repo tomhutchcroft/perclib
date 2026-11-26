@@ -1,0 +1,97 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "chordal-radial-sle",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 140
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Interior normalization and positive clock",
+      "locator": "arXiv:math/0505368v3, Theorem 3 and Remark 4; NYJM 11 (2005), pp.661–664",
+      "relationship": "Written chordal-to-radial proof and stopped inverse; arbitrary weights made explicit",
+      "status": "pending",
+      "note": "The explicitly normalized map gives the radial Loewner equation and the strictly positive capacity clock by differentiation and a rational vector-field identity."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Mixed forces and the old target",
+      "locator": "arXiv:math/0505368v3, Theorem 3 and Remark 4; NYJM 11 (2005), pp.661–664",
+      "relationship": "Written chordal-to-radial proof and stopped inverse; arbitrary weights made explicit",
+      "status": "pending",
+      "note": "Reflection pairs transport arbitrary interior and boundary forces. The residual weight kappa-6 minus the original weight sum is exactly the force at the image of the old chordal target."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "The inverse radial-to-chordal law",
+      "locator": "arXiv:math/0505368v3, Theorem 3 and Remark 4; NYJM 11 (2005), pp.661–664",
+      "relationship": "Written chordal-to-radial proof and stopped inverse; arbitrary weights made explicit",
+      "status": "pending",
+      "note": "Local uniqueness and uniqueness of normalized maps identify the inverse law, including the compensating interior force. The stop at the new boundary target is retained."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 3,
+      "label": "Direct disk normalization",
+      "locator": "arXiv:math/0505368v3, Theorem 3, disk-to-disk case; NYJM 11 (2005), Theorem 3, pp.662–664",
+      "relationship": "Direct disk proof of the target-change law and its stated stopping scope",
+      "status": "pending",
+      "note": "Differentiating the disk normalization gives its positive capacity clock and the radial vector-field identity, with no auxiliary boundary target."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 4,
+      "label": "Radial target changes",
+      "locator": "arXiv:math/0505368v3, Theorem 3, disk-to-disk case; NYJM 11 (2005), Theorem 3, pp.662–664",
+      "relationship": "Direct disk proof of the target-change law and its stated stopping scope",
+      "status": "pending",
+      "note": "The angular generator and reflected force identities give the transformed radial law with residual weight at the old target. Direct normalization retains precisely the source collision and new-interior-target stops."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "9BVE",
+      "proof_uses": [],
+      "reason": "The explicitly normalized map gives the radial Loewner equation and the strictly positive capacity clock by differentiation and a rational vector-field identity."
+    },
+    {
+      "order": 1,
+      "tag": "5KL5",
+      "proof_uses": [
+        "9BVE"
+      ],
+      "reason": "Reflection pairs transport arbitrary interior and boundary forces. The residual weight kappa-6 minus the original weight sum is exactly the force at the image of the old chordal target."
+    },
+    {
+      "order": 2,
+      "tag": "K4PV",
+      "proof_uses": [
+        "9BVE",
+        "5KL5"
+      ],
+      "reason": "Local uniqueness and uniqueness of normalized maps identify the inverse law, including the compensating interior force. The stop at the new boundary target is retained."
+    },
+    {
+      "order": 3,
+      "tag": "JVHZ",
+      "proof_uses": [],
+      "reason": "Differentiating the disk normalization gives its positive capacity clock and the radial vector-field identity, with no auxiliary boundary target."
+    },
+    {
+      "order": 4,
+      "tag": "V2NR",
+      "proof_uses": [
+        "JVHZ"
+      ],
+      "reason": "The angular generator and reflected force identities give the transformed radial law with residual weight at the old target. Direct normalization retains precisely the source collision and new-interior-target stops."
+    }
+  ]
+}

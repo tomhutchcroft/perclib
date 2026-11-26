@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 469 (Q-135, part 2), written on 2026-11-16 by PROVER-F. No upstream
-proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -15,9 +16,10 @@ public import PercLib.Probability.DeterminedIndependence
 public import PercLib.Percolation.Bond.SusceptibilityDerivative
 public import PercLib.Probability.DeterministicModification
 public import PercLib.Probability.OpenEventHarris
+public import PercLib.Models.HierarchicalCutoff
 
 /-!
-# Hierarchical block-quantile amplification: the assembly (Q-135, part 2)
+# Hierarchical block-quantile amplification: the assembly
 
 Part 1 (`HierarchicalAmplification.lean`) proved the scale, the no-direct-edge bound, the
 connection threshold, the amplification arithmetic and the Hoeffding count. This file
@@ -92,9 +94,9 @@ theorem law_bad_pair_le [DecidableEq V] (q : Sym2 V → unitInterval) {Λi Λj :
   set SS : Set (Sym2 V) := Si ∪ Sj with hSS
   have hSSfin : SS.Finite := by
     refine Set.Finite.union ?_ ?_
-    · show ((Λi : Set V).sym2).Finite
+    · change ((Λi : Set V).sym2).Finite
       rw [← Finset.coe_sym2]; exact Finset.finite_toSet _
-    · show ((Λj : Set V).sym2).Finite
+    · change ((Λj : Set V).sym2).Finite
       rw [← Finset.coe_sym2]; exact Finset.finite_toSet _
   have hi_eq : ∀ ω : Config V, ω ∩ SS ∩ Si = ω ∩ Si := fun ω => by
     rw [inter_assoc, inter_eq_right.2 subset_union_left]
@@ -391,7 +393,7 @@ theorem lt_tightnessScale_of_blocks [Countable V] [DecidableEq V] (q : Sym2 V �
       congr 1
       ext w
       simp [and_comm]
-    show m ≤ _
+    change m ≤ _
     calc m ≤ g.card * (R - 1) := Nat.mul_le_mul_right _ hK
       _ ≤ ∑ i ∈ g, (C i ω).card := hlow
       _ = (g.biUnion fun i => C i ω).card := hcardU.symm
@@ -499,7 +501,7 @@ theorem level_sub_le_of_mem_level_ball {u v : ℕ →₀ (Fin d → ZMod L)} {m 
   exact h.trans (max_le hu hv)
 
 open Classical in
-/-- **Hierarchical block-quantile amplification** (7AER, issue 469). On the hierarchical
+/-- **Hierarchical block-quantile amplification.** On the hierarchical
 lattice `ℕ →₀ (Fin d → ZMod L)` with `L ≥ 2`, let `c, α > 0` and let `J` be a
 translation-invariant kernel with `J(u, v) ≥ c L^{-(d+α)j}` when `u ≠ v` first share a
 level-`j` block. Write `R_n(β)` for the quantile `tightnessScale` of the level-`n` block of the
@@ -508,7 +510,7 @@ origin under `q_β = intensityProfile J β` restricted to the pairs inside that 
 `A = (4/c) L^{(d+α)ℓ} log(2N²)`. Then for every `β > 0` and `n ≥ 0`,
 `R_n(β)² ≥ (A/β) L^{(d+α)n}` implies `R_{n+ℓ}(β)² ≥ (A/β) L^{(d+α)(n+ℓ)}`.
 
-The issue's hypotheses `ℓ ≥ 1` and `α < d` are not needed here: they serve only to produce
+The hypotheses `ℓ ≥ 1` and `α < d` are not needed here: they serve only to produce
 such an `ℓ` (`exists_amplification_scale`). The kernel bound is assumed for `u ≠ v` only. -/
 theorem tightnessScale_hierarchical_amplification [NeZero L] (hL : 2 ≤ L) {α c : ℝ}
     (hc : 0 < c) (hα : 0 < α) (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0)
@@ -616,7 +618,7 @@ theorem tightnessScale_hierarchical_amplification [NeZero L] (hL : 2 ≤ L) {α 
   have hqσ : ∀ x e, q (Sym2.map (Equiv.addLeft x) e) = q e := by
     intro x e
     apply Subtype.ext
-    show 1 - Real.exp (-(β : ℝ) * (J (Sym2.map (Equiv.addLeft x) e) : ℝ)) =
+    change 1 - Real.exp (-(β : ℝ) * (J (Sym2.map (Equiv.addLeft x) e) : ℝ)) =
       1 - Real.exp (-(β : ℝ) * (J e : ℝ))
     rw [hJσ]
   set R := tightnessScale (fun e => if e ∈ ((ball n : Finset _) : Set _).sym2 then q e else 0)
@@ -729,9 +731,9 @@ theorem tightnessScale_hierarchical_amplification [NeZero L] (hL : 2 ≤ L) {α 
   have h0 : 0 ≤ (K : ℝ) * ((R : ℝ) - 1) := mul_nonneg (Nat.cast_nonneg _) (by linarith)
   exact hamp.trans (pow_le_pow_left₀ h0 hle 2)
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
-/-- The scale of the issue's example `L = 2`, `d = 3`, `α = 1`: `ℓ = 4` satisfies
+/-- The scale of the example `L = 2`, `d = 3`, `α = 1`: `ℓ = 4` satisfies
 `e^{-2^{12}/(8e)} ≤ 1/4`. -/
 theorem amplification_scale_example_exp :
     Real.exp (-(((2 : ℕ) : ℝ) ^ (3 * 4) / (8 * Real.exp 1))) ≤ 1 / 4 := by
@@ -745,7 +747,7 @@ theorem amplification_scale_example_exp :
   rw [Real.exp_neg, inv_eq_one_div, div_le_div_iff₀ (Real.exp_pos _) (by norm_num)]
   linarith [Real.add_one_le_exp x]
 
-/-- The scale of the issue's example: `ℓ = 4` satisfies `16 e² ≤ 2^{(3-1)·4} = 256`. -/
+/-- The scale of that example: `ℓ = 4` satisfies `16 e² ≤ 2^{(3-1)·4} = 256`. -/
 theorem amplification_scale_example_pow :
     16 * Real.exp 1 ^ 2 ≤ ((2 : ℕ) : ℝ) ^ ((((3 : ℕ) : ℝ) - 1) * ((4 : ℕ) : ℝ)) := by
   have h8 : ((2 : ℕ) : ℝ) ^ ((((3 : ℕ) : ℝ) - 1) * ((4 : ℕ) : ℝ)) = 256 := by
@@ -758,10 +760,10 @@ theorem amplification_scale_example_pow :
   nlinarith
 
 open Classical in
-/-- **D-5 witness** for `tightnessScale_hierarchical_amplification`: `L = 2`, `d = 3`, `α = 1`,
-`c = 1`, `ℓ = 4` and the kernel `J(u, v) = 2^{-4 j}` when `u, v` first share a level-`j`
-block. At `β = 1638400` the hypothesis holds at `n = 0` (the origin block is a single vertex,
-of quantile `2`), so the amplified bound holds at `n = 4`. -/
+/-- **Non-vacuity witness** for `tightnessScale_hierarchical_amplification`: `L = 2`, `d = 3`,
+`α = 1`, `c = 1`, `ℓ = 4` and the kernel `J(u, v) = 2^{-4 j}` when `u, v` first share a level-`j`
+block. At `β = 1638400` the hypothesis holds at `n = 0` (the origin block is a single vertex, of
+quantile `2`), so the amplified bound holds at `n = 4`. -/
 example : ∃ J : Sym2 (ℕ →₀ (Fin 3 → ZMod 2)) → ℝ≥0,
     (∀ x u v, J s(u + x, v + x) = J s(u, v)) ∧
     (∀ u v, u ≠ v → (1 : ℝ) * ((2 : ℕ) : ℝ) ^ (-((((3 : ℕ) : ℝ) + 1) *
@@ -816,6 +818,58 @@ example : ∃ J : Sym2 (ℕ →₀ (Fin 3 → ZMod 2)) → ℝ≥0,
     linarith
   exact tightnessScale_hierarchical_amplification (le_refl 2) one_pos one_pos J hJt hJl
     amplification_scale_example_exp amplification_scale_example_pow (by norm_num) 0 hn
+
+open Classical in
+/-- **Hierarchical block-quantile amplification, translation invariance off the diagonal.**
+The statement of `tightnessScale_hierarchical_amplification` with translation invariance assumed
+for distinct pairs only (the diagonal is arbitrary). -/
+theorem tightnessScale_hierarchical_amplification_of_ne [NeZero L] (hL : 2 ≤ L) {α c : ℝ}
+    (hc : 0 < c) (hα : 0 < α) (J : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0)
+    (hJt : ∀ x u v, u ≠ v → J s(u + x, v + x) = J s(u, v))
+    (hJ : ∀ u v, u ≠ v →
+      c * (L : ℝ) ^ (-(((d : ℝ) + α) * (((v - u).support.sup Nat.succ : ℕ) : ℝ))) ≤ J s(u, v))
+    {ℓ : ℕ} (hexp : Real.exp (-((L : ℝ) ^ (d * ℓ) / (8 * Real.exp 1))) ≤ 1 / 4)
+    (hℓ : 16 * Real.exp 1 ^ 2 ≤ (L : ℝ) ^ (((d : ℝ) - α) * ℓ))
+    {β : ℝ≥0} (hβ : 0 < β) (n : ℕ)
+    (hn : (4 / c) * (L : ℝ) ^ (((d : ℝ) + α) * ℓ) * Real.log (2 * ((L : ℝ) ^ (d * ℓ)) ^ 2) /
+        β * (L : ℝ) ^ (((d : ℝ) + α) * n) ≤
+      (tightnessScale (fun e => if e ∈ {z : (ℕ →₀ (Fin d → ZMod L)) |
+        z.support.sup Nat.succ ≤ n}.sym2 then intensityProfile J β e else 0)
+        (finite_level_ball n).toFinset : ℝ) ^ 2) :
+    (4 / c) * (L : ℝ) ^ (((d : ℝ) + α) * ℓ) * Real.log (2 * ((L : ℝ) ^ (d * ℓ)) ^ 2) / β *
+        (L : ℝ) ^ (((d : ℝ) + α) * ((n : ℝ) + ℓ)) ≤
+      (tightnessScale (fun e => if e ∈ {z : (ℕ →₀ (Fin d → ZMod L)) |
+        z.support.sup Nat.succ ≤ n + ℓ}.sym2 then intensityProfile J β e else 0)
+        (finite_level_ball (n + ℓ)).toFinset : ℝ) ^ 2 := by
+  set J' : Sym2 (ℕ →₀ (Fin d → ZMod L)) → ℝ≥0 := fun e => if e.IsDiag then 0 else J e with hJ'def
+  have hJJ' : ∀ u v, u ≠ v → J s(u, v) = J' s(u, v) := fun u v h => by simp [hJ'def, h]
+  have hJt' : ∀ x u v, J' s(u + x, v + x) = J' s(u, v) := by
+    intro x u v
+    by_cases h : u = v
+    · subst h
+      simp [hJ'def]
+    · have h' : u + x ≠ v + x := fun e => h (add_right_cancel e)
+      rw [← hJJ' _ _ h', ← hJJ' _ _ h, hJt x u v h]
+  have hJ'' : ∀ u v, u ≠ v →
+      c * (L : ℝ) ^ (-(((d : ℝ) + α) * (((v - u).support.sup Nat.succ : ℕ) : ℝ))) ≤
+        J' s(u, v) := fun u v h => hJJ' u v h ▸ hJ u v h
+  have hts : ∀ (S : Set (Sym2 (ℕ →₀ (Fin d → ZMod L)))) (Λ : Finset (ℕ →₀ (Fin d → ZMod L))),
+      tightnessScale (fun e => if e ∈ S then intensityProfile J β e else 0) Λ =
+        tightnessScale (fun e => if e ∈ S then intensityProfile J' β e else 0) Λ := by
+    intro S Λ
+    unfold tightnessScale
+    congr 1
+    ext m
+    simp only [Set.mem_ofPred_eq]
+    rw [law_event_eq_of_offDiagonal _ _ ?_ (measurableSet_le_maxClusterIntersection Λ m) ?_]
+    · intro e he
+      simp only [intensityProfile_eq_of_offDiagonal hJJ' β e he]
+    · intro ω ω' h
+      simp only [Set.mem_ofPred_eq, maxClusterIntersection, cluster,
+        openGraph_eq_of_sdiff_diagSet_eq h]
+  rw [hts] at hn ⊢
+  exact tightnessScale_hierarchical_amplification hL hc hα J' hJt' hJ'' hexp hℓ hβ n hn
+
 
 end Hierarchical
 

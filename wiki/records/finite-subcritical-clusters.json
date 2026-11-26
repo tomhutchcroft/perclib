@@ -1,0 +1,265 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-subcritical-clusters",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 193
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 0,
+      "label": "Integrated triangle error",
+      "locator": "Theorem 1.5, (1.31), and Section 4.1, (4.3)\u2013(4.4), printed pp.7 and19 / PDF indices6 and18",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 1,
+      "label": "Positive threshold denominator",
+      "locator": "Theorem 1.5, (1.30), and its proof in Section 4.1, printed pp.7 and19 / PDF indices6 and18; corrected denominator",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 2,
+      "label": "Denominator counterexample",
+      "locator": "Theorem 1.5, (1.30), under the standing susceptibility-level condition in Section 1.2; counterexample to the unrestricted denominator",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 3,
+      "label": "Sharp susceptibility asymptotic",
+      "locator": "Theorem 1.5, discussion following (1.31), (1.32), printed p.7 / PDF index6",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 4,
+      "label": "Expected largest-component upper bound",
+      "locator": "Section 4.2, (4.5), printed pp.19\u201320 / PDF indices18\u201319; proof here uses a real cutoff and also allows nonuniform bonds",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 5,
+      "label": "Susceptibility-square component lower bound",
+      "locator": "Theorem 1.2(ii) and Section 7, component lower bound; explicit constants inherited from the existing root-tail proof",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 6,
+      "label": "Below-window component scales",
+      "locator": "Section 1.4, subcritical sequence discussion, (1.34)\u2013(1.36), printed p.8 / PDF index7",
+      "relationship": "Written proof with explicit hypotheses; corrected threshold formula distinguished from the source",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text. Journal version and visual PDF comparison not checked. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 7,
+      "label": "Complete-graph logarithmic lower bound and fixed-rank leading sizes",
+      "locator": "arXiv:math/0401069v1, Section 2.1.2, Theorem 2.1(i) and comparison following (2.15), printed pp.12\u201313 / PDF indices11\u201312; Section 3.4.2, (3.10), printed p.16 / PDF index15",
+      "relationship": "Written complete-graph proof by exact tree-component counting and variance control, combined with the existing susceptibility upper bound; the general finite-triangle gap remains separate",
+      "status": "pending",
+      "note": "The comparison and heuristic passages were read in extracted preprint text. The cited book theorem and journal version were not independently checked. No new source error, compiled association or critical-window joint limit is asserted."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 8,
+      "label": "Complete-graph benchmark: written second-order extension",
+      "locator": "Benchmark context: arXiv:math/0401069v1, Section 2.1.2, comparison following (2.15), and Section 3.4.2, (3.10); the fluctuation theorem is proved here from the preceding exact counts",
+      "relationship": "Self-contained refinement of the written complete-graph enumeration argument, not an attribution of the second-order law to the cited passages",
+      "status": "pending",
+      "note": "The tree factorial moments, unicyclic enumeration and bicyclic subgraph bound are supplied in the article. The exact rate I is retained. No new source error, compiled association, independent audit or joint critical-window limit is asserted."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 9,
+      "label": "Complete-graph benchmark: centered moments and expectation correction",
+      "locator": "Benchmark context: arXiv:math/0401069v1, Section 2.1.2 following (2.15), and Section 3.4.2, (3.10); the moment refinement is proved here using the preceding exact-count fluctuation law",
+      "relationship": "Written complete-graph extension with exact-rate exploration and two-sided centered tails, not an attribution of the centered-moment theorem to the benchmark passages",
+      "status": "pending",
+      "note": "The source map also locates the additional primary reading in Nachmias\u2013Peres, Section 3, Lemma 3.1 and the upper-bound part of Theorem 1.1. The new proof uses the already proved Dwass identity and keeps Poisson mean c exactly. No new erratum, compiled association or independent mathematical audit is asserted."
+    },
+    {
+      "source": "nachmias-peres-outside-window",
+      "label": "Joint extreme counts and ordered ranks beyond the leading subcritical law",
+      "locator": "Theorem 1.1, printed p.133 / PDF index0; joint extreme extension derived here from the existing exact enumeration",
+      "relationship": "Primary comparison for the leading law; written multivariate factorial-moment extension",
+      "status": "pending",
+      "note": "Independent marking identifies the joint Poisson limit, followed by cap removal and exclusion of cyclic extremes. No joint critical-window theorem, new erratum or compiled association is asserted.",
+      "order": 10
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "IWRH",
+      "proof_uses": [
+        "F5Y5"
+      ],
+      "reason": "Integrated triangle error. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 1,
+      "tag": "AJQL",
+      "proof_uses": [
+        "IWRH"
+      ],
+      "reason": "Positive threshold denominator. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 2,
+      "tag": "UQEG",
+      "proof_uses": [
+        "R2Y7"
+      ],
+      "reason": "Denominator counterexample. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 3,
+      "tag": "UF7P",
+      "proof_uses": [
+        "IWRH",
+        "AJQL"
+      ],
+      "reason": "Sharp susceptibility asymptotic. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 4,
+      "tag": "WM3D",
+      "proof_uses": [
+        "4A0G"
+      ],
+      "reason": "Expected largest-component upper bound. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 5,
+      "tag": "DAN9",
+      "proof_uses": [
+        "EPK3"
+      ],
+      "reason": "Susceptibility-square component lower bound. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 6,
+      "tag": "L5E1",
+      "proof_uses": [
+        "F5Y5",
+        "WM3D",
+        "DAN9",
+        "UF7P",
+        "3RIO"
+      ],
+      "reason": "Below-window component scales. General finite-graph, constant-triangle and strong-triangle assumptions are separated in the article."
+    },
+    {
+      "order": 7,
+      "tag": "P1F1",
+      "proof_uses": [],
+      "reason": "Count labelled trees and their required closed edges exactly. Ordered pairs of disjoint components have a finite-population factor that dominates the shared closed-edge factor below p=1/(N+1), yielding the variance bound after summing over sizes."
+    },
+    {
+      "order": 8,
+      "tag": "XF00",
+      "proof_uses": [
+        "P1F1"
+      ],
+      "reason": "Retain the cancellation between the falling-factorial and closed-edge quadratic terms. Sum uniform tree-count asymptotics across a band of width I^(-1), then apply the variance bound; no stronger restriction on epsilon beyond epsilon tending to zero and N epsilon^3 tending to infinity is used."
+    },
+    {
+      "order": 9,
+      "tag": "X0R0",
+      "proof_uses": [
+        "XF00",
+        "MIQ7",
+        "3RIO",
+        "WM3D"
+      ],
+      "reason": "The diverging band count gives lower bounds for every fixed rank. Uniform susceptibility gives the matching upper tail and expectation; bounded negative parts then give convergence of the normalized sizes in mean absolute error."
+    },
+    {
+      "order": 10,
+      "tag": "EMO3",
+      "proof_uses": [],
+      "reason": "Extract a connected cycle-rank-two subgraph, classify its degree-two suppression into three forms, and sum valid simple-template embeddings over positive path lengths."
+    },
+    {
+      "order": 11,
+      "tag": "VGZ9",
+      "proof_uses": [
+        "P1F1",
+        "XF00",
+        "X0R0"
+      ],
+      "reason": "Count ordered tuples of distinct tree components exactly; retain finite-population cancellation uniformly at every fixed factorial order. Alternating finite sums give the Poisson probabilities. Remove the upper cutoff only in distribution, using the leading largest-component law."
+    },
+    {
+      "order": 12,
+      "tag": "CJ8R",
+      "proof_uses": [
+        "EMO3",
+        "VGZ9",
+        "X0R0"
+      ],
+      "reason": "Count unicyclic graphs by their unique cycle and rooted forests, bound their expected number at the extreme threshold, and exclude more complex components separately. The Poisson exceedance law gives each fixed-rank distribution with the exact exponential rate."
+    },
+    {
+      "order": 13,
+      "tag": "RN5K",
+      "proof_uses": [
+        "0K60",
+        "RL1L",
+        "BFM4"
+      ],
+      "reason": "Use at most N-1 fresh bonds at each exploration step. Realize each Bernoulli variable as a positive Poisson count, bound the row mean by c, and add independent Poisson padding. Dwass and the lower Stirling inequality give the Borel tail with exact rate I."
+    },
+    {
+      "order": 14,
+      "tag": "XHEC",
+      "proof_uses": [
+        "RN5K",
+        "XF00",
+        "P1F1"
+      ],
+      "reason": "The exact-rate largest-component bound controls all upper deviations. Uniform tree-count expectations on bands down to size 2/I and variance at most mean control all lower deviations, with a separate endpoint argument for zero padding."
+    },
+    {
+      "order": 15,
+      "tag": "OL4S",
+      "proof_uses": [
+        "XHEC",
+        "CJ8R"
+      ],
+      "reason": "Uniform exponential integrability upgrades fixed-rank weak convergence to every polynomial moment and exponential transforms for absolute parameter below one. The negative-log-gamma mean gives the explicit o(I^(-1)) expectation correction."
+    },
+    {
+      "order": 16,
+      "tag": "7W39",
+      "proof_uses": [
+        "VGZ9",
+        "CJ8R",
+        "X0R0"
+      ],
+      "reason": "Extend uniform ordered-tree tuple counts to mixed factorial moments, identify the joint generating function by independent marking, and transfer interval counts to ordered exponential arrival times."
+    }
+  ]
+}

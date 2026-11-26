@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 122 (Q-6), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied.
 -/
 module
 
@@ -56,69 +57,35 @@ theorem encard_iUnion_of_monotone {α : Type*} {K : ℕ → Set α} (hK : Monoto
 
 /-- Internal clusters increase with the domain. -/
 theorem monotone_induce_cluster {S : ℕ → Set V} (hS : Monotone S) (ω : Config V) (x : V) :
-    Monotone fun n => {y | ∃ hx : x ∈ S n, ∃ hy : y ∈ S n,
-      ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩} :=
+    Monotone fun n => localCluster ω (S n) x :=
   fun _ _ hnm _ hy => monotone_localConn hS x _ hnm hy
 
 /-- **The internal clusters increase to the cluster.** -/
 theorem iUnion_induce_cluster {S : ℕ → Set V} (hS : Monotone S) (hcover : ∀ v, ∃ n, v ∈ S n)
     (ω : Config V) (x : V) :
-    (⋃ n, {y | ∃ hx : x ∈ S n, ∃ hy : y ∈ S n,
-      ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩}) = cluster ω x := by
+    (⋃ n, localCluster ω (S n) x) = cluster ω x := by
   ext y
   rw [mem_cluster_iff, conn_eq_iUnion_localConn hS hcover]
-  simp only [mem_iUnion, mem_ofPred_eq]
+  simp only [mem_iUnion, mem_localCluster]
 
 /-- **The cluster volume is the supremum of the internal volumes.** -/
 theorem encard_cluster_eq_iSup_induce {S : ℕ → Set V} (hS : Monotone S)
     (hcover : ∀ v, ∃ n, v ∈ S n) (ω : Config V) (x : V) :
-    (cluster ω x).encard = ⨆ n, ({y | ∃ hx : x ∈ S n, ∃ hy : y ∈ S n,
-      ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩} : Set V).encard := by
+    (cluster ω x).encard = ⨆ n, (localCluster ω (S n) x : Set V).encard := by
   rw [← iUnion_induce_cluster hS hcover ω x,
     encard_iUnion_of_monotone (monotone_induce_cluster hS ω x)]
 
-/-- An internal connection event is measurable when there are countably many vertices. -/
-theorem measurableSet_induce_conn [Countable V] (S : Set V) (x y : V) :
-    MeasurableSet {ω : Config V | ∃ hx : x ∈ S, ∃ hy : y ∈ S,
-      ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} := by
-  by_cases hx : x ∈ S
-  · by_cases hy : y ∈ S
-    · have : {ω : Config V | ∃ hx : x ∈ S, ∃ hy : y ∈ S,
-          ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} =
-          {ω : Config V | ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} := by
-        ext ω
-        simp only [mem_ofPred_eq]
-        exact ⟨fun ⟨_, _, h⟩ => h, fun h => ⟨hx, hy, h⟩⟩
-      rw [this]
-      exact measurableSet_localConn S ⟨x, hx⟩ ⟨y, hy⟩
-    · have : {ω : Config V | ∃ hx : x ∈ S, ∃ hy : y ∈ S,
-          ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} = ∅ := by
-        ext ω
-        simp only [mem_ofPred_eq, mem_empty_iff_false, iff_false]
-        exact fun ⟨_, h, _⟩ => hy h
-      rw [this]
-      exact MeasurableSet.empty
-  · have : {ω : Config V | ∃ hx : x ∈ S, ∃ hy : y ∈ S,
-        ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} = ∅ := by
-      ext ω
-      simp only [mem_ofPred_eq, mem_empty_iff_false, iff_false]
-      exact fun ⟨h, _, _⟩ => hx h
-    rw [this]
-    exact MeasurableSet.empty
-
 /-- The internal cluster volume is measurable when there are countably many vertices. -/
 theorem measurable_encard_induce_cluster [Countable V] (S : Set V) (x : V) :
-    Measurable fun ω : Config V => ({y | ∃ hx : x ∈ S, ∃ hy : y ∈ S,
-      ((openGraph ω).induce S).Reachable ⟨x, hx⟩ ⟨y, hy⟩} : Set V).encard := by
+    Measurable fun ω : Config V => (localCluster ω S x : Set V).encard := by
   refine measurable_encard.comp (Measurable.of_mem fun y => ?_)
-  exact (measurableSet_induce_conn S x y).mem
+  exact (measurableSet_localConn S x y).mem
 
 /-- **The susceptibility is the supremum of the internal expected volumes.** Infinite
 values are allowed on both sides. -/
 theorem chi_eq_iSup_lintegral_induce [Countable V] (q : Sym2 V → unitInterval)
     {S : ℕ → Set V} (hS : Monotone S) (hcover : ∀ v, ∃ n, v ∈ S n) (x : V) :
-    chi q x = ⨆ n, ∫⁻ ω, (({y | ∃ hx : x ∈ S n, ∃ hy : y ∈ S n,
-      ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩} : Set V).encard : ℝ≥0∞)
+    chi q x = ⨆ n, ∫⁻ ω, ((localCluster ω (S n) x : Set V).encard : ℝ≥0∞)
         ∂law q := by
   rw [chi]
   simp_rw [encard_cluster_eq_iSup_induce hS hcover _ x, ENat.toENNReal_iSup]
@@ -129,10 +96,8 @@ theorem chi_eq_iSup_lintegral_induce [Countable V] (q : Sym2 V → unitInterval)
 /-- **Escape probabilities are suprema of internal escape probabilities.** -/
 theorem escape_eq_iSup_induce (q : Sym2 V → unitInterval) {S : ℕ → Set V} (hS : Monotone S)
     (hcover : ∀ v, ∃ n, v ∈ S n) (x : V) (F : Set V) :
-    law q (⋃ y ∈ Fᶜ, conn x y) = ⨆ n, law q {ω | ∃ y ∉ F, y ∈ {y | ∃ hx : x ∈ S n,
-      ∃ hy : y ∈ S n, ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩}} := by
-  have hmono : Monotone fun n => {ω : Config V | ∃ y ∉ F, y ∈ {y | ∃ hx : x ∈ S n,
-      ∃ hy : y ∈ S n, ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩}} :=
+    law q (⋃ y ∈ Fᶜ, conn x y) = ⨆ n, law q {ω | ∃ y ∉ F, y ∈ localCluster ω (S n) x} := by
+  have hmono : Monotone fun n => {ω : Config V | ∃ y ∉ F, y ∈ localCluster ω (S n) x} :=
     fun n m hnm ω ⟨y, hyF, hy⟩ => ⟨y, hyF, monotone_induce_cluster hS ω x hnm hy⟩
   rw [← hmono.measure_iUnion]
   congr 1
@@ -188,8 +153,7 @@ theorem law_cluster_infinite_eq_iInf_iSup_induce [Countable V] (q : Sym2 V → u
     {F : ℕ → Set V} (hF : Monotone F) (hfin : ∀ m, (F m).Finite) (hcov : ∀ v, ∃ m, v ∈ F m)
     (x : V) :
     law q {ω | (cluster ω x).Infinite} = ⨅ m, ⨆ n, law q {ω | ∃ y ∉ F m,
-      y ∈ {y | ∃ hx : x ∈ S n, ∃ hy : y ∈ S n,
-        ((openGraph ω).induce (S n)).Reachable ⟨x, hx⟩ ⟨y, hy⟩}} := by
+      y ∈ localCluster ω (S n) x} := by
   rw [law_cluster_infinite_eq_iInf_escape q hF hfin hcov x]
   simp_rw [escape_eq_iSup_induce q hS hcover x]
 
@@ -197,16 +161,14 @@ theorem law_cluster_infinite_eq_iInf_iSup_induce [Countable V] (q : Sym2 V → u
 
 /-- With `S n = univ` the internal cluster is the cluster. -/
 example (ω : Config V) (x : V) :
-    (⋃ _n : ℕ, {y | ∃ hx : x ∈ (univ : Set V), ∃ hy : y ∈ (univ : Set V),
-      ((openGraph ω).induce (univ : Set V)).Reachable ⟨x, hx⟩ ⟨y, hy⟩}) = cluster ω x :=
+    (⋃ _n : ℕ, localCluster ω (univ : Set V) x) = cluster ω x :=
   iUnion_induce_cluster (S := fun _ => univ) (fun _ _ _ => le_rfl) (fun _ => ⟨0, trivial⟩) ω x
 
 /-- On `ℕ`, with the initial segments as exhaustion, both for the domains (whose first
 term misses the root `5`) and for the finite sets. -/
 example (q : Sym2 ℕ → unitInterval) :
     law q {ω | (cluster ω 5).Infinite} = ⨅ m, ⨆ n, law q {ω | ∃ y ∉ Iic m,
-      y ∈ {y | ∃ hx : 5 ∈ Iic n, ∃ hy : y ∈ Iic n,
-        ((openGraph ω).induce (Iic n)).Reachable ⟨5, hx⟩ ⟨y, hy⟩}} :=
+      y ∈ localCluster ω (Iic n) 5} :=
   law_cluster_infinite_eq_iInf_iSup_induce q (fun _ _ h => Iic_subset_Iic.2 h)
     (fun v => ⟨v, mem_Iic.2 le_rfl⟩) (fun _ _ h => Iic_subset_Iic.2 h) (fun m => finite_Iic m)
     (fun v => ⟨v, mem_Iic.2 le_rfl⟩) 5

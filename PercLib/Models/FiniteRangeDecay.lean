@@ -1,9 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 461 (Q-127), written on 2026-11-16 by PROVER-E: a logarithmic fourth-moment
-bound from a weighted exponential moment (wiki exponential-moments, tag IXEZ), and box exits
-force large clusters for finite-range bonds on `ℤ^d` (tag YVJT, deterministic and conditional
-parts). No upstream proof is copied, no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: a logarithmic fourth-moment bound from a weighted exponential
+moment (wiki exponential-moments, tag IXEZ), and box exits force large clusters for finite-range
+bonds on `ℤ^d` (tag YVJT, deterministic and conditional parts). No upstream proof is copied, no
+definition is added and no Input is introduced.
 -/
 module
 
@@ -11,6 +15,9 @@ public import PercLib.Models.Site.Basic
 public import PercLib.Percolation.Bond.Forest
 public import Mathlib.Analysis.Complex.ExponentialBounds
 public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import PercLib.Probability.ExponentialMoments
+public import PercLib.Percolation.Bond.TreeGraph.Moments
+public import PercLib.Percolation.Bond.UniformVolumeTail
 
 /-! # Exponential comparisons for cluster volumes
 
@@ -18,12 +25,17 @@ public import Mathlib.MeasureTheory.Integral.Bochner.Basic
   `X⁴` is integrable and `E X⁴ ≤ 1152 χ⁴ (log 2χ)² E X²`. With `T = 24 χ² log(2χ)` and
   `s = 1/(4χ²)`, pointwise `X⁴ ≤ T² X² + T³ e^{-sT} X e^{sX}`, because `x³ e^{-sx}` is
   decreasing on `[T, ∞)`; then `E X² ≥ χ²` absorbs the second term.
+* `integral_encard_cluster_pow_four_le` (IXEZ for percolation): the same bound for the root
+  cluster volume of a model with finite susceptibility that is the same at every vertex.
 * `ae_encard_cluster_ge_of_exit` (YVJT, geometric step): for a profile on `ℤ^d` vanishing on
   pairs at sup distance `> R`, almost surely a connection from `o` to a vertex at sup distance
   `> r` forces `|K_o| ≥ ⌊r/R⌋ + 1`.
 * `law_exit_le` (YVJT, conditional): under the volume tail bound
   `P(|K_o| ≥ n) ≤ (√2 χ_o / n) e^{-n/(4M²)}` (an ordinary hypothesis here), the exit
   probability is at most `√2 χ_o e^{-r/(4RM²)}`.
+* `law_exit_le_of_iSup_chi_ne_top` (YVJT): the same exit bound with `χ_o = χ(o)` and
+  `M = ⨆ x, χ(x) < ∞`, the volume tail now supplied by
+  `PercLib.Percolation.Bond.law_encard_cluster_ge_le_sqrt_two_mul`.
 -/
 
 @[expose] public section
@@ -72,9 +84,9 @@ theorem pow_four_le_of_nonneg {x T s : ℝ} (hx : 0 ≤ x) (hT : 0 < T) (hsT : 3
       exact mul_le_mul_of_nonneg_left h3 hx
     nlinarith [sq_nonneg x, sq_nonneg T]
 
-/-- **IXEZ.** Let `X ≥ 0` be measurable and integrable on a probability space, with
-`χ = E X ≥ 1`, `X e^{X/(4χ²)}` integrable and `E[X e^{X/(4χ²)}] ≤ √2 χ`. Then `X⁴` and `X²` are
-integrable and `E X⁴ ≤ 1152 χ⁴ (log 2χ)² E X²`. -/
+/-- **Fourth moment from an exponential moment.** Let `X ≥ 0` be measurable and integrable on a
+probability space, with `χ = E X ≥ 1`, `X e^{X/(4χ²)}` integrable and `E[X e^{X/(4χ²)}] ≤ √2 χ`.
+Then `X⁴` and `X²` are integrable and `E X⁴ ≤ 1152 χ⁴ (log 2χ)² E X²`. -/
 theorem integral_pow_four_le {Ω : Type*} [MeasurableSpace Ω] {P : Measure Ω}
     [IsProbabilityMeasure P] {X : Ω → ℝ} (hXm : AEStronglyMeasurable X P) (hX0 : ∀ ω, 0 ≤ X ω)
     (hXi : Integrable X P) (hχ : 1 ≤ ∫ ω, X ω ∂P)
@@ -200,7 +212,8 @@ theorem integral_pow_four_le {Ω : Type*} [MeasurableSpace Ω] {P : Measure Ω}
   calc ∫ ω, X ω ^ 4 ∂P ≤ 2 * T ^ 2 * ∫ ω, X ω ^ 2 ∂P := by linarith
     _ = 1152 * χ ^ 4 * L ^ 2 * ∫ ω, X ω ^ 2 ∂P := by rw [hT]; ring
 
-/-- **D-5 witness for IXEZ:** `X ≡ 1` under any probability measure (`χ = 1`). -/
+/-- **Non-vacuity witness for `integral_pow_four_le`:** `X ≡ 1` under any probability measure
+(`χ = 1`). -/
 theorem integral_pow_four_le_const_one {Ω : Type*} [MeasurableSpace Ω] (P : Measure Ω)
     [IsProbabilityMeasure P] :
     ∫ _ω, (1 : ℝ) ^ 4 ∂P ≤
@@ -220,6 +233,112 @@ theorem integral_pow_four_le_const_one {Ω : Type*} [MeasurableSpace Ω] (P : Me
     exact (exp_le_exp.2 (by linarith : (1 / 2 : ℝ) ≤ Real.log 2)).trans_eq
       (Real.exp_log (by norm_num))
   linarith
+
+/-! ### IXEZ for cluster volumes -/
+
+section ClusterVolume
+
+open PercLib.Probability PercLib.Percolation.Bond
+open scoped ENNReal
+
+/-- **Fourth moment of the cluster volume.** For an independent bond model on a countable vertex set
+whose susceptibility is finite and the same at every vertex, the root cluster volume `X = |K_o|`
+(read in `ℕ`; it is a.s. finite) satisfies `E X⁴ ≤ 1152 χ⁴ log²(2χ) E X²`. The exponential-moment
+hypothesis of `integral_pow_four_le` comes from the tree-graph moment bounds
+(`lintegral_encard_pow_le`) and `lintegral_mul_exp_le` at `r = 1/(4χ²)`. -/
+theorem integral_encard_cluster_pow_four_le {V : Type*} [Countable V]
+    (q : Sym2 V → unitInterval) (o : V) (hconst : ∀ x, chi q x = chi q o)
+    (hfin : chi q o < ⊤) :
+    Integrable (fun ω => ((cluster ω o).encard.toNat : ℝ) ^ 4) (law q) ∧
+      Integrable (fun ω => ((cluster ω o).encard.toNat : ℝ) ^ 2) (law q) ∧
+      ∫ ω, ((cluster ω o).encard.toNat : ℝ) ^ 4 ∂law q ≤
+        1152 * (chi q o).toReal ^ 4 * Real.log (2 * (chi q o).toReal) ^ 2 *
+          ∫ ω, ((cluster ω o).encard.toNat : ℝ) ^ 2 ∂law q := by
+  set χ := (chi q o).toReal with hχdef
+  set X : Config V → ℝ := fun ω => ((cluster ω o).encard.toNat : ℝ) with hXdef
+  have hXm : Measurable X := measurable_encard_toNat_cluster o
+  have hX0 : ∀ ω, 0 ≤ X ω := fun ω => Nat.cast_nonneg _
+  have hχtop : chi q o ≠ ⊤ := hfin.ne
+  have hχ1 : 1 ≤ chi q o := by
+    calc (1 : ℝ≥0∞) = ∫⁻ _, 1 ∂law q := by simp
+      _ ≤ chi q o := lintegral_mono fun ω => by
+        have h : (1 : ℕ∞) ≤ (cluster ω o).encard :=
+          Set.one_le_encard_iff_nonempty.2 ⟨o, SimpleGraph.Reachable.refl o⟩
+        have h' := ENat.toENNReal_le.2 h
+        simpa using h'
+  have hχ : 1 ≤ χ := by
+    have := ENNReal.toReal_mono hχtop hχ1
+    simpa using this
+  have hχ0 : 0 < χ := zero_lt_one.trans_le hχ
+  -- `ofReal X ≤ |K_o|` everywhere, with equality where the cluster is finite.
+  have hle : ∀ ω, ENNReal.ofReal (X ω) ≤ ((cluster ω o).encard : ℝ≥0∞) := by
+    intro ω
+    rcases eq_or_ne (cluster ω o).encard ⊤ with h | h
+    · simp [h]
+    · obtain ⟨m, hm⟩ := ENat.ne_top_iff_exists.1 h
+      simp [hXdef, ← hm]
+  have hae : ∀ᵐ ω ∂law q, ENNReal.ofReal (X ω) = ((cluster ω o).encard : ℝ≥0∞) :=
+    ae_ofReal_encard_toNat_cluster_eq q o hχtop
+  have hlint : ∫⁻ ω, ENNReal.ofReal (X ω) ∂law q = chi q o := lintegral_congr_ae hae
+  have hXi : Integrable X (law q) :=
+    (lintegral_ofReal_ne_top_iff_integrable hXm.aestronglyMeasurable
+      (Filter.Eventually.of_forall hX0)).1 (by rw [hlint]; exact hχtop)
+  have hint : ∫ ω, X ω ∂law q = χ := by
+    rw [integral_eq_lintegral_of_nonneg_ae (Filter.Eventually.of_forall hX0)
+      hXm.aestronglyMeasurable, hlint]
+  -- Moment bounds from the tree-graph inequality (Y84V).
+  have hmom : ∀ m : ℕ, 1 ≤ m → ∫⁻ ω, ENNReal.ofReal (X ω ^ m) ∂law q ≤
+      ENNReal.ofReal (Nat.doubleFactorial (2 * m - 3) * χ ^ (2 * m - 1)) := by
+    intro m hm
+    have hY := lintegral_encard_pow_le q (M := chi q o) (fun x => (hconst x).le) m hm o
+    calc ∫⁻ ω, ENNReal.ofReal (X ω ^ m) ∂law q
+        ≤ ∫⁻ ω, ((cluster ω o).encard : ℝ≥0∞) ^ m ∂law q := lintegral_mono fun ω => by
+          rw [ENNReal.ofReal_pow (hX0 ω)]
+          exact pow_le_pow_left₀ zero_le (hle ω) m
+      _ ≤ _ := hY
+      _ = ENNReal.ofReal (Nat.doubleFactorial (2 * m - 3) * χ ^ (2 * m - 1)) := by
+        rw [← ENNReal.ofReal_toReal hχtop, ← hχdef,
+          ENNReal.ofReal_mul (Nat.cast_nonneg _), ENNReal.ofReal_natCast,
+          ← ENNReal.ofReal_pow hχ0.le,
+          show 2 * m - 1 = (2 * m - 2) + 1 by omega, pow_succ,
+          ENNReal.ofReal_mul (by positivity)]
+        ring
+  -- The exponential moment (0BQB).
+  set r : ℝ := 1 / (4 * χ ^ 2) with hrdef
+  have hr : 0 ≤ r := by positivity
+  have hr1 : r < (2 * χ ^ 2)⁻¹ := by
+    rw [hrdef, one_div]
+    exact inv_strictAnti₀ (by positivity) (by nlinarith [sq_pos_of_pos hχ0])
+  have hexpL := lintegral_mul_exp_le (P := law q) hXm hX0 hχ0 hmom hr hr1
+  have hval : χ / √(1 - 2 * r * χ ^ 2) = √2 * χ := by
+    have h1 : 1 - 2 * r * χ ^ 2 = 2⁻¹ := by
+      rw [hrdef]
+      field_simp
+      norm_num
+    rw [h1, Real.sqrt_inv, div_inv_eq_mul, mul_comm]
+  rw [hval] at hexpL
+  have hEm' : Measurable fun ω => X ω * exp (r * X ω) :=
+    hXm.mul (measurable_exp.comp (hXm.const_mul r))
+  have hE0 : ∀ ω, 0 ≤ X ω * exp (r * X ω) := fun ω => mul_nonneg (hX0 ω) (exp_pos _).le
+  have hexpi : Integrable (fun ω => X ω * exp (r * X ω)) (law q) :=
+    (lintegral_ofReal_ne_top_iff_integrable hEm'.aestronglyMeasurable
+      (Filter.Eventually.of_forall hE0)).1 (ne_top_of_le_ne_top ENNReal.ofReal_ne_top hexpL)
+  have hexp : ∫ ω, X ω * exp (r * X ω) ∂law q ≤ √2 * χ := by
+    rw [integral_eq_lintegral_of_nonneg_ae (Filter.Eventually.of_forall hE0)
+      hEm'.aestronglyMeasurable]
+    exact ENNReal.toReal_le_of_le_ofReal (by positivity) hexpL
+  have hfun : (fun ω => X ω * exp (X ω / (4 * (∫ ω, X ω ∂law q) ^ 2))) =
+      fun ω => X ω * exp (r * X ω) := by
+    funext ω
+    rw [hint, hrdef]
+    ring_nf
+  have main := integral_pow_four_le (P := law q) (X := X) hXm.aestronglyMeasurable hX0 hXi
+    (by rw [hint]; exact hχ) (by rw [hfun]; exact hexpi)
+    (by rw [hfun, hint]; exact hexp)
+  rw [hint] at main
+  exact main
+
+end ClusterVolume
 
 /-! ### YVJT -/
 
@@ -246,7 +365,7 @@ theorem norm_sub_le_length_mul {ω : Config (LatticeSite d)} {R : ℝ}
           linarith
       _ = (p.length + 1) * R := by ring
 
-/-- **YVJT, geometric step.** Let `q` vanish on pairs at sup distance `> R`, with `R > 0`.
+/-- **Geometric step.** Let `q` vanish on pairs at sup distance `> R`, with `R > 0`.
 Almost surely, if `o` is joined to a vertex `y` with `‖y - o‖ > r`, then
 `|K_o| ≥ ⌊r/R⌋ + 1`. -/
 theorem ae_encard_cluster_ge_of_exit (q : Sym2 (LatticeSite d) → unitInterval) {R r : ℝ}
@@ -283,10 +402,9 @@ theorem ae_encard_cluster_ge_of_exit (q : Sym2 (LatticeSite d) → unitInterval)
         rw [Set.encard_coe_eq_coe_finsetCard, hcard]
     _ ≤ (cluster ω o).encard := Set.encard_le_encard hsub
 
-/-- **YVJT, conditional.** Under the hypotheses of `ae_encard_cluster_ge_of_exit` with
-any real `r`, if `P(|K_o| ≥ n) ≤ (√2 χ / n) e^{-n/(4M²)}` for every `n ≥ 1` (the volume bound XLWI,
-here an ordinary hypothesis), then
-`P(o ↔ a vertex outside o + [-r,r]^d) ≤ √2 χ e^{-r/(4RM²)}`. -/
+/-- **Conditional.** Under the hypotheses of `ae_encard_cluster_ge_of_exit` with any real `r`, if
+`P(|K_o| ≥ n) ≤ (√2 χ / n) e^{-n/(4M²)}` for every `n ≥ 1` (a volume tail bound, here an ordinary
+hypothesis), then `P(o ↔ a vertex outside o + [-r,r]^d) ≤ √2 χ e^{-r/(4RM²)}`. -/
 theorem law_exit_le (q : Sym2 (LatticeSite d) → unitInterval) {R r χ M : ℝ} (hR : 0 < R)
     (hq : ∀ x y : LatticeSite d, R < ‖x - y‖ → q s(x, y) = 0) (o : LatticeSite d)
     (hχ : 0 ≤ χ)
@@ -314,7 +432,7 @@ theorem law_exit_le (q : Sym2 (LatticeSite d) → unitInterval) {R r χ M : ℝ}
 
 /-! ### Non-vacuity for YVJT -/
 
-/-- **D-5 witness for the geometric step:** `d = 1`, `R = 1`, open probability `p` on
+/-- **Non-vacuity witness for the geometric step:** `d = 1`, `R = 1`, open probability `p` on
 nearest-neighbour pairs of `ℤ` and `0` otherwise. -/
 theorem ae_encard_cluster_ge_of_exit_nn (p : unitInterval) (r : ℝ) :
     ∀ᵐ ω ∂law (Sym2.lift ⟨fun x y : LatticeSite 1 => if ‖x - y‖ ≤ 1 then p else 0,
@@ -323,7 +441,7 @@ theorem ae_encard_cluster_ge_of_exit_nn (p : unitInterval) (r : ℝ) :
         ((⌊r / 1⌋₊ + 1 : ℕ) : ℕ∞) ≤ (cluster ω 0).encard :=
   ae_encard_cluster_ge_of_exit _ one_pos (fun x y h => by simp [not_le.2 h]) 0
 
-/-- **D-5 witness for the conditional bound:** with the zero profile the cluster of `o` is
+/-- **Non-vacuity witness for the conditional bound:** with the zero profile the cluster of `o` is
 `{o}` almost surely, so the volume tail hypothesis holds with `χ = 2` and `M = 1`. -/
 theorem law_exit_le_zero (o : LatticeSite d) (r : ℝ) :
     law (fun _ : Sym2 (LatticeSite d) => (0 : unitInterval))
@@ -374,5 +492,49 @@ theorem law_exit_le_zero (o : LatticeSite d) (r : ℝ) :
     exact zero_le
 
 end YVJT
+
+/-! ### YVJT with the volume tail discharged -/
+
+section UniformSusceptibility
+
+open PercLib.Percolation.Bond PercLib.Models.Site
+open scoped ENNReal
+
+variable {d : ℕ}
+
+/-- **Spatial exponential decay for finite-range bonds.** Let `q` vanish on pairs at sup
+distance `> R`, with `R > 0`, and let `M = ⨆ x, χ(x) < ∞`. Then for every real `r`,
+`P(o ↔ a vertex outside o + [-r,r]^d) ≤ √2 χ(o) e^{-r/(4RM²)}`. -/
+theorem law_exit_le_of_iSup_chi_ne_top (q : Sym2 (LatticeSite d) → unitInterval) {R : ℝ}
+    (hR : 0 < R) (hq : ∀ x y : LatticeSite d, R < ‖x - y‖ → q s(x, y) = 0)
+    (hM : (⨆ x, chi q x) ≠ ⊤) (o : LatticeSite d) (r : ℝ) :
+    law q {ω | ∃ y, (openGraph ω).Reachable o y ∧ r < ‖y - o‖} ≤
+      ENNReal.ofReal (√2 * (chi q o).toReal *
+        exp (-(r / (4 * R * (⨆ x, chi q x).toReal ^ 2)))) := by
+  refine law_exit_le q hR hq o ENNReal.toReal_nonneg fun n hn => ?_
+  have hset : {ω : Config (LatticeSite d) | (n : ℕ∞) ≤ (cluster ω o).encard} =
+      {ω | ENNReal.ofReal (n : ℝ) ≤ ((cluster ω o).encard : ℝ≥0∞)} := by
+    ext ω
+    simp only [mem_ofPred_eq, ENNReal.ofReal_natCast]
+    rw [← ENat.toENNReal_le, ENat.toENNReal_coe]
+  rw [hset]
+  exact law_encard_cluster_ge_le_sqrt_two_mul q o hM (by exact_mod_cast hn)
+
+/-! ### Non-vacuity -/
+
+/-- The zero profile on `ℤ^d` has range `R = 1` and `χ ≡ 1`, so it meets every hypothesis of
+`law_exit_le_of_iSup_chi_ne_top`. -/
+example (o : LatticeSite d) (r : ℝ) :
+    law (fun _ : Sym2 (LatticeSite d) => (0 : unitInterval))
+        {ω | ∃ y, (openGraph ω).Reachable o y ∧ r < ‖y - o‖} ≤
+      ENNReal.ofReal (√2 * (chi (fun _ : Sym2 (LatticeSite d) => (0 : unitInterval)) o).toReal *
+        exp (-(r / (4 * 1 *
+          (⨆ x, chi (fun _ : Sym2 (LatticeSite d) => (0 : unitInterval)) x).toReal ^ 2)))) := by
+  have h1 : ∀ x, chi (fun _ : Sym2 (LatticeSite d) => (0 : unitInterval)) x = 1 :=
+    chi_eq_one_of_offDiagonal_zero _ fun _ _ _ => rfl
+  exact law_exit_le_of_iSup_chi_ne_top _ one_pos (fun _ _ _ => rfl)
+    (by simp [h1]) o r
+
+end UniformSusceptibility
 
 end PercLib.Models

@@ -1,0 +1,62 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "rohde-schramm-basic-sle-2005",
+  "entries": [
+    {
+      "id": "covering-grid-localization",
+      "title": "The covering comparison needs an inner grid for its lower bound",
+      "status": "provisional",
+      "locator": "Basic properties of SLE, Annals of Mathematics 161 (2005), proof of Theorem 8.1, p.912/PDF index29, displayed comparison immediately after defining the grid points; arXiv:math/0106036v4 Section 8.1. Compared with extracted journal PDF and HTML on 17 November 2026; no visual-PDF verification claimed.",
+      "claim": "The proof counts epsilon-grid points within epsilon of A and of the full trace, and bounds this count above by 100 times the epsilon-covering number of the trace intersected with A.",
+      "problem": "As a deterministic inequality this can fail because a nearby trace point can lie outside A. For the vertical trace i[0,infinity), A=B(0.04+i,0.01) and epsilon=0.1, the intersection is empty but the grid point i is counted. The source condition epsilon<dist(A,R) holds. This diagnoses the geometric comparison, not the dimension theorem for positive kappa.",
+      "correction": "Use the outer grid only to upper-bound the covering number. For the reverse estimate, choose an interior disk and grid points spaced by 5 epsilon inside it; each trace visit within epsilon occurs in A, and a covering disk accounts for at most one such grid point. Uniform compact small-ball estimates then prove the expected covering exponent. 1424 gives the full logarithmic limit using the already proved all-scale tail lower bound; YBRV derives the Hausdorff upper bound.",
+      "tags": [
+        "1424",
+        "YBRV"
+      ],
+      "issues": [],
+      "leanImpact": "A formal covering argument must distinguish proximity to the full trace from proximity to its restriction to A, and use a positive buffer for the lower grid. A trace-generation input and the compact-uniform one-point bounds must remain explicit. No compiled association, author confirmation or Hausdorff lower bound is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use an outer grid for the upper estimate and a separated interior grid for the lower estimate.",
+        "scale": "local",
+        "impact": "Repairs the localization step; the expected covering exponent and Hausdorff upper bound survive."
+      }
+    },
+    {
+      "id": "reverse-derivative-comparison",
+      "title": "A bounded factor replaces the derivative monotonicity comparison",
+      "status": "provisional",
+      "locator": "Basic properties of SLE, Annals of Mathematics 161 (2005), proof of Lemma 3.3, p.893/PDF index10, comparison immediately before (3.15); arXiv:math/0106036v4 Section 3.1. Compared in journal PDF text and HTML on 17 November 2026; no visual-PDF verification claimed.",
+      "claim": "After the reverse flow reaches height one, the proof bounds its derivative at that time above by the derivative at a later fixed reverse time, referring to the log-derivative formula (3.3).",
+      "problem": "The derivative need not increase. With zero driving from z=i/2, height one occurs at time 3/16 with derivative magnitude 1/2, whereas at time one the magnitude is 1/sqrt(17). The strict reverse inequality persists in a uniform neighborhood of the zero driving path, by continuous dependence and a transverse height crossing; Brownian full support makes such a neighborhood have positive probability for every positive kappa.",
+      "correction": "Use the two-sided height comparison O0VQ. If reverse height one is reached at s<=C, then for every real moment order a, D_C^a >= (1+4C)^(-abs(a)/2) D_s^a. This bounded loss can be absorbed into the unspecified positive constant in the passage from (3.14) to (3.15), including negative moment orders. The full tube-probability lower-bound proof of Lemma 3.3 is not supplied by this repair. Update: 7NGO now proves the full lemma separately, using the tilted-diffusion fractional-moment estimate CUBE in place of the source tube event, together with this bounded-factor comparison.",
+      "tags": [
+        "O0VQ",
+        "7NGO"
+      ],
+      "issues": [],
+      "leanImpact": "A formal proof should retain the absolute log-derivative bound and an explicit positive comparison constant, rather than assume derivative monotonicity or silently require a>=0. The source lemma is unchanged. The source constant and remaining lower-bound hypotheses still need their own proofs. No compiled association or author confirmation. The written proof 7NGO now supplies the remaining probabilistic estimates and constants; no corresponding Lean compilation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Replace derivative monotonicity by the two-sided height comparison with a bounded multiplicative loss.",
+        "scale": "local",
+        "impact": "Repairs the comparison for every real moment order without changing the lemma. The full lower-bound lemma is now proved separately in 7NGO using tilted-diffusion moments."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "Published article: Annals of Mathematics 161 (2005), 883–924",
+    "checkedUrl": "https://annals.math.princeton.edu/wp-content/uploads/annals-v161-n2-p07.pdf",
+    "method": "The published PDF was read in extracted text and the corresponding passages were compared with arXiv v4 HTML. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Both reports have published-text locators: the localized grid comparison in Theorem 8.1, p.912, and the real-moment derivative comparison in Lemma 3.3, p.893. Both remain provisional; the written repairs are separate from confirmation and formal verification.",
+    "comparisons": [
+      {
+        "version": "arXiv:math/0106036v4",
+        "url": "https://arxiv.org/html/math/0106036v4",
+        "status": "compared",
+        "findings": "Sections 8.1 and 3.1 were compared at the two reported passages. The same grid-localization and derivative-comparison issues are recorded in v4 and the published text; no full-paper equivalence or visual-PDF audit is claimed."
+      }
+    ]
+  }
+}

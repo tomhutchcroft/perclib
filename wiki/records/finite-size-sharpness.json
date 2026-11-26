@@ -1,0 +1,105 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-size-sharpness",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 17
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 1,
+      "label": "Sharpness from the boundary functional",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-susceptibility-continuity",
+      "order": 0,
+      "label": "Left continuity and vanishing boundary flux",
+      "locator": "Named public declaration start lines: 46, 54, 66, 73, 90, 159, 176, 189",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "Left continuity allows infinite susceptibility and needs no summable-row assumption. Vanishing boundary flux needs finite susceptibility at one root and a finite uniform probability-row bound, but no transitivity. The three-way RDF0 equivalence is not exported here."
+    },
+    {
+      "source": "perclib-finite-set-criterion",
+      "order": 0,
+      "label": "Transitive contraction and critical boundary flux",
+      "locator": "Named public declaration start lines: 44, 52, 61, 72, 81, 104, 111, 125, 130, 138, 204, 246, 267, 279, 313, 362, 390, 438, 444",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "Finite-row continuity, transport, persistence of a contracting set and R84Z are exported. Source automorphisms preserve all unordered-pair weights; diagonal erasure gives the graph interpretation with off-diagonal invariance. The full threshold identification and density theorem are separate."
+    },
+    {
+      "source": "perclib-supercritical-integration",
+      "order": 0,
+      "label": "Integration and exhaustion for supercritical density",
+      "locator": "Named public declaration start lines: 42, 67, 118, 145, 160, 183, 206, 220",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "These are integration lemmas and conditional percolation consequences. The finite-volume escape differential inequality remains an explicit hypothesis; this file does not supply it or identify the finite-size threshold with the percolation threshold."
+    },
+    {
+      "source": "perclib-unexplored-region",
+      "order": 0,
+      "label": "The unexplored region and internal independence",
+      "locator": "Named public declaration start lines: 31, 47, 69, 87, 114, 147",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The event specifying the unexplored region is unaffected by internal coordinates. The product-law factorization is an identity of event probabilities, including null events; it supplies the first part of HATE."
+    },
+    {
+      "source": "perclib-wired-derivative-formula",
+      "order": 0,
+      "label": "The finite-domain escape derivative",
+      "locator": "Named public declaration start lines: 51, 63, 116, 126, 171, 197, 231, 294, 317, 332, 356, 403, 494, 509, 545, 589, 624, 634",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies the exact derivative and finite-size differential inequality in HATE, with summable rows and no transitivity. The derivative at zero is from the right. The Train 7 appendix evaluates the two-vertex escape probability and derivative; it does not identify the global threshold."
+    },
+    {
+      "source": "perclib-train10-sharpness",
+      "order": 0,
+      "label": "Assembled sharpness theorem",
+      "locator": "Explicit public theorem start lines: 54, 61, 70, 105, 142, 158, 188, 202, 215, 224, 239, 250, 263, 272, 288",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled status inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "HATE",
+      "proof_uses": [
+        "IENL"
+      ],
+      "reason": "The proof factorises P(S=T, o<->_T u) by independence, identifies closed pivotal bonds, and applies the finite intensity Russo formula (IENL)."
+    },
+    {
+      "order": 1,
+      "tag": "L0TE",
+      "proof_uses": [
+        "YLZV",
+        "HATE"
+      ],
+      "reason": "Below t the finite-size susceptibility criterion (YLZV) gives finite susceptibility; above t the differential inequality of HATE is integrated and the domains are exhausted."
+    },
+    {
+      "order": 2,
+      "tag": "RDF0",
+      "proof_uses": [
+        "YLZV",
+        "L0TE",
+        "R84Z"
+      ],
+      "reason": "Contraction implies finite susceptibility by YLZV and the threshold theorem L0TE; the converse uses dominated convergence and the persistence argument of the critical-flux theorem (R84Z)."
+    }
+  ]
+}

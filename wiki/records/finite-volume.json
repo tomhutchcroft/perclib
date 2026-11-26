@@ -1,0 +1,114 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-volume",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 9
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-window-tails",
+      "order": 0,
+      "label": "Finite-window identities and finite-edge limits",
+      "locator": "Named statement start lines in the pinned source: 23, 42, 51, 59, 66, 84, 93, 101, 120, 130, 134",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "FD69 retains arbitrary vertices for the deterministic tail representation, including roots outside the window and zero/impossible thresholds. F0I9 gives simultaneous finite witnesses; SFLE gives monotone event and probability limits. The source exhausts all unordered pairs; the article notes that covering the non-diagonal pairs suffices for graph observables. A finite window is not asserted to be a fixed finite-coordinate support."
+    },
+    {
+      "source": "perclib-local-connectivity",
+      "order": 0,
+      "label": "Restrictions, local witnesses and limits",
+      "locator": "Named statement start lines in the pinned source: 27, 33, 39, 45, 53, 60, 66, 72, 78, 103, 113, 133, 141",
+      "relationship": "Source-inspected exposition with explicit measurable scope",
+      "status": "pending",
+      "note": "7BMQ gives restriction measurability, induced graph identity, support dependence, monotonicity and finite vertex witnesses without ambient countability. Countability of the domain alone suffices for local-event measurability. The restriction pushforward law is an additional expository cylinder argument. SFLE and 5UJQ supply the countable-exhaustion connection limits; no probability interpretation of unverified measurable ambient events is added."
+    },
+    {
+      "source": "perclib-cluster-moments",
+      "order": 0,
+      "label": "Mixed moments and cofinal second-moment windows",
+      "locator": "Named theorem start lines: 28, 45, 54, 72, 79, 86, 102, 109",
+      "relationship": "Grouped source-contract exposition with a stated law generalization",
+      "status": "pending",
+      "note": "6HJ9 expands finite mixed and square moments and full extended moments by joint connections. Pointwise identities require no countability; the probabilistic statements retain countable vertices. The source uses the Bernoulli law, while the same indicator/Tonelli proof given here applies to any configuration law. NEM5 preserves cofinality over all finite subsets and the supremum conclusion without assuming an ordered index. Union coverage alone and arbitrary sequence convergence are expressly excluded."
+    },
+    {
+      "source": "perclib-domain-independence",
+      "order": 0,
+      "label": "Independence of internal events in disjoint domains",
+      "locator": "Named theorem start lines: 32, 41, 61, 71, 82, 92",
+      "relationship": "Complete grouped source contracts with measurable scope retained",
+      "status": "pending",
+      "note": "RDX7 identifies disjoint internal pair blocks, support determination and the finite-family product formula, including the empty family. Ambient vertices may be arbitrary. Measurability is an explicit hypothesis for general events; countability of each domain supplies it for internal connections. The independent-coordinate argument reuses QH7Q. The four-vertex dependent full-window example is additional exposition, not a source counterexample."
+    },
+    {
+      "source": "perclib-induced-exhaustions",
+      "order": 0,
+      "label": "Internal cluster and escape limits",
+      "locator": "Named public theorem start lines: 45, 58, 64, 73, 81, 110, 118, 130, 156, 175, 186",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "6QN7 gives extended-cardinality monotone unions, internal-cluster monotonicity/exhaustion, countable measurability and monotone convergence for susceptibility. It distinguishes arbitrary-domain exhaustion from the separate finite-set escape exhaustion. On arbitrary ambient vertices the source escape and local-connection limits are interpreted as outer-measure identities, not unverified measurable probabilities. Domains may initially omit the root. The finite-domain reversed-limit example is an additional explanation using the existing B12T."
+    },
+    {
+      "source": "perclib-finite-volume-associations",
+      "order": 0,
+      "label": "Finite-window and cluster-partition associations",
+      "locator": "Named public declaration start lines: 56, 74",
+      "relationship": "Source-inspected association with explicit scope distinctions",
+      "status": "pending",
+      "note": "FD69 and F0I9 bundle finite-window event identities and finite open certificates on arbitrary vertex types. Countability is an explicit additional premise only for measurability. No fixed finite coordinate support is asserted. Compiled evidence and independent fingerprint-bound review remain separate."
+    },
+    {
+      "source": "perclib-finite-volume-train9",
+      "order": 0,
+      "label": "Expanded finite-volume assertions",
+      "locator": "Explicit public declaration start lines: 51, 153, 185, 203, 227, 237, 264, 310, 442, 529",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten source assertions include the four new restriction and exhaustion wrappers. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "6HJ9",
+      "proof_uses": [
+        "6WC8",
+        "7QJG",
+        "8DSI"
+      ],
+      "reason": "Expand cluster volumes into measurable connection indicators and apply finite linearity or nonnegative Tonelli."
+    },
+    {
+      "order": 1,
+      "tag": "NEM5",
+      "proof_uses": [
+        "6HJ9"
+      ],
+      "reason": "Cofinality places both projections of each finite pair set in a common window; finite nonnegative subsums recover the full moment."
+    },
+    {
+      "order": 2,
+      "tag": "RDX7",
+      "proof_uses": [
+        "QH7Q",
+        "7BMQ"
+      ],
+      "reason": "Disjoint domains have disjoint internal coordinate sets. Restriction measurability and block independence yield the finite product formula."
+    },
+    {
+      "order": 0,
+      "tag": "6QN7",
+      "proof_uses": [
+        "7BMQ",
+        "B12T"
+      ],
+      "reason": "Finite path witnesses yield induced-domain exhaustion and measurable internal connections; the finite-set escape characterization gives the separate outer infimum."
+    }
+  ]
+}

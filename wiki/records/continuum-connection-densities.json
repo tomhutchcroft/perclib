@@ -1,0 +1,374 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "continuum-connection-densities",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 133
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 0,
+      "label": "Mixed-boundary angular operator",
+      "locator": "arXiv:1011.5822v3, Lemma 2.2 proof, (8)–(9)",
+      "relationship": "Definition with explicit boundary conditions",
+      "status": "pending",
+      "note": "Closed weighted energy form with a zero trace at 0 and natural reflecting flux at 1 after the angular change of variable. Standard closed-form representation is explicit."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 1,
+      "label": "Complete Jacobi spectrum",
+      "locator": "arXiv:1011.5822v3, Lemma 2.2 spectral argument, printed pp.4–5",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Alternative analytic proof by a ground-state transform and polynomial orthogonality. Complete spectrum -5/48-3n(n+1)/4; both operator-domain boundary conditions checked."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 2,
+      "label": "Uniform one-arm asymptotic",
+      "locator": "arXiv:1011.5822v3, Lemma 2.2, (6)–(9) and its final normalization",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Beta projection gives 18/(5pi). Polynomial sup bounds and the exact spectral gap prove uniform relative error O(exp(-3s/2)), strengthening the fixed-angle asymptotic."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 3,
+      "label": "Conformal-radius density",
+      "locator": "arXiv:1011.5822v3, Lemma 2.2, equation (6)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Conditional application: radial-SLE identification and conformal invariance are explicit inputs; the analytic asymptotic is proved."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 4,
+      "label": "Boundary interval density",
+      "locator": "arXiv:1011.5822v3, Lemma 2.1 and Remark 2, equation (5)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Direct consequence of the stated Cardy formula, with the symmetric interval factor, gamma constant and differential identities checked."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 5,
+      "label": "Stopped boundary conditioning",
+      "locator": "arXiv:1011.5822v3, Section 3, first change-of-measure calculation, printed p.6",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Normalized martingale, Girsanov drift and convergence of finite-neighbourhood stopped laws under explicit domain-Markov/Cardy inputs. No terminal-law claim."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 6,
+      "label": "Joint-density operator",
+      "locator": "arXiv:1011.5822v3, Theorem 3.2, (13) and proof, printed pp.7–8",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Exact product identity supplies the inverse-square boundary potential. Missing square in the source is recorded provisionally."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 7,
+      "label": "Conditional and joint conformal weights",
+      "locator": "arXiv:1011.5822v3, Introduction, covariance display after Theorem 1.1, printed p.2",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Boundary density factors cancel in the conditional quotient. The printed additional boundary factor belongs to CF; a dilation checks the normalization."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 8,
+      "label": "Boundary conditioning away from its target",
+      "locator": "arXiv:1011.5822v3, Section 3, conditioning and terminal integrability",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "RSW gluing bounds the boundary connection event below by a local arm; independence then controls every event outside that half-box, without monotonicity of that event."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 9,
+      "label": "Inverse conformal-radius moment under conditioning",
+      "locator": "arXiv:1011.5822v3, Section 3, final uniform-integrability argument",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "The local comparison transfers the alternating bulk two-arm bound through the conditioning. A tail integral gives every inverse-radius moment below 1/4, including L^(6/5) domination for exponent 5/48."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 10,
+      "label": "Uniformly bounded strip factor",
+      "locator": "arXiv:1011.5822v3, Section 3, (14), (19) and the uniform-integrability argument",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "An exact harmonic-measure factorization bounds the candidate by 2^(1/3) K4 times the inverse conformal radius to power 5/48."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 11,
+      "label": "Verification of the strip differential equation",
+      "locator": "arXiv:1011.5822v3, Section 3, (12)–(14) and the candidate following (14)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Written reduction to the hypergeometric equation. The stopped Mobius coordinate-change theorem is an explicit input; the calculation uses only the explicit candidate, not assumed smoothness of an unknown density."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 12,
+      "label": "Three terminal values",
+      "locator": "arXiv:1011.5822v3, Section 3, stopping cases 1–3 and (15)–(19)",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "Under the stated terminal exploration geometry, the strip abscissa tends to zero in every case. Harmonic-measure convergence identifies the limit, and the common integrable bound gives L1 convergence."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 13,
+      "label": "Conditional five-point density",
+      "locator": "arXiv:1011.5822v3, Theorem 1.1 and Section 3 terminal representation",
+      "relationship": "Written proof from explicit inputs",
+      "status": "pending",
+      "note": "The density asymptotic follows by dominated convergence under the explicit terminal domain Markov identification; optional stopping identifies the expectation with the candidate. Terminal conditioning and foundational percolation/SLE results remain literature inputs."
+    },
+    {
+      "source": "smirnov-werner-critical-exponents-2001",
+      "order": 14,
+      "label": "Alternating bulk two-arm input",
+      "locator": "arXiv:math/0109120v2, Theorem 4; Section 4, (9), (12)–(16), (22) and Remarks 5–6",
+      "relationship": "Explicit literature input and scope comparison",
+      "status": "pending",
+      "note": "The continuum upper bound for any exponent below 1/4 is an explicit input to GXMS. It concerns one open and one closed arm; the source exponent proof is not reproduced."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 15,
+      "label": "Stopped Mobius coordinate-change input",
+      "locator": "arXiv:math/0505368v1, Definitions 1–2, Theorem 3 and Remark 4",
+      "relationship": "Explicit literature input and scope comparison",
+      "status": "pending",
+      "note": "AGJ2 uses the theorem with kappa=6 and force weights +2,-2, whose sum is zero. Its collision/target stopping condition is retained."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 16,
+      "label": "Ordinary-SLE moment scope",
+      "locator": "Annals of Mathematics 161 (2005), Lemma 6.3, pp.903–904; (6.2)",
+      "relationship": "Explicit literature input and scope comparison",
+      "status": "pending",
+      "note": "The cited threshold 1/4 is for ordinary chordal SLE6. GXMS supplies a separate conditioned-law argument; no transfer by local absolute continuity or source erratum is asserted."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 17,
+      "label": "Finite right-force collision",
+      "locator": "arXiv:1011.5822v3, Section 3, two-force driving law before Remark 3 and Lemma 3.1",
+      "relationship": "Supplementary proof for the stated driving system",
+      "status": "pending",
+      "note": "The maximal SLE6(2,-2) gap system has finite lifetime. A one-dimensional comparison is proved directly by its scale and square martingales; the left gap stays positive and the right gap tends to zero. No trace interpretation is inferred."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 18,
+      "label": "Integrable endpoint drifts",
+      "locator": "arXiv:1011.5822v3, Section 3, two-force driving law before Remark 3 and Lemma 3.1",
+      "relationship": "Supplementary proof for the stated driving system",
+      "status": "pending",
+      "note": "A b log b Lyapunov estimate proves integrability of the reciprocal right gap. All three positions have finite continuous endpoints, with the left force point separated by at least the initial outer span."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 19,
+      "label": "Collision-time tail and moments",
+      "locator": "arXiv:1011.5822v3, Section 3, two-force driving law before Remark 3 and Lemma 3.1",
+      "relationship": "Supplementary proof for the stated driving system",
+      "status": "pending",
+      "note": "Brownian first-passage domination gives an explicit t^(-1/2) upper tail and finite moments of orders below one half. No assertion about divergence at higher orders."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 20,
+      "label": "Unique continuous absorbed driving law",
+      "locator": "arXiv:1011.5822v3, Section 3, two-force driving law before Remark 3 and Lemma 3.1",
+      "relationship": "Supplementary proof for the stated driving system",
+      "status": "pending",
+      "note": "Local uniqueness, compact stopped Girsanov laws and the continuous finite endpoint construct the unique law held constant after collision. Finite-neighbourhood convergence at terminal times and percolation geometry remain separate."
+    },
+    {
+      "source": "beliaev-izyurov-factorization-2012",
+      "order": 21,
+      "label": "Candidate equation with proved target change",
+      "locator": "arXiv:1011.5822v3, Section 3, explicit candidate and its local-martingale verification before (15)",
+      "relationship": "Written local equation with coordinate-change premise discharged",
+      "status": "pending",
+      "note": "The needed chordal coordinate change is proved by C6T0/6RZ1/0INI. Together with the normalized hypergeometric calculation retained in AGJ2, this proves the full candidate equation under the stated deterministic and stochastic foundations; terminal percolation inputs remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8X8I",
+      "proof_uses": [
+        "O3HO"
+      ],
+      "reason": "Alternative analytic proof by a ground-state transform and polynomial orthogonality. Complete spectrum -5/48-3n(n+1)/4; both operator-domain boundary conditions checked."
+    },
+    {
+      "order": 1,
+      "tag": "DCSM",
+      "proof_uses": [
+        "8X8I"
+      ],
+      "reason": "Beta projection gives 18/(5pi). Polynomial sup bounds and the exact spectral gap prove uniform relative error O(exp(-3s/2)), strengthening the fixed-angle asymptotic."
+    },
+    {
+      "order": 2,
+      "tag": "Q4NI",
+      "proof_uses": [
+        "DCSM"
+      ],
+      "reason": "Conditional application: radial-SLE identification and conformal invariance are explicit inputs; the analytic asymptotic is proved."
+    },
+    {
+      "order": 3,
+      "tag": "GTW7",
+      "proof_uses": [],
+      "reason": "Direct consequence of the stated Cardy formula, with the symmetric interval factor, gamma constant and differential identities checked."
+    },
+    {
+      "order": 4,
+      "tag": "W3QF",
+      "proof_uses": [
+        "GTW7"
+      ],
+      "reason": "Normalized martingale, Girsanov drift and convergence of finite-neighbourhood stopped laws under explicit domain-Markov/Cardy inputs. No terminal-law claim."
+    },
+    {
+      "order": 5,
+      "tag": "ES94",
+      "proof_uses": [
+        "GTW7",
+        "W3QF"
+      ],
+      "reason": "Exact product identity supplies the inverse-square boundary potential. Missing square in the source is recorded provisionally."
+    },
+    {
+      "order": 6,
+      "tag": "QLZ6",
+      "proof_uses": [],
+      "reason": "Boundary density factors cancel in the conditional quotient. The printed additional boundary factor belongs to CF; a dilation checks the normalization."
+    },
+    {
+      "order": 7,
+      "tag": "QHTF",
+      "proof_uses": [],
+      "reason": "RSW gluing bounds the boundary connection event below by a local arm; independence then controls every event outside that half-box, without monotonicity of that event."
+    },
+    {
+      "order": 8,
+      "tag": "GXMS",
+      "proof_uses": [
+        "QHTF",
+        "W3QF"
+      ],
+      "reason": "The local comparison transfers the alternating bulk two-arm bound through the conditioning. A tail integral gives every inverse-radius moment below 1/4, including L^(6/5) domination for exponent 5/48."
+    },
+    {
+      "order": 9,
+      "tag": "RD0Q",
+      "proof_uses": [
+        "V456",
+        "ZZ9Q"
+      ],
+      "reason": "An exact harmonic-measure factorization bounds the candidate by 2^(1/3) K4 times the inverse conformal radius to power 5/48."
+    },
+    {
+      "order": 10,
+      "tag": "AGJ2",
+      "proof_uses": [
+        "W3QF",
+        "ES94"
+      ],
+      "reason": "Written reduction to the hypergeometric equation. The stopped Mobius coordinate-change theorem is an explicit input; the calculation uses only the explicit candidate, not assumed smoothness of an unknown density."
+    },
+    {
+      "order": 11,
+      "tag": "X364",
+      "proof_uses": [
+        "GXMS",
+        "RD0Q",
+        "ZZ9Q"
+      ],
+      "reason": "Under the stated terminal exploration geometry, the strip abscissa tends to zero in every case. Harmonic-measure convergence identifies the limit, and the common integrable bound gives L1 convergence."
+    },
+    {
+      "order": 12,
+      "tag": "SQJF",
+      "proof_uses": [
+        "DCSM",
+        "Q4NI",
+        "GXMS",
+        "RD0Q",
+        "AGJ2",
+        "X364"
+      ],
+      "reason": "The density asymptotic follows by dominated convergence under the explicit terminal domain Markov identification; optional stopping identifies the expectation with the candidate. Terminal conditioning and foundational percolation/SLE results remain literature inputs."
+    },
+    {
+      "order": 13,
+      "tag": "HOKP",
+      "proof_uses": [
+        "W3QF"
+      ],
+      "reason": "The maximal SLE6(2,-2) gap system has finite lifetime. A one-dimensional comparison is proved directly by its scale and square martingales; the left gap stays positive and the right gap tends to zero. No trace interpretation is inferred."
+    },
+    {
+      "order": 14,
+      "tag": "QF08",
+      "proof_uses": [
+        "HOKP"
+      ],
+      "reason": "A b log b Lyapunov estimate proves integrability of the reciprocal right gap. All three positions have finite continuous endpoints, with the left force point separated by at least the initial outer span."
+    },
+    {
+      "order": 15,
+      "tag": "6EPL",
+      "proof_uses": [
+        "HOKP"
+      ],
+      "reason": "Brownian first-passage domination gives an explicit t^(-1/2) upper tail and finite moments of orders below one half. No assertion about divergence at higher orders."
+    },
+    {
+      "order": 16,
+      "tag": "0SPP",
+      "proof_uses": [
+        "W3QF",
+        "HOKP",
+        "QF08"
+      ],
+      "reason": "Local uniqueness, compact stopped Girsanov laws and the continuous finite endpoint construct the unique law held constant after collision. Finite-neighbourhood convergence at terminal times and percolation geometry remain separate."
+    },
+    {
+      "order": 17,
+      "tag": "8Q5E",
+      "proof_uses": [
+        "C6T0",
+        "6RZ1",
+        "0INI",
+        "AGJ2",
+        "W3QF"
+      ],
+      "reason": "The needed chordal coordinate change is proved by C6T0/6RZ1/0INI. Together with the normalized hypergeometric calculation retained in AGJ2, this proves the full candidate equation under the stated deterministic and stochastic foundations; terminal percolation inputs remain separate."
+    },
+    {
+      "order": 18,
+      "tag": "O3HO",
+      "proof_uses": [],
+      "reason": "A definition; its well-posedness remarks use the closed-form representation theorem of Hilbert-space theory and no other wiki assertion."
+    }
+  ]
+}

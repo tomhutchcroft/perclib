@@ -1,0 +1,118 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "correlation-length-fourier",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 169
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Exact squared-length identity",
+      "locator": "17 March 2017 author manuscript, Exercise 11.1 and (11.1.6)\u2013(11.1.7), printed p.136 / PDF index147.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "Absolute moments justify both quotient derivatives and the signed moment formula."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Near-critical correlation-length scale",
+      "locator": "17 March 2017 author manuscript, Theorem 11.1, (11.1.1), and Exercise 11.1, printed pp.135\u2013136 / PDF indices146\u2013147.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "The completed bootstrap gives the uniform comparison on p_c/2 <= p < p_c; the dimension factor and zero endpoint are explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical Fourier amplitude",
+      "locator": "17 March 2017 author manuscript, Theorem 11.3, (11.2.1)\u2013(11.2.2), and Exercise 11.2, printed p.137 / PDF index148.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "The second moment proves the little-oh asymptotic. A power remainder is conditional on an absolute higher moment."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Tilted mass normalization",
+      "locator": "17 March 2017 author manuscript, Discussion of Theorem 11.2 and (11.1.4)\u2013(11.1.5), printed p.136 / PDF index147.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "The conditional tilted identity places squared mass on the inverse-susceptibility side. Identifying the mass and proving the tilted estimates remain separate."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Spatial bootstrap continuity",
+      "locator": "17 March 2017 author manuscript, Exercise 11.3 and (11.2.5), printed p.138 / PDF index149.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "The finite-box first-exit kernel gives an exponential moment, then weighted norm continuity controls the supremum."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 5,
+      "label": "Signed heat integral",
+      "locator": "17 March 2017 author manuscript, Exercise 11.5 and (11.2.10)\u2013(11.2.12), printed pp.138\u2013139 / PDF indices149\u2013150.",
+      "relationship": "Written moment and Fourier deductions; remaining inputs explicit",
+      "status": "pending",
+      "note": "The positive Fourier gap and d>2 justify absolute Fubini even when the spatial kernel is signed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "CM3M",
+      "proof_uses": [
+        "8LOF"
+      ],
+      "reason": "Absolute moments justify both quotient derivatives and the signed moment formula."
+    },
+    {
+      "order": 1,
+      "tag": "93RC",
+      "proof_uses": [
+        "CM3M",
+        "MYG7",
+        "F7N7",
+        "C2V4",
+        "0Y4K"
+      ],
+      "reason": "The completed bootstrap gives the uniform comparison on p_c/2 <= p < p_c; the dimension factor and zero endpoint are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "ET10",
+      "proof_uses": [
+        "F7N7",
+        "22TW"
+      ],
+      "reason": "The second moment proves the little-oh asymptotic. A power remainder is conditional on an absolute higher moment."
+    },
+    {
+      "order": 3,
+      "tag": "1BG0",
+      "proof_uses": [],
+      "reason": "The conditional tilted identity places squared mass on the inverse-susceptibility side. Identifying the mass and proving the tilted estimates remain separate."
+    },
+    {
+      "order": 4,
+      "tag": "BT9V",
+      "proof_uses": [
+        "8LOF"
+      ],
+      "reason": "The finite-box first-exit kernel gives an exponential moment, then weighted norm continuity controls the supremum."
+    },
+    {
+      "order": 5,
+      "tag": "ZPZZ",
+      "proof_uses": [],
+      "reason": "The positive Fourier gap and d>2 justify absolute Fubini even when the spatial kernel is signed."
+    }
+  ]
+}

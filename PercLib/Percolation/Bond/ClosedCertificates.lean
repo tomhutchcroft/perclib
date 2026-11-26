@@ -1,12 +1,16 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 223, Q-47). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
 public import PercLib.Probability.OpenEventHarris
+public import Mathlib.Combinatorics.SimpleGraph.Bipartite
+public import Mathlib.Combinatorics.SimpleGraph.Finite
 
 /-!
 # Closed certificates for non-connection
@@ -118,6 +122,7 @@ theorem isLowerSet_cluster_finite (x : V) :
 
 /-- For `x ∈ C`, the cluster of `x` lies in `C` exactly when no pair from the cluster to the
 complement of `C` is open. -/
+@[tag "YIM4"]
 theorem cluster_subset_iff (ω : Config V) {x : V} {C : Set V} (hx : x ∈ C) :
     cluster ω x ⊆ C ↔ ∀ a ∈ cluster ω x, ∀ b ∉ C, s(a, b) ∉ ω := by
   constructor
@@ -136,6 +141,80 @@ theorem cluster_subset_iff (ω : Config V) {x : V} {C : Set V} (hx : x ∈ C) :
       refine ih ?_ hbx
       by_contra hb
       exact h a hax b hb ((openGraph_adj_iff ω a b).1 hab).1
+
+/-! ### Certificates on a host graph
+
+For a host graph `G` and a vertex set `C`, the pairs of `G` leaving `C` are the edge set of
+mathlib's `G.between C Cᶜ`. -/
+
+/-- The host pairs leaving a finite set are finitely many when the host is locally finite. -/
+theorem finite_edgeSet_between_compl (G : SimpleGraph V) [G.LocallyFinite] {C : Set V}
+    (hC : C.Finite) : (G.between C Cᶜ).edgeSet.Finite := by
+  classical
+  refine (hC.biUnion fun a _ => (G.incidenceSet a).toFinite).subset fun e he => ?_
+  induction e using Sym2.ind with
+  | _ u w =>
+    rw [SimpleGraph.mem_edgeSet, SimpleGraph.between_adj] at he
+    obtain ⟨hadj, ⟨hu, -⟩ | ⟨-, hw⟩⟩ := he
+    · exact mem_biUnion hu ⟨hadj, Sym2.mem_mk_left u w⟩
+    · exact mem_biUnion hw ⟨hadj, Sym2.mem_mk_right u w⟩
+
+/-- Every host walk from a vertex of `C` to a vertex outside `C` uses a host pair leaving
+`C`. -/
+theorem exists_mem_edges_mem_edgeSet_between_compl {G : SimpleGraph V} {C : Set V} {x y : V}
+    (w : G.Walk x y) (hx : x ∈ C) (hy : y ∉ C) :
+    ∃ e ∈ w.edges, e ∈ (G.between C Cᶜ).edgeSet := by
+  obtain ⟨a, ha, b, hb, he⟩ := exists_mem_edges_boundary w hx hy
+  refine ⟨s(a, b), he, ?_⟩
+  rw [SimpleGraph.mem_edgeSet, SimpleGraph.between_adj]
+  exact ⟨w.adj_of_mem_edges he, Or.inl ⟨ha, hb⟩⟩
+
+/-- **Host certificate.** If the open graph of `ω` is a subgraph of `G` and every host pair
+leaving a set `C ∋ x` is closed, then `x` is not connected to any `y ∉ C`. -/
+theorem notMem_conn_of_disjoint_edgeSet_between_compl {G : SimpleGraph V} {C : Set V}
+    {x y : V} (hx : x ∈ C) (hy : y ∉ C) {ω : Config V} (hle : openGraph ω ≤ G)
+    (hdisj : Disjoint (G.between C Cᶜ).edgeSet ω) : ω ∉ conn x y := by
+  rintro ⟨w⟩
+  obtain ⟨a, ha, b, hb, he⟩ := exists_mem_edges_boundary w hx hy
+  have hadj : (openGraph ω).Adj a b := w.adj_of_mem_edges he
+  refine disjoint_left.1 hdisj ?_ ((openGraph_adj_iff ω a b).1 hadj).1
+  rw [SimpleGraph.mem_edgeSet, SimpleGraph.between_adj]
+  exact ⟨hle hadj, Or.inl ⟨ha, hb⟩⟩
+
+/-- The host pairs leaving the cluster of `x` are closed. -/
+theorem disjoint_edgeSet_between_cluster_compl (G : SimpleGraph V) (ω : Config V) (x : V) :
+    Disjoint (G.between (cluster ω x) (cluster ω x)ᶜ).edgeSet ω := by
+  rw [disjoint_left]
+  intro e he
+  induction e using Sym2.ind with
+  | _ u w =>
+    rw [SimpleGraph.mem_edgeSet, SimpleGraph.between_adj] at he
+    obtain ⟨-, ⟨hu, hw⟩ | ⟨hu, hw⟩⟩ := he
+    · exact notMem_of_mem_cluster_of_notMem ω hu hw
+    · rw [Sym2.eq_swap]
+      exact notMem_of_mem_cluster_of_notMem ω hw hu
+
+/-- **Without a host there is no finite coordinate certificate.** On an infinite vertex
+type no finite set of pairs has the property that closing it disconnects `x` from `y` in
+every configuration: a path through a vertex outside the endpoints of the given pairs avoids
+them. (For `x = y` this is trivial.) -/
+theorem not_exists_finset_forall_disjoint_notMem_conn [Infinite V] (x y : V) :
+    ¬ ∃ P : Finset (Sym2 V), ∀ ω : Config V, Disjoint (P : Set (Sym2 V)) ω → ω ∉ conn x y := by
+  rintro ⟨P, hP⟩
+  have hfin : ({x, y} ∪ {z | s(x, z) ∈ (P : Set (Sym2 V))} ∪
+      {z | s(z, y) ∈ (P : Set (Sym2 V))}).Finite := by
+    refine ((toFinite {x, y}).union ?_).union ?_
+    · exact P.finite_toSet.preimage fun a _ b _ h => Sym2.congr_right.1 h
+    · exact P.finite_toSet.preimage fun a _ b _ h => Sym2.congr_left.1 h
+  obtain ⟨z, hz⟩ := hfin.exists_notMem
+  simp only [mem_union, mem_insert_iff, mem_singleton_iff, mem_ofPred_eq, not_or] at hz
+  obtain ⟨⟨⟨hzx, hzy⟩, hxz⟩, hzy'⟩ := hz
+  refine hP {s(x, z), s(z, y)} ?_ (conn_trans (mem_conn_of_mem (Ne.symm hzx) (by simp))
+    (mem_conn_of_mem hzy (by simp)))
+  rw [disjoint_left]
+  rintro e he (rfl | rfl)
+  · exact hxz he
+  · exact hzy' he
 
 /-! ### Non-vacuity -/
 

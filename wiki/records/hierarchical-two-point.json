@@ -1,0 +1,87 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hierarchical-two-point",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 4
+    },
+    {
+      "collection": "critical-theory",
+      "order": 2
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 26,
+      "label": "Critical two-point function on the hierarchical lattice",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 0,
+      "label": "Averaged critical two-point estimate",
+      "locator": "Theorem 1.1",
+      "relationship": "Source theorem",
+      "status": "pending",
+      "note": "Retain the source’s symmetry and kernel hypotheses."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 1,
+      "label": "Pointwise critical two-point estimate",
+      "locator": "Corollary 1.2",
+      "relationship": "Source corollary",
+      "status": "pending",
+      "note": "The source states the pointwise form for radial kernels; constrained and unrestricted connections are distinguished."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "J98J",
+      "proof_uses": [
+        "7AER",
+        "FF30",
+        "12NL",
+        "655W",
+        "7YNX"
+      ],
+      "reason": "The upper envelope gives a finite row sum, so FF30 supplies a finite positive critical intensity with bounds depending only on d, L, alpha, c, C, subcritical finiteness and boundary flux; 12NL supplies rooted damping. Then 655W and 7YNX give pointwise shell bounds at the critical intensity with uniform constants, and summing over shells gives the averaged bounds."
+    },
+    {
+      "order": 1,
+      "tag": "W498",
+      "proof_uses": [
+        "7AER",
+        "FF30",
+        "L0TE",
+        "12NL",
+        "655W",
+        "7YNX"
+      ],
+      "reason": "A radial kernel is symmetric and, by the upper envelope, integrable, so the argument for J98J applies: FF30 gives 1/B <= beta_c < infinity, where B is the finite row sum, together with the quantile bound and boundary flux; L0TE gives subcritical finiteness; 12NL gives rooted damping; 655W bounds the block means; and 7YNX gives pointwise bounds at every vertex of each shell, with constants depending only on d, L, alpha, c, C. Translation invariance moves a general pair x, y to 0, y - x and the ball Lambda(x, y) to Lambda_n; the case x = y is trivial."
+    },
+    {
+      "order": 2,
+      "tag": "V4QQ",
+      "proof_uses": [
+        "J98J"
+      ],
+      "reason": "For n at least 1, multiplying the averaged chain of J98J by the ball volume gives both bounds on the full-cluster mass in the ball for every symmetric kernel; for n = 0 the sum is 1."
+    },
+    {
+      "order": 3,
+      "tag": "YWTU",
+      "proof_uses": [
+        "J98J"
+      ],
+      "reason": "The first inequality of J98J times the ball volume gives the lower bound for the restricted cluster; the upper bound holds because the restricted cluster is contained in the full cluster."
+    }
+  ]
+}

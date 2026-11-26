@@ -1,0 +1,35 @@
+# Integer-line percolation contracts at 5d6efa8
+
+This inventory covers all **15 named public theorems** in `Models/Line.lean` at private `lrp` revision 5d6efa862d99e11fb1f01619be7700b85c1c8f7b, inspected 16 November 2026. Imported declarations, private helpers and anonymous witnesses are excluded. The exposition extends the existing [forest connections article](../articles/forest-connections.md), preserving its earlier assertions.
+
+## Source contracts
+
+| Source line | Contract | Exposition |
+| --- | --- | --- |
+| [Line.lean L21](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For every integer a and natural n, the integer nearest-neighbour graph has a simple path of length n from a to a+n. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L38](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | The line profile is almost surely supported by the nearest-neighbour simple graph; diagonal marginals are arbitrary. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L51](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For ordered integer endpoints, the two-point function is the nearest-neighbour probability raised to their distance. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L89](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | The same formula holds for either endpoint order, including coincident roots and probability endpoints zero and one. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L97](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | Susceptibility at every integer root is (1+p)/(1-p), interpreted in the extended nonnegative numbers, including infinity at p=1. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L113](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For p<1, every root susceptibility is finite. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L121](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For p<1, almost surely every root cluster is finite simultaneously. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L133](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For p<1, each root infinite-cluster event has probability zero. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L141](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For p<1, the event that some cluster is infinite has probability zero. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L150](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | At p=1, a fixed root cluster is almost surely the entire integer line. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L161](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | At p=1, each root infinite-cluster event has probability one. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L169](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | At p=1, every root susceptibility is infinite. | [Argument](../articles/forest-connections.md#section-integer-line) |
+| [Line.lean L175](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | For the unit-rate nearest-neighbour intensity kernel, no infinite cluster exists at any finite nonnegative intensity. | [Argument](../articles/forest-connections.md#section-line-intensity) |
+| [Line.lean L192](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | The unit-rate nearest-neighbour kernel has infinite root critical intensity at every root. | [Argument](../articles/forest-connections.md#section-line-intensity) |
+| [Line.lean L204](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Models/Line.lean) | The same kernel has infinite global critical intensity. | [Argument](../articles/forest-connections.md#section-line-intensity) |
+
+## Endpoints, normalization and reuse
+
+The off-diagonal profile is exactly p on nearest-neighbour pairs and zero elsewhere; diagonal probabilities are unrestricted. The ordered-path and symmetric two-point statements cover all integer roots, including equality. At p=0 the empty-path convention keeps the root term one. At p=1 the susceptibility formula is interpreted in the extended nonnegative numbers, not as a finite real quotient.
+
+BP7B groups these statements, reusing XHFN and 8KVE. Countability of the integer line permits simultaneous exclusion of zero-probability non-host pairs, simultaneous opening of certain nearest-neighbour pairs, and simultaneous finiteness below one. The article makes the almost-sure statement for all roots at p=1, an immediate countable-intersection consequence of the fixed-root source statement. It also states the global probability-one consequence. No countability generalization is attributed to this fixed integer model.
+
+The additional cluster-size formula n(1-p)^2 p^(n-1) is derived by summing the prescribed-cluster probabilities over the n intervals of length n containing the root. Its proof uses R3I9 and is not a source export. For p<1 all clusters are finite; at p=1 no finite-size mass remains.
+
+FH1B uses unit nearest-neighbour intensity weights and finite nonnegative intensity. Every such intensity gives a bond probability strictly below one, so the root and global percolating parameter sets are empty and their infima are infinity. This does not introduce a law at infinite intensity. The explicit exponential susceptibility and the rescaling to any finite positive nearest-neighbour weight are further substitutions into the source two-point/susceptibility formula. The existing normalized-line correction MTYL is linked and preserved, not assigned a second diagnosis.
+
+The source witnesses include arbitrary diagonal marginals, both probability endpoints, coincident roots and unit-rate kernels. Anonymous witnesses are excluded from the census. The older forest and ray source record is retained. No new published-source error or formal correspondence verdict is asserted.

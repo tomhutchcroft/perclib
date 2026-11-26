@@ -1,6 +1,6 @@
 # Roadmap
 
-**12 November 2026.** This replaces the ordering in `INITIAL_BACKLOG.md`. Decisions cited
+**Superseded 20 November 2026 by D-34**; kept until LEAD replaces it with a roadmap generated from the frontier. Originally, 12 November 2026: this replaces the ordering in `INITIAL_BACKLOG.md`. Decisions cited
 as D-n and R-n are in [DECISIONS.md](DECISIONS.md). Working rules are in
 [COORDINATION.md](COORDINATION.md).
 

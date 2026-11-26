@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New proofs using mathlib's product and Bernoulli measures, at the pinned revision
 56a005855ea17e0b0958f73ec801ae140b0a1679. No upstream coupling theorem is copied.
 The coordinate construction uses three states: both open, only the upper open,
@@ -10,6 +14,22 @@ module
 public import PercLib.Probability.ProdBernoulli
 public import Mathlib.MeasureTheory.Integral.Lebesgue.Map
 public import Mathlib.Data.Sym.Sym2
+public import Mathlib.MeasureTheory.Constructions.UnitInterval
+
+/-!
+# Monotone coupling of product Bernoulli laws
+
+Ordered profiles admit a coupling of their product laws with ordered configurations, so increasing
+events and nonnegative increasing observables are monotone in the profile.
+
+## Main results
+
+* `exists_bernoulli_order_coupling`
+* `exists_prodBernoulli_monotone_coupling`
+* `prodBernoulli_mono_event`
+* `lintegral_prodBernoulli_mono`
+* `exists_bond_monotone_coupling`
+-/
 
 @[expose] public section
 
@@ -145,5 +165,53 @@ example (p : ℕ → unitInterval) :
 example (p q : ι → unitInterval) (hpq : p ≤ q) (i : ι) :
     prodBernoulli p {ω | i ∈ ω} ≤ prodBernoulli q {ω | i ∈ ω} :=
   prodBernoulli_mono_event p q hpq (measurableSet_mem i) (fun _ _ h hi => h hi)
+
+section Uniform
+
+variable {E β : Type*}
+
+/-- Thresholding a uniform variable at `p` gives a Bernoulli variable with parameter `p`. -/
+theorem volume_map_le_eq_bernoulliMeasure (p : unitInterval) :
+    (volume : Measure unitInterval).map (· ≤ p) = bernoulliMeasure True False p := by
+  have hm : Measurable (· ≤ p : unitInterval → Prop) := measurableSet_Iic.mem
+  refine eq_bernoulliMeasure (fun s hs h₁ h₂ => ?_) (fun s hs h₁ h₂ => ?_)
+    (fun s hs h₁ h₂ => ?_) (fun s hs h₁ h₂ => ?_) <;> rw [Measure.map_apply hm hs]
+  · have : (· ≤ p) ⁻¹' s = Set.univ := by
+      ext u; by_cases h : u ≤ p <;> simp [h, h₁, h₂]
+    simp [this]
+  · have : (· ≤ p) ⁻¹' s = Set.Iic p := by
+      ext u; by_cases h : u ≤ p <;> simp [h, h₁, h₂]
+    rw [this, unitInterval.volume_Iic, ← ENNReal.ofReal_coe_nnreal]
+    simp
+  · have : (· ≤ p) ⁻¹' s = Set.Ioi p := by
+      ext u
+      rcases le_or_gt u p with h | h
+      · simp [h, h.not_gt, h₁]
+      · simp [h, h.not_ge, h₂]
+    rw [this, unitInterval.volume_Ioi, ← ENNReal.ofReal_coe_nnreal]
+    simp [unitInterval.coe_symm_eq]
+  · have : (· ≤ p) ⁻¹' s = ∅ := by
+      ext u; by_cases h : u ≤ p <;> simp [h, h₁, h₂]
+    simp [this]
+
+/-- Independent uniform variables thresholded at a profile `q` have the product law of `q`. -/
+theorem infinitePi_volume_map_setOf_le_eq_prodBernoulli (q : E → unitInterval) :
+    (Measure.infinitePi fun _ : E => (volume : Measure unitInterval)).map
+      (fun U => {e | U e ≤ q e}) = prodBernoulli q := by
+  rw [prodBernoulli_eq_map]
+  have hpi := Measure.infinitePi_map_pi (μ := fun _ : E => (volume : Measure unitInterval))
+    (f := fun e (u : unitInterval) => u ≤ q e) (fun e => measurableSet_Iic.mem)
+  rw [show (fun e => (volume : Measure unitInterval).map (· ≤ q e)) =
+    (fun e => bernoulliMeasure True False (q e)) from
+      funext fun e => volume_map_le_eq_bernoulliMeasure (q e)] at hpi
+  rw [← hpi, Measure.map_map measurable_setOfPred (by fun_prop)]
+  rfl
+
+/-- The threshold configurations of one family of variables increase with the profile. -/
+theorem monotone_setOf_le_apply [Preorder β] (U : E → β) :
+    Monotone fun q : E → β => {e | U e ≤ q e} :=
+  fun _ _ hq _ he => le_trans he (hq _)
+
+end Uniform
 
 end PercLib.Probability

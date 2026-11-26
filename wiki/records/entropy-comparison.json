@@ -1,0 +1,78 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "entropy-comparison",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 11
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 18,
+      "label": "Entropy and adaptive comparison",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-bernoulli-divergence",
+      "order": 0,
+      "label": "Scalar Bernoulli divergence inequalities",
+      "locator": "Named public declaration start lines: 20, 33, 43, 85, 129, 148, 197, 208, 226, 235",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source proves the positive-intensity scalar bounds in KHB7, the zero-weight case, and the interior two-point inequality used by 58HC. Event-level data processing and extended-divergence endpoint conventions remain separate."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "UVKE",
+      "proof_uses": [],
+      "reason": "A definition; its well-definedness remark uses only t log t >= -1/e and the log-sum inequality, invoking no other wiki assertion."
+    },
+    {
+      "order": 1,
+      "tag": "JR0J",
+      "proof_uses": [],
+      "reason": "Factoring the likelihood ratio on fibres and the log-sum inequality (proved inline); no other wiki assertion is invoked."
+    },
+    {
+      "order": 2,
+      "tag": "58HC",
+      "proof_uses": [
+        "JR0J"
+      ],
+      "reason": "The first inequality is data processing (JR0J) applied to the event indicator; the second is Taylor's formula for the Bernoulli divergence."
+    },
+    {
+      "order": 3,
+      "tag": "CH4N",
+      "proof_uses": [
+        "56TE",
+        "JR0J"
+      ],
+      "reason": "The conditional transcript formula (56TE) gives each next bit its original law, and iterating the chain rule (JR0J) sums the one-coordinate costs."
+    },
+    {
+      "order": 4,
+      "tag": "D66F",
+      "proof_uses": [
+        "CH4N",
+        "KHB7",
+        "58HC"
+      ],
+      "reason": "The finite-transcript identity (CH4N) and the weighted Bernoulli entropy bound (KHB7) bound the prefix entropy; the event comparison (58HC) and finite-prefix approximation pass to the Borel event."
+    },
+    {
+      "order": 5,
+      "tag": "29WG",
+      "proof_uses": [],
+      "reason": "A hybrid-configuration telescoping argument with the conditional product law of unqueried coordinates, proved inline; no other wiki assertion is invoked."
+    }
+  ]
+}

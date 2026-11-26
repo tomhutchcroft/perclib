@@ -1,16 +1,37 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-56 correspondence wrappers for the subcritical-bound article. All mathematical
-inputs are proved in the imported modules; no literature assumptions are added.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Correspondence wrappers for the subcritical-bound article. All mathematical inputs are proved in the
+imported modules; no literature assumptions are added.
 -/
 module
 
 public import PercLib.Percolation.Bond.Intensity
 
+/-!
+# Subcritical bound: correspondence
+
+Wiki correspondence for the row-sum bound, its path and walk ingredients, and the intensity
+thresholds.
+
+## Main results
+
+* `subcritical_bound_and_finiteness`
+* `simple_path_certificates_and_probability`
+* `walk_recurrence_and_geometric_bound`
+* `susceptibility_walk_geometric_chain`
+* `finite_susceptibility_implies_cluster_finiteness`
+* `intensity_row_and_susceptibility_bound`
+* `critical_intensity_bounds_and_zero_case`
+-/
+
 @[expose] public section
 noncomputable section
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 variable {V : Type*}
@@ -18,11 +39,12 @@ variable {V : Type*}
 /-- The full row-sum conclusion: the bound at every root and simultaneous finiteness. -/
 @[tag "53Z9"]
 theorem subcritical_bound_and_finiteness [Countable V] (q : Sym2 V → unitInterval)
-    (m : ℝ≥0∞) (hrow : ∀ v, (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ m) (hm : m < 1) :
+    (m : ℝ≥0∞) (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ m)
+    (hm : m < 1) :
     (∀ v, chi q v ≤ (1-m)⁻¹) ∧ (∀ᵐ ω ∂law q, ∀ v, (cluster ω v).Finite) :=
   ⟨chi_le_inv_one_sub_of_rowSum q m hrow hm, ae_all_clusters_finite_of_rowSum q m hrow hm⟩
 
+open Classical in
 /-- Simple-path witnesses and their exact distinct-coordinate cylinder probability. -/
 @[tag "YFF7"]
 theorem simple_path_certificates_and_probability (q : Sym2 V → unitInterval) (x y : V) :
@@ -46,8 +68,8 @@ theorem walk_recurrence_and_geometric_bound (a : V → V → ℝ≥0∞) (m : �
 /-- The full chain from susceptibility through walk weights to the geometric sum. -/
 @[tag "F12C"]
 theorem susceptibility_walk_geometric_chain [Countable V] (q : Sym2 V → unitInterval)
-    (m : ℝ≥0∞) (hrow : ∀ v, (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ m) (_hm : m < 1) (x : V) :
+    (m : ℝ≥0∞) (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ m)
+    (_hm : m < 1) (x : V) :
     chi q x = ∑' y, tau q x y ∧
     chi q x ≤ ∑' n, walkSum
       (offDiagonal (fun v w => (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞))) n x ∧
@@ -79,18 +101,19 @@ theorem finite_susceptibility_implies_cluster_finiteness [Countable V]
 @[tag "E771"]
 theorem intensity_row_and_susceptibility_bound [Countable V]
     (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0) :
-    (∀ v, (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (intensityProfile J β s(v,w)) : ℝ≥0∞)) ≤ (β : ℝ≥0∞)*M) ∧
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0) :
+    (∀ v, rowSum (fun e => unitInterval.toENNReal (intensityProfile J β e)) v ≤
+      (β : ℝ≥0∞)*M) ∧
     ((β : ℝ≥0∞)*M < 1 → ∀ v,
       chi (intensityProfile J β) v ≤ (1-(β : ℝ≥0∞)*M)⁻¹) :=
   ⟨intensity_rowSum_le J M hJ β, chi_intensity_le J M hJ β⟩
 
+open Classical in
 /-- Both threshold bounds, including the zero-row case and its vanishing off-diagonal rates. -/
 @[tag "JZ47"]
 theorem critical_intensity_bounds_and_zero_case [Countable V]
     (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) :
     ((M : ℝ≥0∞)⁻¹ ≤ globalCriticalIntensity J) ∧
     (∀ x, (M : ℝ≥0∞)⁻¹ ≤ rootCriticalIntensity J x) ∧
     (M = 0 → (∀ v w, w ≠ v → J s(v,w) = 0) ∧
@@ -99,7 +122,7 @@ theorem critical_intensity_bounds_and_zero_case [Countable V]
     inv_le_rootCriticalIntensity J M hJ, ?_⟩
   intro hM
   subst M
-  have hz : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ 0 := by
+  have hz : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ 0 := by
     simpa using hJ
   refine ⟨?_, globalCriticalIntensity_eq_top_of_rowSum_zero J hz,
     rootCriticalIntensity_eq_top_of_rowSum_zero J hz⟩
@@ -118,7 +141,7 @@ example : (∀ v : Bool, chi (fun _ => (⟨1/2, by norm_num⟩ : unitInterval)) 
     change ((1/2 : ℝ≥0) : ℝ≥0∞) = _
     simp
   intro v
-  cases v <;> norm_num [tsum_fintype, hp]
+  cases v <;> norm_num [rowSum_toENNReal, tsum_fintype, hp]
 
 -- The zero-row branch gives infinite thresholds on an infinite vertex type.
 example : (globalCriticalIntensity (fun _ : Sym2 ℕ => (0 : ℝ≥0)) = ⊤) ∧

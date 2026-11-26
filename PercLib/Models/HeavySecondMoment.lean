@@ -1,7 +1,10 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-108 (issue 442, wiki HRS7), on the D-2 interface.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface. No source text or code is copied.
 -/
 module
 
@@ -23,6 +26,7 @@ enters through the hypotheses `hpath`, `hroot` and `hsupp` (no new definition);
 * `lintegral_encard_sq_eq_top`: `E|K_root|² = ⊤`.
 * `lintegral_exp_eq_top`: `E exp(t |K_root|) = ⊤` for every `t > 0`.
 * `iSup_chi_eq_top`: `sup_v χ(v) = ⊤`.
+* `connected_fromEdgeSet_pos`: the support graph `{e | 0 < q e}` is connected.
 
 So the uniform hypothesis `sup_v χ(v) < ⊤` of Y84V cannot be weakened to `χ(o) < ⊤`.
 Almost surely every path edge is open and only pairs of positive probability are open; on
@@ -277,7 +281,8 @@ theorem iSup_chi_eq_top : ⨆ v, chi q v = ⊤ := by
       simp only [Option.some.injEq, Sigma.mk.inj_iff, heq_eq_eq, true_and] at h
       exact h
     refine le_trans ?_ (ENNReal.tsum_comp_le_tsum_of_injective hinj _)
-    have h1 : ∀ i : Fin (2 ^ (k + 1)), tau q (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) (some ⟨k, i⟩) = 1 := by
+    have h1 : ∀ i : Fin (2 ^ (k + 1)), tau q (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩)
+        (some ⟨k, i⟩) = 1 := by
       intro i
       have h := (ae_iff_measure_eq (μ := law q) (measurableSet_conn _ _).nullMeasurableSet).1
         (ae_conn_path hpath k i)
@@ -300,7 +305,45 @@ theorem iSup_chi_eq_top : ⨆ v, chi q v = ⊤ := by
 
 end Model
 
-/-! ### The profile exists (D-5) -/
+/-! ### Connected host
+
+The support graph `{e | 0 < q e}` is connected: each path `C_k` is joined internally by edges
+of probability one and to the root by an edge of probability `4^(-(k+1))`. -/
+
+/-- **The support graph of the heavy-second-moment model is connected.** If `q` is one on
+consecutive vertices of each path `C_k` and positive on the pair joining the root to the
+endpoint `0` of `C_k`, then `fromEdgeSet {e | 0 < q e}` is connected. -/
+theorem connected_fromEdgeSet_pos {q : Sym2 (Option (Σ k : ℕ, Fin (2 ^ (k + 1)))) → unitInterval}
+    (hpath : ∀ (k : ℕ) (i j : Fin (2 ^ (k + 1))), i.val + 1 = j.val →
+      q s(some ⟨k, i⟩, some ⟨k, j⟩) = 1)
+    (hroot : ∀ k : ℕ, (q s(none, some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) : ℝ) = (1 / 4) ^ (k + 1)) :
+    (SimpleGraph.fromEdgeSet {e | 0 < q e}).Connected := by
+  set G := SimpleGraph.fromEdgeSet {e | 0 < q e}
+  have hroot' : ∀ k : ℕ, G.Reachable none (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) := by
+    intro k
+    refine SimpleGraph.Adj.reachable ((SimpleGraph.fromEdgeSet_adj _).2 ⟨?_, by simp⟩)
+    change (0 : ℝ) < (q s(none, some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) : ℝ)
+    rw [hroot k]
+    positivity
+  have hstep : ∀ (k n : ℕ) (h : n < 2 ^ (k + 1)),
+      G.Reachable (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) (some ⟨k, ⟨n, h⟩⟩) := by
+    intro k n
+    induction n with
+    | zero => intro h; exact SimpleGraph.Reachable.refl _
+    | succ n ih =>
+      intro h
+      refine (ih (Nat.lt_of_succ_lt h)).trans (SimpleGraph.Adj.reachable
+        ((SimpleGraph.fromEdgeSet_adj _).2 ⟨?_, ?_⟩))
+      · change 0 < q s(some ⟨k, ⟨n, Nat.lt_of_succ_lt h⟩⟩, some ⟨k, ⟨n + 1, h⟩⟩)
+        rw [hpath k _ _ rfl]
+        exact zero_lt_one
+      · simp
+  refine (SimpleGraph.connected_iff_exists_forall_reachable G).2 ⟨none, fun w => ?_⟩
+  rcases w with _ | ⟨k, ⟨n, h⟩⟩
+  · exact SimpleGraph.Reachable.refl _
+  · exact (hroot' k).trans (hstep k n h)
+
+/-! ### The profile exists -/
 
 /-- A profile with the required values exists. -/
 theorem exists_profile : ∃ q : Sym2 (Option (Σ k : ℕ, Fin (2 ^ (k + 1)))) → unitInterval,
@@ -337,20 +380,20 @@ theorem exists_profile : ∃ q : Sym2 (Option (Σ k : ℕ, Fin (2 ^ (k + 1)))) �
   refine ⟨fun e => Sym2.lift ⟨g, hg⟩ e, ?_, ?_, ?_⟩
   · intro k i j h
     have hp : P (some ⟨k, i⟩) (some ⟨k, j⟩) := ⟨k, i, j, rfl, rfl, Or.inl h⟩
-    show g _ _ = 1
+    change g _ _ = 1
     simp only [g, hp, ↓reduceIte]
   · intro k
     have hnP : ¬ P none (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) := by
       rintro ⟨k', i, j, h1, -⟩
       exact absurd h1 (by simp)
     have hr : R none (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) := ⟨k, Or.inl ⟨rfl, rfl⟩⟩
-    show ((g none (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) : unitInterval) : ℝ) = _
+    change ((g none (some ⟨k, ⟨0, Nat.two_pow_pos _⟩⟩) : unitInterval) : ℝ) = _
     simp only [g, hnP, hr, ↓reduceIte, L, Option.elim_none, Option.elim_some, zero_add]
   · intro a b h
     by_contra hc
     rw [not_or] at hc
     apply h
-    show g a b = 0
+    change g a b = 0
     have h1 : ¬ P a b := hc.1
     have h2 : ¬ R a b := hc.2
     simp only [g, h1, h2, ↓reduceIte]

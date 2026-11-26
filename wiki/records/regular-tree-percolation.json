@@ -1,0 +1,100 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "regular-tree-percolation",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 154
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Root law and extinction conditioning",
+      "locator": "17 March 2017 author manuscript, §2.1, (2.1.1)–(2.1.23), printed pp.17–20.",
+      "relationship": "Written proof with explicit manuscript corrections",
+      "status": "pending",
+      "note": "Condition each branch on failure, retaining the denominator. Bounded-binomial survival gives the dual gap and both root-mean amplitudes."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Many-ancestor hitting identity",
+      "locator": "17 March 2017 author manuscript, Exercise 2.4, (2.1.26), printed p.21.",
+      "relationship": "Written proof with explicit manuscript corrections",
+      "status": "pending",
+      "note": "Formal coefficient substitution proves the forest identity with target k-m for arbitrary offspring laws; the zero-offspring example diagnoses k-1."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Exact root and forward laws",
+      "locator": "17 March 2017 author manuscript, (2.1.24)–(2.1.27), printed pp.20–21.",
+      "relationship": "Written proof with explicit manuscript corrections",
+      "status": "pending",
+      "note": "Dwass gives the forward law; coefficient inversion keeps r initial branches and n later branches distinct."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Size tails and moment exponents",
+      "locator": "17 March 2017 author manuscript, Exercises 2.1 and the discussions of Delta-prime and delta, (2.1.28)–(2.1.29), printed pp.18,20–21.",
+      "relationship": "Written proof with explicit manuscript corrections",
+      "status": "pending",
+      "note": "Uniform Stirling estimates and Laplace sums give all positive real-order finite-cluster moments, including the half-moment logarithm and exact root constants."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Critical survival and its error rate",
+      "locator": "17 March 2017 author manuscript, Exercise 2.5 and (2.1.30)–(2.1.31), printed p.21.",
+      "relationship": "Written proof with explicit manuscript corrections",
+      "status": "pending",
+      "note": "Two successive reciprocal-recursion estimates isolate a nonzero logarithmic correction. The leading exponent remains one."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "0JTK",
+      "proof_uses": [
+        "UKY4",
+        "N9P5"
+      ],
+      "reason": "Condition each branch on failure, retaining the denominator. Bounded-binomial survival gives the dual gap and both root-mean amplitudes."
+    },
+    {
+      "order": 1,
+      "tag": "UPOZ",
+      "proof_uses": [],
+      "reason": "Formal coefficient substitution proves the forest identity with target k-m for arbitrary offspring laws; the zero-offspring example diagnoses k-1."
+    },
+    {
+      "order": 2,
+      "tag": "LS6G",
+      "proof_uses": [
+        "RL1L",
+        "UPOZ"
+      ],
+      "reason": "Dwass gives the forward law; coefficient inversion keeps r initial branches and n later branches distinct."
+    },
+    {
+      "order": 3,
+      "tag": "1KBO",
+      "proof_uses": [
+        "LS6G"
+      ],
+      "reason": "Uniform Stirling estimates and Laplace sums give all positive real-order finite-cluster moments, including the half-moment logarithm and exact root constants."
+    },
+    {
+      "order": 4,
+      "tag": "X9U3",
+      "proof_uses": [
+        "8WO7"
+      ],
+      "reason": "Two successive reciprocal-recursion estimates isolate a nonzero logarithmic correction. The leading exponent remains one."
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 451 (Q-117), written on 2026-11-16 by PROVER-G, against pinned mathlib.
-No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16, against pinned mathlib. No upstream proof is copied.
 -/
 module
 
@@ -60,7 +61,7 @@ theorem tendsto_inv_sub_inv
     field_simp
     ring
   have hψ0 : ψ u ≠ 0 := by rw [hψu]; exact mul_ne_zero hu0.ne' hd
-  show (a - ε u) / (1 - a * u + ε u * u) = 1 / ψ u - 1 / u
+  change (a - ε u) / (1 - a * u + ε u * u) = 1 / ψ u - 1 / u
   rw [hψu]
   field_simp
   ring
@@ -70,7 +71,7 @@ theorem tendsto_nhdsWithin_Ioi_of_pos {r : ℕ → ℝ} (hpos : ∀ n, 0 < r n)
     (hr : Tendsto r atTop (𝓝 0)) : Tendsto r atTop (𝓝[>] 0) :=
   tendsto_nhdsWithin_iff.2 ⟨hr, Eventually.of_forall hpos⟩
 
-/-- **Survival core (8WO7).** If `r_n > 0`, `r_{n+1} = ψ(r_n)` and `r_n → 0`, then
+/-- **Survival core.** If `r_n > 0`, `r_{n+1} = ψ(r_n)` and `r_n → 0`, then
 `n r_n → 1/a`. -/
 theorem tendsto_mul_of_quadratic_recursion (ha : 0 < a)
     (hψ : Tendsto (fun u => (ψ u - u + a * u ^ 2) / u ^ 2) (𝓝[>] 0) (𝓝 0)) {r : ℕ → ℝ}
@@ -126,7 +127,7 @@ theorem tendsto_mul_one_sub_exp_neg_div {lam : ℝ} (hlam : 0 < lam) :
     have e : (n : ℝ) * (lam / n) = lam := by field_simp
     nlinarith
 
-/-- **Yaglom core (AYHV).** Fix `λ > 0`. For `n ≥ 1` let `u_{0,n} = 1 - e^{-λ/n}`,
+/-- **Yaglom core.** Fix `λ > 0`. For `n ≥ 1` let `u_{0,n} = 1 - e^{-λ/n}`,
 `u_{k+1,n} = ψ(u_{k,n})` and assume `0 < u_{k,n} ≤ u_{0,n}` for `k ≤ n`. Then
 `n u_{n,n} → λ/(1 + aλ)`. -/
 theorem tendsto_mul_yaglom (ha : 0 < a)

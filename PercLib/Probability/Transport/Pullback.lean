@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 197 (Q-37), written on 2026-11-15 by PROVER-E. No upstream proof is
-copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied.
 -/
 module
 
@@ -64,6 +65,10 @@ theorem infinitePi_map_comp_injective {X : Type*} [MeasurableSpace X] (μ : I �
     split_ifs with h
     · exact ht _
     · exact MeasurableSet.univ
+
+/-- Pulling a configuration back along any map of indices is measurable. -/
+theorem measurable_preimage_set (g : J → I) : Measurable fun ω : Set I => g ⁻¹' ω :=
+  Measurable.of_mem fun j => measurable_set_mem (g j)
 
 /-- **Pullback of configurations along an injective map of indices.** -/
 theorem prodBernoulli_map_preimage (p : I → unitInterval) {g : J → I}

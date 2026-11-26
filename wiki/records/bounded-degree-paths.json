@@ -1,0 +1,86 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "bounded-degree-paths",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 16
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 3,
+      "label": "The bounded-degree path criterion",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-bounded-degree",
+      "order": 0,
+      "label": "Bounded-degree simple paths and nonpercolation",
+      "locator": "Named statement start lines in the pinned source: 24, 93, 108, 128, 146, 158, 198, 217, 246, 263, 278",
+      "relationship": "Source-inspected statement correspondence with scope qualifications",
+      "status": "pending",
+      "note": "8WML supplies finite continuation-list covers, injectivity of path lists, the path count and finite-cylinder probability bound. These facts do not need ambient countability or off-host zero probabilities; the explanation distinguishes that scope from subsequent whole-cluster claims. Local finiteness gives finite bounded-walk balls and simple paths of every finite length in an infinite cluster. The source proves root and simultaneous nonpercolation using these facts, countable host containment and either natural or real degree subtraction. YP44 additionally sums path bounds for susceptibility; that conclusion is not an exported theorem of this source. The lattice source takes its degree bound as an input. Degree-zero and degree-one endpoint cases are included."
+    },
+    {
+      "source": "perclib-self-avoiding-chi",
+      "order": 0,
+      "label": "Self-avoiding two-point and susceptibility sums",
+      "locator": "Named public theorem start lines: 39, 55, 70, 101, 161, 180, 196",
+      "relationship": "Source-inspected exposition with explicit endpoint conventions",
+      "status": "pending",
+      "note": "UOHI gives the length-restricted two-point series and its subcritical closed form; YP44 gives its susceptibility consequence. The source exports the full nonnegative susceptibility series, valid even when infinite. Lattice local finiteness and degree remain explicit source hypotheses."
+    },
+    {
+      "source": "perclib-self-avoiding-decay",
+      "order": 0,
+      "label": "Self-avoiding decay in host distance",
+      "locator": "Named public theorem start lines: 34",
+      "relationship": "Source-inspected exposition with explicit endpoint conventions",
+      "status": "pending",
+      "note": "UOHI includes the host-distance specialization for distinct endpoints. Disconnected vertices have zero connection probability separately; the source natural-valued distance convention is not an extended distance at infinity."
+    },
+    {
+      "source": "perclib-tree-counting",
+      "order": 0,
+      "label": "Closed-walk cluster-volume counting",
+      "locator": "Named public theorem start lines: 46, 62, 72, 98, 147, 172, 192, 265",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "Eight named theorem contracts; deterministic walk construction and counting, host containment, cluster-volume tails and susceptibility. TEYS gives the tail proof. Its exponential-moment consequence is an additional expository deduction."
+    },
+    {
+      "source": "perclib-boundary-forest-associations",
+      "order": 0,
+      "label": "Boundary, forest and walk assertion wrappers",
+      "locator": "Explicit public theorem/lemma start lines: 27, 43, 77, 94, 102, 132, 151, 172, 215, 247, 278, 392, 406",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete reading of 13 public contracts, with source hypotheses and correspondence boundaries recorded. Source pin: f51f639c15d742034cc6e2058008c79f48392873."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "UOHI",
+      "proof_uses": [
+        "8WML"
+      ],
+      "reason": "Retain only positive path lengths meeting the host-walk lower bound, then sum the fixed-length path probability estimates."
+    },
+    {
+      "order": 1,
+      "tag": "TEYS",
+      "proof_uses": [
+        "5PAT",
+        "CSY8"
+      ],
+      "reason": "Distinct-edge cylinder probabilities and a finite closed-walk count give the volume tail; the positive-index tail sum gives susceptibility."
+    }
+  ]
+}

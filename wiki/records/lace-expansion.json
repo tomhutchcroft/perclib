@@ -1,0 +1,66 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "lace-expansion",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 160
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "The cutting-bond identity and partition",
+      "locator": "17 March 2017 author manuscript, Definitions 6.2\u20136.3, Lemmas 6.4\u20136.5, Exercises 6.2\u20136.3, printed pp.62\u201366, PDF indices73\u201377.",
+      "relationship": "Written proof with explicit summability and critical-limit scope",
+      "status": "pending",
+      "note": "A bridge ordering chooses the first eligible pivotal. Conditioning on the deleted-bond root cluster separates the outside connection; the internal event is localized on the support of the restricted factor."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "The finite expansion and its remainder",
+      "locator": "17 March 2017 author manuscript, Proposition 6.1, (6.2.7)\u2013(6.2.28), Exercises 6.4\u20136.5 and (6.3.1)\u2013(6.3.4), printed pp.61\u201368, PDF indices72\u201379.",
+      "relationship": "Written proof with explicit summability and critical-limit scope",
+      "status": "pending",
+      "note": "A positive operator on cluster-indexed connection functions gives the full finite iteration and sign. Finite susceptibility ensures absolute summability; a separate nonnegative identity extends the pointwise result when the required coefficients are summable at criticality."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "The convergent expansion and critical equation",
+      "locator": "17 March 2017 author manuscript, (6.1.2)\u2013(6.1.6), Exercise 6.1 and Section 6.3, printed pp.60\u201361 and67\u201368, PDF indices71\u201372 and78\u201379.",
+      "relationship": "Written proof with explicit summability and critical-limit scope",
+      "status": "pending",
+      "note": "Summable coefficient norms remove the remainder and justify Fourier algebra. Critical passage retains convergence in the summable norm and susceptibility divergence as explicit hypotheses."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "F69T",
+      "proof_uses": [
+        "G192"
+      ],
+      "reason": "A bridge ordering chooses the first eligible pivotal. Conditioning on the deleted-bond root cluster separates the outside connection; the internal event is localized on the support of the restricted factor."
+    },
+    {
+      "order": 1,
+      "tag": "Z84R",
+      "proof_uses": [
+        "F69T"
+      ],
+      "reason": "A positive operator on cluster-indexed connection functions gives the full finite iteration and sign. Finite susceptibility ensures absolute summability; a separate nonnegative identity extends the pointwise result when the required coefficients are summable at criticality."
+    },
+    {
+      "order": 2,
+      "tag": "I3PK",
+      "proof_uses": [
+        "Z84R"
+      ],
+      "reason": "Summable coefficient norms remove the remainder and justify Fourier algebra. Critical passage retains convergence in the summable norm and susceptibility divergence as explicit hypotheses."
+    }
+  ]
+}

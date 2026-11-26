@@ -1,0 +1,68 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "quotient-cluster-bounds",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 176
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Quotient-cluster domination",
+      "locator": "17 March 2017 author manuscript, Section 13.2, printed pp.158\u2013160 / PDF indices169\u2013171; Proposition 13.7 and its quotient-graph proof.",
+      "relationship": "Written upper-bound proof with matching lower bounds separate",
+      "status": "pending",
+      "note": "The coupling uses one fresh lift for each queried quotient edge; all product marginals are preserved."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Finite-component upper tails and moments",
+      "locator": "17 March 2017 author manuscript, Section 13.2, printed pp.158\u2013160 / PDF indices169\u2013171; 13.1.24 and the upper-bound strategy in Section 13.2.",
+      "relationship": "Written upper-bound proof with matching lower bounds separate",
+      "status": "pending",
+      "note": "The coupling uses one fresh lift for each queried quotient edge; all product marginals are preserved."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical torus upper scale",
+      "locator": "17 March 2017 author manuscript, Section 13.2, printed pp.158\u2013160 / PDF indices169\u2013171; Theorem 13.5 upper bound, Theorem 13.6 exponential upper tail and 13.2.4\u201313.2.5.",
+      "relationship": "Written upper-bound proof with matching lower bounds separate",
+      "status": "pending",
+      "note": "The coupling uses one fresh lift for each queried quotient edge; all product marginals are preserved."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 2,
+      "tag": "SUMF",
+      "proof_uses": [
+        "VUI1",
+        "JZ89",
+        "74SS",
+        "12NL",
+        "WRHL"
+      ],
+      "reason": "Critical torus upper scale from lattice tails and finite-vertex counting."
+    },
+    {
+      "order": 3,
+      "tag": "VUI1",
+      "proof_uses": [
+        "GSLG"
+      ],
+      "reason": "The proof explores the quotient cluster by lifting each queried edge to a fresh edge of G and uses deferred decisions under adaptive exploration (GSLG) to identify the product law on H."
+    },
+    {
+      "order": 4,
+      "tag": "JZ89",
+      "proof_uses": [],
+      "reason": "The proof uses Markov's inequality on the count of vertices in large components and a layer-cake integral; it invokes no other wiki assertion."
+    }
+  ]
+}

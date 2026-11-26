@@ -1,0 +1,1060 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "hierarchical-runaway",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 10
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 7,
+      "label": "The hierarchical runaway observable",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 2,
+      "label": "Block amplification",
+      "locator": "Lemma 2.4; Proposition 2.2 and its proof",
+      "relationship": "Adapted argument",
+      "status": "pending",
+      "note": "7AER and 2XJX use explicit constants and endpoint hypotheses. The displayed bound in Proposition 2.2 differs from its proof; no literal equivalence is asserted."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 3,
+      "label": "Restricted means",
+      "locator": "Proposition 2.7; Lemmas 2.8–2.9",
+      "relationship": "Conditional argument",
+      "status": "pending",
+      "note": "655W retains rooted damping as an input."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 4,
+      "label": "Two-point transfer",
+      "locator": "Propositions 2.10 and 2.12",
+      "relationship": "Conditional argument",
+      "status": "pending",
+      "note": "7YNX retains boundary flux as an input."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 7,
+      "label": "Triangle threshold",
+      "locator": "Corollary 1.4; section 2.5",
+      "relationship": "Related deterministic criterion",
+      "status": "pending",
+      "note": "MS6M derives the complete finite-block triangle trichotomy from explicit two-sided kernel bounds. It does not establish the probabilistic exponent consequences."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 4,
+      "label": "Off-critical endpoint bounds",
+      "locator": "Section 4, Lemmas 4.2–4.3, Proposition 4.4 and Theorems 1.9/4.1",
+      "relationship": "Conditional implication with corrected differential input",
+      "status": "pending",
+      "note": "The endpoint two-point upper bound and boundary flux are explicit assumptions. Finite-ball normalization, positive-part separation and logarithmic inversion are proved; the source numerator diagnosis remains provisional."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 8,
+      "label": "Critical truncated-block bounds",
+      "locator": "Theorem 4.1; equation (4.4); Corollary 4.9",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "2VXH transfers the induced-block mean lower bound through the independent ancestor layer, then proves uniform intermediate-time bounds. It distinguishes the two block laws."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 9,
+      "label": "Maximum and high-dimensional hydrodynamics",
+      "locator": "Proposition 4.2; Proposition 4.5",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "6WO3 proves the maximum bound by tree-graph tails and derives quantitative high-dimensional error and concentration. Critical-dimensional hydrodynamics is not inferred."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 10,
+      "label": "Exact reciprocal mean and amplitude",
+      "locator": "Section 4.1, Lemma 4.10, Corollaries 4.11 and 4.13; Theorems 1.4 and 1.6 at p=1",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "W2VN proves the convergent error series, sharp unconditional lower bound and uniform equivalent under hydrodynamics. The arXiv first-moment coefficient and two local proof defects have provisional corrections; higher-moment constants remain to be audited."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 11,
+      "label": "Second rooted moment",
+      "locator": "Section 4.2, Proposition 4.14 and Corollary 4.15",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "I7HB proves the exact logarithmic growth equation, positive high-dimensional amplitude and uniform quantitative error. It also proves failure of hydrodynamics below the critical dimension, without a pointwise maximum lower bound."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 12,
+      "label": "Higher-moment ratios",
+      "locator": "Section 4.3, Proposition 4.17 and Lemma 4.18",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "ANYT proves the coefficient identity and an exact stable ratio equation. Its contraction uses p-3, not the printed p-1; the source conclusion is retained."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 13,
+      "label": "All fixed-index concentration",
+      "locator": "Corollary 4.19",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "KPCV proves power-sum covariance negligibility, every fixed finite Lr convergence, and mixed-moment factorization."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 14,
+      "label": "High-dimensional rooted moments",
+      "locator": "Theorem 1.4; rooted identities (2.3) and (2.6)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "FY23 proves the high-dimensional rooted moment family with terminal prefactor (L^alpha-1)/beta_c. It also derives a volume-biased squared-normal law from the existing general moment-determination theorem; critical hydrodynamics is still an input."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 15,
+      "label": "Low-dimensional maximum at every scale",
+      "locator": "Theorem 5.1 and Corollary 5.2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Q8JZ bounds the length of every interval of small normalized maxima, then uses monotonicity to obtain the pointwise maximum scale and all fixed real moment scales. The child estimate uses the preceding good scale."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 16,
+      "label": "Capped moments and backward propagation",
+      "locator": "Lemmas 5.4 and 5.6; Corollary 5.5",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "RHK3 gives a direct capped-merger bound, the third-power drift and a finite backward reciprocal iteration. The cap is any positive real number, including values below one."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 17,
+      "label": "Mesoscopic negligibility",
+      "locator": "Proposition 5.3 and section 5.3",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "L3QJ proves the stronger capped version by ruling out a fixed window of excessive third-moment growth. Small scales are treated separately with constants independent of the scale."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 18,
+      "label": "Low-dimensional cluster-volume tails",
+      "locator": "Theorem 1.2, section 5.2 and (5.7)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "ZDDE gives matching full-cluster power-law tails, a finite-block lower bound and a block exponential cutoff. The capped-moment input is proved, and the red/blue ghost argument respects the exact block-layer law."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 19,
+      "label": "Sharp cluster-vector norm threshold",
+      "locator": "Corollary 1.15 and its proof in section 5.2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "THZF constructs compact sets above the sharp threshold and proves endpoint norm divergence in probability using the existing norm lower-tail estimate. Positivity of every limit coordinate remains a separate section 5.4 task."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 20,
+      "label": "Backward propagation of the maximum",
+      "locator": "Lemma 5.9",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "O7W9 integrates the third-moment bound with its block-volume factor, then iterates the terminal gluing inequality to obtain a lower maximum at any fixed number of earlier scales."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 21,
+      "label": "Separation of chosen block maxima",
+      "locator": "Proof of Proposition 5.8, including (5.23)–(5.24)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "OAE2 selects one maximum per block using a fixed tie rule. Opposite-monotonicity Harris handles selection, while the first and last higher-layer edges give two escape factors. A full shell-convolution proof supplies uniform connection decay without a bound for all tied maxima."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 22,
+      "label": "Many large clusters at every time",
+      "locator": "Proposition 5.8",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "YUJ9 separates the maximum-size hypothesis from the requested failure probability and produces one good event valid throughout the coalescent level. It does not assume monotonicity of the kth largest component."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 23,
+      "label": "Positive coordinates of subsequential limits",
+      "locator": "Theorem 5.7; discussion following Corollary 1.15",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "ADJZ proves the scale of every fixed cluster rank in low dimension and uses coordinate continuity and Portmanteau to prove that every coordinate of every weak subsequential limit is positive. No uniqueness of the limiting law is claimed."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 24,
+      "label": "Finite susceptibility derivative",
+      "locator": "Lemma 6.3, finite-volume case",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "LHKO derives the tail and susceptibility inequalities by sending ghost intensity to zero in finite OSSS. It avoids an infinite derivative interchange and supplies the coefficient 1/beta."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 25,
+      "label": "Critical capped scales",
+      "locator": "Lemma 6.2 and the opening of the proof of Theorem 6.1",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "NHNY proves the capped lower-limit alternative by backward propagation and a strict third-moment growth contradiction. It transfers an infimum over time to terminal rooted volumes with normalization L^(alpha n)."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 26,
+      "label": "Conditional two-cluster growth",
+      "locator": "Theorem 6.1, conditional estimates preceding (6.13)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "837P exposes only the two earlier clusters, then charges the first higher-layer edges of two disjoint growth paths. The resulting bound has a constant independent of the cap and tolerance."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 27,
+      "label": "Weighted survival through many scales",
+      "locator": "Theorem 6.1, (6.14)–(6.17)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "EH4L keeps a finite transcript and uninspected next-layer edges between the previous clusters. The corrected hazard includes L^(-(d+alpha)); disjoint open tree witnesses and BK control the weighted smaller-cluster product."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 28,
+      "label": "Critical hydrodynamics",
+      "locator": "Theorem 6.1",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "UL8V combines small-cap scales, conditional growth, weighted survival and finite Russo to improve the susceptibility derivative. LHKO contradicts failure of hydrodynamics. Conditional moment-ratio, concentration and volume-biased conclusions now apply at d=3alpha."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 29,
+      "label": "Fourth moments and ordered discovery",
+      "locator": "Lemma 6.11; finite-valued comparison in Theorem 6.12",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "I2YU proves negative quadrant dependence by conditioning on the current cluster and retaining avoidance of earlier vertices. A self-contained finite convex comparison gives the sufficient bound E centered S_p^4 <= E S_4p+3(E S_2p)^2."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 31,
+      "label": "Leading norm correlations",
+      "locator": "Propositions 6.5 and 6.10; Remark 6.14",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "LWRN proves uniform remainder bounds and two stable ratio equations with exact gluing, giving the variance fraction 2/3 and covariance fraction 4/5. The standard-normal fluctuation conjecture remains a conjecture, with its moment index corrected."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 32,
+      "label": "First mean correction",
+      "locator": "Corollaries 6.6 and 6.7",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "5B41 justifies the future-scale series by a geometric dominating bound and evaluates the time integral with the correct terminal endpoint. Its profile satisfies exact boundary gluing and differs from the printed profile."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 33,
+      "label": "Polynomial decay recursion",
+      "locator": "Lemma 6.4",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "S23T proves the general exponential-recursion lemma by taking inverse powers and summing their asymptotically constant increments."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 34,
+      "label": "Critical moment amplitudes",
+      "locator": "Theorem 1.6, proof in section 6.2; critical normalization of Corollary 1.13",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "WQ7B computes the full integrated decrement after correcting the mean profile, obtains the initial third-power amplitude, and converts to terminal rooted moments and the biased limit. The logarithmic exponents agree with the source; the explicit constants differ and are tracked as provisional corrections."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 35,
+      "label": "Uniform small-volume mean",
+      "locator": "Lemma 6.15",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "9GFG uses the volume-biased limit and absence of a zero atom, then decreases the threshold to cover finitely many earlier levels. The scale (n+1)^(-1/2)L^(2alpha n) is defined at n=0."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 36,
+      "label": "Critical ghost absorption",
+      "locator": "Theorem 1.7 proof, equations (6.30)–(6.32)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "F62A conditions on the truncated root cluster, keeps omitted layer copies independent, and uses a last-exit edge with an outside green connection. The omitted-coordinate row sum is explicit. Small-volume mass absorbs the unknown full ghost probability uniformly."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 37,
+      "label": "Critical full-volume tail",
+      "locator": "Theorem 1.7; final optimization and (6.33)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "FMVJ supplies both tail bounds with an explicit integer scale and bounded-ratio interpolation. It gives matching small-intensity ghost behavior and identifies exactly the finite positive rooted moments. The theorem conclusion is preserved; proof endpoint conventions are made precise."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 39,
+      "label": "Coalescent renormalization map",
+      "locator": "Section 7.2; external Aldous (1997), Proposition 5, p.818",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "7VHT proves continuity of ranking/independent combination and of the map on laws using Aldous fixed-time Feller continuity as an explicit cited input. The exact orbit normalization follows from the merger clock; convergence of an entire orbit implies a fixed point."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 40,
+      "label": "Critical orbit and norm topology",
+      "locator": "Section 7.2 critical-parameter characterization, Conjecture 7.1 and Remark 7.2",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "NIXH proves convergence to zero exactly below beta_c using finite susceptibility and a critical second-moment probability bound. It assembles low-dimensional tightness/positive coordinates and proves high/critical-dimensional non-tightness in l2, with norm limits on either side of p=2. Conjectural orbit convergence remains unproved."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 41,
+      "label": "Spin-system comparison",
+      "locator": "Section 7.2 spin energy and block-spin map",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "YXL0 derives the negative gradient identity, retains ordered-pair factors in the exact recursion, specifies the finite partition-function domain and computes its Gaussian variance map and nondegenerate fixed point. Universality and non-Gaussian fixed-point discussions remain source-era research context."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 42,
+      "label": "Integrable convex comparison and summable sequences",
+      "locator": "Section 6.3, Theorem 6.12 and Remark 6.13; additional absolutely L1-summable sequence consequence",
+      "relationship": "Explicit integrable proof and an additional countable-sum consequence",
+      "status": "pending",
+      "note": "3NBK proves the signed integrable version by finite-valued approximation of each two-variable comparison, induction for convex Lipschitz functions, and increasing maxima of supporting affine functions. OCZT passes it to countable sums under summability of the absolute first moments. Nonintegrable increments and maximal-process comparisons are outside the assertion; no new source error is diagnosed."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 43,
+      "label": "Weak-limit comparison and a sufficient fluctuation criterion",
+      "locator": "Section 6.3, Theorem 6.12 and Remarks 6.13–6.14; additional deductions",
+      "relationship": "Additional limit lemmas and a conditional route to Gaussian fluctuations",
+      "status": "pending",
+      "note": "MDB8 proves closure of convex order under uniformly integrable weak limits and rigidity when the second-moment gap vanishes. 25Z0 supplies the independent Lindeberg argument and transfers its Gaussian limit under a negligible variance deficit. The two added estimates are not verified for hierarchical critical discovery; the source conjecture and higher-moment convergence remain unresolved."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 44,
+      "label": "Discovery variance and the Gaussian comparison in the actual hierarchical model",
+      "locator": "Proposition 4.17, Corollary 4.19, Proposition 6.5 and Lemma 6.11; additional consequences for the discovery comparison",
+      "relationship": "Independent Lindeberg verification and an obstruction to variance matching",
+      "status": "pending",
+      "note": "VH4M uses transitivity to control squared discovery means, proving that the independent variance is asymptotic to f_(2p) and that its Lyapunov ratio vanishes. Q7QG combines this with the existing two-thirds variance equivalent: the actual squared-mass variance is one third smaller than the independent comparison variance. The previous sufficient criterion therefore does not prove the Gaussian conjecture in this model. Limiting standardized laws remain bounded in convex order by a Gaussian of variance three halves; no new source error is diagnosed. Q7QG is original to this wiki; proof not independently checked."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 45,
+      "label": "Fixed moments of hierarchical discovery comparisons and fluctuation limits",
+      "locator": "Proposition 4.17, Corollary 4.19, Lemma 6.11 and Remark 6.14; additional deductions from the fixed-order estimates",
+      "relationship": "All-order moment compactness without Gaussian identification",
+      "status": "pending",
+      "note": "9FO5 proves Gaussian moment convergence for the independent array by set partitions and vanishing aggregate higher moments. V7MP verifies those assumptions for fixed hierarchical powers, transfers uniform integrability of every fixed power to actual fluctuations, and gives convergence of all moments along weakly convergent subsequences. The one-third variance gap persists; a Gaussian distributional limit is not proved. No journal comparison or new source diagnosis is claimed. 9FO5 and V7MP are original to this wiki; proof not independently checked."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 46,
+      "label": "Gaussian fluctuations of squared mass",
+      "locator": "Section 2 generator and child recursion; Section 6.3, Remark 6.14, p=2 case; additional deduction",
+      "relationship": "A centered-moment proof for the actual squared-mass fluctuations",
+      "status": "pending",
+      "note": "J0DE combines the exact coalescent generator with existing uniform moment bounds. Higher jump powers and nonlinear drift are negligible; the remaining Gaussian moment equation contracts both within a level and under independent-child gluing. It proves the p=2 distributional and all fixed moment limits for the exact critical hierarchical model with d at least 3 alpha. General powers, joint/process limits, comparable kernels and exponential-moment convergence are outside this conclusion. J0DE is original to this wiki; proof not independently checked."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 47,
+      "label": "Joint Gaussian fluctuations of integer power sums",
+      "locator": "Section 2 generator and child recursion; Section 6.3, Remark 6.14; additional deduction for fixed integer powers",
+      "relationship": "Joint centered-moment proof and explicit covariance for the exact model",
+      "status": "pending",
+      "note": "MFGT extends J0DE to every fixed finite collection of integer powers at a common intermediate time. A triangular normalized drift and constant limiting jump covariance determine a Gaussian law. A formal power-series identity gives its explicit covariance, and exact child gluing supplies convergence across levels. All fixed mixed and absolute moments converge; noninteger powers, growing indices, several-time or process limits, comparable kernels and exponential moments remain outside scope. MFGT is original to this wiki; proof not independently checked. The journal comparison and Lean formalisation remain pending."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 48,
+      "label": "Gaussian fluctuations at several times",
+      "locator": "Section 2 finite coalescent dynamics; Section 6.3, Remark 6.14; additional finite-dimensional deduction",
+      "relationship": "Cross-time Gaussian dependence within one exact-model coalescent layer",
+      "status": "pending",
+      "note": "OQV3 proves finite-dimensional convergence for fixed integer powers and finitely many deterministic times, including coincident times. The integrated mean clock tends to minus log(1-(1-L^-alpha)u); a backward polynomial transition argument identifies a stationary Gaussian Markov law with the MFGT drift and covariance. Uniform mixed and absolute moments follow. OQV3 is original to this wiki; proof not independently checked. Path-space tightness, nested-level dependence, comparable kernels, exponential moments and Lean formalisation remain outside the result."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 49,
+      "label": "Functional Gaussian limit within a coalescent layer",
+      "locator": "Section 2 finite coalescent dynamics; Section 6.3, Remark 6.14; additional functional-limit deduction",
+      "relationship": "Path tightness and Gaussian convergence for fixed integer power sums in the exact critical model",
+      "status": "pending",
+      "note": "Q4PO upgrades OQV3 to convergence in Skorokhod J1 on a single level, and to uniform-topology convergence for any refining uniform-grid linear interpolations. A compensated fourth-power identity and Doob inequality give maximal increments of order h squared plus eta times h. A deterministic grid bound completes the argument. The limit is the continuous time-changed stationary Gaussian process already identified in OQV3. Supremum moments converge below order four. Nested levels, noninteger or growing powers, comparable kernels, exponential moments, independent mathematical review and Lean formalisation remain separate. No new source-version audit or erratum is claimed. Q4PO is original to this wiki; proof not independently checked."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 50,
+      "label": "Gaussian dependence across nested blocks",
+      "locator": "Section 2 independent layers and gluing; Section 6.3, Remark 6.14; additional finite-tree functional-limit deduction",
+      "relationship": "Joint Gaussian path law for a fixed tree of exact-model hierarchical blocks",
+      "status": "pending",
+      "note": "F7Q2 combines the exact normalized child sum with fresh parent-layer clocks. A backward polynomial argument in the enlarged filtration identifies independent Gaussian parent innovations, without assuming conditional hydrodynamics. Marginal path tightness gives joint convergence on every fixed finite tree, uniform mixed observation moments and supremum moments below order four. An explicit ancestor covariance yields terminal squared-mass correlation L^(-(d+alpha)h/2). Growing depths or power indices, noninteger powers, comparable kernels and full-law block restrictions are excluded. F7Q2 is original to this wiki; proof not independently checked. The journal comparison and Lean formalisation remain pending. No new erratum is claimed."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 51,
+      "label": "All fixed supremum moments of the Gaussian path limit",
+      "locator": "Section 2 finite coalescent generator; Section 6.3, Remark 6.14; additional maximal-moment deduction",
+      "relationship": "Higher-order maximal increments and convergence of polynomially bounded continuous path observables",
+      "status": "pending",
+      "note": "NC7F derives the maximal 2m-th increment estimate h^m plus epsilon_n^(m-1) h by interpolating jump rates, the compensated polynomial identity, Doob and Young inequalities. It gives a quantitative mean interpolation error and convergence of every fixed positive supremum moment for one layer and every fixed finite tree. Continuous path observables with polynomial growth also have convergent expectations. Moment order, power cutoff and depth remain fixed; exponential moments and comparable-kernel or full-law block extensions are not claimed. NC7F is original to this wiki; proof not independently checked. The journal comparison and Lean formalisation remain pending; no source erratum changes."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "OVWJ",
+      "proof_uses": [
+        "6F2J",
+        "MS6M",
+        "4KBG",
+        "MLLO"
+      ],
+      "reason": "Finite-ball comparison, triangle growth, the corrected quadratic inequality after weight normalization, and independent sprinkling. Endpoint hypotheses remain explicit in the statement."
+    },
+    {
+      "order": 1,
+      "tag": "WPAD",
+      "proof_uses": [
+        "OVWJ",
+        "X8T6"
+      ],
+      "reason": "Apply the susceptibility bounds to the power-law exploration comparison; gamma < 2 gives the stated range."
+    },
+    {
+      "order": 6,
+      "tag": "2VXH",
+      "proof_uses": [
+        "FF30",
+        "655W",
+        "12NL",
+        "VI3Y",
+        "MLLO",
+        "54V4",
+        "X2A4"
+      ],
+      "reason": "Critical boundary flux and the induced-block upper estimate transfer through the independent ancestor layer. Gluing gives the uniform mean, then X2A4 controls the error."
+    },
+    {
+      "order": 7,
+      "tag": "6WO3",
+      "proof_uses": [
+        "XLWI",
+        "2VXH",
+        "X2A4"
+      ],
+      "reason": "Tree-graph exponential tails and a root union bound control the maximum; the uniform mean bound gives high-dimensional concentration."
+    },
+    {
+      "order": 8,
+      "tag": "W2VN",
+      "proof_uses": [
+        "X2A4",
+        "54V4",
+        "2VXH",
+        "6WO3"
+      ],
+      "reason": "Integrate the reciprocal equation and iterate gluing. The lower mean bounds the scaled reciprocal above, so the terminal remainder vanishes. Maximum control gives the quantitative high-dimensional error."
+    },
+    {
+      "order": 9,
+      "tag": "I7HB",
+      "proof_uses": [
+        "22H8",
+        "25Z4",
+        "X2A4",
+        "2VXH",
+        "6WO3",
+        "W2VN",
+        "54V4"
+      ],
+      "reason": "The logarithmic second-moment equation has a uniformly small error; gluing turns its integral into an exact product, summable in high dimension."
+    },
+    {
+      "order": 10,
+      "tag": "ANYT",
+      "proof_uses": [
+        "22H8",
+        "25Z4",
+        "X2A4",
+        "I7HB",
+        "W2VN",
+        "54V4"
+      ],
+      "reason": "Retain the half-factor in the moment hierarchy and derive an exact ratio ODE with positive gap p-3. Exact ratio gluing turns it into a contracting recurrence."
+    },
+    {
+      "order": 11,
+      "tag": "KPCV",
+      "proof_uses": [
+        "ANYT",
+        "25Z4",
+        "25TW",
+        "X2A4",
+        "2VXH"
+      ],
+      "reason": "Moment ratios reduce covariance negligibility to M_n squared over the mean. Fixed-index integrability gives Lr convergence and mixed factorization."
+    },
+    {
+      "order": 12,
+      "tag": "FY23",
+      "proof_uses": [
+        "ANYT",
+        "I7HB",
+        "W2VN",
+        "6WO3",
+        "54V4",
+        "0N85"
+      ],
+      "reason": "The rooted identity gives all moment ratios; first and second amplitudes give the high-dimensional constants. The existing moment-determination theorem supplies the volume-biased law."
+    },
+    {
+      "order": 13,
+      "tag": "Q8JZ",
+      "proof_uses": [
+        "22H8",
+        "25Z4",
+        "X2A4",
+        "2VXH",
+        "W2VN",
+        "54V4"
+      ],
+      "reason": "The third-moment growth at every small-maximum scale bounds the length of all bad runs. Monotonicity and the preceding good child scale give a pointwise lower bound."
+    },
+    {
+      "order": 14,
+      "tag": "RHK3",
+      "proof_uses": [
+        "22H8",
+        "25Z4",
+        "X2A4",
+        "2VXH",
+        "W2VN",
+        "54V4"
+      ],
+      "reason": "A direct capped-merger inequality gives the reciprocal differential bound. Harris and the fourth-moment estimate give the third-power drift; finite backward iteration retains every scale and time index."
+    },
+    {
+      "order": 15,
+      "tag": "L3QJ",
+      "proof_uses": [
+        "RHK3",
+        "Q8JZ",
+        "2VXH",
+        "54V4"
+      ],
+      "reason": "A large capped terminal mean propagates backwards. On a fixed window it would force third-moment growth faster than its known scale; finitely many small scales admit an explicit cap bound."
+    },
+    {
+      "order": 16,
+      "tag": "ZDDE",
+      "proof_uses": [
+        "Q8JZ",
+        "L3QJ",
+        "2VXH",
+        "VI3Y",
+        "12NL"
+      ],
+      "reason": "Count vertices in large block clusters for the lower tail. The independent red/blue decomposition and capped mean close the ghost upper bound; rooted damping supplies the block exponential cutoff."
+    },
+    {
+      "order": 17,
+      "tag": "THZF",
+      "proof_uses": [
+        "ZDDE",
+        "Q8JZ",
+        "3109",
+        "54V4"
+      ],
+      "reason": "Rooted tail integration controls small-coordinate mass and produces compact subsets above the threshold. At the endpoint the logarithmic moment growth, norm moment comparison and lower-tail estimate force divergence in probability."
+    },
+    {
+      "order": 18,
+      "tag": "O7W9",
+      "proof_uses": [
+        "22H8",
+        "25Z4",
+        "2VXH",
+        "X2A4",
+        "54V4"
+      ],
+      "reason": "The third-moment logarithmic derivative is bounded by C v_n squared. Integrating over beta_c/v_n squared gives a uniform one-step factor; moment comparison then propagates a maximum lower bound backwards."
+    },
+    {
+      "order": 19,
+      "tag": "OAE2",
+      "proof_uses": [
+        "VI3Y",
+        "F4CV",
+        "AUUG",
+        "7YNX",
+        "FF30",
+        "12NL",
+        "2VXH"
+      ],
+      "reason": "Selecting one maximum factors into internal connectivity and a decreasing competitor constraint. Harris controls the external path under selection. First and last higher-layer edges and a shell convolution supply both escape factors before averaging the selected sizes."
+    },
+    {
+      "order": 20,
+      "tag": "YUJ9",
+      "proof_uses": [
+        "O7W9",
+        "OAE2",
+        "12NL",
+        "54V4"
+      ],
+      "reason": "Place chosen smaller blocks in distinct larger blocks. Their maxima are large by backward propagation and remain distinct with high probability by the connection estimate. Terminal separation preserves distinct large descendants at every earlier time."
+    },
+    {
+      "order": 21,
+      "tag": "ADJZ",
+      "proof_uses": [
+        "YUJ9",
+        "Q8JZ",
+        "THZF",
+        "12NL"
+      ],
+      "reason": "The pointwise low-dimensional maximum bound discharges the size premise. Coordinate continuity, Portmanteau and a countable intersection yield positivity of every limiting coordinate."
+    },
+    {
+      "order": 22,
+      "tag": "LHKO",
+      "proof_uses": [
+        "29WG",
+        "XZ7B",
+        "6X74"
+      ],
+      "reason": "Finite transitive OSSS and Russo with vanishing ghost intensity give a tail inequality, which can be summed finitely to obtain the susceptibility derivative."
+    },
+    {
+      "order": 23,
+      "tag": "NHNY",
+      "proof_uses": [
+        "RHK3",
+        "2VXH",
+        "X2A4",
+        "54V4",
+        "YUJ9",
+        "22H8"
+      ],
+      "reason": "A terminal cap lower bound propagates backwards with the same cap, giving a sharp diagonal profile. Two large clusters force a strict third-moment growth factor at the critical dimension; one large starting scale suffices. The reciprocal cap inequality then transfers a small intermediate value to terminal rooted volume."
+    },
+    {
+      "order": 24,
+      "tag": "837P",
+      "proof_uses": [
+        "VI3Y",
+        "AUUG",
+        "2VXH"
+      ],
+      "reason": "Condition on two distinct earlier cluster sets. First higher-layer edges and disjoint outside paths give two escape row factors. A separate distinct-cluster tail expansion handles the capped contribution."
+    },
+    {
+      "order": 25,
+      "tag": "EH4L",
+      "proof_uses": [
+        "VI3Y",
+        "AUUG"
+      ],
+      "reason": "A finite suppression transcript leaves next-layer edges independent. Charge edges between previous clusters and discard the last counted scale. Smaller distinct clusters furnish disjoint open witnesses in the original product law, yielding the weighted BK bound."
+    },
+    {
+      "order": 26,
+      "tag": "UL8V",
+      "proof_uses": [
+        "LHKO",
+        "NHNY",
+        "837P",
+        "EH4L",
+        "2VXH",
+        "54V4",
+        "W2VN",
+        "ANYT",
+        "KPCV",
+        "FY23"
+      ],
+      "reason": "Split weighted distinct-cluster volume according to the number of large scales. Finite Russo, translation and the summable kernel turn pointwise decay into a strict derivative improvement, contradicting the finite OSSS lower bound under failure of hydrodynamics. Earlier conditional consequences are discharged."
+    },
+    {
+      "order": 27,
+      "tag": "I2YU",
+      "proof_uses": [],
+      "reason": "Conditioning on a cluster disjoint from earlier seeds leaves the outside product law. The partial power sum is monotone under restoring vertices and edges. Joint-tail comparison, finite summation by parts and induction give convex domination by independent marginals. Retain coefficient six on unordered pairs in the fourth central moment."
+    },
+    {
+      "order": 29,
+      "tag": "LWRN",
+      "proof_uses": [
+        "I2YU",
+        "C1BP",
+        "25Z4",
+        "ANYT",
+        "KPCV",
+        "W2VN",
+        "I7HB",
+        "6WO3",
+        "UL8V"
+      ],
+      "reason": "Fourth central moments bound the centered third and mixed remainders. Normalize variance by 2 nu squared/mu and covariance by 12 nu cubed/mu squared; exact gluing and stable linear equations give contractions L^-alpha and L^-2alpha."
+    },
+    {
+      "order": 30,
+      "tag": "5B41",
+      "proof_uses": [
+        "LWRN",
+        "ANYT",
+        "W2VN",
+        "I7HB"
+      ],
+      "reason": "The covariance equivalents determine epsilon2 and epsilon3. Exact mean recursion and a uniform geometric bound on future-scale ratios justify dominated convergence. Evaluate the integral from the current time to the terminal endpoint before simplifying."
+    },
+    {
+      "order": 31,
+      "tag": "S23T",
+      "proof_uses": [],
+      "reason": "Eventual monotonicity forces the positive sequence to zero; its inverse gamma power then has increments tending to gamma B. Cesaro summation gives the amplitude."
+    },
+    {
+      "order": 32,
+      "tag": "WQ7B",
+      "proof_uses": [
+        "UL8V",
+        "5B41",
+        "S23T",
+        "W2VN",
+        "I7HB",
+        "FY23"
+      ],
+      "reason": "Integrate the additive correction to the exact logarithmic third-moment equation. Its integral is positive even though its timewise leading term may change sign. The resulting recurrence gives the initial amplitude; convert explicitly to terminal rooted moments and their volume-biased scale."
+    },
+    {
+      "order": 33,
+      "tag": "9GFG",
+      "proof_uses": [
+        "WQ7B"
+      ],
+      "reason": "Weak convergence of the volume-biased scale and no limiting zero atom give small mass uniformly at late levels. Shrinking delta below every reciprocal scale handles the finitely many earlier levels."
+    },
+    {
+      "order": 34,
+      "tag": "F62A",
+      "proof_uses": [
+        "9GFG",
+        "W2VN",
+        "VI3Y"
+      ],
+      "reason": "Conditioning on the finite truncated cluster fixes its boundary but leaves all outside and omitted layer coordinates product. Last exit separates an omitted edge from the outside green connection. Sum the omitted rows and choose epsilon after fixing the mean and row constants before absorption."
+    },
+    {
+      "order": 35,
+      "tag": "FMVJ",
+      "proof_uses": [
+        "9GFG",
+        "F62A",
+        "WQ7B"
+      ],
+      "reason": "Cauchy-Schwarz on the large-volume part and bounded-ratio scale interpolation give the lower tail. Explicit integer balancing gives the ghost upper bound and hence the upper tail. Layer-cake integration identifies the positive moment threshold, including its logarithmic borderline."
+    },
+    {
+      "order": 37,
+      "tag": "7VHT",
+      "proof_uses": [
+        "54V4"
+      ],
+      "reason": "Finite rearrangement and truncation prove l2 continuity of the ranked union. Aldous1997 Proposition5 supplies the cited fixed-time Feller kernel; finite product laws and bounded continuous tests then prove continuity on probability laws. Check the rescaled merger exponent and output scaling exactly."
+    },
+    {
+      "order": 38,
+      "tag": "NIXH",
+      "proof_uses": [
+        "7VHT",
+        "FF30",
+        "2VXH",
+        "W2VN",
+        "KPCV",
+        "6WO3",
+        "UL8V",
+        "12NL",
+        "THZF",
+        "ADJZ"
+      ],
+      "reason": "Subcritical finite susceptibility sends the squared norm mean to zero. At criticality its first moment is bounded below and second moment bounded above, so a uniform positive probability survives; monotone coupling extends this above criticality. Hydrodynamics and the mean equivalent give sup-norm decay with positive l2 mass. A weak subsequential limit would contradict coordinate evaluation and norm continuity. Deterministic interpolation gives p-norm limits."
+    },
+    {
+      "order": 39,
+      "tag": "YXL0",
+      "proof_uses": [],
+      "reason": "Expand the ordered quadratic energy into diagonal and negative-gradient terms. Factor child partition functions to retain the factor two in the block bias. Diagonalize the Gaussian precision matrix to determine the normalization domain, output variance and fixed point."
+    },
+    {
+      "order": 40,
+      "tag": "3NBK",
+      "proof_uses": [
+        "I2YU"
+      ],
+      "reason": "Use the finite-valued mixed-difference comparison for each truncated pair, pass to integrable variables for Lipschitz tests, induct on the number of increments, then increase supporting-affine approximants."
+    },
+    {
+      "order": 41,
+      "tag": "OCZT",
+      "proof_uses": [
+        "3NBK"
+      ],
+      "reason": "Absolute first-moment summability gives almost-sure absolute convergence and L1 convergence of both sums. Lipschitz convex tests pass to the limit, and supporting-affine approximants recover all finite convex tests."
+    },
+    {
+      "order": 42,
+      "tag": "MDB8",
+      "proof_uses": [
+        "3NBK"
+      ],
+      "reason": "Convex tail tests transfer uniform integrability. Pass Lipschitz convex tests through weak limits, then use supporting-affine approximants. Equal second moments force the nonnegative integrated hinge gap to vanish, identifying the limiting distributions."
+    },
+    {
+      "order": 43,
+      "tag": "25Z0",
+      "proof_uses": [
+        "3NBK",
+        "MDB8"
+      ],
+      "reason": "Prove the independent triangular-array limit by characteristic-function expansion under Lindeberg control. Convex order supplies tightness and transfers square uniform integrability; a vanishing variance deficit invokes the rigidity part of MDB8."
+    },
+    {
+      "order": 44,
+      "tag": "VH4M",
+      "proof_uses": [
+        "54V4",
+        "ANYT",
+        "KPCV",
+        "I2YU",
+        "25Z0",
+        "6WO3",
+        "UL8V"
+      ],
+      "reason": "Count every cluster once and bound each discovery mean by the transitive rooted pth moment. Higher-moment equivalents make the squared-mean subtraction negligible and the independent Lyapunov ratio vanish. Use the established quadrant condition and convex-limit criterion."
+    },
+    {
+      "order": 45,
+      "tag": "Q7QG",
+      "proof_uses": [
+        "VH4M",
+        "LWRN",
+        "25Z0"
+      ],
+      "reason": "Combine the independent variance equivalent with the two-thirds actual variance equivalent and the exact covariance deficit. Uniform integrability retains the mean and variance of subsequential standardized limits; rescale their Gaussian convex comparison and optimize the exponential bound."
+    },
+    {
+      "order": 46,
+      "tag": "9FO5",
+      "proof_uses": [
+        "25Z0",
+        "MDB8"
+      ],
+      "reason": "Expand a fixed integer moment by set partitions. Singleton blocks vanish, blocks of size at least three are negligible, and pair partitions give the normal moment. Higher even moments give uniform integrability at every smaller fixed power; convex order transfers these bounds."
+    },
+    {
+      "order": 47,
+      "tag": "V7MP",
+      "proof_uses": [
+        "9FO5",
+        "VH4M",
+        "ANYT",
+        "KPCV",
+        "I2YU",
+        "3NBK",
+        "Q7QG"
+      ],
+      "reason": "Count cluster powers at their first discovery, bound centered marginal moments, and use the fixed-order equivalents to make every aggregate higher moment vanish. Transfer moment bounds by convex order and rescale by the existing variance equivalent for squared mass."
+    },
+    {
+      "order": 48,
+      "tag": "J0DE",
+      "proof_uses": [
+        "Z960",
+        "22H8",
+        "54V4",
+        "ANYT",
+        "KPCV",
+        "LWRN",
+        "V7MP",
+        "W2VN",
+        "6WO3",
+        "UL8V"
+      ],
+      "reason": "Derive the time-centered moment equation with its exact unordered-pair coefficients. Uniform fixed-moment bounds make the nonlinear drift and higher jumps negligible. The resulting normalized equation and exact independent-child multinomial recursion contract to Gaussian moments; uniform integrability and characteristic-function Taylor remainders identify the law."
+    },
+    {
+      "order": 49,
+      "tag": "MFGT",
+      "proof_uses": [
+        "Z960",
+        "22H8",
+        "54V4",
+        "ANYT",
+        "KPCV",
+        "V7MP",
+        "W2VN",
+        "6WO3",
+        "UL8V"
+      ],
+      "reason": "Expand the centered multivariate generator and bound nonlinear drift and higher jumps by powers of eta. Verify the explicit covariance by a formal power-series Lyapunov identity. Induct on mixed-moment degree using the triangular stable drift and exact independent-child gluing; bound products of transition matrices, then identify the Gaussian law and pass absolute moments by uniform integrability."
+    },
+    {
+      "order": 50,
+      "tag": "OQV3",
+      "proof_uses": [
+        "MFGT",
+        "W2VN",
+        "Z960",
+        "V7MP"
+      ],
+      "reason": "Strengthen the existing normalized generator approximation to Lr for each polynomial. Positive jump covariance and the Lyapunov identity construct Gaussian transitions. Apply the finite-state backward generator formula weighted by past polynomial observations, with unconditional Holder bounds, then eliminate observation times successively. The one-time Gaussian theorem and integrated-mean clock identify all finite-dimensional moments and laws."
+    },
+    {
+      "order": 51,
+      "tag": "Q4PO",
+      "proof_uses": [
+        "OQV3",
+        "MFGT",
+        "W2VN",
+        "V7MP",
+        "Z960"
+      ],
+      "reason": "Decompose rescaled fluctuations into predictable drift and compensated mergers. Existing drift and second/fourth jump bounds give a maximal fourth increment estimate through the compensated polynomial identity and Doob inequality. Uniform-grid interpolation controls missed oscillations, and OQV3 identifies every fixed interpolation limit. A continuous Gaussian realization and bounded Lipschitz tests yield functional convergence; fourth supremum moments supply uniform integrability below order four."
+    },
+    {
+      "order": 52,
+      "tag": "F7Q2",
+      "proof_uses": [
+        "VI3Y",
+        "54V4",
+        "Z960",
+        "MFGT",
+        "OQV3",
+        "Q4PO"
+      ],
+      "reason": "The exact child gluing scales every normalized power sum by Q^(-1/2). Reveal descendants before ancestors so each parent retains fresh independent clocks. Extend the backward polynomial transition identity using unconditional Holder bounds for the earlier observations; eliminate parent observations and substitute the child sum recursively. Independent leaves identify all Gaussian finite-dimensional laws, marginal path tightness yields the joint functional limit, and the recursion computes the ancestor covariance."
+    },
+    {
+      "order": 53,
+      "tag": "NC7F",
+      "proof_uses": [
+        "MFGT",
+        "Q4PO",
+        "F7Q2"
+      ],
+      "reason": "Interpolate intermediate predictable jump rates between orders two and 2m. The compensated polynomial identity, Doob inequality and weighted Young absorption bound the martingale maximum by the mth bracket moment and integrated 2mth jump rate. Add the controlled drift, sum interval errors for interpolation, and use higher supremum moments for uniform integrability of polynomially bounded continuous path observables. Fixed-tree estimates follow by a finite sum without independence."
+    },
+    {
+      "order": 54,
+      "tag": "2XJX",
+      "proof_uses": [
+        "Y84V",
+        "SNB3",
+        "7AER"
+      ],
+      "reason": "Tree-graph moments (Y84V) give the exponential tail (SNB3) and a linear quantile bound, which contradicts the propagation of a failed bound by block amplification (7AER); the endpoint case uses finite-block continuity."
+    },
+    {
+      "order": 55,
+      "tag": "FF30",
+      "proof_uses": [
+        "JZ47",
+        "L0TE",
+        "2XJX",
+        "R84Z"
+      ],
+      "reason": "The row-sum bound (JZ47) gives beta_c>=1/B; finite-set sharpness (L0TE) gives subcritical finite susceptibility so the runaway bound 2XJX applies; the finite-size characterisation with continuity (R84Z) gives the boundary flux."
+    },
+    {
+      "order": 56,
+      "tag": "655W",
+      "proof_uses": [
+        "2XJX"
+      ],
+      "reason": "Rooted damping (a hypothesis) gives the truncated-mean estimate, and the sibling-block recursion is closed using the quantile bound R_n^2 <= (A/b)L^{(d+alpha)n} of 2XJX."
+    },
+    {
+      "order": 57,
+      "tag": "7YNX",
+      "proof_uses": [
+        "655W",
+        "BNY8"
+      ],
+      "reason": "The flux hypothesis and the block-mean bounds of 655W give two-sided block means; the lower bound uses a direct edge between truncated sibling clusters and the upper bound finite-coordinate BK (BNY8) over level crossings."
+    },
+    {
+      "order": 58,
+      "tag": "MS6M",
+      "proof_uses": [],
+      "reason": "Shell counting and the ultrametric inequality bound the triangle increments; no other wiki assertion is invoked."
+    },
+    {
+      "order": 59,
+      "tag": "7GDE",
+      "proof_uses": [
+        "FF30",
+        "12NL",
+        "7YNX",
+        "UVQ6"
+      ],
+      "reason": "FF30 gives the critical intensity and flux, 12NL rooted damping, 7YNX the block-mean lower bound, and finite-window hyperscaling (UVQ6) the contradicting upper bound."
+    },
+    {
+      "order": 60,
+      "tag": "GPDF",
+      "proof_uses": [],
+      "reason": "A definition; the existence remark uses only continuity and monotonicity of r_n and chi_n."
+    },
+    {
+      "order": 61,
+      "tag": "6F2J",
+      "proof_uses": [
+        "BNY8"
+      ],
+      "reason": "A first-exit decomposition with finite-coordinate BK (BNY8) gives chi_N <= chi_n + phi chi_N; shell summation and the boundary coefficient give the two-sided bounds."
+    }
+  ]
+}

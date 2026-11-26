@@ -1,0 +1,79 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "window-tightness-interfaces",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 20
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-tightness-interface",
+      "order": 0,
+      "label": "Finite-window definitions and singleton witnesses",
+      "locator": "Named statement start lines in the pinned source: 56, 60, 64, 70, 89, 102, 111",
+      "relationship": "Source-inspected target definitions and witness identities",
+      "status": "pending",
+      "note": "C5Q9 and JGZB define the two universal properties without asserting that all countable vertex sets satisfy them. The source generalizes from weighted exponential profiles to all Bernoulli profiles; the amplification property uses k>=1 on the recorded reading of the source. Maximum and rooted intersections use full clusters, the root may lie outside the window, and singleton maximum/quantile values are one/two. The article exhibits the false k=0 endpoint and leaves the marked-tree partition and target proofs as obligations."
+    },
+    {
+      "source": "perclib-tightness-bk-step",
+      "order": 0,
+      "label": "Finite witnesses for universal tightness",
+      "locator": "Named public declaration start lines: 42, 47, 51, 55, 59, 66, 76, 96, 106, 120, 237, 267",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source implements the amplification and universal quantile-tail properties for arbitrary profiles on countable vertices, with k at least one, real lambda at least one, and roots outside the window allowed. TreeSplitting and FromBK are imported dependencies, not full-file reads in this inventory."
+    },
+    {
+      "source": "perclib-quantile-from-amplification",
+      "order": 0,
+      "label": "Quantile tails from amplification",
+      "locator": "Named public declaration start lines: 31, 41, 52, 66, 290, 310, 334",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source derives the universal quantile-tail property from the explicit amplification property. It retains k at least one, real thresholds, the strict lower-tail event, outside roots and constants 1/9 and 27."
+    },
+    {
+      "source": "perclib-window-quantile-moments",
+      "order": 0,
+      "label": "Quantile-scale moments of a finite-window maximum",
+      "locator": "Named public declaration start lines: 84, 106, 161",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The lower mean bound uses quantile minimality alone. The upper moments use the explicit universal-tightness premise and give C_k=20 times 18^k times k factorial, for all natural k including zero. The later BK-step source supplies the premise."
+    },
+    {
+      "source": "perclib-finite-quantile",
+      "order": 0,
+      "label": "Finite quantile stability and endpoint transfer",
+      "locator": "Named public theorem start lines: 46, 52, 60, 67, 73, 85, 106, 116, 141, 154, 165",
+      "relationship": "Source-inspected exposition with scope distinctions",
+      "status": "pending",
+      "note": "0SB0 gives stability under nearby profiles bounded above by the endpoint profile on finite ambient vertices, and the positive-endpoint squared-bound transfer. Empty windows have quantile one; nonempty windows at zero intensity have quantile two. The order facts hold in the source for arbitrary ambient types, but the article retains countability for the probability interpretation. No two-sided quantile continuity or hierarchical estimate is claimed."
+    },
+    {
+      "source": "perclib-train10-percolation-bond-tightness-truncatedmean",
+      "order": 0,
+      "label": "Capped means at the window quantile",
+      "locator": "Explicit public theorem start lines: 45, 51, 74, 81, 90, 191, 221, 236, 248",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "0SB0",
+      "proof_uses": [
+        "RA0Z",
+        "6B9V",
+        "GJIW"
+      ],
+      "reason": "A strict tail inequality below the integer minimum persists under finite-profile continuity; order gives the reverse quantile bound, allowing transfer of the full endpoint quantile."
+    }
+  ]
+}

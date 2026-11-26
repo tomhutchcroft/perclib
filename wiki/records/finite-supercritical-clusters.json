@@ -1,0 +1,583 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-supercritical-clusters",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 192
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 0,
+      "label": "Largest-component expectation",
+      "locator": "Section 6, proof of Theorem 1.4(i), (6.14), printed p.29 / PDF index28",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 1,
+      "label": "Shared-boundary variance",
+      "locator": "Section 9, Lemma 9.1, (9.3)\u2013(9.7), printed pp.34\u201335 / PDF indices33\u201334; generalized here to nonuniform probabilities",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 2,
+      "label": "Truncated susceptibility and singleton correction",
+      "locator": "Section 9, (9.8) and its proof, printed p.35 / PDF index34",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 3,
+      "label": "Rectangle field growth",
+      "locator": "Section 5.2, Proposition 5.1(ii), (5.25)\u2013(5.32), printed pp.23\u201324 / PDF indices22\u201323",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 4,
+      "label": "Supercritical large-cluster density",
+      "locator": "Sections 5.2 and 6, Corollary 5.2(ii), (5.33)\u2013(5.36), and (6.15)\u2013(6.19), printed pp.24\u201325 and29 / PDF indices23\u201324 and28",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 5,
+      "label": "Concentration and relative largest-component upper bound",
+      "locator": "Section 9, proof of Theorem 1.6(ii), (9.9)\u2013(9.13), printed pp.35\u201336 / PDF indices34\u201335",
+      "relationship": "Written proof with explicit finite-graph hypotheses and constants",
+      "status": "pending",
+      "note": "Checked arXiv:math/0401069v1 extracted text; journal text and visual PDF comparison unavailable. No new compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 6,
+      "label": "Complete-graph supercritical benchmark: giant and remaining components",
+      "locator": "Benchmark context: arXiv:math/0401069v1, Section 2.1.2; primary exploration reading: Nachmias\u2013Peres, ALEA 3 (2007), Section 4, Lemmas 4.1\u20134.2 and proof of Theorem 1.2, printed pp.138\u2013141 / PDF indices5\u20138",
+      "relationship": "Written complete-graph proof via a uniform martingale exploration estimate, stopped product law, explicit complement conditioning and a separate mean-size argument",
+      "status": "pending",
+      "note": "The proof uses the previously established subcritical component laws and supplies the exploration estimates here. The selected giant complement is not treated as an unconditioned graph; its conditioning has uniformly vanishing effect. No general-host giant claim, new source error or compiled association is asserted."
+    },
+    {
+      "source": "alon-benjamini-stacey-expanders",
+      "order": 7,
+      "label": "Short paths and conditional large-cluster coalescence",
+      "locator": "Author PDF, Section 3, Proposition 3.1 and its proof, printed pp.13\u201314 / PDF indices12\u201313",
+      "relationship": "Written proof of the short-path sprinkling mechanism and giant vertex density, extended here to local tree convergence",
+      "status": "pending",
+      "note": "Read the cited author-PDF passages in extracted text. Fixed d, p and positive edge expansion; no near-critical uniformity, quantitative second-largest bound, new erratum or compiled association is claimed."
+    },
+    {
+      "source": "krivelevich-lubetzky-sudakov-expanders",
+      "order": 8,
+      "label": "Giant density and the local-limit extension",
+      "locator": "Author PDF, Theorem 1, printed p.2 / PDF index1; Section 2.1, Claim 2.3, Corollary 2.4 and proof of Proposition 2.2, printed pp.8\u20139 / PDF indices7\u20138",
+      "relationship": "Written proof of the short-path sprinkling mechanism and giant vertex density, extended here to local tree convergence",
+      "status": "pending",
+      "note": "Read the cited author-PDF passages in extracted text. Fixed d, p and positive edge expansion; no near-critical uniformity, quantitative second-largest bound, new erratum or compiled association is claimed."
+    },
+    {
+      "source": "krivelevich-lubetzky-sudakov-expanders",
+      "order": 9,
+      "label": "Exponential concentration, giant degree law and edge/excess densities",
+      "locator": "Author PDF, Theorem 1 (1.2), (1.4), printed p.2 / PDF index1; Theorem 2.1 (2.1), printed p.6 / PDF index5; Section 2.1 through the degree deduction, printed pp.6\u20139 / PDF indices5\u20138",
+      "relationship": "Written fixed-cutoff concentration and empirical local-profile proof, recovering the giant degree and edge laws with a local-tree assumption",
+      "status": "pending",
+      "note": "Extracted author-PDF text checked. The wiki supplies the bounded-difference constants and fixed-d cubic excess expansion. One provisional prose-conjunction correction has a complete notational fix; displayed source formulas and main conclusions are unchanged. The 2-core and near-critical uniformity remain separate; no compiled association."
+    },
+    {
+      "source": "krivelevich-lubetzky-sudakov-expanders",
+      "order": 10,
+      "label": "The giant 2-core: thick-set expansion, reserved-edge cycles and degree profile",
+      "locator": "Author PDF, Section 2.2, (2.19)\u2013(2.29), Proposition 2.5, Claims 2.8\u20132.9, Corollary 2.10 and Remarks 2.11\u20132.12; printed pp.10\u201314 / PDF indices9\u201313",
+      "relationship": "Complete written reconstruction with explicit sparse-colour constants, corrected red first-round parameter and local-tree extension",
+      "status": "pending",
+      "note": "Extracted author-PDF text read through the final degree deduction. Red first-round bonds have parameter (1-theta)p0; the lower eligible-edge expectation uses its extinction probability. The correction is provisional/fix found/local and preserves the main fixed-parameter theorem. No critical-window uniformity or compiled association is asserted."
+    },
+    {
+      "source": "krivelevich-lubetzky-sudakov-expanders",
+      "order": 11,
+      "label": "Robustness of the giant, balanced separators, long paths and cycles",
+      "locator": "Author PDF, Section 4, Theorem 4.1 and proof, Corollary 4.2, Lemma 4.3 and following cycle paragraph; printed pp.18\u201320 / PDF indices17\u201319",
+      "relationship": "Complete written thinning and geometric proofs, with uniform adversarial vertex deletion, a direct DFS separator and an explicit connector-intersection argument",
+      "status": "pending",
+      "note": "Extracted author-PDF text read. The conditional erasure probability is a lower bound, as the source subsequent display already requires; this is recorded provisionally as fix found/notation. The complete-minor theorem is not reproduced. No near-critical uniformity or compiled association is asserted."
+    },
+    {
+      "source": "bollobas-riordan-giant-normality",
+      "order": 12,
+      "label": "The barely supercritical giant: exact exploration and Gaussian fluctuations",
+      "locator": "arXiv:1010.4595, 11-page version, Theorem 1, Corollary 2, Section 2, (3)\u2013(21), Lemmas 3\u20138 and concluding proof; printed pp.2\u201310 / PDF indices1\u20139",
+      "relationship": "Complete written proof of the vanishing-epsilon specialization, with explicit early-start and characteristic-function arguments",
+      "status": "pending",
+      "note": "Extracted PDF text read. The survival-probability center is retained throughout N epsilon^3 tending to infinity; the N epsilon^5 transition for replacing it by 2 epsilon N is proved separately. No centered-moment convergence, publisher-version comparison, erratum or compiled association is asserted."
+    },
+    {
+      "source": "nachmias-peres-outside-window",
+      "order": 13,
+      "label": "Probability limits and the conditioned complement; leading-scale moment upgrade",
+      "locator": "ALEA 3 (2007), Theorem 1.2 and Section 4, Lemmas 4.1\u20134.2 and full concluding proof; printed pp.133\u2013134 and138\u2013141 / PDF indices0\u20131 and5\u20138",
+      "relationship": "Primary comparison for the probability theorem; additional written exponential-tail and moment arguments",
+      "status": "pending",
+      "note": "Extracted publisher-PDF text read. The new deterministic-block exploration bound controls rare oversized components, and the complement law retains its cutoff conditioning. All fixed positive leading-scale moments are proved here; centered fluctuation moments are not asserted. No new erratum or compiled association."
+    },
+    {
+      "source": "bollobas-riordan-giant-normality",
+      "label": "Gaussian marginal and exact dual normalization in a joint limit",
+      "locator": "arXiv:1010.4595v2, Theorem 1, Corollary 2 and Section 2, printed pp.2\u201310 / PDF indices1\u20139",
+      "relationship": "Written joint-limit extension of the previously reconstructed Gaussian marginal",
+      "status": "pending",
+      "note": "The exact identity I(c*)=I(1+epsilon) and uniform complementary normalization are proved here. The independence theorem is not attributed to the source marginal statement. No centered-moment convergence or compiled association is asserted.",
+      "order": 14
+    },
+    {
+      "source": "nachmias-peres-outside-window",
+      "label": "Conditional complement and centered non-giant extremes jointly with the giant",
+      "locator": "Theorem 1.2 and Section 4 conditional-complement argument, printed pp.133\u2013134 and140\u2013141 / PDF indices0\u20131 and7\u20138",
+      "relationship": "Written centered joint-count and ordered-rank extension retaining the cutoff conditioning",
+      "status": "pending",
+      "note": "The proof conditions on the actual giant vertex set, removes only a uniformly negligible cutoff conditioning, and proves the limit uniformly over the allowed complement sizes. No joint critical-window limit, new erratum or compiled association is asserted.",
+      "order": 15
+    },
+    {
+      "order": 16,
+      "source": "bollobas-riordan-giant-normality",
+      "label": "Centered Gaussian moments beyond the marginal distributional theorem",
+      "locator": "arXiv:1010.4595v2, Theorem 1, Corollary 2 and Section 2, printed pp.2\u201310 / PDF indices1\u20139",
+      "relationship": "Primary context for a written centered-moment extension",
+      "status": "pending",
+      "note": "The weighted exponential estimates, uniform integrability, random-normalization control and limiting covariance calculation are supplied here. No source correction or compiled association is asserted."
+    },
+    {
+      "order": 17,
+      "source": "nachmias-peres-outside-window",
+      "label": "Centered non-giant moments through the conditional complement",
+      "locator": "Theorem 1.2 and Section 4 conditional-complement argument, printed pp.133\u2013134 and140\u2013141 / PDF indices0\u20131 and7\u20138",
+      "relationship": "Primary context for a written centered-moment extension",
+      "status": "pending",
+      "note": "The weighted exponential estimates, uniform integrability, random-normalization control and limiting covariance calculation are supplied here. No source correction or compiled association is asserted."
+    },
+    {
+      "order": 18,
+      "source": "hofstad-nachmias-hypercube",
+      "label": "Broad-regime cube sprinkling",
+      "locator": "Sections 2.3,7.1\u20137.2, printed pp.737\u2013738,791\u2013793,796 / PDF indices12\u201313,66\u201368,71",
+      "relationship": "Comparison for a separate coarse concentration-based packing proof",
+      "status": "pending",
+      "note": "The full near-window range remains separate. No source correction or compiled association is asserted."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "4OVE",
+      "proof_uses": [
+        "1T2M"
+      ],
+      "reason": "Largest-component expectation. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 1,
+      "tag": "RD1J",
+      "proof_uses": [],
+      "reason": "Shared-boundary variance. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 2,
+      "tag": "E4NT",
+      "proof_uses": [],
+      "reason": "Truncated susceptibility and singleton correction. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 3,
+      "tag": "5SCM",
+      "proof_uses": [],
+      "reason": "Rectangle field growth. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 4,
+      "tag": "UQ45",
+      "proof_uses": [
+        "5SCM",
+        "KQN9",
+        "F5Y5",
+        "1T2M"
+      ],
+      "reason": "Supercritical large-cluster density. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 5,
+      "tag": "G987",
+      "proof_uses": [
+        "RD1J",
+        "E4NT",
+        "UQ45",
+        "F5Y5"
+      ],
+      "reason": "Concentration and relative largest-component upper bound. General and critical-reference hypotheses are separated in the article."
+    },
+    {
+      "order": 6,
+      "tag": "AUTD",
+      "proof_uses": [],
+      "reason": "Sum exact conditional exploration means, bound the active queue within each component by the martingale maximum and drift, and apply the L2 maximal inequality. The restart subtraction and discrete-time quadratic correction are retained."
+    },
+    {
+      "order": 7,
+      "tag": "2KT9",
+      "proof_uses": [
+        "AUTD",
+        "RN5K",
+        "X0R0"
+      ],
+      "reason": "A long positive excursion gives the giant. Condition only on the completion stopping history for the independent undiscovered remainder. For the sharper remaining ranks, condition explicitly on the selected giant and then remove the complement size condition using a uniform subcritical tail bound."
+    },
+    {
+      "order": 8,
+      "tag": "U6EN",
+      "proof_uses": [
+        "2KT9",
+        "BFM4",
+        "RL1L"
+      ],
+      "reason": "Supercritical Poisson exploration separates survival mass from the finite Borel tail. Its survival probability is asymptotic to two epsilon; a cutoff between epsilon^(-2) and epsilon N gives the matching expectation upper bound and mean absolute convergence."
+    },
+    {
+      "order": 9,
+      "tag": "9906",
+      "proof_uses": [],
+      "reason": "Finite edge Menger gives linearly many disjoint paths; the total edge count makes at least half short. Their independent sprinkled openings give an exponential failure bound."
+    },
+    {
+      "order": 10,
+      "tag": "NVCH",
+      "proof_uses": [
+        "9906"
+      ],
+      "reason": "Condition on the initial configuration and union-bound only over partitions of its large components. A deterministic weight partition then puts all but delta N of their vertices in one final component."
+    },
+    {
+      "order": 11,
+      "tag": "YTZU",
+      "proof_uses": [
+        "NVCH",
+        "BFM4"
+      ],
+      "reason": "At each fixed cutoff, local tree convergence identifies the mean large-cluster mass and bounded dependence gives concentration. Sprinkle from a smaller fixed parameter, then take the cutoff and parameter limits in order; compare total large-cluster mass for uniqueness."
+    },
+    {
+      "order": 12,
+      "tag": "YCHK",
+      "proof_uses": [
+        "XSA6"
+      ],
+      "reason": "A bond flip changes at most two small components worth of cutoff indicators; locally weighted terms add only a bounded host neighbourhood. Apply the conditional centered-Bernoulli exponential-moment bound to the edge-exposure martingale."
+    },
+    {
+      "order": 13,
+      "tag": "UPQ2",
+      "proof_uses": [
+        "YCHK",
+        "NVCH",
+        "YTZU"
+      ],
+      "reason": "Replace fixed-cutoff variance estimates by exponential bounds, retaining the conditional sprinkling estimate. Fix all cutoffs and the smaller parameter before the graph-size limit; compare large-cluster mass for the second component."
+    },
+    {
+      "order": 14,
+      "tag": "OH6B",
+      "proof_uses": [
+        "YCHK",
+        "UPQ2"
+      ],
+      "reason": "Local convergence identifies the weighted cutoff expectation. Once the largest component exceeds the cutoff, the difference from its weighted mass is bounded by Z_M minus L1; both bounds concentrate exponentially."
+    },
+    {
+      "order": 15,
+      "tag": "VSGH",
+      "proof_uses": [
+        "OH6B",
+        "UPQ2"
+      ],
+      "reason": "Condition the tree root on its open degree and use independent descendant extinction. Sum the degree profile for edges, subtract vertices for excess, and expand the nontrivial fixed point only after the graph-size limit."
+    },
+    {
+      "order": 16,
+      "tag": "0ATK",
+      "proof_uses": [],
+      "reason": "Count connected blocks by canonical depth-first walks, sum over root sets and size compositions, and union-bound the probability that at least half a boundary is reserved blue."
+    },
+    {
+      "order": 17,
+      "tag": "S8OP",
+      "proof_uses": [
+        "0ATK",
+        "9906",
+        "NVCH"
+      ],
+      "reason": "Trim a minimum red cut to components meeting its terminal union; the smaller side is thick in the original host. Its red cut supplies short edge-disjoint paths, and the large-component partition bound gives red-only coalescence."
+    },
+    {
+      "order": 18,
+      "tag": "TGLZ",
+      "proof_uses": [
+        "0ATK",
+        "S8OP",
+        "YCHK",
+        "UPQ2",
+        "XSA6"
+      ],
+      "reason": "Use local two-sided deletion clusters for the upper bound. Blue first-round edges with two large red clusters become cycle edges after red-only coalescence. Correct the red parameter to (1-theta)p0 and use binomial blue sampling conditional only on the full uncoloured configuration. Compare counts for the local approximation, other cores and bridges."
+    },
+    {
+      "order": 19,
+      "tag": "2K74",
+      "proof_uses": [
+        "TGLZ",
+        "YCHK",
+        "VSGH"
+      ],
+      "reason": "The limiting selected-edge degree on the regular tree is the number of surviving branches when that number is at least two. Local concentration and the edge symmetric-difference bound transfer this profile to the giant core; binomial identities give vertices, edges and excess."
+    },
+    {
+      "order": 20,
+      "tag": "58KB",
+      "proof_uses": [],
+      "reason": "Choose the deletion witness after fixing the entire configuration, then independently thin. Erasing the incident open edges has a conditional lower probability bound; isolated deleted vertices explain the t>=1 hypothesis."
+    },
+    {
+      "order": 21,
+      "tag": "P3AV",
+      "proof_uses": [
+        "58KB",
+        "UPQ2",
+        "YTZU"
+      ],
+      "reason": "Compare with a slightly smaller fixed parameter and absorb the exponential erasure cost. The second-largest bound puts the surviving large component inside the original giant; retain the quantifier over all small deletion sets."
+    },
+    {
+      "order": 22,
+      "tag": "PMXD",
+      "proof_uses": [],
+      "reason": "Stop depth-first search when exactly ceil(m/3) vertices are finished. Its stack is a path, separates finished from unseen vertices, and leaves both sides of order at most 2m/3."
+    },
+    {
+      "order": 23,
+      "tag": "F067",
+      "proof_uses": [],
+      "reason": "List successive intersections of the short connector with the long path. One jump in path index is large, and the intervening connector segment is internally disjoint from the path."
+    },
+    {
+      "order": 24,
+      "tag": "8NPK",
+      "proof_uses": [
+        "P3AV",
+        "PMXD",
+        "9906",
+        "F067",
+        "UPQ2"
+      ],
+      "reason": "Find a long first-round path, sprinkle a bounded-length connection between its outer thirds, and use the intersection lemma to obtain a long cycle. The second-largest bound locates it in the final giant; cycles survive core pruning."
+    },
+    {
+      "order": 26,
+      "tag": "UEXT",
+      "proof_uses": [
+        "AUTD",
+        "2KT9"
+      ],
+      "reason": "Solve the exact exploration recursion; dyadic martingale maximal estimates control the restart count and last early zero. The existing long excursion identifies the giant."
+    },
+    {
+      "order": 27,
+      "tag": "WEV8",
+      "proof_uses": [
+        "AUTD"
+      ],
+      "reason": "Bound the conditional binomial variance error in mean and the third absolute moments; telescope conditional characteristic functions and remove deterministic weights in L2."
+    },
+    {
+      "order": 28,
+      "tag": "UKVG",
+      "proof_uses": [
+        "UEXT",
+        "WEV8",
+        "2KT9"
+      ],
+      "reason": "Localize the giant completion at the fluctuation scale, control weighted martingale oscillations on deterministic intervals, linearize the exact drift and replace its root by the survival-probability center."
+    },
+    {
+      "order": 29,
+      "tag": "MEUA",
+      "proof_uses": [
+        "UKVG"
+      ],
+      "reason": "Expand the positive survival root to second order and compare its deterministic bias with the Gaussian scale."
+    },
+    {
+      "order": 30,
+      "tag": "N9DF",
+      "proof_uses": [],
+      "reason": "Bound conditional centered-binomial exponential moments, stop the resulting nonnegative supermartingale at a crossing and optimize its parameter."
+    },
+    {
+      "order": 31,
+      "tag": "PMEN",
+      "proof_uses": [
+        "AUTD",
+        "N9DF"
+      ],
+      "reason": "A long component forces a large martingale increment against finite-population depletion. Group start times in deterministic blocks and sum the resulting quadratic block exponents."
+    },
+    {
+      "order": 32,
+      "tag": "PW6A",
+      "proof_uses": [
+        "AUTD",
+        "N9DF",
+        "RN5K"
+      ],
+      "reason": "Upgrade the deterministic parabolic approximation to exponential probability, locate its long excursion and apply the subcritical tail only conditional on the stopped history."
+    },
+    {
+      "order": 33,
+      "tag": "DNIW",
+      "proof_uses": [
+        "2KT9",
+        "PMEN",
+        "PW6A",
+        "RN5K"
+      ],
+      "reason": "Control all leading-scale moments of the giant, retain the exact cutoff conditioning of its complement, and bound the exceptional contribution using Holder rather than the ambient vertex count."
+    },
+    {
+      "order": 34,
+      "tag": "DD9N",
+      "proof_uses": [
+        "MEUA"
+      ],
+      "reason": "Use the exact Poisson dual identity and differentiate the rate near its subcritical dual; the quotient m/c_m cancels exactly in the logarithmic centering."
+    },
+    {
+      "order": 35,
+      "tag": "OH30",
+      "proof_uses": [
+        "DD9N",
+        "UKVG",
+        "PW6A",
+        "DNIW",
+        "RN5K",
+        "7W39"
+      ],
+      "reason": "Condition on the giant set within a slowly growing Gaussian-size interval. Uniform subcritical interval-count limits and negligible cutoff conditioning factor from the giant-size event."
+    },
+    {
+      "order": 36,
+      "tag": "K1HI",
+      "proof_uses": [
+        "OH30",
+        "7W39"
+      ],
+      "reason": "Express each ordered-size event as inequalities for exceedance counts; the exponential arrival representation identifies the joint rank vector and the tree property."
+    },
+    {
+      "order": 37,
+      "tag": "KU4Y",
+      "proof_uses": [
+        "K1HI"
+      ],
+      "reason": "Expand the exact supercritical rate and retain its bias times the logarithmic centering; use tightness for the diverging-shift case."
+    },
+    {
+      "order": 38,
+      "tag": "Y85E",
+      "proof_uses": [
+        "N9DF",
+        "UEXT"
+      ],
+      "reason": "Apply a weighted exponential maximal bound on dyadic time intervals to the drifted minimum and late zeros of the exploration."
+    },
+    {
+      "order": 39,
+      "tag": "LXGK",
+      "proof_uses": [
+        "Y85E",
+        "UKVG",
+        "PW6A",
+        "PMEN"
+      ],
+      "reason": "Control completion-time fluctuations by the martingale maximum and early errors on the good trajectory; bound every exceptional-event moment using the global largest-component tail."
+    },
+    {
+      "order": 40,
+      "tag": "NVPH",
+      "proof_uses": [
+        "LXGK",
+        "PW6A",
+        "DNIW",
+        "DD9N",
+        "XHEC",
+        "K1HI",
+        "OL4S",
+        "PMEN"
+      ],
+      "reason": "Transfer uniform centered subcritical moments through the cutoff-conditioned complement, with random rate and centering errors controlled in moments; apply uniform integrability to the joint limit."
+    },
+    {
+      "order": 41,
+      "tag": "M7A4",
+      "proof_uses": [
+        "NVPH"
+      ],
+      "reason": "Compute logarithmic gamma covariances by the beta-gamma factorization and differentiate the gamma product; the Gaussian/extreme covariance vanishes by independence."
+    },
+    {
+      "order": 42,
+      "tag": "YI8S",
+      "proof_uses": [],
+      "reason": "Coordinate-exposure exponential moments bound distances to a large set; greedy exclusion of radius-ell neighbourhoods packs vertex-disjoint paths."
+    },
+    {
+      "order": 43,
+      "tag": "5IGY",
+      "proof_uses": [
+        "YI8S"
+      ],
+      "reason": "A balanced partition of final component masses is a union of first-round components; count those partitions and use independent sprinkled paths."
+    },
+    {
+      "order": 44,
+      "tag": "12DQ",
+      "proof_uses": [
+        "EFAQ",
+        "87Y4",
+        "7Y5K",
+        "5IGY"
+      ],
+      "reason": "Verify the cube reference assumptions, concentrate first-round mass and compare the path-success exponent N^(1-o(1)) with at most exp(O(N^(5/6))) partitions."
+    },
+    {
+      "order": 45,
+      "tag": "E6FX",
+      "proof_uses": [
+        "12DQ",
+        "7Y5K"
+      ],
+      "reason": "Mean-square concentration of large-cluster mass bounds the giant second moment and total component squares; transitivity yields susceptibility and negligible remainder."
+    }
+  ]
+}

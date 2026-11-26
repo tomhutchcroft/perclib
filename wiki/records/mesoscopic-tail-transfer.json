@@ -1,0 +1,301 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "mesoscopic-tail-transfer",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 14
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 3,
+      "label": "From cutoff mass to a full volume tail",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 2,
+      "label": "Cutoff moments and tail extraction",
+      "locator": "Sections II.4–II.5; equation (II.5.10)",
+      "relationship": "Explicit sufficient conditions",
+      "note": "The fractional-tail argument excludes the discontinuous endpoint."
+    },
+    {
+      "source": "perclib-reciprocal-ode",
+      "order": 0,
+      "label": "Reciprocal differential inequalities and truncation",
+      "locator": "Explicit public declaration start lines: 52, 63, 85, 128, 206, 225, 236, 240, 245, 253, 268, 300, 319, 343",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fourteen public results retain absolute continuity, ordered truncation limits and the separate logarithmic derivative hypothesis. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-mesoscopic-negligibility",
+      "order": 0,
+      "label": "Fixed-truncation mesoscopic negligibility",
+      "locator": "Explicit public declaration start lines: 41, 59, 97, 122, 181, 202, 234, 247, 257, 274, 390, 464, 478, 491, 499, 507, 520, 527, 543, 609",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty public results separate the uniform analytic estimate, the ordered probability-measure limit and its two-point witness. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-mass-transport-tuple",
+      "order": 0,
+      "label": "Tuple re-rooting and merger algebra",
+      "locator": "Explicit public declaration start lines: 50, 79, 85, 99",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Four public results give invariant tuple reindexing and the real binomial identities. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 69,
+      "label": "Negligible small window counts",
+      "locator": "arXiv:2508.18808v1 §II.5.2, Theorem II.5.2(1), PDF p. 51",
+      "relationship": "Corrected proof with explicit scope",
+      "status": "pending",
+      "note": "A direct tail-integral bound gives the explicit relative factor delta^(p-rho), including rho=0. Full-tail and lower-window-moment inputs are retained."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 70,
+      "label": "Mass in a mesoscopic annulus",
+      "locator": "arXiv:2508.18808v1 §II.5.2, Theorem II.5.2(2), PDF pp. 51–52",
+      "relationship": "Corrected proof with explicit scope",
+      "status": "pending",
+      "note": "Independent added-layer estimate plus first-moment spatial tails supplies annular concentration for alpha<d. The uniform version starts at integer n=3; endpoint outer-mass control is explicitly excluded."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 71,
+      "label": "Lower tails below the biased mean",
+      "locator": "arXiv:2508.18809v1 Lemma III.3.21",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "Unbias on the identical event and retain the biased mean in the final square root. Continuity, not monotonicity, of the moment ratio gives interpolation; radius-one thresholds are handled separately."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 72,
+      "label": "A capped-mean deficit on nearby scales",
+      "locator": "arXiv:2508.18809v1 Lemma III.3.22; (III.3.23)–(III.3.24)",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "The tail gain beats the cap collision error. An integrated logarithmic-growth contradiction gives a quantified selected radius with its law, cap and normalization indexed consistently."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 73,
+      "label": "Riccati propagation with a linear error",
+      "locator": "arXiv:2508.18809v1 Lemma III.3.23",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "The absolutely continuous reciprocal of t^(-e) f supplies the corrected denominator and the strict subthreshold growth bound; 0 <= e < alpha is explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 74,
+      "label": "Critical-dimensional mesoscopic negligibility",
+      "locator": "arXiv:2508.18809v1 Lemma III.3.19 and its proof",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "Fix one positive lambda, propagate a fixed cap to every target radius, then integrate its reciprocal in intensity. A final smaller cap handles all bounded radii."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 75,
+      "label": "Uniform cubic moments including the critical cutoff",
+      "locator": "arXiv:2508.18809v1 Lemmas III.3.24–III.3.25",
+      "relationship": "Proof with explicit scope and provisional local corrections",
+      "status": "pending",
+      "note": "Negligibility retains half the mean above a fixed fraction of r^(2 alpha). A comparison radius at least r and the critical capped mean remove the lambda loss, including lambda=0."
+    },
+    {
+      "source": "hutchcroft-lrp-3",
+      "order": 76,
+      "label": "Full mean-field tails with an explicit cutoff window",
+      "locator": "arXiv:2508.18809v1 Lemma III.3.20 and its proof",
+      "relationship": "Proof with an explicitly narrower cutoff threshold range",
+      "status": "pending",
+      "note": "Negligibility makes the independent-layer ghost comparison contractive without a critical-cutoff susceptibility upper bound. Uniform cubic moments give the lower bound below half the biased mean; the resulting cutoff window retains its fixed coefficient."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "SOG8",
+      "proof_uses": [
+        "AS7A",
+        "ZWQ3"
+      ],
+      "reason": "A direct tail-integral bound gives the explicit relative factor delta^(p-rho), including rho=0. Full-tail and lower-window-moment inputs are retained."
+    },
+    {
+      "order": 1,
+      "tag": "L6K3",
+      "proof_uses": [
+        "AYPN",
+        "C4E9"
+      ],
+      "reason": "Independent added-layer estimate plus first-moment spatial tails supplies annular concentration for alpha<d. The uniform version starts at integer n=3; endpoint outer-mass control is explicitly excluded."
+    },
+    {
+      "order": 2,
+      "tag": "2Z34",
+      "proof_uses": [
+        "BTM3",
+        "9WYX",
+        "Y84V",
+        "6L9Z",
+        "DR1W"
+      ],
+      "reason": "Unbias on the identical event and retain the biased mean in the final square root. Continuity, not monotonicity, of the moment ratio gives interpolation; radius-one thresholds are handled separately."
+    },
+    {
+      "order": 3,
+      "tag": "2HXZ",
+      "proof_uses": [
+        "2Z34",
+        "BTM3",
+        "KPBJ",
+        "MRZO"
+      ],
+      "reason": "The tail gain beats the cap collision error. An integrated logarithmic-growth contradiction gives a quantified selected radius with its law, cap and normalization indexed consistently."
+    },
+    {
+      "order": 4,
+      "tag": "19IN",
+      "proof_uses": [],
+      "reason": "The absolutely continuous reciprocal of t^(-e) f supplies the corrected denominator and the strict subthreshold growth bound; 0 <= e < alpha is explicit."
+    },
+    {
+      "order": 5,
+      "tag": "Q7O9",
+      "proof_uses": [
+        "2HXZ",
+        "19IN",
+        "89T0",
+        "D7A5",
+        "DR1W"
+      ],
+      "reason": "Fix one positive lambda, propagate a fixed cap to every target radius, then integrate its reciprocal in intensity. A final smaller cap handles all bounded radii."
+    },
+    {
+      "order": 6,
+      "tag": "XHJ4",
+      "proof_uses": [
+        "Q7O9",
+        "C0OR",
+        "0NU2",
+        "Y84V"
+      ],
+      "reason": "Negligibility retains half the mean above a fixed fraction of r^(2 alpha). A comparison radius at least r and the critical capped mean remove the lambda loss, including lambda=0."
+    },
+    {
+      "order": 7,
+      "tag": "40HT",
+      "proof_uses": [
+        "Q7O9",
+        "XHJ4",
+        "2Z34",
+        "BEJT",
+        "DR1W"
+      ],
+      "reason": "Negligibility makes the independent-layer ghost comparison contractive without a critical-cutoff susceptibility upper bound. Uniform cubic moments give the lower bound below half the biased mean; the resulting cutoff window retains its fixed coefficient."
+    },
+    {
+      "order": 8,
+      "tag": "QMN5",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 9,
+      "tag": "MIJ7",
+      "proof_uses": [
+        "7WIO"
+      ],
+      "reason": "The proof differentiates the finite product law of the truncated volume (finite-profile Russo formula, 7WIO), double counts by transitivity and bounds the merge term by conditioning on the root cluster."
+    },
+    {
+      "order": 10,
+      "tag": "D7A5",
+      "proof_uses": [
+        "7WIO"
+      ],
+      "reason": "The proof differentiates in finite exhausting sets (7WIO), passes to the limit by dominated convergence, and repeats the finite merge and conditioning argument after a mass transport supplied by the hypothesis."
+    },
+    {
+      "order": 11,
+      "tag": "6H7C",
+      "proof_uses": [
+        "7WIO",
+        "X5SS"
+      ],
+      "reason": "The proof justifies the derivative by finite-volume differentiation (7WIO) and dominated exhaustion, uses mass transport for the factor-three identity, and applies the Harris inequality (X5SS) to truncations for the lower bound."
+    },
+    {
+      "order": 12,
+      "tag": "C9Y8",
+      "proof_uses": [
+        "7WIO"
+      ],
+      "reason": "The proof sums cluster powers over V, differentiates the finite product law with the edge forced closed (7WIO), and bounds the two-cluster term by conditioning on the root cluster."
+    },
+    {
+      "order": 13,
+      "tag": "09EI",
+      "proof_uses": [
+        "7WIO"
+      ],
+      "reason": "The proof differentiates in finite induced subgraphs (7WIO), dominates by Hoelder and mass transport, and reruns the symmetrisation and conditioning steps of D7A5 and C9Y8 rather than applying their statements."
+    },
+    {
+      "order": 14,
+      "tag": "NJF3",
+      "proof_uses": [
+        "7WIO",
+        "X5SS"
+      ],
+      "reason": "The proof reuses dominated finite-volume differentiation (7WIO), bounds outside clusters by conditioning, and gets the lower bounds from Harris association (X5SS) minus the same-cluster contribution."
+    },
+    {
+      "order": 15,
+      "tag": "XXTP",
+      "proof_uses": [
+        "09EI",
+        "X5SS"
+      ],
+      "reason": "The proof inserts into the countable moment hierarchy (09EI) two-sided bounds on each two-cluster term from conditioning and Harris association (X5SS)."
+    },
+    {
+      "order": 16,
+      "tag": "ZWQ3",
+      "proof_uses": [],
+      "reason": "The proof bounds the ghost transform above using mesoscopic negligibility and below by Jensen under size bias, then converts transform bounds to tail bounds by hand; it invokes no other wiki assertion."
+    },
+    {
+      "order": 17,
+      "tag": "YJ5E",
+      "proof_uses": [
+        "0WAE",
+        "NJF3",
+        "LQ6Y",
+        "NS0Q",
+        "D7A5",
+        "6H7C",
+        "KKGL",
+        "C4E9",
+        "BEJT",
+        "ZWQ3"
+      ],
+      "reason": "The proof combines localized damping bounds (0WAE), moment-deficit bounds (NJF3), the quantile bound (LQ6Y) and the all-scale quantile theorem (NS0Q), feeds D7A5 and 6H7C into the negligibility theorem (KKGL), and applies the full-tail transfer (ZWQ3) with the ghost comparison from C4E9 and BEJT."
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sharpness-exercises",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 157
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Nearest-neighbour uniqueness",
+      "locator": "17 March 2017 author manuscript, Section 1.1 and the geometric prerequisites of Exercise 3.7.",
+      "relationship": "Written supporting proof with explicit source and regularity scope",
+      "status": "pending",
+      "note": "Disjoint encounter boxes are contracted in a finite domain; pruning spanning trees down to boundary terminals makes each encounter box a branch vertex. The boundary count contradicts a positive volume density."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Finiteness of pivotal sets under half-space positivity",
+      "locator": "17 March 2017 author manuscript, Exercise 3.7, printed pp.35\u201336, PDF indices46\u201347.",
+      "relationship": "Written supporting proof with explicit source and regularity scope",
+      "status": "pending",
+      "note": "Independent connections in opposite half-spaces produce a backbone vertex with positive probability. Ergodicity gives existence almost surely, uniqueness connects each infinite root to it, and a finite connecting path contains every pivotal edge."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Zero-field density inequality",
+      "locator": "17 March 2017 author manuscript, Exercises 3.6 and 3.8, printed pp.35\u201336, PDF indices46\u201347.",
+      "relationship": "Written supporting proof with explicit source and regularity scope",
+      "status": "pending",
+      "note": "Integrate the finite-torus second inequality first, then pass to the infinite graph and zero field. Positive supercritical density dominates the field-response remainder. The result is integrated and holds at all differentiability points, not a claim of differentiability everywhere."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Exact field asymptotics and logarithmic exponents",
+      "locator": "17 March 2017 author manuscript, Exercise 3.3, printed p.32, PDF index43; notation conventions in Section 1.2.",
+      "relationship": "Written supporting proof with explicit source and regularity scope",
+      "status": "pending",
+      "note": "The tail series and an improper Riemann sum give the Gamma coefficient below exponent one, a logarithm at one, and a finite-mean slope above one. Logarithmic exponents have the separate minimum-with-one rule."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "Y6SG",
+      "proof_uses": [
+        "6GNC",
+        "4K33"
+      ],
+      "reason": "Disjoint encounter boxes are contracted in a finite domain; pruning spanning trees down to boundary terminals makes each encounter box a branch vertex. The boundary count contradicts a positive volume density."
+    },
+    {
+      "order": 1,
+      "tag": "5E0D",
+      "proof_uses": [
+        "Y6SG",
+        "WUAF"
+      ],
+      "reason": "Independent connections in opposite half-spaces produce a backbone vertex with positive probability. Ergodicity gives existence almost surely, uniqueness connects each infinite root to it, and a finite connecting path contains every pivotal edge."
+    },
+    {
+      "order": 2,
+      "tag": "9PPO",
+      "proof_uses": [
+        "G192",
+        "8B62",
+        "J2TE"
+      ],
+      "reason": "Integrate the finite-torus second inequality first, then pass to the infinite graph and zero field. Positive supercritical density dominates the field-response remainder. The result is integrated and holds at all differentiability points, not a claim of differentiability everywhere."
+    },
+    {
+      "order": 3,
+      "tag": "FZQQ",
+      "proof_uses": [
+        "0NVH",
+        "3C2F"
+      ],
+      "reason": "The tail series and an improper Riemann sum give the Gamma coefficient below exponent one, a logarithm at one, and a finite-mean slope above one. Logarithmic exponents have the separate minimum-with-one rule."
+    }
+  ]
+}

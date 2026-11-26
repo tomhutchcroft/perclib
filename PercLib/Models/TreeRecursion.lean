@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 197 (Q-37, the depth recursion), written on 2026-11-15 by PROVER-E.
-No upstream proof is copied. The recursion is the standard Galton–Watson recursion for
-binomial offspring (G. Grimmett, *Percolation*, 2nd ed., 1999, the rooted tree example).
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-15. No upstream proof is copied. The recursion is the standard
+Galton–Watson recursion for binomial offspring (G. Grimmett, *Percolation*, 2nd ed., 1999, the
+rooted tree example).
 -/
 module
 
@@ -24,6 +26,14 @@ on disjoint sets of pairs, and each subtree is a copy of the whole tree. Hence, 
 `p` the open probability of tree edges,
 
 `P(B (n + 1)) = 1 - (1 - p P(B n))^k` (`law_depth_succ`).
+
+For any value on the diagonal, the event `A n` that the root is joined to some word of length
+`n` has the probability of `B n` under the zero-diagonal profile
+(`law_reach_depth_eq_law_depth_open`), so `P(A (n + 1)) = 1 - (1 - p P(A n))^k`
+(`law_reach_depth_succ`) and `P(A n) → P(|K(o)| = ∞)` (`tendsto_law_reach_depth`). The root
+cluster is infinite with positive probability exactly when `k p > 1` or `p = 1`
+(`law_cluster_nil_infinite_pos_iff`), and is almost surely finite at `k p = 1` for `k ≥ 2`
+(`law_cluster_nil_infinite_eq_zero_of_mul_eq_one`).
 
 This file adds no definition.
 -/
@@ -53,7 +63,8 @@ private theorem biInter_of_determined {ι α : Type*} (p : ι → unitInterval) 
     rw [Finset.set_biInter_insert, Finset.prod_insert ha,
       ← ih hS' (fun b hb => hE b (Finset.mem_insert_of_mem hb))
         (fun b hb => hEd b (Finset.mem_insert_of_mem hb))]
-    refine PercLib.Probability.prodBernoulli_inter_of_determined_inter p (S a) (⋃ b ∈ s, S b) ?_ (hE a (Finset.mem_insert_self a s))
+    refine PercLib.Probability.prodBernoulli_inter_of_determined_inter p (S a) (⋃ b ∈ s, S b) ?_
+        (hE a (Finset.mem_insert_self a s))
       (Finset.measurableSet_biInter s fun b hb => hE b (Finset.mem_insert_of_mem hb))
       (hEd a (Finset.mem_insert_self a s)) ?_
     · refine Set.disjoint_iUnion₂_right.2 fun b hb => hS a (Finset.mem_insert_self a s) b
@@ -214,7 +225,8 @@ theorem law_depth_succ (p : unitInterval) (n : ℕ) :
       prodBernoulli q₀ (B n) := by
     intro a
     rw [← hedge a, ← hpull a]
-    refine PercLib.Probability.prodBernoulli_inter_of_determined_inter q₀ {s([], [a])} {e | ∀ v ∈ e, v.getLast? = some a} ?_
+    refine PercLib.Probability.prodBernoulli_inter_of_determined_inter q₀ {s([], [a])}
+        {e | ∀ v ∈ e, v.getLast? = some a} ?_
       (measurableSet_mem _) (hpullm a hBm) ?_ ?_
     · refine Set.disjoint_singleton_left.2 fun h => ?_
       have := h [] (Sym2.mem_mk_left _ _)
@@ -477,6 +489,109 @@ theorem law_cluster_nil_infinite_pos_iff (hk : 1 ≤ k) (p : unitInterval)
     refine lt_of_lt_of_le (ENNReal.ofReal_pos.2 hc0) (le_iInf fun n => ?_)
     rw [hfx n]
     exact ENNReal.ofReal_le_ofReal (hfc n)
+
+/-! ### Depth events for an arbitrary diagonal -/
+
+/-- The ancestral-chain events decrease with the depth. -/
+theorem antitone_depth_open :
+    Antitone fun n : ℕ => {ω : Config (List (Fin k)) |
+      ∃ w : List (Fin k), w.length = n ∧ ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω} := by
+  refine antitone_nat_of_succ_le fun n ω hω => ?_
+  obtain ⟨w, hw, h⟩ := hω
+  refine ⟨w.drop 1, by simp [hw], fun m hm => ?_⟩
+  have := h (m + 1) (by omega)
+  simpa [List.drop_drop, Nat.add_comm, Nat.add_left_comm] using this
+
+/-- **Depth events and ancestral chains.** With open probability `p` on tree edges and `0` on
+the other pairs (any value on the diagonal), the probability that the root reaches depth `n`
+equals the probability, under the zero-diagonal profile, that some word of length `n` has
+all its edges to the root open. -/
+theorem law_reach_depth_eq_law_depth_open (p : unitInterval)
+    (q : Sym2 (List (Fin k)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+        else 0)
+    (n : ℕ) :
+    law q {ω | ∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w} =
+      law (fun e : Sym2 (List (Fin k)) =>
+          if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+            else 0)
+        {ω | ∃ w : List (Fin k), w.length = n ∧ ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω} := by
+  classical
+  set G := SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u
+  set q₀ : Sym2 (List (Fin k)) → unitInterval := fun e => if e ∈ G.edgeSet then p else 0
+  rw [law_event_eq_of_offDiagonal q q₀ (fun e he => hq e he) (measurableSet_reach_depth n)
+    fun ω ω' h => by
+      simp only [mem_ofPred_eq]
+      rw [← openGraph_sdiff_diagSet ω, h, openGraph_sdiff_diagSet]]
+  refine measure_congr ?_
+  filter_upwards [ae_config_subset_host G q₀ fun e he => by simp [q₀, he]] with ω hω
+  exact propext (exists_reachable_nil_iff_of_subset hω n)
+
+/-- **The depth recursion for an arbitrary diagonal.** With open probability `p` on tree edges
+and `0` on the other pairs (any value on the diagonal), `r_n = P(the root reaches depth n)`
+satisfies `r (n + 1) = 1 - (1 - p r n)^k`. -/
+theorem law_reach_depth_succ (p : unitInterval) (q : Sym2 (List (Fin k)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+        else 0)
+    (n : ℕ) :
+    law q {ω | ∃ w : List (Fin k), w.length = n + 1 ∧ (openGraph ω).Reachable [] w} =
+      1 - (1 - (unitInterval.toNNReal p : ℝ≥0∞) *
+        law q {ω | ∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w}) ^ k := by
+  rw [law_reach_depth_eq_law_depth_open p q hq, law_reach_depth_eq_law_depth_open p q hq]
+  exact law_depth_succ p n
+
+/-- **Percolation probability as the limit of the depth probabilities.** With open probability
+`p` on tree edges and `0` on the other pairs (any value on the diagonal),
+`P(the root reaches depth n) → P(|K(o)| = ∞)`. -/
+theorem tendsto_law_reach_depth (p : unitInterval) (q : Sym2 (List (Fin k)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+        else 0) :
+    Filter.Tendsto
+      (fun n => law q {ω | ∃ w : List (Fin k), w.length = n ∧ (openGraph ω).Reachable [] w})
+      Filter.atTop (nhds (law q {ω | (cluster ω []).Infinite})) := by
+  classical
+  set G := SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u
+  set q₀ : Sym2 (List (Fin k)) → unitInterval := fun e => if e ∈ G.edgeSet then p else 0
+  set B : ℕ → Set (Config (List (Fin k))) := fun n =>
+    {ω | ∃ w : List (Fin k), w.length = n ∧ ∀ m < n, s(w.drop (m + 1), w.drop m) ∈ ω}
+  have hdiag : law q {ω | (cluster ω []).Infinite} = law q₀ {ω | (cluster ω []).Infinite} := by
+    refine law_event_eq_of_offDiagonal q q₀ (fun e he => hq e he)
+      (measurableSet_cluster_infinite _) fun ω ω' h => ?_
+    simp only [mem_ofPred_eq, cluster]
+    rw [← openGraph_sdiff_diagSet ω, h, openGraph_sdiff_diagSet]
+  have hinf : law q₀ {ω | (cluster ω []).Infinite} = law q₀ (⋂ n, B n) := by
+    refine measure_congr ?_
+    filter_upwards [ae_config_subset_host G q₀ fun e he => by simp [q₀, he]] with ω hω
+    refine propext ?_
+    rw [mem_iInter]
+    exact cluster_nil_infinite_iff hω
+  have hfun : (fun n => law q {ω | ∃ w : List (Fin k), w.length = n ∧
+      (openGraph ω).Reachable [] w}) = law q₀ ∘ B :=
+    funext fun n => law_reach_depth_eq_law_depth_open p q hq n
+  rw [hfun, hdiag, hinf]
+  exact tendsto_measure_iInter_atTop (fun n => (measurableSet_depth_open n).nullMeasurableSet)
+    antitone_depth_open ⟨0, measure_ne_top _ _⟩
+
+/-- **The critical tree does not percolate.** For `k ≥ 2` and `k p = 1` (any value on the
+diagonal), the root cluster is almost surely finite. -/
+theorem law_cluster_nil_infinite_eq_zero_of_mul_eq_one (hk : 2 ≤ k) (p : unitInterval)
+    (q : Sym2 (List (Fin k)) → unitInterval)
+    (hq : ∀ e, ¬ e.IsDiag → q e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin k) => ∃ b, w = b :: u).edgeSet then p
+        else 0)
+    (hkp : (k : ℝ) * (p : ℝ) = 1) :
+    law q {ω | (cluster ω []).Infinite} = 0 := by
+  by_contra h
+  rcases (law_cluster_nil_infinite_pos_iff (by omega) p q hq).1 (pos_iff_ne_zero.2 h)
+    with h1 | h1
+  · linarith
+  · have hp : (p : ℝ) = 1 := congrArg Subtype.val h1
+    have hk' : (2 : ℝ) ≤ k := by exact_mod_cast hk
+    rw [hp, mul_one] at hkp
+    linarith
 
 /-! ### Non-vacuity -/
 

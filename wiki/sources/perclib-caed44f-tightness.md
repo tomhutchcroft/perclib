@@ -1,0 +1,47 @@
+# Marked splitting and quantile tails at caed44f
+
+This inventory records **16 explicit named public theorems in two complete source files** at private lrp merged source caed44fe69ae18235ca1b7adc3b8a072bf05b7ea: nine deterministic splitting contracts and seven numerical-tightness contracts. Both files are unchanged in the later merged main 22d8485. Private helpers, imports and anonymous examples are excluded. No definitions or Inputs are added.
+
+The [newer BK-step inventory](sources/perclib-22d8485-applications.md) describes the intervening probability argument. These two dependencies are now fully read; this does not alter the original tags or confer compiled formal status.
+
+## Combinatorics/TreeSplitting
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L54](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | Two endpoints of an edge in an arbitrary edge set are connected in its simple graph; coincident endpoints and diagonal pairs are allowed. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L69](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | After deleting an edge joining x and c, reachability propagates the alternative of connection to x or connection to c. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L94](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | If a set contains every edge of F incident to the F-component of a, paths in that component give reachability within the containing edge set. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L109](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | The edges of a finite set with an endpoint reachable from a form a subgraph in which every incident vertex remains reachable from a. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L124](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | A vertex connected to a distinct vertex is incident to an edge of the original edge set. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L132](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | Two connected finite edge sets with a common endpoint have connected union; edge disjointness is not required. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L155](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | If the edges of E are covered by a remainder and a family of pieces, a path from a remainder endpoint to a piece endpoint produces a common vertex of the remainder and some piece. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L473](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | A finite connected loopless edge set with N marked endpoints, k >= 1 and N >= 3^k has an edge partition into at least 3^(k−1)+1 nonempty connected pieces, each with marked mass in [N/3^k,3N/3^k), covering every original endpoint. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+| [L662](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Combinatorics/TreeSplitting.lean) | For a finite tree, the same partition covers every vertex, and hence any prescribed root. Marked endpoints may overlap between pieces. | [Argument](../articles/finite-set-hyperscaling.md#section-greedy-source) |
+
+## Percolation/Bond/Tightness/FromBK
+
+| Source line | Contract | Exposition |
+|---|---|---|
+| [L31](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | For every profile configuration and nonempty finite observation window, the maximum full-cluster intersection has size at least one; no countability is needed. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L41](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | For every profile and nonempty finite observation window, its integer tightness quantile is at least two; no countability is needed. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L52](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | On countable vertices, the maximum-intersection upper-tail event is measurable at every natural threshold, including zero and an empty window. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L66](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | The same maximum-intersection upper tail is measurable at every real threshold, by the natural ceiling convention. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L290](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | On every countable vertex type, the explicit finite-window amplification property implies the universal quantile-tail property, preserving its real thresholds, arbitrary profiles, rooted factor and constants. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L310](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | The amplification property holds on a singleton vertex type for every profile, because its high-threshold events are empty. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+| [L334](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/Tightness/FromBK.lean) | The universal quantile-tail property holds on a singleton vertex type by the preceding implication. | [Argument](../articles/window-tightness-interfaces.md#section-numerical-source) |
+
+## Splitting and endpoint coverage
+
+The splitter is deterministic and imposes no countability or finiteness on the ambient vertex type. Its edge and marked sets are finite. Every marked vertex must be an edge endpoint; the edge set is loopless and connected on its endpoints. Acyclicity is unnecessary. The finite-tree specialization separately proves that every vertex is an endpoint using N >= 3^k >= 3. Thus it covers an unmarked prescribed root as well as the marks.
+
+The proof's temporary invariant uses completed weights in [w,2w), with a special allowance for a single-edge weight at most two, and one connected residual piece of weight below w. Attaching an edge at a residual endpoint adds at most one mark. Combining residual pieces uses subadditivity of marked endpoint counts. At the end, connectedness joins a nonempty residual piece to a completed piece it touches; the resulting weight is below 3w even in the w = 1 single-edge case. All edges stay in the partition. Endpoint sets may overlap, and counting uses N <= the sum of their marked counts, not equality. The strict upper bound yields strictly more than 3^(k−1) pieces. A path on three marked vertices at k = 1 is the explicit anonymous witness.
+
+This is an alternative to the article's centroid-based recursion, with the same finite-tree conclusion. It supplies a workable route around the source's retaining-threshold discrepancy. The erratum remains provisional, and this read does not supply author confirmation.
+
+## Numerical bounds and quantile endpoints
+
+The numerical module assumes the amplification property throughout its general implication. The later BK-step module discharges that premise. Its auxiliary maximum and quantile lower bounds do not need countability, while countability supplies measurability for the probability-complement step. A real threshold becomes a natural ceiling, so integer endpoints cause no change in the non-strict upper-tail event.
+
+Powers of three bracket the desired upper-tail scale; small scales are handled directly, avoiding k = 0. For the lower tail, the source uses lambda = epsilon M and brackets 1/(2 epsilon). Minimality of M gives the strict probability lower bound at M−1. The inequality p^n <= exp(−n(1−p)) bounds the complement. The stated hypothesis epsilon <= 1 is retained, although the proof does not use it. The source does not replace the strict lower event by a non-strict one, or interchange a quantile with a limit. The singleton amplification and quantile witnesses are named public theorems and are counted above.
+
+The detailed Train 5 queue now has nine unread additions. The [Train 5 map](sources/perclib-caed44f.md) lists them; all ten Train 7 additions have separate inventories. The appended wired-derivative section and wider older-source gaps remain.

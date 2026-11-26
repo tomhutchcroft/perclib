@@ -1,0 +1,160 @@
+# Publish the wiki on GitHub Pages (https://tomhutchcroft.github.io/perclib/).
+#
+# Runs on every push to `main` that touches the wiki or the inputs of the compiled
+# manifest, and by hand (workflow_dispatch). Only `main` is ever published: every job
+# is skipped on any other ref, and the `github-pages` environment accepts deployments
+# from the default branch only.
+#
+# Jobs:
+#   configure  actions/configure-pages, for the site's base path (`/perclib`). Its token
+#              may only read the Pages settings; it checks out and runs no repository code.
+#   build      builds PercLib, extracts the manifest of this commit, builds the wiki with
+#              it under the base path and uploads the site. Read-only token, no secrets,
+#              the token is not persisted in .git/config. Without a manifest the wiki
+#              build fails (WIKI_REQUIRE_MANIFEST), so a site without formal status is
+#              never published.
+#   deploy     actions/deploy-pages. The only job that can write: `pages: write` and
+#              `id-token: write`, nothing else; it checks out and runs no repository code.
+#
+# Security (D-31): no `pull_request` trigger, so pull-request code never runs here; no
+# expression is interpolated into a `run:` block (values reach the shell through `env:`);
+# every action is pinned to a full commit SHA (the version in the comment is the tag that
+# SHA was checked against). One deployment at a time, and a running deployment is never
+# cancelled.
+
+name: Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'wiki/**'
+      - 'PercLib/**'
+      - 'PercLib.lean'
+      - 'scripts/ExtractManifest.lean'
+      - 'scripts/build_manifest.py'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  configure:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: read
+    outputs:
+      base_path: ${{ steps.pages.outputs.base_path }}
+    steps:
+      - name: Read the Pages configuration
+        id: pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+  build:
+    needs: configure
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the pushed commit with full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Choose the tag-history base of the wiki checks
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          # The commit before the push; a manual run, or a push whose previous commit
+          # is not in the history, checks against HEAD instead.
+          base="$BEFORE_SHA"
+          if ! [[ "$base" =~ ^[0-9a-f]{40}$ ]] || [[ "$base" =~ ^0+$ ]] \
+             || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+            base=$(git rev-parse HEAD)
+          fi
+          echo "WIKI_HISTORY_BASE=$base" >> "$GITHUB_ENV"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      - name: Install pinned wiki dependencies
+        working-directory: wiki
+        run: npm ci
+
+      - name: Install elan and the pinned toolchain
+        run: scripts/ci_install_elan.sh
+
+      - name: Fetch dependencies and the mathlib build cache
+        run: lake exe cache get
+
+      - name: Build PercLib
+        run: lake build
+
+      - name: Extract the manifest of this commit
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          export MANIFEST_CI_RUN="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          lake env lean --run scripts/ExtractManifest.lean > .lake/manifest-raw.json
+          python3 scripts/build_manifest.py .lake/manifest-raw.json --output .lake/pages-manifest.json
+          test -s .lake/pages-manifest.json
+
+      - name: Test the wiki
+        working-directory: wiki
+        run: npm test
+
+      - name: Build the wiki with the manifest under the Pages base path
+        working-directory: wiki
+        env:
+          BASE_PATH: ${{ needs.configure.outputs.base_path }}
+        run: |
+          set -euo pipefail
+          export WIKI_MANIFEST="$GITHUB_WORKSPACE/.lake/pages-manifest.json"
+          export WIKI_MANIFEST_RUN="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          export WIKI_BUILD_COMMIT="$GITHUB_SHA"
+          export WIKI_REQUIRE_MANIFEST=1
+          export WIKI_BASE_PATH="$BASE_PATH"
+          node src/build.mjs dist
+          test -f dist/index.html
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: wiki/dist
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

@@ -1,0 +1,42 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "two-mark-first-coefficients",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 204
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Two-route weights: the low-order cases",
+      "locator": "Section 3.4, (3.14)\u2013(3.15), printed pp.560\u2013562; low-order cases mentioned after (3.15)",
+      "relationship": "Explicit low-order calculation from the project's eight-edge kernel; the source's all-order reduction remains separate",
+      "status": "pending",
+      "note": "The nine marked sums and weighted critical continuity are written out. Figures were not visually verified; no all-order moment gain is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "5EWK",
+      "proof_uses": [],
+      "reason": "Two routes carry separate weights; changes of variables reduce the nine marked sums to four convolution calculations."
+    },
+    {
+      "order": 1,
+      "tag": "0TO3",
+      "proof_uses": [
+        "5EWK",
+        "BNKQ",
+        "SJIL",
+        "3W22",
+        "F7N7"
+      ],
+      "reason": "The critical quotient bounds weighted bubbles and triangles for tau plus its finite-range convolution; the two-mark estimate supplies a summable envelope for the first two coefficients."
+    }
+  ]
+}

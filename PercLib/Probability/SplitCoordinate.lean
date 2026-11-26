@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 462 (Q-128), written on 2026-11-16 by PROVER-E: the exact increment of a
-disjoint-occurrence probability when one shared coordinate is split into two independent copies
-(wiki backbone-connections, tag XWH4). No upstream proof is copied, no definition is added and
-no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: the exact increment of a disjoint-occurrence probability when one
+shared coordinate is split into two independent copies (wiki backbone-connections, tag XWH4). No
+upstream proof is copied, no definition is added and no Input is introduced.
 -/
 module
 
@@ -389,11 +392,11 @@ theorem prodBernoulli_real_split_eq (q : I → unitInterval) (hA : IsUpperSet A)
       (fun ω => by simp only [Function.comp_apply]; rw [htr_diff _ hb, htr_diff _ ha])]
   simp only [setOf_union_true, setOf_union_false]
 
-/-- **XWH4.** Let `I` be finite, `A, B` increasing and `p = q e`. With the sections
-`A₀ = {η | η ∈ A}`, `A₁ = {η | insert e η ∈ A}` on `{e}ᶜ`, `C_ij = A_i □ B_j`, `U = C₁₀ ∪ C₀₁`,
-`V = C₁₀ ∩ C₀₁` and `μ` the product law on `{e}ᶜ`, the split event `H̃` (on `I ⊕ Unit`, `A`
-reading `e` from `inl e` and `B` from the independent copy `inr ()`, also with probability `p`)
-and `H = A □ B` satisfy `P(H̃) - P(H) = p² μ(C₁₁ \ U) + p (1-p) μ(V \ C₀₀)`. -/
+/-- **Splitting a shared coordinate.** Let `I` be finite, `A, B` increasing and `p = q e`. With the
+sections `A₀ = {η | η ∈ A}`, `A₁ = {η | insert e η ∈ A}` on `{e}ᶜ`, `C_ij = A_i □ B_j`,
+`U = C₁₀ ∪ C₀₁`, `V = C₁₀ ∩ C₀₁` and `μ` the product law on `{e}ᶜ`, the split event `H̃` (on
+`I ⊕ Unit`, `A` reading `e` from `inl e` and `B` from the independent copy `inr ()`, also with
+probability `p`) and `H = A □ B` satisfy `P(H̃) - P(H) = p² μ(C₁₁ \ U) + p (1-p) μ(V \ C₀₀)`. -/
 theorem prodBernoulli_real_split_sub (q : I → unitInterval) (hA : IsUpperSet A)
     (hB : IsUpperSet B) :
     (prodBernoulli (Sum.elim q fun _ : Unit => q e)).real
@@ -434,12 +437,13 @@ theorem prodBernoulli_real_split_sub (q : I → unitInterval) (hA : IsUpperSet A
     (Set.toFinite (disjointOccurrence A₀ B₁)).measurableSet
   linear_combination (-(q e : ℝ) * (1 - (q e : ℝ))) * hUV
 
-/-- Both terms of XWH4 are nonnegative. -/
+/-- Both terms of `prodBernoulli_real_split_sub` are nonnegative. -/
 theorem split_terms_nonneg (p : unitInterval) (x y : ℝ) (hx : 0 ≤ x) (hy : 0 ≤ y) :
     0 ≤ (p : ℝ) ^ 2 * x ∧ 0 ≤ (p : ℝ) * (1 - (p : ℝ)) * y :=
   ⟨by positivity, mul_nonneg (mul_nonneg p.2.1 (sub_nonneg.2 p.2.2)) hy⟩
 
-/-- The second term of XWH4 vanishes exactly when `p ∈ {0, 1}` or `μ(V \ C₀₀) = 0`. -/
+/-- The second term of `prodBernoulli_real_split_sub` vanishes exactly when `p ∈ {0, 1}` or
+`μ(V \ C₀₀) = 0`. -/
 theorem split_second_term_eq_zero_iff (p : unitInterval) (y : ℝ) :
     (p : ℝ) * (1 - (p : ℝ)) * y = 0 ↔ (p : ℝ) = 0 ∨ (p : ℝ) = 1 ∨ y = 0 := by
   simp only [mul_eq_zero, sub_eq_zero]
@@ -447,8 +451,8 @@ theorem split_second_term_eq_zero_iff (p : unitInterval) (y : ℝ) :
 
 /-! ### Non-vacuity -/
 
-/-- **D-5 witness for XWH4, `I = {e}`, `A = B = {e open}`.** Here `P(H) = 0`, `C₁₁` is
-everything and `U = V = ∅`, so the theorem gives `P(H̃) = p²`. -/
+/-- **Non-vacuity witness for `prodBernoulli_real_split_sub`, `I = {e}`, `A = B = {e open}`.** Here
+`P(H) = 0`, `C₁₁` is everything and `U = V = ∅`, so the theorem gives `P(H̃) = p²`. -/
 theorem prodBernoulli_real_split_unit (q : Unit → unitInterval) :
     (prodBernoulli (Sum.elim q fun _ : Unit => q ())).real
         (disjointOccurrence {ω : Set (Unit ⊕ Unit) | Sum.inl ⁻¹' ω ∈ {ω : Set Unit | () ∈ ω}}
@@ -471,8 +475,8 @@ theorem prodBernoulli_real_split_unit (q : Unit → unitInterval) :
   simpa only [measureReal_empty, sub_zero, union_empty, sdiff_empty, inter_empty,
     empty_sdiff, mul_zero, add_zero, probReal_univ, mul_one] using h
 
-/-- **D-5 witness for XWH4, `A = B = univ`.** The hypotheses hold for every finite `I`, and
-then both sides vanish. -/
+/-- **Non-vacuity witness for `prodBernoulli_real_split_sub`, `A = B = univ`.** The hypotheses hold
+for every finite `I`, and then both sides vanish. -/
 theorem prodBernoulli_real_split_sub_univ (q : I → unitInterval) (e : I) :
     (prodBernoulli (Sum.elim q fun _ : Unit => q e)).real
         (disjointOccurrence {ω : Set (I ⊕ Unit) | Sum.inl ⁻¹' ω ∈ (univ : Set (Set I))}

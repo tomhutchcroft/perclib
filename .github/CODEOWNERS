@@ -1,0 +1,14 @@
+# Maintainers who must review changes to the interface, the tooling and the pins (D-37).
+# Tom Hutchcroft names further maintainers here. Proof-only pull requests touch none of
+# these paths; see .github/workflows/automerge.yml for what merges without review.
+# The last matching pattern takes precedence.
+
+/PercLib/**/Basic.lean   @tomhutchcroft
+**/Defs.lean             @tomhutchcroft
+/wiki/                   @tomhutchcroft
+/scripts/                @tomhutchcroft
+/.github/                @tomhutchcroft
+/lean-toolchain          @tomhutchcroft
+/lake-manifest.json      @tomhutchcroft
+/lakefile.toml           @tomhutchcroft
+/docs/DECISIONS.md       @tomhutchcroft

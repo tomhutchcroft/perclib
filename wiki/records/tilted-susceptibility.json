@@ -1,0 +1,71 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "tilted-susceptibility",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 200
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-correlation-1990",
+      "order": 0,
+      "label": "The true exponential mass and the tilt boundary",
+      "locator": "Section 1.1, (1.1)–(1.2), printed p.340 / PDF index3; Appendix A, Propositions A.1–A.3 and Corollary A.4, printed pp.371–376 / PDF indices34–39",
+      "relationship": "Primary-source comparison; the wiki gives its own finite-range proof through an even finite-box kernel",
+      "status": "pending",
+      "note": "Relevant passages read in the publisher PDF text. The spatial decay and endpoint argument are distinguished from the uniform tilted diagram bootstrap, which remains a separate obligation. No numerical constants or spread-out extension are imported."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "The reciprocal mass normalization with the mass now identified",
+      "locator": "17 March 2017 author manuscript, (11.1.5), printed p.136 / PDF index147",
+      "relationship": "Continuation of the existing provisional reciprocal erratum",
+      "status": "pending",
+      "note": "The actual mass now supplies the interior and endpoint assumptions of 1BG0. Endpoint coefficient summability and quantitative tilt estimates remain explicit inputs; the repair status stays partial."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "9LN2",
+      "proof_uses": [
+        "8LOF",
+        "JQLC"
+      ],
+      "reason": "Openness of tilted summability. Written proof; the final application retains its explicit tilted coefficient hypotheses."
+    },
+    {
+      "order": 1,
+      "tag": "JQOQ",
+      "proof_uses": [
+        "9LN2",
+        "BT9V"
+      ],
+      "reason": "Identification of the axial mass and endpoint divergence. Written proof; the final application retains its explicit tilted coefficient hypotheses."
+    },
+    {
+      "order": 2,
+      "tag": "OYWM",
+      "proof_uses": [
+        "9LN2",
+        "JQOQ",
+        "8LOF",
+        "8ZGG"
+      ],
+      "reason": "Parameter continuity and interior tilt regularity. Written proof; the final application retains its explicit tilted coefficient hypotheses."
+    },
+    {
+      "order": 3,
+      "tag": "XZX4",
+      "proof_uses": [
+        "JQOQ",
+        "1BG0"
+      ],
+      "reason": "Conditional application to the actual lace pole. Written proof; the final application retains its explicit tilted coefficient hypotheses."
+    }
+  ]
+}

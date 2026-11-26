@@ -1,0 +1,96 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "schramm-wilson-coordinate-changes-2005",
+  "entries": [
+    {
+      "id": "first-version-pair-exponent",
+      "title": "The first preprint halves the interaction exponent; later versions already correct it",
+      "status": "provisional",
+      "locator": "arXiv:math/0505368v1, Section 5, Theorem 6 product, printed p.7/PDF index6. Compared 17 November 2026 with v1 extracted PDF and HTML, v2/v3 HTML, and NYJM 11 (2005), Theorem 6, printed p.666/PDF index7, extracted PDF. No visual-PDF verification claimed.",
+      "claim": "The v1 product over unordered pairs raises |Z_i-Z_j| |conjugate(Z_i)-Z_j| to rho_i rho_j/(8 kappa) and claims the result is a local martingale.",
+      "problem": "The logarithmic derivative of a pair-distance product is -4 Re(1/(Z_i-U)) Re(1/(Z_j-U)). The v1 exponent cancels only half the cross term from quadratic variation. For kappa=2, U=0, marks 1+i and 2+i, and both weights one, the relative drift is 1/20 at time zero.",
+      "correction": "Use denominator 4 kappa in the pair exponent. TSCX proves the mixed interior/boundary formula and 42Z5 derives the v1 residual. This correction already appears in arXiv v2 and v3 and in the journal Theorem 6. The entry records an earlier-version defect, not an error in the journal formula or a newly discovered repair.",
+      "tags": [
+        "TSCX",
+        "NAG9",
+        "42Z5"
+      ],
+      "issues": [],
+      "leanImpact": "A future formal interface should distinguish unordered pair products, their real-boundary specialization and the diagonal quadratic terms. Kappa must be positive for these powers; normalized weights define the forced law on compact stops. No compiled association, global terminal measure or source-author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the pair exponent already corrected in arXiv v2/v3 and the journal.",
+        "scale": "notation",
+        "impact": "This is an earlier-version defect with an existing author correction, not a new repair or a defect in the journal formula."
+      }
+    },
+    {
+      "id": "radial-clock-derivative",
+      "title": "The radial clock needs a modulus or an explicitly angular derivative",
+      "status": "provisional",
+      "locator": "arXiv:math/0505368v3, Remark 4; NYJM 11 (2005), Remark 4, printed p.664/PDF index5. Compared with the extracted journal PDF and v3 HTML on 17 November 2026; no visual-PDF verification claimed.",
+      "claim": "Remark 4 expresses the time-change rate as the square of the derivative of the coordinate map at the driver.",
+      "problem": "If the prime denotes the complex derivative of the preceding half-plane-to-disk map, its square need not be positive or real. At phi(z)=(z-i)/(z+i) and U=0, phi prime is -2i, whose square is -4, while radial capacity increases at rate 4. This is a notation issue if the prime was intended to denote an angular derivative.",
+      "correction": "Write s prime = |phi prime(U)| squared, equivalently the square of phi prime(U)/(i phi(U)), the real angular boundary derivative. 9BVE derives the normalization and clock, and 5KL5 uses this clock for the force law. The explicit clock in the preceding proof of Theorem 3 is already correct; neither the theorem nor its force-weight condition changes.",
+      "tags": [
+        "9BVE",
+        "5KL5"
+      ],
+      "issues": [],
+      "leanImpact": "A future formal treatment should distinguish the complex spatial derivative from the real angular boundary derivative and prove positivity before inverting the clock. No compiled association or author confirmation is claimed. This provisional entry allows the angular-derivative reading of the source rather than alleging a false coordinate-change theorem.",
+      "resolution": {
+        "status": "found",
+        "summary": "Write the radial clock as the squared modulus of the complex derivative, or the squared angular derivative.",
+        "scale": "notation",
+        "impact": "Clarifies the derivative convention; the theorem and force-weight condition are unchanged."
+      }
+    },
+    {
+      "id": "finite-starting-image",
+      "title": "A half-plane destination requires a finite image of the starting point",
+      "status": "provisional",
+      "locator": "arXiv:math/0505368v3, Theorem 3, compared with Definition 2 and the assertion after Definition 5; NYJM 11 (2005), pp.662, 661 and 665 respectively (PDF indices3, 2 and 6). Read in HTML and extracted journal PDF on 17 November 2026; no visual-PDF verification claimed.",
+      "claim": "Theorem 3 transports the process by a conformal map between the disk or half-plane and identifies it up to positive stopping times. It excludes infinity as the original starting point but does not explicitly exclude infinity as the image starting point.",
+      "problem": "For a half-plane destination, Definition 2 does not define a process started at infinity. For example, kappa=6, no forces, original driver zero and m(z)=-1/z satisfy the stated weight balance, but m(0)=infinity. The destination start is inadmissible, and the new target already equals the original starting point, so the proposed target stop has no positive lifetime.",
+      "correction": "Require psi(w0) to be finite when the destination is the half-plane, equivalently that the new target differ from the starting point. C1GN and 8GVO include this condition. It already appears explicitly in the source strip assertion after Definition 5; the existing half-plane normalization and radial-to-chordal proof also impose it. No force weight or conclusion on admissible configurations changes.",
+      "tags": [
+        "C1GN",
+        "8GVO"
+      ],
+      "issues": [],
+      "leanImpact": "A future coordinate-change interface must include admissibility for both the original and destination drivers and separate a positive local lifetime from a zero initial stop. This is a provisional missing-hypothesis report, not a compiled theorem or an author-confirmed erratum.",
+      "resolution": {
+        "status": "found",
+        "summary": "Require the starting image to be finite for a half-plane destination.",
+        "scale": "local",
+        "impact": "Adds an omitted admissibility condition; the conclusion on admissible configurations and the force weights are unchanged."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:math/0505368v1 (17 May 2005), with separate later-version entries",
+    "checkedUrl": "https://arxiv.org/abs/math/0505368v1",
+    "method": "The v1 Theorem 6 product was checked in HTML and extracted PDF text, then compared with v2/v3 HTML and the journal PDF text. The other two entries use v3 HTML and journal PDF text. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The pair-exponent error is confined to v1 and was already corrected by the authors. The radial-clock convention and finite-starting-image reports concern v3 and the journal text. All three remain provisional; a corrected early version is not a new journal error.",
+    "comparisons": [
+      {
+        "version": "arXiv:math/0505368v2",
+        "url": "https://arxiv.org/html/math/0505368v2",
+        "status": "compared",
+        "findings": "Theorem 6 already has the corrected pair exponent. This recorded comparison concerns that product only."
+      },
+      {
+        "version": "arXiv:math/0505368v3",
+        "url": "https://arxiv.org/html/math/0505368v3",
+        "status": "compared",
+        "findings": "Theorem 6 retains the corrected pair exponent. Remark 4 and Theorem 3 supply the separately reported radial-clock convention and finite-starting-image issues."
+      },
+      {
+        "version": "Published article: New York Journal of Mathematics 11 (2005), 659–669",
+        "url": "https://nyjm.albany.edu/j/2005/11-31.pdf",
+        "status": "compared",
+        "findings": "Theorem 6 on p.666 has the corrected exponent. Remark 4, p.664, and Theorem 3 compared with Definition 2 and the assertion after Definition 5, pp.661–665, have the two later reported issues. The comparison is textual, not visual."
+      }
+    ]
+  }
+}

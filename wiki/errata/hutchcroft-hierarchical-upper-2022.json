@@ -1,0 +1,115 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-hierarchical-upper-2022",
+  "entries": [
+    {
+      "id": "hierarchy-digit-index",
+      "title": "Digit indexing does not permit all translated hierarchies",
+      "status": "provisional",
+      "locator": "arXiv:2202.07634v2 HTML §2.1, the n-block definition; PDF printed p. 7. Both text renditions checked 16 November 2026.",
+      "claim": "The translation of the level-n grid is displayed as a sum of sigma_m L^m for m from one to n.",
+      "problem": "Every such first-level offset is a multiple of L, so the first-level partition is independent of the digits. Translating it by one lattice step cannot remain in the displayed family, contrary to (2.1) and the later compactness argument.",
+      "correction": "Use sigma_m L^(m-1), or equivalently parameterize compatible offsets modulo L^n. EKDO gives the construction, its nesting and its translation action.",
+      "tags": [
+        "EKDO",
+        "F2G0"
+      ],
+      "issues": [],
+      "leanImpact": "The hierarchy type must admit every lattice translation before transporting a selected block to the origin. This repairs the parameterization, not the kernel lower-envelope hypothesis or the conclusion of Theorem 1.1. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Shift the hierarchy digit index so that all translations occur.",
+        "scale": "local",
+        "impact": "Repairs the random hierarchy construction; the intended averaging argument is retained."
+      }
+    },
+    {
+      "id": "coupling-mismatch-equality",
+      "title": "The mismatch probability needs the common closed-edge factor",
+      "status": "provisional",
+      "locator": "arXiv:2202.07634v2 HTML Proof of Lemma 2.3, display before (2.10); PDF printed p. 11. Both text renditions checked 16 November 2026.",
+      "claim": "The constructed pair of Bernoulli edge variables is assigned mismatch probability 1-exp(-beta times the absolute rate difference).",
+      "problem": "For the common-uniform monotone coupling the mismatch probability is the difference of the two opening probabilities, which has an additional factor exp(-beta times the smaller rate). The displayed expression is a valid upper bound, not that identity. In general it cannot be prescribed as a mismatch probability: at beta=1 and rates 2 and 3 it exceeds the sum of the two closed-edge probabilities, an upper bound for every coupling.",
+      "correction": "Use absolute(exp(-beta a)-exp(-beta b)) = exp(-beta min(a,b)) times (1-exp(-beta absolute(a-b))) <= beta absolute(a-b). F2G0 instead proves continuity by a common-uniform coupling dominated by a finite full cluster.",
+      "tags": [
+        "F2G0"
+      ],
+      "issues": [],
+      "leanImpact": "Only a vanishing upper bound is required for the continuity argument. A coupling implementation should retain its exact marginal mismatch formula; no source theorem is refuted by the correction. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the exact exponential mismatch probability and its linear upper bound.",
+        "scale": "local",
+        "impact": "Replaces a false equality by the valid estimate needed for continuity."
+      }
+    },
+    {
+      "id": "maximum-starting-scale",
+      "title": "The contradiction must start at the scale of its block",
+      "status": "provisional",
+      "locator": "arXiv:2202.07634v2 HTML Proof of Proposition 2.4, first contradiction hypothesis; PDF printed p. 14. Both text renditions checked 16 November 2026.",
+      "claim": "For a level-n block, the opening contradiction hypothesis uses L^((d+alpha)/2) in the bound for M_B squared.",
+      "problem": "The recurrence in Lemma 2.6 starts from the threshold proportional to L^((d+alpha)n). The displayed hypothesis has no n and does not match the proposition or the recurrence used on the next line.",
+      "correction": "Start from M_B^2 >= A/(c beta) L^((d+alpha)n). The level-by-level argument in 27T8 then contradicts finite susceptibility.",
+      "tags": [
+        "27T8"
+      ],
+      "issues": [],
+      "leanImpact": "Carry the current block level through the induction invariant. The proposition and its intended proof use the same corrected threshold. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Restore the level n in the maximum's starting-scale threshold.",
+        "scale": "notation",
+        "impact": "The threshold display changes; the intended maximum estimate survives."
+      }
+    },
+    {
+      "id": "squared-selection-factor",
+      "title": "A squared selection factor is missing in one intermediate line",
+      "status": "provisional",
+      "locator": "arXiv:2202.07634v2 HTML §2.4, proof of Theorem 1.1, first multi-line estimate; PDF printed p. 21. Both text renditions checked 16 November 2026.",
+      "claim": "The estimate for T_k contains 4^k. After substitution into the squared sum, one intermediate line omits its square, although the next line includes 2^(4k).",
+      "problem": "Squaring the selected ancestor sum contributes 16^k. It cannot disappear in the substitution and reappear in the purported equality.",
+      "correction": "Retain 16^k throughout, then choose L so that 16 L^(-(d-alpha)) <= 1/2. MRZO writes the resulting convergent geometric series directly.",
+      "tags": [
+        "MRZO"
+      ],
+      "issues": [],
+      "leanImpact": "The final geometric-series argument already uses the correct factor. This is a local display correction and preserves the theorem and its dimensional range. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the squared selection factor and choose the scale ratio large enough.",
+        "scale": "local",
+        "impact": "An intermediate constant changes; the geometric summation and final bound survive."
+      }
+    },
+    {
+      "id": "parent-layer-support",
+      "title": "The parent layer opens pairs in different children",
+      "status": "provisional",
+      "locator": "arXiv:2202.07634v2 HTML proof of Lemma 2.8, opening sentence; PDF printed p. 16. Both text renditions checked 16 November 2026.",
+      "claim": "The opening sentence assigns probability 1-exp(-h) to every distinct pair of vertices in the parent block in its new hierarchical layer.",
+      "problem": "The layer kernel defined in section 2.1 vanishes on pairs within the same child. Such an edge is absent from this layer, even though it can occur in another layer. The stated positive probability applies to pairs in different children.",
+      "correction": "Restrict the opening sentence to endpoints in different children. The proof subsequently joins intersections in two distinct sibling blocks, so every pair it uses meets this condition. EKDO and 2P4M keep that support restriction.",
+      "tags": [
+        "EKDO",
+        "2P4M"
+      ],
+      "issues": [],
+      "leanImpact": "Keep membership in different child blocks in the parent-layer edge law. Do not replace the hierarchical layer by a complete graph on its parent. The proof and conclusion of Lemma 2.8 are unchanged. Provisional pending Tom confirmation; no compiled correspondence claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Require the two vertices to lie in different children of their parent block.",
+        "scale": "notation",
+        "impact": "Corrects the support description to agree with the sibling-block proof."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2202.07634v2",
+    "checkedUrl": "https://arxiv.org/abs/2202.07634v2",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

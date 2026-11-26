@@ -1,0 +1,943 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-triangle-window",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 190
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 0,
+      "label": "Susceptibility with the correct parameter",
+      "locator": "Section4.1,(4.1)\u2013(4.2), printed p.19 / PDF index18",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Relative-parameter counterexample",
+      "locator": "2017 manuscript Exercise13.6,(13.3.11), printed p.163 / PDF index174",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 2,
+      "label": "Finite field bounds",
+      "locator": "Section5.1,Proposition5.1 and Lemma5.3, printed pp.21\u201322 / PDF indices20\u201321",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 3,
+      "label": "Root tail up to the susceptibility scale",
+      "locator": "Section6,Lemmas6.1\u20136.2, printed pp.27\u201328 / PDF indices26\u201327",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 4,
+      "label": "Largest-component second moment",
+      "locator": "Sections3.6 and7; the variance argument is supplied by existing wiki assertion25Z4",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 5,
+      "label": "Positive-field extrapolation",
+      "locator": "Section5.1,Proposition5.4 and Section5.5; reconstructed from the finite inverse-field inequality",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 6,
+      "label": "Largest-component window",
+      "locator": "Theorem1.3(ii) and Section3.6; the component conclusion is proved here without the positive-window susceptibility upper bound",
+      "relationship": "Written proof with explicit finite-graph hypotheses",
+      "status": "pending",
+      "note": "Checked preprint/manuscript only; no new compiled association is claimed."
+    },
+    {
+      "source": "aldous-critical-random-graphs",
+      "order": 7,
+      "label": "Critical exploration and surplus marks",
+      "locator": "Theorem 3, printed p.816 / PDF index4; Sections 2.1\u20132.2, pp.819\u2013824 / indices7\u201312",
+      "relationship": "Discrete-time written proof of the bounded-time exploration and mark limits",
+      "status": "pending",
+      "note": "Ranked excursions, late components and formal correspondence remain separate."
+    },
+    {
+      "source": "aldous-critical-random-graphs",
+      "order": 8,
+      "label": "Ranked critical components and surpluses",
+      "locator": "Corollary 2 and Section 2.3, printed pp.814,824\u2013826 / PDF indices2,12\u201314; Lemma 25, pp.843\u2013844 / indices31\u201332, read for comparison",
+      "relationship": "Written proof with explicit record matching and a stopped-remainder squared-mass bound",
+      "status": "pending",
+      "note": "The window parameter converges to a fixed real number; its process evolution remains separate."
+    },
+    {
+      "source": "aldous-critical-random-graphs",
+      "order": 9,
+      "label": "Square-summable coalescence and critical parameter laws",
+      "locator": "Proposition 5, printed p.818 / PDF index6; Section 4.2, pp.836\u2013843 / indices24\u201331; Corollary 24, p.843 / index31",
+      "relationship": "Written construction, attachment estimate and continuity proof, followed by finite-dimensional critical-parameter convergence",
+      "status": "pending",
+      "note": "The attachment bound includes isolated new vertices. Verification of a possible omission in the searchable Lemma 23 text remains pending; no source erratum is asserted."
+    },
+    {
+      "source": "aldous-critical-random-graphs",
+      "order": 10,
+      "label": "Written path-space upgrade of the coalescent argument",
+      "locator": "Proposition 5 and Corollary 24 as context; O3IS/R8LD/GRSC/TIGK are a written extension of the existing construction and finite-dimensional proof",
+      "relationship": "J1 convergence from stopped squared-mass control and explicit compact containment",
+      "status": "pending",
+      "note": "The path-space statement is not attributed to Corollary 24. Standard Skorokhod compactness and identification are used; joint surplus evolution remains separate."
+    },
+    {
+      "source": "bhamidi-budhiraja-wang-augmented-coalescent",
+      "order": 11,
+      "label": "Cycle-birth rates and Poisson construction",
+      "locator": "arXiv:1212.5493v1, Section 2.3.2 (pp.7\u20138), opening of Section 4 (pp.11\u201312), Lemma 4.9 and proof (pp.14\u201315)",
+      "relationship": "Read transition rates and construction; written simple-graph cycle-increment limit and moments",
+      "status": "pending",
+      "note": "The autonomous finite partition generator supplies conditional Poisson marks. The full near-Feller and marked entrance-law proofs are not claimed; no source correction or compiled correspondence."
+    },
+    {
+      "source": "bhamidi-budhiraja-wang-augmented-coalescent",
+      "order": 12,
+      "label": "Weighted marked states and inherited surplus",
+      "locator": "arXiv:1212.5493v1, Section 2.3.2, (2.8), pp.7\u20138; Section 4.1, Proposition 4.5, Lemmas 4.6\u20134.7 and proofs, pp.13\u201314",
+      "relationship": "Read weighted metric and inherited-surplus construction; written critical initial-tail and propagation proofs",
+      "status": "pending",
+      "note": "The finite simple-cycle estimate and localized linear drift are supplied explicitly. Full ranked marked-process convergence and published-version correspondence remain separate; no source correction is asserted."
+    },
+    {
+      "source": "bhamidi-budhiraja-wang-augmented-coalescent",
+      "order": 13,
+      "label": "Joint marked approximation and critical parameter laws",
+      "locator": "arXiv:1212.5493v1, Section 4.2: Lemma 4.12 statement and introductory discussion, p.16; its proof, pp.18\u201320",
+      "relationship": "Read finite-restriction comparison; written labelled coupling and marked finite-dimensional limit",
+      "status": "pending",
+      "note": "The no-ties assumption and simple-graph error are explicit. No marked path convergence, full auxiliary-lemma audit, published-version comparison or source correction is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "F5Y5",
+      "proof_uses": [
+        "J1LW"
+      ],
+      "reason": "Susceptibility with the correct parameter; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "QPI1",
+      "proof_uses": [
+        "F5Y5"
+      ],
+      "reason": "Relative-parameter counterexample; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "KQN9",
+      "proof_uses": [
+        "F5Y5",
+        "G192",
+        "ZDVK",
+        "OB0K"
+      ],
+      "reason": "Finite field bounds; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "1ZWD",
+      "proof_uses": [
+        "KQN9",
+        "ZK0V"
+      ],
+      "reason": "Root tail up to the susceptibility scale; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "EPK3",
+      "proof_uses": [
+        "1ZWD",
+        "25Z4"
+      ],
+      "reason": "Largest-component second moment; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 5,
+      "tag": "1T2M",
+      "proof_uses": [
+        "KQN9"
+      ],
+      "reason": "Positive-field extrapolation; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 6,
+      "tag": "CBIL",
+      "proof_uses": [
+        "F5Y5",
+        "1ZWD",
+        "EPK3",
+        "1T2M"
+      ],
+      "reason": "Largest-component window; finite-volume uses and parameter normalization are explicit."
+    },
+    {
+      "order": 7,
+      "tag": "R1RF",
+      "proof_uses": [],
+      "reason": "A conditional characteristic-function calculation and fourth-moment tightness prove the martingale limit."
+    },
+    {
+      "order": 8,
+      "tag": "FOTE",
+      "proof_uses": [],
+      "reason": "Exact finite exploration identities control drift and conditional variance at the critical scale."
+    },
+    {
+      "order": 9,
+      "tag": "CY46",
+      "proof_uses": [
+        "R1RF",
+        "FOTE"
+      ],
+      "reason": "The martingale limit and drift bound combine with the continuous running-minimum map."
+    },
+    {
+      "order": 10,
+      "tag": "GGL3",
+      "proof_uses": [
+        "FOTE",
+        "CY46"
+      ],
+      "reason": "Conditional independence of untested edges gives the exact binomial Laplace formula; queue-area convergence identifies its limit."
+    },
+    {
+      "order": 11,
+      "tag": "2N9T",
+      "proof_uses": [],
+      "reason": "Brownian endpoint regularity and atomless conditional future values give the required excursion properties."
+    },
+    {
+      "order": 12,
+      "tag": "59NH",
+      "proof_uses": [],
+      "reason": "Small vertical record drops and null limiting zero sets give endpoint matching; point measures pass across atomless endpoints."
+    },
+    {
+      "order": 13,
+      "tag": "CH8I",
+      "proof_uses": [
+        "CY46",
+        "2N9T",
+        "59NH"
+      ],
+      "reason": "The stopped unexplored graph is subcritical and controls all squared mass of late components; record matching controls the completion time."
+    },
+    {
+      "order": 14,
+      "tag": "M7BY",
+      "proof_uses": [
+        "2N9T",
+        "59NH",
+        "CH8I",
+        "CY46",
+        "GGL3"
+      ],
+      "reason": "Finite marked-excursion matching combines with late and small-component squared-mass bounds to give ranked l2 and surplus convergence."
+    },
+    {
+      "order": 15,
+      "tag": "3G0K",
+      "proof_uses": [],
+      "reason": "Finite-path summation controls a small tail; adding the finite head preserves square summability, and exponential clocks give the Markov kernels."
+    },
+    {
+      "order": 16,
+      "tag": "5HM7",
+      "proof_uses": [],
+      "reason": "An exact vertex-addition identity and stopped conditional expectations control the full squared-mass increase."
+    },
+    {
+      "order": 17,
+      "tag": "7HLE",
+      "proof_uses": [
+        "3G0K",
+        "5HM7"
+      ],
+      "reason": "Small-remainder attachment, a common-clock lower bound and finite restrictions give joint weak continuity and a cadlag version."
+    },
+    {
+      "order": 18,
+      "tag": "Z8T1",
+      "proof_uses": [
+        "3G0K",
+        "7HLE",
+        "M7BY"
+      ],
+      "reason": "The exact exponential time change and continuous Markov kernels combine the one-time ranked limit into consistent finite-dimensional laws."
+    },
+    {
+      "order": 19,
+      "tag": "O3IS",
+      "proof_uses": [
+        "3G0K"
+      ],
+      "reason": "The finite chain strong Markov property and the small-time squared-mass expectation bound control the entire increment interval."
+    },
+    {
+      "order": 20,
+      "tag": "R8LD",
+      "proof_uses": [],
+      "reason": "Exit counts are bounded by an increasing quadratic process; stopped increments separate exits, and marginal tightness gives compact containment."
+    },
+    {
+      "order": 21,
+      "tag": "GRSC",
+      "proof_uses": [
+        "3G0K",
+        "7HLE",
+        "Z8T1",
+        "O3IS",
+        "R8LD"
+      ],
+      "reason": "Marginal continuity and stopped estimates yield J1 tightness; finite paths exclude fixed-time jumps and identify the limit."
+    },
+    {
+      "order": 22,
+      "tag": "TIGK",
+      "proof_uses": [
+        "M7BY",
+        "Z8T1",
+        "GRSC"
+      ],
+      "reason": "The exact exponential clock change approaches the identity, giving the critical size-path law and its integrated squared-norm consequence."
+    },
+    {
+      "order": 23,
+      "tag": "A40L",
+      "proof_uses": [
+        "R2Y7",
+        "CAZQ"
+      ],
+      "reason": "A small susceptibility reference level has the required triangle bound; row-sum comparison controls its displacement from the complete-graph window."
+    },
+    {
+      "order": 24,
+      "tag": "1DEZ",
+      "proof_uses": [
+        "A40L",
+        "YN7V",
+        "M7BY",
+        "7HLE",
+        "GRSC"
+      ],
+      "reason": "Uniform higher moments pass the l2 law to polynomial expectations; stochastic continuity and monotonicity give uniform susceptibility convergence."
+    },
+    {
+      "order": 25,
+      "tag": "KCRC",
+      "proof_uses": [
+        "A40L",
+        "YN7V",
+        "TIGK"
+      ],
+      "reason": "Increasing squared mass bounds path-functional growth by the terminal norm, giving uniform integrability and integrated moment limits."
+    },
+    {
+      "order": 26,
+      "tag": "6TZO",
+      "proof_uses": [
+        "Z8T1"
+      ],
+      "reason": "Poisson proposals preserve the exact size path; the autonomous partition generator yields conditional internal marks, and repeated-edge proposals have vanishing expectation."
+    },
+    {
+      "order": 27,
+      "tag": "6248",
+      "proof_uses": [
+        "6TZO",
+        "TIGK",
+        "A40L"
+      ],
+      "reason": "The conditional Laplace functional and the size-path law identify finite Poisson marks with random squared-mass intensity."
+    },
+    {
+      "order": 28,
+      "tag": "M7RY",
+      "proof_uses": [
+        "6248",
+        "KCRC",
+        "A40L",
+        "YN7V"
+      ],
+      "reason": "Terminal squared-mass moments bound the conditional Poisson counts and their products with the integrated mass, giving uniform integrability."
+    },
+    {
+      "order": 29,
+      "tag": "RJJ9",
+      "proof_uses": [
+        "CH8I"
+      ],
+      "reason": "Counting cycles and attached paths bounds subcritical weighted surplus; the stopped unexplored graph transfers the estimate to the critical remainder."
+    },
+    {
+      "order": 30,
+      "tag": "1QUE",
+      "proof_uses": [
+        "RJJ9",
+        "M7BY",
+        "59NH",
+        "GGL3",
+        "CH8I",
+        "2N9T"
+      ],
+      "reason": "Late weighted marks and early finite mark counts control the rank tail, upgrading the product law to the size-weighted metric."
+    },
+    {
+      "order": 31,
+      "tag": "NH8N",
+      "proof_uses": [
+        "3G0K",
+        "1QUE",
+        "6TZO",
+        "TIGK"
+      ],
+      "reason": "The exact merger drift and a stopped expectation bound preserve negligible inherited tails, including after the critical graph clock change."
+    },
+    {
+      "order": 32,
+      "tag": "V90S",
+      "proof_uses": [
+        "3G0K",
+        "7HLE",
+        "GRSC"
+      ],
+      "reason": "A squared-mass difference controls a specified component; finite witnesses and separated limiting masses identify connections and ranks."
+    },
+    {
+      "order": 33,
+      "tag": "KBJ8",
+      "proof_uses": [
+        "3G0K",
+        "7HLE",
+        "NH8N"
+      ],
+      "reason": "Stopped internal-proposal compensation controls births missed by restrictions; inherited tails and finite new counts give a countable marked construction."
+    },
+    {
+      "order": 34,
+      "tag": "4DZC",
+      "proof_uses": [
+        "V90S",
+        "KBJ8",
+        "NH8N",
+        "7HLE"
+      ],
+      "reason": "Finite labelled old marks and finitely many matched new proposals converge; transported weighted tails account for the remaining old marks."
+    },
+    {
+      "order": 35,
+      "tag": "JSGY",
+      "proof_uses": [
+        "1QUE",
+        "4DZC",
+        "KBJ8",
+        "Z8T1",
+        "2N9T",
+        "6TZO"
+      ],
+      "reason": "The marked initial law and coupled finite-time approximation combine with the exact clock change, a loop/repeated-edge estimate and the tie-rule comparison."
+    },
+    {
+      "order": 36,
+      "tag": "NROY",
+      "proof_uses": [
+        "81TZ",
+        "A40L",
+        "TIGK"
+      ],
+      "reason": "Terminal squared-mass monotonicity and the explicit exponential bound give uniform integrability for exponentially growing size-path observables."
+    },
+    {
+      "order": 37,
+      "tag": "L1PJ",
+      "proof_uses": [
+        "NROY",
+        "6TZO",
+        "6248",
+        "M7RY"
+      ],
+      "reason": "A uniform square-root Poisson bound and the conditional proposal coupling control the joint transform; a larger parameter gives uniform integrability."
+    },
+    {
+      "order": 38,
+      "tag": "NM14",
+      "proof_uses": [
+        "L1PJ",
+        "M7RY"
+      ],
+      "reason": "The even mixed-moment series transfers square-root exponential integrability to any competing law, and signed square roots reduce uniqueness to moment generating functions."
+    },
+    {
+      "order": 39,
+      "tag": "7CDV",
+      "proof_uses": [
+        "PMEN",
+        "1NYQ",
+        "A40L",
+        "YN7V",
+        "TIGK",
+        "NROY"
+      ],
+      "reason": "The cubic largest-component tail controls every quadratic exponential; the cluster-product bound and the second squared-mass moment control the total transform and yield uniform integrability."
+    },
+    {
+      "order": 40,
+      "tag": "ME2X",
+      "proof_uses": [
+        "7CDV",
+        "6TZO",
+        "6248",
+        "M7RY"
+      ],
+      "reason": "Conditional Poisson proposals convert all positive total-mass exponential moments into uniform joint-transform bounds and expectation convergence."
+    },
+    {
+      "order": 41,
+      "tag": "0Y6N",
+      "proof_uses": [
+        "ME2X",
+        "M7RY"
+      ],
+      "reason": "Exponential domination justifies complex differentiation; a continuous cutoff and a finite parameter net give locally uniform convergence of every derivative."
+    },
+    {
+      "order": 42,
+      "tag": "0DWE",
+      "proof_uses": [
+        "NH8N",
+        "KBJ8",
+        "O3IS",
+        "3G0K",
+        "R8LD"
+      ],
+      "reason": "Adding the birth drift gives a stopped increment estimate; the complete product metric and increasing S+H control joint path tightness."
+    },
+    {
+      "order": 43,
+      "tag": "EURS",
+      "proof_uses": [
+        "0DWE",
+        "NH8N",
+        "KBJ8",
+        "V90S",
+        "4DZC",
+        "JSGY",
+        "GRSC",
+        "TIGK"
+      ],
+      "reason": "Finite retained marks give stochastic continuity of the total weighted sum; joint tightness, marked finite-dimensional laws and the Poisson comparison give the critical path and integral limits."
+    },
+    {
+      "order": 44,
+      "tag": "U59P",
+      "proof_uses": [
+        "N9DF",
+        "FOTE",
+        "GGL3",
+        "PMEN",
+        "7CDV"
+      ],
+      "reason": "Polynomial moments of the exploration queue control conditional binomial mark moments; the cubic largest-component tail handles the random completion time of early components."
+    },
+    {
+      "order": 45,
+      "tag": "O4TX",
+      "proof_uses": [
+        "U59P",
+        "RJJ9",
+        "1QUE",
+        "GGL3",
+        "EURS",
+        "1DEZ"
+      ],
+      "reason": "Early second moments and a vanishing late mean imply uniform integrability; moving-parameter and joint path convergence then pass first moments and linearly growing expectations to the limit."
+    },
+    {
+      "order": 46,
+      "tag": "WPKA",
+      "proof_uses": [
+        "U59P",
+        "RJJ9",
+        "1QUE",
+        "EURS",
+        "O4TX"
+      ],
+      "reason": "Explicit polynomial cutoff dependence and a finite-size late bound yield tails approaching order two; moving-parameter convergence then gives fractional moment limits."
+    },
+    {
+      "order": 47,
+      "tag": "JTVN",
+      "proof_uses": [
+        "WPKA",
+        "7CDV",
+        "EURS"
+      ],
+      "reason": "H\u00f6lder combines surplus moments below two with arbitrary squared-size exponential moments, giving uniform integrability for mixed joint-path observables."
+    },
+    {
+      "order": 48,
+      "tag": "QKHG",
+      "proof_uses": [
+        "FOTE",
+        "N9DF",
+        "7CDV",
+        "U59P",
+        "WPKA",
+        "YN7V",
+        "GGL3"
+      ],
+      "reason": "Sharpened queue moments and late squared-mass moments control weighted Bernoulli sums on dyadic exploration intervals, yielding every surplus moment."
+    },
+    {
+      "order": 49,
+      "tag": "DK7F",
+      "proof_uses": [
+        "QKHG",
+        "1QUE",
+        "WPKA",
+        "EURS",
+        "7CDV",
+        "JTVN"
+      ],
+      "reason": "All surplus moments give uniform integrability at every power and, with exponential squared-size moments, convergence of mixed path expectations and covariances."
+    },
+    {
+      "order": 50,
+      "tag": "GZ95",
+      "proof_uses": [
+        "1QUE",
+        "3G0K",
+        "O3IS",
+        "0DWE",
+        "R8LD"
+      ],
+      "reason": "Weighted-state continuity and merger/birth transport bounds control the surplus measure by an increasing function of squared mass plus total weighted surplus."
+    },
+    {
+      "order": 51,
+      "tag": "EAQD",
+      "proof_uses": [
+        "GZ95",
+        "4DZC",
+        "JSGY",
+        "1QUE",
+        "EURS",
+        "7CDV",
+        "QKHG",
+        "DK7F",
+        "2N9T"
+      ],
+      "reason": "Measure-path tightness, the scalar projection and the inherited pathwise bound identify a limit without fixed-time jumps; moment bounds pass growing expectations to it."
+    },
+    {
+      "order": 52,
+      "tag": "7E7T",
+      "proof_uses": [
+        "GGL3",
+        "1QUE",
+        "2N9T",
+        "EURS",
+        "QKHG",
+        "DK7F"
+      ],
+      "reason": "A high Brownian excursion and its conditional Poisson mark give a stretched-exponential lower tail; monotonicity transfers it to integrated surplus and truncated convergence gives uniform finite-graph divergence."
+    },
+    {
+      "order": 53,
+      "tag": "B7V7",
+      "proof_uses": [
+        "7E7T",
+        "EURS",
+        "7CDV",
+        "QKHG",
+        "DK7F"
+      ],
+      "reason": "All polynomial surplus moments with exponential size weights give derivative convergence on the closed Laplace domain; the surplus moment lower bound forces zero Taylor radius at the boundary."
+    },
+    {
+      "order": 54,
+      "tag": "OPH4",
+      "proof_uses": [
+        "GGL3",
+        "1QUE"
+      ],
+      "reason": "An explicit Bernoulli-Poisson coupling controls the weighted error; finite-coordinate Poisson-process coupling and summable mean tails prove continuity of the conditional kernel."
+    },
+    {
+      "order": 55,
+      "tag": "OWBW",
+      "proof_uses": [
+        "OPH4",
+        "M7BY",
+        "59NH",
+        "CY46",
+        "GGL3",
+        "1QUE",
+        "O4TX",
+        "QKHG",
+        "7CDV",
+        "2N9T",
+        "7E7T"
+      ],
+      "reason": "Candidate-area convergence and the expected weighted-rank-tail identity retain the conditional intensities; the kernel limit and moment bounds yield the geometry/mark variance decomposition and conditional entire transform."
+    },
+    {
+      "order": 56,
+      "tag": "WVGG",
+      "proof_uses": [
+        "0DWE",
+        "QKHG",
+        "7CDV"
+      ],
+      "reason": "Closed-edge rates and the exact internal missing-edge count give the simple-graph compensator; terminal moment bounds control its difference from the coalescent drift."
+    },
+    {
+      "order": 57,
+      "tag": "83JM",
+      "proof_uses": [
+        "WVGG",
+        "EAQD",
+        "1QUE",
+        "QKHG",
+        "7CDV",
+        "O4TX",
+        "2N9T",
+        "OWBW"
+      ],
+      "reason": "Continuity of the drift on compatible size/measure states and uniform integrability pass martingale identities and mean derivatives to the critical limit; moving parameters give uniform derivative convergence."
+    },
+    {
+      "order": 58,
+      "tag": "LX6L",
+      "proof_uses": [
+        "GZ95",
+        "WVGG",
+        "83JM",
+        "QKHG",
+        "7CDV"
+      ],
+      "reason": "Collecting merger increments gives the surplus-measure kernel; squared-mass tails prove continuity and the exact internal-edge count gives the finite correction."
+    },
+    {
+      "order": 59,
+      "tag": "E4JW",
+      "proof_uses": [
+        "LX6L",
+        "EAQD",
+        "83JM",
+        "1QUE",
+        "GZ95",
+        "QKHG",
+        "7CDV",
+        "2N9T"
+      ],
+      "reason": "Common path convergence and polynomial moment bounds pass profile martingales and mean derivatives to the limit; the polynomial kernel expansion gives the correlated moment hierarchy."
+    },
+    {
+      "order": 60,
+      "tag": "VM8H",
+      "proof_uses": [
+        "LX6L",
+        "WVGG"
+      ],
+      "reason": "Products of merger and birth increments give the exact finite quadratic rate and covariance identity; the scalar expansion isolates the additional squared-mark sum."
+    },
+    {
+      "order": 61,
+      "tag": "XT0C",
+      "proof_uses": [
+        "LX6L",
+        "E4JW",
+        "EAQD",
+        "83JM",
+        "QKHG",
+        "7CDV"
+      ],
+      "reason": "Pathwise variation bounds make realized jump-product sums continuous under the common time change; all-moment bounds pass their moments and product-martingale identities to the limit."
+    },
+    {
+      "order": 62,
+      "tag": "4W2Z",
+      "proof_uses": [
+        "VM8H",
+        "LX6L",
+        "NH8N",
+        "KBJ8",
+        "JSGY",
+        "1QUE",
+        "QKHG",
+        "7CDV",
+        "2N9T"
+      ],
+      "reason": "Direct future connections bound present squared-mark rates by later selected-surplus second moments; transported initial tails and a separate finite marked head give uniform rate truncation."
+    },
+    {
+      "order": 63,
+      "tag": "GJB6",
+      "proof_uses": [
+        "4W2Z",
+        "VM8H",
+        "XT0C",
+        "E4JW",
+        "EAQD",
+        "LX6L",
+        "83JM",
+        "1QUE",
+        "2N9T"
+      ],
+      "reason": "Uniform quadratic-rate tails allow finite-rank recovery through the measure path limit, passing compensators and product identities; moving parameters give compact uniform covariance derivative limits."
+    },
+    {
+      "order": 64,
+      "tag": "BH5K",
+      "proof_uses": [
+        "4W2Z",
+        "NH8N",
+        "1QUE",
+        "QKHG",
+        "7CDV",
+        "LX6L"
+      ],
+      "reason": "The future inherited-surplus comparison at every power controls higher jump moments; a finite marked head and a separate mass tail yield uniform rank truncation."
+    },
+    {
+      "order": 65,
+      "tag": "KP1O",
+      "proof_uses": [
+        "BH5K",
+        "LX6L",
+        "GJB6",
+        "EAQD",
+        "83JM",
+        "1QUE",
+        "QKHG",
+        "7CDV",
+        "2N9T"
+      ],
+      "reason": "Mean-value bounds control nonlinear jump generators and their tails; the exact missing-edge correction and finite-head recovery pass martingale identities, expectation derivatives and mixed-moment or Fourier equations."
+    },
+    {
+      "order": 66,
+      "tag": "X92C",
+      "proof_uses": [
+        "7CDV",
+        "WVGG",
+        "TIGK"
+      ],
+      "reason": "The reciprocal squared-mass drift stays at most -1/2 until a large component appears; conditional stopping and the cubic largest-component tail give the sharp squared-mass tail power."
+    },
+    {
+      "order": 67,
+      "tag": "J2VQ",
+      "proof_uses": [
+        "X92C",
+        "1QUE",
+        "GGL3",
+        "7E7T",
+        "EURS",
+        "NM14"
+      ],
+      "reason": "A Brownian queue barrier bounds the conditional surplus mean; conditional Poisson exponential Markov gives the upper tail, while the earlier lower bound and signed-square-root argument give sharp moments, fractional exponential thresholds and moment determinacy."
+    },
+    {
+      "order": 68,
+      "tag": "N81A",
+      "proof_uses": [
+        "FOTE",
+        "N9DF"
+      ],
+      "reason": "Independent binomial padding dominates the full adaptive queue; a quadratic mean drift, reversed exponential bounds and deterministic late-time grids give a uniform queue tail."
+    },
+    {
+      "order": 69,
+      "tag": "65IO",
+      "proof_uses": [
+        "N81A",
+        "X92C",
+        "GGL3",
+        "1QUE",
+        "J2VQ",
+        "EURS"
+      ],
+      "reason": "Conditioning on genuine surplus bits gives a Bernoulli exponential bound controlled by queue times squared mass; uniform fractional exponential moments pass marginal and path expectations to the limit."
+    },
+    {
+      "order": 70,
+      "tag": "ZFGF",
+      "proof_uses": [
+        "N81A",
+        "J2VQ",
+        "CY46",
+        "OWBW",
+        "OPH4"
+      ],
+      "reason": "Late queue barriers and compact exploration convergence give a uniform half-line limit while retaining the ranked-state geometry; uniform moments pass maxima and mixed moments."
+    },
+    {
+      "order": 71,
+      "tag": "GDPT",
+      "proof_uses": [
+        "ZFGF",
+        "GGL3",
+        "OWBW",
+        "N81A",
+        "X92C",
+        "65IO"
+      ],
+      "reason": "Finite-rank excursion matching and square-mass tails give the shape measure; exact candidate counting identifies the queue-area correction, and exponential bounds pass growing observables."
+    },
+    {
+      "order": 72,
+      "tag": "WYUD",
+      "proof_uses": [
+        "OPH4",
+        "OWBW",
+        "ZFGF",
+        "GDPT"
+      ],
+      "reason": "Independent single-edge discrepancy moments control the weighted coupling in all finite orders; kernel moment bounds upgrade continuity and the critical conditional law."
+    },
+    {
+      "order": 73,
+      "tag": "L3KC",
+      "proof_uses": [
+        "WYUD",
+        "OWBW",
+        "GGL3",
+        "7E7T"
+      ],
+      "reason": "A local analytic logarithm compares finite conditional binomial transforms with the continuous Poisson exponent; exact Bernoulli cumulant polynomials give finite corrections and moment limits."
+    }
+  ]
+}

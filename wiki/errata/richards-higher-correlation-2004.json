@@ -1,0 +1,35 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "richards-higher-correlation-2004",
+  "entries": [
+    {
+      "id": "conditioning-induction",
+      "title": "The one-coordinate calculation does not establish the claimed induction",
+      "status": "provisional",
+      "locator": "arXiv:math/0410155v1 electronic reprint, Theorem1.1 proof, section2 pp.7–9: restriction B=A minus {z} before(2.5), formulas(2.6)–(2.13), then substitution B=empty. Extracted PDF read17 November2026; no visual-PDF or journal-text comparison.",
+      "claim": "The two-atom calculation is used to assert(2.5) for arbitrary B, after which B=empty gives the three-function inequality.",
+      "problem": "The displayed calculation applies when the conditioned fibre has one coordinate. The extension to arbitrary fibres is not proved. ICQP gives the exact tower identity: the averaged conditional E3 plus E3 of conditional means must be supplemented by a sum of covariances between conditional pair covariances and conditional means. That sum can be negative: for independent fair X,Z, f1=f2=X OR Z, f3=Z, conditioned on Z, it is -1/16. This example does not refute the claimed final inequality; its E3 is5/32.",
+      "correction": "Retain the valid one-bit calculation and the full conditional identity ICQP. A general conclusion requires an additional argument. BXP2 proves all orders for nonnegative Boolean cumulations under product measures; LGXD proves the three-function inequality for bounded nonnegative commonly monotone functions on a product of two chains. Neither replacement supplies the claimed unrestricted theorem. Lieb–Sahi2107.09838v2 Introduction also reports essential gaps; only the discrete step is independently diagnosed here.",
+      "tags": [
+        "ICQP",
+        "BXP2",
+        "LGXD"
+      ],
+      "issues": [],
+      "leanImpact": "A future formal proof must retain the extra covariance terms or provide a different induction invariant. Do not infer global E3 positivity from fibrewise positivity and increasing conditional means alone. The cumulation theorem requires explicit nonnegative Möbius coefficients and a product law; the two-chain result has only two independent ordered coordinates. No compiled association, source confirmation or current resolution of the general conjecture is claimed.",
+      "resolution": {
+        "status": "workaround",
+        "summary": "Proved replacements cover Boolean cumulations and two-chain monotone functions.",
+        "scale": "statement",
+        "impact": "The unrestricted higher-correlation theorem still lacks the missing conditioning argument; the replacements have narrower scope."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:math/0410155v1 electronic reprint",
+    "checkedUrl": "https://arxiv.org/abs/math/0410155v1",
+    "method": "Theorem 1.1 and its Section 2 proof, printed pp.7–9, were read in extracted PDF text. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "The empty-set induction report concerns the electronic reprint. Its identification with Annals of Probability 32(2), 1509–1544 does not supply a separate comparison with publisher text. No such comparison is recorded. The report remains provisional; the local repair and Lean status are separate.",
+    "comparisons": []
+  }
+}

@@ -1,16 +1,17 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-Adapted from pull request 488: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files
-`PercLib/CriticalLRP/MomentProblem/MGF.lean` and
-`PercLib/CriticalLRP/MomentProblem/Moments.lean`, contributed by `yujinhkim`.
-Licence: Apache-2.0, as declared in those files' headers and in
-`third_party/critical-lrp/NOTICE.md` of that commit (upstream origin
-`yujinhkim/Critical-Long-range-percolation` at
-3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf, not independently verified).
-Changes: namespace `PercLib.Probability`; focused imports; `autoImplicit` off; the two
-files merged; audit commands removed.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Adapted from the source repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files `PercLib/CriticalLRP/MomentProblem/MGF.lean` and
+`PercLib/CriticalLRP/MomentProblem/Moments.lean`, contributed by `yujinhkim`. Licence: Apache-2.0,
+as declared in those files' headers and in `third_party/critical-lrp/NOTICE.md` of that commit
+(upstream origin `yujinhkim/Critical-Long-range-percolation` at
+3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf, not independently verified). Changes: namespace
+`PercLib.Probability`; focused imports; `autoImplicit` off; the two files merged; audit commands
+removed.
 -/
 module
 
@@ -41,8 +42,8 @@ open scoped ENNReal NNReal Topology
 namespace PercLib.Probability
 
 
-/-- **Equal moment generating functions determine the distribution**, provided the mgf is finite in a
-neighbourhood of the origin. -/
+/-- **Equal moment generating functions determine the distribution**, provided the mgf is finite in
+a neighbourhood of the origin. -/
 theorem Measure.eq_of_mgf_eq {μ ν : Measure ℝ} [IsProbabilityMeasure μ] [IsProbabilityMeasure ν]
     (h : ProbabilityTheory.mgf id μ = ProbabilityTheory.mgf id ν)
     (h0 : (0 : ℝ) ∈ interior (ProbabilityTheory.integrableExpSet id μ)) : μ = ν := by
@@ -91,7 +92,8 @@ lemma integrable_pow_of_integrable_exp {μ : Measure ℝ} {t : ℝ} (ht : 0 < t)
     (h : Integrable (fun x : ℝ => Real.exp (t * |x|)) μ) (n : ℕ) :
     Integrable (fun x : ℝ => x ^ n) μ := by
   have habs := integrable_abs_pow_of_integrable_exp ht h n
-  refine Integrable.mono' habs ((continuous_id.pow n).aestronglyMeasurable) (Eventually.of_forall ?_)
+  refine Integrable.mono' habs ((continuous_id.pow n).aestronglyMeasurable)
+      (Eventually.of_forall ?_)
   intro x
   rw [Real.norm_eq_abs, abs_pow]
 
@@ -293,11 +295,13 @@ lemma integral_cexp_neg_mul_eq_tsum {ν : Measure ℝ} [IsFiniteMeasure ν]
 (the integrand is dominated by `1`). -/
 lemma tendsto_complexMGF_sub_inv {ν : Measure ℝ} [IsFiniteMeasure ν]
     (hν0 : ∀ᵐ x ∂ν, 0 ≤ x) {w : ℂ} (hw : w.re ≤ 0) :
-    Tendsto (fun n : ℕ => ProbabilityTheory.complexMGF id ν (w - (Complex.ofReal (((n : ℝ) + 1)⁻¹))))
+    Tendsto (fun n : ℕ => ProbabilityTheory.complexMGF id ν
+        (w - (Complex.ofReal (((n : ℝ) + 1)⁻¹))))
       atTop (𝓝 (ProbabilityTheory.complexMGF id ν w)) := by
   have hbound_int : Integrable (fun _ : ℝ => (1 : ℝ)) ν := integrable_const 1
   have hmeas : ∀ n : ℕ, AEStronglyMeasurable
-      (fun x : ℝ => Complex.exp ((w - (Complex.ofReal (((n : ℝ) + 1)⁻¹))) * (x : ℂ))) ν := fun n => by
+      (fun x : ℝ => Complex.exp ((w - (Complex.ofReal (((n : ℝ) + 1)⁻¹))) * (x : ℂ))) ν :=
+          fun n => by
     fun_prop
   have hdom : ∀ n : ℕ, ∀ᵐ x : ℝ ∂ν,
       ‖Complex.exp ((w - (Complex.ofReal (((n : ℝ) + 1)⁻¹))) * (x : ℂ))‖ ≤ 1 := by
@@ -388,7 +392,7 @@ theorem Measure.eq_of_forall_moment_eq_of_summable {μ ν : Measure ℝ} [IsFini
       simp only [ProbabilityTheory.complexMGF, id_eq, neg_mul]
     have hconvμ : ProbabilityTheory.complexMGF id μ (-z) = ∫ x, Complex.exp (-(z * x)) ∂μ := by
       simp only [ProbabilityTheory.complexMGF, id_eq, neg_mul]
-    show ProbabilityTheory.complexMGF id ν (-z) = ProbabilityTheory.complexMGF id μ (-z)
+    change ProbabilityTheory.complexMGF id ν (-z) = ProbabilityTheory.complexMGF id μ (-z)
     rw [hconvν, hconvμ]
     have h1 := integral_cexp_neg_mul_eq_tsum hνint hr hsum hz2
     have h2 := integral_cexp_neg_mul_eq_tsum hμint hr hsumμ hz2
@@ -445,7 +449,7 @@ theorem Measure.eq_of_forall_moment_eq_of_summable {μ ν : Measure ℝ} [IsFini
 
 
 
-/-! ### D-5 witnesses -/
+/-! ### Non-vacuity witnesses -/
 
 /-- The hypotheses of `Measure.eq_of_mgf_eq` hold for `μ = ν = δ₀`: the mgf is finite
 everywhere. -/

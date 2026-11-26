@@ -1,0 +1,329 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hutchcroft-lrp-2",
+  "entries": [
+    {
+      "id": "multiscale-tower-indices",
+      "title": "Intersection ranges in the multiscale tower identity",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF p. 55, §II.5.3, proof of Proposition II.5.9: first equality in the tower-property display after conditional Harris. PDF text extraction checked 16 November 2026; the mismatched intersection ranges also appear there. Author confirmation remains pending.",
+      "claim": "The probability of all mass events A_1 through A_n and the joining events G_1 through G_i is equated with an expectation conditioned on F_i using A_1 through A_(i+1) and G_1 through G_n.",
+      "problem": "These are different intersections. Moreover, G_n is not a joining event for a child: the root has no parent. The next line of the display has the intended ranges, so this is a local indexing mismatch, not a counterexample to the proposition.",
+      "correction": "Keep all A_j and only G_j with j at most i inside the first conditional expectation. Extract the F_i-measurable indicators of A_j for j at most i and G_j for j less than i. Conditional association then gives P(all A, G_1,...,G_i) at least q times P(all A, G_1,...,G_(i-1)). L5IG proves this recurrence with explicit scale separation and iterates it n-1 times.",
+      "tags": [
+        "L5IG",
+        "2BBE"
+      ],
+      "issues": [],
+      "leanImpact": "An eventual formal proof must use the correctly indexed finite intersections and prove measurability of earlier joining events from the separated radii before applying conditional expectation. This changes no tagged statement or claimed exponent and supplies no compiled Lean result. The diagnosis remains provisional pending source-author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the intended ranges of joining events in the tower identity.",
+        "scale": "notation",
+        "impact": "Local conditional-expectation indices change; the multiscale recurrence is preserved."
+      }
+    },
+    {
+      "id": "cutoff-derivative-endpoint-integral",
+      "title": "The alpha=d endpoint of the cutoff derivative integral",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF p. 20, proof of Proposition II.2.5, integrating the unrestricted derivative estimate to infinity after (II.2.5). Both text renditions inspected 16 November 2026.",
+      "claim": "After reducing to alpha <= d, the proof integrates the bound r^(-d+alpha-1) from a positive multiple of the point separation to infinity.",
+      "problem": "This integral is finite only for alpha < d. At alpha=d its integrand is 1/r, so the displayed finite bound does not follow from that integration. The proposition explicitly includes this endpoint.",
+      "correction": "Use the integral only for alpha < d. For alpha=d and cutoff radius at least one eighth of the separation, the desired bound follows directly from a connection probability being at most one, after adjusting its constant. The small-cutoff part still integrates r^(p-1) with p>0 and remains valid. AUAE implements the same separation with a constant allowing for norm equivalence.",
+      "tags": [
+        "AUAE"
+      ],
+      "issues": [],
+      "leanImpact": "Split alpha<d from alpha=d before evaluating the improper integral; do not divide by d-alpha at the endpoint. The existing two-point conclusion is preserved. This is a provisional proof-boundary repair, not a counterexample or compiled Lean result; author confirmation is pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Handle alpha=d at large cutoff by the probability bound one.",
+        "scale": "local",
+        "impact": "Separates an endpoint case from a divergent integral; the proposition keeps its full stated range."
+      }
+    },
+    {
+      "id": "spread-insertion-self-distance",
+      "title": "The insertion product must exclude the point being inserted",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF p. 29, (II.3.8) in the proof of Lemma II.3.7; both text renditions inspected 16 November 2026.",
+      "claim": "The first line of (II.3.8) uses d(a_i, {a_j: 1 <= j <= i}) for i from 4 to n.",
+      "problem": "That set contains a_i, so every such factor is zero. For four or more distinct marked points the displayed right side is zero, while the product of the three spreads on the left is positive.",
+      "correction": "Replace j <= i by j < i, as in the preceding greedy assignment and (II.3.6). The insertion distances are then positive. 0VKF proves the ordered-insertion comparison for every finite metric space; WDGK gives an independent ultrametric proof of the required sweep/recursion equivalence.",
+      "tags": [
+        "0VKF",
+        "WDGK"
+      ],
+      "issues": [],
+      "leanImpact": "Construct the predecessor set with a strict index bound and discharge nonmembership before using positivity or dividing by the insertion distance. This is a provisional index typo in the proof, not a failure of the sweep comparison. No compiled general sweep theorem is claimed; author confirmation remains pending.",
+      "resolution": {
+        "status": "found",
+        "summary": "Measure each insertion distance only to earlier points.",
+        "scale": "notation",
+        "impact": "Changes j<=i to j<i; the required spread comparison is recovered."
+      }
+    },
+    {
+      "id": "geometric-gladkov-product-exponent",
+      "title": "Square-root exponent in the geometric multipoint induction",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF p. 30, proof of Corollary II.3.8, middle line of the displayed induction; both text renditions inspected 16 November 2026.",
+      "claim": "The minimum of the raw product of three pairwise-union sweeps is raised to -(d-2+eta)/2 after taking a square root of three probability bounds.",
+      "problem": "Writing s=(d-2+eta)/2, each probability contributes its sweep to power -s. Taking the square root leaves power -s/2 on the product, not -s. The stated intermediate exponent doubles the scaling degree.",
+      "correction": "Use exponent -(d-2+eta)/4 on the raw sweep product, or retain exponent -(d-2+eta)/2 on its square root. For positive s, C4A5 and WDGK then give the stated conclusion. For s<=0 on distinct lattice points, use probability at most one and sweep at least one directly.",
+      "tags": [
+        "C4A5",
+        "WDGK"
+      ],
+      "issues": [],
+      "leanImpact": "Retain the outer square root when multiplying the three inductive bounds and split the sign of the exponent before exchanging a maximum with a minimum. The source conclusion and existing tagged statements are unchanged. This is provisional pending author confirmation and supplies no compiled higher-order probability inequality.",
+      "resolution": {
+        "status": "found",
+        "summary": "Halve the exponent on the raw sweep product after taking the square root.",
+        "scale": "local",
+        "impact": "Repairs the intermediate scaling degree; the geometric conclusion is unchanged."
+      }
+    },
+    {
+      "id": "inversion-sign-and-complex-form",
+      "title": "Inversion conventions in the covariance proof",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF pp. 30–31, proof of Proposition II.3.9, definition of psi, its determinant and its planar complex expression; both text renditions inspected 16 November 2026.",
+      "claim": "The map psi(x)=-x/||x||^2 is assigned determinant -||x||^(-2d) in every dimension and is written as psi(z)=1/z in the plane.",
+      "problem": "For the stated negative inversion, the radial derivative is positive and the d-1 tangential derivatives are negative, giving determinant (-1)^(d-1)||x||^(-2d). In complex notation it is -1/conjugate(z), not 1/z. In odd dimension the displayed determinant has the wrong sign.",
+      "correction": "Either retain the negative inversion with its parity-dependent determinant and planar expression, or consistently use I(x)=x/||x||^2, whose determinant is -||x||^(-2d) and whose planar expression is 1/conjugate(z). In both cases the absolute Jacobian and squared-distance identity used for covariance are unchanged. 9YE6 uses the standard inversion and N76U justifies the global distance identity.",
+      "tags": [
+        "9YE6",
+        "N76U"
+      ],
+      "issues": [],
+      "leanImpact": "Choose one inversion convention and distinguish signed determinant, absolute Jacobian and local length factor. The covariance conclusion depends on the absolute value and survives these repairs. This is a provisional proof-line inconsistency; no compiled Mobius result or author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use a consistent inversion convention, determinant sign and complex expression.",
+        "scale": "notation",
+        "impact": "The absolute Jacobian and distance identity used for covariance are unchanged."
+      }
+    },
+    {
+      "id": "multigraph-summation-order",
+      "title": "Positive elimination exponents in the multigraph moment sum",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.4.1 and PDF pp. 33–34, proof of Lemma II.4.6, (II.4.3)–(II.4.4) and the spatially weighted sum; both text renditions inspected 16 November 2026.",
+      "claim": "The proof sums a connected regular multigraph in its given label order and substitutes the fractional row bound for exponents Q_l/2^(k-2), including in the spatially weighted estimate.",
+      "problem": "Connectedness alone does not make every Q_l positive in an arbitrary ordering. A doubled four-cycle labelled with vertices 1 and 2 opposite has Q_2=0, while the fractional row bound requires a strictly positive exponent. The marked pair in the weighted sum need not be an edge either. The factor preceding the eliminated-variable sum also uses k-1 where l-1 is intended.",
+      "correction": "For the unweighted sum use a connected-prefix ordering from the root. For a marked displacement, bound its square by a finite sum of squared lengths along a graph path. Recenter each resulting edge term at one endpoint, put the other endpoint second and extend to a connected-prefix ordering. All eliminated exponents are then positive and the final weighted row sum gives the extra r^2. 1EWL supplies this argument and treats repeated marked positions separately.",
+      "tags": [
+        "1EWL",
+        "SOHR"
+      ],
+      "issues": [],
+      "leanImpact": "A formal graph-summation proof needs an ordering witness with a positive incoming multiplicity at every elimination, and a separate path/recentring argument for a nonadjacent marked pair. The moment exponents and conclusions are unchanged. This is a provisional missing proof step, not a counterexample to the theorem; no compiled Lean result or source-author confirmation is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Order vertices by connected prefixes and reduce a marked displacement to a path of graph edges.",
+        "scale": "substantial",
+        "impact": "The summation proof needs a new ordering and weighted reduction; the desired bound survives."
+      }
+    },
+    {
+      "id": "exact-cutoff-derivative-coefficient",
+      "title": "The exact second-moment equation retains the kernel derivative",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.4.3 and PDF p. 41, equation (II.4.27), compared with (II.4.19) and the normalization in §II.1.1. Both text renditions of (II.4.27) inspected 16 November 2026.",
+      "claim": "Equation (II.4.27) writes the exact logarithmic derivative with coefficient 3 beta_c r^(-d-alpha-1), retaining the earlier error e_2.",
+      "problem": "The normalization only gives |J prime(r)|=(1+delta_r) r^(-d-alpha-1), with delta_r tending to zero. It does not make delta_r identically zero. Thus the exact coefficient in (II.4.19) cannot be replaced by the pure power while retaining the same error and an equality sign.",
+      "correction": "Keep 3 beta_c |J prime(r)| in the exact identity, or retain the factor 1+delta_r. Then use delta_r tending to zero when deriving the asymptotic lower bound (II.4.28). GG8B retains the exact rate and A3G0 applies the asymptotic normalization only after the equations are established.",
+      "tags": [
+        "GG8B",
+        "A3G0"
+      ],
+      "issues": [],
+      "leanImpact": "Separate the exact derivative identity from the limiting normalization. Absorbing the factor into a redefined error would require rechecking that error bounds and signs; keeping the exact rate avoids this. The subsequent all-scale conclusion is unchanged. This is provisional pending source-author confirmation, with no compiled Lean association claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Keep the exact kernel derivative until taking the asymptotic limit.",
+        "scale": "local",
+        "impact": "Corrects an exact equality; the asymptotic lower bound is retained."
+      }
+    },
+    {
+      "id": "truncation-back-propagation-normalization",
+      "title": "Normalization and radius scope in truncated back-propagation",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF pp. 47–48, Lemma II.5.5 and its reciprocal-integral proof. Both text renditions inspected 16 November 2026.",
+      "claim": "The implication uses epsilon beta_c/(2 alpha), concludes with alpha/beta, and includes every smaller radius ell <= delta r.",
+      "problem": "The cited susceptibility lower coefficient gives epsilon alpha/(2 beta_c). The parameter in the conclusion is beta_c. The proof only controls the near-sharp asymptotic coefficient as ell tends to infinity; it does not justify the same coefficient at all bounded radii. Its exact integral also drops the kernel-derivative correction before the asymptotic step.",
+      "correction": "Retain beta_c |J prime(t)| |B_t| in the reciprocal integral, use the corrected initial coefficient, and state the asymptotic propagation for ell_0 <= ell <= delta r. OP4X gives the exact general bound; KKGL needs only an interval of radii all tending to infinity.",
+      "tags": [
+        "OP4X",
+        "KKGL"
+      ],
+      "issues": [],
+      "leanImpact": "Keep the truncation fixed, distinguish the exact coefficient from its equivalent, and retain a lower radius in the quantified estimate. The existing reciprocal and negligibility source maps use these separate hypotheses; no small-radius statement is inferred. Provisional pending Tom's confirmation; no new compiled Lean result is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Correct the initial coefficient and state near-sharp propagation only above a sufficiently large radius.",
+        "scale": "statement",
+        "impact": "The bounded-radius scope changes; the downstream application uses radii tending to infinity and survives."
+      }
+    },
+    {
+      "id": "negligibility-truncation-comparison",
+      "title": "Truncation direction at the end of the negligibility proof",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF pp. 49–50, proof of Proposition II.5.3, final comparison using r <= r prime <= C r. Both text renditions inspected 16 November 2026.",
+      "claim": "The final monotonicity comparison uses truncation delta_0 C^kappa r^kappa on the left and delta_0 (r prime)^kappa on the right, then concludes from epsilon C^alpha.",
+      "problem": "The left truncation may be larger, so monotonicity does not justify the displayed inequality. After correcting it, the concluding limit requires a choice of C uniform in epsilon. That choice is available from the fixed gap a alpha > alpha+kappa, although the text only states the weaker gap a alpha > kappa and writes C(epsilon).",
+      "correction": "Use delta_0 r^kappa on the left. From b r^(alpha+kappa) <= m_2(r) <= B r^(alpha+kappa), choose C larger than (B/b)^(1/(a alpha-alpha-kappa)), independently of epsilon. The printed choice of a gives the required positive denominator, so epsilon C^alpha tends to zero. Alternatively, KKGL keeps m=delta R^kappa fixed and propagates one excessive value over [qR,lambda R], avoiding the bad-set comparison.",
+      "tags": [
+        "KKGL",
+        "OP4X"
+      ],
+      "issues": [],
+      "leanImpact": "Formal use should follow the fixed-truncation interval argument rather than infer a uniform estimate from a scale-dependent truncation. The reported issue concerns the printed inference, not a counterexample to negligibility. Provisional pending Tom's confirmation; no new compiled Lean result is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the smaller truncation and choose the comparison constant independently of the tolerance.",
+        "scale": "local",
+        "impact": "Repairs the monotonicity and limiting step; the negligibility conclusion survives."
+      }
+    },
+    {
+      "id": "small-window-moment-exponents",
+      "title": "Moment and tail exponents in the small-window proof",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF p. 51, proof of Theorem II.5.2(1), Cauchy–Schwarz and truncated-tail displays. Both text renditions inspected 16 November 2026.",
+      "claim": "The Cauchy–Schwarz factor is moment 2p-2; the integer-tail sum is equated with a real truncation; the tail exponent is written -(d-alpha)(d+alpha).",
+      "problem": "The product needed for Cauchy–Schwarz uses moment 2p-1. Already for p=1 and a deterministic count above one, the printed moment inequality fails. A noninteger truncation needs its fractional final term, and the tail exponent should be -(d-alpha)/(d+alpha).",
+      "correction": "Use moment 2p-1 and either the exact tail integral or the integer sum plus its fractional last term. SOG8 gives a shorter repair: Y^p 1(Y<=m) <= m^(p-1) min(T,m), whose expectation is at most A m^(p-rho)/(1-rho). Dividing by the window-moment lower bound gives the required uniform negligibility, including rho=0.",
+      "tags": [
+        "SOG8",
+        "AS7A"
+      ],
+      "issues": [],
+      "leanImpact": "The corrected argument needs only a tail upper bound and the matching window-moment lower bound. Real truncations require no floor operation. The source conclusion is retained under those inputs; the alpha=d case uses the trivial tail bound. Provisional pending Tom's confirmation; no new compiled Lean result is claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use moment 2p-1 and exact tail integration, or the direct capped-moment bound.",
+        "scale": "local",
+        "impact": "Corrects the moment and tail exponents and handles noninteger caps; the window estimate survives."
+      }
+    },
+    {
+      "id": "annular-small-volume-and-ghost-scope",
+      "title": "Small-volume and endpoint scope of the annular argument",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML and PDF pp. 46 and 51–52, Theorem II.5.2(2) and the passage from ghost avoidance to (II.5.9); for alpha=d, Corollary II.4.10 on p.40. Both text renditions inspected 16 November 2026; the alpha=d citation was checked in extracted v1 PDF text on 21 November 2026.",
+      "claim": "The annular conclusion is stated for every n>=1, and the proof passes from a small missed-ghost probability to a small outside-volume probability throughout its parameter range.",
+      "problem": "The annulus excludes the root. At n=1 an isolated root always violates the conclusion, and it has positive probability for the paper's summable intensity kernel at finite beta_c; clusters of size two similarly obstruct n=2. Separately, the ghost deficit equals exp(-h I)(1-exp(-h O)), so large inside mass prevents a direct outside-volume bound. At alpha=d the right side of (II.5.9) is epsilon n^0=epsilon, and the theorem's hypothesis (wCL) gives an infinite cluster at beta_c with positive probability by Corollary II.4.10 of the same preprint (arXiv:2508.18808v1, printed p.40: if alpha=d and (wCL) holds, there is an infinite cluster at beta_c); that positive probability makes (II.5.9) itself impossible for arbitrarily small epsilon.",
+      "correction": "For alpha<d, first discard total masses above A n using the fractional tail, then bound the ghost deficit below at field 1/n on the remaining event. L6K3 gives an alternative proof using fresh marks on an independent added layer, with all scale choices explicit. It proves the annular conclusion uniformly for integer n>=3. The alpha=d annular conclusion for large n needs a different argument; the failure of its outside-volume intermediary does not itself refute that conclusion.",
+      "tags": [
+        "L6K3",
+        "AYPN",
+        "79SD"
+      ],
+      "issues": [],
+      "leanImpact": "Separate an asymptotic annular theorem from bounded-volume exceptions and impose positive tail exponent for the outside-volume proof. Do not replace the missed-ghost event by an event that only counts outside mass. No endpoint annular formalization is asserted. Provisional pending Tom's confirmation; no new compiled Lean result is claimed.",
+      "resolution": {
+        "status": "partial",
+        "summary": "The annular bound is proved for alpha<d and integer volumes n>=3.",
+        "scale": "statement",
+        "impact": "The small-volume range must change. The alpha=d large-volume conclusion still needs a different argument."
+      }
+    },
+    {
+      "id": "subcritical-radius-variables",
+      "title": "Radius variables in the subcritical derivative displays",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.6.1 and PDF pp. 57–58, reciprocal integration in Lemma II.6.1 and derivative displays in Proposition II.6.2. Both text renditions inspected 16 November 2026.",
+      "claim": "The reciprocal integral has integrand r^(-alpha-1) with integration variable s; the spatial Russo sum takes y in B_r and then bounds the joining displacement y-x by r. The normalized differential inequality also drops the forcing constant C_p.",
+      "problem": "The first written integral is infinite with r fixed. The spatial sum requires a ball centered at the attachment vertex x; y in B_r alone does not bound y-x. Multiplication by r^(-p) retains the forcing constant.",
+      "correction": "Integrate s^(-alpha-1), use y in B_r(x), and keep the positive forcing constant after normalizing. 04ZI supplies the exact reciprocal comparison. KA3B derives the spatial derivative with its centered joining window and keeps separate constants in the two differential terms.",
+      "tags": [
+        "04ZI",
+        "KA3B"
+      ],
+      "issues": [],
+      "leanImpact": "Distinguish the lower endpoint from the integration variable and encode the derivative support as a displacement constraint. The source conclusions survive these local display repairs; KA3B also avoids induction on the moment order. Provisional pending Tom's confirmation, with no compiled association claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Integrate in the varying radius, center the joining ball at the attachment point, and keep the forcing constant.",
+        "scale": "local",
+        "impact": "Repairs the spatial differential comparison without changing its conclusion."
+      }
+    },
+    {
+      "id": "two-point-upper-integration",
+      "title": "Factor indices and integration range in the two-point upper bound",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.6.1 and PDF pp. 58–59, proof of Lemma II.6.3 after (II.6.2). Both text renditions inspected 16 November 2026.",
+      "claim": "The short-radius argument uses distances x-b and y-a before applying tails to the factors connecting x to a and b to y. It then integrates from xi to R/8 while assuming only R>=xi, and compares that integral two-sidedly with its upper-endpoint power.",
+      "problem": "The displayed distances do not match the two factors to which the tail bound is applied. The integral is reversed when xi<=R<8xi and vanishes at R=8xi, so the asserted positive two-sided comparison cannot be uniform there.",
+      "correction": "Use distances x-a and y-b. Treat R<=8xi directly with the full critical upper bound, and integrate only for R>8xi. Use an upper bound for the short-radius integral, retaining the initial cutoff value. TFKR proves this argument with local absolute continuity and a fixed spatial order p>d+alpha.",
+      "tags": [
+        "TFKR",
+        "KA3B"
+      ],
+      "issues": [],
+      "leanImpact": "Encode the displacement constraint and match each tail to its connection factor. Split the parameter cases before integrating; no lower bound on the short-radius integral is needed. This is a repair of the printed inference, not a counterexample to the crossover conclusion. Provisional pending Tom confirmation; no compiled association claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Use the correct endpoint distances and treat short separations directly.",
+        "scale": "local",
+        "impact": "Avoids the reversed or vanishing integral; the two-point upper bound survives."
+      }
+    },
+    {
+      "id": "two-point-joining-windows",
+      "title": "Window centers and small chosen radii in the joining argument",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.6.1 and PDF pp. 59–61, Lemma II.6.5 and proof of Lemma II.6.4 between (II.6.3) and (II.6.5). Both text renditions inspected 16 November 2026.",
+      "claim": "Lemma II.6.5 places both observation balls at x, while its proof and the joining-edge application place the second ball at y. The subsequent proof takes a small fixed multiple of min(R,xi) as the cutoff radius and applies bounds stated for radii at least one.",
+      "problem": "The printed window does not match the estimate actually proved and used. The chosen radius can be below one, including when xi is bounded and R is large. Also the displayed already-connected-mass estimate inserts a factor tau(x,y); the preceding lemma supplies a rapid-decay upper bound, not a comparison to that actual probability.",
+      "correction": "Center the second ball at y and regularize zero short distances in the summation; 9ZEL handles repeated marked vertices separately. Apply its rapid-decay bound directly, without inserting the stronger tau comparison. If the chosen radius is below one, use the full direct-bond probability, which bounds the desired expression because min(R,xi) is then bounded. NI07 includes these cases and the independent-edge factorial second moment.",
+      "tags": [
+        "9ZEL",
+        "NI07"
+      ],
+      "issues": [],
+      "leanImpact": "Use two explicitly centered windows and distinguish a fixed lower cutoff radius from the observation separation. No refutation of the printed same-center estimate or the stronger intermediate tau comparison is claimed; neither is the conclusion supplied by the cited lemma. The corrected route avoids both. Provisional pending Tom confirmation; no compiled result claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Center the second window at its endpoint and use the rapid-decay estimate directly, with a direct-bond small-radius case.",
+        "scale": "local",
+        "impact": "Repairs the joining estimates without requiring a stronger comparison to the actual connection probability."
+      }
+    },
+    {
+      "id": "subcritical-capped-expectation",
+      "title": "Capping, rather than truncating, in the subcritical second-moment lower bound",
+      "status": "provisional",
+      "locator": "arXiv:2508.18808v1 HTML §II.6.2 and PDF p. 63, proof of Theorem II.1.15 between (II.6.10) and (II.6.11). Both text renditions inspected 16 November 2026.",
+      "claim": "The proof compares the expectation of the cluster size times the indicator that it is below a threshold between a subcritical and the critical law, then identifies the critical truncated expectation with a sum of critical tails through that threshold.",
+      "problem": "The truncated function is not increasing, so stochastic domination does not give the printed comparison. The sum of tails is the expectation of the capped variable, not the indicated truncation. For constants T=1 and S=3 and threshold 2, T<=S but the truncated expectations are 1 and 0, while the sum of the first two tails of S equals 2. This illustrates the two invalid general inferences; it is not a percolation counterexample to the theorem.",
+      "correction": "Keep the size-biased lower bound for the truncated subcritical expectation, bound it above by the capped subcritical expectation, and use domination only for the cap. Express the critical cap by its layer-cake integral, avoiding noninteger-threshold and infinite-cluster ambiguities. XANO completes the moment and volume-tail argument under its critical inputs.",
+      "tags": [
+        "XANO",
+        "IK5Y",
+        "T5JS"
+      ],
+      "issues": [],
+      "leanImpact": "Encode the increasing map min(T,A) and its exact tail integral, not monotonicity of T times a threshold indicator. Keep the critical law extended-valued and the subcritical size bias finitely normalized. The final intermediate-value step additionally needs moment-ratio continuity and a bounded-threshold case within the uniform parameter interval, supplied by IK5Y and XANO. Provisional pending Tom confirmation; no compiled assertion claimed.",
+      "resolution": {
+        "status": "found",
+        "summary": "Apply stochastic domination to the capped expectation and retain the truncated lower bound separately.",
+        "scale": "local",
+        "impact": "The moment and tail argument survives under its stated critical inputs."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:2508.18808v1",
+    "checkedUrl": "https://arxiv.org/abs/2508.18808v1",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

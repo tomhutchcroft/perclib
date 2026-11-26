@@ -1,0 +1,79 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "signed-kernel-moments",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 162
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Absolute moments and convolution",
+      "locator": "17 March 2017 author manuscript, Exercise 7.1 and (7.1.12)\u2013(7.1.13), printed p.70, PDF index81.",
+      "relationship": "Written moment argument with absolute-summability and sign hypotheses",
+      "status": "pending",
+      "note": "Absolute second moments justify Fubini. The matrix identity includes both first-moment cross terms before specializing to even kernels."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Fourier defects and nonnegative moments",
+      "locator": "17 March 2017 author manuscript, (7.1.14)\u2013(7.1.16), printed p.71, PDF index82.",
+      "relationship": "Written moment argument with absolute-summability and sign hypotheses",
+      "status": "pending",
+      "note": "An absolute moment gives the multivariable Taylor expansion. The converse uses Fatou for a nonnegative kernel, not cancellation in a signed sum."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "The limitation for signed kernels",
+      "locator": "17 March 2017 author manuscript, Scope of the heuristic discussion (7.1.14)\u2013(7.1.16) and caveat (a), printed p.71, PDF index82.",
+      "relationship": "Written moment argument with absolute-summability and sign hypotheses",
+      "status": "pending",
+      "note": "An explicit signed kernel separates a quadratic Fourier defect from absolute second-moment summability. This is a scope example, not an asserted source erratum or a percolation counterexample."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "From coefficient bounds to the quadratic term",
+      "locator": "17 March 2017 author manuscript, (7.1.10)\u2013(7.1.17) and the signed-kernel caveat, printed pp.70\u201371, PDF indices81\u201382.",
+      "relationship": "Written moment argument with absolute-summability and sign hypotheses",
+      "status": "pending",
+      "note": "Nonnegative coefficient bounds supply an absolute moment for the signed sum. Isotropy and positivity of the quadratic term are explicit, with a sufficient quantitative condition; no unconditional critical Fourier representation is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "QA8C",
+      "proof_uses": [],
+      "reason": "Absolute second moments justify Fubini. The matrix identity includes both first-moment cross terms before specializing to even kernels."
+    },
+    {
+      "order": 1,
+      "tag": "IVH2",
+      "proof_uses": [],
+      "reason": "An absolute moment gives the multivariable Taylor expansion. The converse uses Fatou for a nonnegative kernel, not cancellation in a signed sum."
+    },
+    {
+      "order": 2,
+      "tag": "QKRD",
+      "proof_uses": [],
+      "reason": "An explicit signed kernel separates a quadratic Fourier defect from absolute second-moment summability. This is a scope example, not an asserted source erratum or a percolation counterexample."
+    },
+    {
+      "order": 3,
+      "tag": "22TW",
+      "proof_uses": [
+        "QA8C",
+        "IVH2",
+        "3W22"
+      ],
+      "reason": "Nonnegative coefficient bounds supply an absolute moment for the signed sum. Isotropy and positivity of the quadratic term are explicit, with a sufficient quantitative condition; no unconditional critical Fourier representation is claimed."
+    }
+  ]
+}

@@ -1,13 +1,15 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-Adapted from NearCritical/BK.lean at tomhutchcroft/near-critical-diffusivity,
-revision c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under Tom Hutchcroft's reuse
-permission (DECISIONS R-3). The native source has no licence header; this is not
-an assertion of an upstream Apache licence. No vendored network code is copied.
-The adaptation uses Set configurations, IsUpperSet, and the single finite-certificate
-convention. Standard image/preimage/insert replace auxiliary Boolean definitions.
+Authors: PercLib contributors
+-/
+/-
+Adapted from NearCritical/BK.lean at tomhutchcroft/near-critical-diffusivity, revision
+c820fea91a7482c1755de0ec94ecb9f59ccfcacc, under Tom Hutchcroft's reuse permission recorded in
+`docs/DECISIONS.md`. The native source has no licence header; this is not an assertion of an
+upstream Apache licence. No vendored network code is copied. The adaptation uses Set configurations,
+IsUpperSet, and the single finite-certificate convention. Standard image/preimage/insert replace
+auxiliary Boolean definitions.
 -/
 module
 
@@ -27,7 +29,6 @@ one. Disjointness is always the existing finite-coordinate certificate conventio
 @[expose] public section
 noncomputable section
 open Set MeasureTheory
-open scoped Classical
 namespace PercLib.Probability
 variable {E : Type*}
 
@@ -149,7 +150,9 @@ theorem sum_sets_option [Fintype E] (f : Set (Option E) → ℝ) :
         cases a <;> by_cases h : none ∈ ω <;> simp [h]
       right_inv := by
         rintro ⟨b, η⟩
-        cases b <;> simp <;> ext e <;> simp }
+        cases b <;> simp only [Bool.false_eq_true, ↓reduceIte, mem_image, reduceCtorEq, and_false,
+            exists_false, decide_false, Prod.mk.injEq, true_and, mem_insert_iff, or_false,
+            decide_true] <;> ext e <;> simp }
   have h := (e.symm.sum_comp f).symm
   simpa [e, Fintype.sum_prod_type, Fintype.univ_bool, add_comm] using h
 
@@ -193,8 +196,10 @@ theorem indicator_disjointOccurrence_insert_none_le {A B : Set (Set (Option E))}
   change _ ≤ (disjointOccurrence A1 B0).indicator _ η +
     (disjointOccurrence A0 B1).indicator _ η - (disjointOccurrence A0 B0).indicator _ η
   by_cases h0 : η ∈ disjointOccurrence A0 B0
-  · have h10 : η ∈ disjointOccurrence A1 B0 := disjointOccurrence_mono (section_closed_subset_open hA) (Subset.refl B0) h0
-    have h01 : η ∈ disjointOccurrence A0 B1 := disjointOccurrence_mono (Subset.refl A0) (section_closed_subset_open hB) h0
+  · have h10 : η ∈ disjointOccurrence A1 B0 := disjointOccurrence_mono
+      (section_closed_subset_open hA) (Subset.refl B0) h0
+    have h01 : η ∈ disjointOccurrence A0 B1 := disjointOccurrence_mono (Subset.refl A0)
+        (section_closed_subset_open hB) h0
     simp only [indicator_of_mem h0, indicator_of_mem h10, indicator_of_mem h01]
     by_cases h : insert none (Option.some '' η) ∈ disjointOccurrence A B <;> simp [h]
   · simp only [indicator_of_notMem h0, sub_zero]
@@ -256,7 +261,7 @@ theorem finiteExpectation_disjointOccurrence_option [Fintype E] {p : ℝ}
   nlinarith [mul_le_mul_of_nonneg_left htrue hp]
 
 /-- Low-density BK propagates across one additional coordinate. -/
-theorem lowDensityBK_option [Fintype E] {p : ℝ} (hp : 0 ≤ p) (hpHalf : p ≤ 1/2)
+theorem lowDensityBK_option [Fintype E] {p : ℝ} (hp : 0 ≤ p) (hpHalf : p ≤ 1 / 2)
     (hBK : ∀ A B : Set (Set E), IsUpperSet A → IsUpperSet B →
       finiteExpectation p ((disjointOccurrence A B).indicator (fun _ => (1 : ℝ))) ≤
         finiteExpectation p (A.indicator (fun _ => (1 : ℝ))) *
@@ -342,6 +347,7 @@ theorem finiteExpectation_image_equiv {F : Type*} [Fintype E] [Fintype F]
   rw [← e.prod_comp (fun i : F => if i ∈ e '' η then p else 1-p)]
   simp
 
+open Classical in
 /-- The low-density assertion transports across a coordinate equivalence. -/
 theorem lowDensityBK_equiv {F : Type*} [Fintype E] [Fintype F] (e : E ≃ F) (p : ℝ)
     (hBK : ∀ A B : Set (Set E), IsUpperSet A → IsUpperSet B →
@@ -392,7 +398,7 @@ theorem lowDensityBK_empty (p : ℝ) (A B : Set (Set PEmpty)) :
   · by_cases hA : ∅ ∈ A <;> by_cases hB : ∅ ∈ B <;> simp [hD, hA, hB]
 
 /-- BK for increasing events under homogeneous finite weights in the range 0≤p≤1/2. -/
-theorem lowDensity_bk [Fintype E] (p : ℝ) (hp : 0 ≤ p) (hpHalf : p ≤ 1/2)
+theorem lowDensity_bk [Fintype E] (p : ℝ) (hp : 0 ≤ p) (hpHalf : p ≤ 1 / 2)
     (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
     finiteExpectation p ((disjointOccurrence A B).indicator (fun _ => (1 : ℝ))) ≤
       finiteExpectation p (A.indicator (fun _ => (1 : ℝ))) *
@@ -420,7 +426,7 @@ theorem finiteExpectation_indicator_eq_measureReal [Fintype E] (p : unitInterval
 
 /-- Low-density BK for the canonical finite Bernoulli product law. -/
 theorem finite_bernoulli_bk_le_half [Fintype E] (p : unitInterval)
-    (hpHalf : (p : ℝ) ≤ 1/2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
+    (hpHalf : (p : ℝ) ≤ 1 / 2) (A B : Set (Set E)) (hA : IsUpperSet A) (hB : IsUpperSet B) :
     (prodBernoulli (fun _ : E => p)).real (disjointOccurrence A B) ≤
       (prodBernoulli (fun _ : E => p)).real A * (prodBernoulli (fun _ : E => p)).real B := by
   have h := lowDensity_bk (p : ℝ) p.property.1 hpHalf A B hA hB

@@ -1,0 +1,207 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "branching-processes",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 2
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 30,
+      "label": "Galton–Watson branching processes",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-offspring-generating-function",
+      "order": 0,
+      "label": "Offspring generating functions and their least fixed point",
+      "locator": "Named public declaration start lines: 50, 54, 58, 65, 69, 73, 80, 86, 94, 111, 120, 130, 137, 170, 175, 181, 186, 197, 213, 249, 287, 335, 348",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source proves the analytic content of 8TFY and BFM4 for an arbitrary probability mass function on the natural numbers, including infinite mean and the deterministic one-child exception. Identifying the iterates with generation extinction probabilities requires a separate process construction."
+    },
+    {
+      "source": "perclib-laplace-tail",
+      "order": 0,
+      "label": "Square-root Laplace deficits and tail bounds",
+      "locator": "Explicit public declaration start lines: 46, 52, 57, 74, 101, 122, 127, 131, 138, 169, 176, 195, 314, 343",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Fourteen public results give the analytic MIFH implication with extended natural volumes and a nontrivial generating-function witness. No exact tail equivalent or local limit is asserted. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-offspring-transform",
+      "order": 0,
+      "label": "Critical offspring transforms",
+      "locator": "Explicit public declaration start lines: 49, 55, 65, 79, 95, 113, 126, 135, 186, 201, 213, 225, 254, 266, 281, 294, 330",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Seventeen public results prove the second-order expansion, unique transform root and its square-root asymptotic. A finite second factorial moment suffices; identification with a progeny law is separate. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-quadratic-recursion",
+      "order": 0,
+      "label": "Quadratic survival and Yaglom recursions",
+      "locator": "Explicit public declaration start lines: 42, 69, 75, 100, 132, 217, 240",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Seven public results prove the reciprocal-increment and fixed-lambda array limits with their uniformity hypotheses explicit. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "DGVA",
+      "proof_uses": [
+        "8TFY",
+        "BFM4",
+        "N9P5"
+      ],
+      "reason": "Root decomposition and the critical fixed-point criterion, with the uniform generating-function expansion proved in N9P5; the new comparison permits either sign of the mean displacement."
+    },
+    {
+      "order": 1,
+      "tag": "AYHV",
+      "proof_uses": [
+        "8WO7",
+        "UKY4"
+      ],
+      "reason": "The finite-variance generating-function recursion and the survival asymptotic give the conditional Laplace limit; exact generation means supply uniform integrability."
+    },
+    {
+      "order": 2,
+      "tag": "NOKH",
+      "proof_uses": [
+        "RL1L",
+        "BFM4"
+      ],
+      "reason": "Dwass reduces progeny probabilities to a central lattice coefficient, computed directly by Fourier inversion under finite positive variance. Critical extinction justifies the concluding tail comparison; the local proof does not use a Tauberian implication."
+    },
+    {
+      "order": 3,
+      "tag": "LHWC",
+      "proof_uses": [
+        "OO12"
+      ],
+      "reason": "The equal-time correspondence controls distortion, roots and the coupled mass measures. Edge-to-child coupling compares contour occupation with uniform vertex mass."
+    },
+    {
+      "order": 4,
+      "tag": "A7TR",
+      "proof_uses": [
+        "OO12",
+        "LHWC",
+        "NOKH",
+        "NT0R"
+      ],
+      "reason": "The conditioned-contour invariance theorem is an explicit external input. LHWC gives measured-tree convergence and continuity gives height/diameter. NOKH identifies admissible sizes; NT0R supplies the uniform ordered-tree specialization."
+    },
+    {
+      "order": 5,
+      "tag": "NCWZ",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 6,
+      "tag": "8TFY",
+      "proof_uses": [],
+      "reason": "The proof iterates q_{n+1}=phi(q_n) and uses monotonicity and continuity of phi; it invokes no other wiki assertion."
+    },
+    {
+      "order": 7,
+      "tag": "BFM4",
+      "proof_uses": [
+        "8TFY"
+      ],
+      "reason": "Each case compares phi(s) with s and concludes through the least-fixed-point characterisation of extinction (8TFY)."
+    },
+    {
+      "order": 8,
+      "tag": "UKY4",
+      "proof_uses": [],
+      "reason": "Conditional means and Tonelli give the formulas directly; no other wiki assertion is invoked."
+    },
+    {
+      "order": 9,
+      "tag": "OVG9",
+      "proof_uses": [
+        "BFM4"
+      ],
+      "reason": "Almost-sure critical extinction (BFM4) makes T finite; the root decomposition F=s phi(F) and a second-order expansion of phi give the asymptotic."
+    },
+    {
+      "order": 10,
+      "tag": "8WO7",
+      "proof_uses": [
+        "BFM4"
+      ],
+      "reason": "Critical extinction (BFM4) gives r_n decreasing to zero; the recursion r_{n+1}=1-phi(1-r_n) and a second-order expansion give the equivalent."
+    },
+    {
+      "order": 11,
+      "tag": "MIFH",
+      "proof_uses": [
+        "OVG9"
+      ],
+      "reason": "Both tail bounds are derived from the transform asymptotic OVG9 by Markov-type comparisons of G(t)=E[1-e^{-tT}]."
+    },
+    {
+      "order": 12,
+      "tag": "XXQK",
+      "proof_uses": [
+        "BFM4",
+        "8TFY"
+      ],
+      "reason": "The extinction criterion (BFM4) gives the threshold and extinction at p_c; the fixed-point characterisation (8TFY) gives the extinction equation that is expanded near p_c."
+    },
+    {
+      "order": 13,
+      "tag": "N9P5",
+      "proof_uses": [
+        "BFM4"
+      ],
+      "reason": "Subsequential limits of the extinction probabilities are fixed points of the critical limit law; the extinction criterion (BFM4) gives rho_j>0 before the uniform expansion is inserted."
+    },
+    {
+      "order": 14,
+      "tag": "Q4NA",
+      "proof_uses": [],
+      "reason": "The proof is a direct computation for the two-point offspring laws and invokes no other wiki assertion."
+    },
+    {
+      "order": 15,
+      "tag": "RL1L",
+      "proof_uses": [],
+      "reason": "The proof is the queue exploration and the cyclic lemma; it invokes no other wiki assertion."
+    },
+    {
+      "order": 16,
+      "tag": "AGPB",
+      "proof_uses": [
+        "RL1L",
+        "BFM4"
+      ],
+      "reason": "Dwass's formula (RL1L) gives the point probabilities; critical extinction (BFM4) leaves no mass at infinity for the tail sum."
+    },
+    {
+      "order": 17,
+      "tag": "NT0R",
+      "proof_uses": [],
+      "reason": "Independence gives the product weight and the contour bijection is explicit; no other wiki assertion is invoked."
+    },
+    {
+      "order": 18,
+      "tag": "OO12",
+      "proof_uses": [],
+      "reason": "A definition; the remarks verifying the metric tree structure are self-contained."
+    }
+  ]
+}

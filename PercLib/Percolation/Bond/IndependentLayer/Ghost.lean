@@ -1,9 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 432 (Q-98, part 1), written on 2026-11-16 by PROVER-G. No upstream proof
-is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. No upstream proof is copied.
 -/
 module
 
@@ -32,8 +33,7 @@ public import Mathlib.Analysis.SpecialFunctions.Log.ERealExp
    (`lintegral_one_sub_exp_eq_prod`); for bond clusters this is
    `lintegral_cluster_one_sub_exp_eq_prod`.
 
-This file adds no definition. The marks are only a device of proof; the statements of the
-package (issue 432) are integrals.
+This file adds no definition. The marks are only a device of proof; the statements are integrals.
 -/
 
 @[expose] public section

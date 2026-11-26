@@ -1,9 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 133 (Q-12), written on 2026-11-14 by PROVER-E, extending the path
-sums of `PercLib.Percolation.Bond.RowSum`. No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14, extending the path sums of `PercLib.Percolation.Bond.RowSum`. No
+upstream proof is copied.
 -/
 module
 
@@ -30,7 +32,6 @@ noncomputable section
 
 open MeasureTheory Set PercLib.Probability
 open scoped ENNReal NNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -67,6 +68,7 @@ theorem exists_support_walk_of_forall_pos (q : Sym2 V → unitInterval) {x y : V
   rw [SimpleGraph.edgeSet_fromEdgeSet]
   exact ⟨hpos e he, SimpleGraph.not_isDiag_of_mem_edgeSet _ (p.edges_subset_edgeSet he)⟩
 
+open Classical in
 /-- A path that is too short for the support graph has zero cylinder product. -/
 theorem path_prod_eq_zero_of_length_lt (q : Sym2 V → unitInterval) {x y : V} {k : ℕ}
     (hk : ∀ p : (SimpleGraph.fromEdgeSet {e | 0 < q e}).Walk x y, k ≤ p.length)
@@ -116,7 +118,7 @@ theorem tsum_list_ge_eq (a : V → V → ℝ≥0∞) (k : ℕ) (x : V) :
 /-- **Two-point decay in the support-graph distance.** If every walk from `x` to `y` in
 the support graph has length at least `k`, then `τ(x, y) ≤ m ^ k (1 - m)⁻¹`. -/
 theorem tau_le_pow_of_walk_length_ge [Countable V] (q : Sym2 V → unitInterval) (m : ℝ≥0∞)
-    (hrow : ∀ v, (∑' w, if w = v then 0 else (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ m)
+    (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ m)
     (hm : m < 1) {x y : V} {k : ℕ}
     (hk : ∀ p : (SimpleGraph.fromEdgeSet {e | 0 < q e}).Walk x y, k ≤ p.length) :
     tau q x y ≤ m ^ k * (1 - m)⁻¹ := by
@@ -134,7 +136,7 @@ theorem tau_le_pow_of_walk_length_ge [Countable V] (q : Sym2 V → unitInterval)
 
 /-- **Decay in the support-graph distance.** -/
 theorem tau_le_pow_dist [Countable V] (q : Sym2 V → unitInterval) (m : ℝ≥0∞)
-    (hrow : ∀ v, (∑' w, if w = v then 0 else (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ m)
+    (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ m)
     (hm : m < 1) (x y : V) :
     tau q x y ≤ m ^ (SimpleGraph.fromEdgeSet {e | 0 < q e}).dist x y * (1 - m)⁻¹ :=
   tau_le_pow_of_walk_length_ge q m hrow hm fun p => SimpleGraph.dist_le p
@@ -147,11 +149,12 @@ theorem tau_eq_zero_of_not_reachable [Countable V] (q : Sym2 V → unitInterval)
   exact path_prod_eq_zero_of_length_lt q (k := p.1.length + 1)
     (fun w => absurd ⟨w⟩ h) p (Nat.lt_succ_self _)
 
+open Classical in
 /-- **Tail of the susceptibility.** The vertices that the support graph keeps at walk
 distance at least `k` from `x` carry total connection probability at most
 `m ^ k (1 - m)⁻¹`. -/
 theorem tsum_tau_walk_length_ge_le [Countable V] (q : Sym2 V → unitInterval) (m : ℝ≥0∞)
-    (hrow : ∀ v, (∑' w, if w = v then 0 else (unitInterval.toNNReal (q s(v,w)) : ℝ≥0∞)) ≤ m)
+    (hrow : ∀ v, rowSum (fun e => unitInterval.toENNReal (q e)) v ≤ m)
     (hm : m < 1) (x : V) (k : ℕ) :
     ∑' y, (if ∀ p : (SimpleGraph.fromEdgeSet {e | 0 < q e}).Walk x y, k ≤ p.length
       then tau q x y else 0) ≤ m ^ k * (1 - m)⁻¹ := by
@@ -179,10 +182,9 @@ two vertices are not joined in the support graph and are never connected. -/
 
 /-- The off-diagonal row sum on `Bool` at `q ≡ 1/4` is at most `1/2`. -/
 private theorem rowSum_quarter_le (v : Bool) :
-    (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (⟨1 / 4, by norm_num, by norm_num⟩ : unitInterval) : ℝ≥0∞)) ≤
-      1 / 2 := by
-  rw [tsum_fintype, Fintype.sum_bool]
+    rowSum (fun _ => unitInterval.toENNReal (⟨1 / 4, by norm_num, by norm_num⟩ : unitInterval))
+      v ≤ 1 / 2 := by
+  rw [rowSum_toENNReal, tsum_fintype, Fintype.sum_bool]
   have : ((unitInterval.toNNReal (⟨1 / 4, by norm_num, by norm_num⟩ : unitInterval) :
       ℝ≥0∞)) ≤ 1 / 2 := by
     rw [show (unitInterval.toNNReal (⟨1 / 4, by norm_num, by norm_num⟩ : unitInterval)) =

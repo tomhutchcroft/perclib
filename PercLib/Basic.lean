@@ -1,7 +1,22 @@
+/-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
 module
 
 public import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic.Linarith
+
+/-!
+# Basic smoke test
+
+A single elementary inequality that exercises mathlib and `nlinarith`.
+
+## Main results
+
+* `two_mul_le_add_sq`
+-/
 
 @[expose] public section
 

@@ -1,8 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-New proofs for P-6 (issue 40), written on 2026-11-14, from pinned mathlib's real
-exponential and ENNReal sums and the P-5 row-sum theorems. No upstream code is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14, from pinned mathlib's real exponential and ENNReal sums and the
+row-sum theorems of `PercLib.Percolation.Bond.RowSum`. No upstream code is copied.
 -/
 module
 
@@ -34,7 +37,6 @@ noncomputable section
 
 open MeasureTheory Set
 open scoped ENNReal NNReal
-open Classical
 
 namespace PercLib.Percolation.Bond
 
@@ -65,21 +67,21 @@ theorem intensityProfile_toNNReal_le (J : Sym2 V → ℝ≥0) (β : ℝ≥0) (e 
   have h := Real.add_one_le_exp (-(β : ℝ) * (J e : ℝ))
   linarith
 
+open Classical in
 /-- A row bound `M` on the intensity gives the row bound `β M` on the profile, in the
-off-diagonal form used by P-5. -/
+off-diagonal form used by `PercLib.Percolation.Bond.RowSum`. -/
 theorem intensity_rowSum_le (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0) (v : V) :
-    (∑' w, if w = v then 0 else
-      (unitInterval.toNNReal (intensityProfile J β s(v,w)) : ℝ≥0∞)) ≤ (β : ℝ≥0∞) * M := by
-  calc (∑' w, if w = v then 0 else
-        (unitInterval.toNNReal (intensityProfile J β s(v,w)) : ℝ≥0∞))
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0) (v : V) :
+    rowSum (fun e => unitInterval.toENNReal (intensityProfile J β e)) v ≤
+      (β : ℝ≥0∞) * M := by
+  calc (rowSum (fun e => unitInterval.toENNReal (intensityProfile J β e)) v)
       ≤ ∑' w, (β : ℝ≥0∞) * (if w = v then 0 else (J s(v,w) : ℝ≥0∞)) := by
         refine ENNReal.tsum_le_tsum fun w => ?_
         split_ifs
         · simp
         · rw [← ENNReal.coe_mul]
           exact ENNReal.coe_le_coe.2 (intensityProfile_toNNReal_le J β _)
-    _ = (β : ℝ≥0∞) * ∑' w, (if w = v then 0 else (J s(v,w) : ℝ≥0∞)) :=
+    _ = (β : ℝ≥0∞) * rowSum (fun e => (J e : ℝ≥0∞)) v :=
         ENNReal.tsum_mul_left
     _ ≤ (β : ℝ≥0∞) * M := by
         gcongr
@@ -88,21 +90,21 @@ theorem intensity_rowSum_le (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
 /-- **Subcritical bound.** If every off-diagonal row of `J` sums to at most `M` and
 `β M < 1`, then `chi ≤ (1 - β M)⁻¹` at every vertex. -/
 theorem chi_intensity_le [Countable V] (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0)
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0)
     (hβ : (β : ℝ≥0∞) * M < 1) (x : V) :
     chi (intensityProfile J β) x ≤ (1 - (β : ℝ≥0∞) * M)⁻¹ :=
   chi_le_inv_one_sub_of_rowSum _ _ (intensity_rowSum_le J M hJ β) hβ x
 
 /-- Under the same hypotheses the susceptibility is finite. -/
 theorem chi_intensity_lt_top [Countable V] (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0)
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0)
     (hβ : (β : ℝ≥0∞) * M < 1) (x : V) :
     chi (intensityProfile J β) x < ⊤ :=
   chi_lt_top_of_rowSum _ _ (intensity_rowSum_le J M hJ β) hβ x
 
 /-- When `β M < 1`, almost surely no cluster is infinite. -/
 theorem law_exists_infinite_intensity_eq_zero [Countable V] (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0)
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0)
     (hβ : (β : ℝ≥0∞) * M < 1) :
     law (intensityProfile J β) {ω | ∃ x, (cluster ω x).Infinite} = 0 := by
   have h := ae_all_clusters_finite_of_rowSum _ _ (intensity_rowSum_le J M hJ β) hβ
@@ -113,7 +115,7 @@ theorem law_exists_infinite_intensity_eq_zero [Countable V] (J : Sym2 V → ℝ�
 
 /-- When `β M < 1`, the cluster of a given vertex is almost surely finite. -/
 theorem law_cluster_infinite_intensity_eq_zero [Countable V] (J : Sym2 V → ℝ≥0)
-    (M : ℝ≥0) (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (β : ℝ≥0)
+    (M : ℝ≥0) (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (β : ℝ≥0)
     (hβ : (β : ℝ≥0∞) * M < 1) (x : V) :
     law (intensityProfile J β) {ω | (cluster ω x).Infinite} = 0 := by
   refine measure_mono_null ?_ (law_exists_infinite_intensity_eq_zero J M hJ β hβ)
@@ -123,7 +125,7 @@ theorem law_cluster_infinite_intensity_eq_zero [Countable V] (J : Sym2 V → ℝ
 /-- A parameter at which some cluster is infinite with positive probability is at least
 `M⁻¹`. -/
 theorem inv_le_of_law_exists_infinite_pos [Countable V] {J : Sym2 V → ℝ≥0} {M : ℝ≥0}
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) {β : ℝ≥0}
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) {β : ℝ≥0}
     (hpos : 0 < law (intensityProfile J β) {ω | ∃ x, (cluster ω x).Infinite}) :
     (M : ℝ≥0∞)⁻¹ ≤ β := by
   by_contra h
@@ -133,7 +135,7 @@ theorem inv_le_of_law_exists_infinite_pos [Countable V] {J : Sym2 V → ℝ≥0}
 
 /-- **Global threshold.** The global threshold is at least `M⁻¹`. -/
 theorem inv_le_globalCriticalIntensity [Countable V] (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) :
     (M : ℝ≥0∞)⁻¹ ≤ globalCriticalIntensity J := by
   unfold globalCriticalIntensity
   refine le_sInf ?_
@@ -142,7 +144,7 @@ theorem inv_le_globalCriticalIntensity [Countable V] (J : Sym2 V → ℝ≥0) (M
 
 /-- **Root threshold.** The threshold at every root is at least `M⁻¹`. -/
 theorem inv_le_rootCriticalIntensity [Countable V] (J : Sym2 V → ℝ≥0) (M : ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ M) (x : V) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ M) (x : V) :
     (M : ℝ≥0∞)⁻¹ ≤ rootCriticalIntensity J x := by
   unfold rootCriticalIntensity
   refine le_sInf ?_
@@ -152,7 +154,7 @@ theorem inv_le_rootCriticalIntensity [Countable V] (J : Sym2 V → ℝ≥0) (M :
 
 /-- **`M = 0`.** With vanishing off-diagonal rows the global threshold is infinite. -/
 theorem globalCriticalIntensity_eq_top_of_rowSum_zero [Countable V] (J : Sym2 V → ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ 0) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ 0) :
     globalCriticalIntensity J = ⊤ := by
   have h := inv_le_globalCriticalIntensity J 0 fun v => by
     rw [ENNReal.coe_zero]
@@ -161,7 +163,7 @@ theorem globalCriticalIntensity_eq_top_of_rowSum_zero [Countable V] (J : Sym2 V 
 
 /-- **`M = 0`.** With vanishing off-diagonal rows every root threshold is infinite. -/
 theorem rootCriticalIntensity_eq_top_of_rowSum_zero [Countable V] (J : Sym2 V → ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ 0) (x : V) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ 0) (x : V) :
     rootCriticalIntensity J x = ⊤ := by
   have h := inv_le_rootCriticalIntensity J 0 (fun v => by
     rw [ENNReal.coe_zero]
@@ -171,7 +173,7 @@ theorem rootCriticalIntensity_eq_top_of_rowSum_zero [Countable V] (J : Sym2 V �
 /-- **`M = 0`.** With vanishing off-diagonal rows the susceptibility is one at every
 finite parameter and every vertex. -/
 theorem chi_intensity_eq_one_of_rowSum_zero [Countable V] (J : Sym2 V → ℝ≥0)
-    (hJ : ∀ v, (∑' w, if w = v then 0 else (J s(v,w) : ℝ≥0∞)) ≤ 0) (β : ℝ≥0) (x : V) :
+    (hJ : ∀ v, rowSum (fun e => (J e : ℝ≥0∞)) v ≤ 0) (β : ℝ≥0) (x : V) :
     chi (intensityProfile J β) x = 1 := by
   apply le_antisymm _ (one_le_chi _ x)
   have h := chi_intensity_le J 0 (fun v => by
@@ -196,7 +198,7 @@ open scoped ENNReal NNReal
 off-diagonal rows equal to one, and at `β = 1/2` the susceptibility is at most two. -/
 example : chi (intensityProfile (fun _ : Sym2 Bool => (1 : ℝ≥0)) (1 / 2)) false ≤
     (1 - ((1 / 2 : ℝ≥0) : ℝ≥0∞) * ((1 : ℝ≥0) : ℝ≥0∞))⁻¹ :=
-  chi_intensity_le _ 1 (fun v => by cases v <;> simp [tsum_fintype])
+  chi_intensity_le _ 1 (fun v => by cases v <;> simp [rowSum_def, tsum_fintype])
     (1 / 2) (by
       rw [ENNReal.coe_one, mul_one]
       exact ENNReal.coe_lt_one_iff.2 (by norm_num)) false
@@ -205,9 +207,9 @@ example : chi (intensityProfile (fun _ : Sym2 Bool => (1 : ℝ≥0)) (1 / 2)) fa
 example : 1 ≤ globalCriticalIntensity (fun _ : Sym2 Bool => (1 : ℝ≥0)) ∧
     1 ≤ rootCriticalIntensity (fun _ : Sym2 Bool => (1 : ℝ≥0)) false := by
   have h1 := inv_le_globalCriticalIntensity (fun _ : Sym2 Bool => (1 : ℝ≥0)) 1
-    (fun v => by cases v <;> simp [tsum_fintype])
+    (fun v => by cases v <;> simp [rowSum_def, tsum_fintype])
   have h2 := inv_le_rootCriticalIntensity (fun _ : Sym2 Bool => (1 : ℝ≥0)) 1
-    (fun v => by cases v <;> simp [tsum_fintype]) false
+    (fun v => by cases v <;> simp [rowSum_def, tsum_fintype]) false
   rw [ENNReal.coe_one, inv_one] at h1 h2
   exact ⟨h1, h2⟩
 

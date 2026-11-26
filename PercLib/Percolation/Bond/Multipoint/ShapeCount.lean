@@ -1,9 +1,11 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 631 (Q-203, items 1 and 5), written on 2026-11-16 by PROVER-F. Wiki tag
-SO5J (article `multipoint-trees`). No upstream proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. Wiki tag SO5J (article `multipoint-trees`). No upstream proof is
+copied and no definition is added.
 -/
 module
 
@@ -76,7 +78,7 @@ theorem card_edgeFinset_trivalentTree {k : ℕ} {G : SimpleGraph (Fin k ⊕ Fin 
   rw [card_vertices_trivalentTree hk] at h
   omega
 
-/-! ### Witnesses (D-5) -/
+/-! ### Witnesses -/
 
 /-- With two leaves the single edge `{0, 1}` (the star at leaf `0`) has `2·2 - 3 = 1` edge. -/
 example : (starGraph (Sum.inl 0 : Fin 2 ⊕ Fin (2 - 2))).edgeFinset.card = 1 := by

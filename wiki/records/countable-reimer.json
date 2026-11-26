@@ -1,0 +1,339 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "countable-reimer",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 178
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 0,
+      "label": "Reimer on a countable edge set",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lin-pims-2025",
+      "order": 1,
+      "label": "Increasing-event measurability and finite Reimer",
+      "locator": "June 2025 notes, Remark 47, Theorem 48 and following paragraph, printed pp.25–26; proof of Theorem 46 on pp.27–28",
+      "relationship": "Read for the distinction between full and finite witnesses",
+      "status": "pending",
+      "note": "The countable outer bound is proved in the new article, not attributed to this passage."
+    },
+    {
+      "source": "borgs-chayes-randall-1998",
+      "order": 2,
+      "label": "Finite nonmonotone Reimer inputs",
+      "locator": "MSR-TR-98-42, Theorem 2.1 and Lemma 4.1",
+      "relationship": "Cited finite theorem; not reproved or compiled here",
+      "status": "pending",
+      "note": "The countable extension uses the finite product bound and, separately, the fair-measure bit-flip bound."
+    },
+    {
+      "source": "arratia-garibaldi-hales-2015",
+      "order": 3,
+      "label": "Countable finite-certificate reduction",
+      "locator": "arXiv:1508.05337v3, Section 7, definitions (23)–(26) and Theorems 9–10",
+      "relationship": "Bernoulli specialization with an additional compactness extension",
+      "status": "pending",
+      "note": "The source distinguishes infinite from finite certificate sets. Its finite-certificate theorem is not cited as already proving the full-witness result."
+    },
+    {
+      "source": "hutchcroft-lin-pims-2025",
+      "order": 4,
+      "label": "Measurable nonmonotone event classes",
+      "locator": "Remark 47, Theorem 48 and the following paragraph, printed pp.25–26 / PDF indices24–25",
+      "relationship": "New written deduction from the existing countable extension, with source conventions checked",
+      "status": "pending",
+      "note": "Passage rechecked in extracted text. The open-partner identity and order-convex endpoint test are new deductions here, not claims that the source proved arbitrary-Borel full measurability."
+    },
+    {
+      "source": "arratia-garibaldi-hales-2015",
+      "order": 5,
+      "label": "Simultaneous families and infinite-coordinate conventions",
+      "locator": "Section 5, Theorem 5; Section 7, (23)–(28), Theorem 9, printed pp.8 and10–11 / PDF indices7 and9–10",
+      "relationship": "New written deduction from the existing countable extension, with source conventions checked",
+      "status": "pending",
+      "note": "Read in extracted text. The source finite-certificate convention and nonassociativity distinction are retained. The new countable-family result uses full Bernoulli certificates and outer regularity."
+    },
+    {
+      "source": "borgs-chayes-randall-1998",
+      "order": 7,
+      "label": "Finite Reimer proof and the countable deduction",
+      "locator": "MSR-TR-98-42, Sections 3–5, printed pp.3–16; Theorem 2.1, Lemmas 4.1 and 5.2",
+      "relationship": "Source-inspected complete written proof; formal correspondence remains pending",
+      "status": "pending",
+      "note": "The remaining finite proof is now read in extracted text. The article spells out the mod-two expansion, real orthogonality, face count and dyadic reduction, then discharges the earlier finite premise informally. No visual PDF comparison or Lean verification is claimed."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 0,
+      "source": "borgs-chayes-randall-1998",
+      "tag": "43BU",
+      "source_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-42.pdf",
+      "edition": "MSR-TR-98-42, November 1998",
+      "locator": "Lemma 4.1, printed p.7; proof in Section 5, pp.9–16",
+      "relationship": "source-statement",
+      "note": "The complementary-cylinder inequality is proved using the specific tensor vectors, a mod-two basis argument and real orthogonality. This is a written proof and not formal evidence."
+    },
+    {
+      "order": 1,
+      "source": "borgs-chayes-randall-1998",
+      "tag": "7GDN",
+      "source_url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-98-42.pdf",
+      "edition": "MSR-TR-98-42, November 1998",
+      "locator": "Theorem 2.1, printed p.3; reductions in Sections 3–4 and proof in Section 5",
+      "relationship": "source-statement",
+      "note": "The product bound is for arbitrary finite alphabets and arbitrary atom probabilities. The fair binary bit-flip conclusion follows from Lemma 4.1. This is a written proof and not formal evidence."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "BBOR",
+      "proof_uses": [
+        "LLAT",
+        "1NUW"
+      ],
+      "reason": "Outer regularity enlarges to open events; compactness reduces their witnesses to finite sets."
+    },
+    {
+      "order": 1,
+      "tag": "4LXO",
+      "proof_uses": [
+        "BBOR",
+        "1NUW",
+        "JRCI"
+      ],
+      "reason": "Borel certificate relations give analytic projections; increasing open envelopes also yield BK without the nonmonotone input."
+    },
+    {
+      "order": 2,
+      "tag": "SD39",
+      "proof_uses": [
+        "BBOR"
+      ],
+      "reason": "A finite prefix and all closed edges form one certificate, disjoint from the suffix."
+    },
+    {
+      "order": 3,
+      "tag": "AWBF",
+      "proof_uses": [
+        "1NUW",
+        "BBOR"
+      ],
+      "reason": "Borel full disjoint occurrence with an open partner. Finite nonmonotone Reimer remains a cited input; measurability and full-certificate conventions are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "593F",
+      "proof_uses": [
+        "4LXO",
+        "BBOR"
+      ],
+      "reason": "Endpoint certificates for order-convex Borel events. Finite nonmonotone Reimer remains a cited input; measurability and full-certificate conventions are explicit."
+    },
+    {
+      "order": 5,
+      "tag": "UFCR",
+      "proof_uses": [
+        "1NUW",
+        "LLAT",
+        "593F"
+      ],
+      "reason": "Finite and countable simultaneous full-certificate Reimer. Finite nonmonotone Reimer remains a cited input; measurability and full-certificate conventions are explicit."
+    },
+    {
+      "order": 6,
+      "tag": "IQJM",
+      "proof_uses": [
+        "SD39",
+        "AWBF"
+      ],
+      "reason": "Full-graph weighted path truncation without finite susceptibility. Finite nonmonotone Reimer remains a cited input; measurability and full-certificate conventions are explicit."
+    },
+    {
+      "order": 7,
+      "tag": "RO0R",
+      "proof_uses": [
+        "IH8I",
+        "BBOR",
+        "1NUW",
+        "593F",
+        "AWBF"
+      ],
+      "reason": "The terminal transcript leaves the unrevealed cube with its product law; joint certificate measurability justifies conditional Reimer for the stated event classes."
+    },
+    {
+      "order": 8,
+      "tag": "7GDN",
+      "proof_uses": [
+        "43BU"
+      ],
+      "reason": "The tensor counting lemma supplies the fair comparison and each face bound; dyadic independent blocks extend the uniform product inequality."
+    },
+    {
+      "order": 9,
+      "tag": "7ZTB",
+      "proof_uses": [
+        "7GDN",
+        "LLAT",
+        "BBOR",
+        "593F",
+        "AWBF",
+        "UFCR",
+        "RO0R"
+      ],
+      "reason": "The proved finite inequalities discharge the premises of the existing full-countable, measurable-family and terminal-exploration arguments in prose."
+    },
+    {
+      "order": 10,
+      "tag": "FYBM",
+      "proof_uses": [
+        "BBOR",
+        "UFCR",
+        "7ZTB"
+      ],
+      "reason": "Whole bit blocks lift mark certificates; outer-probability transport uses standard Borel disintegration. Uniform marks commute exactly with bit reflection."
+    },
+    {
+      "order": 11,
+      "tag": "WXC1",
+      "proof_uses": [
+        "FYBM",
+        "593F",
+        "AWBF"
+      ],
+      "reason": "Compactness and endpoint completions give Borel forcing relations for the stated classes. The open-partner identity gives coanalyticity for real marks; it need not give the Boolean Borel conclusion."
+    },
+    {
+      "order": 12,
+      "tag": "VUSG",
+      "proof_uses": [
+        "IH8I"
+      ],
+      "reason": "The finite-stage single-coordinate update preserves conditional products; a countable determining family and martingale convergence pass the factorisation to the full transcript."
+    },
+    {
+      "order": 13,
+      "tag": "CKK8",
+      "proof_uses": [
+        "VUSG"
+      ],
+      "reason": "Finite threshold queries truncate a uniform interval. Continuous test functions identify the limit, including intervals collapsing to points; terminal conditional independence is supplied by VUSG."
+    },
+    {
+      "order": 14,
+      "tag": "GIFB",
+      "proof_uses": [
+        "CKK8",
+        "FYBM",
+        "WXC1",
+        "RO0R"
+      ],
+      "reason": "Affine normalization of the closed posterior box preserves full certificates and reflection. Compact distance tests and projections establish joint measurability before disintegration and conditional averaging."
+    },
+    {
+      "order": 15,
+      "tag": "28O4",
+      "proof_uses": [
+        "CKK8",
+        "FYBM",
+        "GIFB"
+      ],
+      "reason": "Exact threshold constraints determine the endpoint flags. A Borel coordinate sampling map remains in the admissible intervals and intertwines bit reflection with an endpoint-corrected involution; outer-probability transport gives the bounds."
+    },
+    {
+      "order": 16,
+      "tag": "JISV",
+      "proof_uses": [
+        "28O4",
+        "GIFB",
+        "WXC1"
+      ],
+      "reason": "Closed-input density and greatest completions give Borel forcing relations; finitely many excluded endpoints admit compact exhaustion. Finite-coordinate Borel events give coanalytic forcing, with compatible countable witnesses obtained from compact finite-choice spaces."
+    },
+    {
+      "order": 17,
+      "tag": "AEFA",
+      "proof_uses": [
+        "CKK8",
+        "FYBM",
+        "7ZTB",
+        "UFCR",
+        "RO0R",
+        "28O4"
+      ],
+      "reason": "The conditional interval law gives binary probabilities; explicit admissible representatives identify full certificates. The compact binary space supplies the forcing and open-partner measurability arguments, including history-dependent order-convex inputs."
+    },
+    {
+      "order": 18,
+      "tag": "8LB5",
+      "proof_uses": [
+        "AEFA"
+      ],
+      "reason": "A connection certificate yields a finite path after closing every unassigned variable edge. Conversely, a path certifies its connection using only variable edges. The binary conditional bound and analytic path witnesses give the result for finite or countable families."
+    },
+    {
+      "order": 19,
+      "tag": "NNNN",
+      "proof_uses": [
+        "28UY",
+        "PWBU",
+        "IH8I"
+      ],
+      "reason": "Remove the size cutoff from the fair priority rule, identify its terminal queried set with all incident cluster edges, and apply the terminal product law. An independent exterior copy gives the conditional product pair and the restoration law."
+    },
+    {
+      "order": 20,
+      "tag": "UXBN",
+      "proof_uses": [
+        "NNNN",
+        "E9HR"
+      ],
+      "reason": "The restored configuration has the original law and keeps the first cluster. Off that cluster its second-root cluster is contained in the independent copy, yielding the product bound; Harris and a connected/disconnected split give the covariance comparison."
+    },
+    {
+      "order": 21,
+      "tag": "39JJ",
+      "proof_uses": [
+        "UFCR",
+        "7ZTB"
+      ],
+      "reason": "Distinct clusters give disjoint certificates; the first includes its closed boundary and the others only internal open edges. The outer product bound applies to a measurable subset, and Tonelli gives the functional statement."
+    },
+    {
+      "order": 22,
+      "tag": "LLAT",
+      "proof_uses": [
+        "7GDN"
+      ],
+      "reason": "Finite-certificate events are exhausted by cylinder events D_n, to each of which the finite nonmonotone Reimer inequality and its fair bound (7GDN) are applied, followed by continuity from below."
+    },
+    {
+      "order": 23,
+      "tag": "1NUW",
+      "proof_uses": [],
+      "reason": "A compactness argument on nested cylinder intersections; no other wiki assertion is invoked."
+    },
+    {
+      "order": 24,
+      "tag": "IH8I",
+      "proof_uses": [],
+      "reason": "Induction over finitely many queries, bounded and L^1 martingale limits, and the monotone-class theorem; no other wiki assertion is invoked."
+    },
+    {
+      "order": 25,
+      "tag": "43BU",
+      "proof_uses": [],
+      "reason": "A linear-algebra argument with tensor vectors that are independent modulo two and pairwise orthogonal; no other wiki assertion is invoked."
+    }
+  ]
+}

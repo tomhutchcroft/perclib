@@ -1,13 +1,32 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New glue on the D-2 interface, using mathlib infinitePi_map_pi and
-map_bernoulliMeasure at revision 56a005855ea17e0b0958f73ec801ae140b0a1679.
-No upstream proof is copied. The probability space retains diagonal coordinates;
-only observables insensitive to them have equal distributions.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New glue on the bond interface, using mathlib infinitePi_map_pi and map_bernoulliMeasure
+at revision 56a005855ea17e0b0958f73ec801ae140b0a1679. No upstream proof is copied. The probability
+space retains diagonal coordinates; only observables insensitive to them have equal distributions.
 -/
 module
 
 public import PercLib.Percolation.Bond.Susceptibility
+
+/-!
+# Diagonal insensitivity
+
+Deleting loops does not change the open graph, so observables that ignore the diagonal coordinates,
+among them the two-point function, the cluster volume and the susceptibility, depend only on the
+off-diagonal profile.
+
+## Main results
+
+* `law_map_sdiff_diagSet`
+* `law_map_eq_of_offDiagonal`
+* `tau_eq_of_offDiagonal`
+* `cluster_volume_law_eq_of_offDiagonal`
+* `chi_eq_of_offDiagonal`
+-/
 
 @[expose] public section
 

@@ -1,23 +1,41 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-58: correspondence wrappers for the complete grouped Russo assertions.
-Uses the existing finite-profile definitions and division-free pairing proof
-from Russo.lean; no new configuration or pivotal convention is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Correspondence wrappers for the complete grouped Russo assertions. Uses the existing finite-profile
+definitions and division-free pairing proof from Russo.lean; no new configuration or pivotal
+convention is introduced.
 -/
 module
 
 public import PercLib.Meta.Tag
 public import PercLib.Probability.Russo
 
+/-!
+# Russo formula: correspondence
+
+Wiki correspondence for the grouped Russo assertions.
+
+## Main results
+
+* `forced_increment_pivotal_identities`
+* `russo_observable_polynomial_and_probability`
+* `russo_event_polynomial_and_probability`
+* `russo_homogeneous_polynomial_and_endpoints`
+* `russo_intensity_and_closed_pivotal`
+-/
+
 @[expose] public section
 noncomputable section
 open MeasureTheory Set
-open scoped Classical
 
 namespace PercLib.Probability.FiniteProfile
 variable {E : Type*} [Fintype E]
 
 omit [Fintype E] in
+open Classical in
 /-- The grouped vocabulary contract, including state independence and the signed
 increment's reduction to pivotality for increasing events. -/
 @[tag "71GK"]
@@ -95,6 +113,7 @@ theorem russo_homogeneous_polynomial_and_endpoints
   simpa only [one_mul] using russo_event_polynomial_and_probability
     (fun _ u => u) (fun _ => 1) t (fun _ => hasDerivAt_id t) p s ht hs hA
 
+open Classical in
 private theorem expectation_closed_coordinate (q : E → ℝ) (e : E) (g : (E → Bool) → ℝ)
     (hg : ∀ ω, g (flip e ω) = g ω) :
     expectation q (fun ω => if ω e then 0 else g ω) = (1-q e) * expectation q g := by
@@ -113,6 +132,7 @@ private theorem expectation_closed_coordinate (q : E → ℝ) (e : E) (g : (E �
   linarith
 
 set_option backward.isDefEq.respectTransparency false in
+open Classical in
 private theorem closed_pivotal_probability (p : E → unitInterval) (A : Set (Set E)) (e : E) :
     (prodBernoulli p).real {ω | (insert e ω ∈ A ∧ ω \ {e} ∉ A) ∧ e ∉ ω} =
       (1-(p e : ℝ)) * (prodBernoulli p).real {ω | insert e ω ∈ A ∧ ω \ {e} ∉ A} := by
@@ -154,8 +174,8 @@ and the insertion-increment formula for arbitrary real observables. -/
 @[tag "IENL"]
 theorem russo_intensity_and_closed_pivotal (J : E → ℝ) (_hJ : ∀ e, 0 ≤ J e)
     (β : ℝ) (_hβ : 0 ≤ β) (p : ℝ → E → unitInterval) (s : Set ℝ)
-    (ht : ∀ e, (p β e : ℝ) = 1-Real.exp (-β*J e))
-    (hs : ∀ b ∈ s, ∀ e, (p b e : ℝ) = 1-Real.exp (-b*J e))
+    (ht : ∀ e, (p β e : ℝ) = 1 - Real.exp (-β * J e))
+    (hs : ∀ b ∈ s, ∀ e, (p b e : ℝ) = 1 - Real.exp (-b * J e))
     {A : Set (Set E)} (hA : IsUpperSet A) :
     HasDerivWithinAt (fun b => (prodBernoulli (p b)).real A)
       (∑ e, (J e * Real.exp (-β*J e)) *

@@ -1,0 +1,78 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "lattice-path-growth",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 20
+    },
+    {
+      "collection": "methods",
+      "order": 30
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "perclib-lattice",
+      "order": 0,
+      "label": "Lattice geometry in every nonnegative dimension",
+      "locator": "Named theorem start lines: 41, 55, 61, 84, 91, 113, 128, 136, 141, 149, 158, 167, 203, 208, 217, 230, 248, 254, 262, 273",
+      "relationship": "Grouped exposition of all twenty named theorem contracts",
+      "status": "pending",
+      "note": "6RWC fixes the nearest-neighbour convention. 8QCR covers degree, distance, finite balls and symmetries, including the single vertex in dimension zero. The distinct step vectors supply neighbour injectivity; the coordinatewise construction and walk-length lower bound supply the graph metric. Helpers are grouped into those arguments. No theorem in this module assumes a percolation law."
+    },
+    {
+      "source": "perclib-connective-constant",
+      "order": 0,
+      "label": "Lattice path counts and their growth rate",
+      "locator": "Named theorem start lines: 42, 47, 66, 86, 98, 105, 132, 163, 171, 190",
+      "relationship": "Grouped exposition with a separate bond consequence",
+      "status": "pending",
+      "note": "RSRP and 7DGG cover finiteness, automorphism transport, root independence, splitting and submultiplicativity. Positive-dimensional straight paths and the degree estimate give the hypotheses and bounds for F3YB. The infimum characterization follows from the source limit and pointwise lower bound; the article also gives the logarithmic proof. The dimension-one witness is included. H35T is additional bond-percolation exposition, not an export of this module. Source literature locators are unchecked."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "8QCR",
+      "proof_uses": [
+        "6RWC"
+      ],
+      "reason": "The signed coordinate steps determine degree, graph distance and the lattice symmetries."
+    },
+    {
+      "order": 1,
+      "tag": "7DGG",
+      "proof_uses": [
+        "RSRP",
+        "8QCR"
+      ],
+      "reason": "Translation identifies root counts, and cutting and translating a path gives the submultiplicative injection."
+    },
+    {
+      "order": 2,
+      "tag": "F3YB",
+      "proof_uses": [
+        "7DGG"
+      ],
+      "reason": "The logarithms of the positive path counts are subadditive; quotient and remainder give the growth rate."
+    },
+    {
+      "order": 3,
+      "tag": "H35T",
+      "proof_uses": [
+        "F3YB",
+        "8WML",
+        "YP44"
+      ],
+      "reason": "The simple-path union bound and nonnegative endpoint sum are the bounded-degree argument with the actual lattice path counts; growth below the reciprocal parameter makes the series finite."
+    },
+    {
+      "order": 4,
+      "tag": "RSRP",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

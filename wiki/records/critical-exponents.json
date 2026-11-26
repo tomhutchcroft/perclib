@@ -1,0 +1,158 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "critical-exponents",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 6
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 41,
+      "label": "Critical exponent conventions",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "perclib-log-exponent",
+      "order": 0,
+      "label": "Logarithmic exponents and their converses",
+      "locator": "Named public declaration start lines: 21, 39, 46, 60, 73, 78, 84, 88, 93, 106, 110, 120, 131, 177, 192, 207",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source supplies the analytic implications in UBFE at infinity and explicit counterexamples to both converses. Eventual positivity, real powers and the distinction from model-specific exponent claims remain explicit."
+    },
+    {
+      "source": "perclib-tail-comparison",
+      "order": 0,
+      "label": "Escape, window means and pointwise lower tails",
+      "locator": "Explicit public declaration start lines: 51, 62, 81, 97, 105, 170, 223, 243",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results give HPE6 and MBV2 with explicit constants. The volume estimate permits arbitrary measures and unnested windows; the logarithmic exponent is an input. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-window-hyperscaling",
+      "order": 0,
+      "label": "Window partition identities and hyperscaling",
+      "locator": "Explicit public declaration start lines: 47, 61, 76, 86, 103, 113, 125, 138, 179, 202, 214, 240, 265, 359, 376, 426, 474, 486, 500, 518, 545, 594, 599, 605, 620",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-five public results give partition moments, quantile bounds and the conditional hyperscaling inequalities. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-damped-window-tails",
+      "order": 0,
+      "label": "Damped window tails and exponent implications",
+      "locator": "Explicit public declaration start lines: 41, 53, 139, 220, 249, 274, 301, 325, 476, 499",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten public results give fractional moments and conditional exponent relations. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 43,
+      "label": "Uniform three-point comparison at two scales",
+      "locator": "Section6.3, RSW comparison paragraph",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Written proof: two circuits join three arms for the lower bound; the existing general product theorem gives the upper bound. No conformal invariance or power law assumed."
+    },
+    {
+      "source": "gladkov-decision-trees-2024",
+      "order": 44,
+      "label": "Smallest pair scale in the three-point exponent",
+      "locator": "Section6.3, Corollary6.5 and following exponent discussion",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "Written consequence under existence of the arm logarithmic exponent. Explicit smallest-pair exponent lambda; no numerical square-bond exponent claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "XB1U",
+      "proof_uses": [
+        "WD31",
+        "X5SS"
+      ],
+      "reason": "Four rectangle crossings make an annular circuit. Harris extends an arbitrary arm through a circuit and a crossing from its interior; separated closed-dual annuli give the upper scale bound by independence."
+    },
+    {
+      "order": 1,
+      "tag": "Y8K3",
+      "proof_uses": [
+        "XB1U",
+        "X5SS",
+        "BLNL"
+      ],
+      "reason": "Two disjoint endpoint boxes give the upper bound. Long arms through one common surrounding circuit give the lower bound by Harris; doubling compares scales. Uniform constants identify the logarithmic exponents without assuming power comparisons."
+    },
+    {
+      "order": 2,
+      "tag": "K8A1",
+      "proof_uses": [
+        "XB1U",
+        "Y8K3",
+        "X5SS",
+        "87RB"
+      ],
+      "reason": "Written proof: two circuits join three arms for the lower bound; the existing general product theorem gives the upper bound. No conformal invariance or power law assumed."
+    },
+    {
+      "order": 3,
+      "tag": "UQ4B",
+      "proof_uses": [
+        "K8A1"
+      ],
+      "reason": "Written consequence under existence of the arm logarithmic exponent. Explicit smallest-pair exponent lambda; no numerical square-bond exponent claimed."
+    },
+    {
+      "order": 4,
+      "tag": "PHLF",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 5,
+      "tag": "U5MC",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 6,
+      "tag": "BLNL",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 7,
+      "tag": "OB0A",
+      "proof_uses": [],
+      "reason": "Averaging over the uniform root and grouping by window classes; no other wiki assertion is invoked."
+    },
+    {
+      "order": 8,
+      "tag": "0RX3",
+      "proof_uses": [
+        "HPE6"
+      ],
+      "reason": "The escape bound and the shell-summed window mean are fed into the volume-tail bound from escape probabilities and window means (HPE6) with a=eta/2, b=2-eta."
+    },
+    {
+      "order": 9,
+      "tag": "WD31",
+      "proof_uses": [
+        "X5SS",
+        "22S9",
+        "6THJ"
+      ],
+      "reason": "Written proof following Bollobás–Riordan (arXiv:math/0410359v3): a parity crossing lemma and planar duality give probability 1/2 for the self-dual rectangle; conditioning on the closed dual cluster of the left side, reflection and Harris give RSW; closed dual strip crossings in disjoint annuli give no percolation at 1/2, and sharpness excludes p_c>1/2."
+    }
+  ]
+}

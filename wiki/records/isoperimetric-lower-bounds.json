@@ -1,0 +1,116 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "isoperimetric-lower-bounds",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 130
+    },
+    {
+      "collection": "critical-theory",
+      "order": 130
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 0,
+      "label": "Boundary crossing profile",
+      "locator": "Lemma 2.5, equations (12), (14)–(18)",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "PTM2 counts the nested cube boundaries crossed by one displacement and proves the averaged boundary-functional inequality for the actual bond-probability profile."
+    },
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 1,
+      "label": "Cube boundary geometry",
+      "locator": "Section 2.2 opening; equation (13)",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "31X5 proves an exact displacement count for boundary pairs and the power-law shell comparisons. The logarithm is log(en) at every positive integer scale; the source endpoint correction is provisional."
+    },
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 2,
+      "label": "Critical box lower bound",
+      "locator": "Proposition 2.6 and equation (19)",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "VVB0 combines the profile inequality with the existing critical flux theorem R84Z. It retains internal versus unrestricted connections and finite critical intensity."
+    },
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 3,
+      "label": "Critical exponent lower bounds",
+      "locator": "Theorems 1.1–1.2 and Proposition 2.7",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "BNQK uses the existing UVQ6 window bound and makes the epsilon passage from logarithmic exponents explicit. Existence of the tail and pointwise exponents are separate hypotheses."
+    },
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 4,
+      "label": "Matching spatial averages",
+      "locator": "Discussion after Proposition 2.6",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "0BJP combines VVB0 with MRZO for globally comparable kernels. It also records the logarithmic growth exponent at alpha=1 without removing the logarithmic gap."
+    },
+    {
+      "source": "baumler-berger-isoperimetric-2022",
+      "order": 5,
+      "label": "Probability inputs and finite-window estimates",
+      "locator": "Theorem 2.1, Lemmas 2.2–2.4, equation (11)",
+      "relationship": "Written proof with explicit hypotheses",
+      "status": "pending",
+      "note": "12NL proves the rooted damping used in UVQ6; UVQ6 gives the required quantile and first-moment scales from the uniform full-cluster tail. R84Z supplies critical flux. The source steps are not duplicated as new tags."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "PTM2",
+      "proof_uses": [],
+      "reason": "Count integer radii with one endpoint inside and the other outside; use monotonicity of internal connections and Tonelli."
+    },
+    {
+      "order": 1,
+      "tag": "31X5",
+      "proof_uses": [
+        "PTM2"
+      ],
+      "reason": "Shell counting estimates the crossing profile; exact product intersection counts compare it with the expected open boundary."
+    },
+    {
+      "order": 2,
+      "tag": "VVB0",
+      "proof_uses": [
+        "PTM2",
+        "31X5",
+        "R84Z"
+      ],
+      "reason": "Critical flux is at least one for every box; average and divide by the positive crossing profile."
+    },
+    {
+      "order": 3,
+      "tag": "BNQK",
+      "proof_uses": [
+        "VVB0",
+        "UVQ6"
+      ],
+      "reason": "Uniform global tails imply window-tail bounds. Compare finite-window hyperscaling with the critical box lower bound, then pass from slightly weaker polynomial estimates to logarithmic exponents."
+    },
+    {
+      "order": 4,
+      "tag": "0BJP",
+      "proof_uses": [
+        "VVB0",
+        "MRZO",
+        "KXV3"
+      ],
+      "reason": "A lower kernel envelope supplies the finite critical point and sharp averaged upper bound; the upper envelope supplies the lower bound."
+    }
+  ]
+}

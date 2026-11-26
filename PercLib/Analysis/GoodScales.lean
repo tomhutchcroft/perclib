@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs for issue 468 (Q-134), written on 2026-11-16 by PROVER-E: higher moments under a
-uniform exponential tail, the interval bound between good scales and the persistence of good
-scales (wiki cutoff-hydrodynamics, tags BZDZ, DISO and YEVN). No upstream proof is copied,
-no definition is added and no Input is introduced.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16: higher moments under a uniform exponential tail, the interval
+bound between good scales and the persistence of good scales (wiki cutoff-hydrodynamics, tags BZDZ,
+DISO and YEVN). No upstream proof is copied, no definition is added and no Input is introduced.
 -/
 module
 
@@ -13,6 +16,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.Analysis.SpecialFunctions.Pow.Integral
 public import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 public import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
+public import PercLib.Meta.Tag
 
 /-! # Good scales
 
@@ -78,6 +82,7 @@ theorem absolutelyContinuousOnInterval_log {f : ℝ → ℝ} {a b : ℝ}
 /-- **DISO.** Let `C ≥ 1`, `s > 0`, `R ≥ C s`, `B ≥ b > 0` and `λ > k`. If `f > 0` is
 absolutely continuous on `[s, R/C]` with `f(s) ≥ b s^k`, `f(R/C) ≤ B (R/C)^k` and
 `(log f)'(t) ≥ λ/t` for almost every `t ∈ [s, R/C]`, then `R/s ≤ C (B/b)^{1/(λ-k)}`. -/
+@[tag "DISO"]
 theorem div_le_of_logDeriv_ge {f : ℝ → ℝ} {C s R b B lam k : ℝ} (hC : 1 ≤ C) (hs : 0 < s)
     (hR : C * s ≤ R) (hb : 0 < b) (hbB : b ≤ B) (hlk : k < lam)
     (hpos : ∀ t ∈ Icc s (R / C), 0 < f t) (hac : AbsolutelyContinuousOnInterval f s (R / C))
@@ -153,6 +158,7 @@ nondecreasing on `[r₀, ∞)` and `f > 0` locally absolutely continuous on
 every `r ≥ r₀`, `M(Cr) ≤ δ (Cr)^h` implies `(log f)'(r) ≥ λ/r`. If `M(r_*) ≥ δ r_*^h` for some
 `r_* ≥ r₀`, then `L = C (B/(c δ³))^{1/(λ-k)}` satisfies `L ≥ C` and
 `M(R) ≥ δ L^{-h} R^h` for every `R ≥ r_*`. -/
+@[tag "YEVN"]
 theorem good_scale_persists {M f : ℝ → ℝ} {d h r₀ c B δ C lam k : ℝ}
     (hh : 0 < h) (hr₀ : 0 < r₀) (hc : 0 < c) (hδ : 0 < δ) (hC : 1 ≤ C)
     (hk : k = 3 * h - d) (hlk : k < lam) (hMmono : MonotoneOn M (Ici r₀))
@@ -281,6 +287,7 @@ theorem integral_kernel_scale {r b M : ℝ} (hr : 0 < r) (hb : 0 < b) (hM : 0 < 
 `E X^{p+q} ≤ D_{p,q} M^q E X^p` where
 `D_{p,q} = 1 + A e^{-b} + A (p+q) ∫_1^∞ t^{p+q-1} e^{-bt} dt`; the integral converges and
 `X^{p+q}` is integrable. -/
+@[tag "BZDZ"]
 theorem integral_rpow_add_le_of_tail {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω}
     [IsFiniteMeasure μ] {X : Ω → ℝ} (hXm : Measurable X) (hX0 : ∀ ω, 0 ≤ X ω)
     {M A b p q : ℝ} (hM : 0 < M) (hA : 0 < A) (hb : 0 < b) (hp : 0 < p) (hq : 0 < q)
@@ -416,7 +423,7 @@ theorem integral_rpow_add_le_of_tail {Ω : Type*} [MeasurableSpace Ω] {μ : Mea
 
 /-! ### Non-vacuity -/
 
-/-- DISO with `f(t) = t`, `s = C = b = 1`, `k = 0`, `λ = 1`, `R = B = 2`, where
+/-- `div_le_of_logDeriv_ge` with `f(t) = t`, `s = C = b = 1`, `k = 0`, `λ = 1`, `R = B = 2`, where
 `(log f)' = 1/t` and the conclusion `2 ≤ 2` is an equality. -/
 example : (2 : ℝ) / 1 ≤ 1 * (2 / 1) ^ (1 / ((1 : ℝ) - 0)) := by
   refine div_le_of_logDeriv_ge (f := id) le_rfl one_pos (by norm_num) one_pos (by norm_num)
@@ -426,8 +433,8 @@ example : (2 : ℝ) / 1 ≤ 1 * (2 / 1) ^ (1 / ((1 : ℝ) - 0)) := by
   have ht0 : 0 < t := lt_of_lt_of_le one_pos ht.1
   simp only [id, Real.deriv_log, one_div, le_refl]
 
-/-- YEVN with `h = d = δ = c = C = r₀ = r_* = 1`, `k = 2`, `λ = 3`, `B = 8`, `M(r) = 2r` and
-`f(r) = 8 r²`. Every scale is good, so the derivative hypothesis is vacuous. -/
+/-- `good_scale_persists` with `h = d = δ = c = C = r₀ = r_* = 1`, `k = 2`, `λ = 3`, `B = 8`,
+`M(r) = 2r` and `f(r) = 8 r²`. Every scale is good, so the derivative hypothesis is vacuous. -/
 example : (1 : ℝ) ≤ 1 * (8 / (1 * 1 ^ 3)) ^ (1 / ((3 : ℝ) - 2)) ∧
     ∀ R, (1 : ℝ) ≤ R →
       1 * (1 * (8 / (1 * 1 ^ 3)) ^ (1 / ((3 : ℝ) - 2))) ^ (-(1 : ℝ)) * R ^ (1 : ℝ) ≤ 2 * R := by
@@ -446,8 +453,8 @@ example : (1 : ℝ) ≤ 1 * (8 / (1 * 1 ^ 3)) ^ (1 / ((3 : ℝ) - 2)) ∧
     rw [Real.rpow_one] at hM
     linarith
 
-/-- BZDZ with `X ≡ 1` under a point mass, `M = p = q = b = 1`, `A = e`: the tail hypothesis
-holds (with equality at `t = 1`). -/
+/-- `integral_rpow_add_le_of_tail` with `X ≡ 1` under a point mass, `M = p = q = b = 1`, `A = e`:
+the tail hypothesis holds (with equality at `t = 1`). -/
 example := integral_rpow_add_le_of_tail (μ := Measure.dirac ()) (X := fun _ : Unit => (1 : ℝ))
     measurable_const (fun _ => zero_le_one) one_pos (Real.exp_pos 1) one_pos one_pos one_pos
     (fun t ht => by

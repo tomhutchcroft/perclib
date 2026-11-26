@@ -1,0 +1,38 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "criticality",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 2
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "grimmett",
+      "order": 2,
+      "label": "Critical probabilities",
+      "locator": "Chapter 3 · Critical Probabilities",
+      "relationship": "Subject correspondence",
+      "status": "pending",
+      "note": "Source conventions for the threshold will be mapped explicitly to the common definitions."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "JZN0",
+      "proof_uses": [
+        "8DAH"
+      ],
+      "reason": "The existence event is the countable union of the rooted infinite-cluster events of 8DAH, so it has positive probability exactly when some rooted percolation probability is positive."
+    },
+    {
+      "order": 1,
+      "tag": "X9N1",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

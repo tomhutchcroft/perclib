@@ -1,0 +1,54 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "susceptibility",
+  "collections": [
+    {
+      "collection": "observables",
+      "order": 1
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 21,
+      "label": "Susceptibility",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "The model and its observables",
+      "locator": "Author manuscript · Chapter 1 · Introduction and motivation",
+      "relationship": "Subject correspondence",
+      "status": "pending",
+      "note": "The full, truncated, and finite-volume observables will keep separate canonical definitions."
+    },
+    {
+      "source": "perclib-susceptibility-interface",
+      "order": 1,
+      "label": "Susceptibility identity",
+      "locator": "Source lines 54–70",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "8DSI retains the root contribution and equality in the extended nonnegative reals, including infinite expectation."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "MTJT",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 1,
+      "tag": "BX1L",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

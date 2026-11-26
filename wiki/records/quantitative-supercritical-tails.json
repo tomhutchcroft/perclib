@@ -1,0 +1,94 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "quantitative-supercritical-tails",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 198
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 0,
+      "label": "Upper error at a variable subcritical distance",
+      "locator": "Section A.3, Lemma A.5, (A.26)–(A.31), printed pp.802–803 / PDF indices77–78",
+      "relationship": "Written refinement or application of the repaired field arguments; the stronger printed upper-error rate remains a separate obligation",
+      "status": "pending",
+      "note": "Publisher PDF extracted text checked. Additive displacement, real cutoffs and the extra epsilon^5 N regime are explicit. No visual-page check, compiled association or giant-component lower bound."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 1,
+      "label": "Balance of the displacement and triangle errors",
+      "locator": "Section A.3, (A.28)–(A.29); new explicit minimization of the corrected error",
+      "relationship": "Written refinement or application of the repaired field arguments; the stronger printed upper-error rate remains a separate obligation",
+      "status": "pending",
+      "note": "Publisher PDF extracted text checked. Additive displacement, real cutoffs and the extra epsilon^5 N regime are explicit. No visual-page check, compiled association or giant-component lower bound."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 2,
+      "label": "Improved marking error and matching root tails",
+      "locator": "Section A.3, (A.32)–(A.35), and Proposition A.1; new logarithmic marking choice with the corrected upper bound",
+      "relationship": "Written refinement or application of the repaired field arguments; the stronger printed upper-error rate remains a separate obligation",
+      "status": "pending",
+      "note": "Publisher PDF extracted text checked. Additive displacement, real cutoffs and the extra epsilon^5 N regime are explicit. No visual-page check, compiled association or giant-component lower bound."
+    },
+    {
+      "source": "hofstad-nachmias-hypercube",
+      "order": 3,
+      "label": "Concentrated large-cluster mass in a stronger regime",
+      "locator": "New application of the root-tail estimate and the finite shared-boundary variance bound; not a claim of the source giant-component theorem",
+      "relationship": "Written refinement or application of the repaired field arguments; the stronger printed upper-error rate remains a separate obligation",
+      "status": "pending",
+      "note": "Publisher PDF extracted text checked. Additive displacement, real cutoffs and the extra epsilon^5 N regime are explicit. No visual-page check, compiled association or giant-component lower bound."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "IZ3I",
+      "proof_uses": [
+        "F5Y5",
+        "KQN9",
+        "14T6",
+        "HGND",
+        "1T2M"
+      ],
+      "reason": "Upper error at a variable subcritical distance. All standing hypotheses, transport field ranges and additional separation assumptions are stated."
+    },
+    {
+      "order": 1,
+      "tag": "YE0X",
+      "proof_uses": [
+        "IZ3I"
+      ],
+      "reason": "Balance of the displacement and triangle errors. All standing hypotheses, transport field ranges and additional separation assumptions are stated."
+    },
+    {
+      "order": 2,
+      "tag": "NIYL",
+      "proof_uses": [
+        "6SGU",
+        "BFAM",
+        "AQPE"
+      ],
+      "reason": "Improved marking error and matching root tails. All standing hypotheses, transport field ranges and additional separation assumptions are stated."
+    },
+    {
+      "order": 3,
+      "tag": "7Y5K",
+      "proof_uses": [
+        "NIYL",
+        "RD1J",
+        "E4NT",
+        "1T2M",
+        "R2Y7",
+        "UF7P"
+      ],
+      "reason": "Concentrated large-cluster mass in a stronger regime. All standing hypotheses, transport field ranges and additional separation assumptions are stated."
+    }
+  ]
+}

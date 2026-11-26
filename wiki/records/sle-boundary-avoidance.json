@@ -1,0 +1,117 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-boundary-avoidance",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 143
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Real boundary flow",
+      "locator": "Rohde–Schramm (2005), Lemma 6.2; Lemma 7.2, pp.909–910; simple-curve part of Theorem 7.1, p.911. arXiv:math/0106036v4 Sections 6 and 7. Theorems 5.1 and 6.1 are explicit inputs for the geometric consequences.",
+      "relationship": "Written flow and distortion proofs, with geometric consequences under named trace inputs",
+      "status": "pending",
+      "note": "Scale-function stopping proves global positive boundary flows for kappa at most four and the exact minimum law below four. At four the infimum vanishes without a finite hit."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "Uniform distortion estimate",
+      "locator": "Rohde–Schramm (2005), Lemma 6.2; Lemma 7.2, pp.909–910; simple-curve part of Theorem 7.1, p.911. arXiv:math/0106036v4 Sections 6 and 7. Theorems 5.1 and 6.1 are explicit inputs for the geometric consequences.",
+      "relationship": "Written flow and distortion proofs, with geometric consequences under named trace inputs",
+      "status": "pending",
+      "note": "The bounded integral potential gives a nonnegative local supermartingale for every kappa at most four; monotone convergence bounds the expected total logarithmic distortion. Extending the critical-parameter potential to smaller kappa is proved in the article."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "Distance from a fixed real point",
+      "locator": "Rohde–Schramm (2005), Lemma 6.2; Lemma 7.2, pp.909–910; simple-curve part of Theorem 7.1, p.911. arXiv:math/0106036v4 Sections 6 and 7. Theorems 5.1 and 6.1 are explicit inputs for the geometric consequences.",
+      "relationship": "Written flow and distortion proofs, with geometric consequences under named trace inputs",
+      "status": "pending",
+      "note": "Schwarz reflection and Koebe give a positive uniform trace-distance bound, conditional on the continuous simple-trace theorem. The fixed-point quantifier is retained."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 3,
+      "label": "Transience in the simple-curve regime",
+      "locator": "Rohde–Schramm (2005), Lemma 6.2; Lemma 7.2, pp.909–910; simple-curve part of Theorem 7.1, p.911. arXiv:math/0106036v4 Sections 6 and 7. Theorems 5.1 and 6.1 are explicit inputs for the geometric consequences.",
+      "relationship": "Written flow and distortion proofs, with geometric consequences under named trace inputs",
+      "status": "pending",
+      "note": "The slit prime-end correspondence, conditional independence of the future flow and Brownian scaling give transience for kappa at most four. Trace generation and simplicity remain named inputs, and the kappa greater than four case is not asserted."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 4,
+      "label": "Simultaneous avoidance of the nonzero real boundary",
+      "locator": "arXiv:math/0106036v4, Section 6, Lemma 6.2 and the complete proof of Theorem 6.1; the simple-curve consequences are Lemma 7.2 and Theorem 7.1.",
+      "relationship": "Written simplicity proof from the earlier real-flow and trace theorems",
+      "status": "pending",
+      "note": "Countably many rational starting flows and pathwise order give every real starting point. A common complex ODE neighborhood on each finite horizon excludes hull contact and a radial-tip hit without assuming simplicity."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 5,
+      "label": "Simplicity and identification of the slit hull",
+      "locator": "arXiv:math/0106036v4, Section 6, Lemma 6.2 and the complete proof of Theorem 6.1; the simple-curve consequences are Lemma 7.2 and Theorem 7.1.",
+      "relationship": "Written simplicity proof from the earlier real-flow and trace theorems",
+      "status": "pending",
+      "note": "Countably many rational restart times give inverse-map composition and future-boundary avoidance. Strict capacity growth selects a restart outside any earlier hull, excluding all repeated visits pathwise. The planar Jordan-arc theorem identifies the slit domain; the hypotheses of YBCC and D67E are then supplied."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "RD3V",
+      "proof_uses": [],
+      "reason": "Scale-function stopping proves global positive boundary flows for kappa at most four and the exact minimum law below four. At four the infimum vanishes without a finite hit."
+    },
+    {
+      "order": 1,
+      "tag": "JQ3M",
+      "proof_uses": [
+        "RD3V"
+      ],
+      "reason": "The bounded integral potential gives a nonnegative local supermartingale for every kappa at most four; monotone convergence bounds the expected total logarithmic distortion. Extending the critical-parameter potential to smaller kappa is proved in the article."
+    },
+    {
+      "order": 2,
+      "tag": "YBCC",
+      "proof_uses": [
+        "JQ3M"
+      ],
+      "reason": "Schwarz reflection and Koebe give a positive uniform trace-distance bound, conditional on the continuous simple-trace theorem. The fixed-point quantifier is retained."
+    },
+    {
+      "order": 3,
+      "tag": "D67E",
+      "proof_uses": [
+        "YBCC"
+      ],
+      "reason": "The slit prime-end correspondence, conditional independence of the future flow and Brownian scaling give transience for kappa at most four. Trace generation and simplicity remain named inputs, and the kappa greater than four case is not asserted."
+    },
+    {
+      "order": 4,
+      "tag": "W8MU",
+      "proof_uses": [
+        "RD3V",
+        "MN2A"
+      ],
+      "reason": "Countably many rational starting flows and pathwise order give every real starting point. A common complex ODE neighborhood on each finite horizon excludes hull contact and a radial-tip hit without assuming simplicity."
+    },
+    {
+      "order": 5,
+      "tag": "CKFH",
+      "proof_uses": [
+        "W8MU",
+        "MN2A"
+      ],
+      "reason": "Countably many rational restart times give inverse-map composition and future-boundary avoidance. Strict capacity growth selects a restart outside any earlier hull, excluding all repeated visits pathwise. The planar Jordan-arc theorem identifies the slit domain; the hypotheses of YBCC and D67E are then supplied."
+    }
+  ]
+}

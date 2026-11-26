@@ -1,0 +1,192 @@
+# Automatic merge of proof-only pull requests (D-37, rulings 9e and 10(2)).
+#
+# THIS WORKFLOW DOES NOTHING until Tom enables it. Both of these are repository settings
+# that only an administrator can make:
+#   1. Protect `main` (Settings > Branches > Add branch protection rule, or a ruleset):
+#      require a pull request before merging, require the status check `gate` (shown as
+#      `CI / gate`), require branches to be up to date before merging, and require review
+#      from Code Owners. Do not require a number of approving reviews: proof-only pull
+#      requests touch no path in .github/CODEOWNERS and are meant to merge without one.
+#   2. Turn auto-merge on: Settings > Secrets and variables > Actions > Variables > New
+#      repository variable `AUTOMERGE_ENABLED` with value `true`.
+# Until both are done every run stops at once (the variable is unset) or the decision
+# refuses (the default branch is unprotected). Deleting the variable turns it off again.
+#
+# What it does. When a run of the CI workflow (.github/workflows/ci.yml) completes, this
+# workflow runs from the default branch. It never checks out, builds or executes the
+# pull request's code, and never reads files or artifacts produced by the pull request's
+# build. All it trusts is the GitHub REST API and the default branch's own copies of
+# scripts/automerge_classify.py and .github/automerge-authors. It merges the pull request,
+# with a merge commit, only if every condition below holds; otherwise it does nothing and
+# the pull request waits for a maintainer.
+#   - The author is listed in .github/automerge-authors on the default branch. The author
+#     is the pull request's opener; anyone with write access can push commits to a listed
+#     author's branch in this repository, which is accepted because writers are trusted.
+#   - The run is of the default branch's CI workflow (by workflow id), on a `pull_request`
+#     event, completed with success, and its jobs `gate` and `kernel-replay` both succeeded
+#     (a skipped job does not count) for exactly the pull request's current head commit
+#     and its current base commit (D-29); the base is the tip of the default branch and
+#     the head contains it, so the merged tree is the tree CI checked. Pull requests
+#     from forks are not bound to a base by the API and always wait for a maintainer.
+#   - The diff, from `GET /repos/{o}/{r}/pulls/{n}/files` and the files fetched through
+#     the contents API at the two bound commits, is proof-only as decided by
+#     scripts/automerge_classify.py: only existing `.lean` files under PercLib/ change, no
+#     Basic.lean/Defs.lean, nothing under scripts/, .github/, wiki/, docs/ or the pins,
+#     under tasks/ at most a move of its own task to tasks/done/, and no definition,
+#     structure, class, instance, abbrev, notation, axiom, tag attribute or tagged
+#     statement is added or changed. When in doubt it does not merge.
+#
+# The merge is made with the workflow's GITHUB_TOKEN, and GitHub starts no workflow run
+# for events caused by GITHUB_TOKEN: an automatic merge does not start CI on `main`. This
+# is why the pull request run itself must include a successful `kernel-replay`.
+#
+# Security: the workflow token has no permissions by default; the deciding job may only
+# read; only the merge job, which runs a single API call on validated values, can write.
+# No string a contributor controls (titles, branch names, bodies) is interpolated into a
+# command: event values reach the scripts through `env:` and are validated there.
+# Every third-party action is pinned to a commit.
+
+name: Automerge
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions: {}
+
+concurrency:
+  group: automerge-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  decide:
+    if: >-
+      vars.AUTOMERGE_ENABLED == 'true'
+      && github.event.workflow_run.event == 'pull_request'
+      && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    outputs:
+      merge: ${{ steps.decide.outputs.merge }}
+      pr: ${{ steps.decide.outputs.pr }}
+      head: ${{ steps.decide.outputs.head }}
+      base: ${{ steps.decide.outputs.base }}
+    steps:
+      - name: Check out the classifier and the authors list from the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/automerge_classify.py
+            .github/automerge-authors
+          sparse-checkout-cone-mode: false
+
+      - name: Decide from the API
+        id: decide
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          # File names and reasons printed below come from the pull request: switch off
+          # workflow commands (`::set-output` …) for the rest of this step. Outputs are
+          # written only to $GITHUB_OUTPUT.
+          echo "::stop-commands::$(openssl rand -hex 32)"
+          no() { echo "Not merging: $*"; exit 0; }
+          [[ $RUN_ID =~ ^[0-9]+$ ]] || no "malformed run id"
+          [[ $DEFAULT_BRANCH =~ ^[A-Za-z0-9._-]+$ ]] || no "unexpected default branch name"
+          [[ $REPO =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]] || no "unexpected repository name"
+          work=$RUNNER_TEMP/automerge
+          mkdir -p "$work/base" "$work/head"
+
+          gh api "repos/$REPO/actions/runs/$RUN_ID" > "$work/run.json"
+          attempt=$(jq -r '.run_attempt' "$work/run.json")
+          [[ $attempt =~ ^[0-9]+$ ]] || no "malformed run attempt"
+          gh api "repos/$REPO/actions/runs/$RUN_ID/attempts/$attempt/jobs?per_page=100" \
+            > "$work/jobs.json"
+          gh api "repos/$REPO/actions/workflows/ci.yml" > "$work/workflow.json"
+          pr=$(jq -r 'if (.pull_requests | length) == 1
+                      then .pull_requests[0].number else "" end' "$work/run.json")
+          [[ $pr =~ ^[0-9]+$ ]] || no "the run is not attached to exactly one pull request of this repository"
+
+          gh api "repos/$REPO/pulls/$pr" > "$work/pr.json"
+          gh api "repos/$REPO/branches/$DEFAULT_BRANCH" > "$work/branch.json"
+          tip=$(jq -r '.commit.sha' "$work/branch.json")
+          head=$(jq -r '.head.sha' "$work/pr.json")
+          [[ $tip =~ ^[0-9a-f]{40}$ && $head =~ ^[0-9a-f]{40}$ ]] || no "malformed commit ids"
+          gh api "repos/$REPO/compare/$tip...$head" \
+            --jq '{behind_by, ahead_by, merge_base_commit: {sha: .merge_base_commit.sha}}' \
+            > "$work/compare.json"
+          gh api --paginate "repos/$REPO/pulls/$pr/files?per_page=100" > "$work/files.json"
+
+          # Paths first; then fetch the base and head copies of each Lean file.
+          if ! python3 -I scripts/automerge_classify.py plan --pr "$work/pr.json" \
+              < "$work/files.json" > "$work/plan.txt"; then
+            cat "$work/plan.txt"
+            exit 0
+          fi
+          while read -r side path; do
+            case $side in
+              base) ref=$tip ;;
+              head) ref=$head ;;
+              *) no "unexpected plan line" ;;
+            esac
+            [[ $path =~ ^PercLib/([A-Za-z0-9_]+/)*[A-Za-z0-9_]+\.lean$ ]] || no "unexpected path in plan"
+            mkdir -p "$work/$side/$(dirname "$path")"
+            gh api -H 'Accept: application/vnd.github.raw+json' \
+              "repos/$REPO/contents/$path?ref=$ref" > "$work/$side/$path"
+          done < "$work/plan.txt"
+
+          # Writes merge=true, pr, head and base to GITHUB_OUTPUT only on a yes.
+          python3 -I scripts/automerge_classify.py decide \
+            --run "$work/run.json" --jobs "$work/jobs.json" --pr "$work/pr.json" \
+            --branch "$work/branch.json" --compare "$work/compare.json" \
+            --ci-workflow "$work/workflow.json" --authors .github/automerge-authors \
+            --default-branch "$DEFAULT_BRANCH" \
+            --base-dir "$work/base" --head-dir "$work/head" \
+            --github-output "$GITHUB_OUTPUT" < "$work/files.json" || true
+
+  merge:
+    needs: decide
+    if: needs.decide.outputs.merge == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Merge with a merge commit, bound to the checked head and base
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PR: ${{ needs.decide.outputs.pr }}
+          HEAD_SHA: ${{ needs.decide.outputs.head }}
+          BASE_SHA: ${{ needs.decide.outputs.base }}
+        run: |
+          set -euo pipefail
+          [[ $PR =~ ^[0-9]+$ && $HEAD_SHA =~ ^[0-9a-f]{40}$ && $BASE_SHA =~ ^[0-9a-f]{40}$ ]] \
+            || { echo "Malformed decision outputs; not merging."; exit 1; }
+          [[ $DEFAULT_BRANCH =~ ^[A-Za-z0-9._-]+$ && $REPO =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ ]] \
+            || { echo "Unexpected repository or branch name; not merging."; exit 1; }
+          tip=$(gh api "repos/$REPO/branches/$DEFAULT_BRANCH" --jq '.commit.sha')
+          if [ "$tip" != "$BASE_SHA" ]; then
+            echo "Not merging: the default branch moved after the decision; CI must rerun."
+            exit 0
+          fi
+          # `sha` makes GitHub refuse the merge if the head moved since the decision.
+          gh api -X PUT "repos/$REPO/pulls/$PR/merge" \
+            -f merge_method=merge -f sha="$HEAD_SHA" > /dev/null
+          echo "Merged pull request #$PR at $HEAD_SHA onto $BASE_SHA."

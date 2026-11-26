@@ -1,0 +1,82 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "fourier-bootstrap",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 164
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Reciprocal second differences",
+      "locator": "17 March 2017 author manuscript, Lemma 8.2, (8.2.19)\u2013(8.2.20), proof (8.2.22)\u2013(8.2.30), printed pp.94\u201395, PDF indices105\u2013106.",
+      "relationship": "Written bootstrap prerequisite; sign correction provisional",
+      "status": "pending",
+      "note": "The corrected bound uses absolute values of the three reciprocal factors. A finite-support counterexample diagnoses the missing positivity qualification; the entry remains provisional."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Random-walk comparison",
+      "locator": "17 March 2017 author manuscript, (8.2.10), (8.2.21) and the majorant (8.2.5), printed pp.92\u201395, PDF indices103\u2013106.",
+      "relationship": "Written bootstrap prerequisite; sign correction provisional",
+      "status": "pending",
+      "note": "Positive denominators allow the original difference bound. The comparison keeps its factor two and the full majorant has no zero except the omitted k=0 frequency."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Subcritical moments for continuity",
+      "locator": "17 March 2017 author manuscript, Prerequisite for the functions (8.2.7)\u2013(8.2.8), supplied here from finite susceptibility.",
+      "relationship": "Written bootstrap prerequisite; sign correction provisional",
+      "status": "pending",
+      "note": "A first-exit convolution has finite support and mass less than one. Its geometric expansion gives weighted moments; the uniform coupling and domination then give weighted-norm continuity."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Bootstrap functions and forbidden region",
+      "locator": "17 March 2017 author manuscript, Lemma 8.1; (8.2.1)\u2013(8.2.8); Exercises 8.3\u20138.4, printed pp.90\u201394, PDF indices101\u2013105.",
+      "relationship": "Written bootstrap prerequisite; sign correction provisional",
+      "status": "pending",
+      "note": "The k=0 quotient is omitted explicitly. A uniform weighted-norm bound handles k approaching zero before taking suprema. The improvement implication remains a hypothesis."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "84XD",
+      "proof_uses": [],
+      "reason": "The corrected bound uses absolute values of the three reciprocal factors. A finite-support counterexample diagnoses the missing positivity qualification; the entry remains provisional."
+    },
+    {
+      "order": 1,
+      "tag": "TTS1",
+      "proof_uses": [
+        "84XD"
+      ],
+      "reason": "Positive denominators allow the original difference bound. The comparison keeps its factor two and the full majorant has no zero except the omitted k=0 frequency."
+    },
+    {
+      "order": 2,
+      "tag": "8LOF",
+      "proof_uses": [
+        "JQLC"
+      ],
+      "reason": "A first-exit convolution has finite support and mass less than one. Its geometric expansion gives weighted moments; the uniform coupling and domination then give weighted-norm continuity."
+    },
+    {
+      "order": 3,
+      "tag": "NL05",
+      "proof_uses": [
+        "8LOF",
+        "TTS1"
+      ],
+      "reason": "The k=0 quotient is omitted explicitly. A uniform weighted-norm bound handles k approaching zero before taking suprema. The improvement implication remains a hypothesis."
+    }
+  ]
+}

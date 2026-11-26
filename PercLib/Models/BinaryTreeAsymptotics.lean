@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-115 (issue 449), from pinned mathlib's Stirling formula
-(`Stirling.tendsto_stirlingSeq_sqrt_pi`) and Catalan numbers. The statements follow the
-wiki tags AAZS and V5OZ (binary-tree percolation). No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, from pinned mathlib's Stirling formula (`Stirling.tendsto_stirlingSeq_sqrt_pi`) and
+Catalan numbers. The statements follow the wiki tags AAZS and V5OZ (binary-tree percolation). No
+source text or code is copied.
 -/
 module
 
@@ -25,8 +29,8 @@ Catalan law of 9K6O (the index `n` is the cluster size, as in
 * `centralBinom_div_four_pow_mul_sqrt_tendsto`: `C(2n,n) 4^{-n} √n → 1/√π` (Stirling);
 * `catalan_div_four_pow_isEquivalent` (item 1): `Cat(n)/4^n ~ n^{-3/2}/√π`;
 * `tsum_catalan_div_four_pow_tail` (exact): `∑_{k ≥ n} Cat(k)/4^k = 2 C(2n,n)/4^n`;
-* `catalan_critical_isEquivalent`, `catalan_critical_tail_isEquivalent` (AAZS): `a_n(1/2) ~ n^{-3/2}/√π`
-  and `∑_{k ≥ n} a_k(1/2) ~ 2 n^{-1/2}/√π`;
+* `catalan_critical_isEquivalent`, `catalan_critical_tail_isEquivalent` (AAZS):
+  `a_n(1/2) ~ n^{-3/2}/√π` and `∑_{k ≥ n} a_k(1/2) ~ 2 n^{-1/2}/√π`;
 * `catalan_tendstoUniformlyOn_ratio` (V5OZ): the ratio
   `a_n(p) / [((1-p)/(p√π)) n^{-3/2} (4p(1-p))^n]` tends to `1` uniformly in `p ∈ (0,1)`;
 * `catalan_nearCritical_isEquivalent` (V5OZ): if `p_n = 1/2 + ε_n`, `ε_n → 0` and `n ε_n⁴ → 0`, then
@@ -187,7 +191,7 @@ theorem tsum_catalan_div_four_pow_tail (n : ℕ) :
 
 /-! ### AAZS -/
 
-/-- **AAZS, point mass.** `a_n(1/2) ~ n^{-3/2}/√π`. -/
+/-- **Point mass.** `a_n(1/2) ~ n^{-3/2}/√π`. -/
 theorem catalan_critical_isEquivalent :
     (fun n : ℕ => (catalan n : ℝ) / 4 ^ n * ((1 - 1 / 2) / (1 / 2)) *
         (4 * (1 / 2) * (1 - 1 / 2)) ^ n) ~[atTop]
@@ -195,7 +199,7 @@ theorem catalan_critical_isEquivalent :
   refine IsEquivalent.congr_left catalan_div_four_pow_isEquivalent ?_
   exact Eventually.of_forall fun n => by norm_num
 
-/-- **AAZS, tail.** `∑_{k ≥ n} a_k(1/2) ~ 2 n^{-1/2}/√π`. -/
+/-- **Tail.** `∑_{k ≥ n} a_k(1/2) ~ 2 n^{-1/2}/√π`. -/
 theorem catalan_critical_tail_isEquivalent :
     (fun n : ℕ => ∑' k : ℕ, (catalan (k + n) : ℝ) / 4 ^ (k + n) *
         ((1 - 1 / 2) / (1 / 2)) * (4 * (1 / 2) * (1 - 1 / 2)) ^ (k + n)) ~[atTop]
@@ -221,7 +225,7 @@ theorem catalan_critical_tail_isEquivalent :
 
 /-! ### V5OZ -/
 
-/-- The V5OZ ratio does not depend on `p ∈ (0,1)`. -/
+/-- The ratio of the uniform asymptotics does not depend on `p ∈ (0,1)`. -/
 theorem catalan_ratio_eq {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (n : ℕ) :
     (catalan n : ℝ) / 4 ^ n * ((1 - p) / p) * (4 * p * (1 - p)) ^ n /
         ((1 - p) / (p * √π) * (n : ℝ) ^ (-(3 / 2 : ℝ)) * (4 * p * (1 - p)) ^ n) =
@@ -235,7 +239,7 @@ theorem catalan_ratio_eq {p : ℝ} (hp0 : 0 < p) (hp1 : p < 1) (n : ℕ) :
   · have hr : 0 < (n : ℝ) ^ (-(3 / 2 : ℝ)) := Real.rpow_pos_of_pos (by exact_mod_cast hn) _
     field_simp
 
-/-- **V5OZ, uniform ratio.** The ratio `a_n(p) / [((1-p)/(p√π)) n^{-3/2} (4p(1-p))^n]` tends to
+/-- **Uniform ratio.** The ratio `a_n(p) / [((1-p)/(p√π)) n^{-3/2} (4p(1-p))^n]` tends to
 `1` uniformly in `p ∈ (0,1)`. -/
 theorem catalan_tendstoUniformlyOn_ratio :
     TendstoUniformlyOn (fun (n : ℕ) (p : ℝ) =>
@@ -260,7 +264,7 @@ theorem abs_log_one_sub_add_le {x : ℝ} (hx0 : 0 ≤ x) (hx : x ≤ 1 / 2) :
   rw [div_le_iff₀ (by linarith), show x ^ (1 + 1) = x ^ 2 by norm_num]
   nlinarith [mul_nonneg (sq_nonneg x) (by linarith : (0 : ℝ) ≤ 1 - 2 * x)]
 
-/-- **V5OZ, near-critical point mass.** If `p_n = 1/2 + ε_n` with `ε_n → 0` and
+/-- **Near-critical point mass.** If `p_n = 1/2 + ε_n` with `ε_n → 0` and
 `n ε_n⁴ → 0`, then `a_n(p_n) ~ n^{-3/2} e^{-4 n ε_n²}/√π`. -/
 theorem catalan_nearCritical_isEquivalent (ε : ℕ → ℝ) (hε : Tendsto ε atTop (𝓝 0))
     (hε4 : Tendsto (fun n : ℕ => (n : ℝ) * ε n ^ 4) atTop (𝓝 0)) :
@@ -349,7 +353,7 @@ theorem binaryTree_law_card_eq_half (p : unitInterval) (q : Sym2 (List (Fin 2)) 
   rw [mul_assoc, show ((1 : ℝ) / 2) ^ (m * 2) * 4 ^ m = 1 by rw [pow_mul', ← mul_pow]; norm_num,
     mul_one]
 
-/-- **AAZS on the binary tree, point mass.** At `p = 1/2`,
+/-- **Critical point mass on the binary tree.** At `p = 1/2`,
 `P(|K([])| = n, K([]) finite) ~ n^{-3/2}/√π`. -/
 theorem binaryTree_law_card_isEquivalent (p : unitInterval)
     (q : Sym2 (List (Fin 2)) → unitInterval)
@@ -364,7 +368,7 @@ theorem binaryTree_law_card_isEquivalent (p : unitInterval)
   rw [binaryTree_law_card_eq_half p q hq hp hn, ENNReal.toReal_ofReal (by positivity)]
 
 /-- The volume tail at `p = 1/2`, exactly: `P(|K([])| ≥ n) = 2 C(2n,n)/4^n` for `n ≥ 1`
-(the infinite cluster has probability `0`, Q-71). -/
+(the infinite cluster has probability `0`). -/
 theorem binaryTree_law_le_encard_eq (p : unitInterval) (q : Sym2 (List (Fin 2)) → unitInterval)
     (hq : ∀ e, ¬ e.IsDiag → q e =
       if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then p
@@ -439,7 +443,7 @@ theorem binaryTree_law_le_encard_eq (p : unitInterval) (q : Sym2 (List (Fin 2)) 
           simp_rw [hk]
       _ ≤ _ := measure_mono Set.subset_union_right
 
-/-- **AAZS on the binary tree, tail.** At `p = 1/2`, `P(|K([])| ≥ n) ~ 2 n^{-1/2}/√π`. -/
+/-- **Critical tail on the binary tree.** At `p = 1/2`, `P(|K([])| ≥ n) ~ 2 n^{-1/2}/√π`. -/
 theorem binaryTree_law_le_encard_isEquivalent (p : unitInterval)
     (q : Sym2 (List (Fin 2)) → unitInterval)
     (hq : ∀ e, ¬ e.IsDiag → q e =
@@ -454,11 +458,80 @@ theorem binaryTree_law_le_encard_isEquivalent (p : unitInterval)
     ← tsum_catalan_div_four_pow_tail n]
   exact tsum_congr fun k => by norm_num
 
+/-- The closed-form Catalan expression of the asymptotic theorems is the Catalan law:
+`Cat(n)/4^n · (1-p)/p · (4p(1-p))^n = Cat(n) p^(n-1) (1-p)^(n+1)` for `p ≠ 0`, `n ≥ 1`. -/
+theorem catalan_div_four_pow_mul_eq {p : ℝ} (hp : p ≠ 0) {n : ℕ} (hn : 1 ≤ n) :
+    (catalan n : ℝ) / 4 ^ n * ((1 - p) / p) * (4 * p * (1 - p)) ^ n =
+      (catalan n : ℝ) * p ^ (n - 1) * (1 - p) ^ (n + 1) := by
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+  rw [show m + 1 - 1 = m by omega, show 4 * p * (1 - p) = 4 * (p * (1 - p)) by ring,
+    mul_pow, mul_pow]
+  field_simp
+  ring
+
+/-- **Uniform asymptotics.** For a family of tree profiles `q p` with parameter `p`,
+`P_p(|K| = n) ~ (1-p)/(p√π) n^{-3/2} (4p(1-p))^n` uniformly in `p ∈ (0,1)`. -/
+theorem binaryTree_law_card_tendstoUniformlyOn
+    (q : unitInterval → Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ p e, ¬ e.IsDiag → q p e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then p
+        else 0) :
+    TendstoUniformlyOn (fun (n : ℕ) (p : unitInterval) =>
+      (law (q p) {ω | (cluster ω []).ncard = n ∧ (cluster ω []).Finite}).toReal /
+        ((1 - (p : ℝ)) / ((p : ℝ) * √π) * (n : ℝ) ^ (-(3 / 2 : ℝ)) *
+          (4 * (p : ℝ) * (1 - (p : ℝ))) ^ n))
+      (fun _ => 1) atTop {p : unitInterval | (p : ℝ) ∈ Set.Ioo 0 1} := by
+  have h := catalan_tendstoUniformlyOn_ratio.comp (fun p : unitInterval => (p : ℝ))
+  refine h.congr (eventually_atTop.2 ⟨1, fun n hn p hp => ?_⟩)
+  have hp0 : (p : ℝ) ≠ 0 := hp.1.ne'
+  simp only [Function.comp_apply]
+  rw [binaryTree_law_cluster_card_toReal p (q p) (hq p) hn, catalan_div_four_pow_mul_eq hp0 hn]
+
+/-- **Exact ratio.** For `0 < p < 1` and `n ≥ 1`, the ratio of `P_p(|K| = n)` to
+`(1-p)/(p√π) n^{-3/2} (4p(1-p))^n` equals `(Cat(n)/4^n) / (n^{-3/2}/√π)`, a function of `n`
+alone. -/
+theorem binaryTree_law_card_ratio_eq (q : unitInterval → Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ p e, ¬ e.IsDiag → q p e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then p else 0)
+    {p : unitInterval} (hp : (p : ℝ) ∈ Set.Ioo 0 1) {n : ℕ} (hn : 1 ≤ n) :
+    (law (q p) {ω | (cluster ω []).ncard = n ∧ (cluster ω []).Finite}).toReal /
+        ((1 - (p : ℝ)) / ((p : ℝ) * √π) * (n : ℝ) ^ (-(3 / 2 : ℝ)) *
+          (4 * (p : ℝ) * (1 - (p : ℝ))) ^ n) =
+      (catalan n : ℝ) / 4 ^ n / ((n : ℝ) ^ (-(3 / 2 : ℝ)) / √π) := by
+  rw [binaryTree_law_cluster_card_toReal p (q p) (hq p) hn,
+    ← catalan_div_four_pow_mul_eq hp.1.ne' hn, catalan_ratio_eq hp.1 hp.2 n]
+
+/-- **Near-critical window.** If `p_n = 1/2 + ε_n` with `ε_n → 0` and `n ε_n⁴ → 0`,
+then `P_{p_n}(|K| = n) ~ n^{-3/2} e^{-4nε_n²}/√π`. -/
+theorem binaryTree_law_card_nearCritical_isEquivalent (pn : ℕ → unitInterval)
+    (q : ℕ → Sym2 (List (Fin 2)) → unitInterval)
+    (hq : ∀ n e, ¬ e.IsDiag → q n e =
+      if e ∈ (SimpleGraph.fromRel fun u w : List (Fin 2) => ∃ b, w = b :: u).edgeSet then pn n
+        else 0)
+    (h1 : Tendsto (fun n => (pn n : ℝ) - 1 / 2) atTop (𝓝 0))
+    (h2 : Tendsto (fun n : ℕ => (n : ℝ) * ((pn n : ℝ) - 1 / 2) ^ 4) atTop (𝓝 0)) :
+    (fun n : ℕ => (law (q n) {ω | (cluster ω []).ncard = n ∧ (cluster ω []).Finite}).toReal)
+      ~[atTop] (fun n : ℕ => (n : ℝ) ^ (-(3 / 2 : ℝ)) *
+        Real.exp (-4 * n * ((pn n : ℝ) - 1 / 2) ^ 2) / √π) := by
+  have h := catalan_nearCritical_isEquivalent (fun n => (pn n : ℝ) - 1 / 2) h1 h2
+  refine h.congr_left ?_
+  have hev := h1.eventually (Ioo_mem_nhds (by norm_num : (-1 / 2 : ℝ) < 0)
+    (by norm_num : (0 : ℝ) < 1 / 2))
+  filter_upwards [hev, eventually_ge_atTop 1] with n hn hn1
+  have hp0 : (pn n : ℝ) ≠ 0 := by
+    have := hn.1
+    intro h0
+    rw [h0] at this
+    norm_num at this
+  simp only [add_sub_cancel]
+  rw [binaryTree_law_cluster_card_toReal (pn n) (q n) (hq n) hn1,
+    catalan_div_four_pow_mul_eq hp0 hn1]
+
 end Tree
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5: `a_0 = 1`, `a_1 = 1/4`, `a_2 = 1/8` at `p = 1/2`
+/-- Non-vacuity: `a_0 = 1`, `a_1 = 1/4`, `a_2 = 1/8` at `p = 1/2`
 (`a_n(1/2) = Cat(n)/4^n`; `a_0` is the formal value at `n = 0`, not a cluster size). -/
 example : (catalan 0 : ℝ) / 4 ^ 0 * ((1 - 1 / 2) / (1 / 2)) * (4 * (1 / 2) * (1 - 1 / 2)) ^ 0 = 1 ∧
     (catalan 1 : ℝ) / 4 ^ 1 * ((1 - 1 / 2) / (1 / 2)) * (4 * (1 / 2) * (1 - 1 / 2)) ^ 1 = 1 / 4 ∧
@@ -467,7 +540,7 @@ example : (catalan 0 : ℝ) / 4 ^ 0 * ((1 - 1 / 2) / (1 / 2)) * (4 * (1 / 2) * (
   simp [catalan_zero, catalan_one, catalan_two]
   norm_num
 
-/-- D-5: `ε_n = n^{-1/3}` satisfies `ε_n → 0` and `n ε_n⁴ → 0`. -/
+/-- Non-vacuity: `ε_n = n^{-1/3}` satisfies `ε_n → 0` and `n ε_n⁴ → 0`. -/
 example : Tendsto (fun n : ℕ => (n : ℝ) ^ (-(1 / 3 : ℝ))) atTop (𝓝 0) ∧
     Tendsto (fun n : ℕ => (n : ℝ) * ((n : ℝ) ^ (-(1 / 3 : ℝ))) ^ 4) atTop (𝓝 0) := by
   constructor

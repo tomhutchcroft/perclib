@@ -1,4 +1,9 @@
 /-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New indicator expansions on the canonical bond interface, using pinned mathlib's
 ENNReal sums and Tonelli theorem (56a005855ea17e0b0958f73ec801ae140b0a1679).
 No upstream moment bound or percolation theorem is assumed.
@@ -12,13 +17,15 @@ public import PercLib.Percolation.Bond.Susceptibility
 Finite mixed moments are double sums of joint connection probabilities. The full
 countable identities take values in ENNReal and allow infinity. The finite-domain
 volume here is the intersection of the ambient cluster with the specified domain.
+The identities hold under every measure on configurations; no independence and no
+finiteness of the measure is assumed.
 No tree-graph or BK inequality is asserted.
 -/
 
 @[expose] public section
 
 open MeasureTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 
 namespace PercLib.Percolation.Bond
 
@@ -51,11 +58,11 @@ theorem encard_cluster_inter_mul_eq_sum (ω : Config V) (u v : V) (F D : Finset 
   simp_rw [Finset.mul_sum, indicator_conn_mul]
 
 /-- Exact finite-domain mixed moment, with possibly different roots and domains. -/
-theorem lintegral_cluster_inter_mul [Countable V] (q : Sym2 V → unitInterval)
+theorem lintegral_cluster_inter_mul [Countable V] (μ : Measure (Config V))
     (u v : V) (F D : Finset V) :
     (∫⁻ ω, ((cluster ω u ∩ (F : Set V)).encard : ℝ≥0∞) *
-      ((cluster ω v ∩ (D : Set V)).encard : ℝ≥0∞) ∂law q) =
-    ∑ x ∈ F, ∑ y ∈ D, law q (conn u x ∩ conn v y) := by
+      ((cluster ω v ∩ (D : Set V)).encard : ℝ≥0∞) ∂μ) =
+    ∑ x ∈ F, ∑ y ∈ D, μ (conn u x ∩ conn v y) := by
   have hm (x y : V) : Measurable
       ((conn u x ∩ conn v y).indicator (fun _ => (1 : ℝ≥0∞))) :=
     measurable_const.indicator ((measurableSet_conn u x).inter (measurableSet_conn v y))
@@ -69,11 +76,11 @@ theorem lintegral_cluster_inter_mul [Countable V] (q : Sym2 V → unitInterval)
   exact lintegral_indicator_one ((measurableSet_conn u x).inter (measurableSet_conn v y))
 
 /-- The finite-domain second moment is the sum of joint connections from the root. -/
-theorem lintegral_cluster_inter_sq [Countable V] (q : Sym2 V → unitInterval)
+theorem lintegral_cluster_inter_sq [Countable V] (μ : Measure (Config V))
     (v : V) (F : Finset V) :
-    (∫⁻ ω, ((cluster ω v ∩ (F : Set V)).encard : ℝ≥0∞) ^ 2 ∂law q) =
-      ∑ x ∈ F, ∑ y ∈ F, law q (conn v x ∩ conn v y) := by
-  simpa only [pow_two] using lintegral_cluster_inter_mul q v v F F
+    (∫⁻ ω, ((cluster ω v ∩ (F : Set V)).encard : ℝ≥0∞) ^ 2 ∂μ) =
+      ∑ x ∈ F, ∑ y ∈ F, μ (conn v x ∩ conn v y) := by
+  simpa only [pow_two] using lintegral_cluster_inter_mul μ v v F F
 
 /-- The full mixed volume expands as a countable double sum, allowing infinity. -/
 theorem encard_cluster_mul_eq_tsum (ω : Config V) (u v : V) :
@@ -83,9 +90,9 @@ theorem encard_cluster_mul_eq_tsum (ω : Config V) (u v : V) :
   simp_rw [← ENNReal.tsum_mul_right, ← ENNReal.tsum_mul_left, indicator_conn_mul]
 
 /-- Tonelli gives the full mixed-root moment without any finiteness assumption. -/
-theorem lintegral_cluster_mul [Countable V] (q : Sym2 V → unitInterval) (u v : V) :
-    (∫⁻ ω, ((cluster ω u).encard : ℝ≥0∞) * ((cluster ω v).encard : ℝ≥0∞) ∂law q) =
-      ∑' x, ∑' y, law q (conn u x ∩ conn v y) := by
+theorem lintegral_cluster_mul [Countable V] (μ : Measure (Config V)) (u v : V) :
+    (∫⁻ ω, ((cluster ω u).encard : ℝ≥0∞) * ((cluster ω v).encard : ℝ≥0∞) ∂μ) =
+      ∑' x, ∑' y, μ (conn u x ∩ conn v y) := by
   have hm (x y : V) : Measurable
       ((conn u x ∩ conn v y).indicator (fun _ => (1 : ℝ≥0∞))) :=
     measurable_const.indicator ((measurableSet_conn u x).inter (measurableSet_conn v y))
@@ -99,18 +106,19 @@ theorem lintegral_cluster_mul [Countable V] (q : Sym2 V → unitInterval) (u v :
   exact lintegral_indicator_one ((measurableSet_conn u x).inter (measurableSet_conn v y))
 
 /-- Full second moment as a double connection sum, including infinite second moment. -/
-theorem lintegral_cluster_sq [Countable V] (q : Sym2 V → unitInterval) (v : V) :
-    (∫⁻ ω, ((cluster ω v).encard : ℝ≥0∞) ^ 2 ∂law q) =
-      ∑' x, ∑' y, law q (conn v x ∩ conn v y) := by
-  simpa only [pow_two] using lintegral_cluster_mul q v v
+theorem lintegral_cluster_sq [Countable V] (μ : Measure (Config V)) (v : V) :
+    (∫⁻ ω, ((cluster ω v).encard : ℝ≥0∞) ^ 2 ∂μ) =
+      ∑' x, ∑' y, μ (conn v x ∩ conn v y) := by
+  simpa only [pow_two] using lintegral_cluster_mul μ v v
 
+open Classical in
 /-- Exhaustion by any cofinal family of finite domains recovers the full second
 moment. No finite second-moment assumption or monotonicity of the indexing is needed. -/
 theorem lintegral_cluster_sq_eq_iSup [Countable V] {ι : Type*}
-    (q : Sym2 V → unitInterval) (v : V) (F : ι → Finset V)
+    (μ : Measure (Config V)) (v : V) (F : ι → Finset V)
     (hF : ∀ s : Finset V, ∃ i, s ⊆ F i) :
-    (∫⁻ ω, ((cluster ω v).encard : ℝ≥0∞) ^ 2 ∂law q) =
-      ⨆ i, ∫⁻ ω, ((cluster ω v ∩ (F i : Set V)).encard : ℝ≥0∞) ^ 2 ∂law q := by
+    (∫⁻ ω, ((cluster ω v).encard : ℝ≥0∞) ^ 2 ∂μ) =
+      ⨆ i, ∫⁻ ω, ((cluster ω v ∩ (F i : Set V)).encard : ℝ≥0∞) ^ 2 ∂μ := by
   have hprod : ∀ t : Finset (V × V), ∃ i, t ⊆ (F i).product (F i) := by
     intro t
     obtain ⟨i, hi⟩ := hF (t.image Prod.fst ∪ t.image Prod.snd)
@@ -123,7 +131,7 @@ theorem lintegral_cluster_sq_eq_iSup [Countable V] {ι : Type*}
   rw [← ENNReal.tsum_prod, ENNReal.tsum_eq_iSup_sum' _ hprod]
   congr 1
   funext i
-  exact Finset.sum_product' (F i) (F i) (fun x y => law q (conn v x ∩ conn v y))
+  exact Finset.sum_product' (F i) (F i) (fun x y => μ (conn v x ∩ conn v y))
 
 -- A singleton cluster contributes one, even when the loop has an arbitrary marginal.
 example (q : Sym2 Unit → unitInterval) :
@@ -149,6 +157,6 @@ example : (∫⁻ ω, ((cluster ω (0 : ℕ)).encard : ℝ≥0∞) ^ 2
 example (q : Sym2 ℕ → unitInterval) (v : ℕ) :
     (∫⁻ ω, ((cluster ω v).encard : ℝ≥0∞) ^ 2 ∂law q) =
       ⨆ n, ∫⁻ ω, ((cluster ω v ∩ (Finset.range n : Set ℕ)).encard : ℝ≥0∞) ^ 2 ∂law q :=
-  lintegral_cluster_sq_eq_iSup q v Finset.range Finset.exists_nat_subset_range
+  lintegral_cluster_sq_eq_iSup (law q) v Finset.range Finset.exists_nat_subset_range
 
 end PercLib.Percolation.Bond

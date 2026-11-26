@@ -1,0 +1,147 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "planar-lace-moments",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 205
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 0,
+      "label": "Alternative large-dimension all-order moment argument",
+      "locator": "Section 3.4 and Lemma 1.8, printed pp.560–562; compare Section 4.1 for the Fourier bridge",
+      "relationship": "Independent planar-dual Hölder argument for the qualitative high-dimensional moment step; not the source's sharper spatial decomposition",
+      "status": "pending",
+      "note": "Two marked edges have L3 transforms; unmarked edges use L12. The small connector norm retains geometric decay in lace order. No numerical dimension threshold or full spatial asymptotic is asserted."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 1,
+      "label": "Real-order planar moment gain and conditional spatial closure",
+      "locator": "Section 3.4, (3.11)-(3.15), printed pp.560-562; compare Section 4.1.4 and Theorem 1.4",
+      "relationship": "Independent planar Fourier continuation using the exact absolute-moment endpoint; preserves the earlier even-order argument",
+      "status": "pending",
+      "note": "The moment range is s<2(d-6)/3. The d>30 condition closes only the analytic arithmetic; the critical Fourier and connector smallness hypotheses are retained, with no numerical d=31 percolation claim."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 2,
+      "label": "Ordered planar Fourier bounds and conditional dimension-nineteen closure",
+      "locator": "Sections 3.4-3.5, Figures 4-5 and (3.11)-(3.16), printed pp.560-564; compare Theorem 1.4",
+      "relationship": "Independent refinement of the explicit SJIL strip, using ordered face integration and a three-bridge count rather than the source spatial peeling",
+      "status": "pending",
+      "note": "The condition d>18 closes the analytic arithmetic under the stated critical Fourier and ninth-norm smallness assumptions. It does not verify those assumptions numerically at d=19 or promote formal status."
+    },
+    {
+      "source": "hara-nearest-neighbour-2008",
+      "order": 3,
+      "label": "Weighted spatial transition rows and the moment range below dimension minus six",
+      "locator": "Section 3.4, (3.11)-(3.15), printed pp.560-563; compare Lemmas 1.8-1.9",
+      "relationship": "Independent sufficient row estimate for the SJIL strip, retaining the small-triangle quantity rather than separate Fourier norms on unmarked edges",
+      "status": "pending",
+      "note": "The argument removes the assumed Gaussian two-point bound from the earlier JJJN moment range. It does not reproduce every source estimate, verify numerical percolation smallness, or promote formal status."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "VPUS",
+      "proof_uses": [],
+      "reason": "Facial cycle constraints identify finite-support rooted diagrams; facewise Holder and positive Fejer approximations bound the critical sums."
+    },
+    {
+      "order": 1,
+      "tag": "KOTM",
+      "proof_uses": [
+        "VPUS",
+        "SJIL",
+        "2ZOB",
+        "1165",
+        "0TO3",
+        "3W22"
+      ],
+      "reason": "The expanded strip has faces of length at most six and two edge-disjoint outer routes; mixed L3/L12 norms retain at least N-2 small connectors."
+    },
+    {
+      "order": 2,
+      "tag": "GIN9",
+      "proof_uses": [
+        "KOTM",
+        "F7N7",
+        "RD3X",
+        "1165",
+        "22TW"
+      ],
+      "reason": "The critical infrared bound makes the unweighted connector L12 norm small; repeated doubling supplies fixed moments, spatial derivative bounds and a fourth-order Taylor remainder."
+    },
+    {
+      "order": 3,
+      "tag": "PCOC",
+      "proof_uses": [
+        "ENZ7",
+        "VPUS",
+        "SJIL",
+        "KOTM",
+        "3W22"
+      ],
+      "reason": "Exact real-weight densities give the two marked L3 factors; all placements retain the small connector factors, with Parseval at order zero and a direct bound at order one."
+    },
+    {
+      "order": 4,
+      "tag": "6N01",
+      "proof_uses": [
+        "PCOC",
+        "KOTM",
+        "ENZ7",
+        "65QV"
+      ],
+      "reason": "Dyadic gains first supply the desired real input moment; one real-order gain reaches any output strictly below 2(d-6)/3, with weighted continuity and spatial decay."
+    },
+    {
+      "order": 5,
+      "tag": "7TNU",
+      "proof_uses": [
+        "VPUS",
+        "SJIL"
+      ],
+      "reason": "Integrate the block faces first; every remaining connector face then has at most four factors, giving marked L^(18/7) and unmarked L9 bounds."
+    },
+    {
+      "order": 6,
+      "tag": "5T90",
+      "proof_uses": [
+        "7TNU",
+        "ENZ7",
+        "SJIL",
+        "PCOC",
+        "65QV"
+      ],
+      "reason": "The two-route distribution and exact moment densities double K under (18/7)(K+2)<d; the fixed-kernel iteration reaches s<7d/9-4."
+    },
+    {
+      "order": 7,
+      "tag": "SL9H",
+      "proof_uses": [
+        "SJIL",
+        "PCOC"
+      ],
+      "reason": "Each marked connector-block transition has row sum bounded by two weighted triangle norms; unmarked transitions retain T times Delta. The two outer-route marks affect at most two transitions."
+    },
+    {
+      "order": 8,
+      "tag": "B0RG",
+      "proof_uses": [
+        "SL9H",
+        "ENZ7",
+        "ODMM",
+        "65QV",
+        "JJJN"
+      ],
+      "reason": "Exact input-moment convolution bounds give the weighted triangles when 2K+6<d. Iteration from the second moment reaches every s<d-6 under the fixed small-triangle condition, without assuming Gaussian decay."
+    }
+  ]
+}

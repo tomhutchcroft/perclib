@@ -1,11 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 638 (Q-210, items 1–2 in finite volume), written on 2026-11-16 by
-PROVER-F. Statements from the wiki article `spatial-cutoff-moments` (tags 57RX, 1K61); source
-T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, §I.4.1 and §I.5.1.
-No upstream proof is copied and no definition is added.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-16. Statements from the wiki article `spatial-cutoff-moments` (tags
+57RX, 1K61); source T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, §I.4.1
+and §I.5.1. No upstream proof is copied and no definition is added.
 -/
 module
 
@@ -37,13 +38,14 @@ The diagonal terms `x = y` vanish, since `x ∈ K_o` and `x ∉ K_o` cannot both
 noncomputable section
 
 open MeasureTheory Set
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 
 variable {V : Type*} [Fintype V] [DecidableEq V]
 
 omit [Fintype V] [DecidableEq V] in
+open Classical in
 /-- **Opening one pair, seen from `o`.** The change of `F(K_o)` when `s(x, y)` is opened
 (counted only when it was closed) is the sum of the two one-sided terms
 `1{x ∈ K_o, y ∉ K_o}(F(K_o ∪ K_y) - F(K_o))` and the same with `x, y` exchanged. -/
@@ -91,6 +93,7 @@ theorem insert_sub_eq_add (ω : Config V) (o x y : V) (F : Set V → ℝ) :
     · rfl
     · rw [cluster_insert_of_not_mem ω x y o ho, sub_self]
 
+open Classical in
 /-- **Derivative of a cluster functional.** For every `F : Set V → ℝ`,
 `d/dt E_t F(K_o) = ∑_{x, y} w(x, y) E_t[1{x ∈ K_o, y ∉ K_o}(F(K_o ∪ K_y) - F(K_o))]`. -/
 theorem hasDerivAt_integral_cluster_functional (lam : ℝ → Sym2 V → ℝ≥0) (w : Sym2 V → ℝ)
@@ -124,7 +127,8 @@ theorem hasDerivAt_integral_cluster_functional (lam : ℝ → Sym2 V → ℝ≥0
   push_cast at h2
   linarith
 
-/-- **57RX, finite volume.** For every weight `g : V → ℝ` (for instance
+open Classical in
+/-- **Finite volume.** For every weight `g : V → ℝ` (for instance
 `g(z) = ⟨z - o, u⟩²` on a box of `ℤ^d`),
 `d/dt E_t[∑_{z ∈ K_o} g(z)] = ∑_{x, y} w(x, y) E_t[1{x ∈ K_o, y ∉ K_o} ∑_{z ∈ K_y} g(z)]`. -/
 theorem hasDerivAt_integral_sum_cluster (lam : ℝ → Sym2 V → ℝ≥0) (w : Sym2 V → ℝ) (t : ℝ)
@@ -159,7 +163,8 @@ theorem prod_add_sub_prod {ι : Type*} [Fintype ι] [DecidableEq ι] (a b : ι �
   simp only [Finset.prod_empty, one_mul, Finset.sdiff_empty, add_sub_cancel_left]
   exact Finset.sum_congr rfl fun I _ => mul_comm _ _
 
-/-- **1K61, finite volume.** For polynomial functionals `F(A) = ∏_i ∑_{z ∈ A} P_i(z)`,
+open Classical in
+/-- **Finite volume.** For polynomial functionals `F(A) = ∏_i ∑_{z ∈ A} P_i(z)`,
 `d/dt E_t F(K_o) = ∑_{x, y} w(x, y) E_t[1{x ∈ K_o, y ∉ K_o}
   ∑_{∅ ≠ I} (∏_{i ∉ I} ∑_{K_o} P_i)(∏_{i ∈ I} ∑_{K_y} P_i)]`. -/
 theorem hasDerivAt_integral_prod_sum_cluster {ι : Type*} [Fintype ι] [DecidableEq ι]
@@ -191,9 +196,10 @@ theorem hasDerivAt_integral_prod_sum_cluster {ι : Type*} [Fintype ι] [Decidabl
     exact prod_add_sub_prod _ _
   · rfl
 
-/-! ### Non-vacuity witness (D-5) -/
+/-! ### Non-vacuity witness -/
 
-/-- **D-5 witness.** Two points (`Bool`), `λ_u = u⁺` on the pair (`= u` near `t = 1`), and
+open Classical in
+/-- **Non-vacuity witness.** Two points (`Bool`), `λ_u = u⁺` on the pair (`= u` near `t = 1`), and
 the weight `g = 1{·= true}`: the hypotheses of `hasDerivAt_integral_sum_cluster` hold. -/
 example :
     HasDerivAt (fun u : ℝ => ∫ ω, ∑ z, (cluster ω false).indicator

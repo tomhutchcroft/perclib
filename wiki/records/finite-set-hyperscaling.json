@@ -1,0 +1,212 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-set-hyperscaling",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 9
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 10,
+      "label": "Finite-set hyperscaling bounds",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-hierarchical-2021",
+      "order": 5,
+      "label": "Hyperscaling",
+      "locator": "Theorem 2.14; Corollary 1.5",
+      "relationship": "Related argument",
+      "status": "pending",
+      "note": "WRHL and 7VCS are independently stated conditional results, not source-specific wrappers."
+    },
+    {
+      "source": "perclib-marked-edge-splitting",
+      "order": 0,
+      "label": "Marked connected-edge splitting",
+      "locator": "Named public declaration start lines: 54, 69, 94, 109, 124, 132, 155, 473, 662",
+      "relationship": "Source-inspected exposition with explicit scope distinctions",
+      "status": "pending",
+      "note": "The source proves the marked-piece bound for every finite connected loopless edge set, with a separate finite-tree specialization. It preserves edge and endpoint coverage; marked endpoints may be shared between pieces."
+    },
+    {
+      "source": "hutchcroft-powerlaw-2021",
+      "order": 2,
+      "label": "Power-law bootstrap and critical endpoint",
+      "locator": "arXiv:2008.11197v2, Proposition 1.4, Lemma 4.1, Theorems 1.1–1.2, Remark 1.3; printed pp. 2–4, 8–10, 28–31",
+      "relationship": "Proof with corrected intermediate powers",
+      "status": "pending",
+      "note": "The lattice and weight-threshold arguments retain the A-squared two-cluster estimate, finite susceptibility below the threshold, finite-star proof of a finite critical parameter and finite-witness critical passage. The elementary contraction is supplied separately with a weaker numerical two-ghost constant. The group-kernel construction is included. The two intermediate-power discrepancies were also checked in the publisher HTML; full journal-edition reconciliation and formal correspondence remain separate."
+    },
+    {
+      "source": "hutchcroft-powerlaw-2021",
+      "order": 4,
+      "label": "Infinite-graph marked partition",
+      "locator": "Lemma 2.4, arXiv:2008.11197v2 and publisher HTML, Section 2.1",
+      "relationship": "Finite-core extension of the corrected partition",
+      "status": "pending",
+      "note": "Partition a finite spanning subtree of the marked vertices by DMI0, then attach each unmarked complementary branch to an incident piece. All vertices are covered, the strict marked-mass bounds persist, and on a tree all edges are partitioned. Infinite pieces are not treated as finite BK witnesses."
+    },
+    {
+      "source": "perclib-amplitude-contraction",
+      "order": 0,
+      "label": "Uniform tail amplitudes and endpoint passage",
+      "locator": "Explicit public declaration start lines: 44, 53, 63, 203, 229, 254, 309, 352",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Eight public results close the amplitude contraction and pass to an endpoint using lower semicontinuity of finite-volume tails. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-window-hyperscaling",
+      "order": 0,
+      "label": "Window partition identities and hyperscaling",
+      "locator": "Explicit public declaration start lines: 47, 61, 76, 86, 103, 113, 125, 138, 179, 202, 214, 240, 265, 359, 376, 426, 474, 486, 500, 518, 545, 594, 599, 605, 620",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Twenty-five public results give partition moments, quantile bounds and the conditional hyperscaling inequalities. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-damped-window-tails",
+      "order": 0,
+      "label": "Damped window tails and exponent implications",
+      "locator": "Explicit public declaration start lines: 41, 53, 139, 220, 249, 274, 301, 325, 476, 499",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Ten public results give fractional moments and conditional exponent relations. Source pin: 3978a2fa0ec425729f6e15fbc3c6a142cfa4a672."
+    },
+    {
+      "source": "perclib-train10-models-longrange-quantilemoments",
+      "order": 0,
+      "label": "Lattice quantiles and doubled observation windows",
+      "locator": "Explicit public theorem start lines: 64, 74, 86, 95, 102, 120, 156, 212, 235, 259, 275, 285, 303, 310",
+      "relationship": "Source-inspected exposition with scope boundaries",
+      "status": "pending",
+      "note": "Complete file read at dfbc5b4f4e964374431189c682520bff85e008e6; no compiled or independently reviewed status inferred."
+    },
+    {
+      "source": "hutchcroft-hierarchical-upper-2022",
+      "order": 6,
+      "label": "Spatial-average volume-tail transfer",
+      "locator": "arXiv:2202.07634v2 §3, (3.1)–(3.6), compared with the general deduction GW20",
+      "relationship": "Written deduction with existing probability inputs",
+      "status": "pending",
+      "note": "A general transfer is proved with arbitrary spatial-sum exponent gamma<d. It reuses the written two-ghost theorem, chooses the radius directly from n, and solves a finite least-amplitude quadratic. No imported two-ghost theorem is needed."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 4,
+      "label": "Norm tightness",
+      "locator": "Section 3, Theorem 3.2, Corollary 3.4 and Lemma 3.5",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "3109 extends the existing DMI0/12NL proof to every norm, retains isolated marks, handles countable witnesses and atomic quantiles, and gives explicit constants."
+    },
+    {
+      "source": "hutchcroft-hierarchical-volumes-2022",
+      "order": 5,
+      "label": "Fixed-index moment control",
+      "locator": "Section 3.1, Corollary 3.7 and equation (3.12)",
+      "relationship": "Written proof with explicit scope",
+      "status": "pending",
+      "note": "25TW proves the moment and mixed-moment estimates with exponent-dependent constants. The source uniform-index claim has a counterexample within a fixed critical hierarchical model."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "XHZD",
+      "proof_uses": [
+        "75N0",
+        "UVQ6"
+      ],
+      "reason": "Weighted Cauchy–Schwarz, Harris and the balanced lattice radius give the amplitude contraction."
+    },
+    {
+      "order": 1,
+      "tag": "KXV3",
+      "proof_uses": [
+        "XHZD",
+        "DYUM",
+        "UVQ6"
+      ],
+      "reason": "Subcritical finite susceptibility, the best admissible amplitude, finite stars and finite witnesses close the critical theorem."
+    },
+    {
+      "order": 2,
+      "tag": "58BJ",
+      "proof_uses": [
+        "75N0",
+        "UVQ6",
+        "DYUM"
+      ],
+      "reason": "A lower bound on the edge-weight counting function replaces the Euclidean annulus; summability makes each threshold set finite."
+    },
+    {
+      "order": 3,
+      "tag": "BWH0",
+      "proof_uses": [
+        "75N0",
+        "DYUM"
+      ],
+      "reason": "Finite invariant weight truncations give the exponent-zero two-cluster bound, followed by the truncated-mean and square-root contraction."
+    },
+    {
+      "order": 4,
+      "tag": "S01U",
+      "proof_uses": [
+        "58BJ"
+      ],
+      "reason": "A summable symmetric enumeration kernel has at least a fixed multiple of epsilon to the power minus 1/s edges above threshold."
+    },
+    {
+      "order": 5,
+      "tag": "RZSW",
+      "proof_uses": [
+        "DMI0"
+      ],
+      "reason": "Attach the unmarked branches of a spanning tree to the finite marked-core partition without changing its marked endpoint counts."
+    },
+    {
+      "order": 6,
+      "tag": "AKFN",
+      "proof_uses": [
+        "58BJ"
+      ],
+      "reason": "Count sufficiently heavy displacements on the positive-edge graph; translation mass transport and the tail exponent are explicit."
+    },
+    {
+      "order": 7,
+      "tag": "GW20",
+      "proof_uses": [
+        "BYEO"
+      ],
+      "reason": "A general transfer is proved with arbitrary spatial-sum exponent gamma<d. It reuses the written two-ghost theorem, chooses the radius directly from n, and solves a finite least-amplitude quadratic. No imported two-ghost theorem is needed."
+    },
+    {
+      "order": 8,
+      "tag": "3109",
+      "proof_uses": [
+        "DMI0",
+        "12NL",
+        "AUUG"
+      ],
+      "reason": "Combine marked-tree pieces across clusters and apply BK, then derive tails and moments at a real quantile."
+    },
+    {
+      "order": 9,
+      "tag": "25TW",
+      "proof_uses": [
+        "3109",
+        "12NL"
+      ],
+      "reason": "Tail integration, Jensen, Hölder and Harris retain the dependence on all moment indices."
+    }
+  ]
+}

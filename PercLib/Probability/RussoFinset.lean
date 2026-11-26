@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 145 (Q-19), written on 2026-11-14 by PROVER-E. They transport the
-finite-index Russo formula of `PercLib.Probability.Russo` to events on an arbitrary index
-type that depend on finitely many coordinates. No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. They transport the finite-index Russo formula of
+`PercLib.Probability.Russo` to events on an arbitrary index type that depend on finitely many
+coordinates. No upstream proof is copied.
 -/
 module
 

@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New proof of the factorisation of the law of the set of vertices of a finite domain
 that are not joined to its exterior (wiki finite-size-sharpness, tag HATE, item 1).
 No upstream proof is copied, no definition is added and no Input is introduced.
@@ -141,7 +145,7 @@ theorem measurableSet_unexplored_eq [Countable V] (Λ T : Set V) :
     ext ω
     simp [hvΛ, hvT]
 
-/-- **Item 1 of HATE: factorisation.** For a finite domain `Λ`, a finite `T` and
+/-- **Factorisation.** For a finite domain `Λ`, a finite `T` and
 `o, u ∈ T`, `P(S = T, o ↔_T u) = P(S = T) τ_T(o,u)`, where `S` is the set of vertices of
 `Λ` whose cluster stays in `Λ`. No conditioning on null events is involved. -/
 theorem law_unexplored_eq_inter_localConn [Countable V] (q : Sym2 V → unitInterval)
@@ -166,7 +170,7 @@ theorem law_unexplored_eq_inter_localConn [Countable V] (q : Sym2 V → unitInte
     exact ⟨unexplored_eq_of_agree hag,
       unexplored_eq_of_agree fun e he => (hag e he).symm⟩
   have h := prodBernoulli_inter_of_determined q hdisj (measurableSet_unexplored_eq _ _)
-    (measurableSet_localConn (T : Set V) ⟨o, ho⟩ ⟨u, hu⟩) hA
+    (measurableSet_setOf_reachable_induce (T : Set V) ⟨o, ho⟩ ⟨u, hu⟩) hA
     (localConn_determined (T : Set V) ⟨o, ho⟩ ⟨u, hu⟩)
   exact h
 

@@ -1,0 +1,97 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "finite-magnetization-deletion",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 194
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 0,
+      "label": "Signed green-free deletion",
+      "locator": "September 2004 author manuscript, Appendix A.2, (A.48)–(A.50), printed pp.43–44 / PDF indices42–43",
+      "relationship": "Written finite-graph proof with source-version and coefficient-scope distinctions",
+      "status": "pending",
+      "note": "Extracted text of the May 2003 preprint and September 2004 author manuscript compared. Publisher typesetting and visual PDF unexamined. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 1,
+      "label": "Two marked clusters",
+      "locator": "Same version, (A.35)–(A.43), printed pp.41–43 / PDF indices40–42",
+      "relationship": "Written finite-graph proof with source-version and coefficient-scope distinctions",
+      "status": "pending",
+      "note": "Extracted text of the May 2003 preprint and September 2004 author manuscript compared. Publisher typesetting and visual PDF unexamined. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 2,
+      "label": "Finite cutting-bond inequality",
+      "locator": "Same version, Lemmas A.4–A.5, (A.21)–(A.53), printed pp.40–44 / PDF indices39–43",
+      "relationship": "Written finite-graph proof with source-version and coefficient-scope distinctions",
+      "status": "pending",
+      "note": "Extracted text of the May 2003 preprint and September 2004 author manuscript compared. Publisher typesetting and visual PDF unexamined. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 3,
+      "label": "Complete-graph scope counterexample",
+      "locator": "Same version, Lemma A.4, (A.21)–(A.22), with no explicit triangle-size restriction",
+      "relationship": "Written finite-graph proof with source-version and coefficient-scope distinctions",
+      "status": "pending",
+      "note": "Extracted text of the May 2003 preprint and September 2004 author manuscript compared. Publisher typesetting and visual PDF unexamined. No compiled association."
+    },
+    {
+      "source": "borgs-chayes-finite-window",
+      "order": 4,
+      "label": "Field and root-tail integration",
+      "locator": "Same version, Lemma 5.3 and Appendix A.2; integration given here directly from the corrected coefficient",
+      "relationship": "Written finite-graph proof with source-version and coefficient-scope distinctions",
+      "status": "pending",
+      "note": "Extracted text of the May 2003 preprint and September 2004 author manuscript compared. Publisher typesetting and visual PDF unexamined. No compiled association."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "G9X2",
+      "proof_uses": [],
+      "reason": "Signed green-free deletion. Finite conditioning, coordinate supports and sign restrictions are explicit."
+    },
+    {
+      "order": 1,
+      "tag": "CHWM",
+      "proof_uses": [],
+      "reason": "Two marked clusters. Finite conditioning, coordinate supports and sign restrictions are explicit."
+    },
+    {
+      "order": 2,
+      "tag": "60X1",
+      "proof_uses": [
+        "G9X2",
+        "CHWM"
+      ],
+      "reason": "Finite cutting-bond inequality. Finite conditioning, coordinate supports and sign restrictions are explicit."
+    },
+    {
+      "order": 3,
+      "tag": "EHH4",
+      "proof_uses": [
+        "R2Y7"
+      ],
+      "reason": "Complete-graph scope counterexample. Finite conditioning, coordinate supports and sign restrictions are explicit."
+    },
+    {
+      "order": 4,
+      "tag": "NBKI",
+      "proof_uses": [
+        "60X1"
+      ],
+      "reason": "Field and root-tail integration. Finite conditioning, coordinate supports and sign restrictions are explicit."
+    }
+  ]
+}

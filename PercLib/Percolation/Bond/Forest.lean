@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New proofs using pinned mathlib's acyclic graphs and walks, and PercLib's canonical
 Bernoulli cylinders. No upstream proof copied. Diagonal probabilities are unrestricted.
 -/
@@ -10,10 +14,26 @@ public import PercLib.Probability.Cylinder
 public import Mathlib.Combinatorics.SimpleGraph.Acyclic
 public import Mathlib.Data.Nat.Dist
 
+/-!
+# Percolation on forests
+
+When the positive-probability support is acyclic, the two-point function is the product of the
+probabilities along the unique path and the susceptibility is the sum of path weights; on the ray
+these are explicit geometric expressions.
+
+## Main results
+
+* `ae_openGraph_le_support`
+* `tau_eq_prod_of_isAcyclic`
+* `chi_eq_tsum_paths_of_isAcyclic`
+* `tau_nat_eq_pow_dist`
+* `chi_nat_zero_eq_geometric`
+-/
+
 @[expose] public section
 noncomputable section
 open MeasureTheory Set PercLib.Probability
-open scoped ENNReal NNReal Classical
+open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
 variable {V : Type*}
@@ -45,6 +65,7 @@ theorem mem_conn_of_walk_edges {G : SimpleGraph V} {x y : V} (p : G.Walk x y)
   rw [openGraph, SimpleGraph.edgeSet_fromEdgeSet]
   exact ⟨hp e he, G.not_isDiag_of_mem_edgeSet (p.edges_subset_edgeSet he)⟩
 
+open Classical in
 /-- Inside an acyclic host, connection is equivalent to opening every edge of its
 unique simple path. The nil path is included. -/
 theorem mem_conn_iff_path_edges_of_le {G : SimpleGraph V} (hG : G.IsAcyclic)
@@ -64,6 +85,7 @@ theorem mem_conn_iff_path_edges_of_le {G : SimpleGraph V} (hG : G.IsAcyclic)
   · intro hp
     exact mem_conn_of_walk_edges p.1 (by intro e he; exact hp (by simpa using he))
 
+open Classical in
 /-- Exact path probability for any almost-sure acyclic host. -/
 theorem tau_eq_prod_of_ae_le_acyclic [Countable V] (q : Sym2 V → unitInterval)
     {G : SimpleGraph V} (hG : G.IsAcyclic)
@@ -75,6 +97,7 @@ theorem tau_eq_prod_of_ae_le_acyclic [Countable V] (q : Sym2 V → unitInterval)
   filter_upwards [hhost] with ω hω
   exact propext (mem_conn_iff_path_edges_of_le hG p hω)
 
+open Classical in
 /-- Exact two-point function when the positive-probability support is a forest. -/
 theorem tau_eq_prod_of_isAcyclic [Countable V] (q : Sym2 V → unitInterval)
     (hG : (SimpleGraph.fromEdgeSet {e | 0 < q e}).IsAcyclic) {x y : V}
@@ -91,6 +114,7 @@ theorem tau_eq_zero_of_ae_le (q : Sym2 V → unitInterval) {G : SimpleGraph V}
   filter_upwards [hhost] with ω hω hc
   exact h (hc.mono hω)
 
+open Classical in
 /-- Susceptibility is the exact sum of support-path weights in a forest.
 There is at most one path to each vertex, and the root contributes its empty path. -/
 theorem chi_eq_tsum_paths_of_isAcyclic [Countable V] (q : Sym2 V → unitInterval)
@@ -138,7 +162,7 @@ theorem exists_hasse_nat_path {m n : ℕ} (h : m ≤ n) :
 /-- A nearest-neighbour profile on ℕ has the ray as an almost-sure host;
 no condition is imposed on diagonal coordinates. -/
 theorem ae_openGraph_le_hasse_nat (q : Sym2 ℕ → unitInterval)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0) :
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0) :
     ∀ᵐ ω ∂law q, openGraph ω ≤ SimpleGraph.hasse ℕ := by
   filter_upwards [ae_config_subset_positive q] with ω hω
   intro m n hmn
@@ -148,10 +172,11 @@ theorem ae_openGraph_le_hasse_nat (q : Sym2 ℕ → unitInterval)
   have hzero := hz m n hne (by simpa using hn)
   simp [hzero] at hpos
 
+open Classical in
 /-- Exact ray connection probability, first in increasing endpoint order. -/
 theorem tau_nat_eq_pow_of_le (q : Sym2 ℕ → unitInterval) (t : unitInterval)
-    (hedge : ∀ n, q s(n,n+1) = t)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0)
+    (hedge : ∀ n, q s(n, n + 1) = t)
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0)
     {m n : ℕ} (hmn : m ≤ n) :
     tau q m n = (unitInterval.toNNReal t : ℝ≥0∞) ^ (n - m) := by
   classical
@@ -180,8 +205,8 @@ theorem tau_nat_eq_pow_of_le (q : Sym2 ℕ → unitInterval) (t : unitInterval)
 
 /-- Exact ray connection probability for either endpoint order. -/
 theorem tau_nat_eq_pow_dist (q : Sym2 ℕ → unitInterval) (t : unitInterval)
-    (hedge : ∀ n, q s(n,n+1) = t)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0)
+    (hedge : ∀ n, q s(n, n + 1) = t)
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0)
     (m n : ℕ) : tau q m n = (unitInterval.toNNReal t : ℝ≥0∞) ^ Nat.dist m n := by
   rcases le_total m n with h | h
   · simpa [Nat.dist_eq_sub_of_le h] using tau_nat_eq_pow_of_le q t hedge hz h
@@ -191,8 +216,8 @@ theorem tau_nat_eq_pow_dist (q : Sym2 ℕ → unitInterval) (t : unitInterval)
 /-- The susceptibility at the endpoint of the ray is the full geometric sum.
 This equality includes t=1, when both sides are infinite. -/
 theorem chi_nat_zero_eq_geometric (q : Sym2 ℕ → unitInterval) (t : unitInterval)
-    (hedge : ∀ n, q s(n,n+1) = t)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0) :
+    (hedge : ∀ n, q s(n, n + 1) = t)
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0) :
     chi q 0 = (1 - (unitInterval.toNNReal t : ℝ≥0∞))⁻¹ := by
   rw [chi_eq_tsum_tau]
   simp_rw [tau_nat_eq_pow_dist q t hedge hz, Nat.dist_zero_left]
@@ -200,8 +225,8 @@ theorem chi_nat_zero_eq_geometric (q : Sym2 ℕ → unitInterval) (t : unitInter
 
 /-- Strictly subunit ray probabilities give finite endpoint susceptibility. -/
 theorem chi_nat_zero_lt_top (q : Sym2 ℕ → unitInterval) (t : unitInterval) (ht : t < 1)
-    (hedge : ∀ n, q s(n,n+1) = t)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0) :
+    (hedge : ∀ n, q s(n, n + 1) = t)
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0) :
     chi q 0 < ⊤ := by
   rw [chi_nat_zero_eq_geometric q t hedge hz, ENNReal.inv_lt_top]
   apply tsub_pos_of_lt
@@ -209,8 +234,8 @@ theorem chi_nat_zero_lt_top (q : Sym2 ℕ → unitInterval) (t : unitInterval) (
   exact ht
 
 -- At the endpoint t=1, the root term and the infinite tail are both retained.
-example (q : Sym2 ℕ → unitInterval) (hedge : ∀ n, q s(n,n+1) = 1)
-    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m,n) = 0) :
+example (q : Sym2 ℕ → unitInterval) (hedge : ∀ n, q s(n, n + 1) = 1)
+    (hz : ∀ m n, m ≠ n → ¬ (m + 1 = n ∨ n + 1 = m) → q s(m, n) = 0) :
     chi q 0 = ⊤ := by
   simpa using chi_nat_zero_eq_geometric q 1 hedge hz
 

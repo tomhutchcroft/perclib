@@ -1,0 +1,190 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "cutoff-localization",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 12
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 5,
+      "label": "Localization of cutoff clusters",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 1,
+      "label": "Correlation lengths, pointwise decay and random boxes",
+      "locator": "arXiv:2508.18808v1, §II.2, PDF pp. 18–23: Lemmas II.2.1, II.2.3, II.2.6, II.2.8 and Propositions II.2.5, II.2.7",
+      "relationship": "Proofs with model inputs explicit",
+      "status": "pending",
+      "note": "AUAE proves the spatial-moment/two-point implication and equivalence under explicit susceptibility, averaged, regularity and derivative inputs; its alpha=d endpoint uses the probability bound. YUHF gives the random-box proof under the earlier pointwise estimate. Neither is a full source-correspondence review."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 63,
+      "label": "Volume moments and weak localization",
+      "locator": "arXiv:2508.18808v1 §II.4.1, Theorem II.4.3 and Lemma II.4.4, PDF pp. 33–37",
+      "relationship": "Proof with explicit inputs and summation repair",
+      "status": "pending",
+      "note": "Conditional proof with local absolute continuity, the Russo/mass-transport derivative identity and sharp susceptibility coefficient explicit; no weak localization is assumed."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 67,
+      "label": "Susceptibility and rooted window moments",
+      "locator": "arXiv:2508.18808v1 §II.4, Lemma II.4.9 and Corollary II.4.10, PDF pp. 39–40",
+      "relationship": "Proof with explicit source inputs",
+      "status": "pending",
+      "note": "Combines an exact reciprocal inequality, first-moment localization and the averaged full-law bound. Cutoff susceptibility divergence is retained as an input; alpha=d implies positive full-law infinite-cluster probability."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 71,
+      "label": "Susceptibility crossover",
+      "locator": "arXiv:2508.18808v1 §II.6.1, Lemma II.6.1, PDF pp. 56–57",
+      "relationship": "Proof with explicit uniform assumptions",
+      "status": "pending",
+      "note": "Exact reciprocal bound retains the full susceptibility, including its infinite value, with constants uniform in the parameter."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 72,
+      "label": "Uniform subcritical spatial moments",
+      "locator": "arXiv:2508.18808v1 §II.6.1, Proposition II.6.2 and equation (II.6.1), PDF pp. 57–58",
+      "relationship": "Proof with explicit uniform assumptions",
+      "status": "pending",
+      "note": "Derives the radial-weight Russo bound and uses a three-term power estimate instead of induction. Critical spatial domination and exact uniform-rate hypotheses remain explicit."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 74,
+      "label": "Two-point crossover upper bound",
+      "locator": "arXiv:2508.18808v1 §II.6.1, Lemma II.6.3, PDF pp. 58–59",
+      "relationship": "Proof with explicit hypotheses and endpoint cases",
+      "status": "pending",
+      "note": "Uses the correct factors in the spatial tail bound and integrates only when the susceptibility scale lies below R/8; the bounded-ratio regime is separate."
+    },
+    {
+      "source": "hutchcroft-lrp-2",
+      "order": 75,
+      "label": "Two-point crossover lower bound",
+      "locator": "arXiv:2508.18808v1 §II.6.1, Lemma II.6.4 and (II.6.3)–(II.6.5), PDF pp. 60–61",
+      "relationship": "Proof with explicit hypotheses and endpoint cases",
+      "status": "pending",
+      "note": "Independent joining layer, subtraction of already-connected mass, factorial second moment on disjoint cutoff clusters and a direct-bond treatment of small chosen radii. All model inputs remain explicit."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "tag": "AUAE",
+      "proof_uses": [
+        "32GP"
+      ],
+      "reason": "Spatial localization gives the susceptibility upper bound from the assumed averaged estimate. Derivative regularity, the initial cutoff estimate and the susceptibility lower bound are explicit hypotheses.",
+      "order": 0
+    },
+    {
+      "tag": "YUHF",
+      "proof_uses": [
+        "AUUG"
+      ],
+      "reason": "The simple path supplies finitely many disjoint exit witnesses; BK and the assumed pointwise bound give exponential cutoff decay.",
+      "order": 1
+    },
+    {
+      "order": 2,
+      "tag": "SOHR",
+      "proof_uses": [
+        "1EWL"
+      ],
+      "reason": "Conditional proof with local absolute continuity, the Russo/mass-transport derivative identity and sharp susceptibility coefficient explicit; no weak localization is assumed."
+    },
+    {
+      "order": 3,
+      "tag": "79SD",
+      "proof_uses": [
+        "GG8B",
+        "1AC7"
+      ],
+      "reason": "Combines an exact reciprocal inequality, first-moment localization and the averaged full-law bound. Cutoff susceptibility divergence is retained as an input; alpha=d implies positive full-law infinite-cluster probability."
+    },
+    {
+      "order": 4,
+      "tag": "04ZI",
+      "proof_uses": [
+        "OP4X"
+      ],
+      "reason": "Exact reciprocal bound retains the full susceptibility, including its infinite value, with constants uniform in the parameter."
+    },
+    {
+      "order": 5,
+      "tag": "KA3B",
+      "proof_uses": [
+        "04ZI",
+        "GG8B",
+        "1K61"
+      ],
+      "reason": "Derives the radial-weight Russo bound and uses a three-term power estimate instead of induction. Critical spatial domination and exact uniform-rate hypotheses remain explicit."
+    },
+    {
+      "order": 6,
+      "tag": "TFKR",
+      "proof_uses": [
+        "AUAE",
+        "KA3B"
+      ],
+      "reason": "Uses the correct factors in the spatial tail bound and integrates only when the susceptibility scale lies below R/8; the bounded-ratio regime is separate."
+    },
+    {
+      "order": 7,
+      "tag": "NI07",
+      "proof_uses": [
+        "9ZEL",
+        "KA3B",
+        "AS7A",
+        "AUUG"
+      ],
+      "reason": "Independent joining layer, subtraction of already-connected mass, factorial second moment on disjoint cutoff clusters and a direct-bond treatment of small chosen radii. All model inputs remain explicit."
+    },
+    {
+      "order": 8,
+      "tag": "J7SM",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 9,
+      "tag": "32GP",
+      "proof_uses": [],
+      "reason": "A Markov-type comparison of the spatial moment with the mass outside the ball; no other wiki assertion is invoked."
+    },
+    {
+      "order": 10,
+      "tag": "AWWU",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 11,
+      "tag": "39MV",
+      "proof_uses": [
+        "32GP"
+      ],
+      "reason": "Factorisation and Cauchy-Schwarz bound the moment loss by m_{2q-1} and E Z, and the spatial localisation estimate (32GP) bounds E Z."
+    },
+    {
+      "order": 12,
+      "tag": "IBK7",
+      "proof_uses": [],
+      "reason": "An explicit tree-metric construction with direct moment computations; no other wiki assertion is invoked."
+    }
+  ]
+}

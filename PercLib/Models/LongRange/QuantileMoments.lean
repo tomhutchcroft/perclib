@@ -1,20 +1,23 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-
-Adapted from pull request 488: source repository `yujinhkim/lrp`, branch
-`critical-lrp-1`, commit d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Adapted from the source repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc, files
 `PercLib/CriticalLRP/Tightness/LemmaI26Averaging.lean` (blob 817aa6d768) and
 `PercLib/CriticalLRP/Analysis/LatticeBallAsymptotic.lean` (blob 245577addf), contributed by
 `yujinhkim`. Licence: Apache-2.0, as declared in those files' headers and in
 `third_party/critical-lrp/NOTICE.md` of that commit (upstream origin
-`yujinhkim/Critical-Long-range-percolation` at 3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf,
-not independently verified).
-Changes: the argument (deterministic counting, translation averaging, Markov) is kept and
-rewritten on the D-2 interface: the source's `FiniteVolume.box`, `linfNorm`, `latticeBall`,
-`clusterVolIn`, `ballClusterCount`, `shiftConfig` and `edianMaxVol` are replaced by
-mathlib's sup norm on `Fin d → ℤ`, the `Finset.Icc` ball of `Models/LongRange/PowerLaw.lean`,
-`clusterIntersection`, the push-forward `Sym2.map σ ''` of `Percolation/Bond/Transport.lean`
-and `tightnessScale` (D-33); no definition is added; focused imports; `autoImplicit` off.
+`yujinhkim/Critical-Long-range-percolation` at 3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf, not
+independently verified). Changes: the argument (deterministic counting, translation averaging,
+Markov) is kept and rewritten on the bond interface: the source's `FiniteVolume.box`,
+`linfNorm`, `latticeBall`, `clusterVolIn`, `ballClusterCount`, `shiftConfig` and `edianMaxVol` are
+replaced by mathlib's sup norm on `Fin d → ℤ`, the `Finset.Icc` ball of
+`Models/LongRange/PowerLaw.lean`, `clusterIntersection`, the push-forward `Sym2.map σ ''` of
+`Percolation/Bond/Transport.lean` and `tightnessScale`; no definition is added; focused imports;
+`autoImplicit` off.
 -/
 module
 
@@ -195,7 +198,8 @@ theorem le_card_mul_law_clusterIntersection_ball (q : Sym2 (Fin d → ℤ) → u
       ∑ x ∈ Λ, law q (E x) := by
     calc (m : ℝ≥0∞) * law q {ω | m ≤ maxClusterIntersection Λ ω}
         = ∫⁻ ω, (m : ℝ≥0∞) * {ω | m ≤ maxClusterIntersection Λ ω}.indicator 1 ω ∂(law q) := by
-          rw [lintegral_const_mul _ ((measurable_one).indicator hmaxm), lintegral_indicator_one hmaxm]
+          rw [lintegral_const_mul _ ((measurable_one).indicator hmaxm),
+              lintegral_indicator_one hmaxm]
       _ ≤ ∫⁻ ω, ∑ x ∈ Λ, (E x).indicator 1 ω ∂(law q) := lintegral_mono hpt
       _ = ∑ x ∈ Λ, law q (E x) := by
           rw [lintegral_finsetSum _ fun x _ => (measurable_one).indicator (hEm x)]
@@ -315,7 +319,7 @@ theorem rpow_div_le_lintegral_encard_cluster_intensity {J : Sym2 (Fin d → ℤ)
       ∫⁻ ω, ((cluster ω 0).encard : ℝ≥0∞) ^ p ∂(law (intensityProfile J β)) :=
   rpow_div_le_lintegral_encard_cluster _ (intensityProfile_translation_invariant hJ β) n hp
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 /-- The zero kernel is translation invariant, so Lemma I.2.6 applies to it (and to the zero
 profile) at every `n`, `β` and `p > 0`. -/

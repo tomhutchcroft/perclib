@@ -1,0 +1,82 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "radial-sle-martingales",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 139
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 0,
+      "label": "Reflected radial product",
+      "locator": "arXiv:math/0505368v3, Section 5, Remark 7, equation (9) and Remark 8, equations (10)–(11); journal pp.666–668",
+      "relationship": "Written radial martingale proof and explicit scope of the proposed rare-event interpretation",
+      "status": "pending",
+      "note": "The reflected rational fields have a purely imaginary weighted sum. Collecting the one-point and pair logarithmic drifts gives a stochastic exponential. The normalized center-mark limit agrees with omitting that zero-force mark."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 1,
+      "label": "Boundary renormalization",
+      "locator": "arXiv:math/0505368v3, Section 5, Remark 7, equation (9) and Remark 8, equations (10)–(11); journal pp.666–668",
+      "relationship": "Written radial martingale proof and explicit scope of the proposed rare-event interpretation",
+      "status": "pending",
+      "note": "Analytic continuation and a normalized reflected-pair limit justify the boundary replacement. Bounded stopped stochastic-logarithm coefficients transfer the exponential identity to mixed configurations; the all-boundary powers are computed explicitly."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 2,
+      "label": "Stopped radial force law",
+      "locator": "arXiv:math/0505368v3, Section 5, Remark 7, equation (9) and Remark 8, equations (10)–(11); journal pp.666–668",
+      "relationship": "Written radial martingale proof and explicit scope of the proposed rare-event interpretation",
+      "status": "pending",
+      "note": "Novikov and Girsanov give the angular force drift on compact stops, with no force-weight balance condition. The reflected vector-field convention and the boundary cotangent equations are checked."
+    },
+    {
+      "source": "schramm-wilson-coordinate-changes-2005",
+      "order": 3,
+      "label": "Equal boundary weights and rare-event candidates",
+      "locator": "arXiv:math/0505368v3, Section 5, Remark 7, equation (9) and Remark 8, equations (10)–(11); journal pp.666–668",
+      "relationship": "Written radial martingale proof and explicit scope of the proposed rare-event interpretation",
+      "status": "pending",
+      "note": "For N-1 force marks of weight two, substitution gives the general radial and derivative powers, and their kappa6 and kappa2 specializations. The source rare-event interpretations are described as proposed probability formulas, not proved discrete asymptotics."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "T723",
+      "proof_uses": [],
+      "reason": "The reflected rational fields have a purely imaginary weighted sum. Collecting the one-point and pair logarithmic drifts gives a stochastic exponential. The normalized center-mark limit agrees with omitting that zero-force mark."
+    },
+    {
+      "order": 1,
+      "tag": "EU7X",
+      "proof_uses": [
+        "T723"
+      ],
+      "reason": "Analytic continuation and a normalized reflected-pair limit justify the boundary replacement. Bounded stopped stochastic-logarithm coefficients transfer the exponential identity to mixed configurations; the all-boundary powers are computed explicitly."
+    },
+    {
+      "order": 2,
+      "tag": "MLBQ",
+      "proof_uses": [
+        "T723",
+        "EU7X"
+      ],
+      "reason": "Novikov and Girsanov give the angular force drift on compact stops, with no force-weight balance condition. The reflected vector-field convention and the boundary cotangent equations are checked."
+    },
+    {
+      "order": 3,
+      "tag": "O8ZR",
+      "proof_uses": [
+        "EU7X"
+      ],
+      "reason": "For N-1 force marks of weight two, substitution gives the general radial and derivative powers, and their kappa6 and kappa2 specializations. The source rare-event interpretations are described as proposed probability formulas, not proved discrete asymptotics."
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 New deterministic modification identities from mathlib's coordinatewise
 infinite-product pushforward theorem. No upstream proof copied.
 -/
@@ -7,6 +11,22 @@ module
 
 public import PercLib.Percolation.Bond.Basic
 public import PercLib.Probability.Coupling.Monotone
+
+/-!
+# Deterministic modification of product laws
+
+Closing, opening or deleting a deterministic set of coordinates changes the product law by fixing
+those marginals, and compares increasing events monotonically.
+
+## Main results
+
+* `prodBernoulli_map_inter`
+* `prodBernoulli_map_union`
+* `prodBernoulli_map_sdiff`
+* `prodBernoulli_preimage_inter_le`
+* `prodBernoulli_le_preimage_union`
+* `tau_mask_edgeSet_le`
+-/
 
 @[expose] public section
 noncomputable section
@@ -93,6 +113,14 @@ theorem prodBernoulli_le_union_profile (q : ι → unitInterval) (E : Set ι)
     prodBernoulli q A ≤ prodBernoulli (fun i => if i ∈ E then 1 else q i) A := by
   rw [← prodBernoulli_map_union q E, Measure.map_apply (by fun_prop) hm]
   exact prodBernoulli_le_preimage_union q E hA
+
+/-- The corresponding comparison with probabilities fixed at zero by deletion. -/
+theorem prodBernoulli_sdiff_profile_le (q : ι → unitInterval) (E : Set ι)
+    [DecidablePred (· ∈ E)] {A : Set (Set ι)} (hA : IsUpperSet A)
+    (hm : MeasurableSet A) :
+    prodBernoulli (fun i => if i ∈ E then 0 else q i) A ≤ prodBernoulli q A := by
+  rw [← prodBernoulli_map_sdiff q E, Measure.map_apply (by fun_prop) hm]
+  exact measure_mono fun _ h => hA Set.sdiff_subset h
 
 -- Measurability already belongs to mathlib's set-valued measurable-function API.
 example (E : Set ι) : Measurable (fun ω : Set ι => ω ∩ E) := by fun_prop

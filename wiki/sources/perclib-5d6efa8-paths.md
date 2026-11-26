@@ -1,0 +1,25 @@
+# Specified-path contracts at 5d6efa8
+
+This inventory covers all **nine named public theorems** in the path-lower-bound module at private `lrp` revision 5d6efa862d99e11fb1f01619be7700b85c1c8f7b, inspected 16 November 2026. Imported declarations and the anonymous two-middle-vertex witness are excluded. The [companion article](../articles/connection-paths.md) leaves the migration-protected connectivity article unchanged.
+
+| Source line | Contract | Exposition |
+| --- | --- | --- |
+| [PathLowerBounds.lean L39](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | Opening every distinct bond of a walk connects its endpoints. | [Argument](../articles/connection-paths.md#section-walk) |
+| [PathLowerBounds.lean L49](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | The all-open finite cylinder is contained in the connection event. | [Argument](../articles/connection-paths.md#section-walk) |
+| [PathLowerBounds.lean L57](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | The distinct-bond product bounds the two-point measure from below, without ambient countability. | [Argument](../articles/connection-paths.md#section-walk) |
+| [PathLowerBounds.lean L66](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | The all-open event for a finite set of pairs is measurable. | [Argument](../articles/connection-paths.md#section-walk) |
+| [PathLowerBounds.lean L75](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | An all-open event for any set of pairs is determined by those coordinates. | [Argument](../articles/connection-paths.md#section-alternatives) |
+| [PathLowerBounds.lean L82](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | A finite union of measurable events on pairwise disjoint coordinate blocks has probability one minus the product of failure probabilities. | [Argument](../articles/connection-paths.md#section-alternatives) |
+| [PathLowerBounds.lean L98](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | Pairwise bond-disjoint walks give the parallel lower bound. | [Argument](../articles/connection-paths.md#section-alternatives) |
+| [PathLowerBounds.lean L116](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | A set closed under adjacency contains every vertex reachable from one of its vertices, on arbitrary graphs. | [Argument](../articles/connection-paths.md#section-exact-parallel) |
+| [PathLowerBounds.lean L130](https://github.com/tomhutchcroft/perclib/blob/a920a1ec32e38ee69a36bc4d4b81ef6a1ec1de7d/PercLib/Percolation/Bond/PathLowerBounds.lean) | Two endpoints and k middle vertices, with all 2k host bonds having probability t and all other pairs zero, have connection probability 1 − (1 − t²)^k. | [Argument](../articles/connection-paths.md#section-exact-parallel) |
+
+## Repeated bonds and measurability
+
+The source uses finite walks and takes the finite set of their edges before multiplying probabilities. A walk may repeat a bond; the coordinate still occurs once. Pairwise disjointness of these sets makes different walk events independent, even when their walks share vertices. Requiring only different walks would not suffice.
+
+All-open finite cylinders are measurable on arbitrary vertex types. The source takes their measure and bounds the measure assigned to the larger connection set by monotonicity, without a countability assumption. The article states this as an outer-measure bound and identifies it with the ordinary two-point probability on countable vertices. It does not assert measurability of an arbitrary uncountable union of path events. The coordinate-determination identity also allows an infinite set, but the union-probability theorem separately assumes its events measurable and its family finite.
+
+The empty walk, empty family and zero or one bond probabilities are included. The exact finite example has distinct endpoints even when k is zero; then they cannot connect. The article's heterogeneous product reduces to the source formula when all route probabilities equal t. Allowing arbitrary diagonal coordinates is a separate expository extension, justified because the open graph discards loops. The adjacency-closed-set proof supplies the converse implication needed for equality; the lower bound alone does not.
+
+These are source-contract matches pending independent correspondence review. Tags 9IPM, 8V8H and YPNG are prose identities, not newly compiled Lean associations. Existing errata are unchanged and no published-source correction is asserted.

@@ -1,8 +1,11 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-114 (issue 448), from pinned mathlib's series lemmas.
-The statements are the trace step of the wiki tags IZAO and 87W3 (connection kernels).
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, from pinned mathlib's series lemmas. The statements are the trace step of the wiki tags
+IZAO and 87W3 (connection kernels). No source text or code is copied.
 -/
 module
 
@@ -36,7 +39,6 @@ Each has an additive version.
 noncomputable section
 
 open scoped ENNReal
-open Classical
 
 namespace PercLib.Probability
 
@@ -49,7 +51,7 @@ theorem invariant_apply_one {R : Type*} (M : Γ → Γ → R)
   have := hM v⁻¹ v 1
   rwa [inv_mul_cancel, mul_one, eq_comm] at this
 
-/-- **Trace step of IZAO / 87W3.** For invariant kernels, `tr₁(MN) = tr₁(NM)`:
+/-- **Trace step.** For invariant kernels, `tr₁(MN) = tr₁(NM)`:
 `∑' v, M 1 v * N v 1 = ∑' v, N 1 v * M v 1`. No summability is needed for the identity of
 the two `tsum`s. -/
 @[to_additive /-- Additive version of the trace identity. -/]
@@ -72,9 +74,10 @@ theorem summable_abs_mul_of_sq (M N : Γ → Γ → ℝ) (hM : Summable fun v =>
   rw [abs_mul]
   nlinarith [sq_abs (M 1 v), sq_abs (N v 1), sq_nonneg (|M 1 v| - |N v 1|)]
 
-/-- **Trace step of IZAO / 87W3, with convergence.** For invariant real kernels with
+/-- **Trace step, with convergence.** For invariant real kernels with
 square-summable rows and columns, both trace series converge absolutely and are equal. -/
-@[to_additive trace_comm_of_invariant_add /-- Additive version of the trace identity with convergence. -/]
+@[to_additive trace_comm_of_invariant_add
+    /-- Additive version of the trace identity with convergence. -/]
 theorem trace_comm_of_invariant (M N : Γ → Γ → ℝ)
     (hM : ∀ g x y, M (g * x) (g * y) = M x y) (hN : ∀ g x y, N (g * x) (g * y) = N x y)
     (hMr : ∀ x, Summable fun y => M x y ^ 2) (hMc : ∀ y, Summable fun x => M x y ^ 2)
@@ -109,7 +112,8 @@ theorem tsum_row_eq (M : Γ → Γ → ℝ≥0∞) (hM : ∀ g x y, M (g * x) (g
   simpa using hM x 1 y
 
 /-- Every column of an invariant `M ≥ 0` sums to its row sum at `1`. -/
-@[to_additive tsum_col_eq_add /-- Every column of an invariant `M ≥ 0` sums to its row sum at `0`. -/]
+@[to_additive tsum_col_eq_add
+    /-- Every column of an invariant `M ≥ 0` sums to its row sum at `0`. -/]
 theorem tsum_col_eq (M : Γ → Γ → ℝ≥0∞) (hM : ∀ g x y, M (g * x) (g * y) = M x y) (y : Γ) :
     ∑' x, M x y = ∑' x, M 1 x := by
   rw [← (Equiv.mulLeft y).tsum_eq, ← (Equiv.inv Γ).tsum_eq]
@@ -119,6 +123,7 @@ theorem tsum_col_eq (M : Γ → Γ → ℝ≥0∞) (hM : ∀ g x y, M (g * x) (g
   rw [inv_mul_cancel, show (y * x⁻¹)⁻¹ * y = x by simp [mul_assoc]] at h
   exact h.symm
 
+open Classical in
 /-- **Rows of kernel powers.** For an invariant `M ≥ 0` whose row at `1` sums to `χ`, every
 row of the `n`-th power of `M` sums to `χ^n`. -/
 @[to_additive tsum_iterate_row_add /-- Rows of kernel powers, additive version. -/]
@@ -136,6 +141,7 @@ theorem tsum_iterate_row (M : Γ → Γ → ℝ≥0∞) (hM : ∀ g x y, M (g * 
     rw [ENNReal.tsum_comm]
     simp_rw [ENNReal.tsum_mul_left, tsum_row_eq M hM, hχ, ENNReal.tsum_mul_right, ih, pow_succ]
 
+open Classical in
 /-- **Columns of kernel powers.** For an invariant `M ≥ 0` whose row at `1` sums to `χ`,
 every column of the `n`-th power of `M` sums to `χ^n`. -/
 @[to_additive tsum_iterate_col_add /-- Columns of kernel powers, additive version. -/]
@@ -153,9 +159,9 @@ theorem tsum_iterate_col (M : Γ → Γ → ℝ≥0∞) (hM : ∀ g x y, M (g * 
     rw [ENNReal.tsum_comm]
     simp_rw [ENNReal.tsum_mul_right, ih, ENNReal.tsum_mul_left, tsum_col_eq M hM, hχ, pow_succ]
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
-/-- D-5 on `ℤ` (additive): `M x y = 2^{-|x-y|}` is invariant with square-summable rows and
+/-- Non-vacuity on `ℤ` (additive): `M x y = 2^{-|x-y|}` is invariant with square-summable rows and
 columns, so the trace identity applies, with absolute convergence. -/
 example : Summable (fun v : ℤ => |(1 / 2 : ℝ) ^ (v - 0).natAbs * (1 / 2 : ℝ) ^ (0 - v).natAbs|) ∧
     ∑' v : ℤ, (1 / 2 : ℝ) ^ (v - 0).natAbs * (1 / 2 : ℝ) ^ (0 - v).natAbs =
@@ -183,7 +189,7 @@ example : Summable (fun v : ℤ => |(1 / 2 : ℝ) ^ (v - 0).natAbs * (1 / 2 : �
     (fun g x y => by simp) (fun g x y => by simp) hsq hsq' hsq hsq'
   exact ⟨h.1, h.2.2⟩
 
-/-- D-5 on `ZMod 3` (written `Fin 3`, the same type) with circulant kernels
+/-- Non-vacuity on `ZMod 3` (written `Fin 3`, the same type) with circulant kernels
 `M x y = c(y - x)`, `N x y = d(y - x)`: both traces are `7`, computed as finite sums. -/
 example :
     ∑' v : Fin 3, ![(2 : ℝ), 1, 0] (v - 0) * ![(1 : ℝ), 3, 5] (0 - v) = 7 ∧
@@ -204,8 +210,8 @@ example :
     rw [h0, h1, h2, h3, h4]
     norm_num
 
-/-- D-5 for kernel powers: on `ZMod 3` the all-ones kernel has row sum `3`, and every row
-and column of its `n`-th power sums to `3^n`. -/
+/-- Non-vacuity witness for kernel powers: on `ZMod 3` the all-ones kernel has row sum `3`, and
+every row and column of its `n`-th power sums to `3^n`. -/
 example (n : ℕ) (x : ZMod 3) :
     ∑' y, (fun K : ZMod 3 → ZMod 3 → ℝ≥0∞ => fun a b => ∑' z, K a z * (fun _ _ => 1) z b)^[n]
       (fun a b => if a = b then 1 else 0) x y = 3 ^ n := by

@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 124, Q-8, item 3). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -17,9 +19,9 @@ profile, `q s(x + g, y + g) = q s(x, y)`. Every measurable event of bond configu
 is invariant under all translations `ω ↦ Sym2.map (· + g) '' ω` has probability `0` or `1`,
 and every measurable translation-invariant `ℕ∞`-valued observable is almost surely constant.
 
-The issue asked also for `[Countable G]` and for an explicit hypothesis that each translation
+One might also ask for `[Countable G]` and for an explicit hypothesis that each translation
 preserves `law q`. Neither is needed: preservation follows from translation invariance of `q`
-by S-1 (`prodBernoulli_map_image_sym2_invariant`), and an injective sequence in `G`, which
+(`prodBernoulli_map_image_sym2_invariant`), and an injective sequence in `G`, which
 exists because `G` is infinite, already separates finite sets of pairs.
 -/
 

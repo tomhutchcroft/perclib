@@ -1,8 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-86: intrinsic balls. New for this project; no upstream proof is copied, and no new
-definition is introduced: the intrinsic distance is mathlib's `(openGraph ω).edist`, and
-balls and spheres are written out as sets.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+Intrinsic balls. New for this project; no upstream proof is copied, and no new definition is
+introduced: the intrinsic distance is mathlib's `(openGraph ω).edist`, and balls and spheres are
+written out as sets.
 -/
 module
 
@@ -159,7 +163,7 @@ theorem cluster_subset_ball_of_sphere_empty (ω : Config V) (o : V) (r : ℕ)
   have hfin : (openGraph ω).edist o y ≠ ⊤ :=
     SimpleGraph.edist_ne_top_iff_reachable.mpr hy
   obtain ⟨m, hm⟩ := ENat.ne_top_iff_exists.mp hfin
-  show (openGraph ω).edist o y ≤ r
+  change (openGraph ω).edist o y ≤ r
   rw [← hm]
   by_contra hlt
   have hrm : r ≤ m := by
@@ -194,6 +198,7 @@ private theorem sqrt_bounds (n : ℕ) (hn : 1 ≤ n) :
 /-- **J1V5.** Under any measure on configurations of a countable vertex type, if the
 sphere probabilities satisfy `Q_r = μ(S_ω(o,r) ≠ ∅) ≤ A/r` and the ball volumes satisfy
 `E|B_ω(o,r)| ≤ B r` for `r ≥ 1`, then `μ(|K_o| ≥ n) ≤ (A + 2B)/√n` for every `n ≥ 1`. -/
+@[tag "J1V5"]
 theorem measure_encard_cluster_ge_le [Countable V] (μ : Measure (Config V)) (o : V)
     (A B : ℝ≥0∞)
     (hQ : ∀ r : ℕ, 1 ≤ r → μ {ω | ∃ y, (openGraph ω).edist o y = r} ≤ A / r)
@@ -213,7 +218,7 @@ theorem measure_encard_cluster_ge_le [Countable V] (μ : Measure (Config V)) (o 
     · right
       have := (hω.trans (Set.encard_le_encard
         (cluster_subset_ball_of_sphere_empty ω o r hS)))
-      show (n : ℝ≥0∞) ≤ _
+      change (n : ℝ≥0∞) ≤ _
       exact_mod_cast this
   have hn0 : (n : ℝ≥0∞) ≠ 0 := by exact_mod_cast (by omega : n ≠ 0)
   have hmarkov := meas_ge_le_lintegral_div (μ := μ)
@@ -241,7 +246,8 @@ theorem intensity_ratio_bounds {J α β : ℝ} (hJ : 0 ≤ J) (hα : 0 < α) (h�
   have hl0 : 0 ≤ α / β := (div_pos hα hβ).le
   have hl1 : α / β ≤ 1 := (div_le_one hβ).mpr hαβ
   refine ⟨?_, ?_⟩
-  · have h := convexOn_exp.2 (Set.mem_univ (-β * J)) (Set.mem_univ 0) hl0 (by linarith : 0 ≤ 1 - α / β)
+  · have h := convexOn_exp.2 (Set.mem_univ (-β * J)) (Set.mem_univ 0) hl0
+      (by linarith : 0 ≤ 1 - α / β)
       (by ring)
     simp only [smul_eq_mul, mul_zero, add_zero, Real.exp_zero, mul_one] at h
     have he : α / β * (-β * J) = -α * J := by field_simp
@@ -299,7 +305,7 @@ private theorem coe_toNNReal_eq_ofReal (u : unitInterval) :
   rw [ENNReal.ofReal, Real.toNNReal_of_nonneg (unitInterval.nonneg u)]
   rfl
 
-/-- **PI11**, pointwise. For `q_t = intensityProfile J t` and `0 < α ≤ β`,
+/-- Pointwise. For `q_t = intensityProfile J t` and `0 < α ≤ β`,
 `P_β(x ∈ B_ω(o,r)) ≤ (β/α)^r · P_α(o ↔ x)`. -/
 theorem law_edist_le_le [Countable V] (J : Sym2 V → ℝ≥0) {α β : ℝ≥0} (hα : 0 < α)
     (hαβ : α ≤ β) (o x : V) (r : ℕ) :
@@ -371,7 +377,7 @@ theorem law_edist_le_le [Countable V] (J : Sym2 V → ℝ≥0) {α β : ℝ≥0}
     _ = ((β : ℝ≥0∞) / α) ^ r * (lam ^ r * law (intensityProfile J β) B) := by ring
     _ ≤ _ := mul_le_mul' le_rfl htau
 
-/-- **PI11**, volume form: `E_β|B_ω(o,r)| ≤ (β/α)^r χ_o(α)`. -/
+/-- Volume form: `E_β|B_ω(o,r)| ≤ (β/α)^r χ_o(α)`. -/
 theorem lintegral_ball_le [Countable V] (J : Sym2 V → ℝ≥0) {α β : ℝ≥0} (hα : 0 < α)
     (hαβ : α ≤ β) (o : V) (r : ℕ) :
     ∫⁻ ω, (({y | (openGraph ω).edist o y ≤ r} : Set V).encard : ℝ≥0∞)
@@ -392,7 +398,7 @@ private theorem one_add_inv_pow_le_exp (r : ℕ) (hr : r ≠ 0) :
         congr 1
         field_simp
 
-/-- **PI11**, linear growth. If `b > 0` and `χ_o(b - ε) ≤ C/ε` for all `0 < ε < ε₀`, then
+/-- Linear growth. If `b > 0` and `χ_o(b - ε) ≤ C/ε` for all `0 < ε < ε₀`, then
 `E_b|B_ω(o,r)| ≤ (eC/b)(r+1)` for all large `r`. -/
 theorem eventually_lintegral_ball_le [Countable V] (J : Sym2 V → ℝ≥0) (o : V) {b : ℝ≥0}
     (hb : 0 < b) (C : ℝ≥0∞) {ε₀ : ℝ≥0} (hε₀ : 0 < ε₀)
@@ -460,9 +466,9 @@ theorem eventually_lintegral_ball_le [Countable V] (J : Sym2 V → ℝ≥0) (o :
         simp only [div_eq_mul_inv]
         ring
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
-/-- PI11 on the two-vertex model at `r = 0` and `r = 1`. -/
+/-- The intrinsic ball bounds on the two-vertex model at `r = 0` and `r = 1`. -/
 example (α β : ℝ≥0) (hα : 0 < α) (hαβ : α ≤ β) :
     law (intensityProfile (fun _ : Sym2 Bool => (1 : ℝ≥0)) β)
         {ω | (openGraph ω).edist false true ≤ (0 : ℕ)} ≤
@@ -472,9 +478,9 @@ example (α β : ℝ≥0) (hα : 0 < α) (hαβ : α ≤ β) :
       ((β : ℝ≥0∞) / α) ^ 1 * tau (intensityProfile (fun _ : Sym2 Bool => (1 : ℝ≥0)) α) false true :=
   ⟨law_edist_le_le _ hα hαβ false true 0, law_edist_le_le _ hα hαβ false true 1⟩
 
-/-- J1V5 for the deterministic singleton cluster: on `Unit` under the point mass at the
-empty configuration, `Q_r = 0` and `|B_ω(o,r)| = 1`, so the hypotheses hold with `A = 0`,
-`B = 1`. -/
+/-- `measure_encard_cluster_ge_le` for the deterministic singleton cluster: on `Unit` under the
+point mass at the empty configuration, `Q_r = 0` and `|B_ω(o,r)| = 1`, so the hypotheses hold with
+`A = 0`, `B = 1`. -/
 example (n : ℕ) (hn : 1 ≤ n) :
     Measure.dirac (∅ : Config Unit) {ω | (n : ℕ∞) ≤ (cluster ω ()).encard} ≤
       (0 + 2 * 1) / ENNReal.ofReal (Real.sqrt n) := by

@@ -1,0 +1,67 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sle-height-crossing-kernel",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 152
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 0,
+      "label": "Brownian law under the special derivative tilt",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Remark 3.4, with Theorem 3.2 and the change of measure in the proof of Lemma 3.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written derivation of the explicit kernel, with a reverse-flow asymptotic consequence",
+      "status": "pending",
+      "note": "The bounded martingale coefficient justifies Girsanov on the whole finite height interval. The special parameter cancels the hyperbolic drift in either direction, and integration gives the derivative and physical-clock functionals."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 1,
+      "label": "The exact endpoint moment measure",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Remark 3.4, with Theorem 3.2 and the change of measure in the proof of Lemma 3.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written derivation of the explicit kernel, with a reverse-flow asymptotic consequence",
+      "status": "pending",
+      "note": "Removing the terminal martingale density and changing variables from the Gaussian hyperbolic coordinate to the real endpoint gives every normalization and Jacobian factor. Gaussian integrability includes negative tilt parameters."
+    },
+    {
+      "source": "rohde-schramm-basic-sle-2005",
+      "order": 2,
+      "label": "The reverse height-crossing moment asymptotic",
+      "locator": "arXiv:math/0106036v4, Section 3.1, Remark 3.4, with Theorem 3.2 and the change of measure in the proof of Lemma 3.3. Versioned HTML read; no new journal-PDF comparison.",
+      "relationship": "Written derivation of the explicit kernel, with a reverse-flow asymptotic consequence",
+      "status": "pending",
+      "note": "For imaginary starting points, dominated convergence against an integrable beta weight gives the exact Gamma constant and inverse square-root logarithm. The stopping time is a random height crossing, not a fixed physical time."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "FZJD",
+      "proof_uses": [
+        "O0VQ",
+        "AXSH"
+      ],
+      "reason": "The bounded martingale coefficient justifies Girsanov on the whole finite height interval. The special parameter cancels the hyperbolic drift in either direction, and integration gives the derivative and physical-clock functionals."
+    },
+    {
+      "order": 1,
+      "tag": "THQF",
+      "proof_uses": [
+        "FZJD"
+      ],
+      "reason": "Removing the terminal martingale density and changing variables from the Gaussian hyperbolic coordinate to the real endpoint gives every normalization and Jacobian factor. Gaussian integrability includes negative tilt parameters."
+    },
+    {
+      "order": 2,
+      "tag": "PDLI",
+      "proof_uses": [
+        "THQF"
+      ],
+      "reason": "For imaginary starting points, dominated convergence against an integrable beta weight gives the exact Gamma constant and inverse square-root logarithm. The stopping time is a random height crossing, not a fixed physical time."
+    }
+  ]
+}

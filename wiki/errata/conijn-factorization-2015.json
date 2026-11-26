@@ -1,0 +1,35 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "conijn-factorization-2015",
+  "entries": [
+    {
+      "id": "real-boundary-distance",
+      "title": "The conformal-radius comparison must include the real boundary",
+      "status": "provisional",
+      "locator": "arXiv:1502.04387v3, section 2, equation (2.2), printed p.4/PDF index 3. Versioned HTML and extracted PDF text checked 17 November 2026; no visual-PDF or journal comparison.",
+      "claim": "For a closed connected obstacle A in the upper half-plane, rho(w,A)/4 <= dist(w,A) <= rho(w,A).",
+      "problem": "Koebe and Schwarz bound distance to the whole boundary of the component of H minus A, which also includes the real line. Take A=R+10i and w=i: the component is the horizontal strip of height 10 and rho=(20/pi)sin(pi/10)<2, whereas dist(w,A)=9. Thus the printed upper comparison is false even when the component is simply connected.",
+      "correction": "For a simply connected component D use rho_D(w)/4 <= min(Im(w),dist(w,A)) <= rho_D(w). In particular rho<t<Im(w) implies dist(w,A)<t, while dist(w,A)<t/4 implies rho<t. The shrinking-neighbourhood proof uses a fixed bulk mark, so choose its radius below its height before the mesh limit. This repairs the cited use without changing Theorems 1 or 2.",
+      "tags": [
+        "7GOV",
+        "IP6C",
+        "7O0U"
+      ],
+      "issues": [],
+      "leanImpact": "Any future conformal-radius interface must include the full domain boundary and a simply connected domain hypothesis. The local percolation application requires the explicit bulk-height restriction; site RSW and continuum density formulas remain inputs. The wiki gives the correction and the conditional lattice passage, but claims no compiled association or author confirmation.",
+      "resolution": {
+        "status": "found",
+        "summary": "Measure distance to the whole component boundary and choose the bulk neighbourhood below its height.",
+        "scale": "local",
+        "impact": "Repairs the shrinking-neighbourhood argument without changing either factorization theorem."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "arXiv:1502.04387v3",
+    "checkedUrl": "https://arxiv.org/abs/1502.04387v3",
+    "method": "The reported passages were checked in versioned HTML and extracted PDF text, as recorded in the individual locators. This summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "Reports are confined to the stated preprint passages. No comparison establishing whether these issues persist in the published article or a later revision is recorded here. All reports remain provisional; repair availability and Lean status are separate.",
+    "comparisons": []
+  }
+}

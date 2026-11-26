@@ -1,20 +1,37 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-76: the covariance form of the finite Russo formula. The covariance of an observable
-with a coordinate indicator is `qₑ(1-qₑ)` times the expected forced increment, and in
-intensity coordinates the Russo derivative is a sum of covariances with the coefficients
-`J/(1 - e^{-βJ})`. Uses the finite-profile vocabulary of Russo.lean; no new definition.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The covariance form of the finite Russo formula. The covariance of an observable with a coordinate
+indicator is `qₑ(1-qₑ)` times the expected forced increment, and in intensity coordinates the Russo
+derivative is a sum of covariances with the coefficients `J/(1 - e^{-βJ})`. Uses the finite-profile
+vocabulary of Russo.lean; no new definition.
 -/
 module
 
 public import PercLib.Probability.RussoIntegral
+
+/-!
+# Covariance form of the Russo formula
+
+The covariance of an observable with a coordinate indicator is `qₑ(1-qₑ)` times the expected forced
+increment; in intensity coordinates the Russo derivative is a sum of such covariances.
+
+## Main results
+
+* `covariance_coordinate`
+* `covariance_coordinate_nonneg`
+* `expectation_intensity_hasDerivAt_covariance`
+* `intensity_coefficient_bounds`
+-/
 
 @[expose] public section
 noncomputable section
 
 namespace PercLib.Probability.FiniteProfile
 open Finset
-open scoped Classical
 variable {E : Type*} [Fintype E]
 
 omit [Fintype E] in
@@ -57,8 +74,8 @@ theorem expectation_coordinate (q : E → ℝ) (e : E) :
   rw [h]
   simp [expectation, sum_weight]
 
-/-- **VVDC.** `Cov_q(f, Xₑ) = qₑ(1-qₑ) E_q[Δₑ f]`, for every real profile (in particular
-every profile in `[0,1]^E`, endpoints included). -/
+/-- **Covariance with a coordinate.** `Cov_q(f, Xₑ) = qₑ(1-qₑ) E_q[Δₑ f]`, for every real profile
+(in particular every profile in `[0,1]^E`, endpoints included). -/
 theorem covariance_coordinate (q : E → ℝ) (e : E) (f : (E → Bool) → ℝ) :
     expectation q (fun ω => f ω * if ω e then 1 else 0) -
         expectation q f * expectation q (fun ω => if ω e then 1 else 0) =
@@ -82,6 +99,7 @@ theorem covariance_coordinate (q : E → ℝ) (e : E) (f : (E → Bool) → ℝ)
   ring
 
 omit [Fintype E] in
+open Classical in
 lemma force_false_le_force_true (e : E) (ω : E → Bool) :
     force e false ω ≤ force e true ω := by
   intro j
@@ -108,7 +126,7 @@ theorem covariance_coordinate_nonneg {q : E → ℝ} (hq : ∀ e, q e ∈ Set.Ic
       · exact this.1
       · linarith [this.2]
 
-/-- **DUYN**, derivative. For `q_β(e) = 1 - e^{-βJₑ}` with `Jₑ ≥ 0` and `β > 0`, the
+/-- Derivative. For `q_β(e) = 1 - e^{-βJₑ}` with `Jₑ ≥ 0` and `β > 0`, the
 derivative in `β` of `E_β[f]` is `∑_{e ∈ E₊} c_β(e) Cov_β(f, Xₑ)`, where
 `E₊ = {e | Jₑ > 0}` and `c_β(e) = Jₑ/(1 - e^{-βJₑ})`. -/
 theorem expectation_intensity_hasDerivAt_covariance (J : E → ℝ) (hJ : ∀ e, 0 ≤ J e)
@@ -135,7 +153,7 @@ theorem expectation_intensity_hasDerivAt_covariance (J : E → ℝ) (hJ : ∀ e,
   · have : J e = 0 := le_antisymm (not_lt.mp he) (hJ e)
     simp [this]
 
-/-- **DUYN**, coefficient bounds. For `Jₑ > 0` and `β > 0`: `c_β(e) ≥ 1/β`, and
+/-- Coefficient bounds. For `Jₑ > 0` and `β > 0`: `c_β(e) ≥ 1/β`, and
 `0 < Jₑ/(e^{βJₑ} - 1) = e^{-βJₑ} c_β(e) ≤ c_β(e)`. -/
 theorem intensity_coefficient_bounds {J β : ℝ} (hJ : 0 < J) (hβ : 0 < β) :
     1 / β ≤ J / (1 - Real.exp (-β * J)) ∧
@@ -162,9 +180,9 @@ theorem intensity_coefficient_bounds {J β : ℝ} (hJ : 0 < J) (hβ : 0 < β) :
     have hle : Real.exp (-β * J) ≤ 1 := Real.exp_le_one_iff.mpr (by nlinarith)
     exact mul_le_of_le_one_left (div_pos hJ hd).le hle
 
-/-! ### Non-vacuity witnesses (D-5) -/
+/-! ### Non-vacuity witnesses -/
 
-/-- One coordinate and `f = Xₑ`: VVDC reads `Var = q(1-q)`. -/
+/-- One coordinate and `f = Xₑ`: `covariance_coordinate` reads `Var = q(1-q)`. -/
 example (q : ℝ) :
     expectation (fun _ : Unit => q) (fun ω => (if ω () then (1 : ℝ) else 0) *
         if ω () then 1 else 0) -

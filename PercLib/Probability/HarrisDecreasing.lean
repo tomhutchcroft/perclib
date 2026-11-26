@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New proofs for issue 117 (Q-1), written on 2026-11-14 by PROVER-E. No upstream proof is
-copied: everything is derived from the canonical Harris inequality
-`PercLib.Probability.prodBernoulli_harris` and mathlib's Tonelli theorem.
+Authors: PercLib contributors
+-/
+/-
+New proofs, written on 2026-11-14. No upstream proof is copied: everything is derived from the
+canonical Harris inequality `PercLib.Probability.prodBernoulli_harris` and mathlib's Tonelli
+theorem.
 -/
 module
 
@@ -281,6 +283,14 @@ theorem prodBernoulli_lintegral_mul_le_of_monotone_of_antitone (q : ι → unitI
       (isUpperSet_setOf_lt_of_monotone hf a) (isLowerSet_setOf_lt_of_antitone hg b)
       (measurableSet_lt measurable_const hfm) (measurableSet_lt measurable_const hgm)
 
+/-- **An antitone and a monotone function are negatively correlated.** -/
+theorem prodBernoulli_lintegral_mul_le_of_antitone_of_monotone (q : ι → unitInterval)
+    {f g : Set ι → ℝ≥0∞} (hf : Antitone f) (hg : Monotone g) (hfm : Measurable f)
+    (hgm : Measurable g) :
+    ∫⁻ ω, f ω * g ω ∂prodBernoulli q ≤
+      (∫⁻ ω, f ω ∂prodBernoulli q) * (∫⁻ ω, g ω ∂prodBernoulli q) := by
+  simpa only [mul_comm] using prodBernoulli_lintegral_mul_le_of_monotone_of_antitone q hg hf hgm hfm
+
 /-- **Harris for bounded monotone real functions.** -/
 theorem prodBernoulli_integral_mul_le (q : ι → unitInterval) {f g : Set ι → ℝ} {C : ℝ}
     (hf : Monotone f) (hg : Monotone g) (hfm : Measurable f) (hgm : Measurable g)
@@ -354,6 +364,16 @@ theorem prodBernoulli_integral_mul_le_of_monotone_of_antitone (q : ι → unitIn
     (fun _ _ h => neg_le_neg (hg h)) hfm hgm.neg hfC (fun ω => by rw [abs_neg]; exact hgC ω)
   simp only [mul_neg, integral_neg] at h
   linarith
+
+/-- **A bounded antitone and a bounded monotone real function are negatively
+correlated.** -/
+theorem prodBernoulli_integral_mul_le_of_antitone_of_monotone (q : ι → unitInterval)
+    {f g : Set ι → ℝ} {C : ℝ} (hf : Antitone f) (hg : Monotone g) (hfm : Measurable f)
+    (hgm : Measurable g) (hfC : ∀ ω, |f ω| ≤ C) (hgC : ∀ ω, |g ω| ≤ C) :
+    ∫ ω, f ω * g ω ∂prodBernoulli q ≤
+      (∫ ω, f ω ∂prodBernoulli q) * (∫ ω, g ω ∂prodBernoulli q) := by
+  simpa only [mul_comm] using
+    prodBernoulli_integral_mul_le_of_monotone_of_antitone q hg hf hgm hfm hgC hfC
 
 /-- **Harris for bounded antitone real functions.** -/
 theorem prodBernoulli_integral_mul_le_of_antitone (q : ι → unitInterval)

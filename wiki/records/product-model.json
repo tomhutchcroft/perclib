@@ -1,0 +1,100 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "product-model",
+  "collections": [
+    {
+      "collection": "models",
+      "order": 0
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 20,
+      "label": "Product percolation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "grimmett",
+      "order": 0,
+      "label": "The basic percolation model",
+      "locator": "Chapter 1 · What is Percolation?",
+      "relationship": "Subject correspondence",
+      "status": "pending",
+      "note": "A precise statement-level mapping will follow the edition audit."
+    },
+    {
+      "source": "mathlib",
+      "order": 0,
+      "label": "Infinite product probability measure",
+      "locator": "Mathlib.Probability.ProductMeasure · Measure.infinitePi",
+      "relationship": "Formal foundation",
+      "status": "pending",
+      "note": "The compiled Lrp.Probability.ProdBernoulli adapter reuses this foundation. A full correspondence with the bond-percolation article remains pending."
+    },
+    {
+      "source": "mathlib",
+      "order": 1,
+      "label": "Homogeneous Bernoulli random subsets",
+      "locator": "Mathlib.Probability.Distributions.SetBernoulli",
+      "relationship": "Related formal construction",
+      "status": "pending",
+      "note": "The compiled Lrp.Probability.ProdBernoulli adapter reuses this foundation. A full correspondence with the bond-percolation article remains pending."
+    }
+  ],
+  "occursIn": [
+    {
+      "order": 1,
+      "source": "hutchcroft-book",
+      "tag": "2ML7",
+      "relationship": "generalization",
+      "edition": "In preparation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "note": "Credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "order": 2,
+      "source": "hutchcroft-book",
+      "tag": "8NWX",
+      "relationship": "generalization",
+      "edition": "In preparation",
+      "locator": "Cited without locator; the book is unpublished.",
+      "note": "Credited to T. Hutchcroft, book in preparation."
+    }
+  ],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "5PAT",
+      "proof_uses": [
+        "8NWX"
+      ],
+      "reason": "Intended prose proof: compute a finite cylinder under the product Bernoulli law. This is a prerequisite plan, not extracted Lean evidence."
+    },
+    {
+      "order": 1,
+      "tag": "A65C",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 2,
+      "tag": "2ML7",
+      "proof_uses": [
+        "8NWX"
+      ],
+      "reason": "Indicators of independent uniforms below q(e) are independent Bernoulli(q(e)) coordinates, so each coupled configuration has the product law of 8NWX, and the indicators increase with q."
+    },
+    {
+      "order": 3,
+      "tag": "I24D",
+      "proof_uses": [
+        "5PAT"
+      ],
+      "reason": "The one-edge cylinder probability gives expected open degree equal to the incident sum; a finite mean gives almost-sure finiteness, and a countable intersection gives one event."
+    }
+  ]
+}

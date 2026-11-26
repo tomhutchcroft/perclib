@@ -1,9 +1,12 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-New proofs, written for package Q-103 (issue 437, roadmap T-6), on the D-2 interface.
-Source motivation: M. Aizenman and C. M. Newman, "Tree graph inequalities and critical
-behavior in percolation models", J. Stat. Phys. 36 (1984), and the wiki proof of L82Q.
-No source text or code is copied.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+New proofs, on the bond interface. Source motivation: M. Aizenman and C. M. Newman, "Tree
+graph inequalities and critical behavior in percolation models", J. Stat. Phys. 36 (1984), and the
+wiki proof of L82Q. No source text or code is copied.
 -/
 module
 
@@ -74,7 +77,8 @@ theorem exists_nbr_reachable_avoid [DecidableEq V] {F : Finset (Sym2 V)} {o v : 
 graph of a finite edge set `F` and `|I| ≥ 2`, then there are `z`, a split of `I` into
 nonempty parts `A` and `I \ A`, and pairwise disjoint `F₀, F_A, F_B ⊆ F` with `o ↔ z` in
 `F₀`, `z ↔ x i` in `F_A` for `i ∈ A` and `z ↔ x i` in `F_B` for `i ∈ I \ A`. -/
-theorem exists_branch_finset [DecidableEq V] [DecidableEq ι] (x : ι → V) (I : Finset ι) (hI : 1 < I.card)
+theorem exists_branch_finset [DecidableEq V] [DecidableEq ι] (x : ι → V) (I : Finset ι)
+    (hI : 1 < I.card)
     (F : Finset (Sym2 V)) (o : V)
     (ho : ∀ i ∈ I, (fromEdgeSet (F : Set (Sym2 V))).Reachable o (x i)) :
     ∃ z : V, ∃ A ⊆ I, A.Nonempty ∧ (I \ A).Nonempty ∧
@@ -263,6 +267,7 @@ theorem law_forall_conn_le [Countable V] [DecidableEq ι] (q : Sym2 V → unitIn
 
 /-- **The tree-graph inequality** (L82Q): for every countable vertex type and every
 profile, `P(x ↔ y, x ↔ z) ≤ ∑_w τ(x, w) τ(w, y) τ(w, z)`. -/
+@[tag "L82Q"]
 theorem treeGraphInequality (V : Type*) [Countable V] : TreeGraphInequality V := by
   classical
   intro q x y z
@@ -296,7 +301,7 @@ theorem treeGraphInequality (V : Type*) [Countable V] : TreeGraphInequality V :=
   exact mul_le_mul' le_rfl (countable_profile_bk q (isUpperSet_conn w y)
     (isUpperSet_conn w z))
 
-/-! ### Non-vacuity (D-5) -/
+/-! ### Non-vacuity -/
 
 example : TreeGraphInequality Bool := treeGraphInequality Bool
 

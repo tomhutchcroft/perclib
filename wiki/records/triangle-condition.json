@@ -1,0 +1,87 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "triangle-condition",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 1
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 24,
+      "label": "The triangle condition",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Critical exponents and the triangle condition",
+      "locator": "Author manuscript · Chapter 4",
+      "relationship": "Source theorem family",
+      "status": "pending",
+      "note": "The abstract implications and the later lace-expansion verification occupy different pages."
+    },
+    {
+      "source": "hutchcroft-triangle-2021",
+      "order": 0,
+      "label": "Quantitative mean-field implications",
+      "locator": "Susceptibility inequalities and diagram comparison",
+      "relationship": "Alternative proof route",
+      "status": "pending",
+      "note": "Finite triangle control and slowly divergent triangle control yield different quantitative conclusions."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "67VP",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 1,
+      "tag": "7UDJ",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    },
+    {
+      "order": 2,
+      "tag": "P9JD",
+      "proof_uses": [
+        "2ZI0",
+        "CSY8"
+      ],
+      "reason": "The critical tail estimate of 2ZI0 forces the tail probabilities to zero, giving no percolation, and its n^(-1/2) lower bound makes the tail sum of CSY8 diverge."
+    },
+    {
+      "order": 3,
+      "tag": "2ZI0",
+      "proof_uses": [
+        "NUJY",
+        "JQLC",
+        "8DSI",
+        "2ML7",
+        "4IHK",
+        "JRCI",
+        "5UJQ",
+        "INZI",
+        "AUUG",
+        "L82Q",
+        "AFH6",
+        "UZ7J",
+        "70KD",
+        "JL1S",
+        "36PN",
+        "CSY8",
+        "MBV2"
+      ],
+      "reason": "Susceptibility estimate. Lower bound: finite-volume Russo (4IHK) and BK (JRCI) give chi' <= 2d chi^2; exhaustion (5UJQ), monotone coupling (2ML7) and chi(p_c) = infinity (JQLC) integrate it. Upper bound: a one-sided Russo inequality proved in place expresses chi' as a boundary sum over the finite cluster (INZI); BK for three events (AUUG) and Cauchy-Schwarz bound it below by moments estimated with the tree-graph inequalities (L82Q, AFH6); the cubic bound (UZ7J) and Fourier positivity from 70KD reduce the diagrams to the triangle, giving chi' >= c chi^2 near p_c. NUJY gives 0 < p_c < 1 and 8DSI the two-point sum identity. Critical tail: with beta = -log(1-p) and unit nearest-neighbour weights, the entropy cluster-tail comparison (JL1S) at beta(p_c - n^(-1/2)) and beta(p_c) with the susceptibility upper bound gives P(|K| >= n) <= C n^(-1/2); the universal integrated tail (36PN), the tail-sum identity (CSY8) and MBV2 give the matching lower bound. Order parameter: JL1S at beta(2p_c - p) and beta(p), letting n -> infinity, gives theta(p) <= C (p - p_c); JQLC gives theta(p) >= p - p_c."
+    }
+  ]
+}

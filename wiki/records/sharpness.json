@@ -1,0 +1,70 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "sharpness",
+  "collections": [
+    {
+      "collection": "methods",
+      "order": 6
+    },
+    {
+      "collection": "critical-theory",
+      "order": 0
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "hutchcroft-book",
+      "order": 23,
+      "label": "Sharpness of the phase transition",
+      "locator": "Cited without locator; the book is unpublished.",
+      "relationship": "Credited source",
+      "status": "attribution only",
+      "note": "Results, arguments or exposition in this article taken from the book are credited to T. Hutchcroft, book in preparation."
+    },
+    {
+      "source": "grimmett",
+      "order": 3,
+      "label": "Exponential decay",
+      "locator": "Chapter 5 · Exponential Decay",
+      "relationship": "Subject correspondence",
+      "status": "pending",
+      "note": "Spatial and cluster-volume decay statements must retain their respective hypotheses."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Uniqueness of the phase transition",
+      "locator": "Author manuscript · Chapter 3",
+      "relationship": "Alternative proof routes",
+      "status": "pending",
+      "note": "The Duminil-Copin–Tassion and Aizenman–Barsky approaches can be represented as different routes to related conclusions."
+    },
+    {
+      "source": "dct-sharpness",
+      "order": 0,
+      "label": "The finite-size criterion and sharpness",
+      "locator": "Percolation sharpness argument",
+      "relationship": "Proof route",
+      "status": "pending",
+      "note": "The finite-range spatial-decay conclusion must not be promoted to a general long-range spatial-decay statement."
+    },
+    {
+      "source": "dt-sharpness-zd",
+      "order": 0,
+      "label": "Subcritical finite-set certificate",
+      "locator": "Theorem 1.1",
+      "relationship": "Source-inspected statement correspondence",
+      "status": "pending",
+      "note": "Nearest-neighbour bond percolation on Z^d, d ≥ 2: the certificate threshold equals p_c. Remark 3 gives the openness of the certificate set and hence φ_p(S) ≥ 1 for p ≥ p_c."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "6EIM",
+      "proof_uses": [],
+      "reason": "A definition; it invokes no other wiki assertion."
+    }
+  ]
+}

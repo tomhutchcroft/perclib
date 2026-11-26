@@ -1,0 +1,476 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "iic-random-walk",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 208
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 0,
+      "label": "Killed Green functions, mean exit times and return bounds",
+      "locator": "31 August 2007 author manuscript, Section 2.1.1, (2.17)–(2.23), pp.11–12; Section 2.1.2, Proposition 2.5 and (2.32)–(2.34), pp.13–15",
+      "relationship": "Written reconstruction for logarithmic exponents, using a lazy spectral calculation and explicit binomial removal of laziness",
+      "status": "pending",
+      "note": "Degree volume and kernel normalization are explicit. The complete random-graph theorem and sample-path displacement/range estimates are not imported."
+    },
+    {
+      "source": "kozma-nachmias-alexander-orbach-2009",
+      "order": 1,
+      "label": "Intrinsic geometry to Alexander–Orbach return exponent",
+      "locator": "arXiv:0806.1442v2, Section 2, Theorem 2.1 and the conclusion on pp.14–15",
+      "relationship": "The required return and mean-exit implications are proved through 331W/KGNK/NNW7 and applied to the previously proved geometric bounds",
+      "status": "pending",
+      "note": "The susceptibility-biased extension uses finite triangle; the distant-point version retains KIGU's fixed-shift ratio hypothesis. No IIC identification or full source theorem is claimed."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 2,
+      "label": "Pathwise exit times, maximal displacement and range",
+      "locator": "31 August 2007 author manuscript, Lemma 2.3 and (2.25)–(2.28), pp.11–13; Theorems 1.5(c),1.6, pp.4–5; proof of Theorem 1.6 and (2.48)–(2.49), pp.20–21",
+      "relationship": "Written deterministic logarithmic-exponent proof using the existing geometric limits, a finite Green dipole comparison and summable estimates at dyadic radii",
+      "status": "pending",
+      "note": "Maximum distance is distinguished from instantaneous displacement. Range is first measured by degree mass; the bounded-degree hypothesis is retained for its cardinality. No annealed estimate or IIC identification is inferred."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 3,
+      "label": "Annealed return, mean exit and mean-displacement bounds",
+      "locator": "31 August 2007 author manuscript, Assumption 1.2(1)–(3), Theorem 1.4 (1.14)–(1.16), printed p.4 / PDF index3; proof in Section 2.2, printed p.19 / PDF index18",
+      "relationship": "Written proof from the wiki's weaker linear lower-volume tail, volume first moment and resistance tail; the upper kernel bound uses a threshold-dependent radius",
+      "status": "pending",
+      "note": "No inverse-volume moment is inferred. Bounds are two-sided orders, not asymptotic equivalents; the displacement mean has only a lower bound. The oriented-percolation construction and its geometry remain separate."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 4,
+      "label": "Quantitative walk tightness and fractional moments",
+      "locator": "31 August 2007 author manuscript, Theorem 1.3 (1.12)–(1.13), printed p.4 / PDF index3; (2.36), printed p.16 / PDF index15; discussion before Example 2.6, printed p.17 / PDF index16; proof of Theorem 1.3, (2.42)–(2.43), printed pp.18–19 / PDF indices17–18",
+      "relationship": "Written quantitative version of the good-environment and fast-exit argument, balancing the existing resistance tail against the tracked 22/3 loss",
+      "status": "pending",
+      "note": "The explicit 3/47 and 1/47 powers are deductions for the wiki's finite-triangle hypotheses, not quoted optimal exponents. Negative moments retain 1+distance. The upper mean-displacement problem and all excluded moment endpoints remain open here."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 5,
+      "label": "Quantitative range tails and fractional moments",
+      "locator": "31 August 2007 author manuscript, Theorem 1.6 (1.23)–(1.24), printed p.6 / PDF index5; proof of Theorem 1.6 after (2.48)–(2.49), printed pp.21–22 / PDF indices20–21",
+      "relationship": "The missed-volume argument is made quantitative using the already proved volume and resistance tails; the new moment ranges are deductions for the stated wiki hypotheses",
+      "status": "pending",
+      "note": "Degree range is separated from cardinality until bounded cluster degree is used. Neither a sharp tail nor an upper first-moment estimate is asserted; the apparent source-display equality remains unverified."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 6,
+      "label": "All positive moments and range tails at intrinsic exit",
+      "locator": "Deductions from the existing treatment of Section 2.1 mean-exit and hitting bounds, combined with the wiki intrinsic-volume estimates",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Geometric time blocks give a square-root exponential slow-exit bound. The stopped missed-volume argument gives beta/(3 beta+2), hence 1/7 for the incipient limits. All positive stopped moments are supplied; deterministic-time upper means and excluded negative endpoints remain separate. No source error or new reading is claimed."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 7,
+      "label": "Inverse maximum and improved fixed-time inverse range moments",
+      "locator": "Deductions from the already written slow-exit and stopped-range estimates",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "All negative maximum orders and fixed-time range orders above -1/7 are obtained without new source reading. The range lower tail retains a logarithmic factor; positive first-moment upper bounds and the inverse-range endpoint remain separate."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 8,
+      "label": "Quadratic small displacement and inverse-position moment transition",
+      "locator": "Further deductions from the already written spectral energy, return-moment and incipient volume bounds",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Adjacent-time smoothing handles ordinary-walk parity. A second volume moment yields quadratic small-ball bounds and the inverse-position transition at order two, including its endpoint logarithm. No new source reading, source fault, upper positive first moment or IIC identification is claimed."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 9,
+      "label": "Root occupation moments and successive return times",
+      "locator": "Further deductions from the already written killed-voltage, return-kernel and incipient volume/resistance bounds",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "A renewal estimate compares visits with their fixed-graph mean. A resolvent test gives a finite-time resistance bound and an annealed lower tail, yielding moments for -3/4<p<3 and pathwise visit/return exponents. No new source reading, source fault or optimal moment endpoint is claimed."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 10,
+      "label": "Occupation tail endpoints and successive-return moments",
+      "locator": "Further deductions from the existing return-kernel tail and root occupation bounds",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "An event integral sums weak polynomial tails without independence. The cubic occupation tail gives explicit endpoint bounds, and inversion gives successive-return moments for -1<p<1/4. Excursion reversal proves divergence of return-time moments of order at least one. No sharp endpoint asymptotic, new source reading or source fault is claimed."
+    },
+    {
+      "source": "barlow-jarai-kumagai-slade-iic-2008",
+      "order": 11,
+      "label": "Stationary degree bias, collisions and inverse range moments",
+      "locator": "Further deductions from susceptibility bias, marked path reversal and the existing occupation estimates",
+      "relationship": "Further written deductions; not a newly checked source-statement occurrence",
+      "status": "pending",
+      "note": "Degree bias makes susceptibility-biased cylinder limits stationary and marked reversible. Collision counts give cubic small-range tails and inverse moments below three; first-return tails give a sublinear mean-range upper bound. No identification with distant-point limits, optimal endpoint, new source reading or source fault is claimed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "331W",
+      "proof_uses": [],
+      "reason": "The finite Dirichlet equation, orthogonality of flows and pathwise Cauchy–Schwarz identify resistance and bound killed occupation. Geometric root visits give the recurrence criterion."
+    },
+    {
+      "order": 1,
+      "tag": "KGNK",
+      "proof_uses": [],
+      "reason": "The spectral theorem for the positive lazy contraction bounds edge energy; averaging over a ball gives the upper kernel bound. The Markov property and Cauchy–Schwarz give the lower bound using both root and supremum mean exit times."
+    },
+    {
+      "order": 2,
+      "tag": "NNW7",
+      "proof_uses": [
+        "331W",
+        "KGNK"
+      ],
+      "reason": "Compose the volume and resistance exponents in the Green-function bounds, optimize radius in the kernel bounds, and use explicit binomial comparisons to remove laziness at even times."
+    },
+    {
+      "order": 3,
+      "tag": "IXCJ",
+      "proof_uses": [
+        "NNW7",
+        "E22E",
+        "RG3Z",
+        "POD2"
+      ],
+      "reason": "Bounded cluster degree converts cardinality volume to degree volume. Apply the deterministic theorem on the common full-measure set supplied by the intrinsic volume and resistance results."
+    },
+    {
+      "order": 4,
+      "tag": "LCUN",
+      "proof_uses": [
+        "331W"
+      ],
+      "reason": "The killed Green dipole identifies wired pair resistance; positivity of the two Green deficits and a path-flow bound give both hitting comparisons."
+    },
+    {
+      "order": 5,
+      "tag": "7WII",
+      "proof_uses": [
+        "LCUN",
+        "331W",
+        "NNW7",
+        "KGNK"
+      ],
+      "reason": "Returning through the root amplifies the mean-exit survival bound into a polynomial fast-exit bound. Dyadic Borel–Cantelli gives pathwise exit and maximum exponents; the return kernel controls instantaneous small displacement in probability."
+    },
+    {
+      "order": 6,
+      "tag": "YIJB",
+      "proof_uses": [
+        "LCUN",
+        "7WII"
+      ],
+      "reason": "The expected degree mass missed before exiting a larger ball is small. Markov and Borel–Cantelli give enough visited mass, and the exit-time bound transfers it to deterministic times. Bounded degree is used only for cardinality."
+    },
+    {
+      "order": 7,
+      "tag": "HJKG",
+      "proof_uses": [
+        "7WII",
+        "YIJB",
+        "IXCJ",
+        "RG3Z",
+        "POD2"
+      ],
+      "reason": "Apply the deterministic pathwise results on the common full-measure geometry event, use cluster degree at most 2d, and transfer to the lazy walk through its independent clock."
+    },
+    {
+      "order": 8,
+      "tag": "VFZN",
+      "proof_uses": [
+        "KGNK",
+        "NNW7"
+      ],
+      "reason": "Choose radius proportional to time times the kernel threshold, then integrate the resulting cubic tail. The binomial inequality used from NNW7 is graphwise and does not require its geometric exponent hypotheses."
+    },
+    {
+      "order": 9,
+      "tag": "Z0P0",
+      "proof_uses": [
+        "VFZN",
+        "331W",
+        "KGNK",
+        "NNW7"
+      ],
+      "reason": "A union bound produces a positive-probability event with cubic root mean exit time and a controlled supremum mean. The survival lower bound and binomial comparison give lower kernel moments; direct averaging gives mean exit times."
+    },
+    {
+      "order": 10,
+      "tag": "5QU6",
+      "proof_uses": [
+        "VFZN"
+      ],
+      "reason": "Apply Cauchy–Schwarz first to the walk kernel and then to the environment, retaining the degree-volume first moment. A fixed small fraction of the cubic time radius gives the displacement mean lower bound."
+    },
+    {
+      "order": 11,
+      "tag": "G85Z",
+      "proof_uses": [
+        "Z0P0",
+        "5QU6",
+        "IXCJ",
+        "RG3Z",
+        "KIGU",
+        "Z78U",
+        "POD2"
+      ],
+      "reason": "The finite-triangle geometry supplies a linear lower-volume tail, quadratic degree-volume mean and polynomial resistance tail. Bounded lattice degree converts kernels to probabilities and covers the finitely many small times."
+    },
+    {
+      "order": 12,
+      "tag": "C2KR",
+      "proof_uses": [
+        "Z0P0",
+        "331W",
+        "7WII"
+      ],
+      "reason": "Choose two inner radii from the time and an environment-tolerance parameter, retain both resistance events and both volume events, and use the return-through-root fast-exit inequality. Balance the bad-environment probability with the conditional escape estimate; transfer laziness by the holding-time coupling."
+    },
+    {
+      "order": 13,
+      "tag": "J75E",
+      "proof_uses": [
+        "C2KR",
+        "5QU6",
+        "331W"
+      ],
+      "reason": "The small-displacement bound controls negative moments after adding one; the maximum-distance tail controls positive moments. Integrate the tails and obtain lower bounds from uniform compact intervals of positive mass. Exit moments use the fast-exit tail and the annealed first mean."
+    },
+    {
+      "order": 14,
+      "tag": "YWT9",
+      "proof_uses": [
+        "C2KR",
+        "J75E",
+        "G85Z",
+        "POD2"
+      ],
+      "reason": "The existing IIC volume estimates and resistance exponent one-half give gamma=1/2, delta=3/47 and alpha=1/47. Apply the general joint-law tail and moment bounds without identifying incipient constructions."
+    },
+    {
+      "order": 15,
+      "tag": "JC9J",
+      "proof_uses": [
+        "Z0P0",
+        "C2KR",
+        "LCUN",
+        "331W"
+      ],
+      "reason": "Optimize the outer exit radius and inner visited ball against the resistance and lower-volume tails. A union bound includes the unconditional late-exit probability. The maximum bound and volume mean give the upper tail; integration gives the stated moments."
+    },
+    {
+      "order": 16,
+      "tag": "E3IN",
+      "proof_uses": [
+        "JC9J",
+        "C2KR"
+      ],
+      "reason": "Choose radius of order square root of the range threshold divided by its logarithm. The exponential volume tail then balances the maximum-distance bound, giving positive moments below half the escape exponent."
+    },
+    {
+      "order": 17,
+      "tag": "PSNV",
+      "proof_uses": [
+        "JC9J",
+        "E3IN",
+        "G85Z",
+        "Z78U",
+        "IXCJ"
+      ],
+      "reason": "The IIC resistance exponent one-half gives the lower range exponent 3/23; the exponential intrinsic-volume bound gives positive range moments below 3/94. Bounded lattice degree converts degree mass to vertex cardinality, including the reversed comparison for negative powers."
+    },
+    {
+      "order": 18,
+      "tag": "VI2M",
+      "proof_uses": [
+        "331W"
+      ],
+      "reason": "The supremum mean-exit bound gives geometric survival over fixed graphwise blocks. Splitting by volume and optimizing the cutoff gives the square-root exponential tail and joint exponential integrability."
+    },
+    {
+      "order": 19,
+      "tag": "RA7K",
+      "proof_uses": [
+        "LCUN",
+        "Z0P0"
+      ],
+      "reason": "At the exit time, the missed inner-ball estimate needs no late-exit error. Balance the lower-volume and resistance tails with the probability of missing half the inner ball, retaining integer radii."
+    },
+    {
+      "order": 20,
+      "tag": "OBBT",
+      "proof_uses": [
+        "VI2M",
+        "RA7K",
+        "PSNV",
+        "G85Z",
+        "YWT9"
+      ],
+      "reason": "The incipient exponential degree-volume tail and resistance exponent one half give all positive stopped moments and negative ranges p>-1/47 and p>-1/7. Bounded degree transfers stopped range to vertex cardinality."
+    },
+    {
+      "order": 21,
+      "tag": "ZY62",
+      "proof_uses": [
+        "VI2M"
+      ],
+      "reason": "An intrinsic maximum below an integer radius is exactly failure to hit its sphere. The slow-exit tail therefore gives a stretched-exponential reciprocal tail and all inverse maximum moments."
+    },
+    {
+      "order": 22,
+      "tag": "GCYB",
+      "proof_uses": [
+        "VI2M",
+        "RA7K"
+      ],
+      "reason": "A smaller radius balances the exponential slow-exit error against the stopped-range lower tail; a union bound requires no independence. Integer rounding retains the logarithmic loss."
+    },
+    {
+      "order": 23,
+      "tag": "PDSN",
+      "proof_uses": [
+        "ZY62",
+        "GCYB",
+        "PSNV",
+        "G85Z",
+        "YWT9"
+      ],
+      "reason": "The checked incipient hypotheses give resistance exponent one half. Bounded degree transfers range to cardinality, and existing tightness supplies the lower moment comparisons. The return lower bound prevents confusing maximum with final position."
+    },
+    {
+      "order": 24,
+      "tag": "05B3",
+      "proof_uses": [
+        "KGNK"
+      ],
+      "reason": "The multiplier (1+t)/2 suppresses the negative spectral endpoint. A path energy bound controls kernel variation; nonnegative adjacent kernels recover a bound at the original ordinary-walk time."
+    },
+    {
+      "order": 25,
+      "tag": "9JIV",
+      "proof_uses": [
+        "05B3",
+        "VFZN",
+        "Z0P0"
+      ],
+      "reason": "The second volume and return moments bound the averaged kernel and its gradient. Paley–Zygmund, lower volume and a union bound give a common event for the lower estimate; a one-step inclusion recovers ordinary walk at every time."
+    },
+    {
+      "order": 26,
+      "tag": "FPDW",
+      "proof_uses": [
+        "9JIV",
+        "G85Z",
+        "PSNV",
+        "YWT9"
+      ],
+      "reason": "The incipient exponential degree-volume tail supplies the second moment. Integrating the quadratic small-ball bounds gives all inverse-position orders and the logarithmic endpoint; radius one supplies the return-dominated lower bound."
+    },
+    {
+      "order": 27,
+      "tag": "Y2C3",
+      "proof_uses": [],
+      "reason": "Ordered visit times bound every integer moment by a factorial times the mean power. The renewal generating function bounds small visit counts, including defective returns; integration gives all fixed-chain moment orders above -1."
+    },
+    {
+      "order": 28,
+      "tag": "7UZM",
+      "proof_uses": [
+        "331W",
+        "KGNK",
+        "Y2C3"
+      ],
+      "reason": "The killed voltage tests the positive lazy resolvent. Monotonicity compares its Abel sum with finite-time occupation, and binomial coefficients transfer to ordinary walk. Optimize radius against resistance and volume tails, then average the renewal lower tail."
+    },
+    {
+      "order": 29,
+      "tag": "ZZC8",
+      "proof_uses": [
+        "Y2C3",
+        "7UZM",
+        "G85Z",
+        "PSNV",
+        "IXCJ"
+      ],
+      "reason": "The incipient tails give beta=1/2 and inverse visit moments below 3/4. Return moments, Minkowski and the fixed-chain bound give positive orders below three. Quenched return exponents and dyadic Borel–Cantelli give root visit and inverse return-time exponents."
+    },
+    {
+      "order": 30,
+      "tag": "6UKZ",
+      "proof_uses": [
+        "Y2C3"
+      ],
+      "reason": "Integrate each return probability over an arbitrary environment event, sum, and apply the result to an upper-level event for the mean. Average the conditional exponential occupation tail using a reciprocal Laplace integral."
+    },
+    {
+      "order": 31,
+      "tag": "KMWL",
+      "proof_uses": [
+        "6UKZ",
+        "VFZN",
+        "NNW7",
+        "G85Z",
+        "ZZC8"
+      ],
+      "reason": "The bounded root degree and ordinary/lazy spectral comparisons give the cubic return-probability tail at every time. Summation and occupation transfer retain its exponent; the deterministic occupation cutoffs yield endpoint and higher-order moment bounds."
+    },
+    {
+      "order": 32,
+      "tag": "2XZU",
+      "proof_uses": [
+        "KMWL",
+        "ZZC8",
+        "IXCJ"
+      ],
+      "reason": "Invert root visit counts with integer-time cutoffs. The cubic upper occupation tail controls early returns and the lower occupation tail controls late returns. Tail integration and fixed quantiles give two-sided moment bounds. Reversibility and recurrence identify excursion occupation with degree measure, whose infinite total mass forces infinite means."
+    },
+    {
+      "order": 33,
+      "tag": "K11N",
+      "proof_uses": [
+        "N20X",
+        "E22E"
+      ],
+      "reason": "Translation across an open edge preserves the finite susceptibility cluster-size weight. Pass the bounded cylinder balance identity to the limit, extend by a monotone class, and bias by degree. Retain displacement marks when reversing whole paths."
+    },
+    {
+      "order": 34,
+      "tag": "VFDK",
+      "proof_uses": [
+        "K11N"
+      ],
+      "reason": "Reversing the first k marked steps turns a first visit into root avoidance. Stationarity and the Markov property give collision expectations and future-occupation marginals; deterministic pair counting and Cauchy-Schwarz give the range comparisons."
+    },
+    {
+      "order": 35,
+      "tag": "BP8X",
+      "proof_uses": [
+        "K11N",
+        "VFDK",
+        "6UKZ",
+        "KMWL",
+        "ZZC8",
+        "G85Z",
+        "PDSN"
+      ],
+      "reason": "Sum the cubic tails of future occupations through an event integral, without independence, to control collision counts and small range. Integrate with the deterministic range cutoff; use existing positive fractional moments for lower comparisons. The first-return identity supplies the mean upper bound, and collisions supply its lower bound."
+    }
+  ]
+}

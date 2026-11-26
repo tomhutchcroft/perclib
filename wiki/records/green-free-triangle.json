@@ -1,0 +1,176 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "green-free-triangle",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 167
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Green-free BK",
+      "locator": "17 March 2017 author manuscript, Lemma 9.7, printed pp.118–119 / PDF indices129–130.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "Condition on the green-connected set, apply BK in its complement, then use bounded convergence of indicators rather than a false monotonicity claim."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Triangle differential inequality",
+      "locator": "17 March 2017 author manuscript, Lemma 9.1 and Section 9.4, printed pp.109–110 and114–119 / PDF indices120–121 and125–130.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "The cutting identity retains the correct conditional coordinates. The signed deletion loss is bounded before enlarging its indicator. A positive part makes the triangle-size qualification explicit."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "Magnetization amplitude",
+      "locator": "17 March 2017 author manuscript, Exercise 9.2 and Lemma 9.3, printed pp.110–111 / PDF indices121–122.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "The completed bootstrap controls the nontrivial triangle and the edge mass. The coefficient tends to 1/(2e), yielding the stated uniform square-root bounds."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Generating functions and tails",
+      "locator": "17 March 2017 author manuscript, Theorem 9.2 and (9.2.6)–(9.2.11), printed pp.110–111 / PDF indices121–122.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "A two-field inequality gives explicit two-sided tail constants, including n=1. The lower constant in the manuscript calculation is corrected locally."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Extrapolation",
+      "locator": "17 March 2017 author manuscript, Exercise 9.3 and the proof of Theorem 9.5, printed pp.112–114 / PDF indices123–125.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "Only levels above the supercritical density are inverted. A bi-Lipschitz coordinate change and Fubini justify integration of the almost-everywhere differential inequality along levels."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 5,
+      "label": "Uniform mean-field scaling",
+      "locator": "17 March 2017 author manuscript, Theorems 9.2 and9.5, printed pp.110–114 / PDF indices121–125.",
+      "relationship": "Written green-free and mean-field proofs; diagnoses provisional",
+      "status": "pending",
+      "note": "The density comparison retains 2d and is clipped at one for the full parameter interval. Both tail and rescaled density constants are uniform in sufficiently large dimension."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 6,
+      "label": "Explicit dimension range and constants for mean-field laws",
+      "locator": "Independent quantitative consequences of the existing Chapter 4 small-triangle proof and Chapter 9 field and tail arguments; compare Theorem 4.2 and Theorems 9.2 and9.5 in the 17 March 2017 manuscript",
+      "relationship": "Explicit constants derived from the quantified bootstrap, not a numerical dimension threshold attributed to the source",
+      "status": "pending",
+      "note": "For d>=10^11 the neighbouring triangle is at most 189/d and the field coefficient is at least 2/11. The critical tail, rescaled density and susceptibility estimates then have explicit constants; the exploration-score argument also gives a cubic second moment with constant 1/3 and a lower cutoff chi squared/6. No source correction or compiled status is changed."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "J3M4",
+      "proof_uses": [
+        "G192"
+      ],
+      "reason": "Condition on the green-connected set, apply BK in its complement, then use bounded convergence of indicators rather than a false monotonicity claim."
+    },
+    {
+      "order": 1,
+      "tag": "OB0K",
+      "proof_uses": [
+        "J3M4",
+        "5W46",
+        "F69T"
+      ],
+      "reason": "The cutting identity retains the correct conditional coordinates. The signed deletion loss is bounded before enlarging its indicator. A positive part makes the triangle-size qualification explicit."
+    },
+    {
+      "order": 2,
+      "tag": "C2V4",
+      "proof_uses": [
+        "OB0K",
+        "F7N7",
+        "ZDVK",
+        "G192"
+      ],
+      "reason": "The completed bootstrap controls the nontrivial triangle and the edge mass. The coefficient tends to 1/(2e), yielding the stated uniform square-root bounds."
+    },
+    {
+      "order": 3,
+      "tag": "ZK0V",
+      "proof_uses": [
+        "C2V4"
+      ],
+      "reason": "A two-field inequality gives explicit two-sided tail constants, including n=1. The lower constant in the manuscript calculation is corrected locally."
+    },
+    {
+      "order": 4,
+      "tag": "JR88",
+      "proof_uses": [
+        "G192"
+      ],
+      "reason": "Only levels above the supercritical density are inverted. A bi-Lipschitz coordinate change and Fubini justify integration of the almost-everywhere differential inequality along levels."
+    },
+    {
+      "order": 5,
+      "tag": "74SS",
+      "proof_uses": [
+        "C2V4",
+        "ZK0V",
+        "JR88",
+        "JQLC",
+        "F7N7"
+      ],
+      "reason": "The density comparison retains 2d and is clipped at one for the full parameter interval. Both tail and rescaled density constants are uniform in sufficiently large dimension."
+    },
+    {
+      "order": 6,
+      "tag": "YT0O",
+      "proof_uses": [
+        "7GNW",
+        "NOTF",
+        "0Y4K"
+      ],
+      "reason": "The nontrivial triangle is bounded by three weighted triangles; the explicit critical bound supplies the neighbouring-triangle hypothesis and the susceptibility comparison."
+    },
+    {
+      "order": 7,
+      "tag": "E5ZR",
+      "proof_uses": [
+        "YT0O",
+        "7GNW",
+        "OB0K",
+        "ZDVK",
+        "G192",
+        "ZK0V",
+        "JR88",
+        "JQLC"
+      ],
+      "reason": "An explicit exponential-series comparison makes the field coefficient at least 2/11; integration, tail comparison and valid-level extrapolation give uniform numerical mean-field bounds."
+    },
+    {
+      "order": 8,
+      "tag": "9TAI",
+      "proof_uses": [
+        "YT0O",
+        "E5ZR",
+        "4960",
+        "4GNM",
+        "Y84V",
+        "IK5Y",
+        "2DZD",
+        "0BQB",
+        "76EV"
+      ],
+      "reason": "The small triangle and exploration score give the cubic lower moment with constant 1/3. A size-biased band and an intermediate subcritical parameter give the lower cutoff, while the weighted exponential estimate supplies the upper tail."
+    }
+  ]
+}

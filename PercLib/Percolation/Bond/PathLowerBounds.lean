@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 PercLib contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-
-New for this project (issue 140, Q-17). No upstream proof is copied.
+Authors: PercLib contributors
+-/
+/-
+New for this project. No upstream proof is copied.
 -/
 module
 
@@ -95,6 +97,7 @@ theorem prodBernoulli_biUnion_of_determined {ι κ : Type*} (p : ι → unitInte
 
 /-- **Edge-disjoint paths.** Pairwise edge-disjoint walks give the parallel-system lower
 bound. -/
+@[tag "8V8H"]
 theorem one_sub_prod_le_tau_of_edgeDisjoint [DecidableEq V] (q : Sym2 V → unitInterval)
     {x y : V} {n : ℕ} (p : Fin n → (⊤ : SimpleGraph V).Walk x y)
     (hdisj : Pairwise fun i j => Disjoint (p i).edges.toFinset (p j).edges.toFinset) :
@@ -146,7 +149,9 @@ theorem tau_completeBipartite_bool (k : ℕ) (t : unitInterval) :
     intro e he he'
     simp only [mem_insert_iff, mem_singleton_iff] at he he'
     rcases he with rfl | rfl <;> rcases he' with h | h <;>
-      simp [x, y] at h <;> exact hmm' h
+      simp only [Sym2.eq, Sym2.rel_iff', Prod.mk.injEq, Sum.inr.injEq, true_and, Prod.swap_prod_mk,
+          reduceCtorEq, and_self, or_false, x, Sum.inl.injEq, Bool.false_eq_true, false_and,
+          or_self, y, Bool.true_eq_false, and_false, and_true] at h <;> exact hmm' h
   have hunion := prodBernoulli_biUnion_of_determined q Finset.univ hFdisj
     (A := A) (fun m _ => measurableSet_setOf_finset_subset _) (fun m => subset_determined _)
   have hA : ∀ m, prodBernoulli q (A m) =
@@ -204,6 +209,118 @@ theorem tau_completeBipartite_bool (k : ℕ) (t : unitInterval) :
 
 end SeriesParallel
 
+/-! ### Parallel two-edge routes with arbitrary probabilities -/
+
+section ParallelRoutes
+
+variable [Countable V] {ι : Type*} [Fintype ι]
+
+open scoped Classical in
+/-- **Parallel two-edge routes.** Let `x ≠ y` and let `z : ι → V` be distinct middle
+vertices, different from `x` and `y`. If the only pairs of distinct vertices with positive
+probability are the pairs `s(x, z i)` and `s(z i, y)`, then
+`τ(x, y) = 1 - ∏ᵢ (1 - q(x, z i) q(z i, y))`. Diagonal probabilities are arbitrary. -/
+theorem tau_eq_one_sub_prod_of_parallel_routes (q : Sym2 V → unitInterval) {x y : V}
+    {z : ι → V} (hz : Function.Injective z) (hxy : x ≠ y) (hzx : ∀ i, z i ≠ x)
+    (hzy : ∀ i, z i ≠ y)
+    (hq : ∀ u v, u ≠ v → (∀ i, s(u, v) ≠ s(x, z i) ∧ s(u, v) ≠ s(z i, y)) → q s(u, v) = 0) :
+    tau q x y = 1 - ∏ i, (1 - (unitInterval.toNNReal (q s(x, z i)) : ℝ≥0∞) *
+      (unitInterval.toNNReal (q s(z i, y)) : ℝ≥0∞)) := by
+  set F : ι → Finset (Sym2 V) := fun i => {s(x, z i), s(z i, y)}
+  set A : ι → Set (Config V) := fun i => {ω | ((F i : Finset _) : Set (Sym2 V)) ⊆ ω}
+  have hne : ∀ i, s(x, z i) ≠ s(z i, y) := fun i h => by
+    rcases Sym2.eq_iff.1 h with ⟨h1, -⟩ | ⟨h1, -⟩
+    · exact hzx i h1.symm
+    · exact hxy h1
+  have hFdisj : Set.PairwiseDisjoint ((Finset.univ : Finset ι) : Set ι)
+      (fun i => ((F i : Finset _) : Set (Sym2 V))) := by
+    intro i _ j _ hij
+    simp only [Function.onFun, F, Finset.coe_insert, Finset.coe_singleton]
+    rw [Set.disjoint_left]
+    intro e he he'
+    simp only [mem_insert_iff, mem_singleton_iff] at he he'
+    rcases he with rfl | rfl <;> rcases he' with h | h <;> rcases Sym2.eq_iff.1 h with h | h <;>
+      first
+      | exact hij (hz h.1) | exact hij (hz h.2) | exact hzx _ h.1 | exact hzx _ h.1.symm
+      | exact hzy _ h.1
+  have hunion := prodBernoulli_biUnion_of_determined q Finset.univ hFdisj
+    (A := A) (fun i _ => measurableSet_setOf_finset_subset _) (fun i => subset_determined _)
+  have hA : ∀ i, prodBernoulli q (A i) = (unitInterval.toNNReal (q s(x, z i)) : ℝ≥0∞) *
+      (unitInterval.toNNReal (q s(z i, y)) : ℝ≥0∞) := fun i => by
+    simp only [A]
+    rw [prodBernoulli_subset, Finset.prod_pair (hne i)]
+  simp only [hA] at hunion
+  rw [← hunion]
+  -- Lower bound: each open route connects `x` to `y`.
+  have hsub : (⋃ i ∈ (Finset.univ : Finset ι), A i) ⊆ conn x y := by
+    intro ω hω
+    simp only [mem_iUnion, Finset.mem_univ, exists_true_left] at hω
+    obtain ⟨i, hi⟩ := hω
+    exact conn_trans (mem_conn_of_mem (hzx i).symm (hi (by simp [F])))
+      (mem_conn_of_mem (hzy i) (hi (by simp [F])))
+  -- Upper bound: almost surely every open pair of distinct vertices lies on a route, and then
+  -- the vertices reachable from `x` without an open route are `x` and its open middle
+  -- neighbours.
+  set H : SimpleGraph V := SimpleGraph.fromEdgeSet (⋃ i, {s(x, z i), s(z i, y)})
+  have hae : ∀ᵐ ω ∂law q, openGraph ω ≤ H := by
+    refine (ae_openGraph_le_host_iff H q).2 fun u v huv hH => hq u v huv fun i => ?_
+    constructor <;> intro h <;> refine hH ?_ <;>
+      simp only [H, SimpleGraph.fromEdgeSet_adj, mem_iUnion, mem_insert_iff,
+        mem_singleton_iff] <;> exact ⟨⟨i, by simp [h]⟩, huv⟩
+  refine le_antisymm ?_ (measure_mono hsub)
+  rw [tau]
+  refine measure_mono_ae ?_
+  filter_upwards [hae] with ω hω hconn
+  simp only [mem_iUnion, Finset.mem_univ, exists_true_left]
+  by_contra hno
+  simp only [not_exists] at hno
+  have hclosed : ∀ a b, (openGraph ω).Adj a b →
+      a ∈ {v | v = x ∨ ∃ i, v = z i ∧ s(x, z i) ∈ ω} →
+        b ∈ {v | v = x ∨ ∃ i, v = z i ∧ s(x, z i) ∈ ω} := by
+    intro a b hab ha
+    have hHab := hω hab
+    rw [openGraph_adj_iff] at hab
+    simp only [H, SimpleGraph.fromEdgeSet_adj, mem_iUnion, mem_insert_iff,
+      mem_singleton_iff] at hHab
+    obtain ⟨⟨i, he | he⟩, -⟩ := hHab
+    · rcases ha with rfl | ⟨j, rfl, hj⟩
+      · rw [Sym2.congr_right] at he
+        subst he
+        exact Or.inr ⟨i, rfl, hab.1⟩
+      · rcases Sym2.eq_iff.1 he with ⟨h, -⟩ | ⟨-, rfl⟩
+        · exact absurd h (hzx j)
+        · exact Or.inl rfl
+    · rcases ha with rfl | ⟨j, rfl, hj⟩
+      · rcases Sym2.eq_iff.1 he with ⟨h, -⟩ | ⟨h, -⟩
+        · exact absurd h.symm (hzx i)
+        · exact absurd h hxy
+      · rcases Sym2.eq_iff.1 he with ⟨h, rfl⟩ | ⟨h, -⟩
+        · obtain rfl := hz h
+          refine absurd (fun e he => ?_) (hno j)
+          simp only [F, Finset.coe_insert, Finset.coe_singleton, mem_insert_iff,
+            mem_singleton_iff] at he
+          rcases he with rfl | rfl
+          · exact hj
+          · exact hab.1
+        · exact absurd h (hzy j)
+  rcases mem_of_reachable_of_closed hclosed hconn (Or.inl rfl) with h | ⟨i, h, -⟩
+  · exact hxy h.symm
+  · exact hzy i h.symm
+
+/-- **Homogeneous parallel routes.** If every route pair has probability `t`, then
+`τ(x, y) = 1 - (1 - t²)^k` for `k` middle vertices. -/
+theorem tau_eq_one_sub_pow_of_parallel_routes (q : Sym2 V → unitInterval) {x y : V}
+    {z : ι → V} (hz : Function.Injective z) (hxy : x ≠ y) (hzx : ∀ i, z i ≠ x)
+    (hzy : ∀ i, z i ≠ y)
+    (hq : ∀ u v, u ≠ v → (∀ i, s(u, v) ≠ s(x, z i) ∧ s(u, v) ≠ s(z i, y)) → q s(u, v) = 0)
+    {t : unitInterval} (hxt : ∀ i, q s(x, z i) = t) (hyt : ∀ i, q s(z i, y) = t) :
+    tau q x y = 1 - (1 - (unitInterval.toNNReal t : ℝ≥0∞) *
+      (unitInterval.toNNReal t : ℝ≥0∞)) ^ Fintype.card ι := by
+  rw [tau_eq_one_sub_prod_of_parallel_routes q hz hxy hzx hzy hq]
+  simp only [hxt, hyt, Finset.prod_const, Finset.card_univ]
+
+end ParallelRoutes
+
 /-! ### Non-vacuity -/
 
 open scoped Classical in
@@ -214,6 +331,23 @@ example : tau (fun e => if e ∈ (completeBipartiteGraph Bool (Fin 2)).edgeSet t
     1 - (1 - (unitInterval.toNNReal ⟨1 / 2, by norm_num, by norm_num⟩ : ℝ≥0∞) *
       (unitInterval.toNNReal ⟨1 / 2, by norm_num, by norm_num⟩ : ℝ≥0∞)) ^ 2 :=
   tau_completeBipartite_bool 2 ⟨1 / 2, by norm_num, by norm_num⟩
+
+open scoped Classical in
+/-- The parallel-route hypotheses are satisfiable: on the path `0 - 1 - 2` with both pairs
+present with probability `t` and every other pair of distinct vertices absent (the diagonal
+being arbitrary, here `t` as well), `τ(0, 2) = 1 - (1 - t²)`. -/
+example (t : unitInterval) :
+    tau (fun e : Sym2 (Fin 3) => if e = s(0, 1) ∨ e = s(1, 2) ∨ e.IsDiag then t else 0) 0 2 =
+      1 - (1 - (unitInterval.toNNReal t : ℝ≥0∞) * (unitInterval.toNNReal t : ℝ≥0∞)) ^ 1 := by
+  refine tau_eq_one_sub_pow_of_parallel_routes (ι := Unit) (z := fun _ => 1) _
+    (fun _ _ _ => rfl) (by decide) (fun _ => by decide) (fun _ => by decide)
+    (fun u v huv h => ?_) (fun _ => by simp) (fun _ => by simp)
+  split_ifs with h1
+  · rcases h1 with h1 | h1 | h1
+    · exact absurd h1 (h ()).1
+    · exact absurd h1 (h ()).2
+    · exact absurd (Sym2.mk_isDiag_iff.1 h1) huv
+  · rfl
 
 end PercLib.Percolation.Bond
 

@@ -1,20 +1,22 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-142 (issue 509): the restoration map and the targets of Lemmas I.2.1 and I.4.12 of
-T. Hutchcroft, *Critical long-range percolation I*, arXiv:2508.18807v1, on the D-2
-interface.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The restoration map and the targets of Lemmas I.2.1 and I.4.12 of T. Hutchcroft, *Critical
+long-range percolation I*, arXiv:2508.18807v1, on the bond interface.
 
-Adapted from pull request 488: repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
+Adapted from the repository `yujinhkim/lrp`, branch `critical-lrp-1`, commit
 `d382e4c28d92dd4e698ebf4f2aaf0bc932ae73fc`, files
 `PercLib/CriticalLRP/Correlation/TwoClusterGap.lean` (`restoreMap`, and the statement of
-`longRange_twoCluster_gap_le`) and `PercLib/CriticalLRP/Correlation/Hrest.lean` (the
-statements of `twoCluster_ennreal`, `fkg_functional_ennreal`, `hrest_generic`); licence
-Apache-2.0 as declared in those file headers; upstream
-`yujinhkim/Critical-Long-range-percolation` at `3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`.
-Modified: the edge-labelled `BondGraph`/`edgeLaw` model and the hypothesis `∀ e, p e < 1`
-are replaced by `law q` on `Set (Sym2 V)` with an arbitrary profile; the restoration map
-reads the cluster from its first argument; the three-point tree-graph hypothesis of
-Lemma I.4.12 is dropped from the target, since it is itself the target
+`longRange_twoCluster_gap_le`) and `PercLib/CriticalLRP/Correlation/Hrest.lean` (the statements of
+`twoCluster_ennreal`, `fkg_functional_ennreal`, `hrest_generic`); licence Apache-2.0 as declared in
+those file headers; upstream `yujinhkim/Critical-Long-range-percolation` at
+`3b3d1d0e43ef940bfaa2292ee5c2ee094ac4edbf`. Modified: the edge-labelled `BondGraph`/`edgeLaw` model
+and the hypothesis `∀ e, p e < 1` are replaced by `law q` on `Set (Sym2 V)` with an arbitrary
+profile; the restoration map reads the cluster from its first argument; the three-point tree-graph
+hypothesis of Lemma I.4.12 is dropped from the target, since it is itself the target
 `TreeGraphInequality`. The witnesses below are new.
 -/
 module
@@ -124,7 +126,7 @@ theorem restoreMap_self (o : V) (ω : Config V) : restoreMap o (ω, ω) = ω := 
   · exact mem_restoreMap_of_touch h
   · exact mem_restoreMap_of_not_touch h
 
-/-! ### Witnesses (D-5)
+/-! ### Witnesses
 
 The targets have no hypotheses beyond the monotonicity and measurability of `F` and `G`;
 the witnesses check the constant functionals and, for Lemma I.4.12, the case `y = o`. -/

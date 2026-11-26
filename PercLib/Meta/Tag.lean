@@ -1,18 +1,29 @@
 /-
 Copyright (c) 2026 Tom Hutchcroft. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Tom Hutchcroft (with Codex assistance)
+Authors: Tom Hutchcroft
 -/
 module
 public meta import Lean.Attributes
 public meta import Lean.Elab.Command
+
+/-!
+# The `tag` attribute
+
+The parametric attribute `@[tag "XXXX"]` that records the permanent four-character wiki assertion
+tag of a declaration.
+
+## Main results
+
+* `PercLib.Meta.tagAttribute`
+-/
 
 public meta section
 open Lean
 namespace Lean.Parser.Attr
 
 /-- Permanent wiki assertion identity. The compiled manifest validates cross-module uniqueness
-and the one permitted duplicate: a statement definition and its proof (D-16). -/
+and the one permitted duplicate: a statement definition and its proof. -/
 syntax (name := tag) "tag " str : attr
 end Lean.Parser.Attr
 namespace PercLib.Meta

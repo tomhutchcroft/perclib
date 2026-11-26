@@ -1,5 +1,9 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
 Association wrappers for the product-model, product-symmetries and finite-transcripts
 articles; all probability statements use the existing canonical product law.
 -/
@@ -9,9 +13,24 @@ public import PercLib.Meta.Tag
 public import PercLib.Probability.Exploration.Transcript
 public import PercLib.Probability.Transport.Reindexing
 
+/-!
+# Product model: correspondence
+
+Wiki correspondence for relabelling, restriction, finite transcripts and cylinder probabilities of
+the canonical product law.
+
+## Main results
+
+* `product_relabelling`
+* `product_relabelling_invariant`
+* `transcript_probability_and_factorization`
+* `adaptive_transcript_conditional`
+* `prodBernoulli_open_closed`
+-/
+
 @[expose] public section
 open MeasureTheory ProbabilityTheory Set
-open scoped ENNReal Classical
+open scoped ENNReal
 namespace PercLib.Probability
 variable {I K : Type*}
 
@@ -142,6 +161,7 @@ example : prodBernoulli (fun b : Bool => if b then 0 else 1)
   simpa using prodBernoulli_open_closed (fun b : Bool => if b then 0 else 1)
     {false} {true} (by simp)
 
+open Classical in
 /-- A genuine one-step open transcript at probability one has positive mass. -/
 example (i : I) :
     0 < prodBernoulli (fun _ : I => 1)

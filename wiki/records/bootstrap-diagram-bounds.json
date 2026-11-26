@@ -1,0 +1,134 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "bootstrap-diagram-bounds",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 165
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 0,
+      "label": "Small triangles",
+      "locator": "17 March 2017 author manuscript, Lemma 8.5, printed pp.96–97 / PDF indices107–108.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "Pointwise first-step expansion and nonnegative Fourier transforms give the dimension-uniform small bound at a fixed parameter."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 1,
+      "label": "Weighted pair bounds",
+      "locator": "17 March 2017 author manuscript, Lemma 8.6, printed pp.97–100 / PDF indices108–111.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "The unshifted bound retains the nearest-neighbour factor of order 1/d; Hölder controls all shifts in the supremum."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 2,
+      "label": "H diagram and remaining shifts",
+      "locator": "17 March 2017 author manuscript, Lemma 8.7, (8.3.31)–(8.3.41), Exercise 8.5, printed pp.100–101 / PDF indices111–112.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "The Fourier identity retains the two connector masses. One Holder argument treats arbitrary pairs of shifts, completing all three cases."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Small lace kernel",
+      "locator": "17 March 2017 author manuscript, Proposition 8.3 and Lemma 8.4, printed pp.95–96 and101 / PDF indices106–107 and112.",
+      "relationship": "Written proof; manuscript discrepancies remain provisional",
+      "status": "pending",
+      "note": "The refined first coefficient is used at order one. Geometric summation gives absolute norms and moments before removing the remainder."
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "order": 4,
+      "label": "Explicit constants in the nearest-neighbour bootstrap",
+      "locator": "Independent numerical quantification of the 17 March 2017 manuscript Chapter 8 argument, Lemmas 8.5-8.7 and 8.11-8.12, Propositions 8.8 and 8.10, and Corollary 8.13; printed pp.96-108 / PDF indices107-119",
+      "relationship": "Independent explicit constants for the existing written proof, not a source claim about a numerical dimension threshold",
+      "status": "pending",
+      "note": "The walk input is checked by a finite rational certificate. With weak bootstrap bound two, the weighted coefficient constant is at most 50000000/d; d>=10^11 closes the bootstrap and gives the critical hypotheses for FWHO. No claim is made at dimensions near six or at the conditional dimensions 15, 40, 64 or100; no new source erratum or compiled status is asserted."
+    }
+  ],
+  "occursIn": [],
+  "proofUses": [
+    {
+      "order": 0,
+      "tag": "54IO",
+      "proof_uses": [
+        "ANZF",
+        "RD3X",
+        "IT43"
+      ],
+      "reason": "Pointwise first-step expansion and nonnegative Fourier transforms give the dimension-uniform small bound at a fixed parameter."
+    },
+    {
+      "order": 1,
+      "tag": "PEVH",
+      "proof_uses": [
+        "54IO",
+        "A9W9",
+        "RD3X"
+      ],
+      "reason": "The unshifted bound retains the nearest-neighbour factor of order 1/d; Hölder controls all shifts in the supremum."
+    },
+    {
+      "order": 2,
+      "tag": "L1Y7",
+      "proof_uses": [
+        "RD3X",
+        "09JN"
+      ],
+      "reason": "The Fourier identity retains the two connector masses. One Holder argument treats arbitrary pairs of shifts, completing all three cases."
+    },
+    {
+      "order": 3,
+      "tag": "6G0E",
+      "proof_uses": [
+        "54IO",
+        "PEVH",
+        "L1Y7",
+        "SJIL",
+        "NJT0",
+        "IT43",
+        "09JN",
+        "22TW",
+        "Z84R",
+        "I3PK"
+      ],
+      "reason": "The refined first coefficient is used at order one. Geometric summation gives absolute norms and moments before removing the remainder."
+    },
+    {
+      "order": 4,
+      "tag": "NOTF",
+      "proof_uses": [
+        "LKS9",
+        "54IO",
+        "PEVH",
+        "L1Y7",
+        "A9W9",
+        "RD3X"
+      ],
+      "reason": "The certified sixth walk integral gives explicit unweighted and weighted integrals; retaining constants with bootstrap bound two gives five numerical diagram estimates."
+    },
+    {
+      "order": 5,
+      "tag": "66SP",
+      "proof_uses": [
+        "NOTF",
+        "SJIL",
+        "NJT0",
+        "IT43",
+        "09JN",
+        "22TW",
+        "Z84R",
+        "I3PK"
+      ],
+      "reason": "Exact geometric sums retain the order-zero and refined order-one contributions, give a frequency budget of 50000000/d, and justify the full equation and absolute second moments."
+    }
+  ]
+}

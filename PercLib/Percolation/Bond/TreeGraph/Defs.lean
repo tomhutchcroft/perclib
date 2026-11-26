@@ -1,8 +1,13 @@
 /-
-Copyright (c) 2026 PercLib contributors. Released under Apache 2.0.
-Q-49: the three-point Aizenman–Newman tree-graph target on the D-2 interface.
-The full inequality is a target, not an assumed theorem. Its BK-dependent proof
-belongs to a later package. The elementary witnesses below are new proofs.
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: PercLib contributors
+-/
+/-
+The three-point Aizenman–Newman tree-graph target on the bond interface. The full inequality is a
+target, not an assumed theorem. Its proof, which uses the BK inequality, is `treeGraphInequality` in
+`PercLib/Percolation/Bond/TreeGraph/BranchPoint.lean`. The elementary witnesses below are new
+proofs.
 -/
 module
 
@@ -10,6 +15,18 @@ public import PercLib.Meta.Tag
 public import PercLib.Percolation.Bond.Basic
 public import PercLib.Probability.Cylinder
 public import Mathlib.Topology.Algebra.InfiniteSum.ENNReal
+
+/-!
+# The tree-graph inequality (statement)
+
+The three-point Aizenman–Newman tree-graph inequality as a statement, with elementary cases.
+
+## Main results
+
+* `TreeGraphInequality`
+* `treeGraph_le_of_middle_eq_root`
+* `treeGraph_bool_values`
+-/
 
 @[expose] public section
 noncomputable section

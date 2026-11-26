@@ -1,0 +1,136 @@
+{
+  "schema": "perclib-source-errata-v1",
+  "source": "hofstad-nachmias-hypercube",
+  "entries": [
+    {
+      "id": "walk-time-boundary",
+      "title": "The walk-time convention and the zero-time recurrence need separation",
+      "status": "provisional",
+      "locator": "Journal version: JEMS 19 (2017), Section 3.4, initial directed-edge definition and Lemma 3.11, printed pp.747–748 / PDF indices22–23; extracted text checked in an earlier reading, visual comparison unavailable, not re-read in this revision. Preprint: arXiv:1201.3953v1 (the only arXiv version), Section 3.4, the same definition and Lemma 3.11, printed p.19; extracted PDF text checked on 21 November 2026. The two versions print different identities; see the problem.",
+      "claim": "Lemma 3.11 includes time zero, while its proof uses the ordinary length-t endpoint kernel. The preceding definition observes the second endpoint of an edge already sampled at time zero.",
+      "problem": "Under the length-t convention, P0=I and P1=A/m. At t=0 the claimed recurrence with P(-1)=0 would say m P1/(m-1)=P1. The directed-edge definition as displayed instead advances the endpoint clock by one relative to the path-count proof. arXiv v1 prints the identity without the factor m/(m-1), as sum_u p1(0,u)pt(u,z)=p(t+1)(0,z)+p(t-1)(0,z)/(m-1) for t>=0, with the same directed-edge definition. Its left side has total mass one and, for every t>=1, its right side has total mass 1+1/(m-1), so the v1 identity fails for every t>=1 under any convention in which the pt are probability kernels. Under the length-t convention it holds at t=0.",
+      "correction": "Use P0=I and Pn=B_n/[m(m-1)^(n-1)] for n>=1, indexing the first sampled directed edge at time one (or observing the first endpoint at time zero). State the recurrence for t>=1; at t=0 use P1 P0=P1 separately. The special B2=A^2-mI verifies t=1. For arXiv v1 the corrected identity is (m/(m-1)) sum_u p1(0,u)pt(u,z)=p(t+1)(0,z)+p(t-1)(0,z)/(m-1) for t>=1 under the same length-t convention; it follows from A B_t=B_(t+1)+(m-1)B_(t-1) for t>=2 and from B2=A^2-mI for t=1.",
+      "tags": [
+        "1PM2"
+      ],
+      "issues": [],
+      "leanImpact": "Make the length and directed-edge clocks agree before normalizing counts. Use a separate zero-time identity; no compiled association or audit of all downstream uses is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "Align the endpoint clock with path length and exclude zero from the normalized recurrence.",
+        "scale": "statement",
+        "impact": "A time convention and one endpoint case are corrected. The positive-time recurrence is proved here; later applications must check their time ranges. In arXiv v1 the missing factor m/(m-1) must also be restored for every t>=1."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "supercritical-field-rectangle",
+      "title": "The lower-field rectangle reverses monotonicity and leaves its starting regime",
+      "locator": "JEMS19(2017), Section A.4, Lemma A.6, (A.37)–(A.50), especially (A.45),(A.49)–(A.50), printed pp.804–805 / PDF indices79–80. Same final choices in arXiv:1201.3953v1, printed pp.63–64 / PDF indices62–63. Extracted text.",
+      "claim": "The auxiliary field gamma1 exceeds the target gamma, but a lower bound at gamma1 is transferred to gamma by monotonicity. The seed estimate is applied at displacement delta epsilon with delta=exp(-Q^(1/a)), Q=epsilon^3 V.",
+      "problem": "Increasing magnetization gives the opposite comparison when gamma1>=gamma. Also delta^3 Q tends to zero, while the invoked seed requires it to diverge. For admissible sequences such as epsilon=Q^-1, the proposed gamma1 even exceeds one eventually. The rectangle differential coefficient must be controlled uniformly, not only at its target corner.",
+      "correction": "Replace the rectangle by a stopped characteristic of (A.7), starting at the finite zero-field susceptibility H=chi(p_c). With rho=mp_c and epsilon=m(p-p_c), the field threshold is g*=2 log(1+epsilon/rho)/(rho H+2), and M(p,gamma)>=rho H g*/(rho+epsilon) for gamma>=g*. Since g*=O(epsilon/H), the target fields epsilon^2 Q^(-alpha), alpha<1/3, lie above it eventually. A truncated-field comparison gives a lower-tail relative error O(epsilon+|rho-1|+H^(-1)+Q^(alpha-1/3)); the separate upper proof gives matching polynomial tails. The earlier logarithmic-error rectangle remains valid but is superseded in strength.",
+      "tags": [
+        "464C",
+        "7DLQ",
+        "CI72",
+        "5ZBS",
+        "BFAM",
+        "AQPE",
+        "YHLB"
+      ],
+      "leanImpact": "Formalize the smooth zero-field extension of M/gamma on a finite graph, the characteristic ODE stopped at the target parameter or field, monotonicity of rM/gamma and the integrated dy/dr bound. This supplies a complete written finite lower-field and polynomial lower-tail repair without the invalid rectangle seed. Preserve the explicit reference-parameter error and cutoff conversion. No compiled proof or infinite-graph conclusion is asserted.",
+      "resolution": {
+        "status": "found",
+        "summary": "A characteristic proof replaces the rectangle and recovers the sharp lower bound with a polynomial tail error.",
+        "scale": "substantial",
+        "impact": "The integration method is replaced. The argument starts from the actual finite zero-field susceptibility and keeps the target field valid, removing the former logarithmic loss. Matching tail bounds have an explicit positive power error under the stated strong-triangle hypotheses; a giant-component theorem and the infinite-graph remark remain separate."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "tail-field-ratio-sign",
+      "title": "The ratio of the two marking fields has the decaying exponent",
+      "locator": "JEMS19(2017), Section A.4, (A.51)–(A.54) and the final choice of c, printed p.805 / PDF index80. Matching arXiv:1201.3953v1, printed p.64 / PDF index63.",
+      "claim": "For alpha<alpha-prime, the error in (A.53) uses Q^(alpha-prime-alpha), and the final line takes c=alpha-alpha-prime while calling c positive.",
+      "problem": "The defined fields have ratio gamma1/gamma0=Q^(alpha-alpha-prime), which decays. The printed final choice of c has the wrong sign. Equation (A.54) itself displays the decaying exponent.",
+      "correction": "Use Q^(alpha-alpha-prime) in the subtracted term and, if a prior error is O(Q^(-c0)), take c=min(c0,alpha-prime-alpha)>0. The new characteristic proof instead marks at its exact threshold g*=O(epsilon^2 Q^(-1/3)), giving the lower-tail error Q^(alpha-1/3) directly.",
+      "tags": [
+        "CI72"
+      ],
+      "leanImpact": "Record alpha-prime>alpha before proving the field-ratio decay. This algebra correction does not discharge the independent lower-field proof gap or justify the stronger quantitative target.",
+      "resolution": {
+        "status": "found",
+        "summary": "Reverse the exponent in the field-ratio error and use a positive exponent difference.",
+        "scale": "notation",
+        "impact": "The local ratio and final exponent are corrected without changing the intended leading constant. The separate characteristic repair now supplies a polynomial lower-tail remainder; the original reversed exponent is not used."
+      }
+    },
+    {
+      "status": "provisional",
+      "issues": [],
+      "id": "double-mark-root-event",
+      "title": "A marked root alone does not give two distinct marked connections",
+      "locator": "JEMS19(2017), Section A.5, definition after (A.55), Lemma A.7 (A.57) and first proof step (A.58), printed p.806 / PDF index81. Matching arXiv:1201.3953v1, printed pp.64–65 / PDF indices63–64.",
+      "claim": "The event requires two disjoint connections to distinct marked vertices, but the proof asserts that marking the root alone makes it occur, contributing gamma to its probability.",
+      "problem": "At p=0 every cluster is a singleton, so the stated double-connection probability is zero for gamma>0. The right side of (A.57) is gamma. By continuity the mismatch is not confined to an endpoint. The event used in (A.58) instead includes every marked root.",
+      "correction": "Keep D, the event of two connections to distinct terminal marks, unchanged. Introduce J={root marked} union D. Delete the root before forming the Bonferroni pair events, making their independence from its mark exact. Redo the last-pivotal cutting identity for J; its deletion cost has the extra gamma eta term. The resulting displayed finite coefficient yields a sharp square-root field bound, exact inverse-field transport and a matching leading 2 epsilon root-tail constant under the stated strong-triangle and growing-degree hypotheses. This is a replacement proof, not a claim of the literal printed coefficient or stronger remainder.",
+      "tags": [
+        "E7N9",
+        "ZHGE",
+        "60X1",
+        "23RW",
+        "RX78",
+        "14T6",
+        "HGND",
+        "6SGU",
+        "Q6CS"
+      ],
+      "leanImpact": "Separate D and J in definitions, retain distinct terminal marks in BK witnesses, and include the root-mark term in the signed deletion bound. The article now supplies a complete written replacement route through the leading sharp upper-field and tail estimates. No Lean implementation or compiled association is asserted. The stronger lower-bound remainder remains a separate partial repair.",
+      "resolution": {
+        "status": "found",
+        "summary": "A replacement cutting proof repairs the root-mark event and recovers the leading sharp upper-field and tail constants.",
+        "scale": "substantial",
+        "impact": "The event used for cutting, the root-deleted Bonferroni construction and the deletion coefficient are changed. The literal printed finite coefficient is not claimed. Combined with the separate characteristic lower proof, this now yields matching polynomial tail bounds under explicit hypotheses; a giant-component conclusion and every stronger source upper-error rate remain outside this repair."
+      }
+    },
+    {
+      "id": "upper-extrapolation-error-scale",
+      "title": "The subcritical extrapolation error is evaluated at the wrong distance",
+      "status": "provisional",
+      "locator": "JEMS 19 (2017), Section A.3, Lemma A.5, (A.26)–(A.31) and the deduction (A.34)–(A.35), printed pp.802–803 / PDF indices77–78. Publisher extracted text; no visual comparison.",
+      "claim": "Lemma A.5 gives a Q^(-c) error for every c in (0,1/3); its proof of Proposition A.1 later uses Q^(-1).",
+      "problem": "At subcritical displacement epsilon Q^(-c), Lemma A.4 contributes Q^(3c-1), not Q^(-1). For c>1/4 that term is larger than Q^(-c). The later Q^(-1) replacement also needs a separate argument. This identifies a proof gap, not a counterexample to the stated theorem.",
+      "correction": "Retain delta+1/(Q delta^3), where the subcritical displacement is epsilon delta, and verify the full transported field range. Balancing gives an O(Q^(-1/4)) contribution. At L=epsilon^2 k tending to infinity, mark with gamma=log(L)/k to obtain upper relative error O(epsilon+|mp_c-1|+m^(-1)+a_N+Q^(-1/4)+log(L)/L). The characteristic lower bound adds L Q^(-1/3) when L=o(Q^(1/3)). These are controlled replacement bounds; the stronger general source rate is not claimed.",
+      "tags": [
+        "IZ3I",
+        "YE0X",
+        "NIYL"
+      ],
+      "issues": [],
+      "leanImpact": "Carry the actual subcritical parameter into the triangle estimate and transport an inverse magnetization level only within the proved field interval. Keep the two error terms in the interface; a declaration with the stronger source rate needs a further proof. The logarithmic marking choice and variance application have complete written proofs but no new compiled evidence.",
+      "resolution": {
+        "status": "partial",
+        "summary": "The leading constant and an explicit weaker rate are proved; the stronger general printed rate remains open.",
+        "scale": "statement",
+        "impact": "The replacement retains the same leading field and tail constants, but weakens the guaranteed upper remainder to Q^(-1/4) plus explicit reference errors. This is a quantitative statement change. Optimized marking improves the cutoff error; it does not close the stronger source-rate gap."
+      }
+    }
+  ],
+  "versionAudit": {
+    "checkedVersion": "Published article: Journal of the European Mathematical Society 19 (2017), 725–814",
+    "checkedUrl": "https://ems.press/content/serial-article-files/32188",
+    "method": "The publisher PDF was read in extracted text at the five reported passages. Selected Appendix A passages were also compared with arXiv v1. Section 3.4 of arXiv v1 (the directed-edge definition and Lemma 3.11, printed p.19) was read afresh in extracted PDF text on 21 November 2026; the journal Section 3.4 was not re-read for that comparison. Apart from that reading, this summary consolidates the existing entry locators and reading records; it is not a fresh primary-text or visual-PDF audit.",
+    "scope": "All five reports identify published PDF locations. The arXiv v1 comparison covers three Appendix A entries and the directed-edge clock (walk-time-boundary: Section 3.4, Lemma 3.11, printed p.19), not the separate upper-field event repair. The source findings remain provisional, and partial or substantial replacement arguments do not certify the rest of the paper.",
+    "comparisons": [
+      {
+        "version": "arXiv:1201.3953v1",
+        "url": "https://arxiv.org/abs/1201.3953v1",
+        "status": "compared",
+        "findings": "Matching text was recorded at pp.63–65 for the lower-field derivative, rectangle remainder and upper-extrapolation error entries, corresponding to journal (A.45), (A.49)–(A.54) and (A.55)–(A.58), pp.804–806. For walk-time-boundary, v1 Section 3.4, printed p.19, gives the same directed-edge definition and states Lemma 3.11 without the factor m/(m-1), as sum_u p1(0,u)pt(u,z)=p(t+1)(0,z)+p(t-1)(0,z)/(m-1) for t>=0 with p(-1)=0; its left side has total mass one and, for every t>=1, its right side has total mass 1+1/(m-1), so the v1 identity fails for every t>=1. The journal statement differs from v1 here, as recorded in that entry's locator from an earlier reading not repeated in this comparison. No broader edition equivalence is claimed."
+      }
+    ]
+  }
+}
