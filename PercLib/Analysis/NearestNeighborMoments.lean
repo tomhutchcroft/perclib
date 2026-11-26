@@ -153,17 +153,23 @@ private theorem integral_pi_sum_cos_even_moments (d : ℕ) :
       ring
 
 /-- The sup-norm torus box has the product of its one-dimensional restricted measures. -/
-theorem volume_restrict_pi_ball_eq_pi_Ioo (d : ℕ) :
-    (volume : Measure (Fin d → ℝ)).restrict (ball 0 π) =
-      Measure.pi (fun _ => volume.restrict (Ioo (-π) π)) := by
-  have hball : ball (0 : Fin d → ℝ) π = Set.univ.pi fun _ => Ioo (-π) π := by
+theorem volume_restrict_pi_ball_eq_pi_Ioo_of_pos (d : ℕ) {r : ℝ} (hr : 0 < r) :
+    (volume : Measure (Fin d → ℝ)).restrict (ball 0 r) =
+      Measure.pi (fun _ => volume.restrict (Ioo (-r) r)) := by
+  have hball : ball (0 : Fin d → ℝ) r = Set.univ.pi fun _ => Ioo (-r) r := by
     rcases Nat.eq_zero_or_pos d with rfl | hd
     · ext k
-      simp [Subsingleton.elim k 0, pi_pos]
+      simp [Subsingleton.elim k 0, hr]
     · have : Nonempty (Fin d) := ⟨⟨0, hd⟩⟩
-      rw [ball_pi _ pi_pos]
+      rw [ball_pi _ hr]
       simp [Real.ball_eq_Ioo]
   rw [hball, volume_pi, Measure.restrict_pi_pi]
+
+/-- The Fourier box is the sup-norm ball of radius pi. -/
+theorem volume_restrict_pi_ball_eq_pi_Ioo (d : ℕ) :
+    (volume : Measure (Fin d → ℝ)).restrict (ball 0 π) =
+      Measure.pi (fun _ => volume.restrict (Ioo (-π) π)) :=
+  volume_restrict_pi_ball_eq_pi_Ioo_of_pos d pi_pos
 
 /-- The second moment of the sum of the coordinate cosines on the torus box. -/
 theorem integral_sum_cos_sq (d : ℕ) :

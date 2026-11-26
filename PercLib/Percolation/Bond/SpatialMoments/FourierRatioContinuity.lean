@@ -109,7 +109,8 @@ private theorem abs_ratio_sub_le {a b lam mu D A B : ℝ}
 
 variable {d : ℕ}
 
-private theorem abs_tau_cosine_tsum_le_chi (q : Sym2 (LatticeSite d) → unitInterval)
+/-- The absolute rooted cosine transform is bounded by the finite susceptibility. -/
+theorem abs_tau_cosine_tsum_le_chi (q : Sym2 (LatticeSite d) → unitInterval)
     (hchi : chi q 0 ≠ ⊤) (k : Fin d → ℝ) :
     |∑' x, (tau q 0 x).toReal * cos (∑ i, k i * (x i : ℝ))| ≤ (chi q 0).toReal := by
   have hs : Summable fun x => (tau q 0 x).toReal :=

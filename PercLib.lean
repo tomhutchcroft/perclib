@@ -27,6 +27,7 @@ public import PercLib.Analysis.LatticeCosineWeight
 public import PercLib.Analysis.LatticeFourier.Bounds
 public import PercLib.Analysis.LatticeFourier.Defs
 public import PercLib.Analysis.LatticeFourier.Inversion
+public import PercLib.Analysis.LatticeFourier.TorusIntegration
 public import PercLib.Analysis.LatticeFourierDifference
 public import PercLib.Analysis.LazyWalkComparison
 public import PercLib.Analysis.LazyWalkThresholds
@@ -46,6 +47,8 @@ public import PercLib.Analysis.NearestNeighborResolventTail
 public import PercLib.Analysis.NearestNeighborResolventTailConstants
 public import PercLib.Analysis.NearestNeighborResolventUniform
 public import PercLib.Analysis.NearestNeighborSymbolBounds
+public import PercLib.Analysis.NearestNeighborWeightedResolvent
+public import PercLib.Analysis.NearestNeighborWeightedResolventCritical
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.PowerLawSeriesTail
 public import PercLib.Analysis.QuadraticRecursion
@@ -303,6 +306,7 @@ public import PercLib.Percolation.Bond.IntrinsicBalls
 public import PercLib.Percolation.Bond.IntrinsicGrowth
 public import PercLib.Percolation.Bond.IntrinsicRenewal
 public import PercLib.Percolation.Bond.Lace.Basic
+public import PercLib.Percolation.Bond.Lace.Bootstrap.Bounds
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Defs
 public import PercLib.Percolation.Bond.Lace.ClusterLocalization
 public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
@@ -314,6 +318,7 @@ public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 public import PercLib.Percolation.Bond.Lace.Diagrams.Bounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Chains
+public import PercLib.Percolation.Bond.Lace.Diagrams.Chains.Defs
 public import PercLib.Percolation.Bond.Lace.Diagrams.Coefficients
 public import PercLib.Percolation.Bond.Lace.Diagrams.Contraction
 public import PercLib.Percolation.Bond.Lace.Diagrams.Convergence
@@ -330,7 +335,10 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.ReverseBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TotalMass
 public import PercLib.Percolation.Bond.Lace.Diagrams.TransferBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.Tuple.Basic
+public import PercLib.Percolation.Bond.Lace.Diagrams.Tuple.Bounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Weighted
+public import PercLib.Percolation.Bond.Lace.Diagrams.WeightedCoefficientBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.WeightedSums
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
