@@ -12,6 +12,8 @@ module
 
 public import PercLib.Percolation.Bond.Sharpness
 public import PercLib.Percolation.Bond.IntensityMonotone
+public import PercLib.Percolation.Bond.SusceptibilityContinuity
+public import PercLib.Percolation.Bond.SusceptibilityDerivative
 
 /-! # The sharpness threshold as an infimum
 
@@ -25,12 +27,17 @@ For `J` with summable rows, preserved by a transitive family of bijections, writ
   `β_c = inf {β ≥ 0 | Φ_β(o,T) ≥ 1 for every finite T ∋ o}`, with `inf ∅ = ∞`.
 * `inv_mul_min_le_law_real_cluster_infinite`: for `β > β_c`,
   `P_β(|K_o| = ∞) ≥ (β_c + 1)⁻¹ min {β - β_c, 1}`.
+* `chi_lt_top_iff_exists_boundaryFlux_lt_one` and
+  `exists_boundaryFlux_lt_one_iff_lt_rootCriticalIntensity`: at finite `β`, `χ_β(o) < ∞` iff
+  some finite `T ∋ o` has `Φ_β(o,T) < 1` iff `β < β_c`.
+* `chi_eq_top_of_rootCriticalIntensity_eq` and `tendsto_chi_nhdsLT_of_rootCriticalIntensity_eq`:
+  for finite `β_c`, `χ_{β_c}(o) = ∞` and `χ_β(o) → ∞` as `β ↑ β_c`.
 -/
 
 @[expose] public section
 noncomputable section
 
-open MeasureTheory Set
+open MeasureTheory Set Filter Topology
 open scoped ENNReal NNReal
 
 namespace PercLib.Percolation.Bond
@@ -105,5 +112,70 @@ theorem inv_mul_min_le_law_real_cluster_infinite [Countable V] (J : Sym2 V → �
   rw [ENNReal.coe_toReal, NNReal.coe_sub hdiv, NNReal.coe_div, NNReal.coe_one] at hr
   rw [ENNReal.coe_toReal]
   exact (inv_add_one_mul_min_le_one_sub_div b.2 (NNReal.coe_lt_coe.2 hbβ)).trans hr
+
+/-! ### Finite susceptibility, contraction and the threshold -/
+
+open Classical in
+/-- Under transitivity and summable rows, finite susceptibility at `β` gives a finite
+`T ∋ o` with `Φ_β(o,T) < 1`. -/
+theorem exists_boundaryFlux_lt_one_of_chi_lt_top_of_transitive [Countable V]
+    (J : Sym2 V → ℝ≥0)
+    (hT : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
+    (hJ : ∀ u, Summable fun v => (J s(u, v) : ℝ)) {o : V} {β : ℝ≥0}
+    (hchi : chi (intensityProfile J β) o < ⊤) :
+    ∃ T : Finset V, o ∈ T ∧ boundaryFlux (intensityProfile J β) T o < 1 := by
+  refine exists_boundaryFlux_lt_one_of_chi_lt_top J
+    (rowSum (fun e => (J e : ℝ≥0∞)) o).toNNReal (fun v => ?_) β hchi
+  rw [rowSum_eq_of_transitive J hT v o,
+    ENNReal.coe_toNNReal (offDiag_rowSum_lt_top_of_summable J hJ o).ne]
+
+open Classical in
+/-- Under transitivity and summable rows, a finite `T ∋ o` with `Φ_β(o,T) < 1` exists
+exactly when `β < β_c`. -/
+theorem exists_boundaryFlux_lt_one_iff_lt_rootCriticalIntensity [Countable V]
+    (J : Sym2 V → ℝ≥0)
+    (hT : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
+    (hJ : ∀ u, Summable fun v => (J s(u, v) : ℝ)) (o : V) (β : ℝ≥0) :
+    (∃ T : Finset V, o ∈ T ∧ boundaryFlux (intensityProfile J β) T o < 1) ↔
+      (β : ℝ≥0∞) < rootCriticalIntensity J o :=
+  ⟨fun ⟨T, hoT, hΦ⟩ => lt_rootCriticalIntensity_of_boundaryFlux_lt_one J hT
+      (offDiag_rowSum_lt_top_of_summable J hJ) T hoT β hΦ,
+    fun hβ => exists_boundaryFlux_lt_one_of_chi_lt_top_of_transitive J hT hJ
+      (chi_lt_top_of_lt_rootCriticalIntensity J hT hJ hβ)⟩
+
+open Classical in
+/-- Under transitivity and summable rows, `χ_β(o) < ∞` exactly when some finite `T ∋ o` has
+`Φ_β(o,T) < 1`. -/
+theorem chi_lt_top_iff_exists_boundaryFlux_lt_one [Countable V] (J : Sym2 V → ℝ≥0)
+    (hT : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
+    (hJ : ∀ u, Summable fun v => (J s(u, v) : ℝ)) (o : V) (β : ℝ≥0) :
+    chi (intensityProfile J β) o < ⊤ ↔
+      ∃ T : Finset V, o ∈ T ∧ boundaryFlux (intensityProfile J β) T o < 1 :=
+  ⟨exists_boundaryFlux_lt_one_of_chi_lt_top_of_transitive J hT hJ, fun h =>
+    chi_lt_top_of_lt_rootCriticalIntensity J hT hJ
+      ((exists_boundaryFlux_lt_one_iff_lt_rootCriticalIntensity J hT hJ o β).1 h)⟩
+
+/-- **Critical blow-up.** Under transitivity and summable rows, if `β_c` is finite then
+`χ_{β_c}(o) = ∞`. -/
+theorem chi_eq_top_of_rootCriticalIntensity_eq [Countable V] (J : Sym2 V → ℝ≥0)
+    (hT : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
+    (hJ : ∀ u, Summable fun v => (J s(u, v) : ℝ)) {o : V} {b : ℝ≥0}
+    (hb : rootCriticalIntensity J o = b) :
+    chi (intensityProfile J b) o = ⊤ := by
+  by_contra h
+  have := (exists_boundaryFlux_lt_one_iff_lt_rootCriticalIntensity J hT hJ o b).1
+    ((chi_lt_top_iff_exists_boundaryFlux_lt_one J hT hJ o b).1 (lt_top_iff_ne_top.2 h))
+  rw [hb] at this
+  exact lt_irrefl _ this
+
+/-- **Blow-up from below.** Under transitivity and summable rows, if `β_c` is finite then
+`χ_β(o) → ∞` as `β ↑ β_c`. -/
+theorem tendsto_chi_nhdsLT_of_rootCriticalIntensity_eq [Countable V] (J : Sym2 V → ℝ≥0)
+    (hT : ∀ x y : V, ∃ σ : V ≃ V, σ x = y ∧ ∀ e, J (Sym2.map σ e) = J e)
+    (hJ : ∀ u, Summable fun v => (J s(u, v) : ℝ)) {o : V} {b : ℝ≥0}
+    (hb : rootCriticalIntensity J o = b) :
+    Tendsto (fun β : ℝ≥0 => chi (intensityProfile J β) o) (𝓝[<] b) (𝓝 ⊤) := by
+  have h := tendsto_chi_intensity_nhdsLT J o b
+  rwa [chi_eq_top_of_rootCriticalIntensity_eq J hT hJ hb] at h
 
 end PercLib.Percolation.Bond
