@@ -1,0 +1,463 @@
+{
+  "schema": "perclib-article-records-v1",
+  "article": "canonical-lace-expansion",
+  "collections": [
+    {
+      "collection": "critical-theory",
+      "order": 161
+    }
+  ],
+  "sourceOccurrences": [
+    {
+      "source": "heydenreich-hofstad",
+      "order": 3,
+      "label": "Canonical lace expansions, refined all-order diagrams and Fourier analysis",
+      "locator": "Author manuscript of 17 March 2017 · Chapter 6, pp. 59–68; Chapters 7–8 for diagrammatic estimates and bootstrap",
+      "relationship": "Canonical expansions under explicit analytic hypotheses, with new diagram refinements",
+      "status": "pending",
+      "note": "The article uses the manuscript's edge-probability parameter p, J=2dpD and signed remainder R_N. The zeroth coefficient excludes the diagonal. Remainder domination by the Nth coefficient is explicitly restricted to N≥1. The factor-four triangle bound, deletion-sensitive first-coefficient refinement and two-vertex sharpness witnesses are direct arguments supplied in the article, not attributed theorems of the source. The nonnegative recurrence, finite signed expansion, infinite equation and Fourier quotient have separate explicit hypotheses. The Fourier statement is formulated for unitary characters on countable abelian groups; its lattice formula is a specialization. The all-order pair-state diagrams retain the exact initial diagonal, the outgoing deleted-bond connector, the excluded joining diagonal and a separate terminal norm. Their comparison with canonical coefficients, geometric mass estimate, contraction criterion and Δ(M_d+M_off) transfer bound are new refinements of the framework in Sections 7.3–7.5, not literal source occurrences. The two-vertex p=1/4 computation supplies a nonzero contraction witness with exact row constants."
+    }
+  ],
+  "occursIn": [
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "ZUND",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Definition 6.3(a), p. 62",
+      "relationship": "generalization",
+      "note": "Double connection, including the deterministic diagonal event, is stated for countable independent bond models rather than only the nearest-neighbour lattice.",
+      "order": 0
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "U8OS",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Equation (6.2.7), p. 62",
+      "relationship": "generalization",
+      "note": "The root-zero lattice coefficient is extended to two arbitrary vertices. Multiplication by the off-diagonal indicator equals subtracting the deterministic diagonal in real-valued notation.",
+      "order": 1
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "X30S",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Section 7.2, equation (7.2.9), p. 73; definition (6.2.7), p. 62",
+      "relationship": "generalization",
+      "note": "The pointwise BK estimate is stated on the countable bond interface with the off-diagonal indicator retained explicitly.",
+      "order": 2
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "NLIV",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Equation (6.2.11), p. 63; equations (6.2.25) and (6.2.27), pp. 66–67",
+      "relationship": "generalization",
+      "note": "The source lattice coefficients are extended to arbitrary countable vertex sets and inhomogeneous bond probabilities, with zero off-diagonal-kernel weight on loops. Order k uses k directed pairs and k+1 independent configurations; deleted clusters are rooted at the previous target, with initial root x and final endpoint y. The initial full double connection retains its diagonal. The displayed nearest-neighbour/root-zero formula is the specialization of this general nonnegative, possibly infinite definition. No finiteness or signed convergence is built into the definition.",
+      "order": 3
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "VYRB",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Proposition 6.1, equations (6.2.2)–(6.2.3), p. 61; remainder (6.2.28), p. 67",
+      "relationship": "source-statement",
+      "note": "Nearest-neighbour percolation and the source hypothesis θ(p)=0 are retained. Proposition 6.1 states a real-valued identity; the article distinguishes that source statement from the verified finiteness needed for a formal signed realization of the nonnegative sums and convolutions. Later equations (7.2.11) and (7.5.3), pp. 73 and 82, give finite-order coefficient masses when the triangle diagrams are finite; geometric smallness is used for the sum over orders, as discussed on p. 83. No implication from θ(p)=0 to ℓ¹ coefficient masses is asserted. R_N is signed; its sign is (−1)^(N+1).",
+      "order": 4
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "1741",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Section 6.3, equations (6.3.2)–(6.3.4) and convergence discussion, pp. 67–68",
+      "relationship": "generalization",
+      "note": "The canonical infinite signed equation is stated on arbitrary countable inhomogeneous bond models. Its hypotheses are almost-sure finite deleted clusters at every root, finite total coefficient mass over all orders and endpoints at the chosen root, and a finite continuation bound C uniform in both endpoints. The canonical signed row is absolutely summable, partial rows converge pointwise, continuation sums converge, and the signed remainder vanishes. These facts derive the infinite equation from the finite signed identities, without an assumed expansion equation. The supplied C is retained, with C_p=‖J*τ‖∞≤2dp in the nearest-neighbour specialization. Coefficient summability remains an explicit analytic hypothesis.",
+      "order": 5
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "tag": "PI55",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "locator": "Equation (6.1.3), p. 60; Section 6.3, pp. 67–68",
+      "relationship": "generalization",
+      "note": "The canonical percolation Fourier quotient is stated for every unitary additive character on a countable abelian group with translation-invariant bond probabilities. Finite step mass, finite susceptibility and finite total canonical coefficient mass are explicit assumptions. Translation invariance and finite susceptibility supply almost-sure finite deleted clusters at every root, so no separate finite-cluster premise is required. The canonical infinite equation gives the transformed equation; denominator nonvanishing and the quotient are conclusions, not assumed inputs. The nearest-neighbour lattice specialization uses ψ_k(x)=exp(i k·x) and J=2dpD. No ordinary critical Fourier transform is asserted.",
+      "order": 6
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "UINB",
+      "locator": "Definition 6.2(a)–(b), p. 62",
+      "note": "The in-set and through-set conventions are extended to arbitrary countable bond models. The empty path pins the diagonal: going through A at x=x means x belongs to A.",
+      "order": 7
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "ZTE7",
+      "locator": "Equation (6.2.6), p. 62",
+      "note": "The source subtraction identity is written as an exact sum of the probabilities of the disjoint avoiding and through-set events, on the countable inhomogeneous bond interface.",
+      "order": 8
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "FWTN",
+      "locator": "Definition 6.3(c), p. 62; equations (6.2.11)–(6.2.12), p. 63",
+      "note": "E-prime and the occupied directed cutting event use the canonical insertion/deletion pivotal convention on an arbitrary vertex type. Orientation is tested in the deleted configuration; occupation is a separate requirement for the cutting event.",
+      "order": 9
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "VXRP",
+      "locator": "Lemma 6.5, equation (6.2.21), p. 66",
+      "note": "The disjoint cutting-bond partition is stated for arbitrary vertex types without a finite-cluster hypothesis. Existence uses the least natural-number distance to an eligible initial endpoint; uniqueness prevents orientation and bond overcounting.",
+      "order": 10
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "HU0W",
+      "locator": "Equation (6.2.22), p. 66",
+      "note": "Countable additivity gives an exact probability identity on the countable inhomogeneous bond interface. Each directed cutting event has coefficient one. Conditional factorisation of its probability, equation (6.2.23), is a separate step and is not asserted by this identity.",
+      "order": 11
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "DLF1",
+      "locator": "Definition 6.3(a),(c), p. 62; first-pivotal discussion preceding equation (6.2.9), p. 63",
+      "note": "The source implication that a connected configuration without a double connection has a pivotal bond is stated as an equivalence for arbitrary vertex sets, including the diagonal. The proof constructs finite disjoint paths and requires no ambient finiteness or countability assumption.",
+      "order": 12
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "CM8M",
+      "locator": "Equations (6.2.7)–(6.2.9), pp. 62–63; E-prime specialization after (6.2.12), p. 63",
+      "note": "Combines the deterministic diagonal, zeroth coefficient and disjoint directed first-pivotal sum on the arbitrary countable inhomogeneous bond interface. The whole-space E-prime event is identified with double connection. This probability partition does not assert the conditional factorisation or the full signed expansion.",
+      "order": 13
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "ONAY",
+      "locator": "Lemma 6.4, equation (6.2.13) and proof, pp. 63–64; application in equation (6.2.23), p. 66",
+      "note": "The cutting-bond identity is stated for arbitrary countable inhomogeneous bond models under almost-sure finiteness of the fixed-edge deleted cluster at the source. E-prime is evaluated on the original first layer; the deleted cluster restricts the independent second-layer connection, with both exterior endpoints required to be outside it. This replaces the source global nonpercolation assumption by the explicit local finiteness hypothesis used in the slicing proof.",
+      "order": 14
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "YLI6",
+      "locator": "Equations (6.2.18)–(6.2.20), pp. 64–65; diagonal convention (6.2.7), p. 62",
+      "note": "The initial expansion is written as an extended nonnegative identity with r_0 on the left, for arbitrary countable inhomogeneous bond models. For every fixed pair u,v, the deleted cluster at the root x must be finite almost surely. No coefficient or remainder summability is assumed and no subtraction of infinite quantities occurs. This initial identity does not assert the all-order signed expansion.",
+      "order": 15
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "LVRG",
+      "locator": "Equations (6.3.1)–(6.3.2), p. 67; coefficient and remainder formulas (6.2.27)–(6.2.28), p. 67",
+      "note": "The bound with multiplicative constant one is stated for arbitrary countable inhomogeneous bond models, as an extended nonnegative inequality without finite-cluster or summability assumptions. It is explicitly restricted to positive orders. At order zero the corresponding prefix is the full double-connection probability, including its deterministic diagonal.",
+      "order": 16
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "6UGP",
+      "locator": "Equation (6.3.2) and the following remainder-convergence discussion, p. 67",
+      "note": "Uniform vanishing of the nonnegative remainders is stated on the arbitrary countable bond interface under explicit summability of the positive coefficient masses and a finite uniform continuation bound C. The exact supplied C is retained; no zeroth-mass, finite-cluster or signed-expansion hypothesis is needed. This conclusion concerns the remainders alone and is distinct from the full signed lace equation.",
+      "order": 17
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "G1IE",
+      "locator": "Equation (6.2.24), p. 66; iteration (6.2.27)–(6.2.28) and Exercise 6.5, p. 67",
+      "note": "The canonical coefficient and remainder constructions satisfy an additive recurrence at every nonnegative order on arbitrary countable inhomogeneous bond models. Almost-sure finiteness is assumed for every root and every fixed deleted pair. The recurrence is an extended nonnegative identity, requiring no finite coefficient or remainder sums and no subtraction of infinities.",
+      "order": 18
+    },
+    {
+      "source": "heydenreich-hofstad",
+      "source_url": "https://www.win.tue.nl/~rhofstad/survey-high-d-percolation.pdf",
+      "edition": "Springer book; chapter locators below checked against the author manuscript of 17 March 2017",
+      "relationship": "generalization",
+      "tag": "XMUG",
+      "locator": "Proposition 6.1, equations (6.2.2)–(6.2.3), p. 61; initial step (6.2.20), p. 65; remainder (6.2.28), p. 67",
+      "note": "This general-kernel realization extends the formula to countable inhomogeneous bond models but explicitly strengthens the analytic assumptions: every deleted root cluster is almost surely finite, coefficient row masses at the chosen root are finite through order N, and Jτ has a finite bound uniform in its starting vertex for the fixed target endpoint. It is not asserted to have the same hypotheses as the source's θ(p)=0 statement. These bounds justify real conversion, the finite alternating coefficient sum and its absolutely convergent continuation sums. The signed remainder is (−1)^(N+1)r_N; no infinite-order equation follows from this statement alone.",
+      "order": 19
+    }
+  ],
+  "proofUses": [
+    {
+      "tag": "S9QJ",
+      "proof_uses": [
+        "ZUND",
+        "U8OS",
+        "JRCI"
+      ],
+      "reason": "One of two disjoint finite connection witnesses avoids a fixed bond. Apply BK to ordinary connection and connection after deleting that bond.",
+      "order": 0
+    },
+    {
+      "tag": "X30S",
+      "proof_uses": [
+        "ZUND",
+        "U8OS",
+        "JRCI"
+      ],
+      "reason": "The coefficient is the probability of the disjoint connection event off the diagonal; the countable BK inequality supplies the probability estimate.",
+      "order": 1
+    },
+    {
+      "tag": "RCHH",
+      "proof_uses": [
+        "X30S",
+        "AUUG"
+      ],
+      "reason": "Use the square bound for the three pair-coincidence classes, and the triple-BK bound obtained by splitting one of two bond-disjoint paths at an interior vertex for the distinct-vertex part.",
+      "order": 2
+    },
+    {
+      "tag": "VYRB",
+      "proof_uses": [
+        "ZUND",
+        "U8OS",
+        "NLIV",
+        "UINB",
+        "ZTE7",
+        "FWTN",
+        "HU0W",
+        "CM8M",
+        "ONAY",
+        "YLI6",
+        "G1IE",
+        "XMUG"
+      ],
+      "reason": "The initial identity and all-order nonnegative recurrence give finite signed telescoping after finiteness is verified. XMUG realizes that argument with explicit coefficient-mass and continuation bounds on general kernels. Identifying those additional bounds with the source's stated θ(p)=0 hypothesis is not asserted; almost-sure finite deleted clusters alone are not used here as a claim of ℓ¹ coefficient summability.",
+      "order": 3
+    },
+    {
+      "tag": "1741",
+      "proof_uses": [
+        "NLIV",
+        "XMUG",
+        "LVRG",
+        "6UGP"
+      ],
+      "reason": "Total canonical coefficient mass makes the signed row absolutely summable and its partial sums convergent. The finite continuation bound controls the total absolute continuation series, permitting interchange and convergence of those sums. The signed remainder vanishes by the positive-order bound. Taking limits in XMUG gives the actual canonical infinite equation.",
+      "order": 4
+    },
+    {
+      "tag": "PI55",
+      "proof_uses": [
+        "1741"
+      ],
+      "reason": "Translation invariance transports finite susceptibility to every root and hence supplies the finite deleted-cluster hypothesis; finite step mass supplies the uniform continuation bound. Apply the canonical infinite equation, root the kernels by translation, and use absolute summability and unitary-character multiplicativity to transform convolution. Scalar rearrangement proves both denominator nonvanishing and the quotient without an assumed abstract expansion equation.",
+      "order": 5
+    },
+    {
+      "tag": "ZTE7",
+      "proof_uses": [
+        "UINB"
+      ],
+      "reason": "Connections in the induced complement are a measurable subset of all connections; their complement within that event is exactly the through-set event.",
+      "order": 6
+    },
+    {
+      "tag": "84FZ",
+      "proof_uses": [
+        "UINB",
+        "JRCI"
+      ],
+      "reason": "A simple open path through A splits at a vertex of A into disjoint finite connection witnesses. The union bound and countable BK apply to the containing increasing events, not to the through-set event itself.",
+      "order": 7
+    },
+    {
+      "tag": "VXRP",
+      "proof_uses": [
+        "UINB",
+        "FWTN"
+      ],
+      "reason": "Choose a least-distance eligible pivotal prefix to obtain existence; the order of distinct pivotal pairs and their unique direction give pairwise disjointness.",
+      "order": 8
+    },
+    {
+      "tag": "HU0W",
+      "proof_uses": [
+        "VXRP"
+      ],
+      "reason": "The countably indexed cutting events and E-prime are measurable and pairwise disjoint; countable additivity gives the exact sum with coefficient one.",
+      "order": 9
+    },
+    {
+      "tag": "DLF1",
+      "proof_uses": [
+        "ZUND"
+      ],
+      "reason": "Double witnesses survive every single deletion. Conversely, a finite connecting path has doubly connected endpoints at each step; a constructive first-contact routing argument makes double connectivity transitive.",
+      "order": 10
+    },
+    {
+      "tag": "CM8M",
+      "proof_uses": [
+        "DLF1",
+        "U8OS",
+        "FWTN",
+        "HU0W"
+      ],
+      "reason": "The absence-of-pivotal characterization identifies E-prime for the full vertex set with double connection. The exact cutting probability sum then splits into the deterministic diagonal, zeroth coefficient and first-pivotal probabilities.",
+      "order": 11
+    },
+    {
+      "tag": "ONAY",
+      "proof_uses": [
+        "UINB",
+        "FWTN"
+      ],
+      "reason": "Localize the prefix and deleted-cluster slice to bonds touching that cluster, separate the cutting coordinate and exterior coordinates, and use Bernoulli independence. Almost-sure finiteness permits countable slicing; the exterior event is then realized on an independent layer.",
+      "order": 12
+    },
+    {
+      "tag": "YLI6",
+      "proof_uses": [
+        "CM8M",
+        "ONAY",
+        "ZTE7",
+        "U8OS"
+      ],
+      "reason": "Factor each directed first-pivotal probability using the almost surely finite deleted root cluster, then split unrestricted continuation into avoiding and through-set contributions in an independent layer. Add the through-set remainder and sum nonnegative terms before separating the deterministic diagonal from the zeroth coefficient.",
+      "order": 13
+    },
+    {
+      "tag": "LVRG",
+      "proof_uses": [
+        "NLIV",
+        "UINB"
+      ],
+      "reason": "Bound the final independent through-set event by ordinary connection and integrate that layer. The remaining prefix is precisely the positive-order coefficient, with no extra constant and no finiteness requirement.",
+      "order": 14
+    },
+    {
+      "tag": "6UGP",
+      "proof_uses": [
+        "LVRG"
+      ],
+      "reason": "The continuation bound gives sup_y r_n(x,y) ≤ C times the positive coefficient mass. Finite total positive mass makes these masses tend to zero; multiplication by the finite constant C preserves the limit. No signed expansion identity is used.",
+      "order": 15
+    },
+    {
+      "tag": "G1IE",
+      "proof_uses": [
+        "NLIV",
+        "HU0W",
+        "ONAY",
+        "ZTE7"
+      ],
+      "reason": "Apply the cutting partition and factorisation to the final through-set event conditional on preceding independent layers. The avoiding/through decomposition gives the next coefficient and remainder; integration and nonnegative summation yield the canonical recurrence at every order.",
+      "order": 16
+    },
+    {
+      "tag": "XMUG",
+      "proof_uses": [
+        "YLI6",
+        "G1IE",
+        "LVRG",
+        "NLIV"
+      ],
+      "reason": "Finite coefficient row masses and the continuation bound make every coefficient, remainder and continuation finite, retaining the extra diagonal contribution at order zero. Convert the nonnegative initial identity and recurrence to real equalities, telescope with alternating signs, and use absolute summability to move the finite sum through the continuation sums.",
+      "order": 17
+    },
+    {
+      "tag": "LCX2",
+      "proof_uses": [
+        "NLIV",
+        "FWTN",
+        "84FZ",
+        "S9QJ",
+        "AUUG"
+      ],
+      "reason": "Decompose the first coefficient by a contact with the deleted first-layer cluster. Keep the initial diagonal exact; otherwise use four disjoint arms with deletion retained on two arms and take the minimum with the separate double-connection cap. Contact at the next layer's starting point makes E-prime a double connection. Independent layers and iterated BK give the bound. A two-vertex profile attains both sides at p²; this refinement is a direct argument of the article.",
+      "order": 18
+    },
+    {
+      "tag": "4PAZ",
+      "proof_uses": [
+        "NLIV",
+        "LCX2",
+        "LVRG"
+      ],
+      "reason": "On two vertices the first coefficient has diagonal p² and zero off-diagonal entry. The repeated directed pair contributes p⁴ to the first remainder, while its convolution upper bound also equals p⁴. At p=1 both are one, so every universal multiplier is at least one. This is a direct equality computation, not an attributed source theorem.",
+      "order": 19
+    },
+    {
+      "tag": "3W0M",
+      "proof_uses": [
+        "NLIV",
+        "FWTN",
+        "84FZ",
+        "S9QJ",
+        "AUUG"
+      ],
+      "reason": "A marked coefficient prefix retains connection to a vertex of its last deleted cluster. Finite path decompositions give the two interior six-arm geometries; iterated BK and independence between layers bound their probabilities. Exact nonnegative sum contractions yield the deleted connector followed by the interior transfer, and a separate terminal contraction completes induction. The initial diagonal and excluded joining diagonal are retained. This is a direct refinement of the source diagram framework, not a literal source occurrence.",
+      "order": 20
+    },
+    {
+      "tag": "0HQZ",
+      "proof_uses": [
+        "3W0M"
+      ],
+      "reason": "Sum the actual coefficient comparison over the endpoint. Each interior transfer multiplies row mass by at most ρ, while the final factor contributes its separate κ, giving α_x ρ^n κ. All quantities may be extended nonnegative reals; no finite-cluster premise is used. Finite α_x, ρ and κ already suffice at every fixed order without ρ<1.",
+      "order": 21
+    },
+    {
+      "tag": "5KBX",
+      "proof_uses": [
+        "0HQZ",
+        "X30S"
+      ],
+      "reason": "The zeroth coefficient is bounded by the initial-diagram slice A_x(x,y), so finite α_x supplies its row finiteness. Sum the geometric positive-order bounds when ρ<1 and κ is finite, retaining the actual zeroth mass in the total estimate. This proves summability of the canonical coefficients rather than assuming a diagram comparison. The nonzero two-vertex quarter-probability example has α_x=9/8, exact maximal ρ=1365/4096 and κ=35/128, and first diagonal coefficient 1/16.",
+      "order": 22
+    },
+    {
+      "tag": "MERJ",
+      "proof_uses": [
+        "UZ7J"
+      ],
+      "reason": "Split the transfer into its two interior geometries. Open-triangle domination by the diagonal triangle retains the exact deleted-connector mass M_d in the first. Translation and Tonelli rearrangements bound the second by Δ times the off-diagonal mass M_off, retaining the excluded joining diagonal. Uniformly, ρ≤Δ(M_d+M_off)≤Δ(M+M_off)≤2ΔM. This is a new refinement of the framework of Sections 7.3–7.5, not an attributed literal source theorem; countability and translation invariance are explicit, while finiteness is not required for the extended nonnegative inequality.",
+      "order": 23
+    }
+  ]
+}

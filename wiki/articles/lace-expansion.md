@@ -14,7 +14,8 @@
   "related": [
     "infrared-diagrams",
     "triangle-susceptibility",
-    "integrated-susceptibility"
+    "integrated-susceptibility",
+    "canonical-lace-expansion"
   ],
   "sourceIds": [
     "heydenreich-hofstad"
@@ -27,6 +28,8 @@
   "prototypeUses": []
 }
 ---
+
+<p>The companion article on the <a href="/articles/canonical-lace-expansion/">canonical lace expansion</a> develops the coefficients on countable inhomogeneous bond models, gives exact identities under explicit finiteness hypotheses, and retains deletion and diagonal gains in the all-order diagram bounds.</p>
 
 ## The first eligible pivotal bond {#section-cutting}
 
