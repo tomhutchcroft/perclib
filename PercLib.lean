@@ -138,6 +138,7 @@ public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.Convolution
 public import PercLib.Percolation.Bond.Lace.Expansion.Finite
+public import PercLib.Percolation.Bond.Lace.FiniteClusters
 public import PercLib.Percolation.Bond.Lace.FirstDiagram
 public import PercLib.Percolation.Bond.Lace.FirstDiagramRefined
 public import PercLib.Percolation.Bond.Lace.FirstPivotal
