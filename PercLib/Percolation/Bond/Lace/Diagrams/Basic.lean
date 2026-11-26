@@ -90,4 +90,57 @@ def diagramReverseIterate (q : Sym2 V → unitInterval) (y : V) (n : ℕ)
 def laceDiagram (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) : ℝ≥0∞ :=
   ∑' p, diagramIterate q x n p * diagramTerminal q p y
 
+section Marked
+
+variable {G : Type*} [AddGroup G]
+
+/-- The actual connector core after summing a common translation of the
+outgoing pair. `true` marks the second coordinate, `false` the first. -/
+def diagramMarkedConnectorCore (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞)
+    (ε : Bool) (p r : G × G) : ℝ≥0∞ :=
+  ∑' y, w ((if ε then r.2 else r.1) + y - (if ε then p.2 else p.1)) *
+    diagramConnector q p (r.1 + y, r.2 + y)
+
+/-- The shifted weighted pair. For the character weight this is `W(a;k)`;
+its supremum is the local norm for a mark on the second connector coordinate. -/
+def diagramWeightedPair (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞) (a : G) : ℝ≥0∞ :=
+  ∑' z, w z * (∑' v, offDiagonal (fun a b : G =>
+    (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 v * tau q v z) * tau q 0 (z + a)
+
+@[simp] theorem diagramMarkedConnectorCore_true (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (p r : G × G) :
+    diagramMarkedConnectorCore q w true p r =
+      ∑' y, w (r.2 + y - p.2) * diagramConnector q p (r.1 + y, r.2 + y) := rfl
+
+@[simp] theorem diagramMarkedConnectorCore_false (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (p r : G × G) :
+    diagramMarkedConnectorCore q w false p r =
+      ∑' y, w (r.1 + y - p.1) * diagramConnector q p (r.1 + y, r.2 + y) := rfl
+
+@[simp] theorem diagramMarkedConnectorCore_zero_weight (q : Sym2 G → unitInterval)
+    (ε : Bool) (p r : G × G) :
+    diagramMarkedConnectorCore q (fun _ => 0) ε p r = 0 := by
+  simp [diagramMarkedConnectorCore]
+
+theorem diagramMarkedConnectorCore_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (ε : Bool) (p r : G × G) :
+    diagramMarkedConnectorCore q w ε p r ≤ diagramMarkedConnectorCore q w' ε p r :=
+  ENNReal.tsum_le_tsum fun _ => mul_le_mul' (hw _) le_rfl
+
+theorem diagramWeightedPair_eq_tsum (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (a : G) :
+    diagramWeightedPair q w a = ∑' z, w z * (∑' v, offDiagonal (fun a b : G =>
+      (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) 0 v * tau q v z) * tau q 0 (z + a) := rfl
+
+@[simp] theorem diagramWeightedPair_zero_weight (q : Sym2 G → unitInterval) (a : G) :
+    diagramWeightedPair q (fun _ => 0) a = 0 := by
+  simp [diagramWeightedPair]
+
+theorem diagramWeightedPair_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (a : G) :
+    diagramWeightedPair q w a ≤ diagramWeightedPair q w' a :=
+  ENNReal.tsum_le_tsum fun z => mul_le_mul' (mul_le_mul' (hw z) le_rfl) le_rfl
+
+end Marked
+
 end PercLib.Percolation.Bond.Lace

@@ -36,8 +36,10 @@ public import PercLib.Analysis.MomentHierarchy
 public import PercLib.Analysis.MultiplicativeDecrement
 public import PercLib.Analysis.NearestNeighborMoments
 public import PercLib.Analysis.NearestNeighborPairing
+public import PercLib.Analysis.NearestNeighborResolvent
 public import PercLib.Analysis.NearestNeighborSymbolBounds
 public import PercLib.Analysis.PowerLawConvolution
+public import PercLib.Analysis.PowerLawSeriesTail
 public import PercLib.Analysis.QuadraticRecursion
 public import PercLib.Analysis.ReciprocalCutoff
 public import PercLib.Analysis.ReciprocalDifference
@@ -310,6 +312,7 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Defs
 public import PercLib.Percolation.Bond.Lace.Diagrams.Examples
 public import PercLib.Percolation.Bond.Lace.Diagrams.Finiteness
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedConnectorBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedSums
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
 public import PercLib.Percolation.Bond.Lace.Diagrams.ReverseBounds
@@ -392,6 +395,7 @@ public import PercLib.Percolation.Bond.SpatialMoments.Continuity
 public import PercLib.Percolation.Bond.SpatialMoments.Defs
 public import PercLib.Percolation.Bond.SpatialMoments.Derivative
 public import PercLib.Percolation.Bond.SpatialMoments.FiniteRange
+public import PercLib.Percolation.Bond.SpatialMoments.FourierContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.IntensityContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.Localization
 public import PercLib.Percolation.Bond.SpatialMoments.LocalizationMetric
