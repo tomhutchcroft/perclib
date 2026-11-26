@@ -13,7 +13,7 @@ order: collaborators' pull requests and fork branches, then `main`, then the tas
   then `integrate.sh 41d633b work/p-c-TVM9-fix` (`fbd75fa` + `e986fd6`, spacing `Λ_{L - 1}` in the header) passed on `2ac793f`.
   Logs `/home/user/reports/integrate-cycle6.log`, `integrate-cycle6b.log`. Includes `f23c8a4` (`.github/automerge-authors`, ruling 28).
   On top: FRONTIER regenerated at `2ac793f` + this STATUS commit (docs).
-- **`main` = see Progress (cycle 6 PR)**. Before: `5eea93e` (#27, cycle 5, head `8f875be`); `026af1c` (#26); #25 `be36e68`, #24 `c1f1a95`.
+- **`main` = `5eea93e` still. PR #28 OPEN** (head `91e3002` = gated `2ac793f` + docs); merge refused: required CI check `gate` in progress (>10 min). Next round: merge #28 with sha `91e3002` FIRST, then push the local STATUS commit on top. Before: `5eea93e` (#27, cycle 5, head `8f875be`); `026af1c` (#26); #25 `be36e68`, #24 `c1f1a95`.
   Integration PR open+merge through the API works.
 - Cycle 3 batch: task-board restock `714fb71` (lane B, 8 tasks) + our `227d7c6` holding `exploration-terminates-at-cluster` (7WHX)
   out: possible overlap with the BFS exploration in Yujin's #15/#16 (`Bond/Exploration/BFS/Cluster.lean`); file kept in
@@ -69,7 +69,7 @@ apply exact edits in a `-fix` commit, comment on each PR. Then audit #20 + #22.
 ## Progress (D-35 measure)
 
 Manifest regenerated at `2ac793f`: **423 proved of 1,403** (was 417 at `d311edc`).
-Cycle 6 report: pull requests handled 1 (#2 commented); merged to `main`: PR in this cycle (see "For Tom"; gate `2ac793f`);
+Cycle 6 report: pull requests handled 1 (#2 commented); merged to `main`: nothing yet (PR #28 open, waiting on CI `gate`; local gate `2ac793f` passed);
 assertions proved and merged: 6 tags (TVM9, 0RX3, MTYL, 8WO7, OVG9, MIFH; audit r20-b); agents started by me: 0; briefs queued:
 `060b-audit-c3-yujin-defs` (#20 + #22), `060c-audit-r21-a` (8 tags: W8PB, J1LW, IZAO, 87W3, RL1L, HATE, L0TE, RDF0).
 Cycle 5 report: pull requests handled 0 (none new or updated); merged to `main`: `5eea93e` (PR #27, task board, gate `8f875be`);
