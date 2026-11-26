@@ -154,6 +154,7 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Remainder
 public import PercLib.Percolation.Bond.Lace.Remainder.Sharpness
 public import PercLib.Percolation.Bond.Lace.Remainder.Telescoping
 public import PercLib.Percolation.Bond.Lace.Sharpness
+public import PercLib.Percolation.Bond.Lace.TerminalDiagram
 public import PercLib.Percolation.Bond.Lace.ThroughExpansion
 public import PercLib.Percolation.Bond.Lace.ThroughSet
 public import PercLib.Percolation.Bond.Lace.TwoPaths
