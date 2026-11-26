@@ -31,7 +31,8 @@ open scoped ENNReal BigOperators
 
 namespace PercLib.Probability.ExplorationPoisson
 
-/-- The `ℝ≥0∞`-valued one-coordinate Bernoulli pgf factor. -/
+/-- The `ℝ≥0∞`-valued one-coordinate Bernoulli pgf factor `t * p + (1 - p)`. It is intended for
+`p ≤ 1`; for `p > 1` truncated subtraction makes it `t * p`. -/
 def pgfFactor (t p : ℝ≥0∞) : ℝ≥0∞ := t * p + (1 - p)
 
 theorem pgfFactor_def (t p : ℝ≥0∞) : pgfFactor t p = t * p + (1 - p) := rfl

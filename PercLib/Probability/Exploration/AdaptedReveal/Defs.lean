@@ -83,7 +83,8 @@ about an arbitrary configuration `ω : Set ι`. -/
 noncomputable def openCount {ι : Type*} (S : Finset ι) (ω : Set ι) : ℕ :=
   @Finset.card ι (@Finset.filter ι (fun e => e ∈ ω) (Classical.decPred _) S)
 
-/-- Adapted revelation data: a countably valued state, its revealed coordinate set, and
+/-- Adapted revelation data: a state (of any type; countability is a premise of the consumers
+that need it), its revealed coordinate set, and
 the statement that each state fibre is a cylinder event on the revealed coordinates.
 
 This is the precise stopping-set hypothesis.  It is *not* automatic for a random set

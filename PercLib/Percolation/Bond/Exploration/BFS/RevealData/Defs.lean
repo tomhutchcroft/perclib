@@ -60,6 +60,11 @@ theorem measurable_extendBlock (R : Set (Sym2 V)) : Measurable (extendBlock R) :
     rw [h]
     exact MeasurableSet.empty
 
+/-- `extendBlock` is the image under the subtype inclusion. -/
+theorem extendBlock_eq_image (R : Set (Sym2 V)) (η : Set R) :
+    extendBlock R η = Subtype.val '' η :=
+  Subtype.coe_image.symm
+
 theorem blockRestrict_extendBlock (R : Set (Sym2 V)) (η : Set R) :
     blockRestrict R (extendBlock R η) = η := by
   ext ⟨e, he⟩
