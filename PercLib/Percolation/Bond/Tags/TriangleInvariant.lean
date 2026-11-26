@@ -40,12 +40,14 @@ variable {V : Type*}
 property, and let the connection kernel `T` be invariant, `T(g x, g y) = T(x, y)`. With
 `T²(x,y) = ∑_u T(x,u) T(u,y)`, `T³(x,y) = ∑_{u,w} T(x,u) T(u,w) T(w,y)`, `Δ = T³(o,o)`,
 `A = ∑_v T(o,v) T²(o,v) T³(o,v)` and `B = ∑_v T²(o,v)³` (sums in `[0, ∞]`; `T²` is symmetric),
-one has `B ≤ A ≤ Δ²`. No finiteness of the susceptibility is needed. -/
+one has `B ≤ A ≤ Δ²`. The finite-susceptibility hypothesis of the assertion is carried but
+not used by the proof. -/
 @[tag "IZAO"]
 theorem triangle_cube_le_weighted_le_sq_of_hasMassTransport [Countable V] {Γ : Type*}
     [Group Γ] [MulAction Γ V] [MulAction.IsPretransitive Γ V] (μ : Measure (Config V))
     [IsProbabilityMeasure μ] (hMT : HasMassTransport Γ V)
-    (hinv : ∀ (g : Γ) (x y : V), connProb μ (g • x) (g • y) = connProb μ x y) (o : V) :
+    (hinv : ∀ (g : Γ) (x y : V), connProb μ (g • x) (g • y) = connProb μ x y) (o : V)
+    (_hχ : ∑' v, connProb μ o v < ∞) :
     ∑' v, (∑' u, connProb μ o u * connProb μ u v) ^ 3 ≤
         ∑' v, connProb μ o v * (∑' u, connProb μ o u * connProb μ u v) *
           (∑' u, ∑' w, connProb μ o u * connProb μ u w * connProb μ w v) ∧
@@ -57,12 +59,13 @@ theorem triangle_cube_le_weighted_le_sq_of_hasMassTransport [Countable V] {Γ : 
 
 /-- Let the vertex set be a countable group `G` and the connection kernel be invariant under
 simultaneous left translation, `T(g x, g y) = T(x, y)`. With `A_o = ∑_v T(o,v) T²(o,v) T³(o,v)`,
-`B_o = ∑_v T²(o,v)³` and `Δ_o = T³(o,o)` (sums in `[0, ∞]`), one has `B_o ≤ A_o ≤ Δ_o²`. No
-finiteness of the susceptibility is needed. -/
+`B_o = ∑_v T²(o,v)³` and `Δ_o = T³(o,o)` (sums in `[0, ∞]`), one has `B_o ≤ A_o ≤ Δ_o²`. The
+finite-susceptibility hypothesis of the assertion is carried but not used by the proof. -/
 @[tag "87W3"]
 theorem triangle_cube_le_weighted_le_sq_of_group {G : Type*} [Group G] [Countable G]
     (μ : Measure (Config G)) [IsProbabilityMeasure μ]
-    (hinv : ∀ g x y : G, connProb μ (g * x) (g * y) = connProb μ x y) (o : G) :
+    (hinv : ∀ g x y : G, connProb μ (g * x) (g * y) = connProb μ x y) (o : G)
+    (_hχ : ∑' v, connProb μ o v < ∞) :
     ∑' v, (∑' u, connProb μ o u * connProb μ u v) ^ 3 ≤
         ∑' v, connProb μ o v * (∑' u, connProb μ o u * connProb μ u v) *
           (∑' u, ∑' w, connProb μ o u * connProb μ u w * connProb μ w v) ∧
