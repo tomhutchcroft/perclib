@@ -1,25 +1,24 @@
 # Status
 
-Handoff for the maintainer (LEAD role of D-34). Updated 26 November 2026, ~21:10 UTC, end of **paced cycle 7** (ruling 25).
+Handoff for the maintainer (LEAD role of D-34). Updated 26 November 2026, ~00:15 UTC 27 Nov, end of **paced cycle 8** (ruling 25).
 Older history: [STATUS_LOG.md](STATUS_LOG.md) (do not read by default; cycle 1 details are at its end).
 A maintainer with no memory resumes from this file and `/home/user/reports/ACTIVE.md` (ruling 25: 40 calls per round;
 order: collaborators' pull requests and fork branches, then `main`, then the task board, then our own work).
 
 ## Tip and gate
 
-- Branch `claude/zen-lovelace-rvlcw2`. **Last gated commit `71836f3`** (cycle 7, two batches, both `== gate passed`):
-  `integrate.sh a35e438` + Yujin #13..#19 in stack order + `work/yujin-stack-c2-fix`: attempt 1 failed (longLine lint in
-  `Envelope/Defs.lean` from audit edit 3), the fix branch was dropped (right culprit) and the stack passed on `0120f9a` (pushed);
-  then `integrate.sh 0120f9a work/yujin-stack-c2-fix` (`f1f7c78` = the 9 exact edits of audit c2, verbatim; `4317c96` = rewrap of
-  that docstring line, no text change) passed on `71836f3`. Logs `/home/user/reports/integrate-cycle7.log`, `integrate-cycle7b.log`.
-  On top: FRONTIER regenerated at `71836f3` + this STATUS commit (docs). `a35e438` = merge of `origin/main` (#28 = `7d084c2`) back.
-- **`main` = `7d084c2`** (#28, merged by ARCHITECT on green `gate`). **PR #29 OPEN** (head `a58c5e8` = gated `71836f3` + FRONTIER + STATUS). Next cycle FIRST: merge #29 with
-  `{"merge_method":"merge","sha":"a58c5e8..."}` if CI `gate` is green on `a58c5e8` (ruling 29), then merge `origin/main` back, then push
-  the local commit holding this line (kept unpushed so #29's CI is not restarted). Before: `5eea93e` (#27), `026af1c` (#26).
+- Branch `claude/zen-lovelace-rvlcw2`. **Last gated commit `2d366a2`** (cycle 8, one batch, attempt 1 `== gate passed`, nothing skipped):
+  `integrate.sh e05542e` + the five audit-r21-a branches (all APPROVE): `work/p-b-W8PB` `f030931`, `work/p-c-J1LW` `772a62c`,
+  `work/p-d-IZAO` `a2b00b4`, `work/p-b-RL1L` `00c7eee`, `work/p-c-HATE` `3be8e67` (+ import-closure commit). Log
+  `/home/user/reports/integrate-cycle8.log`. On top: FRONTIER at `2d366a2`, task `galton-watson-dwass` -> done (RL1L proved), this STATUS.
+  `e05542e` = merge of `origin/main` (#29 = `68f9945`, merged by ARCHITECT) back.
+- **`main` = `68f9945`** (#29). **PR to main for this batch: see "PR to main" line below.** Next cycle FIRST: merge it with
+  `{"merge_method":"merge","sha":<head>}` if CI `gate` is green on its head (ruling 29), then merge `origin/main` back.
+  Before: `7d084c2` (#28), `5eea93e` (#27).
 - Cycle 3: 7WHX task held out (possible overlap with Yujin's BFS exploration, now merged in #15/#16): re-check before re-adding.
 - **Kernel replay:** the run on `28c8877` is dead at 180/538 (`/home/user/wt/kreplay-28c8877`). Last passed: `a747905`.
   Restart niced when a cycle has room (`nice -n 15 scripts/kernel_replay.sh 2` in a fresh worktree of the tip); remove the old one.
-- **Actions (cycle 7):** CI on `main` `7d084c2` success; CI on `12b0b51` success; CI on #2 `bfb66cf` success; Automerge skipped (normal).
+- **Actions (cycle 8):** CI on #30 `61e8d84`: gate, scripts, wiki, kernel-replay all success. (Cycle 7: `main` `7d084c2` success.)
 - integrate.sh refuses a branch cut from an unpushed commit: push a gated tip before integrating a fix branch cut from it.
 
 Commands (`/home/user/perclib`, `export PATH=$HOME/.elan/bin:$PATH`):
@@ -43,46 +42,45 @@ PR to `main`: POST `/pulls` (head `claude/zen-lovelace-rvlcw2`), then PUT `/pull
 | PR | Author / branch @ tip | State | Next |
 |---|---|---|---|
 | #10, #11, #12 | yujinhkim / TejasO2 | merged (#10 by Tom; #11, #12 via #24/#25) | none |
-| #13-#19 | yujinhkim stack `aa1cf85`..`302759e` | **gated on the integration branch (cycle 7)**, audit c2 (`060`): #13 A APPROVE WITH CHANGES, #15 APPROVE, #17 APPROVE WITH CHANGES; exact edits applied (`f1f7c78`); close as merged when the PR to main merges | comment on #13-#19 when on `main`; follow-ups for him: A.4 `configWeight` bridge, C.1 `incidentEdges` refactor |
+| #13-#19 | yujinhkim stack `aa1cf85`..`302759e` | **merged** (on `main` via #29, closed as merged) | follow-ups for him: A.4 `configWeight` bridge, C.1 `incidentEdges` refactor (not yet commented) |
 | #20 | yujinhkim `8acc3a8` | audit c3 A **REJECT (fixable)**: `RowSum` duplicates `rowSum`; **commented cycle 7** | wait for new tip |
 | #21 | yujinhkim `cd5ff5c` (P) | waits on #20; commented | gate after #20 |
 | #22 | yujinhkim `cc6eb18` | audit c3 B APPROVE WITH CHANGES (2 exact edits in the report; rename `N` is his); commented | merge after #20 + #21 |
-| #23 | yujinhkim `bf03542` (35 defs, 70 files) | commented (asked to split); audit part 1 briefed (`060d`) | parts 2-4 (see Queue) |
+| #23 | yujinhkim `bf03542` (35 defs, 70 files) | audit part 1 (`audit-c4-yujin-23a.md`): 4 APPROVE, 4 WITH CHANGES (exact edits, ours to apply in a `-fix` commit at merge); **commented cycle 8**; part 2 briefed (`060f`) | parts 3-4 (see Queue) |
+| #30 | TejasO2 `61e8d84` (planar separated arms, 6 defs, 1 new file; CI green) | **new cycle 8; commented** (audit queued) | D-35 audit `060e`, then gate + merge |
 | #2 | tomhutchcroft `bfb66cf` (moved 19:41; vs main 56 files +9.6k, Percolation + wiki, new defs; CI green) | **commented cycle 7** | D-35 audit after the Yujin stack, unless Tom merges |
 
-Cycle 7 (check 20:40): no new PRs (open: #2, #13-#23); fork tips unchanged; no PR from `TejasO2`. Fork tips seen (ruling 24):
-the eleven stack tips above, `80ee07a`, `e6cf6fe` (merged). No fork of `TejasO2` is watched (he opens pull requests directly).
+Cycle 8 (check 23:50): new PR #30 (TejasO2); open: #2, #20-#23, #30; fork tips unchanged (the stack tips above, `80ee07a`, `e6cf6fe` merged). No fork of `TejasO2` is watched (he opens pull requests directly).
 
 ## Progress (D-35 measure)
 
-Manifest regenerated at `71836f3`: **423 proved of 1,403** (unchanged; the Yujin stack carries no tags).
+Manifest regenerated at `2d366a2`: **431 proved** (FRONTIER: 260 ready, 705 blocked, 7 without prerequisites).
+Cycle 8 report: pull requests handled 2 (#30 first response, #23 part-1 verdict commented); merged to `main`: PR for gated `2d366a2`
+(8 tags: W8PB, J1LW, IZAO, 87W3, RL1L, HATE, L0TE, RDF0; audit r21-a) opened, merge next cycle on green `gate`; assertions proved: 8 merged
+(+8, 423 -> 431); agents started by me: 0; briefs queued: `060e-audit-c5-planar-30`, `060f-audit-c6-yujin-23b`.
 Cycle 7 report: pull requests handled 12 (#13-#19 merged into the integration branch after audit + gate, PR #29 to main; #20, #21, #22, #23, #2
 commented); merged to `main`: PR to main opened (head = STATUS commit over gated `71836f3`), merge next cycle on green `gate`;
 `main` = `7d084c2` (#28, cycle 6 work) merged back; assertions proved: 0 new; agents started by me: 0; brief queued: `060d-audit-c4-yujin-23a`.
 Cycle 6 report: pull requests handled 1 (#2 commented); merged to `main`: nothing yet (PR #28 open, waiting on CI `gate`; local gate `2ac793f` passed);
 assertions proved and merged: 6 tags (TVM9, 0RX3, MTYL, 8WO7, OVG9, MIFH; audit r20-b); agents started by me: 0; briefs queued:
 `060b-audit-c3-yujin-defs` (#20 + #22), `060c-audit-r21-a` (8 tags: W8PB, J1LW, IZAO, 87W3, RL1L, HATE, L0TE, RDF0).
-Cycle 5 report: pull requests handled 0 (none new or updated); merged to `main`: `5eea93e` (PR #27, task board, gate `8f875be`);
-assertions proved: 4 new tags on two prover branches, unmerged, need audit (HATE/L0TE/RDF0 on `work/p-c-HATE` @ `3be8e67`; FZQQ on
-`work/p-d-FZQQ` @ `d9629d3`); agents started by me: 0; no new brief (`050a`, `060` still unclaimed).
-Cycles 2-4: see STATUS_LOG.md / git history of this file.
+Cycles 2-5: see STATUS_LOG.md / git history of this file.
 Lane B finished since cycle 1: `audit-c2-yujin-defs`, `audit-c3-yujin-defs` (cycle 7 intake), `audit-c1-planar` (report `/home/user/reports/audit-c1-planar.md`).
 
 ## Finished, not merged
 
 - `frontier-nonbacktracking-recurrence` @ `1a3f0ed` (0MK8): approved, fails the gate on `local macro`
   (`PercLib/Combinatorics/NonbacktrackingRecurrence.lean` lines 98, 379). Needs fix branch (inline the notations, statements unchanged).
-- Briefed in `060c-audit-r21-a` (cycle 6; requests moved to `audit-requests/done/`): W8PB `f030931`, J1LW `772a62c`,
-  IZAO/87W3 `a2b00b4`, RL1L `00c7eee`, HATE/L0TE/RDF0 `3be8e67`.
-- Not yet briefed (requests in `audit-requests/`): N9P5/Q4NA `work/p-b-N9P5` (new, cycle 7); FZQQ `work/p-d-FZQQ` @ `d9629d3`; 27T8 `work/p-a-27T8` @ `e55ffd2`
+- Not yet briefed (requests in `audit-requests/`): 25Z0 `p-a-25Z0`, 4OFD `p-d-4OFD` (new, cycle 8); N9P5/Q4NA `work/p-b-N9P5` (new, cycle 7); FZQQ `work/p-d-FZQQ` @ `d9629d3`; 27T8 `work/p-a-27T8` @ `e55ffd2`
   (`Models/Tags/HierarchicalMaximumScale.lean`); XXQK `work/p-b-XXQK` @ `1a17e3a` (`Probability/Tags/GaltonWatsonThinning.lean`).
 - `work/p-b-Z4JP` @ `6d15a35` (Z4JP, WSKG): audit r20-b A APPROVE WITH CHANGES, change 1 blocking and needs judgement (move
   `permuteHilbertBasis` + API to new `PercLib/Analysis/PermuteHilbertBasis/Defs.lean`); fix brief not yet written. TVM9/MTYL merged cycle 6.
 
 ## In flight / claims
 
-- Lane B: `060`, `060b` done (reports `audit-c2-yujin-defs.md`, `audit-c3-yujin-defs.md`). Queued unclaimed: `060c-audit-r21-a`
-  (8 of our tags), `060d-audit-c4-yujin-23a` (#23 part 1: `Bond/RestorationWindow` + `Bond/IndependentLayer/UnionChange`, 8 defs).
+- Lane B: `060c` (r21-a, all APPROVE, merged cycle 8) and `060d` (#23 part 1) done. Queued unclaimed: `060e-audit-c5-planar-30`
+  (#30), `060f-audit-c6-yujin-23b` (#23 part 2: `Analysis/CapFlux`, `LongRange/Corner`, `LongRange/CornerMoment`, 8 defs).
+- Task board cycle 8: `galton-watson-dwass` -> done (RL1L proved); `check_tasks.py` clean, 15 open.
 - Task board (cycle 5, `8f875be`): of the 7 non-lrp claimed tasks, 6 are `proved` in the manifest (R3I9, D106, UNJ6, HQ6X, GGH2, YPNG)
   and moved to `done/`; `countable-closed-product` (QH7Q, unformalised, no branch activity) released to `open/`. `claimed/` now holds
   only the three held lrp ports. `check_tasks.py` clean, 16 open. `work/p-a-YXL0` = `62815b5` (prover slot a, no commits yet).
@@ -90,9 +88,8 @@ Lane B finished since cycle 1: `audit-c2-yujin-defs`, `audit-c3-yujin-defs` (cyc
 
 ## Queue (`/home/user/reports/queue/`)
 
-Next lane-B briefs, one per cycle (ruling 26 order): (1) #23 part 2 `Analysis/CapFlux` + `LongRange/Corner` + `CornerMoment` (8),
-part 3 `CornerDerivative` (9), part 4 `CornerCoupling` + `DegreeCorner` (10, split if needed), all over `cc6eb18`;
-(2) batched audit FZQQ + 27T8 + XXQK, then N9P5/Q4NA (`work/p-b-N9P5`, new request); (3) Z4JP move fix (r20-b A.1, A.2);
+Next lane-B briefs (ruling 26 order): (1) #23 part 3 `CornerDerivative` (9), part 4 `CornerCoupling` + `DegreeCorner` (10, split if needed), all over `cc6eb18`;
+(2) batched audit FZQQ + 27T8 + XXQK + N9P5/Q4NA + 25Z0 + 4OFD (up to 8 tags); (3) Z4JP move fix (r20-b A.1, A.2);
 (4) 0MK8 macro fix; (5) PR #2 definition audit; (6) ruling 27 wiki briefs; (7) restock, planar map, `tasks/areas/long-range.md`
 listing of the merged #13-#19, `docs/reviews/pr-{13,15,17,20,22}.md` from audits c2/c3, check_d35 label regex, integrate.sh culprit parsing.
 Prover drain only (ruling 21): `420`-`423` in queue. Held: `HOLD-060/205/210/220/230/371` (ruling 18b).
