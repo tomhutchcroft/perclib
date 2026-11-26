@@ -147,6 +147,7 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Bounds
 public import PercLib.Percolation.Bond.Lace.Remainder.Convergence
 public import PercLib.Percolation.Bond.Lace.Remainder.Recurrence
 public import PercLib.Percolation.Bond.Lace.Remainder.Remainder
+public import PercLib.Percolation.Bond.Lace.Remainder.Sharpness
 public import PercLib.Percolation.Bond.Lace.Remainder.Telescoping
 public import PercLib.Percolation.Bond.Lace.Sharpness
 public import PercLib.Percolation.Bond.Lace.ThroughExpansion
