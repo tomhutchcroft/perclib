@@ -13,8 +13,9 @@ order: collaborators' pull requests and fork branches, then `main`, then the tas
   then `integrate.sh 0120f9a work/yujin-stack-c2-fix` (`f1f7c78` = the 9 exact edits of audit c2, verbatim; `4317c96` = rewrap of
   that docstring line, no text change) passed on `71836f3`. Logs `/home/user/reports/integrate-cycle7.log`, `integrate-cycle7b.log`.
   On top: FRONTIER regenerated at `71836f3` + this STATUS commit (docs). `a35e438` = merge of `origin/main` (#28 = `7d084c2`) back.
-- **`main` = `7d084c2`** (#28, merged by ARCHITECT on green `gate`). **PR to main opened this cycle: see "PR open" below; merge it
-  FIRST next cycle if CI `gate` is green on its head (ruling 29), then merge `origin/main` back.** Before: `5eea93e` (#27), `026af1c` (#26).
+- **`main` = `7d084c2`** (#28, merged by ARCHITECT on green `gate`). **PR #29 OPEN** (head `a58c5e8` = gated `71836f3` + FRONTIER + STATUS). Next cycle FIRST: merge #29 with
+  `{"merge_method":"merge","sha":"a58c5e8..."}` if CI `gate` is green on `a58c5e8` (ruling 29), then merge `origin/main` back, then push
+  the local commit holding this line (kept unpushed so #29's CI is not restarted). Before: `5eea93e` (#27), `026af1c` (#26).
 - Cycle 3: 7WHX task held out (possible overlap with Yujin's BFS exploration, now merged in #15/#16): re-check before re-adding.
 - **Kernel replay:** the run on `28c8877` is dead at 180/538 (`/home/user/wt/kreplay-28c8877`). Last passed: `a747905`.
   Restart niced when a cycle has room (`nice -n 15 scripts/kernel_replay.sh 2` in a fresh worktree of the tip); remove the old one.
@@ -55,7 +56,7 @@ the eleven stack tips above, `80ee07a`, `e6cf6fe` (merged). No fork of `TejasO2`
 ## Progress (D-35 measure)
 
 Manifest regenerated at `71836f3`: **423 proved of 1,403** (unchanged; the Yujin stack carries no tags).
-Cycle 7 report: pull requests handled 12 (#13-#19 merged into the integration branch after audit + gate; #20, #21, #22, #23, #2
+Cycle 7 report: pull requests handled 12 (#13-#19 merged into the integration branch after audit + gate, PR #29 to main; #20, #21, #22, #23, #2
 commented); merged to `main`: PR to main opened (head = STATUS commit over gated `71836f3`), merge next cycle on green `gate`;
 `main` = `7d084c2` (#28, cycle 6 work) merged back; assertions proved: 0 new; agents started by me: 0; brief queued: `060d-audit-c4-yujin-23a`.
 Cycle 6 report: pull requests handled 1 (#2 commented); merged to `main`: nothing yet (PR #28 open, waiting on CI `gate`; local gate `2ac793f` passed);
@@ -93,7 +94,7 @@ Next lane-B briefs, one per cycle (ruling 26 order): (1) #23 part 2 `Analysis/Ca
 part 3 `CornerDerivative` (9), part 4 `CornerCoupling` + `DegreeCorner` (10, split if needed), all over `cc6eb18`;
 (2) batched audit FZQQ + 27T8 + XXQK, then N9P5/Q4NA (`work/p-b-N9P5`, new request); (3) Z4JP move fix (r20-b A.1, A.2);
 (4) 0MK8 macro fix; (5) PR #2 definition audit; (6) ruling 27 wiki briefs; (7) restock, planar map, `tasks/areas/long-range.md`
-listing of the merged #13-#19, check_d35 label regex, integrate.sh culprit parsing.
+listing of the merged #13-#19, `docs/reviews/pr-{13,15,17,20,22}.md` from audits c2/c3, check_d35 label regex, integrate.sh culprit parsing.
 Prover drain only (ruling 21): `420`-`423` in queue. Held: `HOLD-060/205/210/220/230/371` (ruling 18b).
 
 ## Held items
