@@ -136,6 +136,7 @@ public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 public import PercLib.Percolation.Bond.Lace.Diagrams.Bounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Defs
+public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
 public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
