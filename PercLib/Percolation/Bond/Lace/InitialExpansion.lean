@@ -209,6 +209,7 @@ theorem tau_add_laceRemainder_zero_eq_doubleConn_add_step [Countable V]
 
 /-- In the standard coefficient convention, the first expansion reads
 `τ + r₀ = δ + π₀ + Jτ + π₀Jτ`. The signed remainder is therefore `-r₀`. -/
+@[tag "YLI6"]
 theorem tau_add_laceRemainder_zero_eq_indicator_add_piZero [Countable V]
     (q : Sym2 V → unitInterval) (x y : V)
     (hfin : ∀ u v : V, ∀ᵐ ω ∂law q, (cluster (ω \ {s(u, v)}) x).Finite) :

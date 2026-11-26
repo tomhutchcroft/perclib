@@ -54,6 +54,7 @@ theorem remainderEvent_snoc_probability_le [Countable V]
 coefficient followed by one open bond and an ordinary connection. The
 explicit off-diagonal weight makes the statement independent of loop
 probabilities. -/
+@[tag "LVRG"]
 theorem laceRemainder_succ_le_tsum_laceCoefficient_mul_tau [Countable V]
     (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) :
     laceRemainder q (n + 1) x y ≤ ∑' u, ∑' v,

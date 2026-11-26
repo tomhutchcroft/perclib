@@ -48,6 +48,7 @@ theorem laceRemainder_succ_le_mass_mul (q : Sym2 V → unitInterval)
 
 /-- Uniform convergence of all nonnegative remainder magnitudes to zero,
 assuming summable positive coefficient masses and a finite continuation bound. -/
+@[tag "6UGP"]
 theorem tendsto_iSup_laceRemainder_zero (q : Sym2 V → unitInterval) (x : V)
     (C : ℝ≥0∞) (hCfinite : C ≠ ⊤)
     (hC : ∀ u y, (∑' v,
