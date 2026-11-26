@@ -185,6 +185,7 @@ theorem tendsto_signedLaceRemainder_zero [Countable V]
 /-- The infinite signed lace expansion with the canonical lace kernel. The
 finite-cluster and absolute-summability hypotheses justify every cutting step,
 real conversion, convolution interchange, and passage to the limit. -/
+@[tag "1741"]
 theorem infinite_lace_expansion [Countable V]
     (q : Sym2 V → unitInterval) (x y : V)
     (hfin : ∀ a u v : V, ∀ᵐ ω ∂law q, (cluster (ω \ {s(u, v)}) a).Finite)

@@ -135,6 +135,7 @@ public import PercLib.Percolation.Bond.Lace.CuttingFactorization
 public import PercLib.Percolation.Bond.Lace.DiagramBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Basic
 public import PercLib.Percolation.Bond.Lace.Diagrams.Bounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic

@@ -275,6 +275,7 @@ theorem canonical_lace_fourier_equation [Countable G]
 
 /-- The Fourier quotient for the canonical lace expansion, including
 nonvanishing of its denominator as a proved conclusion. -/
+@[tag "PI55"]
 theorem canonical_lace_fourier_quotient [Countable G]
     (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y))
