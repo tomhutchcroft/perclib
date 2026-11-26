@@ -39,9 +39,9 @@ namespace PercLib.Probability.ExplorationEnvelope
 /-- One step of the envelope recursion: `u ↦ exp (m * (λ * u - 1))`. -/
 noncomputable def envelopeStep (m lam u : ℝ) : ℝ := Real.exp (m * (lam * u - 1))
 
-/-- The envelope sequence `u_0 = 1`, `u_{n+1} = exp (m * (λ * u_n - 1))` of the exploration outline (5.1).
-It is the number of "units of λ-weight" carried by one vertex of the frontier after `n`
-generations of the exploration. -/
+/-- The envelope sequence `u_0 = 1`, `u_{n+1} = exp (m * (λ * u_n - 1))` of the exploration
+outline (5.1). It is the number of "units of λ-weight" carried by one vertex of the frontier
+after `n` generations of the exploration. -/
 noncomputable def envelope (m lam : ℝ) : ℕ → ℝ
   | 0 => 1
   | (n + 1) => envelopeStep m lam (envelope m lam n)
