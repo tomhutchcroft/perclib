@@ -1,0 +1,63 @@
+/-
+Copyright (c) 2026 PercLib contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+New definitions for this project; no upstream Lean code is copied.
+The pair-state diagrams refine the construction of Heydenreich and van der
+Hofstad (2017), Sections 7.3–7.5, by retaining outgoing bond deletion and
+excluding the duplicated zero-length joining arm.
+-/
+module
+
+public import PercLib.Percolation.Bond.Lace.Basic
+public import PercLib.Percolation.Bond.WalkSum
+
+@[expose] public section
+noncomputable section
+
+open scoped ENNReal Classical
+
+namespace PercLib.Percolation.Bond.Lace
+
+variable {V : Type*}
+
+/-- Initial pair-state mass with the certain diagonal double connection
+handled exactly. A state consists of the branch root and outgoing bond tail. -/
+def diagramInitial (q : Sym2 V → unitInterval) (x : V) (p : V × V) : ℝ≥0∞ :=
+  if p.2 = x then (if p.1 = x then 1 else 0)
+  else tau q x p.1 * tau q x p.2 * tau q p.1 p.2
+
+/-- Connector between consecutive layers, retaining the outgoing deleted
+bond in the first layer. -/
+def diagramConnector (q : Sym2 V → unitInterval) (p r : V × V) : ℝ≥0∞ :=
+  ∑' v, offDiagonal (fun a b : V => (unitInterval.toNNReal (q s(a, b)) : ℝ≥0∞)) p.2 v *
+    law q {ω : Config V | ω \ {s(p.2, v)} ∈ conn p.1 r.1} * tau q v r.2
+
+/-- Interior four-arm factor after extracting the incoming and outgoing
+connections. The second geometry excludes the overlap already counted by the
+first geometry. -/
+def diagramInterior (q : Sym2 V → unitInterval) (p r : V × V) : ℝ≥0∞ :=
+  tau q p.1 p.2 * tau q p.1 r.2 * tau q p.2 r.1 * tau q r.1 r.2 +
+    if p.2 = r.1 then tau q p.1 r.2 *
+      ∑' z, if z = r.1 then 0 else tau q r.1 z * tau q z p.1 * tau q z r.2
+    else 0
+
+/-- One complete interior step of the pair-state diagram. -/
+def diagramTransfer (q : Sym2 V → unitInterval) (p r : V × V) : ℝ≥0∞ :=
+  ∑' s, diagramConnector q p s * diagramInterior q s r
+
+/-- Final step, keeping both arms to the target instead of replacing this
+factor by another full interior transfer. -/
+def diagramTerminal (q : Sym2 V → unitInterval) (p : V × V) (y : V) : ℝ≥0∞ :=
+  ∑' s : V × V, diagramConnector q p s * tau q s.1 s.2 * tau q s.1 y * tau q s.2 y
+
+/-- Initial diagram row after `n` interior transfers. -/
+def diagramIterate (q : Sym2 V → unitInterval) (x : V) (n : ℕ) (p : V × V) : ℝ≥0∞ :=
+  match n with
+  | 0 => diagramInitial q x p
+  | n + 1 => ∑' r, diagramIterate q x n r * diagramTransfer q r p
+
+/-- The pair-state diagram bounding the coefficient of order `n+1`. -/
+def laceDiagram (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) : ℝ≥0∞ :=
+  ∑' p, diagramIterate q x n p * diagramTerminal q p y
+
+end PercLib.Percolation.Bond.Lace
