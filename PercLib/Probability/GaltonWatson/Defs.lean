@@ -30,6 +30,7 @@ so the empty sum makes zero absorbing, and the total progeny is `T = ∑ₙ Zₙ
 * `galtonWatsonMeasure p`: the product law of the offspring variables.
 * `generationSize n ω`: the generation size `Zₙ`.
 * `totalProgeny ω`: the total progeny `T`.
+* `generationSizeFrom k`, `totalProgenyFrom k`: the same quantities started from `k` ancestors.
 
 ## Main results
 
@@ -139,5 +140,80 @@ theorem measurable_totalProgeny : Measurable totalProgeny := by
   simp_rw [ENNReal.tsum_eq_iSup_sum]
   exact .iSup fun s => s.measurable_fun_sum fun n _ =>
     (measurable_from_nat (f := fun k : ℕ => (k : ℝ≥0∞))).comp (measurable_generationSize n)
+
+/-! ### Several ancestors -/
+
+/-- The generation sizes of a Galton–Watson process started from `k` ancestors:
+`Z₀ = k` and `Z_{n+1} = ∑_{j < Zₙ} ξ_{n,j}`. -/
+def generationSizeFrom (k : ℕ) : ℕ → (ℕ → ℕ → ℕ) → ℕ
+  | 0, _ => k
+  | n + 1, ω => ∑ j ∈ Finset.range (generationSizeFrom k n ω), ω n j
+
+/-- The total progeny `∑ₙ Zₙ ∈ ℕ ∪ {∞}` of a Galton–Watson process started from `k`
+ancestors. -/
+def totalProgenyFrom (k : ℕ) (ω : ℕ → ℕ → ℕ) : ℝ≥0∞ :=
+  ∑' n, (generationSizeFrom k n ω : ℝ≥0∞)
+
+@[simp]
+theorem generationSizeFrom_zero (k : ℕ) (ω : ℕ → ℕ → ℕ) : generationSizeFrom k 0 ω = k :=
+  rfl
+
+theorem generationSizeFrom_succ (k n : ℕ) (ω : ℕ → ℕ → ℕ) :
+    generationSizeFrom k (n + 1) ω =
+      ∑ j ∈ Finset.range (generationSizeFrom k n ω), ω n j :=
+  rfl
+
+theorem totalProgenyFrom_def (k : ℕ) (ω : ℕ → ℕ → ℕ) :
+    totalProgenyFrom k ω = ∑' n, (generationSizeFrom k n ω : ℝ≥0∞) :=
+  rfl
+
+/-- One ancestor gives the Galton–Watson process `generationSize`. -/
+theorem generationSizeFrom_one (n : ℕ) (ω : ℕ → ℕ → ℕ) :
+    generationSizeFrom 1 n ω = generationSize n ω := by
+  induction n with
+  | zero => rfl
+  | succ n ih => rw [generationSizeFrom_succ, generationSize_succ, ih]
+
+/-- One ancestor gives the total progeny `totalProgeny`. -/
+theorem totalProgenyFrom_one (ω : ℕ → ℕ → ℕ) : totalProgenyFrom 1 ω = totalProgeny ω := by
+  simp [totalProgenyFrom, totalProgeny, generationSizeFrom_one]
+
+@[simp]
+theorem generationSizeFrom_zero_left (n : ℕ) (ω : ℕ → ℕ → ℕ) :
+    generationSizeFrom 0 n ω = 0 := by
+  induction n with
+  | zero => rfl
+  | succ n ih => simp [generationSizeFrom_succ, ih]
+
+@[simp]
+theorem totalProgenyFrom_zero_left (ω : ℕ → ℕ → ℕ) : totalProgenyFrom 0 ω = 0 := by
+  simp [totalProgenyFrom]
+
+/-- The ancestors are counted in the total progeny. -/
+theorem le_totalProgenyFrom (k : ℕ) (ω : ℕ → ℕ → ℕ) : (k : ℝ≥0∞) ≤ totalProgenyFrom k ω :=
+  ENNReal.le_tsum (f := fun n => (generationSizeFrom k n ω : ℝ≥0∞)) 0
+
+@[fun_prop]
+theorem measurable_generationSizeFrom (k n : ℕ) : Measurable (generationSizeFrom k n) := by
+  induction n with
+  | zero => exact measurable_const
+  | succ n ih =>
+    refine measurable_to_countable' fun m => ?_
+    have : generationSizeFrom k (n + 1) ⁻¹' {m} =
+        ⋃ i : ℕ, (generationSizeFrom k n ⁻¹' {i} ∩
+          {ω : ℕ → ℕ → ℕ | ∑ j ∈ Finset.range i, ω n j = m}) := by
+      ext ω; simp [generationSizeFrom_succ]
+    rw [this]
+    refine MeasurableSet.iUnion fun i => (ih (measurableSet_singleton i)).inter ?_
+    exact measurableSet_eq_fun (Finset.measurable_sum _ fun j _ => by fun_prop)
+      measurable_const
+
+@[fun_prop]
+theorem measurable_totalProgenyFrom (k : ℕ) : Measurable (totalProgenyFrom k) := by
+  unfold totalProgenyFrom
+  simp_rw [ENNReal.tsum_eq_iSup_sum]
+  exact .iSup fun s => s.measurable_fun_sum fun n _ =>
+    (measurable_from_nat (f := fun i : ℕ => (i : ℝ≥0∞))).comp
+      (measurable_generationSizeFrom k n)
 
 end PercLib.Probability
