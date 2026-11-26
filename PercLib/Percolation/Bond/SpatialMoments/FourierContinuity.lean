@@ -143,7 +143,9 @@ theorem eventually_normalized_fourier_second_difference_sub_lt
     rw [← mul_sub, abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ 1 + ‖x‖ ^ 2)]
   exact (abs_normalized_lattice_second_difference_sub_le hrow hbase hwdiff l k hk).trans_lt hsmall
 
-private theorem tendsto_ciSup_of_uniform_abs_sub_lt {α I : Type*} [Nonempty I]
+/-- Uniform convergence to a bounded real family implies convergence of its supremum.
+The approximating families are eventually bounded by the same uniform estimate. -/
+theorem tendsto_ciSup_of_uniform_abs_sub_lt {α I : Type*} [Nonempty I]
     {F : α → I → ℝ} {g : I → ℝ} {a : Filter α} (hg : BddAbove (range g))
     (h : ∀ ε : ℝ, 0 < ε → ∀ᶠ b in a, ∀ i, |F b i - g i| < ε) :
     Tendsto (fun b => ⨆ i, F b i) a (𝓝 (⨆ i, g i)) := by

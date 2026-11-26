@@ -141,6 +141,59 @@ theorem diagramWeightedPair_mono_weight (q : Sym2 G → unitInterval)
     diagramWeightedPair q w a ≤ diagramWeightedPair q w' a :=
   ENNReal.tsum_le_tsum fun z => mul_le_mul' (mul_le_mul' (hw z) le_rfl) le_rfl
 
+/-- The actual joining core with both adjacent deleted connectors. `true`
+marks incoming second to outgoing first; `false` marks first to second. -/
+def diagramMarkedJoiningCore (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞)
+    (ε : Bool) (p r : G × G) : ℝ≥0∞ :=
+  ∑' s, ∑' t, ∑' y, diagramConnector q p s * diagramInterior q s t *
+    diagramConnector q t (r.1 + y, r.2 + y) *
+      w (if ε then t.1 - s.2 else t.2 - s.1)
+
+open scoped Classical in
+/-- The second joining geometry with its actual excluded diagonal and both
+deleted connectors. This is the local `H` diagram before any norm bound. -/
+def diagramMarkedJoiningSecondCore (q : Sym2 G → unitInterval) (w : G → ℝ≥0∞)
+    (p r : G × G) : ℝ≥0∞ :=
+  ∑' u, ∑' v, ∑' t, ∑' y, diagramConnector q p (u, v) * tau q u t *
+    (∑' z, if z = v then 0 else tau q v z * tau q z u * tau q z t) *
+      diagramConnector q (v, t) (r.1 + y, r.2 + y) * w (t - u)
+
+theorem diagramMarkedJoiningCore_eq_tsum (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (ε : Bool) (p r : G × G) :
+    diagramMarkedJoiningCore q w ε p r =
+      ∑' s, ∑' t, ∑' y, diagramConnector q p s * diagramInterior q s t *
+        diagramConnector q t (r.1 + y, r.2 + y) *
+          w (if ε then t.1 - s.2 else t.2 - s.1) := rfl
+
+open scoped Classical in
+theorem diagramMarkedJoiningSecondCore_eq_tsum (q : Sym2 G → unitInterval)
+    (w : G → ℝ≥0∞) (p r : G × G) :
+    diagramMarkedJoiningSecondCore q w p r =
+      ∑' u, ∑' v, ∑' t, ∑' y, diagramConnector q p (u, v) * tau q u t *
+        (∑' z, if z = v then 0 else tau q v z * tau q z u * tau q z t) *
+          diagramConnector q (v, t) (r.1 + y, r.2 + y) * w (t - u) := rfl
+
+@[simp] theorem diagramMarkedJoiningCore_zero_weight (q : Sym2 G → unitInterval)
+    (ε : Bool) (p r : G × G) :
+    diagramMarkedJoiningCore q (fun _ => 0) ε p r = 0 := by
+  simp [diagramMarkedJoiningCore]
+
+@[simp] theorem diagramMarkedJoiningSecondCore_zero_weight (q : Sym2 G → unitInterval)
+    (p r : G × G) : diagramMarkedJoiningSecondCore q (fun _ => 0) p r = 0 := by
+  simp [diagramMarkedJoiningSecondCore]
+
+theorem diagramMarkedJoiningCore_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (ε : Bool) (p r : G × G) :
+    diagramMarkedJoiningCore q w ε p r ≤ diagramMarkedJoiningCore q w' ε p r :=
+  ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ =>
+    ENNReal.tsum_le_tsum fun _ => mul_le_mul' le_rfl (hw _)
+
+theorem diagramMarkedJoiningSecondCore_mono_weight (q : Sym2 G → unitInterval)
+    {w w' : G → ℝ≥0∞} (hw : w ≤ w') (p r : G × G) :
+    diagramMarkedJoiningSecondCore q w p r ≤ diagramMarkedJoiningSecondCore q w' p r :=
+  ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ =>
+    ENNReal.tsum_le_tsum fun _ => ENNReal.tsum_le_tsum fun _ => mul_le_mul' le_rfl (hw _)
+
 end Marked
 
 end PercLib.Percolation.Bond.Lace

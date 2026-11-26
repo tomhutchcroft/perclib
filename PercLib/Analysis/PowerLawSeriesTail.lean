@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.SumIntegralComparisons
 public import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+public import Mathlib.Analysis.PSeries
 
 /-!
 # Explicit tails for polynomially weighted power laws
@@ -23,6 +24,25 @@ the inverse-sixth nearest-neighbour walk moment series.
 open MeasureTheory Set
 
 namespace PercLib.Analysis
+
+/-- Polynomially weighted power-law tails are summable above their integrability
+exponent. The cutoff need not be positive for summability. -/
+theorem summable_pow_mul_div_rpow (N k : ℕ)
+    {a p : ℝ} (ha : 0 ≤ a) (hp : (k : ℝ) + 1 < p) :
+    Summable (fun n : ℕ => (((n + N + 1 : ℕ) : ℝ) ^ k) *
+      (a / ((n + N + 1 : ℕ) : ℝ)) ^ p) := by
+  have hs := (Real.summable_nat_rpow.mpr
+    (show (k : ℝ) - p < -1 by linarith)).comp_injective
+      (show Function.Injective (fun n : ℕ => n + N + 1) by
+        intro m n h
+        dsimp only at h
+        omega)
+  apply (hs.mul_left (a ^ p)).congr
+  intro n
+  dsimp only [Function.comp_apply]
+  have hx : (0 : ℝ) < ((n + N + 1 : ℕ) : ℝ) := by positivity
+  rw [Real.div_rpow ha hx.le, Real.rpow_sub hx, Real.rpow_natCast]
+  ring
 
 /-- The power-law tail after a positive integer cutoff, with its exact
 integral-test constant. -/
