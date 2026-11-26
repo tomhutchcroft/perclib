@@ -67,6 +67,25 @@ def diagramIterate (q : Sym2 V → unitInterval) (x : V) (n : ℕ) (p : V × V) 
   | 0 => diagramInitial q x p
   | n + 1 => ∑' r, diagramIterate q x n r * diagramTransfer q r p
 
+/-- The terminal triangle propagated backwards through the actual `B C_d`
+product. The endpoint remains explicit; no reversal identity is used. -/
+def diagramReverseIterate (q : Sym2 V → unitInterval) (y : V) (n : ℕ)
+    (p : V × V) : ℝ≥0∞ :=
+  match n with
+  | 0 => tau q p.1 p.2 * tau q p.1 y * tau q p.2 y
+  | n + 1 => ∑' r, ∑' t, diagramInterior q p r * diagramConnector q r t *
+      diagramReverseIterate q y n t
+
+@[simp] theorem diagramReverseIterate_zero (q : Sym2 V → unitInterval)
+    (y : V) (p : V × V) :
+    diagramReverseIterate q y 0 p = tau q p.1 p.2 * tau q p.1 y * tau q p.2 y := rfl
+
+@[simp] theorem diagramReverseIterate_succ (q : Sym2 V → unitInterval)
+    (y : V) (n : ℕ) (p : V × V) :
+    diagramReverseIterate q y (n + 1) p =
+      ∑' r, ∑' t, diagramInterior q p r * diagramConnector q r t *
+        diagramReverseIterate q y n t := rfl
+
 /-- The pair-state diagram bounding the coefficient of order `n+1`. -/
 def laceDiagram (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) : ℝ≥0∞ :=
   ∑' p, diagramIterate q x n p * diagramTerminal q p y

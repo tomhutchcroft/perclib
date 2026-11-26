@@ -55,7 +55,8 @@ private theorem integrable_cos_pow (μ : Measure ℝ) [IsFiniteMeasure μ] (m : 
   rw [norm_pow, Real.norm_eq_abs]
   exact pow_le_one₀ (abs_nonneg _) (abs_cos_le_one _)
 
-private theorem integral_Ioo_cos_pow_eq_interval (m : ℕ) :
+/-- Open-period cosine moments agree with the corresponding interval integrals. -/
+theorem integral_Ioo_cos_pow_eq_interval (m : ℕ) :
     (∫ k in Ioo (-π) π, cos k ^ m) = ∫ k in (-π)..π, cos k ^ m := by
   rw [intervalIntegral.integral_of_le (by linarith [pi_pos]), integral_Ioc_eq_integral_Ioo]
 
@@ -82,7 +83,8 @@ private theorem integral_Ioo_cos_pow_four : (∫ k in Ioo (-π) π, cos k ^ 4) =
   simp
   ring
 
-private theorem integral_pi_sum_cos_pow_succ (μ : Measure ℝ) [IsFiniteMeasure μ]
+/-- Integrating out one coordinate gives the binomial recurrence for cosine moments. -/
+theorem integral_pi_sum_cos_pow_succ (μ : Measure ℝ) [IsFiniteMeasure μ]
     (d m : ℕ) :
     (∫ k : Fin (d + 1) → ℝ, (∑ j, cos (k j)) ^ m ∂Measure.pi (fun _ => μ)) =
       ∑ r ∈ range (m + 1), (m.choose r : ℝ) * (∫ t, cos t ^ r ∂μ) *
@@ -110,7 +112,8 @@ private theorem integral_pi_sum_cos_pow_succ (μ : Measure ℝ) [IsFiniteMeasure
     (fun k : Fin d → ℝ => (∑ j, cos (k j)) ^ (m - r))]
   ring
 
-private theorem integral_pi_sum_cos_pow_zero (d : ℕ) :
+/-- The zeroth cosine-sum moment is the volume of the torus box. -/
+theorem integral_pi_sum_cos_pow_zero (d : ℕ) :
     (∫ k : Fin d → ℝ, (∑ j, cos (k j)) ^ 0
       ∂Measure.pi (fun _ => volume.restrict (Ioo (-π) π))) = (2 * π) ^ d := by
   have h := integral_fintype_prod_eq_pow (ι := Fin d)

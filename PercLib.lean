@@ -23,6 +23,8 @@ public import PercLib.Analysis.HardyMajorant
 public import PercLib.Analysis.HomogeneousBallIntegrals
 public import PercLib.Analysis.InverseSquareBlock
 public import PercLib.Analysis.LaplaceUniqueness
+public import PercLib.Analysis.LatticeCosineWeight
+public import PercLib.Analysis.LatticeFourierDifference
 public import PercLib.Analysis.LazyWalkComparison
 public import PercLib.Analysis.LazyWalkThresholds
 public import PercLib.Analysis.LinearODEAsymptotics
@@ -33,6 +35,7 @@ public import PercLib.Analysis.ModelNorm.Defs
 public import PercLib.Analysis.MomentHierarchy
 public import PercLib.Analysis.MultiplicativeDecrement
 public import PercLib.Analysis.NearestNeighborMoments
+public import PercLib.Analysis.NearestNeighborPairing
 public import PercLib.Analysis.NearestNeighborSymbolBounds
 public import PercLib.Analysis.PowerLawConvolution
 public import PercLib.Analysis.QuadraticRecursion
@@ -307,6 +310,7 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.Defs
 public import PercLib.Percolation.Bond.Lace.Diagrams.Examples
 public import PercLib.Percolation.Bond.Lace.Diagrams.Finiteness
 public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedBounds
+public import PercLib.Percolation.Bond.Lace.Diagrams.MarkedSums
 public import PercLib.Percolation.Bond.Lace.Diagrams.Prefix
 public import PercLib.Percolation.Bond.Lace.Diagrams.ReverseBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TotalMass
@@ -384,8 +388,11 @@ public import PercLib.Percolation.Bond.SelfAvoiding
 public import PercLib.Percolation.Bond.SelfAvoidingChi
 public import PercLib.Percolation.Bond.SelfAvoidingDecay
 public import PercLib.Percolation.Bond.Sharpness
+public import PercLib.Percolation.Bond.SpatialMoments.Continuity
 public import PercLib.Percolation.Bond.SpatialMoments.Defs
 public import PercLib.Percolation.Bond.SpatialMoments.Derivative
+public import PercLib.Percolation.Bond.SpatialMoments.FiniteRange
+public import PercLib.Percolation.Bond.SpatialMoments.IntensityContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.Localization
 public import PercLib.Percolation.Bond.SpatialMoments.LocalizationMetric
 public import PercLib.Percolation.Bond.SupercriticalDensity
@@ -393,6 +400,7 @@ public import PercLib.Percolation.Bond.Susceptibility
 public import PercLib.Percolation.Bond.SusceptibilityContinuity
 public import PercLib.Percolation.Bond.SusceptibilityDerivative
 public import PercLib.Percolation.Bond.SusceptibilityEndpoint
+public import PercLib.Percolation.Bond.SusceptibilityKernelContinuity
 public import PercLib.Percolation.Bond.SusceptibilityLevel
 public import PercLib.Percolation.Bond.Tags.BoundaryForest
 public import PercLib.Percolation.Bond.Tags.ChemicalMoments
