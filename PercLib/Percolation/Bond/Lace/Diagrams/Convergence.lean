@@ -46,6 +46,7 @@ theorem tsum_piZero_le_diagramInitial (q : Sym2 V → unitInterval) (x : V) :
 
 /-- The actual coefficient of order `n+1` has the exact geometric row bound,
 including the separate terminal constant. -/
+@[tag "0HQZ"]
 theorem laceCoefficient_mass_le_diagram_geometric (q : Sym2 V → unitInterval)
     (x : V) (ρ κ : ℝ≥0∞)
     (hρ : ∀ p, (∑' r, diagramTransfer q p r) ≤ ρ)
@@ -79,6 +80,7 @@ theorem tsum_laceCoefficient_all_mass_le_diagram (q : Sym2 V → unitInterval)
 
 /-- Subunit transfer and finite initial and terminal bounds imply summability
 of all actual coefficient masses, including order zero. -/
+@[tag "5KBX"]
 theorem tsum_laceCoefficient_all_mass_ne_top_of_diagram
     (q : Sym2 V → unitInterval) (x : V) (ρ κ : ℝ≥0∞)
     (hρone : ρ < 1) (hκfinite : κ ≠ ⊤)

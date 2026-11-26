@@ -254,6 +254,7 @@ theorem markedCoefficient_le_diagramIterate [Countable V]
 /-- Actual positive lace coefficients obey the explicit deleted pair-state
 diagram at every order. Both the interior geometry and the independent-layer
 probability bound are proved; no diagram hypothesis is assumed. -/
+@[tag "3W0M"]
 theorem laceCoefficient_succ_le_laceDiagram [Countable V]
     (q : Sym2 V → unitInterval) (n : ℕ) (x y : V) :
     laceCoefficient q (n + 1) x y ≤ laceDiagram q n x y := by

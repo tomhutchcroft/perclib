@@ -245,6 +245,7 @@ theorem diagramTransfer_second_mass_le_of_add_right
 
 /-- The transfer estimate keeps the exact deleted first-geometry mass and
 the smaller off-diagonal norm in the second geometry. -/
+@[tag "MERJ"]
 theorem diagramTransfer_mass_le_deleted_of_add_right [Countable G]
     (q : Sym2 G → unitInterval)
     (hq : ∀ x y g : G, q s(x + g, y + g) = q s(x, y))
