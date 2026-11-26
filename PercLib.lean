@@ -26,6 +26,7 @@ public import PercLib.Analysis.LaplaceUniqueness
 public import PercLib.Analysis.LatticeCosineWeight
 public import PercLib.Analysis.LatticeFourier.Bounds
 public import PercLib.Analysis.LatticeFourier.Defs
+public import PercLib.Analysis.LatticeFourier.Inversion
 public import PercLib.Analysis.LatticeFourierDifference
 public import PercLib.Analysis.LazyWalkComparison
 public import PercLib.Analysis.LazyWalkThresholds
@@ -39,6 +40,7 @@ public import PercLib.Analysis.MultiplicativeDecrement
 public import PercLib.Analysis.NearestNeighborMoments
 public import PercLib.Analysis.NearestNeighborPairing
 public import PercLib.Analysis.NearestNeighborResolvent
+public import PercLib.Analysis.NearestNeighborResolventCritical
 public import PercLib.Analysis.NearestNeighborResolventPrefix
 public import PercLib.Analysis.NearestNeighborResolventTail
 public import PercLib.Analysis.NearestNeighborResolventTailConstants
@@ -301,6 +303,7 @@ public import PercLib.Percolation.Bond.IntrinsicBalls
 public import PercLib.Percolation.Bond.IntrinsicGrowth
 public import PercLib.Percolation.Bond.IntrinsicRenewal
 public import PercLib.Percolation.Bond.Lace.Basic
+public import PercLib.Percolation.Bond.Lace.Bootstrap.Defs
 public import PercLib.Percolation.Bond.Lace.ClusterLocalization
 public import PercLib.Percolation.Bond.Lace.Coefficients.Basic
 public import PercLib.Percolation.Bond.Lace.Coefficients.Coefficients
@@ -328,9 +331,12 @@ public import PercLib.Percolation.Bond.Lace.Diagrams.TotalMass
 public import PercLib.Percolation.Bond.Lace.Diagrams.TransferBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.TriangleBounds
 public import PercLib.Percolation.Bond.Lace.Diagrams.Weighted
+public import PercLib.Percolation.Bond.Lace.Diagrams.WeightedSums
 public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Events.Continuity
+public import PercLib.Percolation.Bond.Lace.Events.LayerContinuity
+public import PercLib.Percolation.Bond.Lace.Events.LayerLocalization
 public import PercLib.Percolation.Bond.Lace.Events.Localization
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.BootstrapAlgebra
@@ -405,6 +411,7 @@ public import PercLib.Percolation.Bond.SpatialMoments.Continuity
 public import PercLib.Percolation.Bond.SpatialMoments.Defs
 public import PercLib.Percolation.Bond.SpatialMoments.Derivative
 public import PercLib.Percolation.Bond.SpatialMoments.FiniteRange
+public import PercLib.Percolation.Bond.SpatialMoments.FourierBootstrapContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.FourierContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.FourierRatioContinuity
 public import PercLib.Percolation.Bond.SpatialMoments.IntensityContinuity
@@ -535,6 +542,7 @@ public import PercLib.Probability.FiniteCertificate
 public import PercLib.Probability.FiniteContinuity
 public import PercLib.Probability.FiniteEnergy.Insertion
 public import PercLib.Probability.FiniteExpectation
+public import PercLib.Probability.FiniteLayerContinuity
 public import PercLib.Probability.FirstMoment
 public import PercLib.Probability.GaltonWatson
 public import PercLib.Probability.GaltonWatson.Defs
