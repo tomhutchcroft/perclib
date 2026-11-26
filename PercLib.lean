@@ -257,8 +257,10 @@ public import PercLib.Percolation.Bond.Ergodic
 public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct
 public import PercLib.Percolation.Bond.Exploration.BFS.BFSProduct.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.Cluster
+public import PercLib.Percolation.Bond.Exploration.BFS.Counting
 public import PercLib.Percolation.Bond.Exploration.BFS.Defs
 public import PercLib.Percolation.Bond.Exploration.BFS.History
+public import PercLib.Percolation.Bond.Exploration.BFS.Limit
 public import PercLib.Percolation.Bond.Exploration.BFS.Measurable
 public import PercLib.Percolation.Bond.Exploration.BFS.Poisson.Budget
 public import PercLib.Percolation.Bond.Exploration.BFS.RevealData.Defs
