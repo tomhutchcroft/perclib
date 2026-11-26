@@ -145,6 +145,7 @@ public import PercLib.Percolation.Bond.Lace.Remainder.Remainder
 public import PercLib.Percolation.Bond.Lace.Remainder.Telescoping
 public import PercLib.Percolation.Bond.Lace.Sharpness
 public import PercLib.Percolation.Bond.Lace.ThroughSet
+public import PercLib.Percolation.Bond.Lace.ThroughExpansion
 public import PercLib.Percolation.Bond.Lace.TwoPaths
 public import PercLib.Percolation.Bond.LocalConnectivity
 public import PercLib.Percolation.Bond.LocalConvergence
