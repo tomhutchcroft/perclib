@@ -137,7 +137,9 @@ public import PercLib.Percolation.Bond.Lace.DistinctTriangle
 public import PercLib.Percolation.Bond.Lace.DoubleConnection
 public import PercLib.Percolation.Bond.Lace.Expansion.Basic
 public import PercLib.Percolation.Bond.Lace.Expansion.Convolution
+public import PercLib.Percolation.Bond.Lace.Expansion.Defs
 public import PercLib.Percolation.Bond.Lace.Expansion.Finite
+public import PercLib.Percolation.Bond.Lace.Expansion.Infinite
 public import PercLib.Percolation.Bond.Lace.FiniteClusters
 public import PercLib.Percolation.Bond.Lace.FirstDiagram
 public import PercLib.Percolation.Bond.Lace.FirstDiagramRefined
