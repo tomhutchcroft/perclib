@@ -15,10 +15,12 @@
     "bootstrap-diagram-bounds",
     "fourier-bootstrap",
     "lace-expansion",
+    "canonical-lace-expansion",
     "signed-kernel-moments"
   ],
   "sourceIds": [
-    "heydenreich-hofstad"
+    "heydenreich-hofstad",
+    "hutchcroft-triangle-2021"
   ],
   "aliases": [
     "Closing the nearest-neighbour Fourier bootstrap"
@@ -107,6 +109,147 @@ Q_c(k)=\frac{1+\widehat\Pi_c(k)}{1-j_c\widehat D(k)[1+\widehat\Pi_c(k)]}\quad(k\
 <p>Uniform convergence of $\widehat\Pi_p$ gives the corresponding critical denominator bound by a positive constant times $g(k)$. It is therefore nonzero for $k\ne0$, and the subcritical quotients converge there to $Q_c$. The sharper MYG7 bound passes to the limit, giving $Q_c\le(1+C_0/d)/g$.</p>
 <p>For the inverse formula, TTS1 bounds all subcritical quotients by $2(1+C_0/d)/g$. This is integrable for $d>2$. Dominated convergence in the subcritical inverse formula, together with the spatial limit $\tau_p(x)\uparrow\tau_c(x)$, proves the stated identity. The value at the single frequency zero is immaterial to the integral.</p>
 <p>The <a href="/coverage/sources/heydenreich-hofstad-2017-bootstrap/">Chapter 8 map</a> records the remaining illustrative ODE and finer-asymptotic exercises separately. The argument here is for nearest-neighbour percolation in sufficiently large dimension; it does not establish the spread-out exercise or any reverse-BK statement.</p>
+
+## An explicit bootstrap at dimension 50000 {#section-explicit-critical-core}
+
+<p>We now give a separate quantitative result with a smaller dimension threshold. Its constants concern the infrared bootstrap, susceptibility and critical clusters. Let $d\in\mathbb N$, $d\ge50000$, and assign rate $1/(2d)$ to each nearest-neighbour bond of $\mathbb Z^d$, with rate zero elsewhere. At intensity $\beta\ge0$, the open probability and total open-step mass are</p>
+<div class="math-display">$$p(\beta)=1-e^{-\beta/(2d)},\qquad j_\beta=2d\,p(\beta).$$</div>
+<p>The intensity $\beta$, probability $p(\beta)$ and mass $j_\beta$ are distinct. Write $\tau_\beta(x)=\mathbb P_\beta(0\leftrightarrow x)$, $\chi_\beta(x)=\mathbb E_\beta|K(x)|$, $\chi_\beta=\chi_\beta(0)$ and</p>
+<div class="math-display">$$b=\inf\{\beta\ge0:\mathbb P_\beta(|K(0)|=\infty)>0\}.$$</div>
+<p>Transitivity and sharpness identify $b$ with the global percolation threshold and the supremum of intensities with finite susceptibility. We retain this intensity formulation throughout the new estimates.</p>
+<p>Put $D_{\rm rw}(x)=(2d)^{-1}\mathbf1_{\{|x|_1=1\}}$, $a(k)=\widehat D_{\rm rw}(k)=d^{-1}\sum_i\cos k_i$ and $g(k)=1-a(k)$. When $\chi_\beta&lt;\infty$, define $\lambda_\beta=1-\chi_\beta^{-1}$ and $C_\beta(k)=(1-\lambda_\beta a(k))^{-1}$. For torus frequencies $k,l$, let</p>
+<div class="math-display">$$\begin{aligned}
+V_\beta(k,l)&=C_\beta(l-k)C_\beta(l)+C_\beta(l)C_\beta(l+k)+C_\beta(l-k)C_\beta(l+k),\\
+U_\beta(k,l)&=200g(k)V_\beta(k,l),\\
+f_2(\beta)&=\sup_k|\widehat\tau_\beta(k)/C_\beta(k)|,\\
+f_3(\beta)&=\sup_{g(k)>0,l}\frac{|\widehat\tau_\beta(l-k)+\widehat\tau_\beta(l+k)-2\widehat\tau_\beta(l)|}{U_\beta(k,l)},\\
+F(\beta)&=\max\{j_\beta,f_2(\beta),f_3(\beta)\}.
+\end{aligned}$$</div>
+<p>All Fourier series in these definitions are absolutely convergent by finite susceptibility. The condition $g(k)>0$ excludes the zero torus frequency; on physical frequencies in $\mathbb R^d$ it excludes every periodic copy as well.</p>
+
+<a id="tag-JN6H" data-assertion="theorem" data-title="Nearest-neighbour bootstrap at dimension 50000"></a>
+<p>For $d\ge50000$ and every $\beta\ge0$ with $\chi_\beta&lt;\infty$,</p>
+<div class="math-display">$$F(\beta)\le\frac{17}{10}.$$</div>
+<p><em>Proof.</em> At each individual finite-susceptibility parameter, the canonical coefficient and diagram estimates give $F\le2\Rightarrow F\le17/10$. The second-difference component improves to $9/25$. Continuity on each interval of finite susceptibility and $F(0)=1$ exclude a crossing of the gap to two. This discharges the weak-bootstrap premise. In particular, the conclusion applies to every $0\le\beta&lt;b$. The argument retains the separate signed-kernel mass and frequency errors instead of replacing them by a common larger error.</p>
+<p>The same estimates give the useful bounds</p>
+<div class="math-display">$$\begin{gathered}
+f_3(\beta)\le\frac9{25},\qquad
+j_\beta\le\frac d{d-44},\qquad
+0&lt;\widehat\tau_\beta(k)\le\frac{17}{10}\,C_\beta(k),\\
+\sum_{n\ge0,x}\pi_\beta^{(n)}(0,x)\le\frac{44}{d},\qquad
+\sum_{n\ge0,x}[1-\cos(k\cdot x)]\pi_\beta^{(n)}(0,x)\le\frac13g(k).
+\end{gathered}$$</div>
+<p>The <a href="/articles/canonical-lace-expansion/#section-fourier">canonical Fourier equation</a> and its positive numerator give the strict positivity above. These bounds use the actual nonnegative coefficient series. The uniform amplitude $17/10$ is not an asymptotic assertion that the Fourier ratio equals $1+O(1/d)$.</p>
+
+<a id="tag-V1P7" data-assertion="theorem" data-title="Explicit upper bound on the normalized critical intensity"></a>
+<p>For $d\ge50000$, the actual critical intensity satisfies</p>
+<div class="math-display">$$b\le\frac{2d}{2d-89}&lt;\infty.$$</div>
+<p><em>Proof.</em> The elementary bound $p(\beta)\ge\beta/(2d+\beta)$ and $j_\beta\le d/(d-44)$ imply $\beta\le2d/(2d-89)$ whenever susceptibility is finite. Sharpness identifies $b$ with the supremum of these intensities. The unit total rate also gives $b\ge1$. Finiteness of $b$ is thus established before using it as a real endpoint.</p>
+<p>Proof sources at revision <a href="https://github.com/tomhutchcroft/perclib/tree/a1039583fd11e510fcef1643b3ae47c3baef3009">a103958</a>: <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/Subcritical.lean#L37">subcritical bootstrap</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/NNImprovement.lean#L359">second-difference improvement</a>, and <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/Subcritical.lean#L113">critical intensity bound</a>.</p>
+
+## Explicit critical diagrams {#section-explicit-critical-diagrams}
+
+<p>Keep $d\ge50000$ and the preceding normalized intensity family. The open-step kernel is $J_\beta=j_\beta D_{\rm rw}$. Set $T_\beta=J_\beta*\tau_\beta*\tau_\beta*\tau_\beta$, interpreting every convolution as a nonnegative extended sum.</p>
+
+<a id="tag-VCLG" data-assertion="theorem" data-title="Uniform critical continuation-diagram bound"></a>
+<p>At the actual critical intensity, for every $x\in\mathbb Z^d$,</p>
+<div class="math-display">$$T_b(x)\le\frac{9197}{315d}.$$</div>
+
+<a id="tag-IHGE" data-assertion="theorem" data-title="Critical continuation bound at the origin"></a>
+<p>The origin retains the smaller constant</p>
+<div class="math-display">$$T_b(0)\le\frac{8882}{315d}.$$</div>
+
+<a id="tag-98CO" data-assertion="theorem" data-title="Explicit critical triangle bound"></a>
+<p>The critical triangle satisfies</p>
+<div class="math-display">$$\Delta_b=\sum_{u,v}\tau_b(u)\tau_b(v-u)\tau_b(v)\le D_d:=1+\frac{4441}{105d}.$$</div>
+<p><em>Proof of the three bounds.</em> The same estimates hold subcritically by the first-step expansion and explicit walk integrals, after the preceding bootstrap removes their weak-bound hypotheses. Each connection event has a finite path witness, so its probability converges from below at $b$. Passing finite partial sums of the nonnegative continuation diagrams to the limit preserves the bounds. At the origin the direct-step term vanishes. The triangle inequality $\Delta_b\le1+\tfrac32T_b(0)$ gives the stated constant. This passage requires neither finite susceptibility nor finite clusters at $b$.</p>
+<p>Proof sources: the <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalDiagrams.lean#L64">uniform continuation bound</a>, its <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalDiagrams.lean#L81">origin improvement</a>, and the <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalDiagrams.lean#L98">critical triangle bound</a>.</p>
+
+## Susceptibility and finite critical clusters {#section-explicit-criticality}
+
+<a id="tag-59G9" data-assertion="theorem" data-title="Explicit susceptibility bound below the critical intensity"></a>
+<p>For $d\ge50000$, put $D_d=1+4441/(105d)$ and $C_d=\max\{D_db,3b^2D_d^2\}$. At every root $x\in\mathbb Z^d$ and every $0&lt;\beta&lt;b$,</p>
+<div class="math-display">$$\chi_\beta(x)\le\frac{C_d}{b-\beta}.$$</div>
+<p><em>Proof.</em> The exact boundary-susceptibility identity and moment estimates give, almost everywhere strictly below $b$,</p>
+<div class="math-display">$$\chi'_\beta\ge\frac{(\chi_\beta-D_d)_+^2}{3\beta^2D_d^2}.$$</div>
+<p>Integrating the inequality for $\chi-D_d$ gives $\chi_\beta\le D_d+3\beta bD_d^2/(b-\beta)$. Its numerator after multiplication by $b-\beta$ is affine in $\beta$, so its maximum is $\max\{D_db,3b^2D_d^2\}$. Transitivity supplies the same estimate at every root. Only susceptibility strictly below $b$ is used.</p>
+
+<a id="tag-R0WX" data-assertion="theorem" data-title="All critical nearest-neighbour clusters are finite at dimension 50000"></a>
+<p>For $d\ge50000$, at the actual critical intensity,</p>
+<div class="math-display">$$\mathbb P_b\bigl(\text{every cluster is finite}\bigr)=1.$$</div>
+<p><em>Proof.</em> The exploration comparison, with total rate one, gives for $0&lt;\beta&lt;b$</p>
+<div class="math-display">$$\mathbb P_b(|K(x)|=\infty)\le\frac{(b-\beta)^2}{\beta}\chi_\beta(x)\le C_d\frac{b-\beta}{\beta}.$$</div>
+<p>Let $\beta\uparrow b$. Every root has zero infinite-cluster probability, and countability makes all root clusters finite simultaneously on one probability-one event. No uniqueness or critical finite-cluster assumption enters this proof. Right-openness of finite susceptibility and sharpness also give $\chi_b=\infty$; infinite expectation is compatible with almost-surely finite clusters.</p>
+<p>Proof sources: the <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/Criticality.lean#L96">inverse-gap susceptibility estimate</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/Criticality.lean#L147">simultaneous critical cluster finiteness</a>, and <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/Subcritical.lean#L135">infinite critical susceptibility</a>.</p>
+<p>The dimension $50000$ and constants above are quantitative refinements of the Chapter 8 bootstrap framework, not numerical thresholds attributed to Heydenreich–van der Hofstad. The nonpercolation proof uses the boundary and exploration route related to Hutchcroft's quantitative triangle argument. The <a href="#section-explicit-critical-fourier">critical Fourier density below</a> is justified by a separate limiting argument. The <a href="#section-explicit-dimension">dimension-$10^{11}$ theorem with spatial asymptotics</a> retains its own amplitude, moment and sixth-norm hypotheses and conclusions.</p>
+
+## Explicit critical edge probability {#section-explicit-critical-probability}
+
+<p>For the normalized intensity family above, set $p_c=p(b)=1-e^{-b/(2d)}$ and $j_c=2dp_c$. Strict monotonicity and continuity of this change of parameter identify $p_c$ with the usual nearest-neighbour edge-probability threshold. Transitivity identifies every rooted intensity threshold with the global one.</p>
+<a id="tag-LI2P" data-assertion="theorem" data-title="Explicit bounds on the actual critical edge probability"></a>
+<p>For every integer $d\ge50000$,</p>
+<div class="math-display">$$\frac1{2d-1}\le p_c\le\frac1{2d-88}.$$</div>
+<p><em>Proof.</em> Self-avoiding path counting excludes percolation when $(2d-1)p&lt;1$; positive percolation above the actual threshold and continuity give the lower bound. The subcritical bound $j_\beta\le d/(d-44)$ passes to $b$, giving the upper bound. In particular, $1\le j_c\le d/(d-44)$. These are bounds on edge probability and open-step mass, distinct from the preceding bound on $b$.</p>
+<p>Proof sources: <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalThresholdBounds.lean#L123">critical probability bounds</a> and the <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalThresholdBounds.lean#L35">rooted and global threshold identification</a>.</p>
+
+## The actual critical spatial expansion {#section-explicit-critical-expansion}
+
+<p>Keep $d\ge50000$. Let $\pi_b^{(n)}(x,y)$ be the canonical nonnegative coefficients at the actual critical intensity, and put $\Pi_b(x,y)=\sum_{n\ge0}(-1)^n\pi_b^{(n)}(x,y)$. The critical diagram estimates give</p>
+<div class="math-display">$$\sum_y\pi_b^{(n+1)}(x,y)\le\left(1+\frac{8882}{315d}\right)\left(\frac1{855}\right)^n\frac1{1712}\qquad(n\ge0).$$</div>
+<p>Thus the total coefficient mass is finite, $\Pi_b(x,\cdot)$ is absolutely summable, the finite signed kernels converge to $\Pi_b$, and the signed remainders tend to zero. At the origin the sharper bounds inherited from the subcritical coefficients are</p>
+<div class="math-display">$$\sum_{n\ge0,y}\pi_b^{(n)}(0,y)\le\frac{44}{d},\qquad
+\sum_{n\ge0,y}[1-\cos(k\cdot y)]\pi_b^{(n)}(0,y)\le\frac13g(k).$$</div>
+
+<a id="tag-XBMM" data-assertion="theorem" data-title="Canonical spatial lace expansion at the actual nearest-neighbour critical point"></a>
+<p>For every integer $d\ge50000$ and $x,y\in\mathbb Z^d$, with $J_b(u,v)=p_c\mathbf1_{\{|u-v|_1=1\}}$,</p>
+<div class="math-display">$$\begin{aligned}
+\tau_b(x,y)={}&\mathbf1_{\{x=y\}}+\Pi_b(x,y)
++\sum_vJ_b(x,v)\tau_b(v,y)\\
+&+\sum_u\sum_v\Pi_b(x,u)J_b(u,v)\tau_b(v,y).
+\end{aligned}$$</div>
+<p><em>Proof.</em> The pair-state diagrams have initial mass at most $1+8882/(315d)$, transfer mass at most $1/855$ and terminal mass at most $1/1712$. Their geometric comparison supplies the coefficient summability. Almost-sure finiteness of every critical cluster implies finiteness of all deleted-bond clusters. The continuation kernel has a finite uniform bound. These verify the hypotheses of the <a href="/tag/1741/">canonical infinite expansion</a> at $b$, even though $\chi_b=\infty$. The last double sum is absolutely convergent.</p>
+<p>To pass the sharper coefficient bounds to $b$, localize each fixed finite-layer cutting event on finite clusters and dominate the ordered-bond witness sums by a common summable critical diagram. This proves coefficient continuity from below despite the cutting events' lack of configuration monotonicity. It also gives $\|\Pi_\beta(0,\cdot)-\Pi_b(0,\cdot)\|_1\to0$ as $\beta\uparrow b$.</p>
+<p>Proof sources: the <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalExpansion.lean#L219">critical geometric coefficient bound</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalCoefficients.lean#L110">total coefficient bound</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalCoefficients.lean#L131">frequency-weighted coefficient bound</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalExpansion.lean#L274">critical spatial identity</a>, and <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L58">signed-kernel norm continuity</a>.</p>
+
+## The critical Fourier density at dimension 50000 {#section-explicit-critical-fourier}
+
+<p>Define the absolutely convergent coefficient transform</p>
+<div class="math-display">$$P_b(k)=\sum_y\Pi_b(0,y)\cos(k\cdot y).$$</div>
+<p>The critical two-point function has infinite total mass. Its Fourier density below is obtained by a limit from subcritical intensity, without asserting convergence of an unordered critical two-point Fourier series.</p>
+
+<a id="tag-VQ2V" data-assertion="theorem" data-title="Exact critical mass normalization"></a>
+<p>For every integer $d\ge50000$,</p>
+<div class="math-display">$$j_c[1+P_b(0)]=1.$$</div>
+<p><em>Proof.</em> Signed-kernel norm continuity gives continuity of its transform, while divergent critical susceptibility gives $\lambda_\beta\to1$. Take the limit in the subcritical mass normalization. The coefficient bound keeps $1+P_b(0)$ positive.</p>
+
+<p>For $g(k)>0$, set</p>
+<div class="math-display">$$Q_b(k)=\frac{1+P_b(k)}{1-j_ca(k)[1+P_b(k)]}.$$</div>
+<p>The denominator is strictly positive at every such frequency.</p>
+
+<a id="tag-T3YO" data-assertion="theorem" data-title="Critical Fourier quotient as a subcritical Abel limit"></a>
+<p>For every integer $d\ge50000$ and frequency with $g(k)>0$,</p>
+<div class="math-display">$$\lim_{\beta\uparrow b}\widehat\tau_\beta(k)=Q_b(k).$$</div>
+<p><em>Proof.</em> The numerator and denominator converge by signed-kernel norm continuity and continuity of $j_\beta$. The positive denominator at the limit justifies taking their quotient.</p>
+
+<a id="tag-KIPV" data-assertion="theorem" data-title="Positive critical infrared bound with amplitude seventeen tenths"></a>
+<p>At the same dimensions and nonsingular frequencies,</p>
+<div class="math-display">$$0&lt;Q_b(k)\le\frac{17}{10g(k)}.$$</div>
+<p><em>Proof.</em> The positive numerator and denominator give strict positivity. Pass the subcritical bound $(17/10)C_\beta(k)$ to the limit, using $\lambda_\beta\to1$.</p>
+
+<a id="tag-ATL6" data-assertion="theorem" data-title="Critical two-point function as the inverse Fourier coefficient of its Abel density"></a>
+<p>The density $Q_b$ is integrable on $(-\pi,\pi)^d$, and for every $x\in\mathbb Z^d$,</p>
+<div class="math-display">$$\tau_b(0,x)=\frac1{(2\pi)^d}\int_{(-\pi,\pi)^d}\cos(k\cdot x)Q_b(k)\,dk.$$</div>
+<p><em>Proof.</em> The reciprocal $1/g$ is integrable in these dimensions. The subcritical inversion integrands have the common bound $17/(5g)$ almost everywhere. Dominated convergence, the subcritical exact inverse formula and the spatial limit $\tau_\beta(0,x)\to\tau_b(0,x)$ give the identity. Any value assigned at the zero frequency leaves the integral unchanged.</p>
+
+<a id="tag-C8QY" data-assertion="theorem" data-title="Improved second difference of the critical Fourier density"></a>
+<p>For $d\ge50000$ and frequencies satisfying $g(k)>0$, $g(l-k)>0$, $g(l)>0$ and $g(l+k)>0$,</p>
+<div class="math-display">$$\begin{aligned}
+|Q_b(l-k)+Q_b(l+k)-2Q_b(l)|&\le\frac9{25}U_1(k,l),\\
+U_1(k,l)&=200g(k)\left[\frac1{g(l-k)g(l)}+\frac1{g(l)g(l+k)}+\frac1{g(l-k)g(l+k)}\right].
+\end{aligned}$$</div>
+<p><em>Proof.</em> Apply the subcritical second-difference bound and let $\beta\uparrow b$. All three quotient limits and all three resolvent limits exist under the displayed frequency conditions.</p>
+<p>Proof sources: <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L158">mass normalization</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L283">quotient limit</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L302">infrared bound</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L360">integrability</a>, <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L414">inverse formula</a>, and <a href="https://github.com/tomhutchcroft/perclib/blob/a1039583fd11e510fcef1643b3ae47c3baef3009/PercLib/Percolation/Bond/Lace/Bootstrap/Intensity/CriticalFourier.lean#L482">second difference</a>.</p>
+<p>These explicit results establish the critical spatial lace equation and Fourier density at dimension $50000$. The <a href="#section-explicit-dimension">dimension-$10^{11}$ spatial-asymptotic theorem</a> retains its separate small-amplitude, moment and sixth-norm estimates.</p>
 
 ## One explicit dimension threshold {#section-explicit-dimension}
 
