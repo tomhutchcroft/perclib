@@ -33,6 +33,8 @@ unimodularity.
   one base point is equivalent to the property.
 * `PercLib.hasMassTransport_self`: a group acting on itself by left multiplication has the
   mass-transport property.
+* `PercLib.hasMassTransport_multiplicative_self`: an additive group acting on itself by
+  translation has the mass-transport property.
 -/
 
 @[expose] public section
@@ -87,5 +89,19 @@ theorem hasMassTransport_iff_of_pretransitive [MulAction.IsPretransitive Γ V] (
 theorem hasMassTransport_self : HasMassTransport Γ Γ := by
   rw [hasMassTransport_iff_of_pretransitive (1 : Γ)]
   exact fun F hF ↦ Probability.tsum_mass_transport F hF
+
+/-- An additive group acting on itself by translation (as `Multiplicative G`) has the
+mass-transport property. -/
+theorem hasMassTransport_multiplicative_self (G : Type*) [AddGroup G] :
+    HasMassTransport (Multiplicative G) G := by
+  intro F hF o
+  have h : ∀ v, F o v = F (o + -v + o) o := fun v ↦ by
+    have := hF (Multiplicative.ofAdd (o + -v)) o v
+    simp only [ofAdd_smul, vadd_eq_add, neg_add_cancel_right] at this
+    exact this.symm
+  simp_rw [h]
+  exact ((Equiv.neg G).trans ((Equiv.addLeft o).trans (Equiv.addRight o))).tsum_eq
+    (fun w ↦ F w o)
+
 
 end PercLib
