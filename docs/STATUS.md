@@ -12,8 +12,9 @@ order: collaborators' pull requests and fork branches, then `main`, then the tas
   `work/p-d-IZAO` `a2b00b4`, `work/p-b-RL1L` `00c7eee`, `work/p-c-HATE` `3be8e67` (+ import-closure commit). Log
   `/home/user/reports/integrate-cycle8.log`. On top: FRONTIER at `2d366a2`, task `galton-watson-dwass` -> done (RL1L proved), this STATUS.
   `e05542e` = merge of `origin/main` (#29 = `68f9945`, merged by ARCHITECT) back.
-- **`main` = `68f9945`** (#29). **PR to main for this batch: see "PR to main" line below.** Next cycle FIRST: merge it with
-  `{"merge_method":"merge","sha":<head>}` if CI `gate` is green on its head (ruling 29), then merge `origin/main` back.
+- **`main` = `68f9945`** (#29). **PR #31 OPEN** (head `58fb1fe` = gated `2d366a2` + FRONTIER/tasks/STATUS; `.github/automerge-authors` already on `main`). Next cycle FIRST: merge it with
+  `{"merge_method":"merge","sha":"58fb1fea0701f8e4acb18ec4bb3c10b1df7fb503"}` if CI `gate` is green on it (ruling 29), then merge `origin/main`
+  back, then push the local commit holding this line (kept unpushed so #31's CI is not restarted).
   Before: `7d084c2` (#28), `5eea93e` (#27).
 - Cycle 3: 7WHX task held out (possible overlap with Yujin's BFS exploration, now merged in #15/#16): re-check before re-adding.
 - **Kernel replay:** the run on `28c8877` is dead at 180/538 (`/home/user/wt/kreplay-28c8877`). Last passed: `a747905`.
@@ -55,7 +56,7 @@ Cycle 8 (check 23:50): new PR #30 (TejasO2); open: #2, #20-#23, #30; fork tips u
 ## Progress (D-35 measure)
 
 Manifest regenerated at `2d366a2`: **431 proved** (FRONTIER: 260 ready, 705 blocked, 7 without prerequisites).
-Cycle 8 report: pull requests handled 2 (#30 first response, #23 part-1 verdict commented); merged to `main`: PR for gated `2d366a2`
+Cycle 8 report: pull requests handled 2 (#30 first response, #23 part-1 verdict commented); merged to `main`: PR #31 for gated `2d366a2`
 (8 tags: W8PB, J1LW, IZAO, 87W3, RL1L, HATE, L0TE, RDF0; audit r21-a) opened, merge next cycle on green `gate`; assertions proved: 8 merged
 (+8, 423 -> 431); agents started by me: 0; briefs queued: `060e-audit-c5-planar-30`, `060f-audit-c6-yujin-23b`.
 Cycle 7 report: pull requests handled 12 (#13-#19 merged into the integration branch after audit + gate, PR #29 to main; #20, #21, #22, #23, #2
@@ -100,6 +101,9 @@ Prover drain only (ruling 21): `420`-`423` in queue. Held: `HOLD-060/205/210/220
   (`HierarchicalLayers.pairLevel` via `level`).
 
 ## For ARCHITECT
+
+- Cycle 8: an immediate merge attempt on #31 (right after opening, CI pending) was refused by the session's permission layer
+  (auto-mode classifier), not by GitHub; not retried (ruling 25.2). Ruling 29 merges it next cycle anyway; if that is refused too, it needs you.
 
 - Ruling 22.1 PR open+merge worked this cycle (#24, #25); the cycle-1 refusal item is closed.
 - `/home/user/reports/hard/` is empty.
