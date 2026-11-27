@@ -6,7 +6,7 @@ New proofs for this project; no upstream Lean code is copied.
 module
 
 public import PercLib.Percolation.Bond.Lace.Expansion.Fourier
-public import Mathlib.Algebra.Group.EvenFunction
+public import PercLib.Analysis.CharacterSeries
 
 /-!
 # Exact character-deficit moments of convolution
@@ -30,6 +30,9 @@ open scoped ComplexConjugate
 
 namespace PercLib.Percolation.Bond.Lace
 
+export PercLib.Analysis (summable_ofReal_mul_addChar re_tsum_ofReal_mul_addChar
+  im_tsum_ofReal_mul_addChar_eq_zero_of_even)
+
 variable {G : Type*} [AddCommGroup G]
 
 /-- Real embedding commutes with the existing discrete convolution. -/
@@ -49,39 +52,6 @@ theorem summable_addRingConvolution_real {f b : G → ℝ} (hf : Summable f) (hb
   simpa only [ofReal_addRingConvolution] using
     (summable_norm_addRingConvolution (fun x => (f x : ℂ))
       (fun x => (b x : ℂ)) hfC hbC).of_norm
-
-/-- A summable real kernel remains summable after multiplication by a unitary character. -/
-theorem summable_ofReal_mul_addChar {f : G → ℝ} (hf : Summable f) (ψ : AddChar G Circle) :
-    Summable (fun x => (f x : ℂ) * (ψ x : ℂ)) := by
-  apply hf.norm.of_norm_bounded
-  intro x
-  simp only [norm_mul, Circle.norm_coe, mul_one, Complex.norm_real, le_refl]
-
-/-- Taking the real part of a character transform commutes with summation. -/
-theorem re_tsum_ofReal_mul_addChar {f : G → ℝ} (hf : Summable f) (ψ : AddChar G Circle) :
-    (∑' x, (f x : ℂ) * (ψ x : ℂ)).re = ∑' x, f x * (ψ x : ℂ).re := by
-  rw [Complex.re_tsum (summable_ofReal_mul_addChar hf ψ)]
-  simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
-
-/-- The imaginary part of the transform of an even real kernel vanishes. Summability
-is not needed for this symmetry identity because the character has unit modulus. -/
-theorem im_tsum_ofReal_mul_addChar_eq_zero_of_even {f : G → ℝ}
-    (heven : Function.Even f) (ψ : AddChar G Circle) :
-    (∑' x, (f x : ℂ) * (ψ x : ℂ)).im = 0 := by
-  have hconj : conj (∑' x, (f x : ℂ) * (ψ x : ℂ)) =
-      ∑' x, (f x : ℂ) * (ψ x : ℂ) := by
-    rw [Complex.conj_tsum]
-    calc
-      _ = ∑' x, (f (-x) : ℂ) * (ψ (-x) : ℂ) := by
-        apply tsum_congr
-        intro x
-        rw [heven x, AddChar.map_neg_eq_inv, Circle.coe_inv_eq_conj]
-        simp
-      _ = _ := (Equiv.neg G).tsum_eq (fun x => (f x : ℂ) * (ψ x : ℂ))
-  have hi : -(∑' x, (f x : ℂ) * (ψ x : ℂ)).im =
-      (∑' x, (f x : ℂ) * (ψ x : ℂ)).im := by
-    simpa using congrArg Complex.im hconj
-  linarith
 
 /-- The character-deficit moment is the mass minus the real Fourier transform. -/
 theorem tsum_mul_one_sub_re_addChar_eq_sub {f : G → ℝ}

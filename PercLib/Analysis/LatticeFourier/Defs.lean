@@ -6,6 +6,7 @@ New definitions and proofs for this project; no upstream Lean code is copied.
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Analysis.Complex.Circle
 public import Mathlib.Analysis.Normed.Group.InfiniteSum
 public import Mathlib.Algebra.Group.ForwardDiff
 public import Mathlib.Tactic.Ring
@@ -19,6 +20,7 @@ choice of representatives. In dimension zero the normalized symbol is zero.
 ## Main results
 
 * `latticeCosineTransform`: the real cosine transform of an integer-lattice kernel.
+* `latticeCharacter`: the canonical unitary character in physical frequencies.
 * `nearestNeighborSymbol`: the average coordinate cosine.
 * `nearestNeighborResolvent`: the reciprocal `1 / (1 - lambda D)`.
 * `fwdDiff_two_at_sub`: the existing forward difference gives the symmetric second difference.
@@ -29,6 +31,40 @@ choice of representatives. In dimension zero the normalized symbol is zero.
 noncomputable section
 
 namespace PercLib.Analysis
+
+/-- The canonical lattice character in physical frequencies, using mathlib's
+probabilistic character convention `exp(i k·x)`. -/
+def latticeCharacter {ι : Type*} [Fintype ι] (k : ι → ℝ) : AddChar (ι → ℤ) Circle :=
+  Real.probChar.compAddMonoidHom
+    { toFun := fun x => ∑ i, k i * (x i : ℝ)
+      map_zero' := by simp
+      map_add' := by intro x y; simp [mul_add, Finset.sum_add_distrib] }
+
+theorem latticeCharacter_apply {ι : Type*} [Fintype ι] (k : ι → ℝ) (x : ι → ℤ) :
+    latticeCharacter k x = Real.probChar (∑ i, k i * (x i : ℝ)) := rfl
+
+/-- The complex value of the canonical character is the usual exponential. -/
+theorem latticeCharacter_coe_apply {ι : Type*} [Fintype ι] (k : ι → ℝ) (x : ι → ℤ) :
+    (latticeCharacter k x : ℂ) =
+      Complex.exp ((∑ i, k i * (x i : ℝ) : ℝ) * Complex.I) := rfl
+
+@[simp] theorem latticeCharacter_re {ι : Type*} [Fintype ι] (k : ι → ℝ) (x : ι → ℤ) :
+    (latticeCharacter k x : ℂ).re = Real.cos (∑ i, k i * (x i : ℝ)) := by
+  simp [latticeCharacter_coe_apply, Complex.exp_re]
+
+@[simp] theorem latticeCharacter_im {ι : Type*} [Fintype ι] (k : ι → ℝ) (x : ι → ℤ) :
+    (latticeCharacter k x : ℂ).im = Real.sin (∑ i, k i * (x i : ℝ)) := by
+  simp [latticeCharacter_coe_apply, Complex.exp_im]
+
+@[simp] theorem latticeCharacter_zero_frequency {ι : Type*} [Fintype ι] :
+    latticeCharacter (0 : ι → ℝ) = 1 := by
+  ext x
+  simp [latticeCharacter_apply]
+
+@[simp] theorem latticeCharacter_neg_frequency {ι : Type*} [Fintype ι] (k : ι → ℝ) :
+    latticeCharacter (-k) = (latticeCharacter k)⁻¹ := by
+  ext x
+  simp [AddChar.inv_apply, latticeCharacter_apply, Finset.sum_neg_distrib]
 
 /-- The real cosine transform of a kernel on an integer lattice. -/
 def latticeCosineTransform {ι : Type*} [Fintype ι] (f : (ι → ℤ) → ℝ) (k : ι → ℝ) : ℝ :=

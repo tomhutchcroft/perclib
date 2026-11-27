@@ -92,28 +92,28 @@ theorem hasSum_integral_sq_mul_binomial_of_abs_le_one {X : Type*} [MeasurableSpa
   simp_rw [hpow] at h
   simpa only [mul_one_div] using h
 
-/-- The exact even-moment expansion of the squared-symbol cubic resolvent. -/
-theorem hasSum_integral_nearestNeighborSymbol_sq_mul_inv_cube {d : ℕ} (hd : 0 < d)
-    {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) :
-    HasSum (fun m => ((2 * m + 2).choose 2 : ℝ) * r ^ (2 * m) *
+/-- The exact even-moment expansion of every squared-symbol positive integral resolvent power. -/
+theorem hasSum_integral_nearestNeighborSymbol_sq_mul_inv_pow {d : ℕ} (hd : 0 < d)
+    {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) (s : ℕ) :
+    HasSum (fun m => ((2 * m + s).choose s : ℝ) * r ^ (2 * m) *
       (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
         ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ (2 * (m + 1)))))
       (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
         ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ 2 /
-          (1 - r * ((d : ℝ)⁻¹ * ∑ j, cos (k j))) ^ 3)) := by
-  let F : ℕ → ℝ := fun n => ((n + 2).choose 2 : ℝ) * r ^ n *
+          (1 - r * ((d : ℝ)⁻¹ * ∑ j, cos (k j))) ^ (s + 1))) := by
+  let F : ℕ → ℝ := fun n => ((n + s).choose s : ℝ) * r ^ n *
     (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
       ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ (n + 2)))
   have hfull : HasSum F
       (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
         ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ 2 /
-          (1 - r * ((d : ℝ)⁻¹ * ∑ j, cos (k j))) ^ 3)) := by
+          (1 - r * ((d : ℝ)⁻¹ * ∑ j, cos (k j))) ^ (s + 1))) := by
     dsimp only [F]
     rw [volume_restrict_pi_ball_eq_pi_Ioo]
     have h := hasSum_integral_sq_mul_binomial_of_abs_le_one
       (Measure.pi fun _ : Fin d => volume.restrict (Ioo (-π) π))
       (f := fun k => (d : ℝ)⁻¹ * ∑ j, cos (k j)) (by fun_prop)
-      (abs_nearestNeighborSymbol_le_one hd) hr0 hr1 2
+      (abs_nearestNeighborSymbol_le_one hd) hr0 hr1 s
     apply (h.mul_left (((2 * π) ^ d)⁻¹)).congr_fun
     intro n
     ring
@@ -129,6 +129,17 @@ theorem hasSum_integral_nearestNeighborSymbol_sq_mul_inv_cube {d : ℕ} (hd : 0 
   rw [add_zero] at heq
   have h := heq ▸ heven.hasSum
   exact h
+
+/-- The exact even-moment expansion of the squared-symbol cubic resolvent. -/
+theorem hasSum_integral_nearestNeighborSymbol_sq_mul_inv_cube {d : ℕ} (hd : 0 < d)
+    {r : ℝ} (hr0 : 0 ≤ r) (hr1 : r < 1) :
+    HasSum (fun m => ((2 * m + 2).choose 2 : ℝ) * r ^ (2 * m) *
+      (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
+        ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ (2 * (m + 1)))))
+      (((2 * π) ^ d)⁻¹ * (∫ k in ball (0 : Fin d → ℝ) π,
+        ((d : ℝ)⁻¹ * ∑ j, cos (k j)) ^ 2 /
+          (1 - r * ((d : ℝ)⁻¹ * ∑ j, cos (k j))) ^ 3)) :=
+  hasSum_integral_nearestNeighborSymbol_sq_mul_inv_pow hd hr0 hr1 2
 
 /-- The normalized squared-symbol cubic resolvent is at most `53/(105d)`,
 uniformly in the subcritical parameter, for every dimension at least 1000. -/

@@ -33,7 +33,8 @@ namespace PercLib.Percolation.Bond.Lace
 variable {G : Type*} [AddCommGroup G]
 
 /-- On a group, the addition-fiber convolution is the usual difference sum. -/
-theorem addRingConvolution_eq_tsum_sub (f g : G → ℂ) (x : G) :
+theorem addRingConvolution_eq_tsum_sub {R : Type*}
+    [NonUnitalNonAssocSemiring R] [TopologicalSpace R] (f g : G → R) (x : G) :
     DiscreteConvolution.addRingConvolution f g x = ∑' u, f u * g (x - u) := by
   classical
   let e : G ≃ DiscreteConvolution.addFiber x :=

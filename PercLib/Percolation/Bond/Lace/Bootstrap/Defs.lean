@@ -23,6 +23,7 @@ symbol deficit, which is the zero frequency modulo periods on the torus.
 * `tauFourier`, `susceptibilityWalkParameter`: the actual model transform and normalization.
 * `bootstrapTripleProduct`, `bootstrapMajorant`: the three-resolvent factor and `200 g V`.
 * `fourierRatioSup`, `fourierDifferenceSup`: the canonical absolute bootstrap suprema.
+* `fourierBootstrap`: their maximum together with the actual off-diagonal open-edge mass.
 * `three_quarters_le_bootstrapTripleProduct`: the derived uniform positive denominator factor.
 
 The zero profile has transform one, parameter zero, ratio supremum one and difference
@@ -101,6 +102,17 @@ def fourierDifferenceSup (q : Sym2 (Fin d → ℤ) → unitInterval) : ℝ :=
     |(fwdDiff p.1.1)^[2] (tauFourier q) (p.1.2 - p.1.1)| /
       bootstrapMajorant (susceptibilityWalkParameter q) p.1.1 p.1.2
 
+/-- The full Fourier bootstrap quantity. Its first component is the actual
+off-diagonal open-edge mass; for homogeneous nearest-neighbour percolation it is `2 d p`.
+The intensity parameter itself is generally different from this mass. -/
+def fourierBootstrap (q : Sym2 (Fin d → ℤ) → unitInterval) : ℝ :=
+  max (rowSum (fun e => unitInterval.toENNReal (q e)) 0).toReal
+    (max (fourierRatioSup q) (fourierDifferenceSup q))
+
+theorem fourierBootstrap_def (q : Sym2 (Fin d → ℤ) → unitInterval) :
+    fourierBootstrap q = max (rowSum (fun e => unitInterval.toENNReal (q e)) 0).toReal
+      (max (fourierRatioSup q) (fourierDifferenceSup q)) := rfl
+
 /-- The expanded numerator agrees with the existing symmetric-difference formulas. -/
 theorem fourierDifferenceSup_def (q : Sym2 (Fin d → ℤ) → unitInterval) :
     fourierDifferenceSup q =
@@ -166,5 +178,9 @@ theorem bootstrapMajorant_pos (hd : 0 < d) {lam : ℝ}
 @[simp] theorem fourierDifferenceSup_zero_profile :
     fourierDifferenceSup (fun _ : Sym2 (Fin d → ℤ) => (0 : unitInterval)) = 0 := by
   norm_num [fourierDifferenceSup_def]
+
+@[simp] theorem fourierBootstrap_zero_profile :
+    fourierBootstrap (fun _ : Sym2 (Fin d → ℤ) => (0 : unitInterval)) = 1 := by
+  norm_num [fourierBootstrap]
 
 end PercLib.Percolation.Bond.Lace
