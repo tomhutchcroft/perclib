@@ -236,8 +236,10 @@ j_\beta\le\frac d{d-44},\qquad
 <div class="math-display">$$0&lt;Q_b(k)\le\frac{17}{10g(k)}.$$</div>
 <p><em>Proof.</em> The positive numerator and denominator give strict positivity. Pass the subcritical bound $(17/10)C_\beta(k)$ to the limit, using $\lambda_\beta\to1$.</p>
 
+<p>The density $Q_b$ is integrable on $(-\pi,\pi)^d$.</p>
+
 <a id="tag-ATL6" data-assertion="theorem" data-title="Critical two-point function as the inverse Fourier coefficient of its Abel density"></a>
-<p>The density $Q_b$ is integrable on $(-\pi,\pi)^d$, and for every $x\in\mathbb Z^d$,</p>
+<p>For every $x\in\mathbb Z^d$,</p>
 <div class="math-display">$$\tau_b(0,x)=\frac1{(2\pi)^d}\int_{(-\pi,\pi)^d}\cos(k\cdot x)Q_b(k)\,dk.$$</div>
 <p><em>Proof.</em> The reciprocal $1/g$ is integrable in these dimensions. The subcritical inversion integrands have the common bound $17/(5g)$ almost everywhere. Dominated convergence, the subcritical exact inverse formula and the spatial limit $\tau_\beta(0,x)\to\tau_b(0,x)$ give the identity. Any value assigned at the zero frequency leaves the integral unchanged.</p>
 
