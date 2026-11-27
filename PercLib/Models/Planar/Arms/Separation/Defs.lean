@@ -92,6 +92,9 @@ In Nolin's outer separation step, with `R = 2N + 1` and separation scale `η`, t
   box of radius `M` about `b`.
 * A fence is a connection inside its box between its two ends; it may meet the two ends' sides
   of the box elsewhere too.
+* Degenerate parameters: for `s ≤ 0` the separation conditions are empty; for `K = 0` every
+  arm has a fence, and for `K > M` no arm has one, so that both events are empty for `j ≥ 1`.
+  The intended range is `0 < K ≤ M`.
 * For `r ≥ R` the arms may be walks of length zero anywhere in `B_r(z)`; the determination lemma
   assumes `r < R`.
 * The inner fence box of a dual arm contains the row (column) of its first face, which lies just
@@ -197,7 +200,11 @@ four cases are the top side (`b₁ = z₁ + R`, box `[b₀ - K, b₀ + K] × [b�
 (`b₀ = z₀ + R`, box `[b₀, b₀ + M] × [b₁ - K, b₁ + K]`), the bottom side
 (`b₁ = z₁ - R - [c = false]`, box `[b₀ - K, b₀ + K] × [b₁ - M, b₁]`) and the left side
 (`b₀ = z₀ - R - [c = false]`, box `[b₀ - M, b₀] × [b₁ - K, b₁ + K]`); the last face of a dual arm
-lies outside the faces `Icc (z - R) (z + R - 1)` of `B_R(z)`. -/
+lies outside the faces `Icc (z - R) (z + R - 1)` of `B_R(z)`. Degenerate cases: for `K = 0`
+every arm whose end lies on a side has an outer fence (take `x = u = v = b`), so the condition is
+empty; for `K > M` (in particular `M = 0 < K`) no arm has one, since `u` must lie in
+`Icc (b - M) (b + M)`. The intended range is `0 < K ≤ M`, as for Nolin's `K = ⌊η N⌋` and
+`M = ⌊√η N⌋` with `η ≤ 1`. -/
 def HasOuterFence (ω : Config (LatticeSite 2)) (c : Bool) (z : LatticeSite 2) (R M K : ℕ)
     {a b : LatticeSite 2} (γ : (zdGraph 2).Walk a b) : Prop :=
   ∃ x ∈ γ.support, ∃ u v : LatticeSite 2,
@@ -596,7 +603,9 @@ top side (`a₁ = z₁ + r`, box `[a₀ - K, a₀ + K] × [a₁ - M, a₁]`), th
 `[a₀ - M, a₀] × [a₁ - K, a₁ + K]`), the bottom side (`a₁ = z₁ - r - [c = false]`, box
 `[a₀ - K, a₀ + K] × [a₁, a₁ + M]`) and the left side (`a₀ = z₀ - r - [c = false]`, box
 `[a₀, a₀ + M] × [a₁ - K, a₁ + K]`); the first face of a dual arm touches `B_r(z)` from outside, and
-its box contains that face's row (column). -/
+its box contains that face's row (column). As for `HasOuterFence`, for `K = 0` every arm whose
+start lies on a side has an inner fence, and for `K > M` none has; the intended range is
+`0 < K ≤ M`. -/
 def HasInnerFence (ω : Config (LatticeSite 2)) (c : Bool) (z : LatticeSite 2) (r M K : ℕ)
     {a b : LatticeSite 2} (γ : (zdGraph 2).Walk a b) : Prop :=
   ∃ x ∈ γ.support, ∃ u v : LatticeSite 2,
