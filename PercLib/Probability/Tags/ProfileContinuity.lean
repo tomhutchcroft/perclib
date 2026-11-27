@@ -279,29 +279,6 @@ end PercLib.Probability
 namespace PercLib.Probability
 open Filter Topology PercLib.Percolation.Bond
 
-open Classical in
-private theorem continuous_finite_witness_union {I : Type*}
-    (W : Set (Finset I)) (H : Finset W) :
-    Continuous (fun q : I → unitInterval =>
-      prodBernoulli q {ω | ∃ F ∈ H, (F.val : Set I) ⊆ ω}) := by
-  apply continuous_prodBernoulli_of_determined (H.biUnion Subtype.val)
-  intro ω η hEq
-  have hf (F : W) (hF : F ∈ H) :
-      ((F.val : Set I) ⊆ ω ↔ (F.val : Set I) ⊆ η) := by
-    have hsub : (F.val : Set I) ⊆ (H.biUnion Subtype.val : Set I) := by
-      intro i hi
-      exact Finset.mem_biUnion.mpr ⟨F, hF, hi⟩
-    constructor
-    · intro h i hi
-      have hm : i ∈ ω ∩ (H.biUnion Subtype.val : Set I) := ⟨h hi, hsub hi⟩
-      rw [hEq] at hm
-      exact hm.1
-    · intro h i hi
-      have hm : i ∈ η ∩ (H.biUnion Subtype.val : Set I) := ⟨h hi, hsub hi⟩
-      rw [← hEq] at hm
-      exact hm.1
-  exact exists_congr fun F => and_congr_right (hf F)
-
 /-- Events with arbitrary finite open witness families have measurable,
 lower-semicontinuous probability on countable coordinate spaces. Coordinatewise
 convergence gives the liminf bound, with connection events as a special case. -/
@@ -316,31 +293,7 @@ theorem finite_open_witness_probability_regular {I : Type*} [Countable I] (W : S
         liminf (fun n => prodBernoulli (q n) (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) atTop) ∧
     (∀ (V : Type*) (_ : Countable V) (x y : V),
       LowerSemicontinuous (fun q : Sym2 V → unitInterval => tau q x y)) := by
-  obtain ⟨H, hH, hcover⟩ := exists_finset_exhaustion (V := W)
-  let E (n : ℕ) : Set (Set I) := {ω | ∃ F ∈ H n, (F.val : Set I) ⊆ ω}
-  have hm : Monotone E := by
-    intro m n hmn ω hω
-    obtain ⟨F, hF, hf⟩ := hω
-    exact ⟨F, hH hmn hF, hf⟩
-  have heq : (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω}) = ⋃ n, E n := by
-    ext ω
-    simp only [mem_iUnion, mem_ofPred_eq, E]
-    constructor
-    · rintro ⟨F, hF, hf⟩
-      obtain ⟨n, hn⟩ := hcover ⟨F, hF⟩
-      exact ⟨n, ⟨F,hF⟩, hn, hf⟩
-    · rintro ⟨n, F, _, hf⟩
-      exact ⟨F.val, F.property, hf⟩
-  have hlsc : LowerSemicontinuous (fun q : I → unitInterval =>
-      prodBernoulli q (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) := by
-    have hprob : (fun q : I → unitInterval =>
-        prodBernoulli q (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) =
-        fun q => ⨆ n, prodBernoulli q (E n) := by
-      funext q
-      rw [heq, hm.measure_iUnion]
-    rw [hprob]
-    exact lowerSemicontinuous_iSup fun n => (continuous_finite_witness_union W
-        (H n)).lowerSemicontinuous
+  have hlsc := lowerSemicontinuous_prodBernoulli_iUnion_witness W
   refine ⟨measurableSet_iUnion_witness W, hlsc, ?_, fun _ _ => lowerSemicontinuous_tau⟩
   intro q p hp
   exact (hlsc.le_liminf p).trans ((tendsto_pi_nhds.mpr hp).liminf_le_liminf_comp)

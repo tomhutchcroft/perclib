@@ -98,7 +98,9 @@ theorem exists_nonneg_summable_resolvent_coefficients
   simp_rw [hpoint]
   rw [tsum_mul_left, tsum_geometric_of_norm_lt_one hrF]
 
-private theorem nearestNeighbor_direction_symbol {d : ℕ} (hd : 0 < d) (k : Fin d → ℝ) :
+/-- The finite nearest-neighbour direction law has the canonical cosine symbol
+in the physical frequency convention. -/
+theorem nearestNeighbor_direction_symbol {d : ℕ} (hd : 0 < d) (k : Fin d → ℝ) :
     (∑ a : Fin d × Bool, (((2 * d : ℝ)⁻¹ : ℝ) : ℂ) *
       mFourier (Function.update (0 : Fin d → ℤ) a.1 (if a.2 then 1 else -1))
         (fun i => ((k i / (2 * π) : ℝ) : UnitAddCircle))) =

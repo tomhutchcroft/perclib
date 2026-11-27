@@ -141,6 +141,63 @@ theorem lowerSemicontinuous_tau [Countable V] (x y : V) :
   rw [heq]
   exact lowerSemicontinuous_iSup fun n => (continuous_law_localConn (S n) x y).lowerSemicontinuous
 
+/-- The probability of a finite union of finite open witnesses is continuous in the profile. -/
+theorem continuous_prodBernoulli_finite_witness_union {I : Type*}
+    (W : Set (Finset I)) (H : Finset W) :
+    Continuous (fun q : I → unitInterval =>
+      prodBernoulli q {ω | ∃ F ∈ H, (F.val : Set I) ⊆ ω}) := by
+  classical
+  apply continuous_prodBernoulli_of_determined (H.biUnion Subtype.val)
+  intro ω η hEq
+  have hf (F : W) (hF : F ∈ H) :
+      ((F.val : Set I) ⊆ ω ↔ (F.val : Set I) ⊆ η) := by
+    have hsub : (F.val : Set I) ⊆ (H.biUnion Subtype.val : Set I) := by
+      intro i hi
+      exact Finset.mem_biUnion.mpr ⟨F, hF, hi⟩
+    constructor
+    · intro h i hi
+      have hm : i ∈ ω ∩ (H.biUnion Subtype.val : Set I) := ⟨h hi, hsub hi⟩
+      rw [hEq] at hm
+      exact hm.1
+    · intro h i hi
+      have hm : i ∈ η ∩ (H.biUnion Subtype.val : Set I) := ⟨h hi, hsub hi⟩
+      rw [← hEq] at hm
+      exact hm.1
+  exact exists_congr fun F => and_congr_right (hf F)
+
+/-- A countable coordinate space makes the probability of any finite-open-witness
+family lower semicontinuous in the full product profile. -/
+theorem lowerSemicontinuous_prodBernoulli_iUnion_witness {I : Type*} [Countable I]
+    (W : Set (Finset I)) :
+    LowerSemicontinuous (fun q : I → unitInterval =>
+      prodBernoulli q (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) := by
+  obtain ⟨H, hH, hcover⟩ := exists_finset_exhaustion (V := W)
+  let E (n : ℕ) : Set (Set I) := {ω | ∃ F ∈ H n, (F.val : Set I) ⊆ ω}
+  have hm : Monotone E := by
+    intro m n hmn ω hω
+    obtain ⟨F, hF, hf⟩ := hω
+    exact ⟨F, hH hmn hF, hf⟩
+  have heq : (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω}) = ⋃ n, E n := by
+    ext ω
+    simp only [mem_iUnion, mem_ofPred_eq, E]
+    constructor
+    · rintro ⟨F, hF, hf⟩
+      obtain ⟨n, hn⟩ := hcover ⟨F, hF⟩
+      exact ⟨n, ⟨F,hF⟩, hn, hf⟩
+    · rintro ⟨n, F, _, hf⟩
+      exact ⟨F.val, F.property, hf⟩
+  have hlsc : LowerSemicontinuous (fun q : I → unitInterval =>
+      prodBernoulli q (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) := by
+    have hprob : (fun q : I → unitInterval =>
+        prodBernoulli q (⋃ F ∈ W, {ω : Set I | (F : Set I) ⊆ ω})) =
+        fun q => ⨆ n, prodBernoulli q (E n) := by
+      funext q
+      rw [heq, hm.measure_iUnion]
+    rw [hprob]
+    exact lowerSemicontinuous_iSup fun n => (continuous_prodBernoulli_finite_witness_union W
+        (H n)).lowerSemicontinuous
+  exact hlsc
+
 /-! ### One-parameter families -/
 
 /-- A lower semicontinuous monotone function is left-continuous. -/
