@@ -501,6 +501,7 @@ public import PercLib.Probability.LaplaceTail
 public import PercLib.Probability.LayerCake
 public import PercLib.Probability.LayerCakeProduct
 public import PercLib.Probability.LazyReturnKernel
+public import PercLib.Probability.Lindeberg
 public import PercLib.Probability.LongRangeGreenBubble
 public import PercLib.Probability.MagnetizationLowerBound
 public import PercLib.Probability.MassTransport
