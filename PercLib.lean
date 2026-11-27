@@ -334,6 +334,8 @@ public import PercLib.Percolation.Bond.Lace.Bootstrap.FirstStep
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.CriticalCoefficients
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.CriticalDiagrams
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.CriticalExpansion
+public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.CriticalFourier
+public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.CriticalThresholdBounds
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.Criticality
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.Defs
 public import PercLib.Percolation.Bond.Lace.Bootstrap.Intensity.EndpointDiagrams

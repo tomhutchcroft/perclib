@@ -270,6 +270,7 @@ theorem tendsto_signedLaceRemainder_nearestNeighbor_critical_zero (hd : 50000 �
 open scoped Classical in
 /-- The actual infinite spatial lace expansion at the nearest-neighbour critical point.
 Every hypothesis needed by the abstract finite-layer limit has been proved for the model. -/
+@[tag "XBMM"]
 theorem infinite_lace_expansion_nearestNeighbor_critical (hd : 50000 ≤ d)
     (x y : Fin d → ℤ) :
     let q := intensityProfile (nearestNeighborIntensity d)

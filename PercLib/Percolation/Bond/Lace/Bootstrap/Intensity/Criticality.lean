@@ -92,6 +92,7 @@ theorem chi_nearestNeighborIntensity_toReal_le_div_critical_gap
 
 /-- The inverse-gap estimate is an actual extended susceptibility bound at every
 root, with the same finite constant and no endpoint-finiteness premise. -/
+@[tag "59G9"]
 theorem chi_nearestNeighborIntensity_le_div_critical_gap
     {d : ℕ} (hd : 50000 ≤ d) (β : ℝ≥0) (hβpos : 0 < β)
     (hβ : β < (rootCriticalIntensity (nearestNeighborIntensity d) 0).toNNReal)
@@ -142,6 +143,7 @@ theorem ae_finite_cluster_nearestNeighbor_critical
 
 /-- Countability gives simultaneous finiteness of all nearest-neighbour critical
 clusters on one probability-one event. -/
+@[tag "R0WX"]
 theorem ae_forall_finite_cluster_nearestNeighbor_critical
     {d : ℕ} (hd : 50000 ≤ d) :
     ∀ᵐ ω ∂law (intensityProfile (nearestNeighborIntensity d)

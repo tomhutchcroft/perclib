@@ -60,6 +60,7 @@ private theorem critical_continuation_bound {d : ℕ} (hd : 50000 ≤ d)
   simpa only [b, ENNReal.coe_toNNReal hbfinite] using hlt
 
 /-- The actual critical continuation diagram has a uniform explicit bound. -/
+@[tag "VCLG"]
 theorem nn_critical_step_tau_three_le {d : ℕ} (hd : 50000 ≤ d) (x : Fin d → ℤ) :
     let q := intensityProfile (nearestNeighborIntensity d)
       (rootCriticalIntensity (nearestNeighborIntensity d) 0).toNNReal
@@ -76,6 +77,7 @@ theorem nn_critical_step_tau_three_le {d : ℕ} (hd : 50000 ≤ d) (x : Fin d �
     (nn_step_mass_le_of_fourierBootstrap_le _ hw) ((fourierBootstrap_le_iff _ _).mp hw).2.1 x
 
 /-- At the origin the critical continuation bound saves the direct-step term. -/
+@[tag "IHGE"]
 theorem nn_critical_step_tau_three_zero_le {d : ℕ} (hd : 50000 ≤ d) :
     let q := intensityProfile (nearestNeighborIntensity d)
       (rootCriticalIntensity (nearestNeighborIntensity d) 0).toNNReal
@@ -92,6 +94,7 @@ theorem nn_critical_step_tau_three_zero_le {d : ℕ} (hd : 50000 ≤ d) :
     (nn_step_mass_le_of_fourierBootstrap_le _ hw) ((fourierBootstrap_le_iff _ _).mp hw).2.1
 
 /-- The actual critical triangle obeys the same explicit dimension-dependent cap. -/
+@[tag "98CO"]
 theorem nn_critical_triangle_le {d : ℕ} (hd : 50000 ≤ d) :
     let q := intensityProfile (nearestNeighborIntensity d)
       (rootCriticalIntensity (nearestNeighborIntensity d) 0).toNNReal

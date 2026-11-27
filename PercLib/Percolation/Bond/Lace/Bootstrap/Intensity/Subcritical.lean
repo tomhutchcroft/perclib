@@ -33,6 +33,7 @@ namespace PercLib.Percolation.Bond.Lace
 
 /-- The actual nearest-neighbour bootstrap is uniformly bounded throughout the
 finite-susceptibility regime; the weak bootstrap has been discharged by continuity. -/
+@[tag "JN6H"]
 theorem fourierBootstrap_nearestNeighborIntensity_le_of_chi_ne_top
     {d : ℕ} (hd : 50000 ≤ d) (β : ℝ≥0)
     (hchi : chi (intensityProfile (nearestNeighborIntensity d) β) 0 ≠ ⊤) :
@@ -108,6 +109,7 @@ theorem intensity_le_of_nearestNeighbor_chi_ne_top
   ring
 
 /-- The usual percolation threshold is finite and has the same explicit upper bound. -/
+@[tag "V1P7"]
 theorem rootCriticalIntensity_nearestNeighbor_le {d : ℕ} (hd : 50000 ≤ d) :
     rootCriticalIntensity (nearestNeighborIntensity d) 0 ≤
       ENNReal.ofReal (2 * (d : ℝ) / (2 * d - 89)) := by
